@@ -56,7 +56,8 @@ export async function appendStudentAction(sessionId: string, raw: unknown): Prom
   const session = await getSessionOr404(sessionId);
   if (session.status !== "active") throw new HttpError(409, "This session has ended");
   const kase = getCaseOr404(session.caseId);
-  const base = { id: newId("act"), sessionId, t: elapsedMs(session) };
+  // t is taken just before appending so log order and timestamps agree (wording can take ~1s).
+  const stamp = () => ({ id: newId("act"), sessionId, t: elapsedMs(session) });
 
   let action: Action;
   if (input.type === "examine") {
@@ -71,9 +72,9 @@ export async function appendStudentAction(sessionId: string, raw: unknown): Prom
     }
     const region = getContent().regionById.get(input.payload.regionId)!;
     const wording = await wordFinding(sessionId, { maneuverLabel: maneuver.label, regionLabel: region.label, findingText: resolved.findingText });
-    action = { ...base, ...input, result: { ...resolved, ...(wording ? { wording } : {}) } };
+    action = { ...stamp(), ...input, result: { ...resolved, ...(wording ? { wording } : {}) } };
   } else {
-    action = { ...base, ...input } as Action;
+    action = { ...stamp(), ...input } as Action;
   }
   await (await getRepo()).appendAction(action);
   return action;

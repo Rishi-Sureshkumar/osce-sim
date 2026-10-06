@@ -1,8 +1,19 @@
 "use client";
 import type { Action, ActionInput } from "@/domain/schemas";
 
-/** Browser helper: send any adapter-produced ActionInput to the server's single write path. */
-export async function postAction(sessionId: string, input: ActionInput): Promise<Action> {
+let queue: Promise<unknown> = Promise.resolve();
+
+/**
+ * Browser helper: send any adapter-produced ActionInput to the server's single write path.
+ * Requests from one tab are serialised so the log order matches the order of clicks.
+ */
+export function postAction(sessionId: string, input: ActionInput): Promise<Action> {
+  const next = queue.then(() => send(sessionId, input));
+  queue = next.catch(() => undefined);
+  return next;
+}
+
+async function send(sessionId: string, input: ActionInput): Promise<Action> {
   const res = await fetch(`/api/sessions/${sessionId}/actions`, {
     method: "POST",
     headers: { "content-type": "application/json" },
