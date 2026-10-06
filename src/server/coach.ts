@@ -17,6 +17,7 @@ export interface SessionRow {
   needsReview: number;
   overrides: number;
   tokens: number;
+  hints: number;
 }
 
 export async function listSessionRows(): Promise<SessionRow[]> {
@@ -25,7 +26,7 @@ export async function listSessionRows(): Promise<SessionRow[]> {
   const sessions = await repo.listSessions(200);
   return Promise.all(
     sessions.map(async (session) => {
-      const [runs, overrides] = await Promise.all([repo.listGradingRuns(session.id), repo.listOverrides(session.id)]);
+      const [runs, overrides, actions] = await Promise.all([repo.listGradingRuns(session.id), repo.listOverrides(session.id), repo.listActions(session.id)]);
       const run = runs.at(-1);
       const t = run ? totals(applyOverrides(run.scores, overrides.filter((o) => o.gradingRunId === run.id))) : null;
       return {
@@ -36,6 +37,7 @@ export async function listSessionRows(): Promise<SessionRow[]> {
         needsReview: t?.needsReview ?? 0,
         overrides: overrides.length,
         tokens: sessionTokens(session),
+        hints: actions.filter((a) => a.type === "hint").length,
       };
     }),
   );

@@ -23,6 +23,9 @@ export const COURTESY_LABELS = {
   cover: "Covered a region",
 } as const;
 
+/** Badge text for a session mode (phase-1 sessions without a mode were exams). */
+export const modeLabel = (mode: "practice" | "exam" | undefined) => (mode === "practice" ? "Practice" : "Exam");
+
 export const HINT_LABELS = { hint: "Hint used", nudge: "Nudge shown", show_me: "“Show me how” used", section_check: "Section check used" } as const;
 export const TIMER_LABELS = { pause: "Timer paused", resume: "Timer resumed", warning: "2-minute warning", auto_end: "Time up — station ended" } as const;
 export const ROOM_LABELS = { knock: "Knocked", enter: "Entered the room", exit: "Left the room" } as const;
@@ -99,6 +102,7 @@ export function describeAction(a: Action, L: Labels): { who: "student" | "patien
  */
 export function findingDisplay(a: Extract<Action, { type: "examine" }>, labels?: Pick<Labels, "steps">): string {
   const p = a.payload;
+  if (a.result?.hidden) return "Recorded. Findings for this case are revealed when you finish.";
   if (p.tool === "stethoscope" && p.durationMs !== undefined && p.durationMs < MIN_LISTEN_MS) {
     return `Listened for ${(p.durationMs / 1000).toFixed(1)} s — hold the stethoscope still for at least ${MIN_LISTEN_MS / 1000} s to describe what you hear.`;
   }

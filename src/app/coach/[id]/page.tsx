@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { labelsFrom } from "@/components/common/format";
+import { labelsFrom, modeLabel } from "@/components/common/format";
 import { Timeline } from "@/components/common/Timeline";
 import { OverrideForm } from "@/components/coach/OverrideForm";
 import { RegradeButton } from "@/components/coach/RegradeButton";
@@ -38,7 +38,8 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
             {session.studentLabel} — {kase.title}
           </h1>
           <p className="text-sm text-slate-500">
-            {session.status} · started {new Date(session.startedAt).toLocaleString()} · {session.patientTurns} patient turns · {runs.length} grading run(s)
+            <span data-testid="coach-mode">{modeLabel(session.mode)}</span> · {session.status} · started {new Date(session.startedAt).toLocaleString()} · {session.patientTurns} patient turns ·{" "}
+            {actions.filter((a) => a.type === "hint").length} hints used · {runs.length} grading run(s)
           </p>
           <p className="text-xs text-slate-500" data-testid="tokens">
             Tokens — input {u.inputTokens.toLocaleString()}, output {u.outputTokens.toLocaleString()}, cache read {u.cacheReadTokens.toLocaleString()}, cache write{" "}

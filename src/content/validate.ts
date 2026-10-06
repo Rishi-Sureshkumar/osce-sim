@@ -118,6 +118,9 @@ export function ruleRefErrors(rule: Rule, c: ContentIndex): string[] {
       const err = eventRefError(ref, c);
       if (err) out.push(err);
     }
+  } else if ("happened" in rule) {
+    const err = eventRefError(rule.happened, c);
+    if (err) out.push(err);
   } else if ("technique" in rule) {
     maneuverList(rule.technique.maneuver).forEach(checkManeuver);
     for (const r of rule.technique.regions ?? []) if (!c.regionById.has(r)) out.push(`unknown region "${r}"`);
@@ -150,6 +153,8 @@ export function eventRefError(ref: string, c: ContentIndex): string | null {
       return CourtesyTag.safeParse(rest).success ? null : `unknown tag in "${ref}"`;
     case "room":
       return ["knock", "enter", "exit"].includes(rest) ? null : `unknown room event in "${ref}"`;
+    case "timer":
+      return ["pause", "resume", "warning", "auto_end"].includes(rest) ? null : `unknown timer event in "${ref}"`;
     default:
       return `unknown event ref "${ref}"`;
   }

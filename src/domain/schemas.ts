@@ -329,6 +329,8 @@ export type PublicCase = Pick<Case, "id" | "title" | "mode" | "doorSign" | "mark
    * breathing / venous pulsation animations. (Sounds stay server-side until a finding is elicited.)
    */
   presentation: { visibleSigns: NonNullable<Case["visibleSigns"]>; hr: number; rr: number };
+  /** Exam-mode countdown length (doorSign.timeLimitMinutes, or the TIME_LIMIT_SECONDS_OVERRIDE env for tests). */
+  timeLimitSeconds: number;
 };
 
 // ---------------------------------------------------------------------------
@@ -363,6 +365,8 @@ export const ExamResult = z.object({
   audio: AudioSpec.optional(),
   /** Animation drivers for this finding. */
   visual: VisualSpec.optional(),
+  /** Set in responses to the student when the case reveals findings only at the end (text removed). */
+  hidden: z.boolean().optional(),
 });
 export type ExamResult = z.infer<typeof ExamResult>;
 
@@ -530,6 +534,7 @@ export type ActionType = Action["type"];
  *   "first:touch"                                 first examine involving physical contact
  *   "tag:<CourtesyTag>"                           a `say` the classifier tagged (e.g. "tag:asked_consent_exam")
  *   "room:<knock|enter|exit>"                     a room event
+ *   "timer:<pause|resume|warning|auto_end>"       a timer event
  *   "last:examine" | "last:say"                   last action of a type
  */
 export const EventRef = z.string().min(1);
@@ -552,6 +557,7 @@ export type Rule =
   | { said: CourtesyTag | CourtesyTag[] }
   | { technique: TechniqueRule }
   | { hygieneBeforeTouch: true }
+  | { happened: string }
   | { courtesy: CourtesyKind; position?: Position }
   | { before: [string, string] }
   | { performedIn: { maneuver: string | string[]; position: Position | Position[] } }
@@ -599,6 +605,8 @@ export const Rule: z.ZodType<Rule> = z.lazy(() =>
       })
       .strict(),
     z.object({ hygieneBeforeTouch: z.literal(true) }).strict(),
+    /** 1 if the event ref occurred at all (e.g. { not: { happened: "timer:auto_end" } }) */
+    z.object({ happened: EventRef }).strict(),
     z.object({ all: z.array(Rule).min(1) }).strict(),
     z.object({ any: z.array(Rule).min(1) }).strict(),
     z.object({ not: Rule }).strict(),

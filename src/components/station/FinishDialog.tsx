@@ -10,14 +10,18 @@ export function FinishDialog({
   mode,
   append,
   disabled,
+  forceOpen = false,
 }: {
   sessionId: string;
   mode: "encounter" | "screening";
   append: (a: Action) => void;
   disabled: boolean;
+  /** exam time ran out: the presentation step opens and can't be dismissed */
+  forceOpen?: boolean;
 }) {
   const router = useRouter();
-  const [open, setOpen] = useState(false);
+  const [openState, setOpen] = useState(false);
+  const open = openState || forceOpen;
   const [summary, setSummary] = useState("");
   const [ddx, setDdx] = useState(["", "", ""]);
   const [plan, setPlan] = useState("");
@@ -64,6 +68,7 @@ export function FinishDialog({
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4" role="dialog" aria-modal aria-labelledby="finish-h">
           <form onSubmit={submit} className="max-h-[90vh] w-full max-w-xl space-y-3 overflow-y-auto rounded-lg bg-white p-5 shadow-xl">
             <h2 id="finish-h" className="text-lg font-semibold">
+              {forceOpen ? "Time is up — " : ""}
               {encounter ? "Present your findings" : "Finish the screening exam?"}
             </h2>
             {encounter ? (
@@ -106,9 +111,11 @@ export function FinishDialog({
               </p>
             )}
             <div className="flex justify-end gap-2">
-              <button type="button" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 text-sm">
-                Keep going
-              </button>
+              {!forceOpen && (
+                <button type="button" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 text-sm">
+                  Keep going
+                </button>
+              )}
               <button type="submit" disabled={busy || (encounter && filled.length === 0)} className="rounded-md bg-cyan-700 px-4 py-2 text-sm font-medium text-white disabled:opacity-50">
                 {busy ? "Submitting…" : "Submit"}
               </button>

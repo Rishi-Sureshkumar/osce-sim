@@ -11,6 +11,10 @@ import { patientState } from "@/engine/patientState";
 import { toolFor } from "@/exam3d/tools/toolLogic";
 import { TOOL_LABELS, type ToolState } from "@/exam3d/tools/ToolTray";
 import { AudioControls } from "./AudioControls";
+import { ModeTimer } from "./ModeTimer";
+import { PracticeHelp } from "./PracticeHelp";
+import { timeIsUp } from "@/engine/practice";
+import { sessionMode } from "@/domain/schemas";
 import { courtesyFromToolbar } from "@/input/adapters/toolbar";
 import { postAction } from "@/input/client";
 import { ActionLog } from "./ActionLog";
@@ -19,7 +23,6 @@ import { DoorSign } from "./DoorSign";
 import { FindingsPanel } from "./FindingsPanel";
 import { ManeuverMenu } from "./ManeuverMenu";
 import { PerformOverlay } from "./PerformOverlay";
-import { Timer } from "./Timer";
 import { ViewTabs } from "./ViewTabs";
 
 const Exam3DView = dynamic(() => import("@/exam3d/Exam3DView"), {
@@ -45,7 +48,7 @@ export interface StationProps {
   /** Slot for the chat panel. */
   chat?: (ctx: { actions: Action[]; append: (a: Action) => void; disabled: boolean }) => React.ReactNode;
   /** Slot for the finish/submit control. */
-  finish?: (ctx: { append: (a: Action) => void; disabled: boolean }) => React.ReactNode;
+  finish?: (ctx: { append: (a: Action) => void; disabled: boolean; forceOpen: boolean }) => React.ReactNode;
 }
 
 export function Station({ session, kase, catalog, initialActions, chat, finish }: StationProps) {
@@ -75,9 +78,33 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
   const [error, setError] = useState<string | null>(null);
   const labels = useMemo(() => labelsFrom(catalog), [catalog]);
   const ended = session.status !== "active" || actions.some((a) => a.type === "submit_ddx" || a.type === "session_end");
+  const mode = sessionMode(session);
+  const timeUp = timeIsUp(actions);
+  /** exam actions and chat stop when the station ended or exam time ran out */
+  const locked = ended || timeUp;
 
   const append = (a: Action) => setActions((xs) => [...xs, a]);
-  const appendAll = (list: Action[]) => setActions((xs) => [...xs, ...list]);
+  const appendAll = (list: Action[]) => {
+    setActions((xs) => [...xs, ...list]);
+    const nudge = list.find((a) => a.type === "hint" && a.payload.kind === "nudge");
+    if (nudge?.type === "hint") setToast(nudge.payload.text);
+  };
+  const onTimerEvent = (event: "pause" | "resume" | "warning" | "auto_end") =>
+    run(async () => {
+      appendAll((await postAction(session.id, { type: "timer", source: event === "pause" || event === "resume" ? "click" : "system", payload: { event } })).appended);
+      if (event === "warning") setToast("Two minutes left.");
+      if (event === "auto_end") {
+        setToast(null);
+        setSelected(null);
+        setPerforming(null);
+      }
+    });
+  const onShowMe = (m: PublicCatalog["maneuvers"][number]) =>
+    run(async () => {
+      appendAll((await postAction(session.id, { type: "hint", source: "click", payload: { kind: "show_me", text: `Show me how: ${m.label}`, maneuverId: m.id } })).appended);
+      setPerforming({ regionId: selected?.id ?? "", title: `How to: ${m.label}`, steps: m.demo.steps, finding: "Demonstration only. Nothing was examined; choose the exam to perform it.", kind: "menu" });
+      setSelected(null);
+    });
   const examined = useMemo(
     () => new Set(actions.flatMap((a) => (a.type === "examine" ? [a.payload.regionId] : []))),
     [actions],
@@ -93,9 +120,8 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
   const onToolExamine = async (u: ToolUse): Promise<Action | null> => {
     setError(null);
     try {
-      const appended = await postAction(session.id, examineFromTool(u));
+      const { action, appended } = await postAction(session.id, examineFromTool(u));
       appendAll(appended);
-      const action = appended.at(-1)!;
       if (action.type === "examine") {
         const m = maneuverById.get(u.maneuverId);
         setPerforming({ regionId: u.regionId, title: `${m?.label ?? u.maneuverId} — ${regionById.get(u.regionId)?.label ?? u.regionId}`, steps: [], finding: findingDisplay(action, labels), kind: "tool" });
@@ -155,9 +181,8 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
       setPerforming({ regionId, title: `${m.label} — ${selected.label}`, steps: m.demo.steps, finding: null, kind: "menu" });
       setSelected(null);
       try {
-        const appended = await postAction(session.id, examineFromClick(regionId, m.id));
+        const { action, appended } = await postAction(session.id, examineFromClick(regionId, m.id));
         appendAll(appended);
-        const action = appended.at(-1)!;
         if (action.type === "examine") setPerforming((p) => (p ? { ...p, finding: findingDisplay(action, labels), audio: action.result?.audio } : p));
       } catch (e) {
         setPerforming(null);
@@ -166,7 +191,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
     });
 
   const onCourtesy = (kind: CourtesyKind, position?: Position) =>
-    run(async () => appendAll(await postAction(session.id, courtesyFromToolbar(kind, position))));
+    run(async () => appendAll((await postAction(session.id, courtesyFromToolbar(kind, position))).appended));
 
   const whole = catalog.regions.filter((r) => r.view === "whole");
 
@@ -176,13 +201,16 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
         <div>
           <h1 className="text-lg font-semibold">{kase.title}</h1>
           <p className="text-xs text-slate-500">
-            {session.studentLabel} · {kase.mode === "screening" ? "Screening exam" : "Case encounter"}
+            {session.studentLabel} · {kase.mode === "screening" ? "Screening exam" : "Case encounter"} ·{" "}
+            <span className={`rounded px-1.5 py-0.5 font-semibold ${mode === "practice" ? "bg-emerald-100 text-emerald-900" : "bg-slate-800 text-white"}`} data-testid="mode-badge">
+              {mode === "practice" ? "Practice" : "Exam"}
+            </span>
           </p>
         </div>
         <div className="flex items-center gap-3">
           <AudioControls />
-          <Timer startedAt={session.startedAt} limitMinutes={kase.doorSign.timeLimitMinutes} stopped={ended} />
-          {finish?.({ append, disabled: ended })}
+          <ModeTimer mode={mode} startedAt={session.startedAt} limitSeconds={kase.timeLimitSeconds} actions={actions} stopped={locked} onTimerEvent={onTimerEvent} />
+          {finish?.({ append, disabled: ended, forceOpen: timeUp && !ended })}
         </div>
       </header>
 
@@ -192,12 +220,18 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
         </p>
       )}
 
-      <CourtesyToolbar currentPosition={currentPosition} disabled={ended} onCourtesy={onCourtesy} />
+      {timeUp && !ended && (
+        <p role="alert" className="rounded-md bg-red-50 px-3 py-2 text-sm font-medium text-red-800">
+          Time is up. The examination is closed. Present your summary, differential and plan.
+        </p>
+      )}
+      {mode === "practice" && !locked && <PracticeHelp sessionId={session.id} append={append} disabled={locked} />}
+      <CourtesyToolbar currentPosition={currentPosition} disabled={locked} onCourtesy={onCourtesy} />
 
       <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-[minmax(280px,1fr)_minmax(360px,1.3fr)_minmax(280px,1fr)]">
         <div className="flex min-h-0 flex-col gap-3">
           <DoorSign kase={kase} />
-          {chat?.({ actions, append, disabled: ended })}
+          {chat?.({ actions, append, disabled: locked })}
         </div>
 
         <div className="flex min-h-0 flex-col gap-2 rounded-lg border border-slate-200 bg-white p-3">
@@ -215,7 +249,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
                 <button
                   key={r.id}
                   onClick={() => onRegionClick(r)}
-                  disabled={ended}
+                  disabled={locked}
                   className={`rounded-md border px-2 py-1 text-xs ${selected?.id === r.id ? "border-cyan-700 bg-cyan-50" : "border-slate-300"}`}
                 >
                   {r.label}
@@ -242,7 +276,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
                 selectedRegionId={selected?.id}
                 performingRegionId={blocking ? performing?.regionId : null}
                 examinedRegionIds={examined}
-                disabled={ended || blocking}
+                disabled={locked || blocking}
                 onRegionClick={onRegionClick}
               />
             ) : (
@@ -252,12 +286,12 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
                 selectedRegionId={selected?.id}
                 performingRegionId={performing?.regionId}
                 examinedRegionIds={examined}
-                onRegionClick={ended ? () => undefined : onRegionClick}
+                onRegionClick={locked ? () => undefined : onRegionClick}
               />
             )}
-            <div className={`absolute right-2 z-10 w-72 max-w-[90%] ${examView === "3d" ? "bottom-28" : "top-2"} ${performing?.kind === "tool" && !choice ? "pointer-events-none [&_button]:pointer-events-auto" : ""}`}>
-              {toast && !performing && !selected && !choice && (
-                <p className="rounded-md bg-cyan-50 px-3 py-2 text-sm text-cyan-900 shadow" role="status">
+            <div className={`absolute right-2 z-10 w-72 max-w-[90%] ${examView === "3d" ? "bottom-28 max-h-[45%] overflow-y-auto" : "top-2"} ${performing?.kind === "tool" && !choice ? "pointer-events-none [&_button]:pointer-events-auto" : ""}`}>
+              {toast && !selected && !choice && performing?.kind !== "menu" && (
+                <p className="mb-2 rounded-md bg-cyan-50 px-3 py-2 text-sm text-cyan-900 shadow" role="status">
                   {toast}
                 </p>
               )}
@@ -286,7 +320,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
                   onDone={() => setPerforming(null)}
                 />
               ) : selected ? (
-                <ManeuverMenu region={selected} maneuvers={catalog.maneuvers} busy={!!performing} onChoose={onChoose} onClose={() => setSelected(null)} />
+                <ManeuverMenu region={selected} maneuvers={catalog.maneuvers} busy={!!performing} onChoose={onChoose} onShowMe={mode === "practice" ? onShowMe : undefined} onClose={() => setSelected(null)} />
               ) : null}
             </div>
           </div>

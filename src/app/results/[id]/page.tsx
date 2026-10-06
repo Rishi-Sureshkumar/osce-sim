@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { labelsFrom } from "@/components/common/format";
+import { labelsFrom, modeLabel } from "@/components/common/format";
 import { Timeline } from "@/components/common/Timeline";
 import { Debrief } from "@/components/results/Debrief";
 import { FeedbackForm } from "@/components/common/FeedbackForm";
@@ -33,7 +33,10 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
           <p className="text-xs font-semibold tracking-wide text-cyan-700 uppercase">Results</p>
           <h1 className="text-xl font-semibold">{kase.title}</h1>
           <p className="text-sm text-slate-500">
-            {session.studentLabel} · started {new Date(session.startedAt).toLocaleString()}
+            {session.studentLabel} · started {new Date(session.startedAt).toLocaleString()} ·{" "}
+            <span className={`rounded px-1.5 py-0.5 text-xs font-semibold ${session.mode === "practice" ? "bg-emerald-100 text-emerald-900" : "bg-slate-800 text-white"}`} data-testid="mode-badge">
+              {modeLabel(session.mode)}
+            </span>
           </p>
         </div>
         <Link href="/" className="text-sm text-cyan-700 underline">
@@ -49,6 +52,11 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
         <GradeTrigger sessionId={id} />
       ) : (
         <>
+          {session.mode === "practice" && (
+            <p className="rounded-md bg-emerald-50 px-3 py-2 text-xs text-emerald-900">
+              Practice attempt: scored for feedback. Time-dependent items only count in exam mode.
+            </p>
+          )}
           {run.mocked && <p className="rounded-md bg-slate-100 px-3 py-2 text-xs text-slate-600">AI_MOCK is on: transcript-graded items and feedback use canned logic, not the model.</p>}
           <FeedbackSummary run={run} />
           {debrief && <Debrief debrief={debrief} />}

@@ -42,5 +42,6 @@ export function toPublicCase(c: Case): PublicCase {
     ...(c.findingsVisibility ? { findingsVisibility: c.findingsVisibility } : {}),
     patient: { name, age, sex, pronouns, chiefComplaint, setting },
     presentation: { visibleSigns: c.visibleSigns ?? {}, hr: c.vitals.hr, rr: c.vitals.rr },
+    timeLimitSeconds: Number(process.env.TIME_LIMIT_SECONDS_OVERRIDE) > 0 ? Number(process.env.TIME_LIMIT_SECONDS_OVERRIDE) : c.doorSign.timeLimitMinutes * 60,
   };
 }

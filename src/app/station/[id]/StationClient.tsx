@@ -10,7 +10,7 @@ export function StationClient(props: Omit<StationProps, "chat" | "finish">) {
       chat={({ actions, append, disabled }) => (
         <ChatPanel sessionId={props.session.id} patientName={props.kase.patient.name} actions={actions} append={append} disabled={disabled} />
       )}
-      finish={({ append, disabled }) => <FinishDialog sessionId={props.session.id} mode={props.kase.mode} append={append} disabled={disabled} />}
+      finish={({ append, disabled, forceOpen }) => <FinishDialog sessionId={props.session.id} mode={props.kase.mode} append={append} disabled={disabled} forceOpen={forceOpen} />}
     />
   );
 }

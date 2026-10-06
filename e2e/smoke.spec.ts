@@ -90,8 +90,10 @@ test("student completes the HF case end to end; coach reviews and overrides", as
 
   // --- start the HF encounter
   await page.getByLabel("Your name or alias").fill("E2E Student");
+  await page.getByLabel(/Practice \(untimed\)/).check();
   await page.locator('[data-case="hf-decompensated-01"]').click();
   await expect(page).toHaveURL(/\/station\//);
+  await expect(page.locator('[data-testid="mode-badge"]')).toHaveText("Practice");
   await expect(page.getByText("Educational prototype. Synthetic cases. Not for clinical use.")).toBeVisible();
 
   // --- courtesy + history (first question by voice: hold to talk, edit-able draft, then send)
@@ -200,6 +202,7 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.locator('[data-testid="say-source"]').first()).toHaveText("voice");
   await expect(page.locator('[data-testid="say-source"]').nth(1)).toHaveText("typed");
   await expect(page.locator('[data-testid="tokens"]')).toBeVisible();
+  await expect(page.locator('[data-testid="coach-mode"]')).toHaveText("Practice");
 
   const drape = page.locator('[data-item="fcm-03-drape"]');
   await expect(drape).toContainText("0/1");
@@ -224,8 +227,21 @@ test("tuning forks: Weber and the Rinne sequence on the screening patient", asyn
   await page.addInitScript("window.SpeechRecognition = undefined; window.webkitSpeechRecognition = undefined;");
   await page.goto("/");
   await enterCode(page, "student-e2e");
+  await page.getByLabel(/Practice \(untimed\)/).check();
   await page.locator('[data-case="screening-normal"]').click();
   await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  // practice help: hint, progress check, technique demo
+  await page.getByRole("button", { name: "Hint" }).click();
+  await expect(page.locator('[data-testid="practice-help"]')).toContainText("Consider: Washes hands before touching the patient");
+  await page.getByRole("button", { name: "Check my progress" }).click();
+  await expect(page.locator('[data-testid="practice-help"]')).toContainText("Clinical courtesy");
+  const picker = page.locator("details", { hasText: "Choose a region from a list" });
+  await picker.locator("summary").click();
+  await picker.locator('[data-region="neck_thyroid"]').click();
+  await page.locator('[data-show-me="thyroid_palpation"]').click();
+  await expect(page.getByText("Demonstration only. Nothing was examined")).toBeVisible();
+  await page.getByRole("button", { name: "Continue" }).click();
+  await picker.locator("summary").click();
   await expect(page.locator('[data-testid="voice-status"]')).toContainText("Voice input isn't available in this browser");
   await expect(page.getByRole("button", { name: "Hold to talk" })).toBeDisabled();
   await page.locator('[data-tool="tuning_fork"]').click();
@@ -233,6 +249,9 @@ test("tuning forks: Weber and the Rinne sequence on the screening patient", asyn
   await page.getByRole("button", { name: "Strike fork" }).click();
   await camera(page, "Head & neck");
   await holdTool(page, "scalp", 80, "vertex");
+  // touching the patient without hand hygiene is allowed but logged, with a practice nudge
+  await expect(page.getByRole("status").filter({ hasText: "You haven't cleaned your hands yet" })).toBeVisible();
+  await expect(page.locator('[data-testid="action-log"]')).toContainText("Nudge shown");
   await expect(page.locator('[data-testid="sound-caption"]')).toContainText("heard equally in both ears");
   await expect(page.locator('[data-testid="findings"]')).toContainText("no lateralization");
   // Rinne: mastoid → patient signals → beside the ear canal
@@ -245,6 +264,33 @@ test("tuning forks: Weber and the Rinne sequence on the screening patient", asyn
   await expect(page.locator('[data-testid="sequence"]')).toContainText("Sequence complete");
   await expect(page.locator('[data-testid="sequence"]')).not.toContainText("out of order");
   await expect(page.locator('[data-testid="findings"] li').first()).toContainText("Air conduction greater than bone conduction");
+});
+
+test("exam mode: countdown, auto-end at zero, forced presentation, exam-only scoring", async ({ page }) => {
+  await page.goto("/");
+  await enterCode(page, "student-e2e");
+  await page.getByLabel("Your name or alias").fill("E2E Exam");
+  await page.getByLabel(/Exam \(timed\)/).check();
+  await page.locator('[data-case="hf-decompensated-01"]').click();
+  await expect(page.locator('[data-testid="mode-badge"]')).toHaveText("Exam");
+  await expect(page.getByRole("button", { name: "Hint" })).toHaveCount(0); // no help in exam mode
+  await expect(page.getByRole("button", { name: "Pause" })).toHaveCount(0);
+  await page.getByRole("button", { name: "Wash hands" }).click();
+  await ask(page, "What brings you in today?");
+  // the test server shortens the limit to 25 s; at zero the exam locks and the presentation opens
+  await expect(page.getByRole("alert").filter({ hasText: "Time is up" })).toBeVisible({ timeout: 40_000 });
+  await expect(page.locator("#chat-input")).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Wash hands" })).toBeDisabled();
+  await expect(page.getByRole("heading", { name: /Time is up — Present your findings/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Keep going" })).toHaveCount(0);
+  await page.getByLabel("Summary statement").fill("68-year-old man with worsening breathlessness.");
+  await page.getByLabel("Differential 1").fill("Heart failure");
+  await page.getByLabel("Initial plan").fill("Diuretics.");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await expect(page.locator('[data-testid="summary"]')).toBeVisible({ timeout: 30_000 });
+  await expect(page.locator('[data-testid="mode-badge"]')).toHaveText("Exam");
+  await expect(page.locator('[data-item="within-time"]')).toContainText("0/1");
+  await expect(page.locator('[data-testid="timeline"]')).toContainText("Time up — station ended");
 });
 
 test("no API key or framework text in client bundles", () => {

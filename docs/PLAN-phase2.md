@@ -215,7 +215,7 @@ A–I as in the brief. The schema PR is owned by the schemas and engine owner an
 | M1 | 3D patient | done (primitive mannequin; GLB loader deferred, see notes) |
 | M2 | Tools and sound | done |
 | M3 | Speech to text | done |
-| M4 | Practice vs exam mode | planned |
+| M4 | Practice vs exam mode | done |
 | M5 | Room entry and courtesy flow | planned |
 
 ## Implementation notes
@@ -231,6 +231,12 @@ A–I as in the brief. The schema PR is owned by the schemas and engine owner an
 - **M2, vocal resonance** stays a menu maneuver: it needs the patient to say "ee" and shares the diaphragm placement with breath sounds.
 
 - **M3, voice:** the recognizer prefers the standard `SpeechRecognition` over the `webkit` name. The draft keeps its "voice" source even if the student edits it before sending. Real-microphone accuracy is a manual check, because e2e uses a scripted recognizer.
+
+- **M4, enforcement:** once the exam timer has auto-ended, the server rejects further exam, chat and courtesy actions. Pausing is refused in exam mode.
+- **M4, help:** hints, progress checks (deterministic items only, so no AI cost) and "show me how" are practice-only, and every use is logged as a `hint` action. The hand-hygiene nudge is generated and logged server-side on the first unclean touch.
+- **M4, "findings at the end":** the server withholds finding text from the student (sounds still play) until the station ends.
+- **M4, test hook:** `TIME_LIMIT_SECONDS_OVERRIDE` shortens the exam countdown for e2e only. Leave it unset in production.
+- **M4, time item:** `within-time` (`{ not: { happened: "timer:auto_end" } }`, exam mode only) was added to the reasoning and exam sheets.
 
 ## Open questions
 1. **3D model:** source and license. No CC0/CC-BY GLB is bundled; the primitive mannequin ships until the team picks one.

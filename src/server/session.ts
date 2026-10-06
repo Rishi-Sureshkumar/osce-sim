@@ -1,6 +1,7 @@
 import "server-only";
 import { getContent, toPublicCase } from "@/content/load";
-import type { Action, ActionInput, Case, PublicCase, Session, SessionMode, Usage } from "@/domain/schemas";
+import { sessionMode, type Action, type ActionInput, type Case, type PublicCase, type Session, type SessionMode, type Usage } from "@/domain/schemas";
+import { timeIsUp } from "@/engine/practice";
 import { ActionInput as ActionInputSchema } from "@/domain/schemas";
 import { InvalidExamError, isTouch, resolveFinding } from "@/engine/resolveFinding";
 import { DRAPE_ZONE_OF, patientState } from "@/engine/patientState";
@@ -59,23 +60,40 @@ async function nextT(session: Session): Promise<number> {
  * Returns the action plus any actions it implied (e.g. an automatic drape `expose`).
  */
 export async function appendStudentActions(sessionId: string, raw: unknown): Promise<{ action: Action; appended: Action[] }> {
-  const implied: Action[] = [];
-  const action = await appendOne(sessionId, raw, implied);
-  return { action, appended: [...implied, action] };
+  const before: Action[] = [];
+  const after: Action[] = [];
+  const action = await appendOne(sessionId, raw, before, after);
+  const session = await getSessionOr404(sessionId);
+  const kase = getCaseOr404(session.caseId);
+  const all = [...before, action, ...after].map((a) => redactForStudent(a, kase, session));
+  return { action: all[before.length]!, appended: all };
 }
+
+/** Cases with findingsVisibility "end" keep finding text from the student until the station ends. */
+export function redactForStudent(a: Action, kase: Case, session: Session): Action {
+  if (a.type !== "examine" || !a.result || kase.findingsVisibility !== "end" || session.status !== "active") return a;
+  return { ...a, result: { ...a.result, findingText: "", wording: undefined, hidden: true } };
+}
+
+const AFTER_TIME_UP = new Set(["submit_ddx", "timer", "hint", "note"]);
 
 /** Convenience wrapper when the caller only needs the main action. */
 export async function appendStudentAction(sessionId: string, raw: unknown): Promise<Action> {
   return (await appendStudentActions(sessionId, raw)).action;
 }
 
-async function appendOne(sessionId: string, raw: unknown, implied: Action[]): Promise<Action> {
+async function appendOne(sessionId: string, raw: unknown, implied: Action[], after: Action[]): Promise<Action> {
   const parsed = ActionInputSchema.safeParse(raw);
   if (!parsed.success) throw new HttpError(400, "Invalid action");
   const input: ActionInput = parsed.data;
   const session = await getSessionOr404(sessionId);
   if (session.status !== "active") throw new HttpError(409, "This session has ended");
   const kase = getCaseOr404(session.caseId);
+  const logSoFar = await (await getRepo()).listActions(sessionId);
+  if (timeIsUp(logSoFar) && !AFTER_TIME_UP.has(input.type)) throw new HttpError(409, "Time is up — present your findings.");
+  if (input.type === "timer" && (input.payload.event === "pause" || input.payload.event === "resume") && sessionMode(session) === "exam") {
+    throw new HttpError(400, "The timer can't be paused in exam mode.");
+  }
   // t is taken just before appending so log order and timestamps agree (wording can take ~1s).
   const stamp = async () => ({ id: newId("act"), sessionId, t: await nextT(session) });
 
@@ -108,10 +126,22 @@ async function appendOne(sessionId: string, raw: unknown, implied: Action[]): Pr
       payload: { ...input.payload, touch: isTouch(maneuver) },
       result: { ...resolved, ...(wording ? { wording } : {}) },
     };
+    // practice mode: nudge (and log) touching the patient without clean hands, once
+    if (sessionMode(session) === "practice" && isTouch(maneuver) && !state.handsClean && state.uncleanTouches === 0) {
+      after.push({
+        id: newId("act"),
+        sessionId,
+        t: action.t,
+        type: "hint",
+        source: "system",
+        payload: { kind: "nudge", text: "You haven't cleaned your hands yet. Hand hygiene comes before touching the patient." },
+      });
+    }
   } else {
     action = { ...(await stamp()), ...input } as Action;
   }
   await (await getRepo()).appendAction(action);
+  for (const a of after) await (await getRepo()).appendAction(a);
   return action;
 }
 
@@ -134,7 +164,11 @@ export async function previewAudio(sessionId: string, maneuverId: string, region
   }
 }
 
-export async function appendSystemAction(sessionId: string, a: Omit<Extract<Action, { source: "system" }>, "id" | "sessionId" | "t">): Promise<Action> {
+type SystemAppend =
+  | Omit<Extract<Action, { source: "system" }>, "id" | "sessionId" | "t">
+  | { type: "hint"; source: "system"; payload: Extract<Action, { type: "hint" }>["payload"] };
+
+export async function appendSystemAction(sessionId: string, a: SystemAppend): Promise<Action> {
   const session = await getSessionOr404(sessionId);
   const action = { ...a, id: newId("act"), sessionId, t: await nextT(session) } as Action;
   await (await getRepo()).appendAction(action);
@@ -167,7 +201,7 @@ export interface StudentSessionView {
 
 export async function getStudentView(sessionId: string): Promise<StudentSessionView> {
   const session = await getSessionOr404(sessionId);
-  const kase = toPublicCase(getCaseOr404(session.caseId));
-  const actions = await (await getRepo()).listActions(sessionId);
-  return { session, kase, actions };
+  const full = getCaseOr404(session.caseId);
+  const actions = (await (await getRepo()).listActions(sessionId)).map((a) => redactForStudent(a, full, session));
+  return { session, kase: toPublicCase(full), actions };
 }

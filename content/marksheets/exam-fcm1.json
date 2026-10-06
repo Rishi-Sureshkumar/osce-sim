@@ -1806,6 +1806,22 @@
         "performed": "ankle_foot_rom"
       },
       "sourceText": ""
+    },
+    {
+      "id": "within-time",
+      "section": "Timing",
+      "label": "Finishes within the time limit (exam mode only)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "not": {
+          "happened": "timer:auto_end"
+        }
+      },
+      "modes": [
+        "exam"
+      ],
+      "sourceText": ""
     }
   ]
 }

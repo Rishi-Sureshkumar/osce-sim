@@ -6,6 +6,7 @@ import type { PublicCase } from "@/domain/schemas";
 export function CasePicker({ cases }: { cases: PublicCase[] }) {
   const router = useRouter();
   const [name, setName] = useState("");
+  const [mode, setMode] = useState<"practice" | "exam">("practice");
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -16,7 +17,7 @@ export function CasePicker({ cases }: { cases: PublicCase[] }) {
       const res = await fetch("/api/sessions", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ caseId, studentLabel: name }),
+        body: JSON.stringify({ caseId, studentLabel: name, mode }),
       });
       const body = await res.json();
       if (!res.ok) throw new Error(body.error ?? "Could not start the session");
@@ -39,6 +40,25 @@ export function CasePicker({ cases }: { cases: PublicCase[] }) {
           className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
         />
       </label>
+      <fieldset className="text-sm">
+        <legend className="font-medium">Mode</legend>
+        <div className="mt-1 grid gap-2 sm:grid-cols-2">
+          {(
+            [
+              ["practice", "Practice (untimed)", "Timer counts up and can pause. Hints, technique demos, nudges and progress checks are available. Scored, labelled practice."],
+              ["exam", "Exam (timed)", "Countdown from the station's time limit with a 2-minute warning; ends automatically. No help. Feedback only at the end."],
+            ] as const
+          ).map(([value, label, help]) => (
+            <label key={value} className={`flex cursor-pointer gap-2 rounded-lg border p-3 ${mode === value ? "border-cyan-700 bg-cyan-50" : "border-slate-200 bg-white"}`}>
+              <input type="radio" name="mode" value={value} checked={mode === value} onChange={() => setMode(value)} className="mt-1" />
+              <span>
+                <span className="font-medium">{label}</span>
+                <span className="block text-xs text-slate-600">{help}</span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
       {error && (
         <p role="alert" className="text-sm text-red-700">
           {error}

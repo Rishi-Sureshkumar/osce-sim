@@ -28,6 +28,8 @@ export default defineConfig({
       COACH_ACCESS_CODE: "coach-e2e",
       AUTH_SECRET: "e2e-secret-not-for-production",
       RATE_LIMIT_PER_MINUTE: "1000",
+      // exam-mode countdown for e2e (practice mode counts up and is unaffected)
+      TIME_LIMIT_SECONDS_OVERRIDE: "25",
     },
   },
 });

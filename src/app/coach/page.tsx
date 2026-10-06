@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { mmss } from "@/components/common/format";
+import { mmss, modeLabel } from "@/components/common/format";
 import { listSessionRows } from "@/server/coach";
 
 export const dynamic = "force-dynamic";
@@ -20,6 +20,7 @@ export default async function CoachHome() {
             <tr>
               <th className="px-3 py-2">Student</th>
               <th className="px-3 py-2">Case</th>
+              <th className="px-3 py-2">Mode</th>
               <th className="px-3 py-2">Started</th>
               <th className="px-3 py-2">Duration</th>
               <th className="px-3 py-2">Status</th>
@@ -31,7 +32,7 @@ export default async function CoachHome() {
           <tbody className="divide-y divide-slate-100">
             {rows.length === 0 && (
               <tr>
-                <td colSpan={8} className="px-3 py-6 text-center text-slate-500">
+                <td colSpan={9} className="px-3 py-6 text-center text-slate-500">
                   No sessions yet.
                 </td>
               </tr>
@@ -44,6 +45,7 @@ export default async function CoachHome() {
                   </Link>
                 </td>
                 <td className="px-3 py-2">{r.caseTitle}</td>
+                <td className="px-3 py-2">{modeLabel(r.session.mode)}</td>
                 <td className="px-3 py-2 whitespace-nowrap">{new Date(r.session.startedAt).toLocaleString()}</td>
                 <td className="px-3 py-2 font-mono">{r.session.endedAt ? mmss(Date.parse(r.session.endedAt) - Date.parse(r.session.startedAt)) : "—"}</td>
                 <td className="px-3 py-2">{r.session.status}</td>
@@ -51,6 +53,7 @@ export default async function CoachHome() {
                 <td className="px-3 py-2">
                   {r.needsReview > 0 && <span className="rounded bg-amber-100 px-1.5 text-xs text-amber-900">{r.needsReview} needs review</span>}
                   {r.overrides > 0 && <span className="ml-1 rounded bg-indigo-100 px-1.5 text-xs text-indigo-800">{r.overrides} overrides</span>}
+                  {r.hints > 0 && <span className="ml-1 rounded bg-emerald-100 px-1.5 text-xs text-emerald-900">{r.hints} hints</span>}
                 </td>
                 <td className="px-3 py-2 font-mono text-xs">{r.tokens.toLocaleString()}</td>
               </tr>

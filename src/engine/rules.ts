@@ -46,6 +46,7 @@ export function findEvent(log: Action[], ref: string): Action | undefined {
     if (body === "touch") return a.type === "examine" && a.payload.touch !== false;
     if (body.startsWith("tag:")) return a.type === "say" && !!a.payload.tags?.some((t) => t.tag === body.slice(4));
     if (body.startsWith("room:")) return a.type === "room" && a.payload.event === body.slice(5);
+    if (body.startsWith("timer:")) return a.type === "timer" && a.payload.event === body.slice(6);
     if (["examine", "say", "courtesy", "submit_ddx", "note", "state_change", "hint", "room"].includes(body)) return a.type === body;
     return a.type === "courtesy" && a.payload.kind === body;
   };
@@ -103,6 +104,11 @@ function evaluate(rule: Rule, log: Action[]): RuleResult {
   if ("said" in rule) {
     const tags = new Set<string>(list(rule.said));
     const hit = log.find((a) => a.type === "say" && a.payload.tags?.some((t) => tags.has(t.tag)));
+    return { value: hit ? 1 : 0, actionIds: hit ? [hit.id] : [] };
+  }
+
+  if ("happened" in rule) {
+    const hit = findEvent(log, rule.happened);
     return { value: hit ? 1 : 0, actionIds: hit ? [hit.id] : [] };
   }
 
