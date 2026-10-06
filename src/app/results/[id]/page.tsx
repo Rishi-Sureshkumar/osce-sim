@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { labelsFrom } from "@/components/common/format";
 import { Timeline } from "@/components/common/Timeline";
 import { Debrief } from "@/components/results/Debrief";
+import { FeedbackForm } from "@/components/common/FeedbackForm";
 import { FeedbackSummary } from "@/components/results/FeedbackSummary";
 import { GradeTrigger } from "@/components/results/GradeTrigger";
 import { SheetCard } from "@/components/results/SheetCard";
@@ -54,6 +55,7 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
           {sheets.map((s) => (
             <SheetCard key={s.sheet.id} view={s} actionsById={actionsById} labels={labels} timelineHref={href} />
           ))}
+          <FeedbackForm sessionId={id} page="results" />
         </>
       )}
 

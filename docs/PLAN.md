@@ -19,7 +19,7 @@ check and tests pass.
 | M2 | Case encounter and AI patient | Case picker, door sign, streaming patient chat that follows `unknownPolicy`, AI finding wording with raw-text fallback, differential and plan submission, session saved to the database. | done |
 | M3 | Scoring and student feedback | Auto-rule interpreter, AI grading with verified evidence, a results page (score, evidence quotes, links to timeline timestamps), narrative summary. Tests for the interpreter and quote verification. | done |
 | M4 | Coach view | Session list; transcript and timeline view with exams and chat interleaved; override any score with the evidence beside it; override history; token usage. | done |
-| M5 | Ship | In-app feedback form (stored in the database), access-code gate, cost guards, Playwright smoke test of one full HF encounter with the model mocked, README deploy steps, seed script. | planned |
+| M5 | Ship | In-app feedback form (stored in the database), access-code gate, cost guards, Playwright smoke test of one full HF encounter with the model mocked, README deploy steps, seed script. | done |
 
 Out of scope for now, with interfaces only: voice input (`src/input/adapters/voice.ts`), the 3D model,
 VR (`vr.ts`), and cases beyond HF and screening.
@@ -94,6 +94,25 @@ Shared-file rule: changes to `src/domain/schemas.ts` or `regions.json` need a he
 - **`/source` is git-ignored.** The framework PDF and checklist must not be committed while
   copyright is open.
 
+## Verification status (end of M5)
+- `npm run validate`, `typecheck`, `lint` and `test` pass. The tests cover: finding resolution (all four fallbacks plus
+  vitals), the rule interpreter, quote verification, the grading pipeline, the patient prompt (no findings or diagnosis
+  leak), the wording guard, the auth token, body-diagram coverage of every region, and the repo contract.
+- The Postgres repo and migrations were tested against a local Postgres (`TEST_DATABASE_URL=… npm test`).
+- `npm run e2e` passes. It covers the full HF encounter with `AI_MOCK=true` (gate → history → CV and pulmonary exam
+  → differential → scored results with verified quotes → coach override), plus a scan of client bundles for the
+  API key, the SDK and framework text.
+- **Not yet exercised against the live API** (no key in the build environment): the streaming patient, the Haiku
+  wording and the structured-output grader. They type-check against `@anthropic-ai/sdk` 0.131. First live run:
+  set `AI_MOCK=false` and `ANTHROPIC_API_KEY`, run one HF encounter, and check the coach view's token counts.
+
+## Known limitations / next steps
+- **Session privacy:** students reach their session by an unguessable id. There are no per-student accounts, and any coach sees all sessions.
+- **Rate limiting:** in-memory, per serverless instance.
+- **Accessibility:** the SVG regions are keyboard-focusable buttons with labels, but small regions (lymph nodes) are fiddly on touch screens.
+- **Exam feedback:** the "performed" visualisation is text steps with a highlight. There's no media yet (`demo.mediaUrl` is ready for heart and lung sounds).
+- **Grading time:** grading runs in the request that the results page triggers. For long sessions on slow models, move it to a background job.
+
 ## Communication items defaulted to `not_assessable` (team to confirm)
 In `content/marksheets/history-communication.json`:
 - `remove-barriers`: sits down, breaks computer contact (body position and screen use aren't visible).
@@ -119,3 +138,4 @@ Candidates the team might also move to `not_assessable`, currently AI-graded fro
 5. **Scoring scale**: the school sheets may use 0/1/2 or global ratings. We store a 0–1 fraction × weight per item. Confirm how coaches want it shown.
 6. **Weights**: every exam item currently has weight 1 (reflexes 0.2 each). Should coaches weight critical items (e.g. hand hygiene) higher?
 7. **Who sees what**: should students see `needs_review` items before a coach has looked at them?
+8. **API budget**: what monthly spend limit should the Anthropic key have, and who holds the key?

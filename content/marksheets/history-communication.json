@@ -120,7 +120,7 @@
     {
       "id": "open-story",
       "section": "Opening the interview",
-      "label": "Uses an open-ended question to get the story",
+      "label": "Invites the patient’s story with an open-ended prompt",
       "weight": 1,
       "scoring": "ai",
       "guidance": "Invites the patient’s narrative with an open prompt (e.g. Tell me about…).",

@@ -157,7 +157,7 @@
         "cardiac_mitral"
       ],
       "normalFinding": {
-        "default": "PMI in the left 5th intercostal space at the midclavicular line; small (about 2 cm), brief, not sustained."
+        "default": "PMI at the 5th left intercostal space, midclavicular line; small (about 2 cm), brief, not sustained."
       },
       "demo": {
         "steps": [

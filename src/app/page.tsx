@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getContent, toPublicCase } from "@/content/load";
 import { CasePicker } from "@/components/home/CasePicker";
 
@@ -12,6 +13,9 @@ export default function Home() {
         Practise a station: take a history, examine the patient, present your differential, and get feedback against the mark sheet.
       </p>
       <CasePicker cases={cases} />
+      <p className="mt-8 text-sm text-slate-500">
+        Coach? Open the <Link href="/coach" className="text-cyan-700 underline">coach view</Link> (needs the coach code).
+      </p>
     </main>
   );
 }

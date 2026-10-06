@@ -16,11 +16,12 @@ export function mockPatientReply(c: Case, question: string, turnIndex: number): 
     }
     return c.history.openingStatement;
   }
-  const hit = (keywords?: string[]) => (keywords ?? []).some((k) => q.includes(norm(k)));
-  const fact = c.history.facts.find((f) => hit(f.keywords));
-  if (fact) return fact.answer;
-  const neg = c.history.pertinentNegatives.find((n) => hit(n.keywords));
-  if (neg) return neg.answer;
+  // strongest match wins: total length of matched keywords
+  const strength = (keywords?: string[]) => (keywords ?? []).reduce((n, k) => (q.includes(norm(k)) ? n + k.length : n), 0);
+  const best = [...c.history.facts.map((f) => ({ answer: f.answer, s: strength(f.keywords) })), ...c.history.pertinentNegatives.map((n) => ({ answer: n.answer, s: strength(n.keywords) }))]
+    .filter((x) => x.s > 0)
+    .sort((a, b) => b.s - a.s)[0];
+  if (best) return best.answer;
   if (/examine|listen|take a look|feel your|press on|ok if i|okay if i/.test(q)) return "Sure, go ahead.";
   if (/thank/.test(q)) return "Thank you.";
   return c.history.unknownPolicy.unknownReply;

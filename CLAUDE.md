@@ -38,12 +38,17 @@ npm test             # vitest (engine, content validation, scoring, repo)
 npm run lint
 npm run validate     # schema + cross-reference check of /content
 npm run e2e          # Playwright smoke test (builds + starts the app with AI_MOCK=true)
+npm run check:copyright  # needs local /source/*.txt — flags 7-word runs copied from the framework
 npm run seed         # writes a demo HF session (graded) into the configured store
 npm run db:generate  # drizzle-kit: SQL migration from src/server/db/schema.ts
 npm run db:migrate   # apply ./drizzle migrations to DATABASE_URL
 ```
 
-Before every commit: `npm run validate && npm run typecheck && npm test && npm run lint`.
+Before every commit: `npm run validate && npm run typecheck && npm test && npm run lint`
+(and `npm run check:copyright` if you touched content/UI text).
+
+Env for tooling: `TEST_DATABASE_URL` (also runs the Postgres repo test), `FILE_STORE_PATH`
+(file-store location; e2e uses `test-results/e2e-store.json`).
 
 ## Folder map (each workstream owns its folders — see docs/PLAN.md)
 

@@ -65,7 +65,7 @@ export function ChatPanel({
             <Bubble key={a.id} who={patientName} text={a.payload.text} />
           ) : null,
         )}
-        {streaming !== null && <Bubble who={patientName} text={streaming || "…"} />}
+        {streaming !== null && <Bubble who={patientName} text={streaming || "…"} streaming />}
         <div ref={endRef} />
       </div>
       {error && (
@@ -95,9 +95,9 @@ export function ChatPanel({
   );
 }
 
-function Bubble({ who, text, mine }: { who: string; text: string; mine?: boolean }) {
+function Bubble({ who, text, mine, streaming }: { who: string; text: string; mine?: boolean; streaming?: boolean }) {
   return (
-    <div className={`flex ${mine ? "justify-end" : "justify-start"}`}>
+    <div className={`flex ${mine ? "justify-end" : "justify-start"}`} data-streaming={streaming || undefined} aria-busy={streaming || undefined}>
       <div className={`max-w-[85%] rounded-lg px-3 py-2 text-sm ${mine ? "bg-cyan-700 text-white" : "bg-slate-100"}`}>
         <span className={`block text-[10px] font-semibold uppercase ${mine ? "text-cyan-100" : "text-slate-500"}`}>{who}</span>
         {text}

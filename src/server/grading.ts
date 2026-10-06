@@ -2,20 +2,15 @@ import "server-only";
 import { getContent } from "@/content/load";
 import type { Action, Case, GradingRun, MarkSheet } from "@/domain/schemas";
 import { scoreAiItems, scoreDeterministicItems } from "@/engine/scoring";
+import { sheetsForCase as filterSheets } from "@/engine/sheets";
 import { gradeAiItems } from "./ai/grader";
 import { getRepo } from "./db";
 import { HttpError } from "./errors";
 import { newId } from "./ids";
 import { getCaseOr404, getSessionOr404, recordUsage } from "./session";
 
-/** Mark sheets for a case, restricted to the case's configured sections. */
 export function sheetsForCase(kase: Case): MarkSheet[] {
-  const content = getContent();
-  return kase.markSheetIds.map((id) => {
-    const sheet = content.markSheetById.get(id)!;
-    const sections = kase.markSheetSections?.[id];
-    return sections ? { ...sheet, items: sheet.items.filter((i) => sections.includes(i.section)) } : sheet;
-  });
+  return filterSheets(kase, getContent().markSheetById);
 }
 
 const inFlight = new Map<string, Promise<GradingRun>>();
@@ -83,17 +78,3 @@ async function doGrade(sessionId: string, trigger: GradingRun["trigger"]): Promi
 }
 
 const round = (n: number) => Math.round(n * 100) / 100;
-
-/** Key abnormal findings in the case that the student never elicited (deterministic). */
-export function missedKeyFindings(kase: Case, log: Action[]): { maneuverId: string; regionId: string | null }[] {
-  const out: { maneuverId: string; regionId: string | null }[] = [];
-  for (const [maneuverId, byRegion] of Object.entries(kase.abnormalFindings)) {
-    const exams = log.filter((a) => a.type === "examine" && a.payload.maneuverId === maneuverId);
-    const regions = Object.keys(byRegion).filter((r) => r !== "default");
-    if (!exams.length) out.push({ maneuverId, regionId: regions[0] ?? null });
-    else if (regions.length && !exams.some((a) => a.type === "examine" && regions.includes(a.payload.regionId))) {
-      out.push({ maneuverId, regionId: regions[0]! });
-    }
-  }
-  return out;
-}

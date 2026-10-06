@@ -6,6 +6,7 @@ import { OverrideForm } from "@/components/coach/OverrideForm";
 import { RegradeButton } from "@/components/coach/RegradeButton";
 import { SheetCard } from "@/components/results/SheetCard";
 import { FeedbackSummary } from "@/components/results/FeedbackSummary";
+import { FeedbackForm } from "@/components/common/FeedbackForm";
 import { HttpError } from "@/server/errors";
 import { getResultsView } from "@/server/results";
 
@@ -70,6 +71,8 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
           ) : (
             <p className="rounded-md bg-slate-100 p-3 text-sm">Not graded yet.</p>
           )}
+
+          <FeedbackForm sessionId={id} page="coach-session" prompt="Coach feedback on this simulator / grading" />
 
           <section className="rounded-lg border border-slate-200 bg-white p-4" aria-labelledby="ovr-h">
             <h2 id="ovr-h" className="font-semibold">

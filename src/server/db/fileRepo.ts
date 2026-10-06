@@ -17,7 +17,7 @@ const empty = (): Store => ({ sessions: [], actions: [], gradingRuns: [], overri
 export class FileRepo implements Repo {
   private chain: Promise<unknown> = Promise.resolve();
 
-  constructor(private file = path.join(process.cwd(), ".data", "store.json")) {}
+  constructor(private file = process.env.FILE_STORE_PATH || path.join(process.cwd(), ".data", "store.json")) {}
 
   private read(): Store {
     if (!fs.existsSync(this.file)) return empty();

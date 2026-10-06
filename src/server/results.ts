@@ -3,7 +3,8 @@ import { getContent, getPublicCatalog, toPublicCase } from "@/content/load";
 import type { Action, Case, GradingRun, MarkSheet, Override, PublicCase, Session } from "@/domain/schemas";
 import { applyOverrides, totals, type EffectiveScore, type SheetTotals } from "@/engine/scoring";
 import { getRepo } from "./db";
-import { missedKeyFindings, sheetsForCase } from "./grading";
+import { missedKeyFindings } from "@/engine/sheets";
+import { sheetsForCase } from "./grading";
 import { getCaseOr404, getSessionOr404 } from "./session";
 
 export interface SheetView {
