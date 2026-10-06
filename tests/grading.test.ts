@@ -41,7 +41,7 @@ describe("grading pipeline (deterministic + mock AI)", () => {
 
   it("mock AI judgements quote the transcript verbatim and pass verification", () => {
     const ai = scoreAiItems(history, mockJudgements(history, log), log);
-    const intro = ai.find((s) => s.itemId === "introduce-self-role")!;
+    const intro = ai.find((s) => s.itemId === "greet-by-name")!;
     expect(intro.status).toBe("scored");
     expect(intro.value).toBe(1);
     expect(intro.evidence[0]!.verified).toBe(true);

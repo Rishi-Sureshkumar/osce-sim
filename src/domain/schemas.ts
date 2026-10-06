@@ -45,6 +45,7 @@ export const Position = z.enum([
   "seated_leaning_forward",
   "supine",
   "reclined_30",
+  "reclined_45",
   "left_lateral_decubitus",
   "prone",
   "standing",
@@ -535,6 +536,8 @@ export type ActionType = Action["type"];
  *   "tag:<CourtesyTag>"                           a `say` the classifier tagged (e.g. "tag:asked_consent_exam")
  *   "room:<knock|enter|exit>"                     a room event
  *   "timer:<pause|resume|warning|auto_end>"       a timer event
+ *   "drape_change"                                draping, exposing or covering (courtesy or direct manipulation)
+ *   "drape:cover" | "drape:expose"                a zone covered (incl. re-draping) / uncovered
  *   "last:examine" | "last:say"                   last action of a type
  */
 export const EventRef = z.string().min(1);

@@ -136,15 +136,17 @@ export function ruleRefErrors(rule: Rule, c: ContentIndex): string[] {
   return out;
 }
 
-const TYPES = ["examine", "say", "courtesy", "submit_ddx", "note", "state_change", "hint", "room", "touch"];
+const TYPES = ["examine", "say", "courtesy", "submit_ddx", "note", "state_change", "hint", "room", "touch", "drape_change"];
 
 export function eventRefError(ref: string, c: ContentIndex): string | null {
   const [head, rest] = ref.includes(":") ? [ref.slice(0, ref.indexOf(":")), ref.slice(ref.indexOf(":") + 1)] : [ref, ""];
-  if (!rest) return CourtesyKind.safeParse(head).success ? null : `unknown event ref "${ref}"`;
+  if (!rest) return CourtesyKind.safeParse(head).success || head === "drape_change" ? null : `unknown event ref "${ref}"`;
   switch (head) {
     case "first":
     case "last":
-      return TYPES.includes(rest) ? null : `unknown action type in "${ref}"`;
+      return TYPES.includes(rest) || !eventRefError(rest, c) ? null : `unknown action type in "${ref}"`;
+    case "drape":
+      return rest === "cover" || rest === "expose" ? null : `unknown drape event in "${ref}"`;
     case "maneuver":
       return c.maneuverById.has(rest) ? null : `unknown maneuver in "${ref}"`;
     case "position":

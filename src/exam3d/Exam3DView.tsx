@@ -11,6 +11,7 @@ import { CameraRig, PRESET_LABELS, presetGoal, regionGoal, type CameraPreset } f
 import { Patient3D } from "./Patient3D";
 import { ANCHOR_BY_REGION, SNAP_TOLERANCE, poseFor, snapToAnchor, type Vec3 } from "./regionAnchors";
 import { RegionPicker } from "./RegionPicker";
+import { Dispenser } from "./Dispenser";
 import { Room } from "./Room";
 import { TestHook } from "./TestHook";
 import { MIN_LISTEN_MS, candidatesFor, placementSound, regionsForTool, sequenceProgress, stepForPlacement } from "./tools/toolLogic";
@@ -38,6 +39,8 @@ export interface Exam3DViewProps {
   onToolExamine: (u: ToolUse) => Promise<Action | null>;
   /** several maneuvers fit this placement: ask the student; resolves to the chosen maneuver id */
   onToolAmbiguous: (regionId: string, maneuverIds: string[]) => Promise<string | null>;
+  /** the sanitiser dispenser in the scene (press and hold) */
+  sanitiser?: { progress: number; start: () => void; cancel: () => void };
 }
 
 interface Hold {
@@ -276,6 +279,9 @@ export default function Exam3DView(props: Exam3DViewProps) {
           <directionalLight position={[2, 4, 2]} intensity={1.1} />
           <directionalLight position={[-2, 2, -1]} intensity={0.35} />
           <Room backrest={pose.backrest} showBackrest={state.bedAngle < 60 && state.position !== "left_lateral_decubitus"} />
+          {props.sanitiser && (
+            <Dispenser progress={props.sanitiser.progress} clean={state.handsClean} onStart={() => !props.disabled && props.sanitiser!.start()} onCancel={props.sanitiser.cancel} />
+          )}
           <Patient3D
             pose={pose}
             drape={state.drape}
@@ -333,7 +339,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
         )}
         {backHidden && (
           <p className="pointer-events-none absolute bottom-8 left-2 max-w-xs rounded-md bg-amber-50 px-2 py-1 text-xs text-amber-900">
-            The back is against the bed. Sit the patient up (position: seated) to examine it.
+            The back is against the bed. Ask the patient to sit up (or raise the bed) to examine it.
           </p>
         )}
       </div>

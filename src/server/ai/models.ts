@@ -6,6 +6,8 @@ export const MODELS = {
   grader: "claude-sonnet-5-5",
   /** Rewording a deterministic finding into a natural sentence. */
   wording: "claude-haiku-4-5-20251001",
+  /** Courtesy-tag fallback when the regex pass finds nothing in a long utterance. */
+  tagger: "claude-haiku-4-5-20251001",
 } as const;
 
 /**

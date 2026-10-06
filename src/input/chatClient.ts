@@ -5,6 +5,7 @@ import { sayFromVoice } from "./adapters/voice";
 
 type ChatEvent =
   | { type: "student"; action: Action }
+  | { type: "implied"; action: Action }
   | { type: "delta"; text: string }
   | { type: "patient"; action: Action }
   | { type: "error"; message: string };
@@ -39,7 +40,7 @@ export async function sendChat(
       buf = buf.slice(nl + 1);
       if (!line) continue;
       const e = JSON.parse(line) as ChatEvent;
-      if (e.type === "student") handlers.onStudent(e.action);
+      if (e.type === "student" || e.type === "implied") handlers.onStudent(e.action);
       else if (e.type === "delta") handlers.onDelta(e.text);
       else if (e.type === "patient") handlers.onPatient(e.action);
       else throw new Error(e.message);

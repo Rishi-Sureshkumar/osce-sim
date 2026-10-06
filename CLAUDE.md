@@ -62,14 +62,14 @@ content/marksheets/*.json           mark sheets (auto rules / ai items / not_ass
 src/domain/schemas.ts               TEAM CONTRACT (Zod) — heads-up to the team before changing
 src/content/                        loaders + cross-reference validation
 src/engine/                         pure TS: resolveFinding, rules interpreter, evidence check, scoring
-src/input/adapters/                 click / text / toolbar → Action (voice, vr are stubs)
+src/input/adapters/                 click / text / toolbar → Action (+ tool, voice; vr is a stub)
 src/server/ai/                      the ONLY place that talks to Anthropic (models.ts, patient, wording, grader, mock)
 src/server/db/                      Repo interface, Postgres (Drizzle) + file store
 src/server/                         session service, auth, rate limit, cost guards
 src/app/api/                        route handlers
 src/app/(pages)                     gate, home, station, results, coach
 src/components/body/                SVG body diagram (views, regions → svgPathId)
-src/components/station/             toolbar, chat, findings, log, maneuver menu, submit dialog
+src/components/station/             door, encounter bar (sanitise / bed / drape / Actions menu), chat, findings, log, maneuver menu, submit dialog
 src/components/results/, coach/     results and coach UI
 tests/                              vitest; e2e/ Playwright
 ```
@@ -101,11 +101,16 @@ would contradict the case (e.g. "unlaboured" breathing).
 **Add a mark-sheet item** — add to `content/marksheets/<sheet>.json`:
 - `scoring: "auto"` + a `rule` (see the Rule type in schemas.ts: `performed`, `courtesy`, `before`,
   `performedIn`, `submitted`, `said` (courtesy tags), `technique` (tool/mode/placement/duration/position),
-  `hygieneBeforeTouch`, `all`, `any`, `not`). Add `modes: ["exam"]` for time-dependent items. The single interpreter is `src/engine/rules.ts`;
+  `hygieneBeforeTouch`, `happened` (any event ref, e.g. `room:exit`, `drape:cover`, `tag:closing`), `all`, `any`, `not`). Add `modes: ["exam"]` for time-dependent items. The single interpreter is `src/engine/rules.ts`;
   never write per-item code.
 - `scoring: "ai"` + `guidance` (what the grader looks for) + optional `mockKeywords` (used when AI_MOCK=true).
   Grader output must quote evidence; quotes are verified verbatim server-side, otherwise `needs_review`.
 - `scoring: "not_assessable"` + `notAssessableReason`. Shown greyed out to coaches, never scored.
+
+**Courtesy tags** — what the student says is tagged server-side in `src/server/tags.ts` (regex
+first; `src/server/ai/tagger.ts` is the verified-quote model fallback). Add a phrasing there with a
+test in `tests/tags.test.ts`. Tags are never accepted from the browser. Positioning tags must only
+match requests, never symptom questions.
 
 **Add an input method (voice / VR)** — implement the adapter in `src/input/adapters/` so it returns
 `ActionInput`s and posts them like `click.ts` does. Do not touch the engine.

@@ -25,15 +25,18 @@
       "section": "Setting the stage",
       "label": "Introduces self (full name) and role",
       "weight": 1,
-      "scoring": "ai",
-      "guidance": "Student states their own name (first and last) and their role, e.g. medical student.",
-      "mockKeywords": [
-        "my name is",
-        "i am a medical student",
-        "i’m a medical student",
-        "medical student"
-      ],
-      "sourceText": ""
+      "scoring": "auto",
+      "sourceText": "",
+      "rule": {
+        "all": [
+          {
+            "said": "introduced_name"
+          },
+          {
+            "said": "stated_role"
+          }
+        ]
+      }
     },
     {
       "id": "remove-barriers",
@@ -904,14 +907,11 @@
       "section": "Ending the encounter",
       "label": "Checks for any other questions before ending",
       "weight": 1,
-      "scoring": "ai",
-      "guidance": "Asks if there is anything else before closing.",
-      "mockKeywords": [
-        "anything else",
-        "any other questions",
-        "before we finish"
-      ],
-      "sourceText": ""
+      "scoring": "auto",
+      "sourceText": "",
+      "rule": {
+        "said": "offered_questions"
+      }
     },
     {
       "id": "expectancies",

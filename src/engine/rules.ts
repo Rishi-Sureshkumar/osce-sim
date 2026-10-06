@@ -41,9 +41,20 @@ export function findEvent(log: Action[], ref: string): Action | undefined {
   const match = (a: Action): boolean => {
     if (body.startsWith("maneuver:")) return a.type === "examine" && a.payload.maneuverId === body.slice(9);
     if (body.startsWith("position:")) {
-      return a.type === "courtesy" && a.payload.kind === "position" && a.payload.position === body.slice(9);
+      const p = body.slice(9);
+      return (a.type === "courtesy" && a.payload.kind === "position" && a.payload.position === p) || (a.type === "state_change" && a.payload.position === p);
     }
     if (body === "touch") return a.type === "examine" && a.payload.touch !== false;
+    if (body === "drape_change") {
+      return (a.type === "courtesy" && ["drape", "expose", "cover"].includes(a.payload.kind)) || (a.type === "state_change" && !!a.payload.drape);
+    }
+    if (body === "drape:cover" || body === "drape:expose") {
+      const cover = body === "drape:cover";
+      return (
+        (a.type === "courtesy" && (a.payload.kind === (cover ? "cover" : "expose") || (cover && a.payload.kind === "drape"))) ||
+        (a.type === "state_change" && !!a.payload.drape && a.payload.drape.covered === cover)
+      );
+    }
     if (body.startsWith("tag:")) return a.type === "say" && !!a.payload.tags?.some((t) => t.tag === body.slice(4));
     if (body.startsWith("room:")) return a.type === "room" && a.payload.event === body.slice(5);
     if (body.startsWith("timer:")) return a.type === "timer" && a.payload.event === body.slice(6);

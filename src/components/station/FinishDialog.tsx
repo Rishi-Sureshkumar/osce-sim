@@ -10,18 +10,18 @@ export function FinishDialog({
   mode,
   append,
   disabled,
-  forceOpen = false,
+  forceOpen = null,
 }: {
   sessionId: string;
   mode: "encounter" | "screening";
   append: (a: Action) => void;
   disabled: boolean;
-  /** exam time ran out: the presentation step opens and can't be dismissed */
-  forceOpen?: boolean;
+  /** exam time ran out or the student left the room: the presentation step opens and can't be dismissed */
+  forceOpen?: "time_up" | "left_room" | null;
 }) {
   const router = useRouter();
   const [openState, setOpen] = useState(false);
-  const open = openState || forceOpen;
+  const open = openState || !!forceOpen;
   const [summary, setSummary] = useState("");
   const [ddx, setDdx] = useState(["", "", ""]);
   const [plan, setPlan] = useState("");
@@ -68,7 +68,7 @@ export function FinishDialog({
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4" role="dialog" aria-modal aria-labelledby="finish-h">
           <form onSubmit={submit} className="max-h-[90vh] w-full max-w-xl space-y-3 overflow-y-auto rounded-lg bg-white p-5 shadow-xl">
             <h2 id="finish-h" className="text-lg font-semibold">
-              {forceOpen ? "Time is up — " : ""}
+              {forceOpen === "time_up" ? "Time is up — " : ""}
               {encounter ? "Present your findings" : "Finish the screening exam?"}
             </h2>
             {encounter ? (

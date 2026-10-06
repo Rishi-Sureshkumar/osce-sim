@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import type { Action, AudioSpec, CourtesyKind, Position, PublicCase, Region, Session, View } from "@/domain/schemas";
+import type { Action, AudioSpec, CourtesyKind, DrapeZone, Position, PublicCase, Region, Session, View } from "@/domain/schemas";
 import type { PublicCatalog } from "@/content/types";
 import { BodyDiagram } from "@/components/body/BodyDiagram";
 import { findingDisplay, labelsFrom } from "@/components/common/format";
@@ -18,8 +18,10 @@ import { sessionMode } from "@/domain/schemas";
 import { courtesyFromToolbar } from "@/input/adapters/toolbar";
 import { postAction } from "@/input/client";
 import { ActionLog } from "./ActionLog";
-import { CourtesyToolbar } from "./CourtesyToolbar";
 import { DoorSign } from "./DoorSign";
+import { EncounterBar } from "./EncounterBar";
+import { RoomDoor } from "./RoomDoor";
+import { SANITISE_HOLD_MS, useHold } from "./useHold";
 import { FindingsPanel } from "./FindingsPanel";
 import { ManeuverMenu } from "./ManeuverMenu";
 import { PerformOverlay } from "./PerformOverlay";
@@ -40,6 +42,9 @@ const VIEW_KEY = "osce.examView";
 /** menu performs block the view until "Continue"; tool findings are non-blocking cards */
 type Performing = { regionId: string; title: string; steps: string[]; finding: string | null; audio?: AudioSpec; kind: "menu" | "tool" };
 
+/** why the presentation step opened by itself (it can't be dismissed) */
+export type ForceOpen = "time_up" | "left_room" | null;
+
 export interface StationProps {
   session: Session;
   kase: PublicCase;
@@ -48,7 +53,7 @@ export interface StationProps {
   /** Slot for the chat panel. */
   chat?: (ctx: { actions: Action[]; append: (a: Action) => void; disabled: boolean }) => React.ReactNode;
   /** Slot for the finish/submit control. */
-  finish?: (ctx: { append: (a: Action) => void; disabled: boolean; forceOpen: boolean }) => React.ReactNode;
+  finish?: (ctx: { append: (a: Action) => void; disabled: boolean; forceOpen: ForceOpen }) => React.ReactNode;
 }
 
 export function Station({ session, kase, catalog, initialActions, chat, finish }: StationProps) {
@@ -80,8 +85,13 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
   const ended = session.status !== "active" || actions.some((a) => a.type === "submit_ddx" || a.type === "session_end");
   const mode = sessionMode(session);
   const timeUp = timeIsUp(actions);
-  /** exam actions and chat stop when the station ended or exam time ran out */
-  const locked = ended || timeUp;
+  const state = useMemo(() => patientState(actions), [actions]);
+  const left = actions.some((a) => a.type === "room" && a.payload.event === "exit");
+  const outside = !state.inRoom;
+  /** exam actions and chat stop outside the room, when the station ended or exam time ran out */
+  const locked = ended || timeUp || outside;
+  const [entering, setEntering] = useState(false);
+  const [leaveNudge, setLeaveNudge] = useState<string | null>(null);
 
   const append = (a: Action) => setActions((xs) => [...xs, a]);
   const appendAll = (list: Action[]) => {
@@ -109,7 +119,6 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
     () => new Set(actions.flatMap((a) => (a.type === "examine" ? [a.payload.regionId] : []))),
     [actions],
   );
-  const currentPosition = useMemo(() => patientState(actions).position, [actions]);
   const [tool, setTool] = useState<ToolState>({ tool: null, stethMode: "diaphragm", forkFreq: "512", struckAt: null });
   const [choice, setChoice] = useState<{ region: Region; ids: string[]; resolve: (id: string | null) => void } | null>(null);
   const [toast, setToast] = useState<string | null>(null);
@@ -193,6 +202,50 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
   const onCourtesy = (kind: CourtesyKind, position?: Position) =>
     run(async () => appendAll((await postAction(session.id, courtesyFromToolbar(kind, position))).appended));
 
+  // ---- room entry, hand hygiene, bed and drape (direct manipulation), leaving
+  const post = async (a: Parameters<typeof postAction>[1]) => appendAll((await postAction(session.id, a)).appended);
+  const onEnter = () =>
+    run(async () => {
+      setEntering(true);
+      try {
+        await post({ type: "room", source: "click", payload: { event: "knock" } });
+        await post({ type: "room", source: "click", payload: { event: "enter" } });
+      } finally {
+        setEntering(false);
+      }
+    });
+  const sanitise = useHold(SANITISE_HOLD_MS, () =>
+    void run(async () => {
+      await post({ type: "courtesy", source: "click", payload: { kind: "hand_hygiene" } });
+      setToast("Hands cleaned.");
+    }),
+  );
+  const onBed = (position: Position) => run(() => post({ type: "state_change", source: "click", payload: { position, via: "direct" } }));
+  const onDrape = (zone: DrapeZone, covered: boolean) => run(() => post({ type: "state_change", source: "click", payload: { drape: { zone, covered }, via: "direct" } }));
+  const leave = () =>
+    run(async () => {
+      setLeaveNudge(null);
+      await post({ type: "room", source: "click", payload: { event: "exit" } });
+      setSelected(null);
+      setPerforming(null);
+      setTool((t) => ({ ...t, tool: null }));
+    });
+  const onLeave = () => {
+    if (mode !== "practice") return leave();
+    // practice: one reminder (logged) before leaving without a goodbye or exit hand hygiene
+    const lastTouch = actions.findLastIndex((a) => a.type === "examine" && a.payload.touch !== false);
+    const lastClean = actions.findLastIndex((a) => a.type === "courtesy" && a.payload.kind === "hand_hygiene");
+    const saidBye = actions.some((a) => a.type === "say" && a.payload.tags?.some((t) => t.tag === "closing"));
+    const tips = [!saidBye && "say goodbye to the patient", lastTouch > lastClean && "clean your hands on the way out"].filter(Boolean);
+    if (!tips.length || leaveNudge) return leave();
+    const text = `Before you leave: ${tips.join(" and ")}.`;
+    setLeaveNudge(text);
+    return run(async () => {
+      const { appended } = await postAction(session.id, { type: "hint", source: "system", payload: { kind: "nudge", text } });
+      setActions((xs) => [...xs, ...appended]);
+    });
+  };
+
   const whole = catalog.regions.filter((r) => r.view === "whole");
 
   return (
@@ -209,8 +262,8 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
         </div>
         <div className="flex items-center gap-3">
           <AudioControls />
-          <ModeTimer mode={mode} startedAt={session.startedAt} limitSeconds={kase.timeLimitSeconds} actions={actions} stopped={locked} onTimerEvent={onTimerEvent} />
-          {finish?.({ append, disabled: ended, forceOpen: timeUp && !ended })}
+          <ModeTimer mode={mode} startedAt={session.startedAt} limitSeconds={kase.timeLimitSeconds} actions={actions} stopped={ended || timeUp} onTimerEvent={onTimerEvent} />
+          {finish?.({ append, disabled: ended, forceOpen: ended ? null : timeUp ? "time_up" : left ? "left_room" : null })}
         </div>
       </header>
 
@@ -225,8 +278,25 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
           Time is up. The examination is closed. Present your summary, differential and plan.
         </p>
       )}
+      {outside && !ended && !left && !timeUp ? (
+        <RoomDoor kase={kase} busy={entering} onEnter={onEnter} />
+      ) : (
+      <>
+      {left && !ended && (
+        <p role="status" className="rounded-md bg-slate-100 px-3 py-2 text-sm text-slate-800">
+          You have left the room. Present your summary, differential and plan.
+        </p>
+      )}
       {mode === "practice" && !locked && <PracticeHelp sessionId={session.id} append={append} disabled={locked} />}
-      <CourtesyToolbar currentPosition={currentPosition} disabled={locked} onCourtesy={onCourtesy} />
+      {!left && <EncounterBar state={state} disabled={locked} sanitise={sanitise} onBed={onBed} onDrape={onDrape} onMenu={onCourtesy} onLeave={onLeave} />}
+      {leaveNudge && !left && (
+        <p className="rounded-md bg-cyan-50 px-3 py-2 text-sm text-cyan-900" role="status" data-testid="leave-nudge">
+          {leaveNudge}
+          <button type="button" className="ml-2 underline" onClick={() => void leave()}>
+            Leave anyway
+          </button>
+        </p>
+      )}
 
       <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-[minmax(280px,1fr)_minmax(360px,1.3fr)_minmax(280px,1fr)]">
         <div className="flex min-h-0 flex-col gap-3">
@@ -269,6 +339,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
                 }}
                 onToolExamine={onToolExamine}
                 onToolAmbiguous={onToolAmbiguous}
+                sanitiser={sanitise}
                 regions={catalog.regions}
                 examinableRegionIds={examinable}
                 actions={actions}
@@ -331,6 +402,8 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
           <ActionLog actions={actions} labels={labels} />
         </div>
       </div>
+      </>
+      )}
     </div>
   );
 }

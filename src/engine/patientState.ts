@@ -6,6 +6,7 @@ export const POSITION_ANGLE: Record<Position, number> = {
   supine: 0,
   prone: 0,
   reclined_30: 30,
+  reclined_45: 45,
   left_lateral_decubitus: 0,
   seated: 80,
   seated_leaning_forward: 85,

@@ -1,6 +1,6 @@
 import "server-only";
 import { getContent, toPublicCase } from "@/content/load";
-import { sessionMode, type Action, type ActionInput, type Case, type PublicCase, type Session, type SessionMode, type Usage } from "@/domain/schemas";
+import { sessionMode, type Action, type ActionInput, type Case, type PublicCase, type Session, type SessionMode, type TagHit, type Usage } from "@/domain/schemas";
 import { timeIsUp } from "@/engine/practice";
 import { ActionInput as ActionInputSchema } from "@/domain/schemas";
 import { InvalidExamError, isTouch, resolveFinding } from "@/engine/resolveFinding";
@@ -59,10 +59,10 @@ async function nextT(session: Session): Promise<number> {
  * deterministically, optionally adds AI wording, and appends to the log.
  * Returns the action plus any actions it implied (e.g. an automatic drape `expose`).
  */
-export async function appendStudentActions(sessionId: string, raw: unknown): Promise<{ action: Action; appended: Action[] }> {
+export async function appendStudentActions(sessionId: string, raw: unknown, server: ServerFields = {}): Promise<{ action: Action; appended: Action[] }> {
   const before: Action[] = [];
   const after: Action[] = [];
-  const action = await appendOne(sessionId, raw, before, after);
+  const action = await appendOne(sessionId, raw, before, after, server);
   const session = await getSessionOr404(sessionId);
   const kase = getCaseOr404(session.caseId);
   const all = [...before, action, ...after].map((a) => redactForStudent(a, kase, session));
@@ -77,12 +77,18 @@ export function redactForStudent(a: Action, kase: Case, session: Session): Actio
 
 const AFTER_TIME_UP = new Set(["submit_ddx", "timer", "hint", "note"]);
 
-/** Convenience wrapper when the caller only needs the main action. */
-export async function appendStudentAction(sessionId: string, raw: unknown): Promise<Action> {
-  return (await appendStudentActions(sessionId, raw)).action;
+/** Fields only the server may set (never accepted from the browser). */
+export interface ServerFields {
+  /** courtesy tags for a `say` (from src/server/tags.ts) */
+  tags?: TagHit[];
 }
 
-async function appendOne(sessionId: string, raw: unknown, implied: Action[], after: Action[]): Promise<Action> {
+/** Convenience wrapper when the caller only needs the main action. */
+export async function appendStudentAction(sessionId: string, raw: unknown, server: ServerFields = {}): Promise<Action> {
+  return (await appendStudentActions(sessionId, raw, server)).action;
+}
+
+async function appendOne(sessionId: string, raw: unknown, implied: Action[], after: Action[], server: ServerFields): Promise<Action> {
   const parsed = ActionInputSchema.safeParse(raw);
   if (!parsed.success) throw new HttpError(400, "Invalid action");
   const input: ActionInput = parsed.data;
@@ -137,6 +143,8 @@ async function appendOne(sessionId: string, raw: unknown, implied: Action[], aft
         payload: { kind: "nudge", text: "You haven't cleaned your hands yet. Hand hygiene comes before touching the patient." },
       });
     }
+  } else if (input.type === "say") {
+    action = { ...(await stamp()), ...input, payload: { ...input.payload, ...(server.tags?.length ? { tags: server.tags } : {}) } };
   } else {
     action = { ...(await stamp()), ...input } as Action;
   }

@@ -216,7 +216,7 @@ A–I as in the brief. The schema PR is owned by the schemas and engine owner an
 | M2 | Tools and sound | done |
 | M3 | Speech to text | done |
 | M4 | Practice vs exam mode | done |
-| M5 | Room entry and courtesy flow | planned |
+| M5 | Room entry and courtesy flow | done |
 
 ## Implementation notes
 - **M1, model:** no CC0/CC-BY model is in the repo, so the GLB loader was not written. Untested code would mislead the team. `Mannequin.tsx` is the swap point, documented in `public/models/LICENSE.md`.
@@ -238,11 +238,26 @@ A–I as in the brief. The schema PR is owned by the schemas and engine owner an
 - **M4, test hook:** `TIME_LIMIT_SECONDS_OVERRIDE` shortens the exam countdown for e2e only. Leave it unset in production.
 - **M4, time item:** `within-time` (`{ not: { happened: "timer:auto_end" } }`, exam mode only) was added to the reasoning and exam sheets.
 
+- **M5, the door:** a session opens outside the room (door sign plus "Knock and enter", logged as `room` knock and enter). Exam and chat controls appear only inside. The exam clock runs from session start, so reading the door sign counts.
+- **M5, hand hygiene:** the dispenser stands by the head of the bed in the 3D scene. The "Hold to sanitise hands" button does the same in either view. Both need a 3 s hold, show a ring and log `courtesy: hand_hygiene`. The Actions menu has an instant "Clean hands (no hold)" for keyboard and switch users.
+- **M5, tags:** `src/server/tags.ts` (regex, pure, unit-tested) runs on every chat turn. `src/server/ai/tagger.ts` (Haiku, mock path, 5 s timeout) runs only when the regex found nothing, the utterance is at least 20 characters and it contains a courtesy cue word. A model tag is kept only if its evidence appears verbatim in the utterance. Tags are set server-side; the actions API strips any `tags` a browser sends.
+- **M5, spoken positioning:** a `requested_position` tag appends a `state_change` (`via: "verbal"`). It only fires on requests ("could you…", "please…", or an imperative sentence), never on symptom questions such as "do you get breathless when you lie flat?". The e2e test caught that bug and a unit test now covers it. `reclined_45` was added to the `Position` enum (additive).
+- **M5, direct manipulation:** the bed-angle slider (flat / 30° / 45° / seated) and the per-zone drape toggles log `state_change` (`via: "direct"`). Drape toggles were built instead of a drag-the-sheet gesture; they are faster to use and to test. The sheet in the 3D scene follows the state.
+- **M5, leaving:** "Leave the room" logs `room: exit`, locks the exam and opens the presentation, which can't be dismissed. In practice mode, leaving without a goodbye tag or without hand hygiene after the last contact first shows one logged nudge, with "Leave anyway".
+- **M5, mark sheets:**
+  - `fcm-01` is `{ hygieneBeforeTouch: true }`.
+  - `fcm-03` credits re-covering a zone (`drape:cover`) or the menu's re-drape. The automatic expose doesn't count.
+  - New auto items: `courtesy-introduce`, `courtesy-consent` (consent tag before the first touch), `courtesy-exit-hygiene` and `courtesy-closing`.
+  - In the history sheet, `introduce-self-role` and `anything-else` became `said` rules. Every other communication item stays AI-graded.
+- **M5, event refs:** `drape:cover`, `drape:expose` and `drape_change` were added. `position:<p>` now matches `state_change` as well as the courtesy. `first:`/`last:` accept any event ref (e.g. `last:hand_hygiene`).
+- **M5, coach view:** each tagged utterance shows its tags with the words that earned them, and model tags are marked. Knock, enter and exit, plus every bed and drape change (direct, verbal or menu), appear in the timeline.
+
 ## Open questions
 1. **3D model:** source and license. No CC0/CC-BY GLB is bundled; the primitive mannequin ships until the team picks one.
 2. **Sounds:** recorded or procedural (procedural by default)? If recorded, which licensed library?
 3. **Exam time:** is 15 minutes right for the HF case, and what for the screening exam?
 4. **Voice:** which browsers to support (Chrome/Edge/Safari via Web Speech; Firefox falls back to typing)? Is a server STT provider needed?
 5. **Hint content:** generic "next unmet item", or coach-authored hints per case?
-6. **Courtesy tags:** should a tag fully decide a communication item (auto), or only feed the AI grader?
+6. **Courtesy tags:** should a tag fully decide a communication item (auto), or only feed the AI grader? M5 made five items tag-decided (introduce ×2, consent, closing, offers questions). Coaches can override any of them.
 7. **Placement tolerance:** what tolerance and minimum listen time should count as correct technique?
+8. **Hygiene hold:** is a 3 s hold enough, or should it approach a real 20 s rub? Should hygiene also be required on re-entry?

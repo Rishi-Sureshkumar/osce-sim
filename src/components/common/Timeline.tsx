@@ -1,5 +1,5 @@
 import type { Action } from "@/domain/schemas";
-import { describeAction, findingDisplay, mmss, type Labels } from "./format";
+import { TAG_LABELS, describeAction, findingDisplay, mmss, type Labels } from "./format";
 import { orderLog } from "@/engine/order";
 
 /** Interleaved timeline of everything in the log. Each row is an anchor (#a-<actionId>) for evidence links. */
@@ -24,6 +24,17 @@ export function Timeline({ actions, labels, highlight }: { actions: Action[]; la
               </span>
               <div className={`min-w-0 flex-1 ${tone}`}>
                 <p className="break-words whitespace-pre-wrap">{d.text}</p>
+                {a.type === "say" && !!a.payload.tags?.length && (
+                  <ul className="mt-1 flex flex-wrap gap-1" aria-label="Courtesy tags">
+                    {a.payload.tags.map((t) => (
+                      <li key={t.tag} className="rounded bg-sky-50 px-1.5 py-0.5 text-[11px] text-sky-900" data-testid="courtesy-tag" title={t.via === "model" ? "Tagged by the model (quote verified)" : "Tagged by keyword match"}>
+                        {TAG_LABELS[t.tag]}
+                        {t.position ? ` (${t.position.replace(/_/g, " ")})` : ""}: <q className="italic">{t.evidence}</q>
+                        {t.via === "model" && <span className="ml-1 text-sky-600">· model</span>}
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 {a.type === "examine" && <p className="mt-0.5 text-slate-600">→ {findingDisplay(a, labels)}</p>}
                 {a.type === "submit_ddx" && (
                   <div className="mt-1 space-y-1 text-slate-700">

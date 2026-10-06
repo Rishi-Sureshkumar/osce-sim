@@ -54,6 +54,13 @@ async function holdTool(page: Page, region: string, ms: number, landmark?: strin
   await page.mouse.up();
 }
 
+/** Outside the room: the door sign, then knock and enter. */
+async function knockAndEnter(page: Page) {
+  await expect(page.locator('[data-testid="room-door"]')).toContainText("Door sign");
+  await page.getByRole("button", { name: "Knock and enter" }).click();
+  await expect(page.locator('[data-testid="room-door"]')).toHaveCount(0);
+}
+
 async function camera(page: Page, preset: string) {
   await page.getByRole("tab", { name: preset }).click();
   await page.waitForTimeout(1500); // tween
@@ -96,8 +103,20 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.locator('[data-testid="mode-badge"]')).toHaveText("Practice");
   await expect(page.getByText("Educational prototype. Synthetic cases. Not for clinical use.")).toBeVisible();
 
-  // --- courtesy + history (first question by voice: hold to talk, edit-able draft, then send)
-  await page.getByRole("button", { name: "Wash hands" }).click();
+  // --- room entry: door sign, knock, then sanitise at the dispenser in the 3D scene (press and hold ~3 s)
+  await expect(page.locator("#chat-input")).toHaveCount(0); // nothing to do outside the room but read the sign
+  await knockAndEnter(page);
+  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await expect(page.locator('[data-testid="hands-status"]')).toHaveText("Hands: not cleaned");
+  await page.waitForTimeout(1500); // initial camera settle
+  const dispenser = await page.evaluate(() => window.__osce3d!.projectObject("dispenser"));
+  await page.mouse.move(dispenser.x, dispenser.y);
+  await page.mouse.down();
+  await page.waitForTimeout(3_400);
+  await page.mouse.up();
+  await expect(page.locator('[data-testid="hands-status"]')).toHaveText("Hands: clean");
+
+  // --- history (first question by voice: hold to talk, edit-able draft, then send); courtesy comes from what is said
   await page.evaluate(() => (window as unknown as { __sttScript: string[] }).__sttScript.push("Hello Mr. Bennett, my name is Sam Patel and I'm a medical student. What brings you in today?"));
   const mic = page.getByRole("button", { name: "Hold to talk" });
   await mic.hover();
@@ -114,9 +133,9 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await ask(page, "Any chest pain?");
   await ask(page, "Is it okay if I examine you now?");
 
-  // --- CV + pulmonary exam, entirely in the 3D view
-  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
-  await page.getByLabel("Patient position").selectOption("reclined_30");
+  // --- CV + pulmonary exam, entirely in the 3D view; positioning by asking the patient
+  await ask(page, "Could you lie back for me, please?");
+  await expect(page.locator('[data-testid="position-label"]')).toHaveText("Reclined to 30°");
   await examine(page, "neck_jvp_right", "jvp_inspection");
   await expect(page.locator('[data-testid="findings"]')).toContainText("JVP clearly elevated");
   // one real click on the canvas: project the apex anchor to the screen and click it (goes through raycasting)
@@ -127,7 +146,8 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.locator('section[aria-label="Examinations for Mitral area / apex (L 5th ICS, MCL)"]')).toBeVisible();
   await page.getByRole("button", { name: "Close menu" }).click();
   // stethoscope: bell at the apex in left lateral decubitus, held for > 3 s
-  await page.getByLabel("Patient position").selectOption("left_lateral_decubitus");
+  await ask(page, "Could you roll onto your left side?");
+  await expect(page.locator('[data-testid="position-label"]')).toHaveText("Left lateral decubitus");
   await page.locator('[data-tool="stethoscope"]').click();
   await page.getByRole("radio", { name: "Bell" }).click();
   await camera(page, "Chest (front)");
@@ -140,8 +160,12 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await page.mouse.up();
   await expect(page.locator('[data-testid="findings"]')).toContainText("Loud low-pitched S3 gallop");
   await expect(page.locator('[data-testid="action-log"]')).toContainText(/stethoscope \(bell\) · (on|edge of) target/);
-  // crackles at both posterior bases, sitting up, diaphragm
-  await page.getByLabel("Patient position").selectOption("seated");
+  // the chest was uncovered automatically for the exam; cover it again (direct manipulation)
+  await page.getByRole("button", { name: "Chest: uncovered" }).click();
+  await expect(page.getByRole("button", { name: "Chest: covered" })).toHaveAttribute("aria-pressed", "true");
+  // crackles at both posterior bases, sitting up (bed raised with the slider), diaphragm
+  await page.getByLabel("Bed angle").fill("3");
+  await expect(page.locator('[data-testid="position-label"]')).toHaveText("Seated upright");
   await page.getByRole("radio", { name: "Diaphragm" }).click();
   await camera(page, "Chest (back)");
   await holdTool(page, "lung_post_rl", 3_400);
@@ -159,8 +183,17 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.locator('[data-region="lung_ant_ru"]').first()).toBeVisible();
   await page.getByRole("radio", { name: "3D patient" }).click();
 
-  // --- present
-  await page.getByRole("button", { name: "Finish & present" }).click();
+  // --- closing: goodbye, clean hands again (accessible hold button), leave → the presentation opens
+  await ask(page, "Thank you for your time, take care.");
+  const sanitiser = page.getByRole("button", { name: "Hold to sanitise hands" });
+  await sanitiser.hover();
+  await page.mouse.down();
+  await page.waitForTimeout(3_400);
+  await page.mouse.up();
+  await expect(page.locator('[data-testid="action-log"]')).toContainText("Cleaned hands");
+  await page.getByRole("button", { name: "Leave the room" }).click();
+  await expect(page.getByRole("heading", { name: "Present your findings" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Keep going" })).toHaveCount(0);
   await page.getByLabel("Summary statement").fill("68-year-old man with known HFrEF with 2 weeks of worsening dyspnoea, orthopnea, raised JVP, S3, crackles and edema.");
   await page.getByLabel("Differential 1").fill("Acute decompensated heart failure");
   await page.getByLabel("Differential 2").fill("Pneumonia");
@@ -170,10 +203,16 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   // --- scored feedback with verified, quoted evidence
   await expect(page).toHaveURL(/\/results\//);
   await expect(page.locator('[data-testid="summary"]')).toBeVisible({ timeout: 30_000 });
+  const greet = page.locator('[data-item="greet-by-name"]');
+  await expect(greet).toContainText("1/1");
+  await expect(greet.locator('span[title="Quote verified in transcript"]')).toContainText("Mr.");
+  // courtesy items decided by tags on what was said, and by hygiene / drape / room state
   const intro = page.locator('[data-item="introduce-self-role"]');
   await expect(intro).toContainText("1/1");
-  await expect(intro.locator('span[title="Quote verified in transcript"]')).toContainText("my name is");
-  await expect(page.locator('[data-item="fcm-01-hand-hygiene"]')).toContainText("1/1");
+  await expect(intro).toContainText("my name is Sam Patel");
+  for (const id of ["fcm-01-hand-hygiene", "fcm-03-drape", "courtesy-introduce", "courtesy-consent", "courtesy-exit-hygiene", "courtesy-closing"]) {
+    await expect(page.locator(`[data-item="${id}"]`)).toContainText("1/1");
+  }
   await expect(page.locator('[data-item="fcm-33-jvp-position"]')).toContainText("1/1");
   await expect(page.locator('[data-item="fcm-38-bell-lld"]')).toContainText("1/1");
   await expect(page.locator('[data-item="fcm-38-bell-technique"]')).toContainText("1/1");
@@ -203,16 +242,23 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.locator('[data-testid="say-source"]').nth(1)).toHaveText("typed");
   await expect(page.locator('[data-testid="tokens"]')).toBeVisible();
   await expect(page.locator('[data-testid="coach-mode"]')).toHaveText("Practice");
+  // courtesy tags with the words that earned them, and the encounter events
+  await expect(page.locator('[data-testid="courtesy-tag"]').filter({ hasText: "Introduced name" })).toContainText("my name is Sam Patel");
+  await expect(page.locator('[data-testid="courtesy-tag"]').filter({ hasText: "Asked consent" })).toContainText("Is it okay if I examine");
+  await expect(page.locator('[data-testid="courtesy-tag"]').filter({ hasText: "Asked to change position" }).first()).toContainText("lie back");
+  await expect(page.locator('[data-testid="timeline"]')).toContainText("Knocked");
+  await expect(page.locator('[data-testid="timeline"]')).toContainText("(asked verbally)");
+  await expect(page.locator('[data-testid="timeline"]')).toContainText("Left the room");
 
-  const drape = page.locator('[data-item="fcm-03-drape"]');
-  await expect(drape).toContainText("0/1");
-  await drape.getByRole("button", { name: "Override score" }).click();
-  await drape.getByLabel(/Points/).fill("1");
-  await drape.getByLabel("Reason").fill("Draped verbally; toolbar missed it");
-  await drape.getByLabel("Your name").fill("Dr Coach");
-  await drape.getByRole("button", { name: "Save" }).click();
-  await expect(drape).toContainText("1/1");
-  await expect(drape).toContainText("Coach override");
+  const pulse = page.locator('[data-item="fcm-05-pulse"]');
+  await expect(pulse).toContainText("0/1");
+  await pulse.getByRole("button", { name: "Override score" }).click();
+  await pulse.getByLabel(/Points/).fill("1");
+  await pulse.getByLabel("Reason").fill("Pulse counted from the monitor");
+  await pulse.getByLabel("Your name").fill("Dr Coach");
+  await pulse.getByRole("button", { name: "Save" }).click();
+  await expect(pulse).toContainText("1/1");
+  await expect(pulse).toContainText("Coach override");
   await expect(page.locator('[data-testid="override-history"]')).toContainText("from 0 to 1");
 
   // timeline is strictly ordered by t
@@ -229,10 +275,11 @@ test("tuning forks: Weber and the Rinne sequence on the screening patient", asyn
   await enterCode(page, "student-e2e");
   await page.getByLabel(/Practice \(untimed\)/).check();
   await page.locator('[data-case="screening-normal"]').click();
+  await knockAndEnter(page);
   await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
   // practice help: hint, progress check, technique demo
   await page.getByRole("button", { name: "Hint" }).click();
-  await expect(page.locator('[data-testid="practice-help"]')).toContainText("Consider: Washes hands before touching the patient");
+  await expect(page.locator('[data-testid="practice-help"]')).toContainText("Consider: Cleans hands before first touching the patient");
   await page.getByRole("button", { name: "Check my progress" }).click();
   await expect(page.locator('[data-testid="practice-help"]')).toContainText("Clinical courtesy");
   const picker = page.locator("details", { hasText: "Choose a region from a list" });
@@ -275,12 +322,17 @@ test("exam mode: countdown, auto-end at zero, forced presentation, exam-only sco
   await expect(page.locator('[data-testid="mode-badge"]')).toHaveText("Exam");
   await expect(page.getByRole("button", { name: "Hint" })).toHaveCount(0); // no help in exam mode
   await expect(page.getByRole("button", { name: "Pause" })).toHaveCount(0);
-  await page.getByRole("button", { name: "Wash hands" }).click();
+  await knockAndEnter(page);
+  // keyboard-accessible fallback for the direct-manipulation controls
+  await page.getByRole("button", { name: "Actions" }).click();
+  await expect(page.getByRole("menuitem").first()).toBeFocused();
+  await page.keyboard.press("Enter"); // "Clean hands (no hold)"
+  await expect(page.locator('[data-testid="hands-status"]')).toHaveText("Hands: clean");
   await ask(page, "What brings you in today?");
   // the test server shortens the limit to 25 s; at zero the exam locks and the presentation opens
   await expect(page.getByRole("alert").filter({ hasText: "Time is up" })).toBeVisible({ timeout: 40_000 });
   await expect(page.locator("#chat-input")).toBeDisabled();
-  await expect(page.getByRole("button", { name: "Wash hands" })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Hold to sanitise hands" })).toBeDisabled();
   await expect(page.getByRole("heading", { name: /Time is up — Present your findings/ })).toBeVisible();
   await expect(page.getByRole("button", { name: "Keep going" })).toHaveCount(0);
   await page.getByLabel("Summary statement").fill("68-year-old man with worsening breathlessness.");

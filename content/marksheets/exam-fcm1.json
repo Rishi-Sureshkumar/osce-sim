@@ -8,14 +8,11 @@
       "id": "fcm-01-hand-hygiene",
       "fcmId": 1,
       "section": "Clinical courtesy",
-      "label": "Washes hands before touching the patient",
+      "label": "Cleans hands before first touching the patient",
       "weight": 1,
       "scoring": "auto",
       "rule": {
-        "before": [
-          "hand_hygiene",
-          "first:examine"
-        ]
+        "hygieneBeforeTouch": true
       },
       "sourceText": ""
     },
@@ -33,11 +30,50 @@
       "id": "fcm-03-drape",
       "fcmId": 3,
       "section": "Clinical courtesy",
-      "label": "Drapes the patient appropriately",
+      "label": "Keeps the patient draped, covering areas again after examining them",
       "weight": 1,
       "scoring": "auto",
       "rule": {
-        "courtesy": "drape"
+        "any": [
+          {
+            "courtesy": "drape"
+          },
+          {
+            "happened": "drape:cover"
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-introduce",
+      "section": "Clinical courtesy",
+      "label": "Introduces self by name and role",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "all": [
+          {
+            "said": "introduced_name"
+          },
+          {
+            "said": "stated_role"
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-consent",
+      "section": "Clinical courtesy",
+      "label": "Asks permission before the first physical contact",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "before": [
+          "tag:asked_consent_exam",
+          "first:touch"
+        ]
       },
       "sourceText": ""
     },
@@ -56,6 +92,38 @@
         "cold",
         "okay if i"
       ],
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-exit-hygiene",
+      "section": "Clinical courtesy",
+      "label": "Cleans hands again after the last contact, before leaving",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "all": [
+          {
+            "before": [
+              "last:touch",
+              "last:hand_hygiene"
+            ]
+          },
+          {
+            "happened": "room:exit"
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-closing",
+      "section": "Clinical courtesy",
+      "label": "Closes the encounter (thanks the patient / says goodbye)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "said": "closing"
+      },
       "sourceText": ""
     },
     {

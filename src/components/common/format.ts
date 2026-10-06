@@ -1,4 +1,4 @@
-import type { Action, Position, SequenceStep } from "@/domain/schemas";
+import type { Action, CourtesyTag, Position, SequenceStep } from "@/domain/schemas";
 import { MIN_LISTEN_MS } from "@/exam3d/tools/toolLogic";
 import type { PublicCatalog } from "@/content/types";
 
@@ -7,13 +7,14 @@ export const POSITION_LABELS: Record<Position, string> = {
   seated_leaning_forward: "Seated, leaning forward",
   supine: "Supine (flat)",
   reclined_30: "Reclined to 30°",
+  reclined_45: "Reclined to 45°",
   left_lateral_decubitus: "Left lateral decubitus",
   prone: "Prone",
   standing: "Standing",
 };
 
 export const COURTESY_LABELS = {
-  hand_hygiene: "Washed hands",
+  hand_hygiene: "Cleaned hands",
   introduce: "Introduced self",
   consent: "Obtained consent",
   drape: "Draped patient",
@@ -28,6 +29,17 @@ export const modeLabel = (mode: "practice" | "exam" | undefined) => (mode === "p
 
 export const HINT_LABELS = { hint: "Hint used", nudge: "Nudge shown", show_me: "“Show me how” used", section_check: "Section check used" } as const;
 export const TIMER_LABELS = { pause: "Timer paused", resume: "Timer resumed", warning: "2-minute warning", auto_end: "Time up — station ended" } as const;
+export const TAG_LABELS: Record<CourtesyTag, string> = {
+  introduced_name: "Introduced name",
+  stated_role: "Stated role",
+  confirmed_patient_identity: "Confirmed identity",
+  asked_consent_exam: "Asked consent",
+  explained_procedure: "Explained procedure",
+  asked_comfort: "Checked comfort",
+  offered_questions: "Offered questions",
+  closing: "Closing",
+  requested_position: "Asked to change position",
+};
 export const ROOM_LABELS = { knock: "Knocked", enter: "Entered the room", exit: "Left the room" } as const;
 
 /** Display a log time. Always floors to the whole second (the one formatter used everywhere). */
@@ -76,7 +88,8 @@ export function describeAction(a: Action, L: Labels): { who: "student" | "patien
         p.position ? `patient ${POSITION_LABELS[p.position].toLowerCase()}` : "",
         p.drape ? `${p.drape.zone} ${p.drape.covered ? "covered" : "uncovered"}` : "",
       ].filter(Boolean);
-      return { who: "student", text: `Changed ${parts.join(", ")} (${p.via})` };
+      const how = p.via === "verbal" ? "asked verbally" : p.via === "menu" ? "from the menu" : "directly";
+      return { who: "student", text: `Changed ${parts.join(", ")} (${how})` };
     }
     case "hint":
       return { who: "system", text: `${HINT_LABELS[a.payload.kind]}: ${a.payload.text}` };

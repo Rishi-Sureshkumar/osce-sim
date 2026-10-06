@@ -1,6 +1,8 @@
 import "server-only";
 import type { Action } from "@/domain/schemas";
 import { runPatientTurn } from "./ai/patient";
+import { modelTags } from "./ai/tagger";
+import { needsModelFallback, regexTags } from "./tags";
 import { getRepo } from "./db";
 import { HttpError } from "./errors";
 import { assertCanChat } from "./guards";
@@ -9,6 +11,8 @@ import { appendStudentAction, appendSystemAction, getCaseOr404, getSessionOr404,
 /** NDJSON events streamed to the browser for one chat turn. */
 export type ChatEvent =
   | { type: "student"; action: Action }
+  /** actions the utterance implied, e.g. a spoken "could you sit up" → state_change */
+  | { type: "implied"; action: Action }
   | { type: "delta"; text: string }
   | { type: "patient"; action: Action }
   | { type: "error"; message: string };
@@ -23,7 +27,19 @@ export async function startChatTurn(sessionId: string, text: string, source: "te
   const session = await getSessionOr404(sessionId);
   assertCanChat(session);
   const kase = getCaseOr404(session.caseId);
-  const studentAction = await appendStudentAction(sessionId, { type: "say", source, payload: { text: clean } });
+  // Courtesy tags: regex first, model fallback only when nothing matched and the words suggest courtesy.
+  let tags = regexTags(clean);
+  if (needsModelFallback(clean, tags)) {
+    const m = await modelTags(clean);
+    if (m.usage) await recordUsage(sessionId, m.usage);
+    tags = m.tags;
+  }
+  const studentAction = await appendStudentAction(sessionId, { type: "say", source, payload: { text: clean } }, { tags });
+  const implied: Action[] = [];
+  const asked = tags.find((t) => t.tag === "requested_position" && t.position);
+  if (asked?.position) {
+    implied.push(await appendStudentAction(sessionId, { type: "state_change", source, payload: { position: asked.position, via: "verbal" } }));
+  }
   const repo = await getRepo();
   await repo.updateSession(sessionId, { patientTurns: session.patientTurns + 1 });
 
@@ -44,6 +60,7 @@ export async function startChatTurn(sessionId: string, text: string, source: "te
         }
       };
       send({ type: "student", action: studentAction });
+      for (const a of implied) send({ type: "implied", action: a });
       try {
         const log = await repo.listActions(sessionId);
         const result = await runPatientTurn(kase, log, (delta) => send({ type: "delta", text: delta }));

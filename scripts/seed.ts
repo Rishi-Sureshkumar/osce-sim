@@ -7,10 +7,11 @@ import { loadContentFromDisk } from "../src/content/loadFromDisk";
 import type { Action, ActionInput, GradingRun, Session } from "../src/domain/schemas";
 
 type SystemInput = Omit<Extract<Action, { source: "system" }>, "id" | "sessionId" | "t">;
-import { resolveFinding } from "../src/engine/resolveFinding";
+import { isTouch, resolveFinding } from "../src/engine/resolveFinding";
 import { scoreAiItems, scoreDeterministicItems } from "../src/engine/scoring";
 import { sheetsForCase } from "../src/engine/sheets";
 import { mockJudgements, mockPatientReply } from "../src/server/ai/mock";
+import { regexTags } from "../src/server/tags";
 import { FileRepo } from "../src/server/db/fileRepo";
 import type { Repo } from "../src/server/db/repo";
 
@@ -32,14 +33,20 @@ const push = (a: ActionInput | SystemInput, dt = 15_000) => {
   log.push(action);
 };
 const say = (text: string) => {
-  push({ type: "say", source: "text", payload: { text } });
+  const tags = regexTags(text);
+  push({ type: "say", source: "text", payload: { text, ...(tags.length ? { tags } : {}) } } as ActionInput);
   const turn = log.filter((a) => a.type === "patient_say").length;
   push({ type: "patient_say", source: "system", payload: { text: mockPatientReply(kase, text, turn), mocked: true } }, 4_000);
 };
-const ex = (maneuverId: string, regionId: string) => push({ type: "examine", source: "click", payload: { maneuverId, regionId } }, 20_000);
-const pos = (position: string) => push({ type: "courtesy", source: "toolbar", payload: { kind: "position", position } } as ActionInput, 5_000);
+const ex = (maneuverId: string, regionId: string) => {
+  const touch = isTouch(content.maneuverById.get(maneuverId)!);
+  push({ type: "examine", source: "click", payload: { maneuverId, regionId, touch } } as ActionInput, 20_000);
+};
+const pos = (position: string) => push({ type: "state_change", source: "click", payload: { position, via: "direct" } } as ActionInput, 5_000);
 
 push({ type: "session_start", source: "system", payload: { caseId: kase.id } }, 0);
+push({ type: "room", source: "click", payload: { event: "knock" } }, 30_000);
+push({ type: "room", source: "click", payload: { event: "enter" } }, 3_000);
 say("Hello Mr. Bennett, my name is Alex Kim and I'm a medical student. What brings you in today?");
 say("Tell me more about that. When did it start?");
 say("How far can you walk before you get breathless?");
@@ -69,7 +76,11 @@ for (const r of ["lung_post_ru", "lung_post_lu", "lung_post_rl", "lung_post_ll"]
 ex("chest_percussion", "lung_post_rl");
 ex("edema_assessment", "shin_right");
 ex("edema_assessment", "shin_left");
+push({ type: "state_change", source: "click", payload: { drape: { zone: "chest", covered: true }, via: "direct" } } as ActionInput, 5_000);
 say("I think your heart is struggling to pump and fluid has built up. We will give you medicine to remove the fluid. Do you have any questions?");
+say("Thank you for your time, Mr. Bennett. Take care.");
+push({ type: "courtesy", source: "click", payload: { kind: "hand_hygiene" } }, 5_000);
+push({ type: "room", source: "click", payload: { event: "exit" } }, 3_000);
 push({
   type: "submit_ddx",
   source: "text",
