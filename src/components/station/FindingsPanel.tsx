@@ -1,11 +1,12 @@
 import type { Action } from "@/domain/schemas";
 import { findingDisplay, mmss, type Labels } from "@/components/common/format";
+import { orderLog } from "@/engine/order";
 
 type Exam = Extract<Action, { type: "examine" }>;
 
 /** All findings elicited so far, newest first. Reads only from the action log. */
 export function FindingsPanel({ actions, labels }: { actions: Action[]; labels: Labels }) {
-  const exams = actions.filter((a): a is Exam => a.type === "examine").reverse();
+  const exams = orderLog(actions).filter((a): a is Exam => a.type === "examine").reverse();
   return (
     <section aria-labelledby="findings-h" className="flex min-h-0 flex-col rounded-lg border border-slate-200 bg-white">
       <h2 id="findings-h" className="border-b border-slate-200 px-3 py-2 text-sm font-semibold">

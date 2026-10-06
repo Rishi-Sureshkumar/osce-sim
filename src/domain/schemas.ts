@@ -284,8 +284,10 @@ export const SystemActionInput = z.discriminatedUnion("type", [
 const actionMeta = {
   id: z.string(),
   sessionId: z.string(),
-  /** ms since session start */
+  /** ms since session start (monotonic per session; floored to seconds for display) */
   t: z.number().int().min(0),
+  /** storage append order; breaks ties on t. Assigned by the repo. */
+  seq: z.number().int().optional(),
 };
 
 export const Action = z.discriminatedUnion("type", [

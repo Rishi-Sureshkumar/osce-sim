@@ -1,6 +1,7 @@
 import type { Action } from "@/domain/schemas";
 import { COURTESY_LABELS, POSITION_LABELS, mmss } from "@/components/common/format";
 import type { ContentIndex } from "@/content/types";
+import { orderLog } from "@/engine/order";
 
 /**
  * Plain-text transcript for the grader. Every line carries its action id so the grader can cite
@@ -8,7 +9,7 @@ import type { ContentIndex } from "@/content/types";
  */
 export function renderTranscript(log: Action[], content: Pick<ContentIndex, "maneuverById" | "regionById">): string {
   const lines: string[] = [];
-  for (const a of log) {
+  for (const a of orderLog(log)) {
     const head = `[${a.id}] ${mmss(a.t)}`;
     switch (a.type) {
       case "say":

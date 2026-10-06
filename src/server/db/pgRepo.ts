@@ -4,6 +4,7 @@ import postgres from "postgres";
 import type { Action, Feedback, GradingRun, Override, Session } from "@/domain/schemas";
 import type { Repo } from "./repo";
 import * as t from "./schema";
+import { orderLog } from "@/engine/order";
 
 const iso = (s: string | null) => (s ? new Date(s).toISOString() : null);
 
@@ -35,11 +36,12 @@ export class PgRepo implements Repo {
     return this.toSession(r);
   }
   async appendAction(a: Action) {
-    await this.db.insert(t.actions).values({ id: a.id, sessionId: a.sessionId, t: a.t, type: a.type, data: a });
+    const { seq: _seq, ...data } = a;
+    await this.db.insert(t.actions).values({ id: a.id, sessionId: a.sessionId, t: a.t, type: a.type, data: data as Action });
   }
   async listActions(sessionId: string) {
     const rows = await this.db.select().from(t.actions).where(eq(t.actions.sessionId, sessionId)).orderBy(asc(t.actions.seq));
-    return rows.map((r) => r.data);
+    return orderLog(rows.map((r) => ({ ...r.data, seq: r.seq })));
   }
   async saveGradingRun(run: GradingRun) {
     await this.db.insert(t.gradingRuns).values({ id: run.id, sessionId: run.sessionId, createdAt: run.createdAt, data: run });

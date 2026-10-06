@@ -45,6 +45,12 @@ export function elapsedMs(session: Session): number {
   return Math.max(0, Date.now() - Date.parse(session.startedAt));
 }
 
+/** Monotonic per-session timestamp: never earlier than the last logged action. */
+async function nextT(session: Session): Promise<number> {
+  const log = await (await getRepo()).listActions(session.id);
+  return Math.max(elapsedMs(session), log.at(-1)?.t ?? 0);
+}
+
 /**
  * The single write path for student actions. Validates the input, resolves exam findings
  * deterministically, optionally adds AI wording, and appends to the log.
@@ -57,7 +63,7 @@ export async function appendStudentAction(sessionId: string, raw: unknown): Prom
   if (session.status !== "active") throw new HttpError(409, "This session has ended");
   const kase = getCaseOr404(session.caseId);
   // t is taken just before appending so log order and timestamps agree (wording can take ~1s).
-  const stamp = () => ({ id: newId("act"), sessionId, t: elapsedMs(session) });
+  const stamp = async () => ({ id: newId("act"), sessionId, t: await nextT(session) });
 
   let action: Action;
   if (input.type === "examine") {
@@ -72,9 +78,9 @@ export async function appendStudentAction(sessionId: string, raw: unknown): Prom
     }
     const region = getContent().regionById.get(input.payload.regionId)!;
     const wording = await wordFinding(sessionId, { maneuverLabel: maneuver.label, regionLabel: region.label, findingText: resolved.findingText });
-    action = { ...stamp(), ...input, result: { ...resolved, ...(wording ? { wording } : {}) } };
+    action = { ...(await stamp()), ...input, result: { ...resolved, ...(wording ? { wording } : {}) } };
   } else {
-    action = { ...stamp(), ...input } as Action;
+    action = { ...(await stamp()), ...input } as Action;
   }
   await (await getRepo()).appendAction(action);
   return action;
@@ -82,7 +88,7 @@ export async function appendStudentAction(sessionId: string, raw: unknown): Prom
 
 export async function appendSystemAction(sessionId: string, a: Omit<Extract<Action, { source: "system" }>, "id" | "sessionId" | "t">): Promise<Action> {
   const session = await getSessionOr404(sessionId);
-  const action = { ...a, id: newId("act"), sessionId, t: elapsedMs(session) } as Action;
+  const action = { ...a, id: newId("act"), sessionId, t: await nextT(session) } as Action;
   await (await getRepo()).appendAction(action);
   return action;
 }

@@ -1,4 +1,5 @@
 import type { Action, Position, Rule } from "@/domain/schemas";
+import { orderLog } from "./order";
 
 /**
  * The ONE interpreter for `auto` mark-sheet rules. Rules are declarative predicates over the
@@ -16,7 +17,7 @@ function examines(log: Action[]) {
   return log.filter((a): a is Extract<Action, { type: "examine" }> => a.type === "examine");
 }
 
-/** Position the patient is in when log[actionIndex] happens (last `position` courtesy before it). */
+/** Position the patient is in when log[actionIndex] happens (last `position` courtesy before it). `log` must be ordered. */
 export function positionAt(log: Action[], actionIndex: number): Position | undefined {
   let pos: Position | undefined;
   for (let i = 0; i < actionIndex && i < log.length; i++) {
@@ -26,7 +27,7 @@ export function positionAt(log: Action[], actionIndex: number): Position | undef
   return pos;
 }
 
-/** Finds the action an event ref points at (see EventRef docs in schemas.ts). */
+/** Finds the action an event ref points at (see EventRef docs in schemas.ts). `log` must be ordered. */
 export function findEvent(log: Action[], ref: string): Action | undefined {
   let mode: "first" | "last" = "first";
   let body = ref;
@@ -48,6 +49,11 @@ export function findEvent(log: Action[], ref: string): Action | undefined {
 }
 
 export function evaluateRule(rule: Rule, log: Action[]): RuleResult {
+  return evaluate(rule, orderLog(log));
+}
+
+/** `log` is already in canonical order here. */
+function evaluate(rule: Rule, log: Action[]): RuleResult {
   if ("performed" in rule) {
     const ids = new Set(list(rule.performed));
     const hits = examines(log).filter((a) => ids.has(a.payload.maneuverId));
@@ -96,16 +102,16 @@ export function evaluateRule(rule: Rule, log: Action[]): RuleResult {
   }
 
   if ("all" in rule) {
-    const rs = rule.all.map((r) => evaluateRule(r, log));
+    const rs = rule.all.map((r) => evaluate(r, log));
     return { value: Math.min(...rs.map((r) => r.value)), actionIds: unique(rs.flatMap((r) => r.actionIds)) };
   }
   if ("any" in rule) {
-    const rs = rule.any.map((r) => evaluateRule(r, log));
+    const rs = rule.any.map((r) => evaluate(r, log));
     const best = rs.reduce((a, b) => (b.value > a.value ? b : a));
     return best;
   }
   if ("not" in rule) {
-    const r = evaluateRule(rule.not, log);
+    const r = evaluate(rule.not, log);
     return { value: 1 - r.value, actionIds: [] };
   }
   const never: never = rule;

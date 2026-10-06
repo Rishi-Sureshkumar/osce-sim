@@ -1,6 +1,7 @@
 import type { Action, Case, MarkSheet } from "@/domain/schemas";
 import { normalizeForQuote, quotableText } from "@/engine/evidence";
 import type { AiItemJudgement } from "@/engine/scoring";
+import { orderLog } from "@/engine/order";
 
 const norm = (s: string) => normalizeForQuote(s).toLowerCase();
 
@@ -32,7 +33,7 @@ export function mockPatientReply(c: Case, question: string, turnIndex: number): 
  * containing one of the item's mockKeywords is quoted verbatim as evidence → score 1; else 0.
  */
 export function mockJudgements(sheet: MarkSheet, log: Action[]): AiItemJudgement[] {
-  const quotable = log.filter((a) => a.type === "say" || a.type === "submit_ddx");
+  const quotable = orderLog(log).filter((a) => a.type === "say" || a.type === "submit_ddx");
   return sheet.items
     .filter((i) => i.scoring === "ai")
     .map((item) => {

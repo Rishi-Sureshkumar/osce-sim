@@ -10,7 +10,9 @@ export interface Repo {
   listSessions(limit?: number): Promise<Session[]>;
   updateSession(id: string, patch: Partial<Omit<Session, "id">>): Promise<Session>;
 
+  /** Appends and assigns `seq` (append order). */
   appendAction(a: Action): Promise<void>;
+  /** Returns the log in canonical order (t, then seq) with `seq` populated. */
   listActions(sessionId: string): Promise<Action[]>;
 
   saveGradingRun(run: GradingRun): Promise<void>;

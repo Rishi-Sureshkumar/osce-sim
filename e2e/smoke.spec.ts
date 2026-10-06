@@ -29,6 +29,12 @@ async function examine(page: Page, view: string, region: string, maneuver: strin
 }
 
 test("student completes the HF case end to end; coach reviews and overrides", async ({ page }) => {
+  const consoleErrors: string[] = [];
+  page.on("console", (m) => {
+    // expected 401s from the deliberate wrong-code / forbidden checks are network noise, not app errors
+    if (m.type() === "error" && !/status of 40[13]/.test(m.text())) consoleErrors.push(m.text());
+  });
+  page.on("pageerror", (e) => consoleErrors.push(String(e)));
   // --- gate
   await page.goto("/");
   await expect(page).toHaveURL(/\/gate/);
@@ -119,6 +125,12 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(drape).toContainText("1/1");
   await expect(drape).toContainText("Coach override");
   await expect(page.locator('[data-testid="override-history"]')).toContainText("from 0 to 1");
+
+  // timeline is strictly ordered by t
+  const times = await page.locator('[data-testid="timeline"] li span.font-mono').allInnerTexts();
+  expect([...times].sort()).toEqual(times);
+
+  expect(consoleErrors, consoleErrors.join("\n")).toEqual([]);
 });
 
 test("no API key or framework text in client bundles", () => {

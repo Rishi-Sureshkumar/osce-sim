@@ -1,11 +1,12 @@
 import type { Action } from "@/domain/schemas";
 import { describeAction, findingDisplay, mmss, type Labels } from "./format";
+import { orderLog } from "@/engine/order";
 
 /** Interleaved timeline of everything in the log. Each row is an anchor (#a-<actionId>) for evidence links. */
 export function Timeline({ actions, labels, highlight }: { actions: Action[]; labels: Labels; highlight?: Set<string> }) {
   return (
     <ol className="divide-y divide-slate-100 rounded-lg border border-slate-200 bg-white" data-testid="timeline">
-      {actions.map((a) => {
+      {orderLog(actions).map((a) => {
         const d = describeAction(a, labels);
         const tone =
           d.who === "patient" ? "text-violet-800" : a.type === "examine" ? "text-emerald-800" : a.type === "courtesy" ? "text-sky-800" : d.who === "system" ? "text-slate-400" : "text-slate-900";

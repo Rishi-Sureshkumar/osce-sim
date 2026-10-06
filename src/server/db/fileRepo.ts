@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Action, Feedback, GradingRun, Override, Session } from "@/domain/schemas";
 import type { Repo } from "./repo";
+import { orderLog } from "@/engine/order";
 
 interface Store {
   sessions: Session[];
@@ -62,10 +63,14 @@ export class FileRepo implements Repo {
     });
   }
   async appendAction(a: Action) {
-    await this.mutate((st) => void st.actions.push(a));
+    await this.mutate((st) => {
+      const seq = st.actions.reduce((m, x, i) => Math.max(m, x.seq ?? i + 1), 0) + 1;
+      st.actions.push({ ...a, seq });
+    });
   }
   async listActions(sessionId: string) {
-    return this.read().actions.filter((a) => a.sessionId === sessionId);
+    const all = this.read().actions;
+    return orderLog(all.map((a, i) => ({ ...a, seq: a.seq ?? i + 1 })).filter((a) => a.sessionId === sessionId));
   }
   async saveGradingRun(run: GradingRun) {
     await this.mutate((st) => void st.gradingRuns.push(run));

@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import type { Action, CourtesyKind, Position, PublicCase, Region, Session, View } from "@/domain/schemas";
 import type { PublicCatalog } from "@/content/types";
 import { BodyDiagram } from "@/components/body/BodyDiagram";
+import { orderLog } from "@/engine/order";
 import { findingDisplay, labelsFrom } from "@/components/common/format";
 import { examineFromClick } from "@/input/adapters/click";
 import { courtesyFromToolbar } from "@/input/adapters/toolbar";
@@ -45,7 +46,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
   );
   const currentPosition = useMemo(() => {
     let p: Position | undefined;
-    for (const a of actions) if (a.type === "courtesy" && a.payload.kind === "position") p = a.payload.position;
+    for (const a of orderLog(actions)) if (a.type === "courtesy" && a.payload.kind === "position") p = a.payload.position;
     return p;
   }, [actions]);
 

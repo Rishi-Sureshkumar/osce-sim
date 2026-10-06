@@ -1,5 +1,6 @@
 import type { Action } from "@/domain/schemas";
 import { describeAction, mmss, type Labels } from "@/components/common/format";
+import { orderLog } from "@/engine/order";
 
 export function ActionLog({ actions, labels }: { actions: Action[]; labels: Labels }) {
   return (
@@ -8,7 +9,7 @@ export function ActionLog({ actions, labels }: { actions: Action[]; labels: Labe
         Action log
       </h2>
       <ol className="min-h-0 flex-1 overflow-y-auto px-3 py-2 font-mono text-xs" data-testid="action-log">
-        {[...actions].reverse().map((a) => {
+        {orderLog(actions).reverse().map((a) => {
           const d = describeAction(a, labels);
           return (
             <li key={a.id} className="py-0.5">

@@ -1,5 +1,6 @@
 import type { Action, Case } from "@/domain/schemas";
 import type Anthropic from "@anthropic-ai/sdk";
+import { orderLog } from "@/engine/order";
 
 /** Static rules — identical for every case, so they sit first in the cached prefix. */
 export const PATIENT_RULES = `You are role-playing a patient in an OSCE (clinical skills exam) simulation used to train medical students. The person writing to you is a medical student. Stay in character as the patient for the whole conversation.
@@ -43,7 +44,7 @@ FOR REVIEW-OF-SYSTEMS STYLE QUESTIONS ABOUT THINGS YOU DON'T HAVE: "${c.history.
 /** Conversation so far, from the log only. Consecutive same-role turns are merged. */
 export function buildMessages(log: Action[]): Anthropic.MessageParam[] {
   const out: { role: "user" | "assistant"; content: string }[] = [];
-  for (const a of log) {
+  for (const a of orderLog(log)) {
     if (a.type !== "say" && a.type !== "patient_say") continue;
     const role = a.type === "say" ? "user" : "assistant";
     const text = a.payload.text;
