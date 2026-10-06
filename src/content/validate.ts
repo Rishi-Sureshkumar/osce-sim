@@ -61,8 +61,14 @@ export function validateContentGraph(c: ContentIndex): string[] {
         if (!ms.items.some((i) => i.section === sec)) errors.push(`case ${cs.id}: mark sheet ${msId} has no section "${sec}"`);
       }
     }
+    // drawn signs must agree with the findings a student would elicit
     for (const e of cs.visibleSigns?.edema ?? []) {
       if (!c.regionById.has(e.regionId)) errors.push(`case ${cs.id}: visibleSigns edema on unknown region "${e.regionId}"`);
+      const f = cs.abnormalFindings.edema_assessment;
+      if (!f?.[e.regionId] && !f?.default) errors.push(`case ${cs.id}: edema drawn on ${e.regionId} but edema_assessment has no abnormal finding there`);
+    }
+    if ((cs.visibleSigns?.jvpCm ?? 0) > 3 && !cs.abnormalFindings.jvp_inspection) {
+      errors.push(`case ${cs.id}: visibleSigns.jvpCm > 3 but jvp_inspection has no abnormal finding`);
     }
     const factIds = new Set<string>();
     for (const f of cs.history.facts) {

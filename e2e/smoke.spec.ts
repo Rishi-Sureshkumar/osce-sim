@@ -20,9 +20,11 @@ async function ask(page: Page, text: string) {
   await expect(page.getByRole("button", { name: "Send" })).toBeDisabled(); // empty input, not streaming
 }
 
-async function examine(page: Page, view: string, region: string, maneuver: string) {
-  await page.getByRole("tab", { name: view }).click();
-  await page.locator(`[data-region="${region}"]`).click();
+/** Examine via the 3D view's accessible region list (part of the 3D view). */
+async function examine(page: Page, region: string, maneuver: string) {
+  const picker = page.locator("details", { hasText: "Choose a region from a list" });
+  if (!(await picker.evaluate((d) => (d as HTMLDetailsElement).open))) await picker.locator("summary").click();
+  await picker.locator(`[data-region="${region}"]`).click();
   await page.locator(`[data-maneuver="${maneuver}"]`).click();
   await expect(page.locator('[data-testid="perform-finding"] .font-medium')).toBeVisible();
   await page.getByRole("button", { name: "Continue" }).click();
@@ -62,18 +64,32 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await ask(page, "Any chest pain?");
   await ask(page, "Is it okay if I examine you now?");
 
-  // --- CV + pulmonary exam
+  // --- CV + pulmonary exam, entirely in the 3D view
+  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
   await page.getByLabel("Patient position").selectOption("reclined_30");
-  await examine(page, "Head & neck", "neck_jvp_right", "jvp_inspection");
+  await examine(page, "neck_jvp_right", "jvp_inspection");
   await expect(page.locator('[data-testid="findings"]')).toContainText("JVP clearly elevated");
+  // one real click on the canvas: project the apex anchor to the screen and click it (goes through raycasting)
+  await page.getByRole("tab", { name: "Chest (front)" }).click();
+  await page.waitForTimeout(1500); // camera tween
+  const apex = await page.evaluate(() => window.__osce3d!.project("cardiac_mitral"));
+  await page.mouse.click(apex!.x, apex!.y);
+  await expect(page.locator('section[aria-label="Examinations for Mitral area / apex (L 5th ICS, MCL)"]')).toBeVisible();
+  await page.getByRole("button", { name: "Close menu" }).click();
   await page.getByLabel("Patient position").selectOption("left_lateral_decubitus");
-  await examine(page, "Precordium", "cardiac_mitral", "auscultate_heart_bell");
+  await examine(page, "cardiac_mitral", "auscultate_heart_bell");
   await expect(page.locator('[data-testid="findings"]')).toContainText("S3 gallop");
   await page.getByLabel("Patient position").selectOption("seated");
-  await examine(page, "Back", "lung_post_rl", "auscultate_lungs");
-  await examine(page, "Back", "lung_post_ll", "auscultate_lungs");
-  await examine(page, "Front", "shin_right", "edema_assessment");
+  await examine(page, "lung_post_rl", "auscultate_lungs");
+  await examine(page, "lung_post_ll", "auscultate_lungs");
+  await examine(page, "shin_right", "edema_assessment");
   await expect(page.locator('[data-testid="findings"]')).toContainText("pitting edema");
+  // the drape was exposed automatically and logged
+  await expect(page.locator('[data-testid="action-log"]')).toContainText("Exposed a region");
+  // 2D fallback is still available
+  await page.getByRole("radio", { name: "2D diagram" }).click();
+  await expect(page.locator('[data-region="lung_ant_ru"]').first()).toBeVisible();
+  await page.getByRole("radio", { name: "3D patient" }).click();
 
   // --- present
   await page.getByRole("button", { name: "Finish & present" }).click();

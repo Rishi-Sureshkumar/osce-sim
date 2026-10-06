@@ -56,8 +56,20 @@ async function nextT(session: Session): Promise<number> {
 /**
  * The single write path for student actions. Validates the input, resolves exam findings
  * deterministically, optionally adds AI wording, and appends to the log.
+ * Returns the action plus any actions it implied (e.g. an automatic drape `expose`).
  */
+export async function appendStudentActions(sessionId: string, raw: unknown): Promise<{ action: Action; appended: Action[] }> {
+  const implied: Action[] = [];
+  const action = await appendOne(sessionId, raw, implied);
+  return { action, appended: [...implied, action] };
+}
+
+/** Convenience wrapper when the caller only needs the main action. */
 export async function appendStudentAction(sessionId: string, raw: unknown): Promise<Action> {
+  return (await appendStudentActions(sessionId, raw)).action;
+}
+
+async function appendOne(sessionId: string, raw: unknown, implied: Action[]): Promise<Action> {
   const parsed = ActionInputSchema.safeParse(raw);
   if (!parsed.success) throw new HttpError(400, "Invalid action");
   const input: ActionInput = parsed.data;
@@ -76,7 +88,9 @@ export async function appendStudentAction(sessionId: string, raw: unknown): Prom
     // Examining a region that is still draped exposes it first (logged, so coaches see it).
     const zone = DRAPE_ZONE_OF[input.payload.regionId];
     if (zone && state.drape[zone]) {
-      await repo.appendAction({ ...(await stamp()), type: "courtesy", source: input.source, payload: { kind: "expose", regionId: input.payload.regionId } });
+      const expose: Action = { ...(await stamp()), type: "courtesy", source: input.source, payload: { kind: "expose", regionId: input.payload.regionId } };
+      await repo.appendAction(expose);
+      implied.push(expose);
     }
     let resolved;
     try {

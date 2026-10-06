@@ -321,8 +321,13 @@ export const Case = z.object({
 export type Case = z.infer<typeof Case>;
 
 /** What the browser is allowed to see about a case (no history facts, findings or differential). */
-export type PublicCase = Pick<Case, "id" | "title" | "mode" | "doorSign" | "markSheetIds"> & {
+export type PublicCase = Pick<Case, "id" | "title" | "mode" | "doorSign" | "markSheetIds" | "findingsVisibility"> & {
   patient: Pick<Case["patient"], "name" | "age" | "sex" | "pronouns" | "chiefComplaint" | "setting">;
+  /**
+   * What anyone in the room can see without examining: drawn signs and the rates that drive
+   * breathing / venous pulsation animations. (Sounds stay server-side until a finding is elicited.)
+   */
+  presentation: { visibleSigns: NonNullable<Case["visibleSigns"]>; hr: number; rr: number };
 };
 
 // ---------------------------------------------------------------------------

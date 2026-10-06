@@ -1,5 +1,6 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import type { Action, CourtesyKind, Position, PublicCase, Region, Session, View } from "@/domain/schemas";
 import type { PublicCatalog } from "@/content/types";
 import { BodyDiagram } from "@/components/body/BodyDiagram";
@@ -17,6 +18,18 @@ import { PerformOverlay } from "./PerformOverlay";
 import { Timer } from "./Timer";
 import { ViewTabs } from "./ViewTabs";
 
+const Exam3DView = dynamic(() => import("@/exam3d/Exam3DView"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex min-h-[360px] flex-1 items-center justify-center rounded-md bg-slate-100 text-sm text-slate-600" role="status">
+      Loading 3D patient…
+    </div>
+  ),
+});
+
+type ExamView = "3d" | "2d";
+const VIEW_KEY = "osce.examView";
+
 type Performing = { regionId: string; title: string; steps: string[]; finding: string | null };
 
 export interface StationProps {
@@ -33,6 +46,25 @@ export interface StationProps {
 export function Station({ session, kase, catalog, initialActions, chat, finish }: StationProps) {
   const [actions, setActions] = useState<Action[]>(initialActions);
   const [view, setView] = useState<View>("anterior");
+  const [examView, setExamView] = useState<ExamView>("3d");
+  useEffect(() => {
+    try {
+      const v = localStorage.getItem(VIEW_KEY);
+      if (v === "2d" || v === "3d") setExamView(v);
+    } catch {
+      /* storage unavailable: keep the default */
+    }
+  }, []);
+  const switchView = (v: ExamView) => {
+    setExamView(v);
+    setSelected(null);
+    try {
+      localStorage.setItem(VIEW_KEY, v);
+    } catch {
+      /* ignore */
+    }
+  };
+  const examinable = useMemo(() => new Set(catalog.maneuvers.flatMap((m) => m.allowedRegions)), [catalog]);
   const [selected, setSelected] = useState<Region | null>(null);
   const [performing, setPerforming] = useState<Performing | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -40,6 +72,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
   const ended = session.status !== "active" || actions.some((a) => a.type === "submit_ddx" || a.type === "session_end");
 
   const append = (a: Action) => setActions((xs) => [...xs, a]);
+  const appendAll = (list: Action[]) => setActions((xs) => [...xs, ...list]);
   const examined = useMemo(
     () => new Set(actions.flatMap((a) => (a.type === "examine" ? [a.payload.regionId] : []))),
     [actions],
@@ -76,8 +109,9 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
       setPerforming({ regionId, title: `${m.label} — ${selected.label}`, steps: m.demo.steps, finding: null });
       setSelected(null);
       try {
-        const action = await postAction(session.id, examineFromClick(regionId, m.id));
-        append(action);
+        const appended = await postAction(session.id, examineFromClick(regionId, m.id));
+        appendAll(appended);
+        const action = appended.at(-1)!;
         if (action.type === "examine") setPerforming((p) => (p ? { ...p, finding: findingDisplay(action) } : p));
       } catch (e) {
         setPerforming(null);
@@ -86,7 +120,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
     });
 
   const onCourtesy = (kind: CourtesyKind, position?: Position) =>
-    run(async () => append(await postAction(session.id, courtesyFromToolbar(kind, position))));
+    run(async () => appendAll(await postAction(session.id, courtesyFromToolbar(kind, position))));
 
   const whole = catalog.regions.filter((r) => r.view === "whole");
 
@@ -121,7 +155,14 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
 
         <div className="flex min-h-0 flex-col gap-2 rounded-lg border border-slate-200 bg-white p-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <ViewTabs view={view} onChange={(v) => (setView(v), setSelected(null))} />
+            <div role="radiogroup" aria-label="Exam view" className="flex overflow-hidden rounded-md border border-slate-300 text-xs">
+              {(["3d", "2d"] as const).map((v) => (
+                <button key={v} role="radio" aria-checked={examView === v} onClick={() => switchView(v)} className={`px-2.5 py-1 ${examView === v ? "bg-slate-800 text-white" : "bg-white"}`}>
+                  {v === "3d" ? "3D patient" : "2D diagram"}
+                </button>
+              ))}
+            </div>
+            {examView === "2d" && <ViewTabs view={view} onChange={(v) => (setView(v), setSelected(null))} />}
             <div className="flex gap-1">
               {whole.map((r) => (
                 <button
@@ -135,16 +176,30 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
               ))}
             </div>
           </div>
-          <div className="relative min-h-0 flex-1">
-            <BodyDiagram
-              view={view}
-              regions={catalog.regions}
-              selectedRegionId={selected?.id}
-              performingRegionId={performing?.regionId}
-              examinedRegionIds={examined}
-              onRegionClick={ended ? () => undefined : onRegionClick}
-            />
-            <div className="absolute top-2 right-2 w-72 max-w-[90%]">
+          <div className="relative flex min-h-0 flex-1 flex-col">
+            {examView === "3d" ? (
+              <Exam3DView
+                regions={catalog.regions}
+                examinableRegionIds={examinable}
+                actions={actions}
+                presentation={kase.presentation}
+                selectedRegionId={selected?.id}
+                performingRegionId={performing?.regionId}
+                examinedRegionIds={examined}
+                disabled={ended || !!performing}
+                onRegionClick={onRegionClick}
+              />
+            ) : (
+              <BodyDiagram
+                view={view}
+                regions={catalog.regions}
+                selectedRegionId={selected?.id}
+                performingRegionId={performing?.regionId}
+                examinedRegionIds={examined}
+                onRegionClick={ended ? () => undefined : onRegionClick}
+              />
+            )}
+            <div className={`absolute right-2 z-10 w-72 max-w-[90%] ${examView === "3d" ? "top-11" : "top-2"}`}>
               {performing ? (
                 <PerformOverlay title={performing.title} steps={performing.steps} finding={performing.finding} onDone={() => setPerforming(null)} />
               ) : selected ? (

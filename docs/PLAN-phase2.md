@@ -212,11 +212,17 @@ A–I as in the brief. The schema PR is owned by the schemas and engine owner an
 |---|---|---|
 | M0 | Bug fixes | done |
 | S | Schema changes | done |
-| M1 | 3D patient | planned |
+| M1 | 3D patient | done (primitive mannequin; GLB loader deferred, see notes) |
 | M2 | Tools and sound | planned |
 | M3 | Speech to text | planned |
 | M4 | Practice vs exam mode | planned |
 | M5 | Room entry and courtesy flow | planned |
+
+## Implementation notes
+- **M1, model:** no CC0/CC-BY model is in the repo, so the GLB loader was not written. Untested code would mislead the team. `Mannequin.tsx` is the swap point, documented in `public/models/LICENSE.md`.
+- **M1, neuro and whole-patient regions** are buttons in the 3D view, not body anchors. The `neuro_*` regions are exam domains, not places. The 2D "zoom" shortcut regions (`head`, `precordium`) have no 3D anchor.
+- **M1, implied actions:** the actions API returns every action it appended (e.g. the automatic drape `expose`), so the live log matches the stored log.
+- **M1, known warning:** react-three-fiber 9.8 triggers a `THREE.Clock` deprecation warning with three 0.186. It is a warning, not an error, and comes from inside the library.
 
 ## Open questions
 1. **3D model:** source and license. No CC0/CC-BY GLB is bundled; the primitive mannequin ships until the team picks one.

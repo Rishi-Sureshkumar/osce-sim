@@ -35,6 +35,8 @@ export function toPublicCase(c: Case): PublicCase {
     mode: c.mode,
     doorSign: c.doorSign,
     markSheetIds: c.markSheetIds,
+    ...(c.findingsVisibility ? { findingsVisibility: c.findingsVisibility } : {}),
     patient: { name, age, sex, pronouns, chiefComplaint, setting },
+    presentation: { visibleSigns: c.visibleSigns ?? {}, hr: c.vitals.hr, rr: c.vitals.rr },
   };
 }

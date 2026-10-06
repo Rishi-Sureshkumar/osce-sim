@@ -605,6 +605,28 @@
       "shin_left": "Shiny, taut skin over the swollen shin; no ulcers or erythema."
     }
   },
+  "visibleSigns": {
+    "jvpCm": 9,
+    "edema": [
+      {
+        "regionId": "shin_right",
+        "grade": 3
+      },
+      {
+        "regionId": "shin_left",
+        "grade": 3
+      },
+      {
+        "regionId": "ankle_right",
+        "grade": 3
+      },
+      {
+        "regionId": "ankle_left",
+        "grade": 3
+      }
+    ],
+    "breathing": "laboured"
+  },
   "expectedDifferential": [
     {
       "rank": 1,
