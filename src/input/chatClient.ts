@@ -1,6 +1,7 @@
 "use client";
 import type { Action } from "@/domain/schemas";
 import { sayFromText } from "./adapters/text";
+import { sayFromVoice } from "./adapters/voice";
 
 type ChatEvent =
   | { type: "student"; action: Action }
@@ -13,8 +14,9 @@ export async function sendChat(
   sessionId: string,
   text: string,
   handlers: { onStudent: (a: Action) => void; onDelta: (t: string) => void; onPatient: (a: Action) => void },
+  source: "text" | "voice" = "text",
 ): Promise<void> {
-  const input = sayFromText(text);
+  const input = source === "voice" ? sayFromVoice(text) : sayFromText(text);
   const res = await fetch(`/api/sessions/${sessionId}/chat`, {
     method: "POST",
     headers: { "content-type": "application/json" },

@@ -16,6 +16,11 @@ export function Timeline({ actions, labels, highlight }: { actions: Action[]; la
               <span className="w-12 shrink-0 font-mono text-xs text-slate-400">{mmss(a.t)}</span>
               <span className="w-20 shrink-0 text-xs font-semibold text-slate-500 uppercase">
                 {d.who === "patient" ? "Patient" : a.type === "examine" ? "Exam" : a.type === "courtesy" ? "Action" : d.who === "system" ? "" : "Student"}
+                {a.type === "say" && (
+                  <span className={`ml-1 rounded px-1 text-[10px] normal-case ${a.source === "voice" ? "bg-cyan-100 text-cyan-800" : "bg-slate-100 text-slate-500"}`} data-testid="say-source">
+                    {a.source === "voice" ? "voice" : "typed"}
+                  </span>
+                )}
               </span>
               <div className={`min-w-0 flex-1 ${tone}`}>
                 <p className="break-words whitespace-pre-wrap">{d.text}</p>

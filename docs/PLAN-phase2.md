@@ -214,7 +214,7 @@ A–I as in the brief. The schema PR is owned by the schemas and engine owner an
 | S | Schema changes | done |
 | M1 | 3D patient | done (primitive mannequin; GLB loader deferred, see notes) |
 | M2 | Tools and sound | done |
-| M3 | Speech to text | planned |
+| M3 | Speech to text | done |
 | M4 | Practice vs exam mode | planned |
 | M5 | Room entry and courtesy flow | planned |
 
@@ -229,6 +229,8 @@ A–I as in the brief. The schema PR is owned by the schemas and engine owner an
 - **M2, sequences:** sequence placements are measured against the step's landmark (mastoid, ear canal), not the region centre. The finding shows only after the last step, and out-of-order steps are flagged.
 - **M2, camera:** "Left side" and "Right side" presets were added for lateral exams (ears, Rinne, lateral chest).
 - **M2, vocal resonance** stays a menu maneuver: it needs the patient to say "ee" and shares the diaphragm placement with breath sounds.
+
+- **M3, voice:** the recognizer prefers the standard `SpeechRecognition` over the `webkit` name. The draft keeps its "voice" source even if the student edits it before sending. Real-microphone accuracy is a manual check, because e2e uses a scripted recognizer.
 
 ## Open questions
 1. **3D model:** source and license. No CC0/CC-BY GLB is bundled; the primitive mannequin ships until the team picks one.

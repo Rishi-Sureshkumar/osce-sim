@@ -9,6 +9,30 @@ async function enterCode(page: Page, code: string) {
   await page.getByRole("button", { name: "Continue" }).click();
 }
 
+/**
+ * Stand-in for the browser's speech recognizer (a real microphone can't be used headlessly).
+ * It emits each scripted utterance as interim words, then a final result when stopped.
+ */
+const FAKE_STT = `
+  window.__sttScript = [];
+  class FakeRecognition {
+    constructor() { this.onresult = null; this.onend = null; this.onerror = null; }
+    start() {
+      this.text = window.__sttScript.shift() || "";
+      const words = this.text.split(" ");
+      setTimeout(() => this.onresult && this.onresult({ resultIndex: 0, results: [{ isFinal: false, 0: { transcript: words.slice(0, 3).join(" ") } }] }), 50);
+    }
+    stop() {
+      setTimeout(() => {
+        this.onresult && this.onresult({ resultIndex: 0, results: [{ isFinal: true, 0: { transcript: this.text } }] });
+        this.onend && this.onend();
+      }, 30);
+    }
+  }
+  window.SpeechRecognition = FakeRecognition;
+  window.webkitSpeechRecognition = FakeRecognition;
+`;
+
 async function ask(page: Page, text: string) {
   const before = await page.locator('[data-testid="chat-log"] > div').count();
   await page.locator("#chat-input").fill(text);
@@ -51,6 +75,7 @@ test("student completes the HF case end to end; coach reviews and overrides", as
     if (m.type() === "error" && !/status of 40[13]/.test(m.text())) consoleErrors.push(m.text());
   });
   page.on("pageerror", (e) => consoleErrors.push(String(e)));
+  await page.addInitScript(FAKE_STT);
   // --- gate
   await page.goto("/");
   await expect(page).toHaveURL(/\/gate/);
@@ -69,9 +94,18 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page).toHaveURL(/\/station\//);
   await expect(page.getByText("Educational prototype. Synthetic cases. Not for clinical use.")).toBeVisible();
 
-  // --- courtesy + history
+  // --- courtesy + history (first question by voice: hold to talk, edit-able draft, then send)
   await page.getByRole("button", { name: "Wash hands" }).click();
-  await ask(page, "Hello Mr. Bennett, my name is Sam Patel and I'm a medical student. What brings you in today?");
+  await page.evaluate(() => (window as unknown as { __sttScript: string[] }).__sttScript.push("Hello Mr. Bennett, my name is Sam Patel and I'm a medical student. What brings you in today?"));
+  const mic = page.getByRole("button", { name: "Hold to talk" });
+  await mic.hover();
+  await page.mouse.down();
+  await expect(page.locator('[data-testid="voice-status"]')).toContainText("Listening… Hello Mr. Bennett,");
+  await page.mouse.up();
+  await expect(page.locator("#chat-input")).toHaveValue(/What brings you in today\?$/);
+  await page.locator("#chat-input").press("Enter");
+  await expect(page.locator('[data-testid="chat-log"]')).toContainText("You (voice)");
+  await expect(page.locator("[data-streaming]")).toHaveCount(0);
   await expect(page.locator('[data-testid="chat-log"]')).toContainText("catch my breath");
   await ask(page, "Do you get short of breath when you lie flat at night?");
   await expect(page.locator('[data-testid="chat-log"]')).toContainText("three pillows");
@@ -163,6 +197,8 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page).toHaveURL(new RegExp(`/coach/${sessionId}`));
   await expect(page.locator('[data-testid="timeline"]')).toContainText("Jugular venous pressure");
   await expect(page.locator('[data-testid="timeline"]')).toContainText("three pillows");
+  await expect(page.locator('[data-testid="say-source"]').first()).toHaveText("voice");
+  await expect(page.locator('[data-testid="say-source"]').nth(1)).toHaveText("typed");
   await expect(page.locator('[data-testid="tokens"]')).toBeVisible();
 
   const drape = page.locator('[data-item="fcm-03-drape"]');
@@ -184,10 +220,14 @@ test("student completes the HF case end to end; coach reviews and overrides", as
 });
 
 test("tuning forks: Weber and the Rinne sequence on the screening patient", async ({ page }) => {
+  // also: a browser without speech recognition (e.g. Firefox) falls back to typing with a notice
+  await page.addInitScript("window.SpeechRecognition = undefined; window.webkitSpeechRecognition = undefined;");
   await page.goto("/");
   await enterCode(page, "student-e2e");
   await page.locator('[data-case="screening-normal"]').click();
   await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await expect(page.locator('[data-testid="voice-status"]')).toContainText("Voice input isn't available in this browser");
+  await expect(page.getByRole("button", { name: "Hold to talk" })).toBeDisabled();
   await page.locator('[data-tool="tuning_fork"]').click();
   // Weber at the vertex
   await page.getByRole("button", { name: "Strike fork" }).click();

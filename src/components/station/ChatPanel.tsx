@@ -2,6 +2,9 @@
 import { useEffect, useRef, useState } from "react";
 import type { Action } from "@/domain/schemas";
 import { sendChat } from "@/input/chatClient";
+import { PushToTalk, WebSpeechProvider, type PushToTalkState } from "@/input/adapters/voice";
+
+const PREFS = "osce.voicePrefs";
 
 /** Conversation with the patient. Shows say/patient_say from the shared log plus the streaming reply. */
 export function ChatPanel({
@@ -21,32 +24,107 @@ export function ChatPanel({
   const [streaming, setStreaming] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  // the current draft came from speech (kept if the student edits it before sending)
+  const [fromVoice, setFromVoice] = useState(false);
+  const [voice, setVoice] = useState<PushToTalkState>({ listening: false, interim: "", error: null });
+  const [supported, setSupported] = useState(true);
+  const [autoSend, setAutoSend] = useState(false);
+  const [speakReplies, setSpeakReplies] = useState(false);
+  const ptt = useRef<PushToTalk | null>(null);
+  const sendRef = useRef<(msg: string, source: "text" | "voice") => Promise<void>>(async () => undefined);
+  const prefsRef = useRef({ autoSend, speakReplies });
+  prefsRef.current = { autoSend, speakReplies };
+
+  useEffect(() => {
+    try {
+      const p = JSON.parse(localStorage.getItem(PREFS) ?? "null") as { autoSend: boolean; speakReplies: boolean } | null;
+      if (p) {
+        setAutoSend(p.autoSend);
+        setSpeakReplies(p.speakReplies);
+      }
+    } catch {
+      /* defaults */
+    }
+    const instance = new PushToTalk(new WebSpeechProvider(), setVoice, (t) => {
+      if (prefsRef.current.autoSend) void sendRef.current(t, "voice");
+      else {
+        setText((cur) => (cur.trim() ? `${cur.trim()} ${t}` : t));
+        setFromVoice(true);
+        inputRef.current?.focus();
+      }
+    });
+    ptt.current = instance;
+    setSupported(instance.supported);
+  }, []);
+  useEffect(() => {
+    try {
+      localStorage.setItem(PREFS, JSON.stringify({ autoSend, speakReplies }));
+    } catch {
+      /* ignore */
+    }
+  }, [autoSend, speakReplies]);
+
+  // hold Space to talk when focus isn't in a text field
+  useEffect(() => {
+    const typing = (el: EventTarget | null) => el instanceof HTMLElement && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT|BUTTON)$/.test(el.tagName));
+    const down = (e: KeyboardEvent) => {
+      if (e.code !== "Space" || e.repeat || disabled || typing(e.target) || !ptt.current?.supported) return;
+      e.preventDefault();
+      ptt.current.press();
+    };
+    const up = (e: KeyboardEvent) => {
+      if (e.code !== "Space" || !ptt.current?.state.listening) return;
+      e.preventDefault();
+      ptt.current.release();
+    };
+    window.addEventListener("keydown", down);
+    window.addEventListener("keyup", up);
+    return () => {
+      window.removeEventListener("keydown", down);
+      window.removeEventListener("keyup", up);
+    };
+  }, [disabled]);
   const turns = actions.filter((a) => a.type === "say" || a.type === "patient_say");
 
   useEffect(() => endRef.current?.scrollIntoView({ block: "end" }), [turns.length, streaming]);
 
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const msg = text.trim();
+  const send = async (msg: string, source: "text" | "voice") => {
     if (!msg || streaming !== null) return;
     setText("");
+    setFromVoice(false);
     setError(null);
     setStreaming("");
     try {
-      await sendChat(sessionId, msg, {
-        onStudent: append,
-        onDelta: (d) => setStreaming((s) => (s ?? "") + d),
-        onPatient: (a) => {
-          append(a);
-          setStreaming(null);
+      await sendChat(
+        sessionId,
+        msg,
+        {
+          onStudent: append,
+          onDelta: (d) => setStreaming((s) => (s ?? "") + d),
+          onPatient: (a) => {
+            append(a);
+            setStreaming(null);
+            if (prefsRef.current.speakReplies && a.type === "patient_say" && typeof window !== "undefined" && "speechSynthesis" in window) {
+              window.speechSynthesis.cancel();
+              window.speechSynthesis.speak(new SpeechSynthesisUtterance(a.payload.text));
+            }
+          },
         },
-      });
+        source,
+      );
     } catch (err) {
       setError((err as Error).message);
       setText(msg);
     } finally {
       setStreaming(null);
     }
+  };
+  sendRef.current = send;
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await send(text.trim(), fromVoice ? "voice" : "text");
   };
 
   return (
@@ -60,7 +138,7 @@ export function ChatPanel({
         )}
         {turns.map((a) =>
           a.type === "say" ? (
-            <Bubble key={a.id} who="You" text={a.payload.text} mine />
+            <Bubble key={a.id} who={a.source === "voice" ? "You (voice)" : "You"} text={a.payload.text} mine />
           ) : a.type === "patient_say" ? (
             <Bubble key={a.id} who={patientName} text={a.payload.text} />
           ) : null,
@@ -73,14 +151,52 @@ export function ChatPanel({
           {error}
         </p>
       )}
+      {(voice.listening || voice.error || !supported) && (
+        <p className={`px-3 pt-1 text-xs ${voice.error || !supported ? "text-amber-800" : "text-cyan-800"}`} aria-live="polite" data-testid="voice-status">
+          {!supported
+            ? "Voice input isn't available in this browser (try Chrome, Edge or Safari). Type instead."
+            : voice.error
+              ? voice.error
+              : `Listening… ${voice.interim}`}
+        </p>
+      )}
       <form onSubmit={submit} className="flex gap-2 border-t border-slate-200 p-2">
+        <button
+          type="button"
+          disabled={disabled || !supported || streaming !== null}
+          aria-pressed={voice.listening}
+          aria-label="Hold to talk"
+          title="Hold to talk (or hold Space)"
+          onPointerDown={(e) => {
+            e.preventDefault();
+            ptt.current?.press();
+          }}
+          onPointerUp={() => ptt.current?.release()}
+          onPointerLeave={() => ptt.current?.release()}
+          onKeyDown={(e) => {
+            if ((e.key === "Enter" || e.key === " ") && !e.repeat) {
+              e.preventDefault();
+              ptt.current?.press();
+            }
+          }}
+          onKeyUp={(e) => {
+            if (e.key === "Enter" || e.key === " ") ptt.current?.release();
+          }}
+          className={`rounded-md px-3 py-2 text-sm font-medium ${voice.listening ? "bg-red-600 text-white" : "border border-slate-300 bg-white text-slate-700"} disabled:opacity-50`}
+        >
+          {voice.listening ? "● Rec" : "Hold to talk"}
+        </button>
         <label htmlFor="chat-input" className="sr-only">
           Message to patient
         </label>
         <input
           id="chat-input"
+          ref={inputRef}
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => {
+            setText(e.target.value);
+            if (!e.target.value) setFromVoice(false);
+          }}
           disabled={disabled}
           maxLength={2000}
           autoComplete="off"
@@ -91,6 +207,16 @@ export function ChatPanel({
           Send
         </button>
       </form>
+      <div className="flex flex-wrap gap-4 px-3 pb-2 text-xs text-slate-600">
+        <label className="flex items-center gap-1.5">
+          <input type="checkbox" checked={autoSend} onChange={(e) => setAutoSend(e.target.checked)} disabled={!supported} />
+          Send speech automatically
+        </label>
+        <label className="flex items-center gap-1.5">
+          <input type="checkbox" checked={speakReplies} onChange={(e) => setSpeakReplies(e.target.checked)} />
+          Patient speaks replies aloud
+        </label>
+      </div>
     </section>
   );
 }
