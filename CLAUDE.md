@@ -88,6 +88,10 @@ Run `npm run validate`. No code change needed; it appears in the menu for its re
 `{ text, audio?, visual?, byPosition? }` — e.g. an S3 under `auscultate_heart_bell.cardiac_mitral` with
 `audio: { generator: "heart", params: { s3: 0.6 } }` and a louder `byPosition.left_lateral_decubitus`.
 
+**Sounds** are data: `audio: { generator: "heart" | "breath" | "tone", params }` (see `AudioSpec`) or
+`{ clipId }` for a recorded clip listed with source + license in `public/audio/manifest.json`. The pure
+schedules in `src/audio/schedule.ts` are unit-tested; `src/audio/engine.ts` plays them.
+
 **Add a case** — copy `content/cases/hf-decompensated-01.json`, keep `synthetic: true`, and follow
 `docs/CASE_AUTHORING.md` (including the de-identification checklist for anything based on a real
 patient). Only list *abnormal* findings; everything else falls back to the catalog's normals.

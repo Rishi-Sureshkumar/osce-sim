@@ -90,7 +90,9 @@
           "Place the stethoscope just lateral to the midline over the carotid.",
           "Ask the patient to hold their breath briefly while you listen."
         ]
-      }
+      },
+      "interaction": "place",
+      "tool": "stethoscope"
     },
     {
       "requiresPositioning": [
@@ -189,10 +191,46 @@
         "cardiac_mitral"
       ],
       "normalFinding": {
-        "default": "Regular rate and rhythm; normal S1 and S2; no murmurs, rubs or extra sounds.",
-        "cardiac_aortic": "Regular rhythm; S2 crisp and well heard; no murmur.",
-        "cardiac_pulmonic": "Regular rhythm; physiological splitting of S2 with inspiration; no murmur.",
-        "cardiac_mitral": "Regular rhythm; S1 normal; no murmur."
+        "default": {
+          "text": "Regular rate and rhythm; normal S1 and S2; no murmurs, rubs or extra sounds.",
+          "audio": {
+            "generator": "heart",
+            "params": {
+              "intensity": 0.8,
+              "s2SplitMs": 0
+            }
+          }
+        },
+        "cardiac_aortic": {
+          "text": "Regular rhythm; S2 crisp and well heard; no murmur.",
+          "audio": {
+            "generator": "heart",
+            "params": {
+              "intensity": 0.8,
+              "s2SplitMs": 0
+            }
+          }
+        },
+        "cardiac_pulmonic": {
+          "text": "Regular rhythm; physiological splitting of S2 with inspiration; no murmur.",
+          "audio": {
+            "generator": "heart",
+            "params": {
+              "intensity": 0.8,
+              "s2SplitMs": 35
+            }
+          }
+        },
+        "cardiac_mitral": {
+          "text": "Regular rhythm; S1 normal; no murmur.",
+          "audio": {
+            "generator": "heart",
+            "params": {
+              "intensity": 0.8,
+              "s2SplitMs": 0
+            }
+          }
+        }
       },
       "demo": {
         "steps": [
@@ -200,7 +238,10 @@
           "Listen at the aortic, pulmonic, Erb point, tricuspid and mitral areas in turn.",
           "At each area time the sounds to the cycle and listen for murmurs in systole and diastole."
         ]
-      }
+      },
+      "interaction": "place",
+      "tool": "stethoscope",
+      "toolMode": "diaphragm"
     },
     {
       "requiresPositioning": [
@@ -218,14 +259,26 @@
         "cardiac_tricuspid"
       ],
       "normalFinding": {
-        "default": "No S3 or S4 with the bell."
+        "default": {
+          "text": "No S3 or S4 with the bell.",
+          "audio": {
+            "generator": "heart",
+            "params": {
+              "intensity": 0.7,
+              "s2SplitMs": 0
+            }
+          }
+        }
       },
       "demo": {
         "steps": [
           "Switch to the bell and rest it lightly on the skin.",
           "Listen over the apex (best with the patient rolled to the left) for low-pitched extra sounds."
         ]
-      }
+      },
+      "interaction": "place",
+      "tool": "stethoscope",
+      "toolMode": "bell"
     },
     {
       "sourceText": "",

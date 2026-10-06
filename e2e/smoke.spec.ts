@@ -21,6 +21,20 @@ async function ask(page: Page, text: string) {
 }
 
 /** Examine via the 3D view's accessible region list (part of the 3D view). */
+/** Press and hold a tool on a region (or a named landmark) of the 3D patient via the real canvas. */
+async function holdTool(page: Page, region: string, ms: number, landmark?: string) {
+  const p = await page.evaluate(([r, l]) => window.__osce3d!.project(r!, l), [region, landmark] as const);
+  await page.mouse.move(p!.x, p!.y);
+  await page.mouse.down();
+  await page.waitForTimeout(ms);
+  await page.mouse.up();
+}
+
+async function camera(page: Page, preset: string) {
+  await page.getByRole("tab", { name: preset }).click();
+  await page.waitForTimeout(1500); // tween
+}
+
 async function examine(page: Page, region: string, maneuver: string) {
   const picker = page.locator("details", { hasText: "Choose a region from a list" });
   if (!(await picker.evaluate((d) => (d as HTMLDetailsElement).open))) await picker.locator("summary").click();
@@ -76,12 +90,30 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await page.mouse.click(apex!.x, apex!.y);
   await expect(page.locator('section[aria-label="Examinations for Mitral area / apex (L 5th ICS, MCL)"]')).toBeVisible();
   await page.getByRole("button", { name: "Close menu" }).click();
+  // stethoscope: bell at the apex in left lateral decubitus, held for > 3 s
   await page.getByLabel("Patient position").selectOption("left_lateral_decubitus");
-  await examine(page, "cardiac_mitral", "auscultate_heart_bell");
-  await expect(page.locator('[data-testid="findings"]')).toContainText("S3 gallop");
+  await page.locator('[data-tool="stethoscope"]').click();
+  await page.getByRole("radio", { name: "Bell" }).click();
+  await camera(page, "Chest (front)");
+  const apexHold = page.evaluate(() => window.__osce3d!.project("cardiac_mitral"));
+  const pt = await apexHold;
+  await page.mouse.move(pt!.x, pt!.y);
+  await page.mouse.down();
+  await expect(page.locator('[data-testid="sound-caption"]')).toContainText("S3 (loud)", { timeout: 3_000 });
+  await page.waitForTimeout(3_300);
+  await page.mouse.up();
+  await expect(page.locator('[data-testid="findings"]')).toContainText("Loud low-pitched S3 gallop");
+  await expect(page.locator('[data-testid="action-log"]')).toContainText(/stethoscope \(bell\) · (on|edge of) target/);
+  // crackles at both posterior bases, sitting up, diaphragm
   await page.getByLabel("Patient position").selectOption("seated");
-  await examine(page, "lung_post_rl", "auscultate_lungs");
-  await examine(page, "lung_post_ll", "auscultate_lungs");
+  await page.getByRole("radio", { name: "Diaphragm" }).click();
+  await camera(page, "Chest (back)");
+  await holdTool(page, "lung_post_rl", 3_400);
+  await expect(page.locator('[data-testid="findings"]')).toContainText("fine end-inspiratory crackles just above");
+  await holdTool(page, "lung_post_ll", 3_400);
+  await expect(page.locator('[data-testid="sound-caption"]')).toContainText("fine crackles");
+  // back to the pointer for the menu-driven exams
+  await page.getByRole("button", { name: "Pointer (menu)" }).click();
   await examine(page, "shin_right", "edema_assessment");
   await expect(page.locator('[data-testid="findings"]')).toContainText("pitting edema");
   // the drape was exposed automatically and logged
@@ -108,6 +140,8 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.locator('[data-item="fcm-01-hand-hygiene"]')).toContainText("1/1");
   await expect(page.locator('[data-item="fcm-33-jvp-position"]')).toContainText("1/1");
   await expect(page.locator('[data-item="fcm-38-bell-lld"]')).toContainText("1/1");
+  await expect(page.locator('[data-item="fcm-38-bell-technique"]')).toContainText("1/1");
+  await expect(page.locator('[data-item="fcm-42-lung-technique"]')).toContainText("1/1");
   await expect(page.locator('[data-item="remove-barriers"]')).toContainText("Not assessable");
   await expect(page.locator('[data-testid="missed-findings"]')).toContainText("Hepatojugular");
   // evidence link jumps to the timeline
@@ -147,6 +181,30 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   expect([...times].sort()).toEqual(times);
 
   expect(consoleErrors, consoleErrors.join("\n")).toEqual([]);
+});
+
+test("tuning forks: Weber and the Rinne sequence on the screening patient", async ({ page }) => {
+  await page.goto("/");
+  await enterCode(page, "student-e2e");
+  await page.locator('[data-case="screening-normal"]').click();
+  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await page.locator('[data-tool="tuning_fork"]').click();
+  // Weber at the vertex
+  await page.getByRole("button", { name: "Strike fork" }).click();
+  await camera(page, "Head & neck");
+  await holdTool(page, "scalp", 80, "vertex");
+  await expect(page.locator('[data-testid="sound-caption"]')).toContainText("heard equally in both ears");
+  await expect(page.locator('[data-testid="findings"]')).toContainText("no lateralization");
+  // Rinne: mastoid → patient signals → beside the ear canal
+  await camera(page, "Left side");
+  await page.getByRole("button", { name: "Strike fork" }).click();
+  await holdTool(page, "ear_left", 80, "mastoid");
+  await expect(page.locator('[data-testid="findings"] li').first()).toContainText("Step done: Base of the fork on the mastoid");
+  await page.getByRole("button", { name: /Patient signals/ }).click({ timeout: 10_000 });
+  await holdTool(page, "ear_left", 80, "ear_canal");
+  await expect(page.locator('[data-testid="sequence"]')).toContainText("Sequence complete");
+  await expect(page.locator('[data-testid="sequence"]')).not.toContainText("out of order");
+  await expect(page.locator('[data-testid="findings"] li').first()).toContainText("Air conduction greater than bone conduction");
 });
 
 test("no API key or framework text in client bundles", () => {

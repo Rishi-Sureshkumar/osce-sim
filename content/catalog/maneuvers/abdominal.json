@@ -55,7 +55,10 @@
           "Note the presence and character of bowel sounds."
         ]
       },
-      "sourceText": ""
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "stethoscope",
+      "toolMode": "diaphragm"
     },
     {
       "id": "abd_bruits",
@@ -83,7 +86,10 @@
           "Listen over each iliac artery below the umbilicus."
         ]
       },
-      "sourceText": ""
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "stethoscope",
+      "toolMode": "diaphragm"
     },
     {
       "id": "abd_light_palpation",

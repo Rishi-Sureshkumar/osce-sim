@@ -18,7 +18,7 @@ interface Props {
   edema: Record<string, number>;
 }
 
-export function UpperBody({ rr, laboured }: Pick<Props, "rr" | "laboured">) {
+export function UpperBody({ rr, laboured, pupilScale = 1 }: Pick<Props, "rr" | "laboured"> & { pupilScale?: number }) {
   const chest = useRef<Mesh>(null);
   useFrame(({ clock }) => {
     if (!chest.current) return;
@@ -46,7 +46,7 @@ export function UpperBody({ rr, laboured }: Pick<Props, "rr" | "laboured">) {
         </mesh>
         {/* eyes, nose, mouth hints */}
         {[-0.036, 0.036].map((x) => (
-          <mesh key={x} position={[x, 0.088, -0.015]}>
+          <mesh key={x} position={[x, 0.088, -0.015]} scale={pupilScale}>
             <sphereGeometry args={[0.012, 12, 8]} />
             <meshStandardMaterial color="#2b2b2b" />
           </mesh>

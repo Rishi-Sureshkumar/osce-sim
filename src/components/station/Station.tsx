@@ -1,12 +1,16 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import type { Action, CourtesyKind, Position, PublicCase, Region, Session, View } from "@/domain/schemas";
+import type { Action, AudioSpec, CourtesyKind, Position, PublicCase, Region, Session, View } from "@/domain/schemas";
 import type { PublicCatalog } from "@/content/types";
 import { BodyDiagram } from "@/components/body/BodyDiagram";
-import { orderLog } from "@/engine/order";
 import { findingDisplay, labelsFrom } from "@/components/common/format";
 import { examineFromClick } from "@/input/adapters/click";
+import { examineFromTool, type ToolUse } from "@/input/adapters/tool";
+import { patientState } from "@/engine/patientState";
+import { toolFor } from "@/exam3d/tools/toolLogic";
+import { TOOL_LABELS, type ToolState } from "@/exam3d/tools/ToolTray";
+import { AudioControls } from "./AudioControls";
 import { courtesyFromToolbar } from "@/input/adapters/toolbar";
 import { postAction } from "@/input/client";
 import { ActionLog } from "./ActionLog";
@@ -30,7 +34,8 @@ const Exam3DView = dynamic(() => import("@/exam3d/Exam3DView"), {
 type ExamView = "3d" | "2d";
 const VIEW_KEY = "osce.examView";
 
-type Performing = { regionId: string; title: string; steps: string[]; finding: string | null };
+/** menu performs block the view until "Continue"; tool findings are non-blocking cards */
+type Performing = { regionId: string; title: string; steps: string[]; finding: string | null; audio?: AudioSpec; kind: "menu" | "tool" };
 
 export interface StationProps {
   session: Session;
@@ -77,11 +82,37 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
     () => new Set(actions.flatMap((a) => (a.type === "examine" ? [a.payload.regionId] : []))),
     [actions],
   );
-  const currentPosition = useMemo(() => {
-    let p: Position | undefined;
-    for (const a of orderLog(actions)) if (a.type === "courtesy" && a.payload.kind === "position") p = a.payload.position;
-    return p;
-  }, [actions]);
+  const currentPosition = useMemo(() => patientState(actions).position, [actions]);
+  const [tool, setTool] = useState<ToolState>({ tool: null, stethMode: "diaphragm", forkFreq: "512", struckAt: null });
+  const [choice, setChoice] = useState<{ region: Region; ids: string[]; resolve: (id: string | null) => void } | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
+  const maneuverById = useMemo(() => new Map(catalog.maneuvers.map((m) => [m.id, m])), [catalog]);
+  const regionById = useMemo(() => new Map(catalog.regions.map((r) => [r.id, r])), [catalog]);
+
+  /** Log a tool use from the 3D view and show its finding. */
+  const onToolExamine = async (u: ToolUse): Promise<Action | null> => {
+    setError(null);
+    try {
+      const appended = await postAction(session.id, examineFromTool(u));
+      appendAll(appended);
+      const action = appended.at(-1)!;
+      if (action.type === "examine") {
+        const m = maneuverById.get(u.maneuverId);
+        setPerforming({ regionId: u.regionId, title: `${m?.label ?? u.maneuverId} — ${regionById.get(u.regionId)?.label ?? u.regionId}`, steps: [], finding: findingDisplay(action, labels), kind: "tool" });
+      }
+      return action;
+    } catch (e) {
+      setError((e as Error).message);
+      return null;
+    }
+  };
+
+  const onToolAmbiguous = (regionId: string, ids: string[]) =>
+    new Promise<string | null>((resolve) => {
+      const region = regionById.get(regionId);
+      if (!region) return resolve(null);
+      setChoice({ region, ids, resolve });
+    });
 
   const run = async (fn: () => Promise<void>) => {
     setError(null);
@@ -92,8 +123,10 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
     }
   };
 
+  const blocking = performing?.kind === "menu";
   const onRegionClick = (r: Region) => {
-    if (performing) return;
+    if (blocking) return;
+    if (performing) setPerforming(null);
     if (r.zoomTo) {
       setView(r.zoomTo);
       setSelected(null);
@@ -105,14 +138,27 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
   const onChoose = (m: PublicCatalog["maneuvers"][number]) =>
     run(async () => {
       if (!selected) return;
+      // In 3D, maneuvers that need an instrument are done with it: pick up the tool instead.
+      const needs = toolFor(m);
+      if (examView === "3d" && needs && needs !== "hands") {
+        setTool((t) => ({
+          ...t,
+          tool: needs,
+          ...(m.toolMode === "bell" || m.toolMode === "diaphragm" ? { stethMode: m.toolMode } : {}),
+          ...(m.toolMode === "128" || m.toolMode === "512" ? { forkFreq: m.toolMode } : {}),
+        }));
+        setToast(`${TOOL_LABELS[needs]}${m.toolMode ? ` (${m.toolMode})` : ""} ready — use it on the patient.`);
+        setSelected(null);
+        return;
+      }
       const regionId = selected.id;
-      setPerforming({ regionId, title: `${m.label} — ${selected.label}`, steps: m.demo.steps, finding: null });
+      setPerforming({ regionId, title: `${m.label} — ${selected.label}`, steps: m.demo.steps, finding: null, kind: "menu" });
       setSelected(null);
       try {
         const appended = await postAction(session.id, examineFromClick(regionId, m.id));
         appendAll(appended);
         const action = appended.at(-1)!;
-        if (action.type === "examine") setPerforming((p) => (p ? { ...p, finding: findingDisplay(action) } : p));
+        if (action.type === "examine") setPerforming((p) => (p ? { ...p, finding: findingDisplay(action, labels), audio: action.result?.audio } : p));
       } catch (e) {
         setPerforming(null);
         throw e;
@@ -134,6 +180,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
           </p>
         </div>
         <div className="flex items-center gap-3">
+          <AudioControls />
           <Timer startedAt={session.startedAt} limitMinutes={kase.doorSign.timeLimitMinutes} stopped={ended} />
           {finish?.({ append, disabled: ended })}
         </div>
@@ -179,14 +226,23 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
           <div className="relative flex min-h-0 flex-1 flex-col">
             {examView === "3d" ? (
               <Exam3DView
+                sessionId={session.id}
+                maneuvers={catalog.maneuvers}
+                tool={tool}
+                onToolChange={(t) => {
+                  setTool(t);
+                  setToast(null);
+                }}
+                onToolExamine={onToolExamine}
+                onToolAmbiguous={onToolAmbiguous}
                 regions={catalog.regions}
                 examinableRegionIds={examinable}
                 actions={actions}
                 presentation={kase.presentation}
                 selectedRegionId={selected?.id}
-                performingRegionId={performing?.regionId}
+                performingRegionId={blocking ? performing?.regionId : null}
                 examinedRegionIds={examined}
-                disabled={ended || !!performing}
+                disabled={ended || blocking}
                 onRegionClick={onRegionClick}
               />
             ) : (
@@ -199,9 +255,36 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
                 onRegionClick={ended ? () => undefined : onRegionClick}
               />
             )}
-            <div className={`absolute right-2 z-10 w-72 max-w-[90%] ${examView === "3d" ? "top-11" : "top-2"}`}>
-              {performing ? (
-                <PerformOverlay title={performing.title} steps={performing.steps} finding={performing.finding} onDone={() => setPerforming(null)} />
+            <div className={`absolute right-2 z-10 w-72 max-w-[90%] ${examView === "3d" ? "bottom-28" : "top-2"} ${performing?.kind === "tool" && !choice ? "pointer-events-none [&_button]:pointer-events-auto" : ""}`}>
+              {toast && !performing && !selected && !choice && (
+                <p className="rounded-md bg-cyan-50 px-3 py-2 text-sm text-cyan-900 shadow" role="status">
+                  {toast}
+                </p>
+              )}
+              {choice ? (
+                <ManeuverMenu
+                  region={choice.region}
+                  maneuvers={catalog.maneuvers.filter((m) => choice.ids.includes(m.id))}
+                  busy={false}
+                  onChoose={(m) => {
+                    choice.resolve(m.id);
+                    setChoice(null);
+                  }}
+                  onClose={() => {
+                    choice.resolve(null);
+                    setChoice(null);
+                  }}
+                />
+              ) : performing ? (
+                <PerformOverlay
+                  title={performing.title}
+                  steps={performing.steps}
+                  finding={performing.finding}
+                  audio={examView === "2d" ? performing.audio : undefined}
+                  hr={kase.presentation.hr}
+                  rr={kase.presentation.rr}
+                  onDone={() => setPerforming(null)}
+                />
               ) : selected ? (
                 <ManeuverMenu region={selected} maneuvers={catalog.maneuvers} busy={!!performing} onChoose={onChoose} onClose={() => setSelected(null)} />
               ) : null}

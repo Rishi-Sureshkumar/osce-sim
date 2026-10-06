@@ -6,7 +6,7 @@ import type { Mesh, MeshBasicMaterial } from "three";
 import type { DrapeZone } from "@/domain/schemas";
 import { LowerDrape, UpperDrape } from "./Drape";
 import { LowerBody, UpperBody } from "./Mannequin";
-import { HINGE_Y, REGION_ANCHORS, pickRegion, type Pose, type RegionAnchor } from "./regionAnchors";
+import { HINGE_Y, REGION_ANCHORS, pickRegion, type Pose, type RegionAnchor, type Vec3 } from "./regionAnchors";
 import { JvpStrip } from "./VisibleSigns";
 
 export interface Patient3DProps {
@@ -24,6 +24,12 @@ export interface Patient3DProps {
   examinedRegionIds: Set<string>;
   enabledRegionIds: Set<string>;
   onPick: (regionId: string, e: ThreeEvent<MouseEvent>) => void;
+  /** a tool is in hand: pointer down/move/up report world points instead of picking */
+  toolActive: boolean;
+  onToolDown: (point: Vec3) => void;
+  onToolMove: (point: Vec3) => void;
+  onToolUp: () => void;
+  pupilScale: number;
   onDoublePick: (regionId: string) => void;
   onHover: (regionId: string | null) => void;
 }
@@ -33,6 +39,13 @@ export interface Patient3DProps {
  * the upper group tilts with the backrest. Picking resolves ray hits to a canonical regionId,
  * ignoring anchors hidden behind the body surface.
  */
+/** Where the ray meets the skin (not an invisible collider sphere): tool placements are measured from it. */
+function surfacePoint(e: ThreeEvent<PointerEvent>): Vec3 {
+  const body = e.intersections.find((i) => i.object.userData.kind === "body");
+  const pt = body?.point ?? e.point;
+  return [pt.x, pt.y, pt.z];
+}
+
 export function Patient3D(p: Patient3DProps) {
   const resolve = (e: ThreeEvent<MouseEvent | PointerEvent>): string | null => {
     const bodyHit = e.intersections.find((i) => i.object.userData.kind === "body");
@@ -50,8 +63,21 @@ export function Patient3D(p: Patient3DProps) {
       rotation={[0, 0, p.pose.roll]}
       onClick={(e) => {
         e.stopPropagation();
+        if (p.toolActive) return;
         const id = resolve(e);
         if (id) p.onPick(id, e);
+      }}
+      onPointerDown={(e) => {
+        if (!p.toolActive) return;
+        e.stopPropagation();
+        (e.target as unknown as Element).setPointerCapture?.(e.pointerId);
+        p.onToolDown(surfacePoint(e));
+      }}
+      onPointerUp={(e) => {
+        if (!p.toolActive) return;
+        e.stopPropagation();
+        (e.target as unknown as Element).releasePointerCapture?.(e.pointerId);
+        p.onToolUp();
       }}
       onDoubleClick={(e) => {
         e.stopPropagation();
@@ -60,12 +86,13 @@ export function Patient3D(p: Patient3DProps) {
       }}
       onPointerMove={(e) => {
         e.stopPropagation();
+        if (p.toolActive && e.buttons) p.onToolMove(surfacePoint(e));
         p.onHover(resolve(e));
       }}
       onPointerOut={() => p.onHover(null)}
     >
       <group rotation={[p.pose.backrest, 0, 0]}>
-        <UpperBody rr={p.rr} laboured={p.laboured} />
+        <UpperBody rr={p.rr} laboured={p.laboured} pupilScale={p.pupilScale} />
         <UpperDrape drape={p.drape} />
         <JvpStrip jvpCm={p.jvpCm} hr={p.hr} />
         <Anchors segment="upper" {...p} />

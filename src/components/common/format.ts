@@ -1,4 +1,5 @@
-import type { Action, Position } from "@/domain/schemas";
+import type { Action, Position, SequenceStep } from "@/domain/schemas";
+import { MIN_LISTEN_MS } from "@/exam3d/tools/toolLogic";
 import type { PublicCatalog } from "@/content/types";
 
 export const POSITION_LABELS: Record<Position, string> = {
@@ -35,12 +36,14 @@ export function mmss(ms: number): string {
 export interface Labels {
   maneuver: (id: string) => string;
   region: (id: string) => string;
+  steps?: (id: string) => SequenceStep[] | undefined;
 }
 
 export function labelsFrom(catalog: PublicCatalog): Labels {
   const m = new Map(catalog.maneuvers.map((x) => [x.id, x.label]));
   const r = new Map(catalog.regions.map((x) => [x.id, x.label]));
-  return { maneuver: (id) => m.get(id) ?? id, region: (id) => r.get(id) ?? id };
+  const st = new Map(catalog.maneuvers.map((x) => [x.id, x.steps]));
+  return { maneuver: (id) => m.get(id) ?? id, region: (id) => r.get(id) ?? id, steps: (id) => st.get(id) };
 }
 
 /** One-line description of an action, used by the live log and the coach timeline. */
@@ -53,7 +56,8 @@ export function describeAction(a: Action, L: Labels): { who: "student" | "patien
     case "examine": {
       const p = a.payload;
       const step = p.step ? ` (step: ${p.step})` : "";
-      return { who: "student", text: `${L.maneuver(p.maneuverId)} — ${L.region(p.regionId)}${step}` };
+      const tech = techniqueSummary(a);
+      return { who: "student", text: `${L.maneuver(p.maneuverId)} — ${L.region(p.regionId)}${step}${tech ? ` · ${tech}` : ""}` };
     }
     case "courtesy":
       return {
@@ -88,7 +92,29 @@ export function describeAction(a: Action, L: Labels): { who: "student" | "patien
   }
 }
 
-/** Shown to the student: AI wording when available, otherwise the deterministic text. */
-export function findingDisplay(a: Extract<Action, { type: "examine" }>): string {
+/**
+ * Shown to the student: AI wording when available, otherwise the deterministic text.
+ * A stethoscope held for less than the minimum listen time, and the intermediate steps of a
+ * sequence (e.g. Rinne), show what was done instead of the finding.
+ */
+export function findingDisplay(a: Extract<Action, { type: "examine" }>, labels?: Pick<Labels, "steps">): string {
+  const p = a.payload;
+  if (p.tool === "stethoscope" && p.durationMs !== undefined && p.durationMs < MIN_LISTEN_MS) {
+    return `Listened for ${(p.durationMs / 1000).toFixed(1)} s — hold the stethoscope still for at least ${MIN_LISTEN_MS / 1000} s to describe what you hear.`;
+  }
+  const steps = p.step ? labels?.steps?.(p.maneuverId) : undefined;
+  if (steps && p.step !== steps.at(-1)?.id) {
+    return `Step done: ${steps.find((s) => s.id === p.step)?.label ?? p.step}`;
+  }
   return a.result?.wording || a.result?.findingText || "";
+}
+
+/** Technique summary of a tool use, for the log and the coach timeline. */
+export function techniqueSummary(a: Extract<Action, { type: "examine" }>): string {
+  const p = a.payload;
+  if (!p.tool) return "";
+  const parts = [p.toolMode ? `${p.tool.replace("_", " ")} (${p.toolMode})` : p.tool.replace("_", " ")];
+  if (p.placementError !== undefined) parts.push(p.placementError <= 1 ? `on target (${p.placementError.toFixed(2)} r)` : p.placementError <= 1.5 ? `edge of target (${p.placementError.toFixed(2)} r)` : `off target (${p.placementError.toFixed(2)} r)`);
+  if (p.durationMs !== undefined) parts.push(`held ${(p.durationMs / 1000).toFixed(1)} s`);
+  return parts.join(" · ");
 }

@@ -115,6 +115,25 @@ async function appendOne(sessionId: string, raw: unknown, implied: Action[]): Pr
   return action;
 }
 
+/**
+ * Sound for a tool placement, so it can play while the stethoscope is held. Returns only the audio
+ * (no finding text) and logs nothing; the placement is logged as an `examine` when it ends.
+ */
+export async function previewAudio(sessionId: string, maneuverId: string, regionId: string) {
+  const session = await getSessionOr404(sessionId);
+  if (session.status !== "active") throw new HttpError(409, "This session has ended");
+  const kase = getCaseOr404(session.caseId);
+  const maneuver = getContent().maneuverById.get(maneuverId);
+  if (!maneuver) throw new HttpError(400, "Unknown maneuver");
+  const state = patientState(await (await getRepo()).listActions(sessionId));
+  try {
+    return { audio: resolveFinding(kase, maneuver, regionId, { position: state.position }).audio ?? null };
+  } catch (e) {
+    if (e instanceof InvalidExamError) throw new HttpError(400, e.message);
+    throw e;
+  }
+}
+
 export async function appendSystemAction(sessionId: string, a: Omit<Extract<Action, { source: "system" }>, "id" | "sessionId" | "t">): Promise<Action> {
   const session = await getSessionOr404(sessionId);
   const action = { ...a, id: newId("act"), sessionId, t: await nextT(session) } as Action;

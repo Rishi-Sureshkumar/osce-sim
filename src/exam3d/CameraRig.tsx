@@ -6,11 +6,13 @@ import { Vector3 } from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { ANCHOR_BY_REGION, dirToWorld, toWorld, type Pose, type Vec3 } from "./regionAnchors";
 
-export type CameraPreset = "body" | "head_neck" | "chest_front" | "chest_back" | "abdomen" | "hands" | "feet";
+export type CameraPreset = "body" | "head_neck" | "left_side" | "right_side" | "chest_front" | "chest_back" | "abdomen" | "hands" | "feet";
 
 export const PRESET_LABELS: Record<CameraPreset, string> = {
   body: "Whole body",
   head_neck: "Head & neck",
+  left_side: "Left side",
+  right_side: "Right side",
   chest_front: "Chest (front)",
   chest_back: "Chest (back)",
   abdomen: "Abdomen",
@@ -30,6 +32,13 @@ export function presetGoal(preset: CameraPreset, pose: Pose): { position: Vec3; 
     case "head_neck": {
       const t = toWorld([0, 0.03, -0.72], "upper", pose);
       return { target: t, position: add(add(t, front, 0.55), side, 0.12) };
+    }
+    case "left_side":
+    case "right_side": {
+      // the patient's own side (+X is the patient's left), framed on the head, neck and upper chest
+      const t = toWorld([0, 0.0, -0.66], "upper", pose);
+      const out = dirToWorld([preset === "left_side" ? 1 : -1, 0, 0], "upper", pose);
+      return { target: t, position: add(add(t, out, 0.7), up, 0.08) };
     }
     case "chest_front": {
       const t = toWorld([0.02, 0.12, -0.4], "upper", pose);
@@ -68,7 +77,7 @@ export function regionGoal(regionId: string, pose: Pose): { position: Vec3; targ
 }
 
 /** Orbit controls with limits, plus smooth tweening to preset/region goals. */
-export function CameraRig({ goal }: { goal: { position: Vec3; target: Vec3; key: number } }) {
+export function CameraRig({ goal, enabled = true }: { goal: { position: Vec3; target: Vec3; key: number }; enabled?: boolean }) {
   const controls = useRef<OrbitControlsImpl>(null);
   const { camera, invalidate } = useThree();
   const tweening = useRef(true);
@@ -96,6 +105,7 @@ export function CameraRig({ goal }: { goal: { position: Vec3; target: Vec3; key:
     <OrbitControls
       ref={controls}
       makeDefault
+      enabled={enabled}
       enableDamping
       dampingFactor={0.12}
       minDistance={0.22}

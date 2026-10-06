@@ -176,6 +176,7 @@ export const SequenceStep = z
     landmark: z.string().optional(),
   })
   .strict();
+export type SequenceStep = z.infer<typeof SequenceStep>;
 
 export const ExamManeuver = z.object({
   id: ManeuverId,

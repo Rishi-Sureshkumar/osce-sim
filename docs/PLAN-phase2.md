@@ -213,7 +213,7 @@ A–I as in the brief. The schema PR is owned by the schemas and engine owner an
 | M0 | Bug fixes | done |
 | S | Schema changes | done |
 | M1 | 3D patient | done (primitive mannequin; GLB loader deferred, see notes) |
-| M2 | Tools and sound | planned |
+| M2 | Tools and sound | done |
 | M3 | Speech to text | planned |
 | M4 | Practice vs exam mode | planned |
 | M5 | Room entry and courtesy flow | planned |
@@ -223,6 +223,12 @@ A–I as in the brief. The schema PR is owned by the schemas and engine owner an
 - **M1, neuro and whole-patient regions** are buttons in the 3D view, not body anchors. The `neuro_*` regions are exam domains, not places. The 2D "zoom" shortcut regions (`head`, `precordium`) have no 3D anchor.
 - **M1, implied actions:** the actions API returns every action it appended (e.g. the automatic drape `expose`), so the live log matches the stored log.
 - **M1, known warning:** react-three-fiber 9.8 triggers a `THREE.Clock` deprecation warning with three 0.186. It is a warning, not an error, and comes from inside the library.
+
+- **M2, sound while holding:** `POST /api/sessions/[id]/listen` returns only the audio for a placement (no text) and logs nothing, so the stethoscope can play while held. The placement is logged as an `examine` on release, with `placementError` and `durationMs`. A listen under 3 s is logged, but the student sees "listened for x s" instead of the finding.
+- **M2, tools vs menu:** in 3D, choosing an instrument maneuver from the menu picks up the tool instead of performing it. The 2D view still performs menu choices, as the accessibility fallback, and offers "Play sound". Technique items (`fcm-38-bell-technique`, `fcm-42-lung-technique`) can only be earned with the 3D tools.
+- **M2, sequences:** sequence placements are measured against the step's landmark (mastoid, ear canal), not the region centre. The finding shows only after the last step, and out-of-order steps are flagged.
+- **M2, camera:** "Left side" and "Right side" presets were added for lateral exams (ears, Rinne, lateral chest).
+- **M2, vocal resonance** stays a menu maneuver: it needs the patient to say "ee" and shares the diaphragm placement with breath sounds.
 
 ## Open questions
 1. **3D model:** source and license. No CC0/CC-BY GLB is bundled; the primitive mannequin ships until the team picks one.

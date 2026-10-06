@@ -548,12 +548,70 @@
       "cardiac_mitral": "PMI displaced laterally to the 6th intercostal space at the anterior axillary line; diffuse (about 4 cm)."
     },
     "auscultate_heart_diaphragm": {
-      "cardiac_mitral": "Tachycardic, regular. Soft grade 2/6 holosystolic murmur at the apex radiating toward the axilla. A low-pitched extra sound after S2 is faintly audible.",
-      "default": "Tachycardic, regular rhythm; normal S1 and S2; no murmur at this area."
+      "cardiac_mitral": {
+        "text": "Tachycardic, regular. Soft grade 2/6 holosystolic murmur at the apex radiating toward the axilla. A low-pitched extra sound after S2 is faintly audible.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.75,
+            "s2SplitMs": 0,
+            "s3": 0.25,
+            "murmur": {
+              "phase": "systolic",
+              "shape": "holosystolic",
+              "grade": 2,
+              "pitch": "high"
+            }
+          }
+        }
+      },
+      "default": {
+        "text": "Tachycardic, regular rhythm; normal S1 and S2; no murmur at this area.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.75,
+            "s2SplitMs": 0
+          }
+        }
+      }
     },
     "auscultate_heart_bell": {
-      "cardiac_mitral": "Low-pitched S3 gallop at the apex, loudest with the patient rolled onto the left side.",
-      "cardiac_tricuspid": "Faint low-pitched extra sound after S2, better heard at the apex."
+      "cardiac_mitral": {
+        "text": "Low-pitched S3 gallop at the apex, loudest with the patient rolled onto the left side.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.7,
+            "s2SplitMs": 0,
+            "s3": 0.55
+          }
+        },
+        "byPosition": {
+          "left_lateral_decubitus": {
+            "text": "Loud low-pitched S3 gallop at the apex — clearest with the patient rolled onto the left side.",
+            "audio": {
+              "generator": "heart",
+              "params": {
+                "intensity": 0.75,
+                "s2SplitMs": 0,
+                "s3": 0.95
+              }
+            }
+          }
+        }
+      },
+      "cardiac_tricuspid": {
+        "text": "Faint low-pitched extra sound after S2, better heard at the apex.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.65,
+            "s2SplitMs": 0,
+            "s3": 0.2
+          }
+        }
+      }
     },
     "peripheral_pulses": {
       "foot_right": "Dorsalis pedis and posterior tibial pulses 1+, hard to feel through the edema.",
@@ -572,12 +630,84 @@
       "default": "Mildly increased work of breathing with visible neck accessory muscle use; symmetric expansion; no scars."
     },
     "auscultate_lungs": {
-      "lung_post_rl": "Breath sounds reduced at the very base, with fine end-inspiratory crackles just above.",
-      "lung_post_ll": "Fine end-inspiratory crackles over the lower third of the lung field.",
-      "lung_lat_r": "Fine crackles at the lateral base.",
-      "lung_lat_l": "Fine crackles at the lateral base.",
-      "lung_ant_rl": "Scattered fine crackles at end inspiration.",
-      "lung_ant_ll": "Scattered fine crackles at end inspiration."
+      "lung_post_rl": {
+        "text": "Breath sounds reduced at the very base, with fine end-inspiratory crackles just above.",
+        "audio": {
+          "generator": "breath",
+          "params": {
+            "type": "reduced",
+            "crackles": "fine",
+            "cracklesDensity": 0.6,
+            "wheeze": false,
+            "intensity": 0.7
+          }
+        }
+      },
+      "lung_post_ll": {
+        "text": "Fine end-inspiratory crackles over the lower third of the lung field.",
+        "audio": {
+          "generator": "breath",
+          "params": {
+            "type": "vesicular",
+            "crackles": "fine",
+            "cracklesDensity": 0.75,
+            "wheeze": false,
+            "intensity": 0.7
+          }
+        }
+      },
+      "lung_lat_r": {
+        "text": "Fine crackles at the lateral base.",
+        "audio": {
+          "generator": "breath",
+          "params": {
+            "type": "vesicular",
+            "crackles": "fine",
+            "cracklesDensity": 0.5,
+            "wheeze": false,
+            "intensity": 0.7
+          }
+        }
+      },
+      "lung_lat_l": {
+        "text": "Fine crackles at the lateral base.",
+        "audio": {
+          "generator": "breath",
+          "params": {
+            "type": "vesicular",
+            "crackles": "fine",
+            "cracklesDensity": 0.5,
+            "wheeze": false,
+            "intensity": 0.7
+          }
+        }
+      },
+      "lung_ant_rl": {
+        "text": "Scattered fine crackles at end inspiration.",
+        "audio": {
+          "generator": "breath",
+          "params": {
+            "type": "vesicular",
+            "crackles": "fine",
+            "cracklesDensity": 0.3,
+            "wheeze": false,
+            "intensity": 0.7
+          }
+        }
+      },
+      "lung_ant_ll": {
+        "text": "Scattered fine crackles at end inspiration.",
+        "audio": {
+          "generator": "breath",
+          "params": {
+            "type": "vesicular",
+            "crackles": "fine",
+            "cracklesDensity": 0.3,
+            "wheeze": false,
+            "intensity": 0.7
+          }
+        }
+      }
     },
     "chest_percussion": {
       "lung_post_rl": "Dull to percussion over the lowest part of the right base.",

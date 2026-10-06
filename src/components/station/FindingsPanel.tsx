@@ -19,7 +19,7 @@ export function FindingsPanel({ actions, labels }: { actions: Action[]; labels: 
             <p className="text-xs text-slate-500">
               {mmss(a.t)} · {labels.maneuver(a.payload.maneuverId)} — {labels.region(a.payload.regionId)}
             </p>
-            <p>{findingDisplay(a)}</p>
+            <p>{findingDisplay(a, labels)}</p>
           </li>
         ))}
       </ul>

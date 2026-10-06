@@ -19,7 +19,7 @@ export function Timeline({ actions, labels, highlight }: { actions: Action[]; la
               </span>
               <div className={`min-w-0 flex-1 ${tone}`}>
                 <p className="break-words whitespace-pre-wrap">{d.text}</p>
-                {a.type === "examine" && <p className="mt-0.5 text-slate-600">→ {findingDisplay(a)}</p>}
+                {a.type === "examine" && <p className="mt-0.5 text-slate-600">→ {findingDisplay(a, labels)}</p>}
                 {a.type === "submit_ddx" && (
                   <div className="mt-1 space-y-1 text-slate-700">
                     <p>

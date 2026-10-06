@@ -297,7 +297,12 @@
         "eye_left"
       ],
       "normalFinding": {
-        "default": "Pupils equal, round, 3 mm, briskly reactive to light directly and consensually."
+        "default": {
+          "text": "Pupils equal, round, 3 mm, briskly reactive to light directly and consensually.",
+          "visual": {
+            "pupilConstriction": 0.6
+          }
+        }
       },
       "demo": {
         "steps": [
@@ -306,7 +311,9 @@
           "Repeat on the other side."
         ]
       },
-      "sourceText": ""
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "penlight"
     },
     {
       "id": "eom_accommodation",
@@ -382,12 +389,21 @@
       "system": "heent",
       "technique": "special",
       "allowedRegions": [
-        "scalp",
-        "ear_right",
-        "ear_left"
+        "scalp"
       ],
       "normalFinding": {
-        "default": "Sound heard equally in both ears; no lateralization."
+        "default": {
+          "text": "Sound heard equally in both ears; no lateralization.",
+          "audio": {
+            "generator": "tone",
+            "params": {
+              "freq": 512,
+              "pan": 0,
+              "decaySec": 8,
+              "airBoneRatio": 2
+            }
+          }
+        }
       },
       "demo": {
         "steps": [
@@ -396,7 +412,10 @@
           "Ask whether the sound is louder on one side or the same in both ears."
         ]
       },
-      "sourceText": ""
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "tuning_fork",
+      "toolMode": "512"
     },
     {
       "id": "rinne_test",
@@ -409,7 +428,18 @@
         "ear_left"
       ],
       "normalFinding": {
-        "default": "Air conduction greater than bone conduction bilaterally."
+        "default": {
+          "text": "Air conduction greater than bone conduction bilaterally.",
+          "audio": {
+            "generator": "tone",
+            "params": {
+              "freq": 512,
+              "pan": 0,
+              "decaySec": 9,
+              "airBoneRatio": 2
+            }
+          }
+        }
       },
       "demo": {
         "steps": [
@@ -418,7 +448,29 @@
           "Ask whether the sound is audible again; repeat on the other side."
         ]
       },
-      "sourceText": ""
+      "sourceText": "",
+      "interaction": "sequence",
+      "tool": "tuning_fork",
+      "toolMode": "512",
+      "steps": [
+        {
+          "id": "bone",
+          "label": "Base of the fork on the mastoid (bone conduction)",
+          "kind": "place",
+          "landmark": "mastoid"
+        },
+        {
+          "id": "signal",
+          "label": "Patient says the sound has stopped",
+          "kind": "signal"
+        },
+        {
+          "id": "air",
+          "label": "Prongs beside the ear canal (air conduction)",
+          "kind": "place",
+          "landmark": "ear_canal"
+        }
+      ]
     },
     {
       "id": "nares_inspection",

@@ -58,7 +58,18 @@
         "lung_post_ll"
       ],
       "normalFinding": {
-        "default": "Vesicular breath sounds; no crackles, wheezes or rubs."
+        "default": {
+          "text": "Vesicular breath sounds; no crackles, wheezes or rubs.",
+          "audio": {
+            "generator": "breath",
+            "params": {
+              "type": "vesicular",
+              "cracklesDensity": 0.5,
+              "wheeze": false,
+              "intensity": 0.7
+            }
+          }
+        }
       },
       "demo": {
         "steps": [
@@ -66,7 +77,10 @@
           "Press the diaphragm firmly and listen through a full breath at each spot.",
           "Compare side to side, working down the front, sides and back."
         ]
-      }
+      },
+      "interaction": "place",
+      "tool": "stethoscope",
+      "toolMode": "diaphragm"
     },
     {
       "requiresPositioning": [

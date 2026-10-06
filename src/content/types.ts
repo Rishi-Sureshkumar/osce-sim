@@ -15,5 +15,5 @@ export interface ContentIndex {
 /** The slice of the catalog the browser needs (no case data). */
 export interface PublicCatalog {
   regions: Region[];
-  maneuvers: Pick<ExamManeuver, "id" | "fcmId" | "label" | "system" | "technique" | "allowedRegions" | "demo">[];
+  maneuvers: Pick<ExamManeuver, "id" | "fcmId" | "label" | "system" | "technique" | "allowedRegions" | "demo" | "interaction" | "tool" | "toolMode" | "steps">[];
 }

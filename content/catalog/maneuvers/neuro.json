@@ -551,7 +551,18 @@
         "toe_great_left"
       ],
       "normalFinding": {
-        "default": "Vibration sense intact at the fingers and great toes bilaterally."
+        "default": {
+          "text": "Vibration sense intact at the fingers and great toes bilaterally.",
+          "audio": {
+            "generator": "tone",
+            "params": {
+              "freq": 128,
+              "pan": 0,
+              "decaySec": 12,
+              "airBoneRatio": 2
+            }
+          }
+        }
       },
       "demo": {
         "steps": [
@@ -560,7 +571,10 @@
           "Test all four limbs; move proximally if sense is reduced."
         ]
       },
-      "sourceText": ""
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "tuning_fork",
+      "toolMode": "128"
     },
     {
       "id": "reflex_biceps",
@@ -574,7 +588,12 @@
         "elbow_left"
       ],
       "normalFinding": {
-        "default": "Biceps reflex 2+ and symmetric bilaterally."
+        "default": {
+          "text": "Biceps reflex 2+ and symmetric bilaterally.",
+          "visual": {
+            "reflex": 2
+          }
+        }
       },
       "demo": {
         "steps": [
@@ -583,7 +602,9 @@
           "Watch for elbow flexion and compare sides."
         ]
       },
-      "sourceText": ""
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "reflex_hammer"
     },
     {
       "id": "reflex_triceps",
@@ -597,7 +618,12 @@
         "elbow_left"
       ],
       "normalFinding": {
-        "default": "Triceps reflex 2+ and symmetric bilaterally."
+        "default": {
+          "text": "Triceps reflex 2+ and symmetric bilaterally.",
+          "visual": {
+            "reflex": 2
+          }
+        }
       },
       "demo": {
         "steps": [
@@ -606,7 +632,9 @@
           "Watch for elbow extension and compare sides."
         ]
       },
-      "sourceText": ""
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "reflex_hammer"
     },
     {
       "id": "reflex_brachioradialis",
@@ -620,7 +648,12 @@
         "wrist_left"
       ],
       "normalFinding": {
-        "default": "Brachioradialis reflex 2+ and symmetric bilaterally."
+        "default": {
+          "text": "Brachioradialis reflex 2+ and symmetric bilaterally.",
+          "visual": {
+            "reflex": 2
+          }
+        }
       },
       "demo": {
         "steps": [
@@ -629,7 +662,9 @@
           "Watch for elbow flexion and forearm supination; compare sides."
         ]
       },
-      "sourceText": ""
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "reflex_hammer"
     },
     {
       "id": "reflex_patellar",
@@ -643,7 +678,12 @@
         "knee_left"
       ],
       "normalFinding": {
-        "default": "Patellar reflex 2+ and symmetric bilaterally."
+        "default": {
+          "text": "Patellar reflex 2+ and symmetric bilaterally.",
+          "visual": {
+            "reflex": 2
+          }
+        }
       },
       "demo": {
         "steps": [
@@ -652,7 +692,9 @@
           "Watch for knee extension and compare sides."
         ]
       },
-      "sourceText": ""
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "reflex_hammer"
     },
     {
       "id": "reflex_achilles",
@@ -666,7 +708,12 @@
         "ankle_left"
       ],
       "normalFinding": {
-        "default": "Achilles reflex 2+ and symmetric bilaterally."
+        "default": {
+          "text": "Achilles reflex 2+ and symmetric bilaterally.",
+          "visual": {
+            "reflex": 2
+          }
+        }
       },
       "demo": {
         "steps": [
@@ -675,7 +722,9 @@
           "Watch for plantarflexion and compare sides."
         ]
       },
-      "sourceText": ""
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "reflex_hammer"
     },
     {
       "id": "babinski",
@@ -698,7 +747,9 @@
           "Watch the big toe direction; repeat on the other foot."
         ]
       },
-      "sourceText": ""
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "reflex_hammer"
     },
     {
       "id": "finger_nose_finger",

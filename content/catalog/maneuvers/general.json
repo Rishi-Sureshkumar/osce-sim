@@ -63,7 +63,9 @@
           "Feel for the brachial pulse in the antecubital fossa.",
           "Wrap the cuff snugly on bare skin with the bladder over the artery."
         ]
-      }
+      },
+      "interaction": "place",
+      "tool": "bp_cuff"
     },
     {
       "sourceText": "",
@@ -111,7 +113,9 @@
           "Inflate 20–30 mmHg above the palpated value and deflate slowly (about 2–3 mmHg per second).",
           "Record when tapping sounds start and when they stop."
         ]
-      }
+      },
+      "interaction": "place",
+      "tool": "bp_cuff"
     },
     {
       "sourceText": "",

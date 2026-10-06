@@ -597,6 +597,27 @@
       "sourceText": ""
     },
     {
+      "id": "fcm-38-bell-technique",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Technique: bell placed accurately at the apex and held ≥ 3 s",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "technique": {
+          "maneuver": "auscultate_heart_bell",
+          "tool": "stethoscope",
+          "toolMode": "bell",
+          "regions": [
+            "cardiac_mitral"
+          ],
+          "maxPlacementError": 1.5,
+          "minDurationMs": 3000
+        }
+      },
+      "sourceText": ""
+    },
+    {
       "id": "fcm-39-pedal-pulses",
       "fcmId": 39,
       "section": "Cardiovascular",
@@ -701,6 +722,28 @@
             "seated",
             "seated_leaning_forward"
           ]
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-42-lung-technique",
+      "fcmId": 42,
+      "section": "Pulmonary",
+      "label": "Technique: listens at both bases accurately for ≥ 3 s each",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "technique": {
+          "maneuver": "auscultate_lungs",
+          "tool": "stethoscope",
+          "regions": [
+            "lung_post_rl",
+            "lung_post_ll"
+          ],
+          "maxPlacementError": 1.5,
+          "minDurationMs": 3000,
+          "partial": true
         }
       },
       "sourceText": ""
