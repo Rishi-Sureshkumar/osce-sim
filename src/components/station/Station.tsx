@@ -23,9 +23,9 @@ export interface StationProps {
   kase: PublicCase;
   catalog: PublicCatalog;
   initialActions: Action[];
-  /** Slot for the chat panel (M2). */
-  chat?: (ctx: { append: (a: Action) => void; disabled: boolean }) => React.ReactNode;
-  /** Slot for the finish/submit control (M2). */
+  /** Slot for the chat panel. */
+  chat?: (ctx: { actions: Action[]; append: (a: Action) => void; disabled: boolean }) => React.ReactNode;
+  /** Slot for the finish/submit control. */
   finish?: (ctx: { append: (a: Action) => void; disabled: boolean }) => React.ReactNode;
 }
 
@@ -115,7 +115,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
       <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-[minmax(280px,1fr)_minmax(360px,1.3fr)_minmax(280px,1fr)]">
         <div className="flex min-h-0 flex-col gap-3">
           <DoorSign kase={kase} />
-          {chat?.({ append, disabled: ended })}
+          {chat?.({ actions, append, disabled: ended })}
         </div>
 
         <div className="flex min-h-0 flex-col gap-2 rounded-lg border border-slate-200 bg-white p-3">
