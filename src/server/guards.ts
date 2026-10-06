@@ -9,7 +9,7 @@ export function limits() {
     maxPatientTurns: intEnv("MAX_PATIENT_TURNS", 40),
     patientMaxOutputTokens: intEnv("PATIENT_MAX_OUTPUT_TOKENS", 350),
     wordingMaxOutputTokens: intEnv("WORDING_MAX_OUTPUT_TOKENS", 200),
-    graderMaxOutputTokens: intEnv("GRADER_MAX_OUTPUT_TOKENS", 12000),
+    graderMaxOutputTokens: intEnv("GRADER_MAX_OUTPUT_TOKENS", 16000),
     maxSessionTokens: intEnv("MAX_SESSION_TOKENS", 400_000),
     rateLimitPerMinute: intEnv("RATE_LIMIT_PER_MINUTE", 60),
   };
