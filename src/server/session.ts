@@ -1,0 +1,118 @@
+import "server-only";
+import { getContent, toPublicCase } from "@/content/load";
+import type { Action, ActionInput, Case, PublicCase, Session, Usage } from "@/domain/schemas";
+import { ActionInput as ActionInputSchema } from "@/domain/schemas";
+import { InvalidExamError, resolveFinding } from "@/engine/resolveFinding";
+import { getRepo } from "./db";
+import { HttpError } from "./errors";
+import { newId } from "./ids";
+import { wordFinding } from "./ai/wording";
+
+export const emptyUsage = (): Usage => ({ inputTokens: 0, outputTokens: 0, cacheReadTokens: 0, cacheWriteTokens: 0 });
+
+export function getCaseOr404(caseId: string): Case {
+  const c = getContent().caseById.get(caseId);
+  if (!c) throw new HttpError(404, `Unknown case "${caseId}"`);
+  return c;
+}
+
+export async function createSession(caseId: string, studentLabel: string): Promise<Session> {
+  getCaseOr404(caseId);
+  const repo = await getRepo();
+  const session: Session = {
+    id: newId("ses"),
+    caseId,
+    studentLabel: studentLabel.trim().slice(0, 80) || "Anonymous",
+    status: "active",
+    startedAt: new Date().toISOString(),
+    endedAt: null,
+    patientTurns: 0,
+    gradingRuns: 0,
+    usage: emptyUsage(),
+  };
+  await repo.createSession(session);
+  await repo.appendAction({ id: newId("act"), sessionId: session.id, t: 0, type: "session_start", source: "system", payload: { caseId } });
+  return session;
+}
+
+export async function getSessionOr404(id: string): Promise<Session> {
+  const s = await (await getRepo()).getSession(id);
+  if (!s) throw new HttpError(404, "Session not found");
+  return s;
+}
+
+export function elapsedMs(session: Session): number {
+  return Math.max(0, Date.now() - Date.parse(session.startedAt));
+}
+
+/**
+ * The single write path for student actions. Validates the input, resolves exam findings
+ * deterministically, optionally adds AI wording, and appends to the log.
+ */
+export async function appendStudentAction(sessionId: string, raw: unknown): Promise<Action> {
+  const parsed = ActionInputSchema.safeParse(raw);
+  if (!parsed.success) throw new HttpError(400, "Invalid action");
+  const input: ActionInput = parsed.data;
+  const session = await getSessionOr404(sessionId);
+  if (session.status !== "active") throw new HttpError(409, "This session has ended");
+  const kase = getCaseOr404(session.caseId);
+  const base = { id: newId("act"), sessionId, t: elapsedMs(session) };
+
+  let action: Action;
+  if (input.type === "examine") {
+    const maneuver = getContent().maneuverById.get(input.payload.maneuverId);
+    if (!maneuver) throw new HttpError(400, "Unknown maneuver");
+    let resolved;
+    try {
+      resolved = resolveFinding(kase, maneuver, input.payload.regionId);
+    } catch (e) {
+      if (e instanceof InvalidExamError) throw new HttpError(400, e.message);
+      throw e;
+    }
+    const region = getContent().regionById.get(input.payload.regionId)!;
+    const wording = await wordFinding(sessionId, { maneuverLabel: maneuver.label, regionLabel: region.label, findingText: resolved.findingText });
+    action = { ...base, ...input, result: { ...resolved, ...(wording ? { wording } : {}) } };
+  } else {
+    action = { ...base, ...input } as Action;
+  }
+  await (await getRepo()).appendAction(action);
+  return action;
+}
+
+export async function appendSystemAction(sessionId: string, a: Omit<Extract<Action, { source: "system" }>, "id" | "sessionId" | "t">): Promise<Action> {
+  const session = await getSessionOr404(sessionId);
+  const action = { ...a, id: newId("act"), sessionId, t: elapsedMs(session) } as Action;
+  await (await getRepo()).appendAction(action);
+  return action;
+}
+
+export async function recordUsage(sessionId: string, u: Partial<Usage>): Promise<void> {
+  const repo = await getRepo();
+  const s = await repo.getSession(sessionId);
+  if (!s) return;
+  await repo.updateSession(sessionId, {
+    usage: {
+      inputTokens: s.usage.inputTokens + (u.inputTokens ?? 0),
+      outputTokens: s.usage.outputTokens + (u.outputTokens ?? 0),
+      cacheReadTokens: s.usage.cacheReadTokens + (u.cacheReadTokens ?? 0),
+      cacheWriteTokens: s.usage.cacheWriteTokens + (u.cacheWriteTokens ?? 0),
+    },
+  });
+}
+
+export function totalTokens(u: Usage): number {
+  return u.inputTokens + u.outputTokens + u.cacheReadTokens + u.cacheWriteTokens;
+}
+
+export interface StudentSessionView {
+  session: Session;
+  kase: PublicCase;
+  actions: Action[];
+}
+
+export async function getStudentView(sessionId: string): Promise<StudentSessionView> {
+  const session = await getSessionOr404(sessionId);
+  const kase = toPublicCase(getCaseOr404(session.caseId));
+  const actions = await (await getRepo()).listActions(sessionId);
+  return { session, kase, actions };
+}

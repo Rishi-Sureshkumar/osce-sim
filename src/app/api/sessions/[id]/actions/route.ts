@@ -1,0 +1,12 @@
+import { appendStudentAction } from "@/server/session";
+import { errorResponse } from "@/server/errors";
+
+export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const { id } = await params;
+    const action = await appendStudentAction(id, await req.json().catch(() => null));
+    return Response.json({ action });
+  } catch (e) {
+    return errorResponse(e);
+  }
+}
