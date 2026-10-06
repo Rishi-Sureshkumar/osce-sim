@@ -1,0 +1,117 @@
+import type { Action, Position, Rule } from "@/domain/schemas";
+
+/**
+ * The ONE interpreter for `auto` mark-sheet rules. Rules are declarative predicates over the
+ * append-only action log. Returns a value in [0, 1] (1 = fully achieved) plus the ids of the
+ * actions that satisfied it (used as evidence links in the results page).
+ */
+export interface RuleResult {
+  value: number;
+  actionIds: string[];
+}
+
+const list = <T>(x: T | T[]): T[] => (Array.isArray(x) ? x : [x]);
+
+function examines(log: Action[]) {
+  return log.filter((a): a is Extract<Action, { type: "examine" }> => a.type === "examine");
+}
+
+/** Position the patient is in when log[actionIndex] happens (last `position` courtesy before it). */
+export function positionAt(log: Action[], actionIndex: number): Position | undefined {
+  let pos: Position | undefined;
+  for (let i = 0; i < actionIndex && i < log.length; i++) {
+    const a = log[i]!;
+    if (a.type === "courtesy" && a.payload.kind === "position" && a.payload.position) pos = a.payload.position;
+  }
+  return pos;
+}
+
+/** Finds the action an event ref points at (see EventRef docs in schemas.ts). */
+export function findEvent(log: Action[], ref: string): Action | undefined {
+  let mode: "first" | "last" = "first";
+  let body = ref;
+  if (ref.startsWith("last:")) {
+    mode = "last";
+    body = ref.slice(5);
+  } else if (ref.startsWith("first:")) {
+    body = ref.slice(6);
+  }
+  const match = (a: Action): boolean => {
+    if (body.startsWith("maneuver:")) return a.type === "examine" && a.payload.maneuverId === body.slice(9);
+    if (body.startsWith("position:")) {
+      return a.type === "courtesy" && a.payload.kind === "position" && a.payload.position === body.slice(9);
+    }
+    if (["examine", "say", "courtesy", "submit_ddx", "note"].includes(body)) return a.type === body;
+    return a.type === "courtesy" && a.payload.kind === body;
+  };
+  return mode === "first" ? log.find(match) : [...log].reverse().find(match);
+}
+
+export function evaluateRule(rule: Rule, log: Action[]): RuleResult {
+  if ("performed" in rule) {
+    const ids = new Set(list(rule.performed));
+    const hits = examines(log).filter((a) => ids.has(a.payload.maneuverId));
+    if (rule.regions?.length) {
+      const covered = rule.regions.filter((r) => hits.some((h) => h.payload.regionId === r));
+      const frac = covered.length / rule.regions.length;
+      const value = rule.partial ? frac : frac === 1 ? 1 : 0;
+      return { value, actionIds: hits.filter((h) => covered.includes(h.payload.regionId)).map((h) => h.id) };
+    }
+    if (rule.minRegions) {
+      const distinct = new Set(hits.map((h) => h.payload.regionId));
+      const frac = Math.min(1, distinct.size / rule.minRegions);
+      return { value: rule.partial ? frac : frac === 1 ? 1 : 0, actionIds: hits.map((h) => h.id) };
+    }
+    return { value: hits.length ? 1 : 0, actionIds: hits.slice(0, 1).map((h) => h.id) };
+  }
+
+  if ("courtesy" in rule) {
+    const hit = log.find(
+      (a) =>
+        a.type === "courtesy" &&
+        a.payload.kind === rule.courtesy &&
+        (rule.position === undefined || a.payload.position === rule.position),
+    );
+    return { value: hit ? 1 : 0, actionIds: hit ? [hit.id] : [] };
+  }
+
+  if ("before" in rule) {
+    const a = findEvent(log, rule.before[0]);
+    const b = findEvent(log, rule.before[1]);
+    if (!a || !b) return { value: 0, actionIds: [] };
+    const ok = log.indexOf(a) < log.indexOf(b);
+    return { value: ok ? 1 : 0, actionIds: ok ? [a.id, b.id] : [] };
+  }
+
+  if ("performedIn" in rule) {
+    const ids = new Set(list(rule.performedIn.maneuver));
+    const positions = new Set(list(rule.performedIn.position));
+    const hit = log.find((a, i) => a.type === "examine" && ids.has(a.payload.maneuverId) && positions.has(positionAt(log, i)!));
+    return { value: hit ? 1 : 0, actionIds: hit ? [hit.id] : [] };
+  }
+
+  if ("submitted" in rule) {
+    const hit = log.find((a) => a.type === "submit_ddx");
+    return { value: hit ? 1 : 0, actionIds: hit ? [hit.id] : [] };
+  }
+
+  if ("all" in rule) {
+    const rs = rule.all.map((r) => evaluateRule(r, log));
+    return { value: Math.min(...rs.map((r) => r.value)), actionIds: unique(rs.flatMap((r) => r.actionIds)) };
+  }
+  if ("any" in rule) {
+    const rs = rule.any.map((r) => evaluateRule(r, log));
+    const best = rs.reduce((a, b) => (b.value > a.value ? b : a));
+    return best;
+  }
+  if ("not" in rule) {
+    const r = evaluateRule(rule.not, log);
+    return { value: 1 - r.value, actionIds: [] };
+  }
+  const never: never = rule;
+  throw new Error(`Unknown rule ${JSON.stringify(never)}`);
+}
+
+function unique<T>(xs: T[]): T[] {
+  return [...new Set(xs)];
+}

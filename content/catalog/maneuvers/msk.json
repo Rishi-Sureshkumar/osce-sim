@@ -1,0 +1,790 @@
+{
+  "system": "msk",
+  "maneuvers": [
+    {
+      "id": "back_inspection",
+      "fcmId": 88,
+      "label": "Inspect the back and spinal alignment",
+      "system": "msk",
+      "technique": "inspect",
+      "allowedRegions": [
+        "spine_cervical",
+        "spine_thoracic",
+        "spine_lumbar",
+        "sacrum"
+      ],
+      "requiresPositioning": [
+        "standing"
+      ],
+      "normalFinding": {
+        "default": "Spine straight with normal curvature; shoulders and iliac crests level."
+      },
+      "demo": {
+        "steps": [
+          "Look at the standing patient's back from behind and the side.",
+          "Check posture and spinal curves.",
+          "Compare heights of the front and back pelvic landmarks on both sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "back_palpation",
+      "fcmId": 89,
+      "label": "Palpate spine and paraspinal muscles",
+      "system": "msk",
+      "technique": "palpate",
+      "allowedRegions": [
+        "spine_cervical",
+        "spine_thoracic",
+        "spine_lumbar",
+        "sacrum"
+      ],
+      "normalFinding": {
+        "default": "No spinous process or paraspinal tenderness."
+      },
+      "demo": {
+        "steps": [
+          "Press on each spinous process from the neck down to the sacrum.",
+          "Then feel the muscles on either side of the spine.",
+          "Ask about tenderness."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "back_rom",
+      "fcmId": 90,
+      "label": "Spinal range of motion",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "spine_cervical",
+        "spine_thoracic",
+        "spine_lumbar"
+      ],
+      "requiresPositioning": [
+        "standing"
+      ],
+      "normalFinding": {
+        "default": "Full painless spinal flexion, extension, lateral bending and rotation."
+      },
+      "demo": {
+        "steps": [
+          "Ask the standing patient to bend forward and then lean back.",
+          "Ask them to bend to each side.",
+          "Ask them to twist the trunk to each side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "straight_leg_raise",
+      "fcmId": 91,
+      "label": "Straight leg raise",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "spine_lumbar",
+        "hip_right",
+        "hip_left"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Straight leg raise negative bilaterally; no radicular pain reproduced."
+      },
+      "demo": {
+        "steps": [
+          "Have the patient lie flat on the back.",
+          "Keeping the knee straight, slowly lift one leg by the heel.",
+          "Ask if pain shoots down the leg; repeat on the other side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "faber_test",
+      "fcmId": 92,
+      "label": "FABER (Patrick) test",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "hip_right",
+        "hip_left",
+        "sacrum"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "FABER negative bilaterally; no hip or sacroiliac pain."
+      },
+      "demo": {
+        "steps": [
+          "With the patient supine, place one ankle on the opposite knee in a figure-four.",
+          "Steady the opposite side of the pelvis with one hand.",
+          "Gently press the bent knee toward the table and ask about pain; repeat on the other side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "shoulder_inspection",
+      "fcmId": 93,
+      "label": "Inspect shoulders",
+      "system": "msk",
+      "technique": "inspect",
+      "allowedRegions": [
+        "shoulder_right",
+        "shoulder_left"
+      ],
+      "normalFinding": {
+        "default": "Shoulders symmetric without deformity, swelling, wasting or discoloration."
+      },
+      "demo": {
+        "steps": [
+          "Expose both shoulders.",
+          "Compare from the front and back for symmetry and muscle bulk."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "shoulder_palpation",
+      "fcmId": 94,
+      "label": "Palpate shoulders",
+      "system": "msk",
+      "technique": "palpate",
+      "allowedRegions": [
+        "shoulder_right",
+        "shoulder_left"
+      ],
+      "normalFinding": {
+        "default": "No tenderness over the bony landmarks, AC joint, bicipital groove or rotator cuff muscles."
+      },
+      "demo": {
+        "steps": [
+          "Feel the scapular spine, acromion and acromioclavicular joint.",
+          "Feel the biceps tendon in its groove at the front of the shoulder.",
+          "Feel the trapezius, deltoid and rotator cuff muscle bellies."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "shoulder_rom",
+      "fcmId": 95,
+      "label": "Shoulder range of motion",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "shoulder_right",
+        "shoulder_left"
+      ],
+      "normalFinding": {
+        "default": "Full painless shoulder flexion, extension, abduction, internal and external rotation bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to raise both arms forward, then reach back.",
+          "Ask them to raise the arms out to the sides overhead.",
+          "Check internal rotation (hand up the back) and external rotation (hands behind the head)."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "shoulder_hawkins",
+      "fcmId": 96,
+      "label": "Hawkins impingement test",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "shoulder_right",
+        "shoulder_left"
+      ],
+      "normalFinding": {
+        "default": "Hawkins test negative bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Raise the patient's arm forward to shoulder height with the elbow bent to 90 degrees.",
+          "Steady the shoulder and rotate the forearm downward to turn the shoulder inward.",
+          "Ask about pain; repeat on the other side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "shoulder_neer",
+      "fcmId": 97,
+      "label": "Neer impingement test",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "shoulder_right",
+        "shoulder_left"
+      ],
+      "normalFinding": {
+        "default": "Neer test negative bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Steady the scapula with one hand.",
+          "With the arm straight and thumb down, lift it forward overhead as far as it will go.",
+          "Ask about pain; repeat on the other side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "shoulder_empty_can",
+      "fcmId": 98,
+      "label": "Empty can test (supraspinatus)",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "shoulder_right",
+        "shoulder_left"
+      ],
+      "normalFinding": {
+        "default": "Empty can test negative; supraspinatus strength 5/5 without pain bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Have the patient hold the straight arms out at 90 degrees, angled slightly forward, thumbs down.",
+          "Press down on the forearms while they resist.",
+          "Note weakness or pain on either side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "shoulder_infraspinatus",
+      "fcmId": 99,
+      "label": "Infraspinatus (external rotation) test",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "shoulder_right",
+        "shoulder_left"
+      ],
+      "normalFinding": {
+        "default": "External rotation strength 5/5 without pain bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to keep the elbows tucked at the sides, bent to 90 degrees.",
+          "Ask them to rotate the forearms outward against your hands.",
+          "Compare strength and pain on both sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "elbow_inspection",
+      "fcmId": 100,
+      "label": "Inspect elbows",
+      "system": "msk",
+      "technique": "inspect",
+      "allowedRegions": [
+        "elbow_right",
+        "elbow_left"
+      ],
+      "normalFinding": {
+        "default": "Elbows symmetric without swelling, deformity or discoloration."
+      },
+      "demo": {
+        "steps": [
+          "Expose both elbows.",
+          "Compare carrying angle, contour and skin on each side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "elbow_palpation",
+      "fcmId": 101,
+      "label": "Palpate elbows",
+      "system": "msk",
+      "technique": "palpate",
+      "allowedRegions": [
+        "elbow_right",
+        "elbow_left"
+      ],
+      "normalFinding": {
+        "default": "No tenderness over the medial or lateral epicondyles or olecranon."
+      },
+      "demo": {
+        "steps": [
+          "Feel the lateral epicondyle and the medial epicondyle.",
+          "Feel the olecranon at the back of the elbow.",
+          "Ask about tenderness and note swelling."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "elbow_rom",
+      "fcmId": 102,
+      "label": "Elbow range of motion",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "elbow_right",
+        "elbow_left"
+      ],
+      "normalFinding": {
+        "default": "Full painless elbow flexion, extension, pronation and supination bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to bend and straighten both elbows.",
+          "With elbows at 90 degrees at the sides, turn the palms down and then up."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "wrist_hand_inspection",
+      "fcmId": 103,
+      "label": "Inspect wrists and hands",
+      "system": "msk",
+      "technique": "inspect",
+      "allowedRegions": [
+        "wrist_right",
+        "wrist_left",
+        "hand_right",
+        "hand_left"
+      ],
+      "normalFinding": {
+        "default": "Hands and wrists symmetric without swelling, deformity, wasting or discoloration."
+      },
+      "demo": {
+        "steps": [
+          "Look at the backs and palms of both hands.",
+          "Check the joints for swelling or deformity.",
+          "Compare the thenar and hypothenar muscle bulk."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "wrist_hand_palpation",
+      "fcmId": 104,
+      "label": "Palpate wrist and hand joints",
+      "system": "msk",
+      "technique": "palpate",
+      "allowedRegions": [
+        "wrist_right",
+        "wrist_left",
+        "hand_right",
+        "hand_left"
+      ],
+      "normalFinding": {
+        "default": "No tenderness, warmth or swelling of the wrist, CMC, MCP, PIP or DIP joints."
+      },
+      "demo": {
+        "steps": [
+          "Feel across the wrist joint.",
+          "Squeeze gently over the thumb base, knuckles and each finger joint.",
+          "Note tenderness, warmth or bogginess."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "wrist_hand_rom",
+      "fcmId": 105,
+      "label": "Wrist and hand range of motion",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "wrist_right",
+        "wrist_left",
+        "hand_right",
+        "hand_left"
+      ],
+      "normalFinding": {
+        "default": "Full painless wrist and finger range of motion bilaterally; full fist."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to bend the wrists up and down, then tilt them side to side.",
+          "Ask them to straighten the fingers fully.",
+          "Ask them to make a tight fist with both hands."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "rise_from_chair",
+      "fcmId": 106,
+      "label": "Rise from chair without using arms",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "hip_right",
+        "hip_left",
+        "neuro_motor_lower"
+      ],
+      "requiresPositioning": [
+        "seated"
+      ],
+      "normalFinding": {
+        "default": "Rises from the chair easily without using the arms."
+      },
+      "demo": {
+        "steps": [
+          "Ask the seated patient to fold the arms across the chest.",
+          "Ask them to stand up from the chair.",
+          "Watch for effort, use of the arms or rocking."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "lower_limb_standing_inspection",
+      "fcmId": 107,
+      "label": "Inspect lower limbs while standing",
+      "system": "msk",
+      "technique": "inspect",
+      "allowedRegions": [
+        "hip_right",
+        "hip_left",
+        "knee_right",
+        "knee_left",
+        "ankle_right",
+        "ankle_left",
+        "foot_right",
+        "foot_left"
+      ],
+      "requiresPositioning": [
+        "standing"
+      ],
+      "normalFinding": {
+        "default": "Hips, knees, ankles and feet symmetric without deformity, swelling or discoloration."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to stand with legs exposed.",
+          "Compare the hips, knees, ankles and feet from front, side and back."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "hip_palpation",
+      "fcmId": 108,
+      "label": "Palpate hips",
+      "system": "msk",
+      "technique": "palpate",
+      "allowedRegions": [
+        "hip_right",
+        "hip_left"
+      ],
+      "normalFinding": {
+        "default": "No tenderness over the iliac crests or greater trochanters."
+      },
+      "demo": {
+        "steps": [
+          "Feel along each iliac crest.",
+          "Feel over the greater trochanter on the side of each hip.",
+          "Ask about tenderness."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "hip_extension",
+      "fcmId": 109,
+      "label": "Hip extension",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "hip_right",
+        "hip_left"
+      ],
+      "requiresPositioning": [
+        "prone",
+        "standing"
+      ],
+      "normalFinding": {
+        "default": "Full painless hip extension bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Have the patient lie face down or stand.",
+          "Move the straight leg backward from the hip.",
+          "Note range and pain; repeat on the other side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "hip_flexion",
+      "fcmId": 110,
+      "label": "Hip flexion",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "hip_right",
+        "hip_left"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Full painless hip flexion bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "With the patient lying on the back, bend the knee.",
+          "Bring the knee up toward the chest.",
+          "Note range and pain; repeat on the other side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "hip_rotation",
+      "fcmId": 111,
+      "label": "Hip internal and external rotation",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "hip_right",
+        "hip_left"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Full painless hip internal and external rotation bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "With the patient supine, flex the hip and knee to about 90 degrees.",
+          "Swing the foot outward to rotate the hip inward, then inward to rotate it outward.",
+          "Note range and pain; repeat on the other side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "hip_abduction_adduction",
+      "fcmId": 112,
+      "label": "Hip abduction and adduction",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "hip_right",
+        "hip_left"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Full painless hip abduction and adduction bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "With the patient supine, steady the pelvis.",
+          "Move the straight leg out to the side, then back across the midline.",
+          "Repeat on the other side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "knee_inspection",
+      "fcmId": 113,
+      "label": "Inspect knees",
+      "system": "msk",
+      "technique": "inspect",
+      "allowedRegions": [
+        "knee_right",
+        "knee_left"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Knees symmetric without swelling, effusion, deformity or discoloration."
+      },
+      "demo": {
+        "steps": [
+          "Expose both knees with the patient lying flat.",
+          "Compare contour, alignment and skin on each side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "knee_palpation",
+      "fcmId": 114,
+      "label": "Palpate knees",
+      "system": "msk",
+      "technique": "palpate",
+      "allowedRegions": [
+        "knee_right",
+        "knee_left"
+      ],
+      "normalFinding": {
+        "default": "No joint line, patellar, fibular head or popliteal tenderness; no effusion."
+      },
+      "demo": {
+        "steps": [
+          "Feel the medial and lateral joint lines with the knee slightly bent.",
+          "Feel the patella and the fibular head.",
+          "Feel the back of the knee for swelling."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "knee_rom",
+      "fcmId": 115,
+      "label": "Knee range of motion",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "knee_right",
+        "knee_left"
+      ],
+      "normalFinding": {
+        "default": "Full painless knee flexion and extension bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to bend each knee as far as possible.",
+          "Then ask them to straighten it fully."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "knee_varus_valgus",
+      "fcmId": 116,
+      "label": "Varus and valgus stress test",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "knee_right",
+        "knee_left"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Collateral ligaments stable to varus and valgus stress bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Bend the knee to about 30 degrees with the patient lying flat.",
+          "Hold the thigh steady and push the lower leg inward then outward.",
+          "Feel for gapping at the joint line; repeat on the other knee."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "knee_drawer",
+      "fcmId": 117,
+      "label": "Anterior and posterior drawer test",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "knee_right",
+        "knee_left"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Anterior and posterior drawer tests negative with firm endpoints bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Bend the knee to 90 degrees with the foot flat and steady it by sitting lightly on it.",
+          "Grip the top of the shin and pull it forward.",
+          "Then push it backward; note excess movement and repeat on the other knee."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "ankle_foot_inspection",
+      "fcmId": 118,
+      "label": "Inspect ankles and feet",
+      "system": "msk",
+      "technique": "inspect",
+      "allowedRegions": [
+        "ankle_right",
+        "ankle_left",
+        "foot_right",
+        "foot_left"
+      ],
+      "normalFinding": {
+        "default": "Ankles and feet symmetric without swelling, deformity or discoloration."
+      },
+      "demo": {
+        "steps": [
+          "Look at both ankles and feet from all sides, including the soles.",
+          "Compare for swelling, colour change or deformity."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "ankle_foot_palpation",
+      "fcmId": 119,
+      "label": "Palpate ankles and feet",
+      "system": "msk",
+      "technique": "palpate",
+      "allowedRegions": [
+        "ankle_right",
+        "ankle_left",
+        "foot_right",
+        "foot_left"
+      ],
+      "normalFinding": {
+        "default": "No tenderness over the malleoli, Achilles tendon, navicular or base of the fifth metatarsal."
+      },
+      "demo": {
+        "steps": [
+          "Feel the inner and outer ankle bones.",
+          "Feel along the Achilles tendon.",
+          "Feel the navicular and the base of the fifth metatarsal."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "ankle_foot_rom",
+      "fcmId": 120,
+      "label": "Ankle range of motion",
+      "system": "msk",
+      "technique": "special",
+      "allowedRegions": [
+        "ankle_right",
+        "ankle_left",
+        "foot_right",
+        "foot_left"
+      ],
+      "normalFinding": {
+        "default": "Full painless dorsiflexion, plantarflexion, inversion and eversion bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to pull the foot up and point it down.",
+          "Ask them to turn the sole inward and then outward.",
+          "Compare sides."
+        ]
+      },
+      "sourceText": ""
+    }
+  ]
+}

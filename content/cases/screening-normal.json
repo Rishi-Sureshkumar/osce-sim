@@ -1,0 +1,93 @@
+{
+  "id": "screening-normal",
+  "title": "Full head-to-toe screening exam (healthy volunteer)",
+  "mode": "screening",
+  "patient": {
+    "name": "Jordan Lee",
+    "age": 28,
+    "sex": "female",
+    "pronouns": "she/her",
+    "chiefComplaint": "Routine screening examination",
+    "setting": "Clinical skills room, seated on the exam table",
+    "persona": {
+      "affect": "Relaxed and cooperative",
+      "speakingStyle": "Friendly, brief answers",
+      "worries": "None",
+      "background": "Graduate student volunteering as a standardized patient"
+    }
+  },
+  "doorSign": {
+    "task": "Ms. Lee is a healthy volunteer. Perform a complete screening physical examination following the FCM-1 framework, from clinical courtesy and vital signs through head-to-toe examination.",
+    "timeLimitMinutes": 30
+  },
+  "vitals": {
+    "hr": 68,
+    "rr": 14,
+    "bpSystolic": 116,
+    "bpDiastolic": 74,
+    "tempC": 36.7,
+    "spo2": 99,
+    "spo2Context": "on room air"
+  },
+  "history": {
+    "openingStatement": "Hi! I’m here for the practice exam — I feel fine.",
+    "facts": [
+      {
+        "id": "health",
+        "topic": "General health",
+        "answer": "I’m healthy. No medical problems.",
+        "revealOnlyIfAsked": false,
+        "keywords": [
+          "medical",
+          "health",
+          "conditions",
+          "problems"
+        ]
+      },
+      {
+        "id": "meds",
+        "topic": "Medications",
+        "answer": "Just a daily multivitamin.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "medication",
+          "medicine",
+          "pills",
+          "taking"
+        ]
+      },
+      {
+        "id": "allergies",
+        "topic": "Allergies",
+        "answer": "No allergies.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "allerg"
+        ]
+      }
+    ],
+    "pertinentNegatives": [
+      {
+        "topic": "Any symptoms",
+        "answer": "No, I feel completely well.",
+        "keywords": [
+          "pain",
+          "symptom",
+          "problem",
+          "feel"
+        ]
+      }
+    ],
+    "unknownPolicy": {
+      "negativeReply": "No, nothing like that.",
+      "unknownReply": "Not that I know of."
+    }
+  },
+  "abnormalFindings": {},
+  "expectedDifferential": [],
+  "markSheetIds": [
+    "exam-fcm1"
+  ],
+  "synthetic": true,
+  "sourceNote": "Synthetic all-normal standardized patient for screening-exam practice."
+}

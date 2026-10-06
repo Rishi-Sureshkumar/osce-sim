@@ -1,0 +1,1768 @@
+{
+  "id": "exam-fcm1",
+  "title": "Physical Examination (FCM-1 framework)",
+  "kind": "exam",
+  "sourceNote": "Items map to FCM-1 Physical Exam Framework numbers (fcmId). Labels are paraphrased; framework text not reproduced pending copyright clearance.",
+  "items": [
+    {
+      "id": "fcm-01-hand-hygiene",
+      "fcmId": 1,
+      "section": "Clinical courtesy",
+      "label": "Washes hands before touching the patient",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "before": [
+          "hand_hygiene",
+          "first:examine"
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-02-notes",
+      "fcmId": 2,
+      "section": "Clinical courtesy",
+      "label": "Note-taking does not interfere with rapport",
+      "weight": 1,
+      "scoring": "not_assessable",
+      "notAssessableReason": "Note-taking behaviour and eye contact are not visible in this interface.",
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-03-drape",
+      "fcmId": 3,
+      "section": "Clinical courtesy",
+      "label": "Drapes the patient appropriately",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "courtesy": "drape"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-04-comfort",
+      "fcmId": 4,
+      "section": "Clinical courtesy",
+      "label": "Verbally checks the patient's comfort during the exam",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Credit if the student, during the physical exam, says something that shows attention to the patient's comfort or dignity: asks if they are comfortable, warns before touching/cold stethoscope, asks them to say if anything hurts, offers help repositioning.",
+      "mockKeywords": [
+        "comfortable",
+        "let me know if",
+        "hurt",
+        "cold",
+        "okay if i"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-05-pulse",
+      "fcmId": 5,
+      "section": "Vital signs",
+      "label": "Radial pulse rate and rhythm",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "pulse_radial"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-06-resp-rate",
+      "fcmId": 6,
+      "section": "Vital signs",
+      "label": "Respiratory rate at rest",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "respiratory_rate"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-07-bp-cuff",
+      "fcmId": 7,
+      "section": "Vital signs",
+      "label": "BP: correct cuff, placed over the brachial artery",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "bp_cuff_placement"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-08-bp-arm",
+      "fcmId": 8,
+      "section": "Vital signs",
+      "label": "BP: arm flexed and supported",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "bp_arm_support"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-09-bp",
+      "fcmId": 9,
+      "section": "Vital signs",
+      "label": "BP measured after cuff placement (palpatory then auscultatory)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "all": [
+          {
+            "performed": "blood_pressure"
+          },
+          {
+            "before": [
+              "maneuver:bp_cuff_placement",
+              "maneuver:blood_pressure"
+            ]
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-10-general",
+      "fcmId": 10,
+      "section": "General appearance",
+      "label": "Comments on general appearance",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "general_appearance"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-11-ln-occipital",
+      "fcmId": 11,
+      "section": "Head, neck and eyes",
+      "label": "Palpates occipital lymph nodes",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "ln_occipital_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-12-ln-post-auricular",
+      "fcmId": 12,
+      "section": "Head, neck and eyes",
+      "label": "Palpates post auricular lymph nodes",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "ln_post_auricular_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-13-ln-pre-auricular",
+      "fcmId": 13,
+      "section": "Head, neck and eyes",
+      "label": "Palpates pre auricular lymph nodes",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "ln_pre_auricular_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-14-ln-submandibular",
+      "fcmId": 14,
+      "section": "Head, neck and eyes",
+      "label": "Palpates submandibular lymph nodes",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "ln_submandibular_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-15-ln-post-cervical",
+      "fcmId": 15,
+      "section": "Head, neck and eyes",
+      "label": "Palpates post cervical lymph nodes",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "ln_post_cervical_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-16-ln-ant-cervical",
+      "fcmId": 16,
+      "section": "Head, neck and eyes",
+      "label": "Palpates ant cervical lymph nodes",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "ln_ant_cervical_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-17-ln-submental",
+      "fcmId": 17,
+      "section": "Head, neck and eyes",
+      "label": "Palpates submental lymph nodes",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "ln_submental_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-18-ln-supraclavicular",
+      "fcmId": 18,
+      "section": "Head, neck and eyes",
+      "label": "Palpates supraclavicular lymph nodes",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "ln_supraclavicular_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-19-trachea",
+      "fcmId": 19,
+      "section": "Head, neck and eyes",
+      "label": "Palpates trachea position",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "trachea_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-20-thyroid",
+      "fcmId": 20,
+      "section": "Head, neck and eyes",
+      "label": "Palpates thyroid (from behind, with swallow)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "thyroid_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-21-eye-inspection",
+      "fcmId": 21,
+      "section": "Head, neck and eyes",
+      "label": "Inspects both eyes",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "eye_inspection",
+        "regions": [
+          "eye_right",
+          "eye_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-22-visual-fields",
+      "fcmId": 22,
+      "section": "Head, neck and eyes",
+      "label": "Visual fields by confrontation",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "visual_fields_confrontation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-23-pupils",
+      "fcmId": 23,
+      "section": "Head, neck and eyes",
+      "label": "Pupils: size and light reflexes, both eyes",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "pupils_light_reflex",
+        "regions": [
+          "eye_right",
+          "eye_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-24-eom",
+      "fcmId": 24,
+      "section": "Head, neck and eyes",
+      "label": "Extraocular movements and accommodation",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "eom_accommodation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-25-ophthalmoscopy",
+      "fcmId": 25,
+      "section": "Head, neck and eyes",
+      "label": "Ophthalmoscopy, both eyes",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "ophthalmoscopy",
+        "regions": [
+          "eye_right",
+          "eye_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-26-otoscopy",
+      "fcmId": 26,
+      "section": "Head, neck and eyes",
+      "label": "Otoscopy, both ears",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "otoscopy",
+        "regions": [
+          "ear_right",
+          "ear_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-27-weber",
+      "fcmId": 27,
+      "section": "Head, neck and eyes",
+      "label": "Weber test",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "weber_test"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-28-rinne",
+      "fcmId": 28,
+      "section": "Head, neck and eyes",
+      "label": "Rinne test",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "rinne_test"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-29-nares",
+      "fcmId": 29,
+      "section": "Head, neck and eyes",
+      "label": "Inspects nares",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "nares_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-30-mouth",
+      "fcmId": 30,
+      "section": "Head, neck and eyes",
+      "label": "Inspects mouth and pharynx",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "mouth_throat_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-31-floor-mouth",
+      "fcmId": 31,
+      "section": "Head, neck and eyes",
+      "label": "Inspects tongue and floor of mouth",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "floor_of_mouth_tongue"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-32-teeth",
+      "fcmId": 32,
+      "section": "Head, neck and eyes",
+      "label": "Inspects teeth and gums",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "teeth_gums_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-33-jvp",
+      "fcmId": 33,
+      "section": "Cardiovascular",
+      "label": "Inspects the jugular venous pressure",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "jvp_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-33-jvp-position",
+      "fcmId": 33,
+      "section": "Cardiovascular",
+      "label": "Technique: JVP assessed with patient reclined to ~30°",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "jvp_inspection",
+          "position": "reclined_30"
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-34-carotid-palpation",
+      "fcmId": 34,
+      "section": "Cardiovascular",
+      "label": "Palpates both carotids (one side at a time)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "carotid_palpation",
+        "regions": [
+          "carotid_right",
+          "carotid_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-34-carotid-bruit",
+      "fcmId": 34,
+      "section": "Cardiovascular",
+      "label": "Auscultates both carotids for bruits",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "carotid_auscultation",
+        "regions": [
+          "carotid_right",
+          "carotid_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-35-precordium-inspect",
+      "fcmId": 35,
+      "section": "Cardiovascular",
+      "label": "Inspects the precordium",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "precordial_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-36-heaves-thrills",
+      "fcmId": 36,
+      "section": "Cardiovascular",
+      "label": "Palpates for heaves and thrills (sternal border and base)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "precordial_palpation",
+        "regions": [
+          "precordium_lsb",
+          "cardiac_aortic",
+          "cardiac_pulmonic"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-37-pmi",
+      "fcmId": 37,
+      "section": "Cardiovascular",
+      "label": "Locates the point of maximal impulse",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "pmi_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-37-pmi-position",
+      "fcmId": 37,
+      "section": "Cardiovascular",
+      "label": "Technique: PMI with patient supine or left lateral",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "pmi_palpation",
+          "position": [
+            "supine",
+            "left_lateral_decubitus"
+          ]
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-38-heart-diaphragm",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Auscultates all five areas with the diaphragm",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "auscultate_heart_diaphragm",
+        "regions": [
+          "cardiac_aortic",
+          "cardiac_pulmonic",
+          "cardiac_erbs",
+          "cardiac_tricuspid",
+          "cardiac_mitral"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-38-heart-bell",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Listens at the apex with the bell for extra heart sounds",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "auscultate_heart_bell",
+        "regions": [
+          "cardiac_mitral"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-38-bell-lld",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Technique: bell at apex with patient in left lateral decubitus",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "auscultate_heart_bell",
+          "position": "left_lateral_decubitus"
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-39-pedal-pulses",
+      "fcmId": 39,
+      "section": "Cardiovascular",
+      "label": "Palpates pedal pulses bilaterally",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "peripheral_pulses",
+        "regions": [
+          "foot_right",
+          "foot_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-40-edema",
+      "fcmId": 40,
+      "section": "Cardiovascular",
+      "label": "Assesses lower-limb edema bilaterally",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "performed": "edema_assessment",
+            "regions": [
+              "shin_right",
+              "shin_left"
+            ],
+            "partial": false
+          },
+          {
+            "performed": "edema_assessment",
+            "regions": [
+              "ankle_right",
+              "ankle_left"
+            ],
+            "partial": false
+          },
+          {
+            "performed": "edema_assessment",
+            "regions": [
+              "foot_right",
+              "foot_left"
+            ],
+            "partial": false
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-41-chest-inspection",
+      "fcmId": 41,
+      "section": "Pulmonary",
+      "label": "Inspects the chest and work of breathing",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "chest_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-42-lung-ausc",
+      "fcmId": 42,
+      "section": "Pulmonary",
+      "label": "Auscultates front, sides and back, comparing sides",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "auscultate_lungs",
+        "regions": [
+          "lung_ant_ru",
+          "lung_ant_lu",
+          "lung_ant_rl",
+          "lung_ant_ll",
+          "lung_lat_r",
+          "lung_lat_l",
+          "lung_post_ru",
+          "lung_post_lu",
+          "lung_post_rl",
+          "lung_post_ll"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-42-lung-position",
+      "fcmId": 42,
+      "section": "Pulmonary",
+      "label": "Technique: posterior chest auscultated with patient sitting up",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "auscultate_lungs",
+          "position": [
+            "seated",
+            "seated_leaning_forward"
+          ]
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-43-vocal-resonance",
+      "fcmId": 43,
+      "section": "Pulmonary",
+      "label": "Vocal resonance / egophony over the posterior chest",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "vocal_resonance",
+        "regions": [
+          "lung_post_rl",
+          "lung_post_ll"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-44-fremitus",
+      "fcmId": 44,
+      "section": "Pulmonary",
+      "label": "Tactile fremitus, comparing sides",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "tactile_fremitus",
+        "regions": [
+          "lung_post_ru",
+          "lung_post_lu",
+          "lung_post_rl",
+          "lung_post_ll"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-45-percussion",
+      "fcmId": 45,
+      "section": "Pulmonary",
+      "label": "Percusses front and back, comparing sides",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "chest_percussion",
+        "regions": [
+          "lung_ant_ru",
+          "lung_ant_lu",
+          "lung_ant_rl",
+          "lung_ant_ll",
+          "lung_post_ru",
+          "lung_post_lu",
+          "lung_post_rl",
+          "lung_post_ll"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-46-abd-inspection",
+      "fcmId": 46,
+      "section": "Abdomen",
+      "label": "Inspects the abdomen",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "abd_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-47-bowel-sounds",
+      "fcmId": 47,
+      "section": "Abdomen",
+      "label": "Auscultates bowel sounds in all four quadrants",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "bowel_sounds",
+        "regions": [
+          "abd_ruq",
+          "abd_luq",
+          "abd_rlq",
+          "abd_llq"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "abd-order",
+      "section": "Abdomen",
+      "label": "Technique: auscultates before palpating",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "before": [
+          "maneuver:bowel_sounds",
+          "maneuver:abd_light_palpation"
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-48-bruits",
+      "fcmId": 48,
+      "section": "Abdomen",
+      "label": "Auscultates for abdominal bruits",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "abd_bruits"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-49-light-palpation",
+      "fcmId": 49,
+      "section": "Abdomen",
+      "label": "Light palpation, all quadrants",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "abd_light_palpation",
+        "regions": [
+          "abd_ruq",
+          "abd_luq",
+          "abd_rlq",
+          "abd_llq"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-49-deep-palpation",
+      "fcmId": 49,
+      "section": "Abdomen",
+      "label": "Deep palpation, all quadrants",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "abd_deep_palpation",
+        "regions": [
+          "abd_ruq",
+          "abd_luq",
+          "abd_rlq",
+          "abd_llq"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-50-murphy",
+      "fcmId": 50,
+      "section": "Abdomen",
+      "label": "Murphy's sign",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "murphys_sign"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-51-mcburney",
+      "fcmId": 51,
+      "section": "Abdomen",
+      "label": "McBurney point tenderness",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "mcburney_point"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-52-cva",
+      "fcmId": 52,
+      "section": "Abdomen",
+      "label": "CVA tenderness, both sides",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "cva_tenderness",
+        "regions": [
+          "cva_right",
+          "cva_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-53-liver",
+      "fcmId": 53,
+      "section": "Abdomen",
+      "label": "Palpates the liver edge",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "liver_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-54-spleen",
+      "fcmId": 54,
+      "section": "Abdomen",
+      "label": "Palpates for the spleen",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "spleen_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-55-aorta",
+      "fcmId": 55,
+      "section": "Abdomen",
+      "label": "Palpates the abdominal aorta",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "aorta_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-56-orientation",
+      "fcmId": 56,
+      "section": "Neurological",
+      "label": "Assesses orientation",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "orientation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-57-cn-i-smell",
+      "fcmId": 57,
+      "section": "Neurological",
+      "label": "CN I (smell), when indicated",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "cn_i_smell"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-58-cn-ii-acuity",
+      "fcmId": 58,
+      "section": "Neurological",
+      "label": "CN II (visual acuity)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "cn_ii_acuity"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-59-cn-iii-iv-vi-eom",
+      "fcmId": 59,
+      "section": "Neurological",
+      "label": "CN III, IV, VI (eye movements)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "cn_iii_iv_vi_eom"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-60-cn-v-trigeminal",
+      "fcmId": 60,
+      "section": "Neurological",
+      "label": "CN V (facial sensation / jaw)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "cn_v_trigeminal"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-61-cn-vii-facial",
+      "fcmId": 61,
+      "section": "Neurological",
+      "label": "CN VII (facial movement)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "cn_vii_facial"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-62-cn-ix-x-palate",
+      "fcmId": 62,
+      "section": "Neurological",
+      "label": "CN IX, X (palate / gag)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "cn_ix_x_palate"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-63-cn-xii-tongue",
+      "fcmId": 63,
+      "section": "Neurological",
+      "label": "CN XII (tongue)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "cn_xii_tongue"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-64-cn-xi-shrug",
+      "fcmId": 64,
+      "section": "Neurological",
+      "label": "CN XI (shoulder shrug)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "cn_xi_shrug"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-65-cn-viii-hearing",
+      "fcmId": 65,
+      "section": "Neurological",
+      "label": "CN VIII (hearing)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "cn_viii_hearing"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-66-motor-tone",
+      "fcmId": 66,
+      "section": "Neurological",
+      "label": "Assesses tone",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "motor_tone"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-67-strength-c5-shoulder-abduction",
+      "fcmId": 67,
+      "section": "Neurological",
+      "label": "Strength C5: shoulder abduction",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "strength_c5_shoulder_abduction"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-68-strength-c5-6-elbow-flexion",
+      "fcmId": 68,
+      "section": "Neurological",
+      "label": "Strength C5–6: elbow flexion",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "strength_c5_6_elbow_flexion"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-69-strength-c5-7-elbow-extension",
+      "fcmId": 69,
+      "section": "Neurological",
+      "label": "Strength C5–7: elbow extension",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "strength_c5_7_elbow_extension"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-70-strength-c6-8-wrist-extension",
+      "fcmId": 70,
+      "section": "Neurological",
+      "label": "Strength C6–8: wrist extension",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "strength_c6_8_wrist_extension"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-71-strength-c8-t1-finger-abduction",
+      "fcmId": 71,
+      "section": "Neurological",
+      "label": "Strength C8–T1: finger abduction",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "strength_c8_t1_finger_abduction"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-72-strength-c7-t1-grip",
+      "fcmId": 72,
+      "section": "Neurological",
+      "label": "Strength C7–T1: grip",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "strength_c7_t1_grip"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-73-strength-l2-4-hip-flexion",
+      "fcmId": 73,
+      "section": "Neurological",
+      "label": "Strength L2–4: hip flexion",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "strength_l2_4_hip_flexion"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-74-strength-l2-4-knee-extension",
+      "fcmId": 74,
+      "section": "Neurological",
+      "label": "Strength L2–4: knee extension",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "strength_l2_4_knee_extension"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-75-strength-l4-s2-knee-flexion",
+      "fcmId": 75,
+      "section": "Neurological",
+      "label": "Strength L4–S2: knee flexion",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "strength_l4_s2_knee_flexion"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-76-strength-l4-s1-ankle",
+      "fcmId": 76,
+      "section": "Neurological",
+      "label": "Strength L4–S1: ankle dorsi/plantar flexion",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "strength_l4_s1_ankle"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-77-sensation-light-touch",
+      "fcmId": 77,
+      "section": "Neurological",
+      "label": "Sensation: light touch",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "sensation_light_touch"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-78-sensation-pin-prick",
+      "fcmId": 78,
+      "section": "Neurological",
+      "label": "Sensation: pin prick",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "sensation_pin_prick"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-79-sensation-proprioception",
+      "fcmId": 79,
+      "section": "Neurological",
+      "label": "Sensation: proprioception",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "sensation_proprioception"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-80-sensation-vibration",
+      "fcmId": 80,
+      "section": "Neurological",
+      "label": "Sensation: vibration",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "sensation_vibration"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-81-reflex-biceps",
+      "fcmId": 81,
+      "section": "Neurological",
+      "label": "Reflex: biceps",
+      "weight": 0.2,
+      "scoring": "auto",
+      "rule": {
+        "performed": "reflex_biceps"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-81-reflex-triceps",
+      "fcmId": 81,
+      "section": "Neurological",
+      "label": "Reflex: triceps",
+      "weight": 0.2,
+      "scoring": "auto",
+      "rule": {
+        "performed": "reflex_triceps"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-81-reflex-brachioradialis",
+      "fcmId": 81,
+      "section": "Neurological",
+      "label": "Reflex: brachioradialis",
+      "weight": 0.2,
+      "scoring": "auto",
+      "rule": {
+        "performed": "reflex_brachioradialis"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-81-reflex-patellar",
+      "fcmId": 81,
+      "section": "Neurological",
+      "label": "Reflex: patellar",
+      "weight": 0.2,
+      "scoring": "auto",
+      "rule": {
+        "performed": "reflex_patellar"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-81-reflex-achilles",
+      "fcmId": 81,
+      "section": "Neurological",
+      "label": "Reflex: achilles",
+      "weight": 0.2,
+      "scoring": "auto",
+      "rule": {
+        "performed": "reflex_achilles"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-82-babinski",
+      "fcmId": 82,
+      "section": "Neurological",
+      "label": "Plantar response (Babinski)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "babinski"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-83-finger-nose-finger",
+      "fcmId": 83,
+      "section": "Neurological",
+      "label": "Finger–nose–finger",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "finger_nose_finger"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-84-heel-knee-shin",
+      "fcmId": 84,
+      "section": "Neurological",
+      "label": "Heel–knee–shin",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "heel_knee_shin"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-85-romberg",
+      "fcmId": 85,
+      "section": "Neurological",
+      "label": "Romberg test",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "romberg"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-86-gait",
+      "fcmId": 86,
+      "section": "Neurological",
+      "label": "Observes gait",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "gait"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-87-nuchal-rigidity",
+      "fcmId": 87,
+      "section": "Neurological",
+      "label": "Meningeal signs / neck stiffness",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "nuchal_rigidity"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-88-back-inspection",
+      "fcmId": 88,
+      "section": "Musculoskeletal",
+      "label": "Back: inspection",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "back_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-89-back-palpation",
+      "fcmId": 89,
+      "section": "Musculoskeletal",
+      "label": "Back: palpation",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "back_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-90-back-rom",
+      "fcmId": 90,
+      "section": "Musculoskeletal",
+      "label": "Back: range of motion",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "back_rom"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-91-straight-leg-raise",
+      "fcmId": 91,
+      "section": "Musculoskeletal",
+      "label": "Straight leg raise",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "straight_leg_raise"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-92-faber-test",
+      "fcmId": 92,
+      "section": "Musculoskeletal",
+      "label": "FABER test",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "faber_test"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-93-shoulder-inspection",
+      "fcmId": 93,
+      "section": "Musculoskeletal",
+      "label": "Shoulder: inspection",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "shoulder_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-94-shoulder-palpation",
+      "fcmId": 94,
+      "section": "Musculoskeletal",
+      "label": "Shoulder: palpation",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "shoulder_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-95-shoulder-rom",
+      "fcmId": 95,
+      "section": "Musculoskeletal",
+      "label": "Shoulder: range of motion",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "shoulder_rom"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-96-shoulder-hawkins",
+      "fcmId": 96,
+      "section": "Musculoskeletal",
+      "label": "Hawkins test",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "shoulder_hawkins"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-97-shoulder-neer",
+      "fcmId": 97,
+      "section": "Musculoskeletal",
+      "label": "Neer test",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "shoulder_neer"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-98-shoulder-empty-can",
+      "fcmId": 98,
+      "section": "Musculoskeletal",
+      "label": "Empty can test",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "shoulder_empty_can"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-99-shoulder-infraspinatus",
+      "fcmId": 99,
+      "section": "Musculoskeletal",
+      "label": "Infraspinatus test",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "shoulder_infraspinatus"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-100-elbow-inspection",
+      "fcmId": 100,
+      "section": "Musculoskeletal",
+      "label": "Elbow: inspection",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "elbow_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-101-elbow-palpation",
+      "fcmId": 101,
+      "section": "Musculoskeletal",
+      "label": "Elbow: palpation",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "elbow_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-102-elbow-rom",
+      "fcmId": 102,
+      "section": "Musculoskeletal",
+      "label": "Elbow: range of motion",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "elbow_rom"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-103-wrist-hand-inspection",
+      "fcmId": 103,
+      "section": "Musculoskeletal",
+      "label": "Wrist/hand: inspection",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "wrist_hand_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-104-wrist-hand-palpation",
+      "fcmId": 104,
+      "section": "Musculoskeletal",
+      "label": "Wrist/hand: palpation",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "wrist_hand_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-105-wrist-hand-rom",
+      "fcmId": 105,
+      "section": "Musculoskeletal",
+      "label": "Wrist/hand: range of motion",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "wrist_hand_rom"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-106-rise-from-chair",
+      "fcmId": 106,
+      "section": "Musculoskeletal",
+      "label": "Rise from chair (proximal hip strength)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "rise_from_chair"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-107-lower-limb-standing-inspection",
+      "fcmId": 107,
+      "section": "Musculoskeletal",
+      "label": "Standing inspection of lower limbs",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "lower_limb_standing_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-108-hip-palpation",
+      "fcmId": 108,
+      "section": "Musculoskeletal",
+      "label": "Hip: palpation",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "hip_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-109-hip-extension",
+      "fcmId": 109,
+      "section": "Musculoskeletal",
+      "label": "Hip extension",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "hip_extension"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-110-hip-flexion",
+      "fcmId": 110,
+      "section": "Musculoskeletal",
+      "label": "Hip flexion",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "hip_flexion"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-111-hip-rotation",
+      "fcmId": 111,
+      "section": "Musculoskeletal",
+      "label": "Hip internal/external rotation",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "hip_rotation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-112-hip-abduction-adduction",
+      "fcmId": 112,
+      "section": "Musculoskeletal",
+      "label": "Hip abduction/adduction",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "hip_abduction_adduction"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-113-knee-inspection",
+      "fcmId": 113,
+      "section": "Musculoskeletal",
+      "label": "Knee: inspection",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "knee_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-114-knee-palpation",
+      "fcmId": 114,
+      "section": "Musculoskeletal",
+      "label": "Knee: palpation",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "knee_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-115-knee-rom",
+      "fcmId": 115,
+      "section": "Musculoskeletal",
+      "label": "Knee: range of motion",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "knee_rom"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-116-knee-varus-valgus",
+      "fcmId": 116,
+      "section": "Musculoskeletal",
+      "label": "Knee: varus/valgus stress",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "knee_varus_valgus"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-117-knee-drawer",
+      "fcmId": 117,
+      "section": "Musculoskeletal",
+      "label": "Knee: drawer test",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "knee_drawer"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-118-ankle-foot-inspection",
+      "fcmId": 118,
+      "section": "Musculoskeletal",
+      "label": "Ankle/foot: inspection",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "ankle_foot_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-119-ankle-foot-palpation",
+      "fcmId": 119,
+      "section": "Musculoskeletal",
+      "label": "Ankle/foot: palpation",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "ankle_foot_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-120-ankle-foot-rom",
+      "fcmId": 120,
+      "section": "Musculoskeletal",
+      "label": "Ankle/foot: range of motion",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "ankle_foot_rom"
+      },
+      "sourceText": ""
+    }
+  ]
+}

@@ -1,0 +1,819 @@
+{
+  "system": "neuro",
+  "maneuvers": [
+    {
+      "id": "orientation",
+      "fcmId": 56,
+      "label": "Assess orientation",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_mental_status"
+      ],
+      "normalFinding": {
+        "default": "Alert and oriented to person, place, time and situation."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient their name.",
+          "Ask where they are and what the date is.",
+          "Ask why they are here today."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "cn_i_smell",
+      "fcmId": 57,
+      "label": "Test smell (CN I)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_cranial_nerves",
+        "nose"
+      ],
+      "normalFinding": {
+        "default": "Smell intact to a familiar odour in each nostril."
+      },
+      "demo": {
+        "steps": [
+          "Only test when indicated.",
+          "Occlude one nostril and, with the eyes closed, ask the patient to name a familiar scent.",
+          "Repeat on the other side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "cn_ii_acuity",
+      "fcmId": 58,
+      "label": "Assess visual acuity (CN II)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_cranial_nerves",
+        "eye_right",
+        "eye_left"
+      ],
+      "normalFinding": {
+        "default": "Visual acuity grossly intact in each eye."
+      },
+      "demo": {
+        "steps": [
+          "Have the patient cover one eye.",
+          "Ask them to read a line of text or a wall chart.",
+          "Repeat with the other eye."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "cn_iii_iv_vi_eom",
+      "fcmId": 59,
+      "label": "Test eye movements (CN III, IV, VI)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_cranial_nerves",
+        "eye_right",
+        "eye_left"
+      ],
+      "normalFinding": {
+        "default": "Extraocular movements full in all directions without diplopia or nystagmus."
+      },
+      "demo": {
+        "steps": [
+          "Stand in front of the patient and ask them to keep the head still.",
+          "Have them follow your finger in a broad H shape with the eyes only.",
+          "Ask about double vision and watch for nystagmus."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "cn_v_trigeminal",
+      "fcmId": 60,
+      "label": "Test facial sensation (CN V)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_cranial_nerves",
+        "face"
+      ],
+      "normalFinding": {
+        "default": "Facial sensation intact and symmetric in all three trigeminal divisions."
+      },
+      "demo": {
+        "steps": [
+          "Lightly touch the forehead, cheek and jaw on both sides together.",
+          "Ask whether the patient can feel it and whether both sides feel the same."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "cn_vii_facial",
+      "fcmId": 61,
+      "label": "Test facial movement (CN VII)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_cranial_nerves",
+        "face"
+      ],
+      "normalFinding": {
+        "default": "Face symmetric at rest and with eyebrow raise, cheek puff and smile."
+      },
+      "demo": {
+        "steps": [
+          "Look at the face at rest for asymmetry.",
+          "Ask the patient to raise the eyebrows, puff out the cheeks and smile.",
+          "Compare the two sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "cn_ix_x_palate",
+      "fcmId": 62,
+      "label": "Test palate elevation (CN IX, X)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_cranial_nerves",
+        "mouth"
+      ],
+      "normalFinding": {
+        "default": "Palate elevates symmetrically; uvula midline."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to open wide and say 'ah'.",
+          "Watch the soft palate rise and check whether the uvula stays central."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "cn_xii_tongue",
+      "fcmId": 63,
+      "label": "Test tongue protrusion (CN XII)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_cranial_nerves",
+        "mouth"
+      ],
+      "normalFinding": {
+        "default": "Tongue protrudes in the midline without deviation, wasting or fasciculations."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to stick the tongue straight out.",
+          "Look for deviation to either side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "cn_xi_shrug",
+      "fcmId": 64,
+      "label": "Test shoulder shrug (CN XI)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_cranial_nerves",
+        "shoulder_right",
+        "shoulder_left"
+      ],
+      "normalFinding": {
+        "default": "Shoulder shrug strong and symmetric against resistance."
+      },
+      "demo": {
+        "steps": [
+          "Rest your hands on top of the patient's shoulders.",
+          "Ask them to shrug up against your pressure and compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "cn_viii_hearing",
+      "fcmId": 65,
+      "label": "Test hearing by finger rub (CN VIII)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_cranial_nerves",
+        "ear_right",
+        "ear_left"
+      ],
+      "normalFinding": {
+        "default": "Hearing grossly intact to finger rub bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Rub your fingers together about an arm's length from one side of the head.",
+          "Bring them slowly closer and ask the patient to say when the sound is heard.",
+          "Repeat on the other side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "motor_tone",
+      "fcmId": 66,
+      "label": "Assess muscle tone",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_motor_upper",
+        "neuro_motor_lower"
+      ],
+      "normalFinding": {
+        "default": "Normal tone in all four limbs without rigidity, spasticity or cogwheeling."
+      },
+      "demo": {
+        "steps": [
+          "Hold the patient's hand like a handshake and ask them to relax.",
+          "Turn the forearm palm up and palm down, slowly then faster, and bend and straighten the elbow.",
+          "Feel for any change in resistance; distract the patient with a task in the other hand if needed."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "strength_c5_shoulder_abduction",
+      "fcmId": 67,
+      "label": "Strength: shoulder abduction (C5)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_motor_upper",
+        "shoulder_right",
+        "shoulder_left"
+      ],
+      "normalFinding": {
+        "default": "Shoulder abduction 5/5 bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to lift the elbows out to the sides with fists in front of the chest.",
+          "Push down on both upper arms while they resist.",
+          "Compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "strength_c5_6_elbow_flexion",
+      "fcmId": 68,
+      "label": "Strength: elbow flexion (C5-6)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_motor_upper",
+        "elbow_right",
+        "elbow_left"
+      ],
+      "normalFinding": {
+        "default": "Elbow flexion 5/5 bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Steady the patient's elbow with one hand.",
+          "Ask them to pull the forearm toward the shoulder against your other hand.",
+          "Compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "strength_c5_7_elbow_extension",
+      "fcmId": 69,
+      "label": "Strength: elbow extension (C5-7)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_motor_upper",
+        "elbow_right",
+        "elbow_left"
+      ],
+      "normalFinding": {
+        "default": "Elbow extension 5/5 bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Steady the patient's elbow with one hand.",
+          "Ask them to push the forearm away against your other hand.",
+          "Compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "strength_c6_8_wrist_extension",
+      "fcmId": 70,
+      "label": "Strength: wrist extension (C6-8)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_motor_upper",
+        "wrist_right",
+        "wrist_left"
+      ],
+      "normalFinding": {
+        "default": "Wrist extension 5/5 bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to cock both wrists back with fists closed.",
+          "Try to push the hands down while they resist.",
+          "Compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "strength_c8_t1_finger_abduction",
+      "fcmId": 71,
+      "label": "Strength: finger abduction (C8-T1)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_motor_upper",
+        "hand_right",
+        "hand_left"
+      ],
+      "normalFinding": {
+        "default": "Finger abduction 5/5 bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to spread the fingers wide.",
+          "Try to squeeze the fingers together while they resist.",
+          "Compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "strength_c7_t1_grip",
+      "fcmId": 72,
+      "label": "Strength: grip (C7-T1)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_motor_upper",
+        "hand_right",
+        "hand_left"
+      ],
+      "normalFinding": {
+        "default": "Grip strength 5/5 and symmetric."
+      },
+      "demo": {
+        "steps": [
+          "Offer two fingers to each of the patient's hands.",
+          "Ask them to squeeze as hard as they can.",
+          "Compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "strength_l2_4_hip_flexion",
+      "fcmId": 73,
+      "label": "Strength: hip flexion (L2-4)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_motor_lower",
+        "hip_right",
+        "hip_left"
+      ],
+      "normalFinding": {
+        "default": "Hip flexion 5/5 bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Ask the seated patient to lift the thigh off the table.",
+          "Press down on the thigh just above the knee while they resist.",
+          "Compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "strength_l2_4_knee_extension",
+      "fcmId": 74,
+      "label": "Strength: knee extension (L2-4)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_motor_lower",
+        "knee_right",
+        "knee_left"
+      ],
+      "normalFinding": {
+        "default": "Knee extension 5/5 bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Steady the thigh above the knee.",
+          "Ask the patient to straighten the leg against your hand on the shin.",
+          "Compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "strength_l4_s2_knee_flexion",
+      "fcmId": 75,
+      "label": "Strength: knee flexion (L4-S2)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_motor_lower",
+        "knee_right",
+        "knee_left"
+      ],
+      "normalFinding": {
+        "default": "Knee flexion 5/5 bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Hold behind the patient's ankle.",
+          "Ask them to bend the knee, pulling the heel back against your hand.",
+          "Compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "strength_l4_s1_ankle",
+      "fcmId": 76,
+      "label": "Strength: ankle dorsiflexion and plantarflexion (L4-S1)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_motor_lower",
+        "ankle_right",
+        "ankle_left",
+        "foot_right",
+        "foot_left"
+      ],
+      "normalFinding": {
+        "default": "Ankle dorsiflexion and plantarflexion 5/5 bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to pull the toes up toward the ceiling against your hand.",
+          "Then ask them to push the foot down as if on a pedal against resistance.",
+          "Compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "sensation_light_touch",
+      "fcmId": 77,
+      "label": "Test light touch sensation",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_sensory"
+      ],
+      "normalFinding": {
+        "default": "Light touch intact and symmetric in all four limbs."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to close the eyes.",
+          "Touch the skin lightly at the wrists and shins on both sides.",
+          "Ask whether they feel it and whether both sides feel alike."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "sensation_pin_prick",
+      "fcmId": 78,
+      "label": "Test pin prick sensation",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_sensory"
+      ],
+      "normalFinding": {
+        "default": "Pin prick sensation intact and symmetric in all four limbs."
+      },
+      "demo": {
+        "steps": [
+          "With the patient's eyes closed, touch the skin with a clean sharp point.",
+          "Test both arms and both legs, comparing sides.",
+          "Ask whether it feels sharp and equal on each side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "sensation_proprioception",
+      "fcmId": 79,
+      "label": "Test joint position sense",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_sensory"
+      ],
+      "normalFinding": {
+        "default": "Joint position sense intact at the fingers and great toes bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Hold the sides of a finger or great toe and show the patient what up and down feel like.",
+          "With the eyes closed, move the digit a little and ask which way it went.",
+          "Test both hands and feet; go more proximal if they get it wrong."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "sensation_vibration",
+      "fcmId": 80,
+      "label": "Test vibration sense",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_sensory"
+      ],
+      "normalFinding": {
+        "default": "Vibration sense intact at the fingers and great toes bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Set a low-pitched tuning fork vibrating.",
+          "Place it on a bony point of a finger or great toe and ask the patient to say when it stops.",
+          "Test all four limbs; move proximally if sense is reduced."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "reflex_biceps",
+      "fcmId": 81,
+      "label": "Biceps reflex",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_reflexes",
+        "elbow_right",
+        "elbow_left"
+      ],
+      "normalFinding": {
+        "default": "Biceps reflex 2+ and symmetric bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Rest the patient's relaxed arm with the elbow partly bent.",
+          "Place your thumb over the biceps tendon and tap it with the hammer.",
+          "Watch for elbow flexion and compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "reflex_triceps",
+      "fcmId": 81,
+      "label": "Triceps reflex",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_reflexes",
+        "elbow_right",
+        "elbow_left"
+      ],
+      "normalFinding": {
+        "default": "Triceps reflex 2+ and symmetric bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Support the relaxed arm so the forearm hangs down.",
+          "Tap the triceps tendon just above the elbow.",
+          "Watch for elbow extension and compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "reflex_brachioradialis",
+      "fcmId": 81,
+      "label": "Brachioradialis reflex",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_reflexes",
+        "wrist_right",
+        "wrist_left"
+      ],
+      "normalFinding": {
+        "default": "Brachioradialis reflex 2+ and symmetric bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Rest the forearm on the patient's lap, thumb up.",
+          "Tap the radial side of the forearm a few centimetres above the wrist.",
+          "Watch for elbow flexion and forearm supination; compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "reflex_patellar",
+      "fcmId": 81,
+      "label": "Patellar reflex",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_reflexes",
+        "knee_right",
+        "knee_left"
+      ],
+      "normalFinding": {
+        "default": "Patellar reflex 2+ and symmetric bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Have the patient sit with legs dangling.",
+          "Tap the patellar tendon just below the kneecap.",
+          "Watch for knee extension and compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "reflex_achilles",
+      "fcmId": 81,
+      "label": "Achilles reflex",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_reflexes",
+        "ankle_right",
+        "ankle_left"
+      ],
+      "normalFinding": {
+        "default": "Achilles reflex 2+ and symmetric bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Gently dorsiflex the relaxed foot.",
+          "Tap the Achilles tendon above the heel.",
+          "Watch for plantarflexion and compare sides."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "babinski",
+      "fcmId": 82,
+      "label": "Plantar response (Babinski)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_reflexes",
+        "foot_right",
+        "foot_left"
+      ],
+      "normalFinding": {
+        "default": "Plantar responses flexor bilaterally (Babinski negative)."
+      },
+      "demo": {
+        "steps": [
+          "Use a blunt point such as a key or hammer handle.",
+          "Stroke the outer sole from heel toward the little toe, then across the ball of the foot.",
+          "Watch the big toe direction; repeat on the other foot."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "finger_nose_finger",
+      "fcmId": 83,
+      "label": "Finger-nose-finger test",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_cerebellar"
+      ],
+      "normalFinding": {
+        "default": "Finger-to-nose testing accurate and smooth bilaterally without dysmetria or intention tremor."
+      },
+      "demo": {
+        "steps": [
+          "Hold your finger out at the edge of the patient's reach.",
+          "Ask them to touch your finger and then their own nose, back and forth.",
+          "Move your finger to new spots; repeat with the other hand."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "heel_knee_shin",
+      "fcmId": 84,
+      "label": "Heel-knee-shin test",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_cerebellar"
+      ],
+      "requiresPositioning": [
+        "supine",
+        "seated"
+      ],
+      "normalFinding": {
+        "default": "Heel-to-shin testing smooth and accurate bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to rest a heel just below the other knee.",
+          "Have them run the heel down the shin to the ankle.",
+          "Repeat with the other leg."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "romberg",
+      "fcmId": 85,
+      "label": "Romberg test",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_gait"
+      ],
+      "requiresPositioning": [
+        "standing"
+      ],
+      "normalFinding": {
+        "default": "Romberg negative; stands steadily with feet together and eyes closed."
+      },
+      "demo": {
+        "steps": [
+          "Have the patient stand with feet together and arms at the sides.",
+          "Ask them to close the eyes and stay still for up to a minute.",
+          "Stand close enough to catch them if they sway or fall."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "gait",
+      "fcmId": 86,
+      "label": "Observe gait",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_gait"
+      ],
+      "requiresPositioning": [
+        "standing"
+      ],
+      "normalFinding": {
+        "default": "Gait steady with normal stride, base and arm swing; tandem, heel and toe walking intact."
+      },
+      "demo": {
+        "steps": [
+          "Watch the patient walk away, turn and come back.",
+          "Then ask for heel-to-toe walking in a line.",
+          "Finally ask them to walk on the heels and then on the toes."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "nuchal_rigidity",
+      "fcmId": 87,
+      "label": "Assess for nuchal rigidity",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_meningeal",
+        "spine_cervical"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Neck supple; no nuchal rigidity."
+      },
+      "demo": {
+        "steps": [
+          "With the patient lying flat, cradle the head in your hands.",
+          "Gently bend the neck to bring the chin toward the chest.",
+          "Feel for resistance or pain."
+        ]
+      },
+      "sourceText": ""
+    }
+  ]
+}

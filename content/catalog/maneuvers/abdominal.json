@@ -1,0 +1,287 @@
+{
+  "system": "abdominal",
+  "maneuvers": [
+    {
+      "id": "abd_inspection",
+      "fcmId": 46,
+      "label": "Inspect the abdomen",
+      "system": "abdominal",
+      "technique": "inspect",
+      "allowedRegions": [
+        "abd_ruq",
+        "abd_luq",
+        "abd_rlq",
+        "abd_llq",
+        "abd_epigastric"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Abdomen flat and symmetric without scars, distension, discoloration or visible pulsations."
+      },
+      "demo": {
+        "steps": [
+          "Expose the abdomen from the lower chest to the pelvis with the patient lying flat.",
+          "Look at contour and symmetry, including from the side at abdominal level.",
+          "Note any scars, skin changes or visible masses."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "bowel_sounds",
+      "fcmId": 47,
+      "label": "Auscultate bowel sounds",
+      "system": "abdominal",
+      "technique": "auscultate",
+      "allowedRegions": [
+        "abd_ruq",
+        "abd_luq",
+        "abd_rlq",
+        "abd_llq",
+        "abd_epigastric"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Normoactive bowel sounds in all four quadrants."
+      },
+      "demo": {
+        "steps": [
+          "Place the stethoscope diaphragm lightly on the abdomen.",
+          "Listen for a short while in every quadrant.",
+          "Note the presence and character of bowel sounds."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "abd_bruits",
+      "fcmId": 48,
+      "label": "Auscultate for abdominal bruits",
+      "system": "abdominal",
+      "technique": "auscultate",
+      "allowedRegions": [
+        "abd_ruq",
+        "abd_luq",
+        "abd_rlq",
+        "abd_llq",
+        "abd_epigastric"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "No aortic, renal or iliac bruits."
+      },
+      "demo": {
+        "steps": [
+          "Listen with the stethoscope over the aorta just above the umbilicus.",
+          "Listen over each renal artery, slightly above and to either side of the umbilicus.",
+          "Listen over each iliac artery below the umbilicus."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "abd_light_palpation",
+      "fcmId": 49,
+      "label": "Light palpation of the abdomen",
+      "system": "abdominal",
+      "technique": "palpate",
+      "allowedRegions": [
+        "abd_ruq",
+        "abd_luq",
+        "abd_rlq",
+        "abd_llq",
+        "abd_epigastric"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Abdomen soft and non-tender without guarding or rigidity."
+      },
+      "demo": {
+        "steps": [
+          "Watch the patient's face throughout and leave any painful area until last.",
+          "With the flat of your fingers, press gently in each quadrant using a rocking motion."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "abd_deep_palpation",
+      "fcmId": 49,
+      "label": "Deep palpation of the abdomen",
+      "system": "abdominal",
+      "technique": "palpate",
+      "allowedRegions": [
+        "abd_ruq",
+        "abd_luq",
+        "abd_rlq",
+        "abd_llq",
+        "abd_epigastric"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "No masses or deep tenderness in any quadrant."
+      },
+      "demo": {
+        "steps": [
+          "After light palpation, press more firmly in each quadrant.",
+          "Feel for masses or deep tenderness, keeping an eye on the patient's face."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "murphys_sign",
+      "fcmId": 50,
+      "label": "Murphy's sign",
+      "system": "abdominal",
+      "technique": "special",
+      "allowedRegions": [
+        "abd_ruq"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Murphy's sign negative; inspiration not interrupted by pain."
+      },
+      "demo": {
+        "steps": [
+          "Place your fingers below the right costal margin at the midclavicular line.",
+          "Ask the patient to breathe in slowly while you press in and up under the ribs.",
+          "Watch for the breath being stopped short because of pain."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "mcburney_point",
+      "fcmId": 51,
+      "label": "Palpate McBurney's point",
+      "system": "abdominal",
+      "technique": "palpate",
+      "allowedRegions": [
+        "abd_rlq"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "No tenderness at McBurney's point."
+      },
+      "demo": {
+        "steps": [
+          "Find the point about one third of the way from the right anterior superior iliac spine to the umbilicus.",
+          "Press firmly there and ask about pain."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "cva_tenderness",
+      "fcmId": 52,
+      "label": "Costovertebral angle tenderness",
+      "system": "abdominal",
+      "technique": "percuss",
+      "allowedRegions": [
+        "cva_right",
+        "cva_left"
+      ],
+      "requiresPositioning": [
+        "seated"
+      ],
+      "normalFinding": {
+        "default": "No costovertebral angle tenderness bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Have the patient sit up and lay one palm over the angle between the lowest rib and the spine.",
+          "Strike the back of that hand with the ulnar side of your other fist.",
+          "Ask about pain and repeat on the other side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "liver_palpation",
+      "fcmId": 53,
+      "label": "Palpate the liver edge",
+      "system": "abdominal",
+      "technique": "palpate",
+      "allowedRegions": [
+        "abd_ruq"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Liver edge not palpable or felt as a smooth, soft, non-tender edge at the right costal margin."
+      },
+      "demo": {
+        "steps": [
+          "Start low in the right lower quadrant at the midclavicular line.",
+          "Ask the patient to breathe in and feel for the edge striking your fingertips.",
+          "Move your hand up a little at a time until the edge or costal margin is reached."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "spleen_palpation",
+      "fcmId": 54,
+      "label": "Palpate the spleen",
+      "system": "abdominal",
+      "technique": "palpate",
+      "allowedRegions": [
+        "abd_luq"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Spleen not palpable."
+      },
+      "demo": {
+        "steps": [
+          "Stand on the patient's right and reach across to support the left lower ribs from behind.",
+          "With your right hand below the left costal margin, ask for a deep breath.",
+          "Feel for a spleen tip moving down onto your fingers."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "aorta_palpation",
+      "fcmId": 55,
+      "label": "Palpate the abdominal aorta",
+      "system": "abdominal",
+      "technique": "palpate",
+      "allowedRegions": [
+        "abd_epigastric"
+      ],
+      "requiresPositioning": [
+        "supine"
+      ],
+      "normalFinding": {
+        "default": "Aortic pulsation palpable in the epigastrium, not expansile, of normal width."
+      },
+      "demo": {
+        "steps": [
+          "Stand on the patient's right and press firmly just left of midline in the upper abdomen.",
+          "Once you feel the pulse, place a hand on either side of it.",
+          "Judge the width and whether the pulsation pushes your hands apart."
+        ]
+      },
+      "sourceText": ""
+    }
+  ]
+}

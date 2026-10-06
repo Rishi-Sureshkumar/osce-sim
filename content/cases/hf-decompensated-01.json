@@ -1,0 +1,656 @@
+{
+  "id": "hf-decompensated-01",
+  "title": "Shortness of breath in a 68-year-old (ED)",
+  "mode": "encounter",
+  "patient": {
+    "name": "Harold Bennett",
+    "age": 68,
+    "sex": "male",
+    "pronouns": "he/him",
+    "chiefComplaint": "Worsening shortness of breath for two weeks",
+    "setting": "Emergency department, sitting upright on a stretcher",
+    "persona": {
+      "affect": "Tired, a little breathless, polite, worried but trying to make light of it",
+      "speakingStyle": "Short sentences; pauses to catch his breath after longer answers; plain everyday words, no medical jargon",
+      "worries": "Worried he will be admitted and miss his granddaughter’s birthday this weekend; quietly worried it is his heart again",
+      "background": "Retired city bus driver, married, enjoys fishing and his grandchildren"
+    }
+  },
+  "doorSign": {
+    "task": "Mr. Bennett, 68, presents with two weeks of worsening shortness of breath. Take a focused history, perform a focused cardiovascular and respiratory examination, then present your summary, differential diagnosis and initial plan.",
+    "timeLimitMinutes": 15
+  },
+  "vitals": {
+    "hr": 104,
+    "rr": 24,
+    "bpSystolic": 148,
+    "bpDiastolic": 92,
+    "tempC": 36.8,
+    "spo2": 89,
+    "spo2Context": "on room air"
+  },
+  "history": {
+    "openingStatement": "I just can’t catch my breath. It’s been getting worse for a couple of weeks.",
+    "facts": [
+      {
+        "id": "dyspnea-onset",
+        "topic": "Onset and course of breathlessness",
+        "answer": "It came on gradually about two weeks ago and has got steadily worse. The last three days have been the worst.",
+        "revealOnlyIfAsked": false,
+        "keywords": [
+          "start",
+          "began",
+          "when",
+          "how long",
+          "onset",
+          "course",
+          "worse"
+        ]
+      },
+      {
+        "id": "dyspnea-exertion",
+        "topic": "Exertional limit",
+        "answer": "Two weeks ago I could walk a few blocks. Now I get winded walking from the bedroom to the kitchen, or going up the 12 stairs at home.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "walk",
+          "stairs",
+          "how far",
+          "exert",
+          "activity",
+          "exercise",
+          "distance"
+        ]
+      },
+      {
+        "id": "orthopnea",
+        "topic": "Breathlessness lying flat",
+        "answer": "I can’t lie flat any more. I’ve been sleeping on three pillows, and last night I slept in my recliner.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "lie flat",
+          "lying",
+          "pillows",
+          "sleep",
+          "lay down",
+          "flat"
+        ]
+      },
+      {
+        "id": "pnd",
+        "topic": "Waking up breathless at night",
+        "answer": "Yes, a couple of times this week I woke up gasping and had to sit on the edge of the bed for a few minutes.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "wake",
+          "night",
+          "gasping",
+          "middle of the night",
+          "waking"
+        ]
+      },
+      {
+        "id": "swelling",
+        "topic": "Leg swelling",
+        "answer": "My ankles have been puffy for about a week, worse by the evening. My shoes are tight.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "swelling",
+          "swollen",
+          "ankle",
+          "legs",
+          "feet",
+          "shoes",
+          "puffy",
+          "edema"
+        ]
+      },
+      {
+        "id": "weight",
+        "topic": "Weight change",
+        "answer": "I’ve put on about 4 kilos — nine pounds — in the last two weeks, even though I’m not eating much.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "weight",
+          "kilos",
+          "pounds",
+          "heavier",
+          "gain"
+        ]
+      },
+      {
+        "id": "cough",
+        "topic": "Cough",
+        "answer": "A dry tickly cough, mostly at night when I lie down. Nothing coming up.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "cough",
+          "phlegm",
+          "sputum",
+          "mucus"
+        ]
+      },
+      {
+        "id": "abdomen",
+        "topic": "Abdominal fullness and appetite",
+        "answer": "My belly feels full and a bit sore on the right side, and I’ve not had much appetite.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "appetite",
+          "belly",
+          "stomach",
+          "abdomen",
+          "full",
+          "eating",
+          "nausea"
+        ]
+      },
+      {
+        "id": "fatigue",
+        "topic": "Fatigue",
+        "answer": "I’m wiped out all the time.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "tired",
+          "fatigue",
+          "energy",
+          "exhausted"
+        ]
+      },
+      {
+        "id": "nocturia",
+        "topic": "Night-time urination",
+        "answer": "I’m up two or three times a night to pass water.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "urin",
+          "pee",
+          "bladder",
+          "water works",
+          "bathroom"
+        ]
+      },
+      {
+        "id": "trigger-meds",
+        "topic": "Medication adherence",
+        "answer": "I ran out of my water pill about ten days ago and didn’t get it refilled — I hate being stuck near a bathroom when I’m out.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "water pill",
+          "furosemide",
+          "lasix",
+          "taking your",
+          "run out",
+          "ran out",
+          "missed",
+          "adherence",
+          "stopped"
+        ]
+      },
+      {
+        "id": "trigger-diet",
+        "topic": "Diet / salt",
+        "answer": "We had a lot of family over for my wife’s 70th — lots of takeout, ham, chips. More salt than I’m supposed to have.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "salt",
+          "diet",
+          "food",
+          "eating",
+          "takeout"
+        ]
+      },
+      {
+        "id": "pmh",
+        "topic": "Past medical history",
+        "answer": "I had a heart attack in 2019 — they put a stent in. Since then they’ve said my heart pumps weakly. I also have high blood pressure, type 2 diabetes and high cholesterol.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "medical conditions",
+          "medical problems",
+          "health problems",
+          "past medical",
+          "history",
+          "heart attack",
+          "diabetes",
+          "blood pressure",
+          "conditions"
+        ]
+      },
+      {
+        "id": "ef",
+        "topic": "What he was told about his heart",
+        "answer": "The heart doctor said it pumps at about 30 percent. I had a scan last spring.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "pump",
+          "ejection",
+          "echo",
+          "scan",
+          "weak heart",
+          "heart failure",
+          "cardiologist"
+        ]
+      },
+      {
+        "id": "psh",
+        "topic": "Past surgeries and procedures",
+        "answer": "The stent in 2019 through my wrist, and my appendix out when I was 20.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "surgery",
+          "surgeries",
+          "operation",
+          "procedure",
+          "stent",
+          "appendix"
+        ]
+      },
+      {
+        "id": "meds",
+        "topic": "Medications and doses",
+        "answer": "Furosemide 40 mg in the morning — the one I ran out of. Carvedilol 12.5 mg twice a day, lisinopril 10 mg once a day, spironolactone 25 mg, aspirin 81 mg, atorvastatin 80 mg at night, and metformin 1000 mg twice a day. No over-the-counter stuff except some ibuprofen for my knee last week.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "medication",
+          "medicine",
+          "pills",
+          "taking",
+          "dose",
+          "over the counter",
+          "supplements",
+          "ibuprofen",
+          "vitamins"
+        ]
+      },
+      {
+        "id": "allergies",
+        "topic": "Allergies",
+        "answer": "Penicillin gave me a rash all over as a kid. No food allergies.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "allerg",
+          "reaction"
+        ]
+      },
+      {
+        "id": "fh",
+        "topic": "Family history",
+        "answer": "My dad died of a heart attack at 62. My mom had a stroke and died at 80. I have one brother, he’s 71 and has diabetes.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "family",
+          "father",
+          "mother",
+          "dad",
+          "mom",
+          "brother",
+          "sister",
+          "siblings",
+          "parents"
+        ]
+      },
+      {
+        "id": "smoking",
+        "topic": "Smoking",
+        "answer": "I smoked a pack a day for 30 years and quit after the heart attack in 2019.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "smoke",
+          "cigarette",
+          "tobacco",
+          "vape"
+        ]
+      },
+      {
+        "id": "alcohol",
+        "topic": "Alcohol",
+        "answer": "A beer or two on the weekend. Not more.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "alcohol",
+          "drink",
+          "beer",
+          "wine"
+        ]
+      },
+      {
+        "id": "drugs",
+        "topic": "Recreational drugs",
+        "answer": "No, never.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "drugs",
+          "recreational",
+          "marijuana",
+          "cannabis",
+          "cocaine"
+        ]
+      },
+      {
+        "id": "occupation",
+        "topic": "Occupation",
+        "answer": "Retired. I drove city buses for 35 years.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "work",
+          "job",
+          "occupation",
+          "retired",
+          "do for a living"
+        ]
+      },
+      {
+        "id": "home",
+        "topic": "Who he lives with",
+        "answer": "With my wife, Carol. Our daughter lives ten minutes away.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "live with",
+          "home",
+          "wife",
+          "who is at home",
+          "married"
+        ]
+      },
+      {
+        "id": "meaning",
+        "topic": "What gives him joy",
+        "answer": "My grandkids, and fishing at the lake with my brother.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "enjoy",
+          "joy",
+          "meaning",
+          "hobbies",
+          "fun",
+          "like to do"
+        ]
+      },
+      {
+        "id": "sexual",
+        "topic": "Sexual history",
+        "answer": "Married forty-five years, just my wife. Not much going on lately with how tired I’ve been.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "sexual",
+          "partner",
+          "sex"
+        ]
+      },
+      {
+        "id": "travel",
+        "topic": "Travel",
+        "answer": "No trips. Haven’t been further than the grocery store in a month.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "travel",
+          "trip",
+          "flight",
+          "plane",
+          "been away",
+          "long drive"
+        ]
+      },
+      {
+        "id": "concerns",
+        "topic": "Patient concerns and expectations",
+        "answer": "I’m scared it’s my heart again. And I really want to be home for my granddaughter’s birthday on Saturday.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "worried",
+          "concern",
+          "scared",
+          "think is going on",
+          "expect",
+          "hoping"
+        ]
+      }
+    ],
+    "pertinentNegatives": [
+      {
+        "topic": "Chest pain / pressure",
+        "answer": "No chest pain or pressure. Not like the heart attack.",
+        "keywords": [
+          "chest pain",
+          "chest pressure",
+          "tightness",
+          "angina"
+        ]
+      },
+      {
+        "topic": "Fever / chills",
+        "answer": "No fevers or chills.",
+        "keywords": [
+          "fever",
+          "chills",
+          "temperature",
+          "sweats"
+        ]
+      },
+      {
+        "topic": "Productive cough / blood",
+        "answer": "Nothing coming up, and no blood.",
+        "keywords": [
+          "blood",
+          "hemoptysis",
+          "coughing up"
+        ]
+      },
+      {
+        "topic": "Palpitations / fainting",
+        "answer": "No racing heart that I’ve noticed, and I haven’t passed out.",
+        "keywords": [
+          "palpitation",
+          "racing",
+          "faint",
+          "pass out",
+          "dizzy",
+          "dizziness",
+          "lightheaded"
+        ]
+      },
+      {
+        "topic": "Calf pain / one-sided swelling",
+        "answer": "No, both legs are the same. No pain in my calves.",
+        "keywords": [
+          "calf",
+          "one leg",
+          "one side",
+          "clot"
+        ]
+      },
+      {
+        "topic": "Wheeze",
+        "answer": "No wheezing.",
+        "keywords": [
+          "wheez",
+          "whistl"
+        ]
+      },
+      {
+        "topic": "Recent illness / sick contacts",
+        "answer": "No colds, nobody sick at home.",
+        "keywords": [
+          "sick contacts",
+          "cold",
+          "flu",
+          "virus",
+          "infection"
+        ]
+      },
+      {
+        "topic": "Neurological symptoms",
+        "answer": "No weakness, numbness or trouble speaking.",
+        "keywords": [
+          "weakness",
+          "numb",
+          "tingling",
+          "speech",
+          "vision"
+        ]
+      },
+      {
+        "topic": "Urinary symptoms other than frequency at night",
+        "answer": "No burning or blood in the urine.",
+        "keywords": [
+          "burning",
+          "blood in",
+          "pain when"
+        ]
+      },
+      {
+        "topic": "Skin",
+        "answer": "No rashes.",
+        "keywords": [
+          "rash",
+          "skin",
+          "itch"
+        ]
+      },
+      {
+        "topic": "Mood",
+        "answer": "I’m a bit fed up, but not depressed.",
+        "keywords": [
+          "mood",
+          "depress",
+          "anxious",
+          "anxiety",
+          "stress"
+        ]
+      }
+    ],
+    "unknownPolicy": {
+      "negativeReply": "No, nothing like that.",
+      "unknownReply": "Hmm, I’m not sure. I haven’t noticed anything like that."
+    }
+  },
+  "abnormalFindings": {
+    "general_appearance": {
+      "default": "Older man sitting bolt upright, mildly breathless at rest, pausing mid-sentence to breathe; alert and oriented; looks tired."
+    },
+    "pulse_radial": {
+      "default": "Radial pulse {vitals.hr} beats/min, regular rhythm, low volume."
+    },
+    "respiratory_rate": {
+      "default": "Respiratory rate {vitals.rr} breaths/min, mildly laboured."
+    },
+    "jvp_inspection": {
+      "default": "JVP clearly elevated: venous column about 9 cm above the sternal angle at 30° (estimated RAP ~14 cmH2O), pulsating up to the angle of the jaw."
+    },
+    "hepatojugular_reflux": {
+      "default": "Positive: with sustained right upper quadrant pressure the JVP rises about 4 cm and stays up while pressure is held."
+    },
+    "precordial_inspection": {
+      "default": "Apical impulse visible lateral to the midclavicular line; no scars or deformity."
+    },
+    "pmi_palpation": {
+      "cardiac_mitral": "PMI displaced laterally to the 6th intercostal space at the anterior axillary line; diffuse (about 4 cm)."
+    },
+    "auscultate_heart_diaphragm": {
+      "cardiac_mitral": "Tachycardic, regular. Soft grade 2/6 holosystolic murmur at the apex radiating toward the axilla. A low-pitched extra sound after S2 is faintly audible.",
+      "default": "Tachycardic, regular rhythm; normal S1 and S2; no murmur at this area."
+    },
+    "auscultate_heart_bell": {
+      "cardiac_mitral": "Low-pitched S3 gallop at the apex, loudest with the patient rolled onto the left side.",
+      "cardiac_tricuspid": "Faint low-pitched extra sound after S2, better heard at the apex."
+    },
+    "peripheral_pulses": {
+      "foot_right": "Dorsalis pedis and posterior tibial pulses 1+, hard to feel through the edema.",
+      "foot_left": "Dorsalis pedis and posterior tibial pulses 1+, hard to feel through the edema."
+    },
+    "edema_assessment": {
+      "shin_right": "3+ pitting edema extending to mid-shin.",
+      "shin_left": "3+ pitting edema extending to mid-shin.",
+      "ankle_right": "3+ pitting edema; deep impression persists after pressure.",
+      "ankle_left": "3+ pitting edema; deep impression persists after pressure.",
+      "foot_right": "Pitting edema over the dorsum of the foot.",
+      "foot_left": "Pitting edema over the dorsum of the foot.",
+      "sacrum": "Trace sacral edema."
+    },
+    "chest_inspection": {
+      "default": "Mildly increased work of breathing with visible neck accessory muscle use; symmetric expansion; no scars."
+    },
+    "auscultate_lungs": {
+      "lung_post_rl": "Breath sounds reduced at the very base, with fine end-inspiratory crackles just above.",
+      "lung_post_ll": "Fine end-inspiratory crackles over the lower third of the lung field.",
+      "lung_lat_r": "Fine crackles at the lateral base.",
+      "lung_lat_l": "Fine crackles at the lateral base.",
+      "lung_ant_rl": "Scattered fine crackles at end inspiration.",
+      "lung_ant_ll": "Scattered fine crackles at end inspiration."
+    },
+    "chest_percussion": {
+      "lung_post_rl": "Dull to percussion over the lowest part of the right base.",
+      "lung_post_ll": "Slightly dull at the left base.",
+      "lung_lat_r": "Dull at the right lateral base."
+    },
+    "tactile_fremitus": {
+      "lung_post_rl": "Tactile fremitus reduced at the right base."
+    },
+    "vocal_resonance": {
+      "lung_post_rl": "Vocal resonance reduced at the right base; no egophony."
+    },
+    "abd_inspection": {
+      "default": "Mildly distended; no visible veins or bruising.",
+      "abd_rlq": "Small, well-healed oblique scar in the right lower quadrant."
+    },
+    "abd_light_palpation": {
+      "abd_ruq": "Mild tenderness in the right upper quadrant without guarding."
+    },
+    "liver_palpation": {
+      "abd_ruq": "Smooth, mildly tender liver edge palpable about 3 cm below the right costal margin."
+    },
+    "skin_inspection": {
+      "shin_right": "Shiny, taut skin over the swollen shin; no ulcers or erythema.",
+      "shin_left": "Shiny, taut skin over the swollen shin; no ulcers or erythema."
+    }
+  },
+  "expectedDifferential": [
+    {
+      "rank": 1,
+      "diagnosis": "Acute decompensated heart failure (HFrEF, ischaemic cardiomyopathy)",
+      "rationale": "Known EF ~30% after MI; orthopnea, PND, weight gain, bilateral pitting edema, raised JVP, positive HJR, displaced PMI, S3, bibasal crackles and right effusion. Precipitants: stopped furosemide, dietary salt load, recent NSAID."
+    },
+    {
+      "rank": 2,
+      "diagnosis": "Acute coronary syndrome as a precipitant",
+      "rationale": "Prior MI and multiple risk factors; must be excluded with ECG and troponin even without chest pain (silent ischaemia in diabetes)."
+    },
+    {
+      "rank": 3,
+      "diagnosis": "Community-acquired pneumonia",
+      "rationale": "Crackles and hypoxia, but afebrile, dry cough and bilateral findings with edema argue against."
+    },
+    {
+      "rank": 4,
+      "diagnosis": "Pulmonary embolism",
+      "rationale": "Tachycardia and hypoxia; less likely given symmetric edema, gradual course and clear volume overload."
+    },
+    {
+      "rank": 5,
+      "diagnosis": "COPD exacerbation",
+      "rationale": "30 pack-year history, but no wheeze or sputum and clear signs of fluid overload."
+    },
+    {
+      "rank": 6,
+      "diagnosis": "Other causes of fluid overload (renal failure, cirrhosis)",
+      "rationale": "Consider with labs; cardiac signs make these less likely."
+    }
+  ],
+  "markSheetIds": [
+    "history-communication",
+    "exam-fcm1",
+    "clinical-reasoning"
+  ],
+  "markSheetSections": {
+    "exam-fcm1": [
+      "Clinical courtesy",
+      "Vital signs",
+      "General appearance",
+      "Cardiovascular",
+      "Pulmonary"
+    ]
+  },
+  "synthetic": true,
+  "sourceNote": "Fully synthetic teaching case written by the team. Not based on any real patient."
+}

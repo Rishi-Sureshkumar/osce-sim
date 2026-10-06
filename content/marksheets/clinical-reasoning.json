@@ -1,0 +1,97 @@
+{
+  "id": "clinical-reasoning",
+  "title": "Clinical Reasoning & Presentation",
+  "kind": "history",
+  "sourceNote": "Case-agnostic reasoning items, graded against the case’s expectedDifferential. Written by the team, not from a school document.",
+  "items": [
+    {
+      "id": "submitted",
+      "section": "Clinical reasoning",
+      "label": "Submits a summary, differential and plan",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "submitted": "submit_ddx"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "summary-statement",
+      "section": "Clinical reasoning",
+      "label": "Summary statement synthesises key history and exam findings",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Judge ONLY the submitted summary. Full credit: concise one-liner + key positives and pertinent negatives from what the student actually elicited. Half: partial. Quote from the submission.",
+      "mockKeywords": [
+        "year-old",
+        "presents with",
+        "history of"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "leading-dx",
+      "section": "Clinical reasoning",
+      "label": "Leading diagnosis matches the case",
+      "weight": 2,
+      "scoring": "ai",
+      "guidance": "Compare the student’s #1 diagnosis with the expected differential rank 1. Full credit for the same diagnosis (synonyms fine); half credit if it appears in their list but not first.",
+      "mockKeywords": [
+        "heart failure",
+        "chf",
+        "hf"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "ddx-breadth",
+      "section": "Clinical reasoning",
+      "label": "Considers reasonable alternatives",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Credit if at least two other diagnoses from the expected differential (or equally reasonable ones) are listed.",
+      "mockKeywords": [
+        "pneumonia",
+        "embolism",
+        "copd",
+        "acs",
+        "myocardial"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "ddx-supported",
+      "section": "Clinical reasoning",
+      "label": "Differential is supported by findings the student elicited",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Credit if the summary/differential cites findings the student actually obtained (history answers or exam actions in the log), rather than findings they never elicited.",
+      "mockKeywords": [
+        "crackles",
+        "jvp",
+        "edema",
+        "s3",
+        "orthopnea"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "plan",
+      "section": "Clinical reasoning",
+      "label": "Initial plan is safe and appropriate",
+      "weight": 2,
+      "scoring": "ai",
+      "guidance": "Judge the plan against standard initial management for the leading diagnosis (key investigations and first treatments). Half credit if reasonable but incomplete; 0 if unsafe or absent.",
+      "mockKeywords": [
+        "diuretic",
+        "furosemide",
+        "ecg",
+        "troponin",
+        "bnp",
+        "chest x-ray",
+        "oxygen"
+      ],
+      "sourceText": ""
+    }
+  ]
+}

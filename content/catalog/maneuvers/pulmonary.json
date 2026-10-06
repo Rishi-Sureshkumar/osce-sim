@@ -1,0 +1,162 @@
+{
+  "system": "pulmonary",
+  "maneuvers": [
+    {
+      "requiresPositioning": [
+        "seated"
+      ],
+      "sourceText": "",
+      "id": "chest_inspection",
+      "fcmId": 41,
+      "label": "Chest inspection & work of breathing",
+      "system": "pulmonary",
+      "technique": "inspect",
+      "allowedRegions": [
+        "lung_ant_ru",
+        "lung_ant_lu",
+        "lung_ant_rl",
+        "lung_ant_ll",
+        "lung_post_ru",
+        "lung_post_lu",
+        "lung_post_rl",
+        "lung_post_ll",
+        "lung_lat_r",
+        "lung_lat_l"
+      ],
+      "normalFinding": {
+        "default": "Symmetric chest shape and expansion; no accessory muscle use; no scars or lesions; breathing comfortably."
+      },
+      "demo": {
+        "steps": [
+          "With the patient seated, watch the whole chest rise and fall.",
+          "Look at the neck muscles for extra effort with breathing.",
+          "Check front, sides and back for scars, devices or skin changes."
+        ]
+      }
+    },
+    {
+      "requiresPositioning": [
+        "seated",
+        "seated_leaning_forward"
+      ],
+      "sourceText": "",
+      "id": "auscultate_lungs",
+      "fcmId": 42,
+      "label": "Lung auscultation (breath sounds)",
+      "system": "pulmonary",
+      "technique": "auscultate",
+      "allowedRegions": [
+        "lung_ant_ru",
+        "lung_ant_lu",
+        "lung_ant_rl",
+        "lung_ant_ll",
+        "lung_lat_r",
+        "lung_lat_l",
+        "lung_post_ru",
+        "lung_post_lu",
+        "lung_post_rl",
+        "lung_post_ll"
+      ],
+      "normalFinding": {
+        "default": "Vesicular breath sounds; no crackles, wheezes or rubs."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to breathe deeply through the mouth.",
+          "Press the diaphragm firmly and listen through a full breath at each spot.",
+          "Compare side to side, working down the front, sides and back."
+        ]
+      }
+    },
+    {
+      "requiresPositioning": [
+        "seated",
+        "seated_leaning_forward"
+      ],
+      "sourceText": "",
+      "id": "vocal_resonance",
+      "fcmId": 43,
+      "label": "Vocal resonance / egophony",
+      "system": "pulmonary",
+      "technique": "auscultate",
+      "allowedRegions": [
+        "lung_post_ru",
+        "lung_post_lu",
+        "lung_post_rl",
+        "lung_post_ll"
+      ],
+      "normalFinding": {
+        "default": "Normal vocal resonance; spoken \"ee\" heard as \"ee\" (no egophony)."
+      },
+      "demo": {
+        "steps": [
+          "Place the diaphragm over the back of the chest.",
+          "Ask the patient to say \"ee\" and listen for a change in the sound.",
+          "Compare sides."
+        ]
+      }
+    },
+    {
+      "requiresPositioning": [
+        "seated",
+        "seated_leaning_forward"
+      ],
+      "sourceText": "",
+      "id": "tactile_fremitus",
+      "fcmId": 44,
+      "label": "Tactile fremitus",
+      "system": "pulmonary",
+      "technique": "palpate",
+      "allowedRegions": [
+        "lung_post_ru",
+        "lung_post_lu",
+        "lung_post_rl",
+        "lung_post_ll"
+      ],
+      "normalFinding": {
+        "default": "Tactile fremitus present and symmetric."
+      },
+      "demo": {
+        "steps": [
+          "Stand behind the patient and place the edge of your hand on the back.",
+          "Ask them to repeat a short phrase while you feel the vibration.",
+          "Compare upper, middle and lower zones on both sides."
+        ]
+      }
+    },
+    {
+      "requiresPositioning": [
+        "seated",
+        "seated_leaning_forward"
+      ],
+      "sourceText": "",
+      "id": "chest_percussion",
+      "fcmId": 45,
+      "label": "Chest percussion",
+      "system": "pulmonary",
+      "technique": "percuss",
+      "allowedRegions": [
+        "lung_ant_ru",
+        "lung_ant_lu",
+        "lung_ant_rl",
+        "lung_ant_ll",
+        "lung_lat_r",
+        "lung_lat_l",
+        "lung_post_ru",
+        "lung_post_lu",
+        "lung_post_rl",
+        "lung_post_ll"
+      ],
+      "normalFinding": {
+        "default": "Resonant to percussion."
+      },
+      "demo": {
+        "steps": [
+          "Lay the middle finger of one hand flat on the chest between the ribs.",
+          "Strike its middle phalanx with a quick tap from the other middle finger.",
+          "Move side to side at several levels, comparing the notes."
+        ]
+      }
+    }
+  ]
+}
