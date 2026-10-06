@@ -49,6 +49,7 @@ function anteriorLimbs(side: "right" | "left"): Shape[] {
     rect(`r-shin_${side}`, 112, 480, 24, 72),
     { svgPathId: `r-ankle_${side}`, el: "ellipse", cx: X(124), cy: 562, rx: 13, ry: 7 },
     { svgPathId: `r-foot_${side}`, el: "ellipse", cx: X(118), cy: 582, rx: 19, ry: 9 },
+    { svgPathId: `r-toe_great_${side}`, el: "circle", cx: X(134), cy: 590, r: 5 },
   ];
 }
 

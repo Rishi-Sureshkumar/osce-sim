@@ -1,5 +1,5 @@
 import type { Action } from "@/domain/schemas";
-import { COURTESY_LABELS, POSITION_LABELS, mmss } from "@/components/common/format";
+import { describeAction, mmss } from "@/components/common/format";
 import type { ContentIndex } from "@/content/types";
 import { orderLog } from "@/engine/order";
 
@@ -9,6 +9,10 @@ import { orderLog } from "@/engine/order";
  */
 export function renderTranscript(log: Action[], content: Pick<ContentIndex, "maneuverById" | "regionById">): string {
   const lines: string[] = [];
+  const labels = {
+    maneuver: (id: string) => content.maneuverById.get(id)?.label ?? id,
+    region: (id: string) => content.regionById.get(id)?.label ?? id,
+  };
   for (const a of orderLog(log)) {
     const head = `[${a.id}] ${mmss(a.t)}`;
     switch (a.type) {
@@ -25,9 +29,13 @@ export function renderTranscript(log: Action[], content: Pick<ContentIndex, "man
         break;
       }
       case "courtesy":
-        lines.push(
-          `${head} ACTION (not quotable): ${a.payload.kind === "position" && a.payload.position ? `Positioned patient: ${POSITION_LABELS[a.payload.position]}` : COURTESY_LABELS[a.payload.kind]}`,
-        );
+      case "state_change":
+      case "room":
+        lines.push(`${head} ACTION (not quotable): ${describeAction(a, labels).text}`);
+        break;
+      case "hint":
+      case "timer":
+        lines.push(`${head} SYSTEM (not quotable): ${describeAction(a, labels).text}`);
         break;
       case "note":
         lines.push(`${head} STUDENT NOTE: ${a.payload.text}`);

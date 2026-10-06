@@ -1,8 +1,9 @@
 import "server-only";
 import { getContent, toPublicCase } from "@/content/load";
-import type { Action, ActionInput, Case, PublicCase, Session, Usage } from "@/domain/schemas";
+import type { Action, ActionInput, Case, PublicCase, Session, SessionMode, Usage } from "@/domain/schemas";
 import { ActionInput as ActionInputSchema } from "@/domain/schemas";
-import { InvalidExamError, resolveFinding } from "@/engine/resolveFinding";
+import { InvalidExamError, isTouch, resolveFinding } from "@/engine/resolveFinding";
+import { DRAPE_ZONE_OF, patientState } from "@/engine/patientState";
 import { getRepo } from "./db";
 import { HttpError } from "./errors";
 import { newId } from "./ids";
@@ -16,7 +17,7 @@ export function getCaseOr404(caseId: string): Case {
   return c;
 }
 
-export async function createSession(caseId: string, studentLabel: string): Promise<Session> {
+export async function createSession(caseId: string, studentLabel: string, mode: SessionMode = "exam"): Promise<Session> {
   getCaseOr404(caseId);
   const repo = await getRepo();
   const session: Session = {
@@ -24,6 +25,7 @@ export async function createSession(caseId: string, studentLabel: string): Promi
     caseId,
     studentLabel: studentLabel.trim().slice(0, 80) || "Anonymous",
     status: "active",
+    mode,
     startedAt: new Date().toISOString(),
     endedAt: null,
     patientTurns: 0,
@@ -69,16 +71,29 @@ export async function appendStudentAction(sessionId: string, raw: unknown): Prom
   if (input.type === "examine") {
     const maneuver = getContent().maneuverById.get(input.payload.maneuverId);
     if (!maneuver) throw new HttpError(400, "Unknown maneuver");
+    const repo = await getRepo();
+    const state = patientState(await repo.listActions(sessionId));
+    // Examining a region that is still draped exposes it first (logged, so coaches see it).
+    const zone = DRAPE_ZONE_OF[input.payload.regionId];
+    if (zone && state.drape[zone]) {
+      await repo.appendAction({ ...(await stamp()), type: "courtesy", source: input.source, payload: { kind: "expose", regionId: input.payload.regionId } });
+    }
     let resolved;
     try {
-      resolved = resolveFinding(kase, maneuver, input.payload.regionId);
+      resolved = resolveFinding(kase, maneuver, input.payload.regionId, { position: state.position });
     } catch (e) {
       if (e instanceof InvalidExamError) throw new HttpError(400, e.message);
       throw e;
     }
     const region = getContent().regionById.get(input.payload.regionId)!;
     const wording = await wordFinding(sessionId, { maneuverLabel: maneuver.label, regionLabel: region.label, findingText: resolved.findingText });
-    action = { ...(await stamp()), ...input, result: { ...resolved, ...(wording ? { wording } : {}) } };
+    action = {
+      ...(await stamp()),
+      type: "examine",
+      source: input.source,
+      payload: { ...input.payload, touch: isTouch(maneuver) },
+      result: { ...resolved, ...(wording ? { wording } : {}) },
+    };
   } else {
     action = { ...(await stamp()), ...input } as Action;
   }

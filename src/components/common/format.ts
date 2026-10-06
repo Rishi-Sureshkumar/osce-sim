@@ -18,8 +18,15 @@ export const COURTESY_LABELS = {
   drape: "Draped patient",
   position: "Positioned patient",
   close_encounter: "Closed the encounter",
+  expose: "Exposed a region",
+  cover: "Covered a region",
 } as const;
 
+export const HINT_LABELS = { hint: "Hint used", nudge: "Nudge shown", show_me: "“Show me how” used", section_check: "Section check used" } as const;
+export const TIMER_LABELS = { pause: "Timer paused", resume: "Timer resumed", warning: "2-minute warning", auto_end: "Time up — station ended" } as const;
+export const ROOM_LABELS = { knock: "Knocked", enter: "Entered the room", exit: "Left the room" } as const;
+
+/** Display a log time. Always floors to the whole second (the one formatter used everywhere). */
 export function mmss(ms: number): string {
   const s = Math.floor(ms / 1000);
   return `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
@@ -43,13 +50,33 @@ export function describeAction(a: Action, L: Labels): { who: "student" | "patien
       return { who: "student", text: a.payload.text };
     case "patient_say":
       return { who: "patient", text: a.payload.text };
-    case "examine":
-      return { who: "student", text: `${L.maneuver(a.payload.maneuverId)} — ${L.region(a.payload.regionId)}` };
+    case "examine": {
+      const p = a.payload;
+      const step = p.step ? ` (step: ${p.step})` : "";
+      return { who: "student", text: `${L.maneuver(p.maneuverId)} — ${L.region(p.regionId)}${step}` };
+    }
     case "courtesy":
       return {
         who: "student",
-        text: a.payload.kind === "position" && a.payload.position ? `Positioned patient: ${POSITION_LABELS[a.payload.position]}` : COURTESY_LABELS[a.payload.kind],
+        text:
+          a.payload.kind === "position" && a.payload.position
+            ? `Positioned patient: ${POSITION_LABELS[a.payload.position]}`
+            : `${COURTESY_LABELS[a.payload.kind]}${a.payload.regionId ? `: ${L.region(a.payload.regionId)}` : ""}`,
       };
+    case "state_change": {
+      const p = a.payload;
+      const parts = [
+        p.position ? `patient ${POSITION_LABELS[p.position].toLowerCase()}` : "",
+        p.drape ? `${p.drape.zone} ${p.drape.covered ? "covered" : "uncovered"}` : "",
+      ].filter(Boolean);
+      return { who: "student", text: `Changed ${parts.join(", ")} (${p.via})` };
+    }
+    case "hint":
+      return { who: "system", text: `${HINT_LABELS[a.payload.kind]}: ${a.payload.text}` };
+    case "timer":
+      return { who: "system", text: TIMER_LABELS[a.payload.event] };
+    case "room":
+      return { who: "student", text: ROOM_LABELS[a.payload.event] };
     case "note":
       return { who: "student", text: `Note: ${a.payload.text}` };
     case "submit_ddx":

@@ -603,6 +603,20 @@
       "system": "neuro",
       "view": "neuro",
       "svgPathId": "r-neuro_meningeal"
+    },
+    {
+      "id": "toe_great_right",
+      "label": "Right great toe",
+      "system": "neuro",
+      "view": "anterior",
+      "svgPathId": "r-toe_great_right"
+    },
+    {
+      "id": "toe_great_left",
+      "label": "Left great toe",
+      "system": "neuro",
+      "view": "anterior",
+      "svgPathId": "r-toe_great_left"
     }
   ]
 }

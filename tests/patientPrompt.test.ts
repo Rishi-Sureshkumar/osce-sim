@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { loadContentFromDisk } from "@/content/loadFromDisk";
 import { buildCaseBlock, buildMessages, PATIENT_RULES } from "@/server/ai/patientPrompt";
+import { findingValueText } from "@/engine/resolveFinding";
 import { mockPatientReply } from "@/server/ai/mock";
 import { passesWordingGuard } from "@/server/ai/wordingGuard";
 import { makeLog, say } from "./helpers";
@@ -19,7 +20,7 @@ describe("patient prompt", () => {
   it("never includes exam findings, vitals or the expected differential (invariant 1)", () => {
     const prompt = PATIENT_RULES + block;
     for (const findings of Object.values(hf.abnormalFindings)) {
-      for (const text of Object.values(findings)) expect(prompt).not.toContain(text);
+      for (const v of Object.values(findings)) expect(prompt).not.toContain(findingValueText(v));
     }
     for (const d of hf.expectedDifferential) expect(prompt).not.toContain(d.diagnosis);
     expect(prompt).not.toContain(String(hf.vitals.spo2) + "%");

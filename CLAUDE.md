@@ -26,7 +26,9 @@ and workstream ownership.
 7. **Copyright:** the FCM-1 framework is not cleared. Use `fcmId` numbers and our own short
    labels. Never paste framework text into the repo or UI. `sourceText` fields stay `""`.
    `/source` is git-ignored — never commit it.
-8. **The browser never receives a full case.** Use `toPublicCase()`; history facts, abnormal
+8. **Log order is `orderLog()` (t, then seq)** — `src/engine/order.ts`. Never rely on array position.
+   Sounds come from finding data (`audio`), never from a model.
+9. **The browser never receives a full case.** Use `toPublicCase()`; history facts, abnormal
    findings and the expected differential stay on the server.
 
 ## Commands
@@ -80,6 +82,12 @@ tests/                              vitest; e2e/ Playwright
 `normalFinding.default` (+ optional per-region keys), `demo.steps` (own words), `sourceText: ""`.
 Run `npm run validate`. No code change needed; it appears in the menu for its regions.
 
+**Phase-2 maneuver fields** (all optional): `interaction` (`click|place|sequence|drag_path`), `tool`,
+`toolMode` (`bell|diaphragm|128|512`), `steps` (for sequences, with 3D `landmark` names), `touch`
+(defaults to true unless technique is `inspect`). Finding values may be plain text or
+`{ text, audio?, visual?, byPosition? }` — e.g. an S3 under `auscultate_heart_bell.cardiac_mitral` with
+`audio: { generator: "heart", params: { s3: 0.6 } }` and a louder `byPosition.left_lateral_decubitus`.
+
 **Add a case** — copy `content/cases/hf-decompensated-01.json`, keep `synthetic: true`, and follow
 `docs/CASE_AUTHORING.md` (including the de-identification checklist for anything based on a real
 patient). Only list *abnormal* findings; everything else falls back to the catalog's normals.
@@ -88,7 +96,8 @@ would contradict the case (e.g. "unlaboured" breathing).
 
 **Add a mark-sheet item** — add to `content/marksheets/<sheet>.json`:
 - `scoring: "auto"` + a `rule` (see the Rule type in schemas.ts: `performed`, `courtesy`, `before`,
-  `performedIn`, `submitted`, `all`, `any`, `not`). The single interpreter is `src/engine/rules.ts`;
+  `performedIn`, `submitted`, `said` (courtesy tags), `technique` (tool/mode/placement/duration/position),
+  `hygieneBeforeTouch`, `all`, `any`, `not`). Add `modes: ["exam"]` for time-dependent items. The single interpreter is `src/engine/rules.ts`;
   never write per-item code.
 - `scoring: "ai"` + `guidance` (what the grader looks for) + optional `mockKeywords` (used when AI_MOCK=true).
   Grader output must quote evidence; quotes are verified verbatim server-side, otherwise `needs_review`.

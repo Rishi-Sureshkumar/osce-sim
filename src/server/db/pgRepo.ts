@@ -16,7 +16,7 @@ export class PgRepo implements Repo {
   }
 
   private toSession(r: typeof t.sessions.$inferSelect): Session {
-    return { ...r, status: r.status as Session["status"], startedAt: iso(r.startedAt)!, endedAt: iso(r.endedAt) };
+    return { ...r, status: r.status as Session["status"], mode: r.mode as Session["mode"], startedAt: iso(r.startedAt)!, endedAt: iso(r.endedAt) };
   }
 
   async createSession(s: Session) {

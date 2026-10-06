@@ -23,6 +23,7 @@ export function positionAt(log: Action[], actionIndex: number): Position | undef
   for (let i = 0; i < actionIndex && i < log.length; i++) {
     const a = log[i]!;
     if (a.type === "courtesy" && a.payload.kind === "position" && a.payload.position) pos = a.payload.position;
+    if (a.type === "state_change" && a.payload.position) pos = a.payload.position;
   }
   return pos;
 }
@@ -42,7 +43,10 @@ export function findEvent(log: Action[], ref: string): Action | undefined {
     if (body.startsWith("position:")) {
       return a.type === "courtesy" && a.payload.kind === "position" && a.payload.position === body.slice(9);
     }
-    if (["examine", "say", "courtesy", "submit_ddx", "note"].includes(body)) return a.type === body;
+    if (body === "touch") return a.type === "examine" && a.payload.touch !== false;
+    if (body.startsWith("tag:")) return a.type === "say" && !!a.payload.tags?.some((t) => t.tag === body.slice(4));
+    if (body.startsWith("room:")) return a.type === "room" && a.payload.event === body.slice(5);
+    if (["examine", "say", "courtesy", "submit_ddx", "note", "state_change", "hint", "room"].includes(body)) return a.type === body;
     return a.type === "courtesy" && a.payload.kind === body;
   };
   return mode === "first" ? log.find(match) : [...log].reverse().find(match);
@@ -94,6 +98,46 @@ function evaluate(rule: Rule, log: Action[]): RuleResult {
     const positions = new Set(list(rule.performedIn.position));
     const hit = log.find((a, i) => a.type === "examine" && ids.has(a.payload.maneuverId) && positions.has(positionAt(log, i)!));
     return { value: hit ? 1 : 0, actionIds: hit ? [hit.id] : [] };
+  }
+
+  if ("said" in rule) {
+    const tags = new Set<string>(list(rule.said));
+    const hit = log.find((a) => a.type === "say" && a.payload.tags?.some((t) => tags.has(t.tag)));
+    return { value: hit ? 1 : 0, actionIds: hit ? [hit.id] : [] };
+  }
+
+  if ("hygieneBeforeTouch" in rule) {
+    // the last hand hygiene before the first examine that involves touch
+    const firstTouch = log.findIndex((a) => a.type === "examine" && a.payload.touch !== false);
+    if (firstTouch < 0) return { value: 0, actionIds: [] };
+    let hygiene: Action | undefined;
+    for (let i = 0; i < firstTouch; i++) {
+      const a = log[i]!;
+      if (a.type === "courtesy" && a.payload.kind === "hand_hygiene") hygiene = a;
+    }
+    return hygiene ? { value: 1, actionIds: [hygiene.id, log[firstTouch]!.id] } : { value: 0, actionIds: [log[firstTouch]!.id] };
+  }
+
+  if ("technique" in rule) {
+    const r = rule.technique;
+    const ids = new Set(list(r.maneuver));
+    const positions = r.position ? new Set(list(r.position)) : null;
+    const good = log.filter((a, i) => {
+      if (a.type !== "examine" || !ids.has(a.payload.maneuverId)) return false;
+      const p = a.payload;
+      if (r.tool && p.tool !== r.tool) return false;
+      if (r.toolMode && p.toolMode !== r.toolMode) return false;
+      if (r.maxPlacementError !== undefined && (p.placementError === undefined || p.placementError > r.maxPlacementError)) return false;
+      if (r.minDurationMs !== undefined && (p.durationMs === undefined || p.durationMs < r.minDurationMs)) return false;
+      if (positions && !positions.has(positionAt(log, i)!)) return false;
+      return true;
+    }) as Extract<Action, { type: "examine" }>[];
+    if (r.regions?.length) {
+      const covered = r.regions.filter((reg) => good.some((g) => g.payload.regionId === reg));
+      const frac = covered.length / r.regions.length;
+      return { value: r.partial ? frac : frac === 1 ? 1 : 0, actionIds: good.filter((g) => covered.includes(g.payload.regionId)).map((g) => g.id) };
+    }
+    return { value: good.length ? 1 : 0, actionIds: good.slice(0, 1).map((g) => g.id) };
   }
 
   if ("submitted" in rule) {

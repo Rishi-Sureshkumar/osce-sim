@@ -6,6 +6,7 @@ export const sessions = pgTable("sessions", {
   caseId: text("case_id").notNull(),
   studentLabel: text("student_label").notNull(),
   status: text("status").notNull(),
+  mode: text("mode").notNull().default("exam"),
   startedAt: timestamp("started_at", { withTimezone: true, mode: "string" }).notNull(),
   endedAt: timestamp("ended_at", { withTimezone: true, mode: "string" }),
   patientTurns: integer("patient_turns").notNull().default(0),

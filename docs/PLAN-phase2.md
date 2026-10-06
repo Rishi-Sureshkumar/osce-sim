@@ -49,13 +49,13 @@ All changes are additive, so existing content stays valid. They are tested by `t
   - `visual` drives animations, such as a reflex jerk amplitude or pupil constriction.
   - `resolveFinding` returns `{ findingText, resolvedFrom, audio?, visual? }` from the same fallback chain, so invariant 2 is unchanged.
 - **Case:**
-  - `visibleSigns?: { jvpElevatedCm?, edema?: { side, grade }[], breathing?: "laboured" | ... }`. These drive only what is drawn on the model.
+  - `visibleSigns?: { jvpCm?, edema?: { regionId, grade }[], breathing?: "normal" | "laboured" }`. These drive only what is drawn on the model.
   - `findingsVisibility?: "immediate" | "end"`, default `"immediate"`.
   - Keep the existing `doorSign.timeLimitMinutes`. It is the prompt's `timeLimitMin`, and renaming it would break content; the plan records this.
 - **Action:**
   - `examine` payload gains optional `tool`, `toolMode`, `placementError` (in scene units, plus a normalised 0–1), `durationMs` and `step`.
   - `say` gains optional `tags: { tag, evidence, via: "regex" | "model" }[]`.
-  - New `courtesy` kinds: `expose`, `cover`, `hand_hygiene_exit`.
+  - New `courtesy` kinds: `expose`, `cover`. (Exit hygiene is a normal `hand_hygiene` after the last touch; no separate kind was needed.)
   - New action types: `hint` (practice help used), `state_change` (bed angle or drape, from direct manipulation), `timer` (pause, resume, auto-end) and `room` (knocked, entered, exited).
 - **Session:** `mode: "practice" | "exam"`, default `"exam"` for old rows. Postgres needs a migration via `npm run db:generate`.
 - **Rule language** (extending the single interpreter in `src/engine/rules.ts`):
@@ -108,7 +108,7 @@ All changes are additive, so existing content stays valid. They are tested by `t
 - **Tuning fork:**
   - Weber: place at the vertex; the stereo pan comes from the case's `weber_test` audio params, with normal centred.
   - Rinne: a `sequence` of mastoid, then a "can't hear it" button, then the ear canal.
-  - Vibration: the great toe DIP. This needs one new region, `toe_great_right/left`, added rather than renaming anything.
+  - Vibration: the great toe DIP, on the new regions `toe_great_right/left` (added in the schema change set; nothing renamed).
   - The sequence engine validates order and logs each step with `step`.
 - **Hammer and penlight:** place on the target, then play an animation scaled by the finding's `visual` (jerk amplitude, pupil constriction).
 - **Sound engine (`src/audio/`):**
@@ -211,7 +211,7 @@ A–I as in the brief. The schema PR is owned by the schemas and engine owner an
 | # | Milestone | Status |
 |---|---|---|
 | M0 | Bug fixes | done |
-| S | Schema changes | planned |
+| S | Schema changes | done |
 | M1 | 3D patient | planned |
 | M2 | Tools and sound | planned |
 | M3 | Speech to text | planned |

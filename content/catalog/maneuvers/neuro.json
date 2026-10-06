@@ -523,7 +523,9 @@
       "system": "neuro",
       "technique": "special",
       "allowedRegions": [
-        "neuro_sensory"
+        "neuro_sensory",
+        "toe_great_right",
+        "toe_great_left"
       ],
       "normalFinding": {
         "default": "Joint position sense intact at the fingers and great toes bilaterally."
@@ -544,7 +546,9 @@
       "system": "neuro",
       "technique": "special",
       "allowedRegions": [
-        "neuro_sensory"
+        "neuro_sensory",
+        "toe_great_right",
+        "toe_great_left"
       ],
       "normalFinding": {
         "default": "Vibration sense intact at the fingers and great toes bilaterally."

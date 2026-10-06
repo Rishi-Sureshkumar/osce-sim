@@ -1,14 +1,34 @@
-import type { Action, ItemScore, MarkSheet, MarkSheetItem, Override, Rule } from "@/domain/schemas";
+import type { Action, ItemScore, MarkSheet, MarkSheetItem, Override, Rule, SessionMode } from "@/domain/schemas";
 import { verifyEvidence } from "./evidence";
 import { evaluateRule } from "./rules";
 
 const round = (n: number) => Math.round(n * 100) / 100;
 
-/** Deterministic scoring of every `auto` item, plus placeholder rows for `not_assessable` items. */
-export function scoreDeterministicItems(sheet: MarkSheet, log: Action[]): ItemScore[] {
+/** Is this item scored in this session mode? (e.g. time-dependent items are exam-only) */
+export function appliesInMode(item: Pick<MarkSheetItem, "modes">, mode: SessionMode): boolean {
+  return !item.modes || item.modes.includes(mode);
+}
+
+/**
+ * Deterministic scoring of every `auto` item, plus placeholder rows for `not_assessable` items
+ * and for items that don't apply in this session mode.
+ */
+export function scoreDeterministicItems(sheet: MarkSheet, log: Action[], mode: SessionMode = "exam"): ItemScore[] {
   const out: ItemScore[] = [];
   for (const item of sheet.items) {
-    if (item.scoring === "not_assessable") {
+    if (!appliesInMode(item, mode)) {
+      out.push({
+        markSheetId: sheet.id,
+        itemId: item.id,
+        scoring: "not_assessable",
+        status: "not_assessable",
+        value: 0,
+        points: 0,
+        maxPoints: 0,
+        rationale: `Only scored in ${item.modes!.join("/")} mode.`,
+        evidence: [],
+      });
+    } else if (item.scoring === "not_assessable") {
       out.push({
         markSheetId: sheet.id,
         itemId: item.id,
@@ -50,10 +70,10 @@ export interface AiItemJudgement {
  * An item is `needs_review` if: the grader skipped it, any quote fails verification,
  * or it awarded credit without evidence.
  */
-export function scoreAiItems(sheet: MarkSheet, judgements: AiItemJudgement[], log: Action[]): ItemScore[] {
+export function scoreAiItems(sheet: MarkSheet, judgements: AiItemJudgement[], log: Action[], mode: SessionMode = "exam"): ItemScore[] {
   const byId = new Map(judgements.map((j) => [j.itemId, j]));
   return sheet.items
-    .filter((i) => i.scoring === "ai")
+    .filter((i) => i.scoring === "ai" && appliesInMode(i, mode))
     .map((item): ItemScore => {
       const j = byId.get(item.id);
       if (!j) {

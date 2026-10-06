@@ -1,7 +1,7 @@
 import "server-only";
 import { getContent } from "@/content/load";
-import type { Action, Case, GradingRun, MarkSheet } from "@/domain/schemas";
-import { scoreAiItems, scoreDeterministicItems } from "@/engine/scoring";
+import { sessionMode, type Action, type Case, type GradingRun, type MarkSheet } from "@/domain/schemas";
+import { appliesInMode, scoreAiItems, scoreDeterministicItems } from "@/engine/scoring";
 import { sheetsForCase as filterSheets } from "@/engine/sheets";
 import { gradeAiItems } from "./ai/grader";
 import { getRepo } from "./db";
@@ -36,8 +36,9 @@ async function doGrade(sessionId: string, trigger: GradingRun["trigger"]): Promi
 
   const kase = getCaseOr404(session.caseId);
   const log: Action[] = await repo.listActions(sessionId);
+  const mode = sessionMode(session);
   const sheets = sheetsForCase(kase);
-  const deterministic = sheets.flatMap((s) => scoreDeterministicItems(s, log));
+  const deterministic = sheets.flatMap((s) => scoreDeterministicItems(s, log, mode));
   const autoScored = deterministic.filter((s) => s.scoring === "auto");
   const got = autoScored.reduce((n, s) => n + s.points, 0);
   const max = autoScored.reduce((n, s) => n + s.maxPoints, 0);
@@ -49,9 +50,10 @@ async function doGrade(sessionId: string, trigger: GradingRun["trigger"]): Promi
     .slice(0, 25);
   const deterministicSummary = `Exam checklist: ${round(got)}/${max} points. Not done or incomplete: ${missed.join("; ") || "none"}.`;
 
-  const ai = await gradeAiItems({ kase, sheets, log, content, deterministicSummary });
+  const gradedSheets = sheets.map((s) => ({ ...s, items: s.items.filter((i) => appliesInMode(i, mode)) }));
+  const ai = await gradeAiItems({ kase, sheets: gradedSheets, log, content, deterministicSummary });
   await recordUsage(sessionId, ai.usage);
-  const aiScores = sheets.flatMap((s) => scoreAiItems(s, ai.judgements, log));
+  const aiScores = sheets.flatMap((s) => scoreAiItems(s, ai.judgements, log, mode));
 
   // keep mark-sheet item order
   const order = new Map(sheets.flatMap((s) => s.items.map((i, idx) => [`${s.id}/${i.id}`, idx] as const)));
@@ -64,6 +66,7 @@ async function doGrade(sessionId: string, trigger: GradingRun["trigger"]): Promi
     sessionId,
     createdAt: new Date().toISOString(),
     trigger,
+    mode,
     summary: ai.summary,
     strengths: ai.strengths,
     improvements: ai.improvements,
