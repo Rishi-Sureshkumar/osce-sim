@@ -45,7 +45,9 @@ export function EncounterBar({
     ? BED_STOPS.indexOf(state.position)
     : BED_STOPS.reduce((best, p, i) => (Math.abs(POSITION_ANGLE[p] - state.bedAngle) < Math.abs(POSITION_ANGLE[BED_STOPS[best]!] - state.bedAngle) ? i : best), 0);
   const [bed, setBed] = useState(stop);
-  useEffect(() => setBed(stop), [stop, state.position]);
+  useEffect(() => {
+    setBed(stop);
+  }, [stop, state.position]);
   const commit = useRef<ReturnType<typeof setTimeout> | null>(null);
   const moveBed = (i: number) => {
     setBed(i);

@@ -20,7 +20,9 @@ export function LoadingOverlay() {
 /** Frame-rate readout for performance checks: add ?fps to the URL. Renders nothing otherwise. */
 export function FpsMeter() {
   const [on, setOn] = useState(false);
-  useEffect(() => setOn(typeof window !== "undefined" && new URLSearchParams(window.location.search).has("fps")), []);
+  useEffect(() => {
+    setOn(typeof window !== "undefined" && new URLSearchParams(window.location.search).has("fps"));
+  }, []);
   const frames = useRef(0);
   const since = useRef(performance.now());
   useFrame(() => {

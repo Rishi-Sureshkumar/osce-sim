@@ -27,7 +27,9 @@ export function ChatPanel({
   const [streaming, setStreaming] = useState<string | null>(null);
   const speakingRef = useRef(onSpeaking);
   speakingRef.current = onSpeaking;
-  useEffect(() => speakingRef.current?.(streaming !== null && streaming.length > 0), [streaming]);
+  useEffect(() => {
+    speakingRef.current?.(streaming !== null && streaming.length > 0);
+  }, [streaming]);
   const [error, setError] = useState<string | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -93,7 +95,10 @@ export function ChatPanel({
   }, [disabled]);
   const turns = actions.filter((a) => a.type === "say" || a.type === "patient_say");
 
-  useEffect(() => endRef.current?.scrollIntoView({ block: "end" }), [turns.length, streaming]);
+  // block body: an effect must return nothing or a cleanup function (some hosts return a value from scrollIntoView)
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ block: "end" });
+  }, [turns.length, streaming]);
 
   const send = async (msg: string, source: "text" | "voice") => {
     if (!msg || streaming !== null) return;

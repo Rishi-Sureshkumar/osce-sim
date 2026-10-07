@@ -11,7 +11,9 @@ export function OverrideForm({ sessionId, markSheetId, itemId, maxPoints, curren
   const [coach, setCoach] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  useEffect(() => setCoach(loadCoachName()), []);
+  useEffect(() => {
+    setCoach(loadCoachName());
+  }, []);
 
   if (!open) {
     return (

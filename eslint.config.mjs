@@ -10,6 +10,16 @@ const config = [
   {
     rules: {
       "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
+      // An effect's return value is treated as its cleanup. `useEffect(() => el.scrollIntoView())` returns
+      // whatever the call returns; in some hosts (the claude.ai artifact frame) that is not a function and
+      // React crashes the whole tree. Use a block body unless you are returning a cleanup function.
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "CallExpression[callee.name=/^use(Layout|Insertion)?Effect$/] > ArrowFunctionExpression:matches([body.type='CallExpression'], [body.type='ChainExpression'], [body.type='AwaitExpression'])",
+          message: "Effects must not return a call's result (React treats it as cleanup). Use a block body: () => { doThing(); }",
+        },
+      ],
     },
   },
 ];
