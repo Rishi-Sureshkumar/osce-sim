@@ -373,6 +373,11 @@ export type PublicCase = Pick<Case, "id" | "title" | "mode" | "doorSign" | "mark
   presentation: { visibleSigns: NonNullable<Case["visibleSigns"]>; hr: number; rr: number };
   /** Exam-mode countdown length (doorSign.timeLimitMinutes, or the TIME_LIMIT_SECONDS_OVERRIDE env for tests). */
   timeLimitSeconds: number;
+  /**
+   * The 1B flow (door → "You may begin" → encounter → PEN), for encounter cases with timeLimits.
+   * Seconds, after ENCOUNTER_SECONDS_OVERRIDE / PEN_SECONDS_OVERRIDE (tests).
+   */
+  flow?: { encounterSeconds: number; penSeconds: number };
 };
 
 // ---------------------------------------------------------------------------
@@ -509,13 +514,21 @@ export const PenPayload = z.object({
   history: z.string().max(6000),
   exam: z.string().max(6000),
   diagnoses: z
+    // at least one unless the note was locked at time-up (the finish route checks)
     .array(z.object({ diagnosis: z.string().min(1).max(300), support: z.string().max(2000).optional() }))
-    .min(1)
     .max(3),
-  /** set by the server when the note was locked at time-up from the last autosaved draft */
+  /** set by the server when the note was locked at time-up (submitted at the deadline or from the autosaved draft) */
   locked: z.boolean().optional(),
 });
 export type PenPayload = z.infer<typeof PenPayload>;
+
+/** The PEN as typed so far: autosaved by the server so time-up can submit it if the browser misses the deadline. */
+export const PenDraft = z.object({
+  history: z.string().max(6000),
+  exam: z.string().max(6000),
+  diagnoses: z.array(z.object({ diagnosis: z.string().max(300), support: z.string().max(2000).optional() })).max(3),
+});
+export type PenDraft = z.infer<typeof PenDraft>;
 
 const SubmitPayload = z.object({
   summary: z.string().max(4000),
@@ -786,6 +799,8 @@ export const Session = z.object({
   patientTurns: z.number().int(),
   gradingRuns: z.number().int(),
   usage: Usage,
+  /** Phase 3: last autosaved post-encounter note (never sent to scoring; submit_pen is). */
+  penDraft: PenDraft.nullable().optional(),
 });
 export type Session = z.infer<typeof Session>;
 

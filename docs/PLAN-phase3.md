@@ -298,7 +298,7 @@ Lighting is stable: hemisphere light, one shadowed key light, and contact shadow
 | M2 | Patient model and room | done |
 | M3 | Cinematic navigation | done |
 | M4 | Hidden targets | done |
-| M5 | 1B encounter flow and PEN | planned |
+| M5 | 1B encounter flow and PEN | done |
 | M6 | Two-domain scoring | planned |
 
 ### M4 notes (as built)
@@ -307,6 +307,14 @@ Lighting is stable: hemisphere light, one shadowed key light, and contact shadow
 - The server refuses a tool `examine` outside its tolerance or a stethoscope one shorter than 3 s, refuses hints in exam mode, and redacts distances (and hides `tool_contact`) from the student while the session is active. Coaches and results see them in full.
 - Snapping: inside several tolerances the most central anchor wins (relative distance), so the 6 cm breast zone never swallows the apex.
 - Practice "Show landmarks" shows labels only (no markers) for 3 s and logs a hint. `/dev/anchors` draws tolerance and 2× bands; `notFound()` in production.
+
+### M5 notes (as built)
+- `src/engine/encounter.ts` derives corridor → encounter → pen → submitted from the log; `allowedInPhase` and `dueTimerEvents` are shared by server and client. Applies to encounter cases with `timeLimits` (`PublicCase.flow`); screening cases keep the old countdown and finish dialog.
+- The server owns the deadlines (`enforceFlow` runs on every action, view, draft save and `POST /tick`): it logs `encounter_end` when the encounter time has passed, refuses anything but the note afterwards (no re-entry), and after the note deadline (+5 s grace) logs `pen_lock` and submits the last autosaved draft (`Session.penDraft`, migration `0002_pen_draft`). Students can't log `encounter_end`/`pen_lock` themselves, and warnings only when due.
+- Exam mode: "You may begin" button (stands in for the proctor; spoken with speechSynthesis) unlocks the door. Practice begins automatically and has no deadlines.
+- PEN form: History, Physical examination ("include only maneuvers you performed"), up to 3 diagnoses with optional supporting findings, no plan; autosaves every 5 s; submitted as-is and marked `locked` at time-up.
+- Notepad: scratch only, localStorage per session, never sent to the server.
+- Test overrides: `ENCOUNTER_SECONDS_OVERRIDE`, `PEN_SECONDS_OVERRIDE`.
 
 ## Open questions
 1. Domain pass thresholds: 70% is a placeholder.

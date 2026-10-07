@@ -36,6 +36,24 @@ export function Timeline({ actions, labels, highlight }: { actions: Action[]; la
                   </ul>
                 )}
                 {a.type === "examine" && <p className="mt-0.5 text-slate-600">→ {findingDisplay(a, labels)}</p>}
+                {a.type === "submit_pen" && (
+                  <div className="mt-1 space-y-1 text-slate-700" data-testid="pen-in-timeline">
+                    <p className="whitespace-pre-wrap">
+                      <span className="font-medium">History:</span> {a.payload.history || "—"}
+                    </p>
+                    <p className="whitespace-pre-wrap">
+                      <span className="font-medium">Physical exam:</span> {a.payload.exam || "—"}
+                    </p>
+                    <ol className="list-decimal pl-5">
+                      {a.payload.diagnoses.map((d, i) => (
+                        <li key={i}>
+                          {d.diagnosis}
+                          {d.support ? <span className="text-slate-500"> — {d.support}</span> : null}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
                 {a.type === "submit_ddx" && (
                   <div className="mt-1 space-y-1 text-slate-700">
                     <p>

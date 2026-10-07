@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import type { Action, CourtesyKind, DrapeZone, Position, PublicCase, Region, Session } from "@/domain/schemas";
 import type { PublicCatalog } from "@/content/types";
@@ -18,6 +18,11 @@ import { courtesyFromToolbar } from "@/input/adapters/toolbar";
 import { postAction } from "@/input/client";
 import { ActionLog } from "./ActionLog";
 import { DoorSign } from "./DoorSign";
+import { DoorPlacard } from "./DoorPlacard";
+import { EncounterClock } from "./EncounterClock";
+import { Notepad } from "./Notepad";
+import { PenForm } from "./PenForm";
+import { encounterState } from "@/engine/encounter";
 import { EncounterBar } from "./EncounterBar";
 import { DescribeDialog } from "./DescribeDialog";
 import { SANITISE_HOLD_MS, useHold } from "./useHold";
@@ -62,14 +67,20 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
   const [performing, setPerforming] = useState<Performing | null>(null);
   const [error, setError] = useState<string | null>(null);
   const labels = useMemo(() => labelsFrom(catalog), [catalog]);
-  const ended = session.status !== "active" || actions.some((a) => a.type === "submit_ddx" || a.type === "session_end");
+  const ended = session.status !== "active" || actions.some((a) => a.type === "submit_ddx" || a.type === "submit_pen" || a.type === "session_end");
   const mode = sessionMode(session);
-  const timeUp = timeIsUp(actions);
+  const flow = kase.flow ?? null;
+  // 1B flow: corridor → encounter → PEN, from the log (deadlines are applied by the server)
+  const flowState = flow ? encounterState(actions, mode, flow, Date.now() - Date.parse(session.startedAt)) : null;
+  const phase = flowState?.phase ?? null;
+  const [penLock, setPenLock] = useState(false);
+  const [begunBanner, setBegunBanner] = useState(false);
+  const timeUp = flow ? phase === "pen" || phase === "submitted" : timeIsUp(actions);
   const state = useMemo(() => patientState(actions), [actions]);
   const left = actions.some((a) => a.type === "room" && a.payload.event === "exit");
   const outside = !state.inRoom;
   /** exam actions and chat stop outside the room, when the station ended or exam time ran out */
-  const locked = ended || timeUp || outside;
+  const locked = ended || timeUp || outside || (!!flow && phase !== "encounter");
   const [entering, setEntering] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const [quality, setQuality] = useQuality();
@@ -252,7 +263,73 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
     });
   };
 
+  // ---- 1B flow: "You may begin", warnings, deadlines
+  const begin = () =>
+    run(async () => {
+      await post({ type: "timer", source: mode === "practice" ? "system" : "click", payload: { event: "begin" } });
+      setBegunBanner(true);
+      setTimeout(() => setBegunBanner(false), 4000);
+      try {
+        if (mode === "exam" && "speechSynthesis" in window) window.speechSynthesis.speak(new SpeechSynthesisUtterance("You may begin."));
+      } catch {
+        /* no speech: the banner is enough */
+      }
+    });
+  const autoBegun = useRef(false);
+  useEffect(() => {
+    // practice: no proctor — the encounter begins as soon as the station opens
+    if (flow && mode === "practice" && phase === "corridor" && !autoBegun.current) {
+      autoBegun.current = true;
+      void begin();
+    }
+  });
+  const onFlowWarning = (event: "encounter_warning" | "pen_warning") =>
+    run(async () => {
+      await post({ type: "timer", source: "system", payload: { event } });
+      setToast(event === "encounter_warning" ? "5 minutes remaining." : "2 minutes remaining for the note.");
+    });
+  const onDeadline = (which: "encounter" | "pen") => {
+    if (which === "pen") return setPenLock(true);
+    void run(async () => {
+      const res = await fetch(`/api/sessions/${session.id}/tick`, { method: "POST" });
+      const body = await res.json();
+      if (!res.ok) throw new Error(body.error ?? "Could not reach the server");
+      setActions(body.actions as Action[]);
+      setSelected(null);
+      setPerforming(null);
+      setTool((t) => ({ ...t, tool: null }));
+    });
+  };
+
   const whole = catalog.regions.filter((r) => r.group === "whole");
+
+  if (flow && (phase === "pen" || (phase === "submitted" && !ended))) {
+    return (
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-3 p-3">
+        <header className="flex flex-wrap items-center justify-between gap-2">
+          <h1 className="text-lg font-semibold">{kase.title}</h1>
+          <EncounterClock mode={mode} startedAt={session.startedAt} limits={flow} actions={actions} onWarning={onFlowWarning} onDeadline={onDeadline} />
+        </header>
+        {error && (
+          <p role="alert" className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-800">
+            {error}
+          </p>
+        )}
+        {toast && (
+          <p role="status" className="rounded-md bg-amber-50 px-3 py-2 text-sm text-amber-900">
+            {toast}
+          </p>
+        )}
+        <div className="grid gap-3 lg:grid-cols-[1fr_300px]">
+          <PenForm sessionId={session.id} initial={session.penDraft} lockNow={penLock || !!flowState?.locked} endReason={flowState?.endReason ?? null} />
+          <div className="space-y-3">
+            <Notepad sessionId={session.id} />
+            <DoorPlacard kase={kase} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto flex max-w-[1500px] flex-col gap-3 p-3 lg:h-[calc(100vh-30px)]">
@@ -275,8 +352,18 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
               <option value="low">Low</option>
             </select>
           </label>
-          <ModeTimer mode={mode} startedAt={session.startedAt} limitSeconds={kase.timeLimitSeconds} actions={actions} stopped={ended || timeUp} onTimerEvent={onTimerEvent} />
-          {finish?.({ append, disabled: ended, forceOpen: ended ? null : timeUp ? "time_up" : left ? "left_room" : null })}
+          {flow ? (
+            <EncounterClock mode={mode} startedAt={session.startedAt} limits={flow} actions={actions} onWarning={onFlowWarning} onDeadline={onDeadline} />
+          ) : (
+            <ModeTimer mode={mode} startedAt={session.startedAt} limitSeconds={kase.timeLimitSeconds} actions={actions} stopped={ended || timeUp} onTimerEvent={onTimerEvent} />
+          )}
+          {flow && ended ? (
+            <a href={`/results/${session.id}`} className="rounded-md bg-slate-800 px-4 py-2 text-sm font-medium text-white">
+              View results
+            </a>
+          ) : (
+            !flow && finish?.({ append, disabled: ended, forceOpen: ended ? null : timeUp ? "time_up" : left ? "left_room" : null })
+          )}
         </div>
       </header>
 
@@ -286,7 +373,12 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
         </p>
       )}
 
-      {timeUp && !ended && (
+      {begunBanner && (
+        <p role="status" className="rounded-md bg-emerald-600 px-3 py-2 text-center text-sm font-semibold text-white" data-testid="begin-banner">
+          You may begin.
+        </p>
+      )}
+      {!flow && timeUp && !ended && (
         <p role="alert" className="rounded-md bg-red-50 px-3 py-2 text-sm font-medium text-red-800">
           Time is up. The examination is closed. Present your summary, differential and plan.
         </p>
@@ -317,7 +409,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
         </div>
       )}
       {describe && <DescribeDialog region={describe} onSubmit={onDescribeSubmit} onClose={() => setDescribe(null)} />}
-      {left && !ended && (
+      {!flow && left && !ended && (
         <p role="status" className="rounded-md bg-slate-100 px-3 py-2 text-sm text-slate-800">
           You have left the room. Present your summary, differential and plan.
         </p>
@@ -335,7 +427,19 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
 
       <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-[minmax(250px,0.8fr)_minmax(460px,2fr)_minmax(250px,0.8fr)]">
         <div className="flex min-h-0 flex-col gap-3">
-          <DoorSign kase={kase} />
+          {flow ? (
+            <DoorPlacard kase={kase}>
+              {phase === "corridor" && mode === "exam" && (
+                <button type="button" onClick={() => void begin()} className="mt-3 w-full rounded-md bg-emerald-700 px-3 py-2 text-sm font-semibold text-white" data-testid="begin">
+                  You may begin
+                </button>
+              )}
+              {phase === "corridor" && mode === "exam" && <p className="mt-1 text-xs text-slate-500">Stands in for the proctor&apos;s announcement. The door opens once the encounter begins.</p>}
+            </DoorPlacard>
+          ) : (
+            <DoorSign kase={kase} />
+          )}
+          <Notepad sessionId={session.id} />
           {chat?.({ actions, append, disabled: locked, onSpeaking: setSpeaking })}
         </div>
 
@@ -369,7 +473,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
                 onToolContact={onToolContact}
                 onLandmarksHint={mode === "practice" ? (where) => void run(async () => appendAll((await postAction(session.id, { type: "hint", source: "click", payload: { kind: "hint", text: `Showed landmarks: ${where}` } })).appended)) : undefined}
                 mode={mode}
-                canEnter={!ended && !timeUp && !left && !entering}
+                canEnter={!ended && !timeUp && !left && !entering && (!flow || phase === "encounter")}
                 onEnter={onEnter}
                 onWash={onWash}
                 onSit={onSit}

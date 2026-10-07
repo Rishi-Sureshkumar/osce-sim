@@ -101,7 +101,14 @@
       "scoring": "auto",
       "rule": {
         "not": {
-          "happened": "timer:auto_end"
+          "any": [
+            {
+              "happened": "timer:auto_end"
+            },
+            {
+              "happened": "timer:pen_lock"
+            }
+          ]
         }
       },
       "modes": [

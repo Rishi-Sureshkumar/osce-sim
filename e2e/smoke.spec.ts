@@ -122,7 +122,14 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.locator('[data-testid="mode-badge"]')).toHaveText("Practice");
   await expect(page.getByText("Educational prototype. Synthetic cases. Not for clinical use.")).toBeVisible();
 
-  // --- corridor → click the door in the 3D scene: knock, the door swings open, the camera walks in
+  // --- corridor: the door placard; practice begins by itself (no proctor), with the notepad to hand
+  await expect(page.getByTestId("door-placard")).toContainText("Reason for visit: Shortness of breath");
+  await expect(page.getByTestId("door-placard")).toContainText("Do not perform: Breast exam");
+  await expect(page.getByTestId("begin")).toHaveCount(0);
+  await expect(page.getByTestId("encounter-clock")).toHaveAttribute("data-phase", "encounter");
+  await page.getByRole("button", { name: /Notepad/ }).click();
+  await page.getByLabel("Notepad text").fill("SOB 2/52, orthopnea");
+  // --- click the door in the 3D scene: knock, the door swings open, the camera walks in
   await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
   await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "corridor");
   await expect(page.locator("#chat-input")).toBeDisabled(); // nothing to do outside the room but read the door
@@ -255,13 +262,19 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await page.getByRole("button", { name: "Leave the room" }).click();
   await expect(page.getByRole("dialog", { name: "Leave the room?" })).toContainText("No re-entry");
   await page.getByRole("dialog", { name: "Leave the room?" }).getByRole("button", { name: "Leave" }).click();
-  await expect(page.getByRole("heading", { name: "Present your findings" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Keep going" })).toHaveCount(0);
-  await page.getByLabel("Summary statement").fill("68-year-old man with known HFrEF with 2 weeks of worsening dyspnoea, orthopnea, raised JVP, S3, crackles and edema.");
-  await page.getByLabel("Differential 1").fill("Acute decompensated heart failure");
-  await page.getByLabel("Differential 2").fill("Pneumonia");
-  await page.getByLabel("Initial plan").fill("Oxygen, IV furosemide, ECG, troponin, BNP and chest x-ray.");
-  await page.getByRole("button", { name: "Submit" }).click();
+  // --- leaving ends the encounter: the post-encounter note (no plan in 1B); the notepad is kept
+  await expect(page.getByRole("heading", { name: "Post-encounter note" })).toBeVisible();
+  await expect(page.getByTestId("exam3d")).toHaveCount(0); // no re-entry
+  await page.getByRole("button", { name: /Notepad/ }).click();
+  await expect(page.getByLabel("Notepad text")).toHaveValue("SOB 2/52, orthopnea");
+  await expect(page.getByLabel(/Initial plan/)).toHaveCount(0);
+  await page.getByLabel("History").fill("68-year-old man with known HFrEF: 2 weeks of worsening dyspnoea, orthopnea (three pillows). No chest pain.");
+  await page.getByLabel("Physical examination").fill("JVP raised at 30 degrees. S3 at the apex in left lateral decubitus. Fine crackles at both bases. Pitting edema of the shins.");
+  await page.getByLabel("Diagnosis 1").fill("Acute decompensated heart failure");
+  await page.getByLabel("Supporting findings 1").fill("orthopnea, raised JVP, S3, crackles, edema");
+  await page.getByLabel("Diagnosis 2").fill("Pneumonia");
+  await expect(page.getByTestId("pen-saved")).toContainText("Draft saved", { timeout: 8_000 });
+  await page.getByRole("button", { name: "Submit note" }).click();
 
   // --- scored feedback with verified, quoted evidence
   await expect(page).toHaveURL(/\/results\//);
@@ -301,6 +314,7 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page).toHaveURL(new RegExp(`/coach/${sessionId}`));
   await expect(page.locator('[data-testid="timeline"]')).toContainText("Jugular venous pressure");
   await expect(page.locator('[data-testid="timeline"]')).toContainText("three pillows");
+  await expect(page.getByTestId("pen-in-timeline")).toContainText("S3 at the apex in left lateral decubitus");
   // every placement is logged for the coach with its nearest anchor and distance (never shown to the student)
   await expect(page.locator('[data-testid="timeline"]')).toContainText(/stethoscope \(bell\) placed near Mitral area[^·]*· \d\.\d cm \(tolerance 2\.5 cm\)[^·]*·[^·]*· near the target/);
   await expect(page.locator('[data-testid="say-source"]').first()).toHaveText("voice");
@@ -385,7 +399,7 @@ test("tuning forks: Weber and the Rinne sequence on the screening patient", asyn
   await expect(page.locator('[data-testid="findings"] li').first()).toContainText("Air conduction greater than bone conduction");
 });
 
-test("exam mode: countdown, auto-end at zero, forced presentation, exam-only scoring", async ({ page }) => {
+test("exam mode: door placard, You may begin, 15-minute encounter ends itself, the note locks at time-up", async ({ page }) => {
   await page.goto("/");
   await enterCode(page, "student-e2e");
   await page.getByLabel("Your name or alias").fill("E2E Exam");
@@ -394,6 +408,13 @@ test("exam mode: countdown, auto-end at zero, forced presentation, exam-only sco
   await expect(page.locator('[data-testid="mode-badge"]')).toHaveText("Exam");
   await expect(page.getByRole("button", { name: "Hint" })).toHaveCount(0); // no help in exam mode
   await expect(page.getByRole("button", { name: "Pause" })).toHaveCount(0);
+  // corridor: the door stays shut until "You may begin"
+  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await expect(page.getByTestId("encounter-clock")).toHaveAttribute("data-phase", "corridor");
+  await expect(page.getByRole("button", { name: "Knock and enter" })).toBeDisabled();
+  await page.getByTestId("begin").click();
+  await expect(page.getByTestId("begin-banner")).toHaveText("You may begin.");
+  await expect(page.getByTestId("encounter-clock")).toHaveAttribute("data-phase", "encounter");
   await knockAndEnter(page);
   // keyboard-accessible fallback for the direct-manipulation controls
   await page.getByRole("button", { name: "Actions" }).click();
@@ -401,20 +422,20 @@ test("exam mode: countdown, auto-end at zero, forced presentation, exam-only sco
   await page.keyboard.press("Enter"); // "Clean hands (no hold)"
   await expect(page.locator('[data-testid="hands-status"]')).toHaveText("Hands: clean");
   await ask(page, "What brings you in today?");
-  // the test server shortens the limit to 25 s; at zero the exam locks and the presentation opens
-  await expect(page.getByRole("alert").filter({ hasText: "Time is up" })).toBeVisible({ timeout: 40_000 });
-  await expect(page.locator("#chat-input")).toBeDisabled();
-  await expect(page.getByRole("button", { name: "Hold to sanitise hands" })).toBeDisabled();
-  await expect(page.getByRole("heading", { name: /Time is up — Present your findings/ })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Keep going" })).toHaveCount(0);
-  await page.getByLabel("Summary statement").fill("68-year-old man with worsening breathlessness.");
-  await page.getByLabel("Differential 1").fill("Heart failure");
-  await page.getByLabel("Initial plan").fill("Diuretics.");
-  await page.getByRole("button", { name: "Submit" }).click();
-  await expect(page.locator('[data-testid="summary"]')).toBeVisible({ timeout: 30_000 });
+  // the test server shortens the encounter to 25 s (warning when 5 minutes remain); at zero the note opens
+  await expect(page.getByRole("heading", { name: "Post-encounter note" })).toBeVisible({ timeout: 40_000 });
+  await expect(page.getByTestId("pen-form")).toContainText("Encounter time is up");
+  await expect(page.getByTestId("exam3d")).toHaveCount(0);
+  await page.getByLabel("History").fill("68-year-old man with worsening breathlessness.");
+  await page.getByLabel("Diagnosis 1").fill("Heart failure");
+  await expect(page.getByTestId("pen-saved")).toContainText("Draft saved", { timeout: 8_000 });
+  // the note (20 s here) locks at time-up and is submitted as it stands
+  await expect(page.locator('[data-testid="summary"]')).toBeVisible({ timeout: 60_000 });
   await expect(page.locator('[data-testid="mode-badge"]')).toHaveText("Exam");
   await expect(page.locator('[data-item="within-time"]')).toContainText("0/1");
-  await expect(page.locator('[data-testid="timeline"]')).toContainText("Time up — station ended");
+  for (const t of ["“You may begin”", "5 minutes remaining in the encounter", "Encounter time is up", "Note time is up — note locked", "(locked at time-up): Heart failure"]) {
+    await expect(page.locator('[data-testid="timeline"]')).toContainText(t);
+  }
 });
 
 test("initial download stays within the 15 MB budget (JS + models)", () => {

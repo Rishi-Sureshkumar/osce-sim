@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { finishSession } from "@/server/finish";
+import { finishWithPen } from "@/server/session";
 import { errorResponse, HttpError } from "@/server/errors";
 import { rateLimit } from "@/server/guards";
 
@@ -14,6 +15,8 @@ const Body = z.object({
     })
     .nullable()
     .default(null),
+  /** 1B flow cases: the post-encounter note */
+  pen: z.unknown().optional(),
 });
 
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -22,7 +25,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
     const { id } = await params;
     const body = Body.safeParse(await req.json().catch(() => ({})));
     if (!body.success) throw new HttpError(400, "Invalid submission");
-    const actions = await finishSession(id, body.data.submission);
+    const actions = body.data.pen !== undefined ? await finishWithPen(id, body.data.pen) : await finishSession(id, body.data.submission);
     return Response.json({ actions, resultsUrl: `/results/${id}` });
   } catch (e) {
     return errorResponse(e);

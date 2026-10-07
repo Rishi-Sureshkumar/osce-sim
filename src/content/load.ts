@@ -46,5 +46,13 @@ export function toPublicCase(c: Case): PublicCase {
     patient: { name, age, sex, pronouns, chiefComplaint, setting },
     presentation: { visibleSigns: c.visibleSigns ?? {}, hr: c.vitals.hr, rr: c.vitals.rr },
     timeLimitSeconds: Number(process.env.TIME_LIMIT_SECONDS_OVERRIDE) > 0 ? Number(process.env.TIME_LIMIT_SECONDS_OVERRIDE) : c.doorSign.timeLimitMinutes * 60,
+    ...(flowLimits(c) ? { flow: flowLimits(c)! } : {}),
   };
+}
+
+/** 1B flow limits for encounter cases with timeLimits (env overrides shorten them for tests). */
+export function flowLimits(c: Case): { encounterSeconds: number; penSeconds: number } | null {
+  if (c.mode !== "encounter" || !c.timeLimits) return null;
+  const env = (k: string) => (Number(process.env[k]) > 0 ? Number(process.env[k]) : null);
+  return { encounterSeconds: env("ENCOUNTER_SECONDS_OVERRIDE") ?? c.timeLimits.encounterMin * 60, penSeconds: env("PEN_SECONDS_OVERRIDE") ?? c.timeLimits.penMin * 60 };
 }

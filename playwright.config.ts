@@ -30,6 +30,9 @@ export default defineConfig({
       RATE_LIMIT_PER_MINUTE: "1000",
       // exam-mode countdown for e2e (practice mode counts up and is unaffected)
       TIME_LIMIT_SECONDS_OVERRIDE: "25",
+      // 1B flow (encounter cases): a 25 s encounter and a 20 s note
+      ENCOUNTER_SECONDS_OVERRIDE: "25",
+      PEN_SECONDS_OVERRIDE: "20",
     },
   },
 });

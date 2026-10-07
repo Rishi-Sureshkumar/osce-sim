@@ -52,7 +52,8 @@ Before every commit: `npm run validate && npm run typecheck && npm test && npm r
 (and `npm run check:copyright` if you touched content/UI text).
 
 Env for tooling: `TEST_DATABASE_URL` (also runs the Postgres repo test), `FILE_STORE_PATH`
-(file-store location; e2e uses `test-results/e2e-store.json`).
+(file-store location; e2e uses `test-results/e2e-store.json`), `ENCOUNTER_SECONDS_OVERRIDE` /
+`PEN_SECONDS_OVERRIDE` (shorten the 1B encounter and note clocks in tests).
 
 ## Folder map (each workstream owns its folders — see docs/PLAN.md)
 
