@@ -17,6 +17,7 @@ import { sessionMode } from "@/domain/schemas";
 import { courtesyFromToolbar } from "@/input/adapters/toolbar";
 import { postAction } from "@/input/client";
 import { ActionLog } from "./ActionLog";
+import { ErrorBoundary } from "@/components/common/ErrorBoundary";
 import { DoorSign } from "./DoorSign";
 import { DoorPlacard } from "./DoorPlacard";
 import { EncounterClock } from "./EncounterClock";
@@ -440,7 +441,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
             <DoorSign kase={kase} />
           )}
           <Notepad sessionId={session.id} />
-          {chat?.({ actions, append, disabled: locked, onSpeaking: setSpeaking })}
+          <ErrorBoundary label="conversation panel">{chat?.({ actions, append, disabled: locked, onSpeaking: setSpeaking })}</ErrorBoundary>
         </div>
 
         <div className="flex min-h-0 flex-col gap-2 rounded-lg border border-slate-200 bg-white p-3">
@@ -460,6 +461,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
             </div>
           </div>
           <div className="relative flex min-h-0 flex-1 flex-col">
+            <ErrorBoundary label="3D exam view">
             <Exam3DView
                 sessionId={session.id}
                 maneuvers={catalog.maneuvers}
@@ -496,6 +498,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
                 disabled={locked || blocking}
                 onRegionClick={onRegionClick}
               />
+            </ErrorBoundary>
             <div className={`absolute right-2 z-10 w-72 max-w-[90%] bottom-28 max-h-[45%] overflow-y-auto ${performing?.kind === "tool" && !choice ? "pointer-events-none [&_button]:pointer-events-auto" : ""}`}>
               {toast && !selected && !choice && performing?.kind !== "menu" && (
                 <p className="mb-2 rounded-md bg-cyan-50 px-3 py-2 text-sm text-cyan-900 shadow" role="status">

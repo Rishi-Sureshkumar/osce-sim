@@ -156,6 +156,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
   const pending = useRef<{ hit: BodyHit } | null>(null);
   const holdRef = useRef<Hold | null>(null);
   const recorded = useRef<number | null>(null);
+  const [contextLost, setContextLost] = useState(false);
   const [landmarksAt, setLandmarksAt] = useState<number | null>(null);
   useEffect(() => {
     if (landmarksAt === null) return;
@@ -471,6 +472,14 @@ export default function Exam3DView(props: Exam3DViewProps) {
           shadows={quality === "high"}
           camera={{ fov: 45, near: 0.02, far: 30, position: goal.position as Vec3 }}
           gl={{ antialias: quality === "high" }}
+          onCreated={({ gl }) => {
+            // a lost GPU context (driver reset, memory pressure) would otherwise leave a blank canvas
+            gl.domElement.addEventListener("webglcontextlost", (e) => {
+              e.preventDefault();
+              setContextLost(true);
+            });
+            gl.domElement.addEventListener("webglcontextrestored", () => setContextLost(false));
+          }}
         >
           <color attach="background" args={["#e9eff2"]} />
           <hemisphereLight args={["#ffffff", "#b8c4cc", 1.05]} />
@@ -539,6 +548,12 @@ export default function Exam3DView(props: Exam3DViewProps) {
         </Canvas>
 
         <LoadingOverlay />
+        {contextLost && (
+          <div role="alert" className="absolute inset-0 z-30 flex flex-col items-center justify-center gap-2 bg-slate-100/95 p-4 text-center text-sm">
+            <p className="font-medium">The 3D view lost its graphics context.</p>
+            <p className="text-xs text-slate-600">Try the Low graphics setting, or reload the page. Your session is saved.</p>
+          </div>
+        )}
         {/* breadcrumb, Back, and a keyboard route to every shot */}
         <div className="absolute top-2 left-2 z-10 flex items-center gap-1.5 text-xs" data-testid="breadcrumb">
           {SHOTS[shot.current].parent && (
