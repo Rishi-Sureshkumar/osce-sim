@@ -1,7 +1,7 @@
 import "server-only";
 import { MIN_LISTEN_MS } from "@/exam3d/tools/toolLogic";
 import { flowLimits, getContent, toPublicCase } from "@/content/load";
-import { PenDraft, PenPayload, sessionMode, type Action, type ActionInput, type Case, type PublicCase, type Session, type SessionMode, type TagHit, type Usage } from "@/domain/schemas";
+import { PenDraft, PenPayload, sessionMode, type Action, type ActionInput, type Case, type PublicCase, type Session, type SessionMode, type TagHit } from "@/domain/schemas";
 import { DEADLINE_GRACE_MS, allowedInPhase, dueTimerEvents, encounterState, type EncounterPhase, type FlowLimits } from "@/engine/encounter";
 import { timeIsUp } from "@/engine/practice";
 import { ActionInput as ActionInputSchema } from "@/domain/schemas";
@@ -10,9 +10,6 @@ import { DRAPE_ZONE_OF, patientState } from "@/engine/patientState";
 import { getRepo } from "./db";
 import { HttpError } from "./errors";
 import { newId } from "./ids";
-import { wordFinding } from "./ai/wording";
-
-export const emptyUsage = (): Usage => ({ inputTokens: 0, outputTokens: 0, cacheReadTokens: 0, cacheWriteTokens: 0 });
 
 export function getCaseOr404(caseId: string): Case {
   const c = getContent().caseById.get(caseId);
@@ -33,7 +30,6 @@ export async function createSession(caseId: string, studentLabel: string, mode: 
     endedAt: null,
     patientTurns: 0,
     gradingRuns: 0,
-    usage: emptyUsage(),
   };
   await repo.createSession(session);
   await repo.appendAction({ id: newId("act"), sessionId: session.id, t: 0, type: "session_start", source: "system", payload: { caseId } });
@@ -72,11 +68,16 @@ export async function appendStudentActions(sessionId: string, raw: unknown, serv
 }
 
 /**
- * What the student may see while the station is active:
+ * What the student may see (the matcher's `match` on say / patient_say is never sent), and while the station is active:
  * - placement distances and tolerances (the hidden anchors) are stripped from tool exams and contacts;
  * - cases with findingsVisibility "end" keep finding text from the student until the station ends.
  */
 export function redactForStudent(a: Action, kase: Case, session: Session): Action {
+  // how the matcher understood an utterance (fact ids, topics, scores) is for coaches only, always
+  if ((a.type === "say" || a.type === "patient_say") && a.payload.match) {
+    const { match: _m, ...payload } = a.payload;
+    return { ...a, payload } as Action;
+  }
   if (session.status !== "active") return a;
   if (a.type === "tool_contact") return { ...a, payload: { ...a.payload, distanceCm: 0, toleranceCm: 0 } };
   if (a.type !== "examine") return a;
@@ -145,14 +146,13 @@ async function appendOne(sessionId: string, raw: unknown, implied: Action[], aft
       if (e instanceof InvalidExamError) throw new HttpError(400, e.message);
       throw e;
     }
-    const region = getContent().regionById.get(input.payload.regionId)!;
-    const wording = await wordFinding(sessionId, { maneuverLabel: maneuver.label, regionLabel: region.label, findingText: resolved.findingText });
+    // the finding is shown as resolved (case/catalog text): no model rewords it (Phase 4 M1)
     action = {
       ...(await stamp()),
       type: "examine",
       source: input.source,
       payload: { ...input.payload, touch: isTouch(maneuver) },
-      result: { ...resolved, ...(wording ? { wording } : {}) },
+      result: { ...resolved },
     };
     // practice mode: nudge (and log) touching the patient without clean hands, once
     if (sessionMode(session) === "practice" && isTouch(maneuver) && !state.handsClean && state.uncleanTouches === 0) {
@@ -331,25 +331,6 @@ export async function appendSystemAction(sessionId: string, a: SystemAppend): Pr
   const action = { ...a, id: newId("act"), sessionId, t: await nextT(session) } as Action;
   await (await getRepo()).appendAction(action);
   return action;
-}
-
-export async function recordUsage(sessionId: string, u: Partial<Usage>): Promise<void> {
-  const repo = await getRepo();
-  const s = await repo.getSession(sessionId);
-  if (!s) return;
-  const cur = s.usage ?? emptyUsage();
-  await repo.updateSession(sessionId, {
-    usage: {
-      inputTokens: cur.inputTokens + (u.inputTokens ?? 0),
-      outputTokens: cur.outputTokens + (u.outputTokens ?? 0),
-      cacheReadTokens: cur.cacheReadTokens + (u.cacheReadTokens ?? 0),
-      cacheWriteTokens: cur.cacheWriteTokens + (u.cacheWriteTokens ?? 0),
-    },
-  });
-}
-
-export function totalTokens(u: Usage): number {
-  return u.inputTokens + u.outputTokens + u.cacheReadTokens + u.cacheWriteTokens;
 }
 
 export interface StudentSessionView {

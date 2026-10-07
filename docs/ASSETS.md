@@ -40,3 +40,18 @@
 - **Budget:** initial download ≤ 15 MB. The e2e size check sums the JS chunks and `/models`.
 - **Quality setting:** "Graphics: High/Low" in the station header. Low sets dpr 1 and turns off shadows and antialiasing. It defaults to Low on iPad and phones.
 - **FPS:** `?fps` on the station URL shows a frame-rate readout. An iPad measurement is a manual check.
+
+## Language model files (Phase 4)
+
+Vendored into `public/lang/` by `npm run lang:vendor` (git-ignored; runs on install, test and build).
+
+| Files | Source | Licence | Notes |
+|---|---|---|---|
+| `public/lang/models/Xenova/all-MiniLM-L6-v2/` (q8 ONNX + tokenizer, ~23 MB) | sentence-transformers/all-MiniLM-L6-v2, ONNX export by Xenova, taken from the npm package `@ryanstark24/sfgraph-models@1.1.3` because huggingface.co is not reachable from the build environment | Apache-2.0 | sha256 pinned in `scripts/lang/vendor.ts`, plus a functional ordering check. The upstream hash could not be verified here (open question in `docs/PLAN-phase4.md`) |
+| `public/lang/ort/` | onnxruntime-web (Microsoft), from `node_modules` | MIT | wasm runtime for the browser |
+| server inference | `@huggingface/transformers` 4.3.1 + `onnxruntime-node` | Apache-2.0 / MIT | `serverExternalPackages` in `next.config.ts` |
+| optional "Enhanced patient" | `@mlc-ai/web-llm` 0.2.85 (Apache-2.0) loading `Qwen2.5-0.5B-Instruct-q4f16_1-MLC` (Apache-2.0, ~945 MB) from the MLC CDN | Apache-2.0 | off by default; WebGPU only; display-only rewording behind a faithfulness guard |
+
+The embedding model turns text into vectors so a student's words can be compared with a case's example
+questions and the mark sheets' example sentences. It never generates text, facts or scores.
+`npm run lang:embed` precomputes the case and bank phrase vectors into `src/lang/generated/` (int8, committed).

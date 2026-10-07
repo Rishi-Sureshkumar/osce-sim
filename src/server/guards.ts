@@ -1,37 +1,23 @@
 import "server-only";
 import type { Session } from "@/domain/schemas";
-import { intEnv } from "./ai/client";
 import { HttpError } from "./errors";
 
-/** Cost guards. All overridable via env (see .env.example). */
+/** Integer env var with a default (invalid or missing → default). */
+export function intEnv(name: string, fallback: number): number {
+  const v = Number.parseInt(process.env[name] ?? "", 10);
+  return Number.isFinite(v) && v > 0 ? v : fallback;
+}
+
+/** Abuse guards (there is no paid model to protect any more; Phase 4 M1 removed the token caps). */
 export function limits() {
   return {
-    maxPatientTurns: intEnv("MAX_PATIENT_TURNS", 40),
-    patientMaxOutputTokens: intEnv("PATIENT_MAX_OUTPUT_TOKENS", 350),
-    wordingMaxOutputTokens: intEnv("WORDING_MAX_OUTPUT_TOKENS", 200),
-    graderMaxOutputTokens: intEnv("GRADER_MAX_OUTPUT_TOKENS", 16000),
-    maxSessionTokens: intEnv("MAX_SESSION_TOKENS", 400_000),
     rateLimitPerMinute: intEnv("RATE_LIMIT_PER_MINUTE", 60),
   };
 }
 
-export function sessionTokens(s: Session): number {
-  const u = s.usage ?? { inputTokens: 0, outputTokens: 0, cacheReadTokens: 0, cacheWriteTokens: 0 };
-  return u.inputTokens + u.outputTokens + u.cacheReadTokens + u.cacheWriteTokens;
-}
-
 export function assertCanChat(s: Session) {
-  const l = limits();
   if (s.status !== "active") throw new HttpError(409, "This session has ended.");
-  if (s.patientTurns >= l.maxPatientTurns) throw new HttpError(429, `Patient turn limit reached (${l.maxPatientTurns}). Please finish the station.`);
-  if (sessionTokens(s) >= l.maxSessionTokens) throw new HttpError(429, "This session has reached its AI usage limit.");
 }
-
-/** True when the session still has AI budget for optional calls (e.g. finding wording). */
-export function hasAiBudget(s: Session): boolean {
-  return sessionTokens(s) < limits().maxSessionTokens;
-}
-
 // --- per-IP rate limit (in-memory, per server instance; good enough for a demo) ---
 const hits = new Map<string, number[]>();
 

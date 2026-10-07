@@ -2,9 +2,11 @@ import { defineConfig } from "@playwright/test";
 
 const PORT = 3200;
 
-/** Smoke test runs a production build with the model mocked and access codes set. */
+/** Smoke test runs a production build with access codes set (no external service is ever called). */
 export default defineConfig({
   testDir: "./e2e",
+  // the catalog and visual harnesses have their own configs (npm run test:catalog / test:visual)
+  testIgnore: ["**/catalog.spec.ts", "**/visual.spec.ts"],
   timeout: 120_000,
   retries: 0,
   // one browser at a time: software WebGL is CPU-bound, and specs share the file store
@@ -23,8 +25,6 @@ export default defineConfig({
     // PW_REUSE=1: reuse a server you started yourself (same env as below) while iterating on specs
     reuseExistingServer: !!process.env.PW_REUSE,
     env: {
-      AI_MOCK: "true",
-      ANTHROPIC_API_KEY: "",
       DATABASE_URL: "",
       FILE_STORE_PATH: "test-results/e2e-store.json",
       ACCESS_CODE: "student-e2e",

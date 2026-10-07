@@ -83,7 +83,7 @@
       "section": "Clinical courtesy",
       "label": "Verbally checks the patient's comfort during the exam",
       "weight": 1,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Credit if the student, during the physical exam, says something that shows attention to the patient's comfort or dignity: asks if they are comfortable, warns before touching/cold stethoscope, asks them to say if anything hurts, offers help repositioning.",
       "mockKeywords": [
         "comfortable",
@@ -92,6 +92,65 @@
         "cold",
         "okay if i"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "let me know if anything hurts",
+          "let me know if it hurts",
+          "let me know if this hurts",
+          "tell me if it hurts",
+          "tell me if anything hurts",
+          "let me know if anything is uncomfortable",
+          "let me know if you are uncomfortable",
+          "this might be cold",
+          "this may be cold",
+          "might feel cold",
+          "might be a bit cold",
+          "sorry about my cold hands",
+          "my hands are cold",
+          "can i help you",
+          "let me help you",
+          "do you need help",
+          "do you need a hand"
+        ],
+        "patterns": [
+          "\\b(?:are you|is that|is this|you|are you still|you still) (?:feeling )?(?:comfortable|comfy|ok(?:ay)?|alright|all right)\\b(?!.*\\b(?:at night|when you (?:sleep|lie)|sleeping|in bed|overnight|at home)\\b)",
+          "\\b(?:let me know|tell me|say|shout) (?:straight away |right away )?if (?:anything|it|this|that|any of this) (?:hurts|is (?:sore|painful|uncomfortable|tender)|feels (?:uncomfortable|sore|painful)|becomes (?:uncomfortable|painful|sore)|gets (?:uncomfortable|sore))\\b",
+          "\\b(?:might|may|will|could|is going to) (?:be|feel) (?:a (?:bit|little) |slightly )?(?:cold|chilly)\\b",
+          "\\b(?:my|the|this) (?:cold|warm(?:ed)?(?: up)?) (?:stethoscope|hands|fingers)\\b",
+          "\\b(?:can|may|shall|let) (?:i|me) help you\\b",
+          "\\b(?:do you need|would you like|need) (?:any help|some help|a hand|help)\\b",
+          "\\bsorry (?:if|about|for)\\b.*\\b(?:cold|hands|uncomfortable|hurt|hurts|sore|tender)\\b",
+          "\\b(?:does|did|is) (?:that|this|it) (?:hurt|sore|tender|painful|uncomfortable)\\b",
+          "\\b(?:would you like|do you want|shall i get you|let me get you) (?:the |a |another )?(?:blanket|sheet|pillow|gown)\\b",
+          "\\b(?:cover|covering) you (?:back )?up\\b",
+          "\\b(?:my|the|this) (?:hands|fingers|stethoscope) (?:are|is|might be|may be|will be|could be|feel|might feel|may feel) (?:a bit |a little |quite |very )?(?:cold|chilly)\\b"
+        ],
+        "exemplars": [
+          "Let me know if anything feels uncomfortable.",
+          "This stethoscope might feel a little cold.",
+          "Are you still comfortable lying back like that?",
+          "Tell me if this hurts at all.",
+          "Can I help you sit forward?",
+          "I'm going to press on your belly now; please say if it's sore.",
+          "Sorry, my hands are a bit cold.",
+          "Is that pillow okay, or would you like another one?",
+          "Let me cover you back up with the sheet so you stay warm."
+        ],
+        "counterExemplars": [
+          "Are you comfortable lying flat at night?",
+          "Does your chest hurt when you breathe in?",
+          "Take a deep breath in for me.",
+          "Do you get cold hands and feet?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {

@@ -44,3 +44,14 @@ describe("hidden anchors stay hidden while the station is active", () => {
     expect(visibleToStudent(contact, done)).toBe(true);
   });
 });
+
+describe("the language matcher's view of an utterance is coach-only", () => {
+  const match = { clauses: [{ text: "how many pillows", target: "orthopnea", kind: "fact" as const, score: 0.9, via: "embedding" as const }], topics: ["orthopnea"], embedding: "server" as const };
+  const reply: Action = { id: "p1", sessionId: "s", t: 3, type: "patient_say", source: "system", payload: { text: "Three pillows.", match } };
+  it("strips match from patient_say for the student, active or ended", () => {
+    for (const status of ["active", "graded"] as const) {
+      const r = redactForStudent(reply, kase, { status } as Session);
+      expect(r.type === "patient_say" && r.payload).toEqual({ text: "Three pillows." });
+    }
+  });
+});

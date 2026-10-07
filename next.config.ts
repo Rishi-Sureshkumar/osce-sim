@@ -11,10 +11,16 @@ const PATCHES = fs.existsSync(path.join(process.cwd(), "patches"))
 const nextConfig: NextConfig = {
   // Content JSON is read from disk at runtime on the server; make sure it ships with the deployment.
   outputFileTracingIncludes: {
-    "/**": ["./content/**/*.json"],
+    "/**": ["./content/**/*.json", "./src/lang/generated/**/*.json", "./public/lang/models/**/*"],
   },
-  serverExternalPackages: ["postgres"],
-  webpack(config) {
+  // the server embeds with onnxruntime-node (native): never bundle it
+  serverExternalPackages: ["postgres", "@huggingface/transformers", "onnxruntime-node", "sharp"],
+  webpack(config, { isServer }) {
+    if (!isServer) {
+      // the browser build of transformers.js uses onnxruntime-web; its node-only peers must not be bundled
+      config.resolve = config.resolve ?? {};
+      config.resolve.alias = { ...(config.resolve.alias ?? {}), "onnxruntime-node": false, sharp: false };
+    }
     if (config.cache && typeof config.cache === "object" && PATCHES.length) {
       config.cache.buildDependencies = { ...(config.cache.buildDependencies ?? {}), patches: PATCHES };
     }

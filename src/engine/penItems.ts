@@ -4,7 +4,7 @@
  * - the case's `penKey` → one AI item per history point, exam point and accepted diagnosis, plus
  *   a justification item and the deterministic "no unperformed findings reported" item.
  */
-import type { Case, MarkSheet, MarkSheetItem } from "@/domain/schemas";
+import type { Case, MarkSheet, MarkSheetItem, MatchSpec } from "@/domain/schemas";
 
 export const CASE_PE_SHEET = "case-pe";
 export const PEN_SHEET = "pen";
@@ -24,6 +24,14 @@ export function casePeSheet(kase: Case, threshold: number | undefined): MarkShee
   };
 }
 
+/** The deterministic match spec of a generated note item (src/lang/grade/match.ts). */
+function penMatch(sources: MatchSpec["sources"], keywords: string[], exemplars: string[], polarity: MatchSpec["polarity"]): MatchSpec {
+  return { sources, keywords: [...new Set(keywords.filter(Boolean))], patterns: [], exemplars, counterExemplars: [], topics: [], form: "any", polarity, minMatches: 1, window: "any", penalties: [] };
+}
+
+/** Graded specially (src/lang/grade/pen.ts): each listed diagnosis needs supporting findings. */
+export const PEN_JUSTIFICATION_ITEM = "pen-justification";
+
 export function penSheet(kase: Case, threshold: number | undefined): MarkSheet | null {
   const key = kase.penKey;
   if (!key) return null;
@@ -38,6 +46,7 @@ export function penSheet(kase: Case, threshold: number | undefined): MarkSheet |
         scoring: "match",
         guidance: `Credit only if the POST-ENCOUNTER NOTE history section documents this ${h.kind === "negative" ? "pertinent negative" : "pertinent positive"}: ${h.text}. Quote the note.`,
         mockKeywords: h.keywords,
+        match: penMatch(["pen_history"], [...h.terms, ...h.keywords], h.exemplars.length ? h.exemplars : [h.text], h.kind === "negative" ? "negated" : "affirmed"),
         sourceText: "",
       }),
     ),
@@ -50,6 +59,7 @@ export function penSheet(kase: Case, threshold: number | undefined): MarkSheet |
         scoring: "match",
         guidance: `Credit only if the POST-ENCOUNTER NOTE exam section documents: ${e.text}, AND the transcript shows the student performed the exam that elicits it. Quote the note.`,
         mockKeywords: e.keywords,
+        match: penMatch(["pen_exam"], [...e.terms, ...e.keywords], e.exemplars.length ? e.exemplars : [e.text], "affirmed"),
         sourceText: "",
       }),
     ),
@@ -62,11 +72,13 @@ export function penSheet(kase: Case, threshold: number | undefined): MarkSheet |
         scoring: "match",
         guidance: `Credit if the note's diagnoses list ${d.diagnosis}${d.aliases.length ? ` (or: ${d.aliases.join(", ")})` : ""}${d.rank === 1 ? ", ideally first" : ""}. Rationale: ${d.rationale}. Quote the note.`,
         mockKeywords: [d.diagnosis, ...d.aliases],
+        // accepted diagnoses that satisfy this key entry contribute their names and synonyms
+        match: penMatch(["pen_diagnoses"], [d.diagnosis, ...d.aliases, ...kase.acceptableDiagnoses.filter((a) => a.satisfies.includes(d.id)).flatMap((a) => [a.diagnosis, ...a.synonyms])], [d.diagnosis], "any"),
         sourceText: "",
       }),
     ),
     {
-      id: "pen-justification",
+      id: PEN_JUSTIFICATION_ITEM,
       section: "PEN: differential",
       label: "Diagnoses are justified by findings the student elicited",
       weight: 2,

@@ -5,7 +5,6 @@ import type { Override, Session } from "@/domain/schemas";
 import { applyOverrides, totals } from "@/engine/scoring";
 import { getRepo } from "./db";
 import { HttpError } from "./errors";
-import { sessionTokens } from "./guards";
 import { newId } from "./ids";
 import { getSessionOr404 } from "./session";
 
@@ -16,7 +15,6 @@ export interface SessionRow {
   maxPoints: number | null;
   needsReview: number;
   overrides: number;
-  tokens: number;
   hints: number;
 }
 
@@ -36,7 +34,6 @@ export async function listSessionRows(): Promise<SessionRow[]> {
         maxPoints: t?.maxPoints ?? null,
         needsReview: t?.needsReview ?? 0,
         overrides: overrides.length,
-        tokens: sessionTokens(session),
         hints: actions.filter((a) => a.type === "hint").length,
       };
     }),

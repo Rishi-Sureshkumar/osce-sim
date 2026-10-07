@@ -1,6 +1,6 @@
 /**
  * Courtesy tags for a student utterance. A keyword/regex pass runs first; the matched words are
- * stored verbatim as evidence. The model fallback (src/server/ai/tagger.ts) is called from chat.ts.
+ * stored verbatim as evidence. The similarity fallback (src/lang/tags.ts) is called from chat.ts.
  * Pure — no server-only imports — so it is unit-tested directly.
  */
 import type { CourtesyTag, Position, TagHit } from "@/domain/schemas";
@@ -51,9 +51,9 @@ export function regexTags(text: string): TagHit[] {
   return out;
 }
 
-/** Words that suggest courtesy content the regexes may have missed (gate for the model fallback). */
+/** Words that suggest courtesy content the regexes may have missed (gate for the similarity fallback). */
 const CUES = /\b(name|student|doctor|exam\w*|listen\w*|comfortable|questions|bye|thank|sit|lie|lay|roll|lean|consent|okay if|alright if|permission|mind if)\b/i;
 
-export function needsModelFallback(text: string, hits: TagHit[]): boolean {
+export function needsFallback(text: string, hits: TagHit[]): boolean {
   return hits.length === 0 && text.trim().length >= 20 && CUES.test(text);
 }

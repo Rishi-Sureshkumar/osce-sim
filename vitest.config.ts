@@ -12,6 +12,6 @@ export default defineConfig({
   test: {
     include: ["src/**/*.test.ts", "tests/**/*.test.ts"],
     environment: "node",
-    env: { AI_MOCK: "true" },
+    setupFiles: ["tests/setup/no-network.ts"],
   },
 });

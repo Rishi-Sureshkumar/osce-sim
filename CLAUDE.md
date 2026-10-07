@@ -1,15 +1,17 @@
 # OSCE Simulator — guide for Claude Code sessions
 
-Web-based OSCE simulator. Students take a history from an AI patient, examine a patient
+Web-based OSCE simulator. Students take a history from a simulated patient (deterministic, offline), examine a patient
 in a 3D exam room, present a differential, and get scored feedback against school
 mark sheets. Coaches review sessions and override scores. Read `docs/PLAN.md` for milestones
 and workstream ownership.
 
 ## Invariants — never violate
 
-1. **Cases are the only source of truth for clinical facts.** The model never invents a
-   finding, vital sign, lab or history fact. The AI has exactly three jobs: (a) voice the
-   patient from case facts, (b) reword a structured finding, (c) grade `ai` mark-sheet items.
+1. **Cases are the only source of truth for clinical facts, and no model decides anything.** There is no
+   external LLM. The patient's replies are case (or conversation-bank) text chosen deterministically by
+   `src/lang`; grading is the rules interpreter plus deterministic matching (`src/lang/grade`, verbatim
+   quotes). The optional in-browser WebLLM (`src/lang/webllm`, off by default) may only reword text that
+   was already chosen, for display; the log keeps the original. Nothing invents a finding, vital or fact.
 2. **Finding resolution is deterministic** (`src/engine/resolveFinding.ts`):
    `case.abnormalFindings[m][region] ?? case.abnormalFindings[m].default ?? catalog[m].normalFinding[region] ?? catalog[m].normalFinding.default`,
    then `{vitals.*}` placeholders are filled from the case. If AI wording fails, show the raw text.
@@ -19,8 +21,11 @@ and workstream ownership.
    read only from the log. Nothing scores from UI state.
 4. **Content is data.** Cases, mark sheets and the exam catalog are JSON in `/content`,
    validated by Zod. Adding a case, maneuver or mark-sheet item must never need a code change.
-5. **The Anthropic API key is server-side only.** All model calls go through `src/server/ai/`.
-   Never import that folder from a client component; never prefix env vars with `NEXT_PUBLIC_`.
+5. **No external service; matching data stays on the server.** The sentence-embedding model is vendored
+   (`npm run lang:vendor`) and runs in the browser (only to help pick a reply) and on the server (always
+   re-embeds for grading — client vectors are never trusted for scores). Case facts, paraphrase banks and
+   phrase vectors (`src/lang/generated`) never reach the browser: don't import `src/lang/server.ts`,
+   `src/lang/tags.ts`, `src/lang/bank.ts` or `src/lang/grade` from a client component; never prefix env vars with `NEXT_PUBLIC_`.
 6. **Region ids are canonical and stable** (`content/catalog/regions.json`). The 3D room (and any
    future VR renderer) maps to the same `regionId` strings; each region has a `group` (focus shot /
    menu grouping). Never rename or delete one; add new ones instead (retired ids get `hidden: true`).
@@ -36,16 +41,22 @@ and workstream ownership.
 ## Commands
 
 ```bash
-npm run dev          # http://localhost:3000 (AI_MOCK=true and no DATABASE_URL = zero setup)
+npm run dev          # http://localhost:3000 (no DATABASE_URL = zero setup; no API key needed)
 npm run typecheck    # tsc --noEmit
 npm test             # vitest (engine, content validation, scoring, repo)
 npm run lint
 npm run validate     # schema + cross-reference check of /content
-npm run e2e          # Playwright smoke test (builds + starts the app with AI_MOCK=true)
+npm run e2e          # Playwright smoke test (builds + starts the app)
 npm run check:copyright  # needs local /source/*.txt — flags 7-word runs copied from the framework
 npm run seed         # writes a demo HF session (graded) into the configured store
 npm run db:generate  # drizzle-kit: SQL migration from src/server/db/schema.ts
 npm run db:migrate   # apply ./drizzle migrations to DATABASE_URL
+npm run lang:vendor  # copy the MiniLM model + onnxruntime wasm into public/lang (pinned sha256; runs on install/test/build)
+npm run lang:embed   # regenerate src/lang/generated phrase vectors after changing intents or banks
+npm run lang:eval    # chat fixtures accuracy (tests/fixtures/chat; --verbose shows misses)
+npm run lang:calibrate   # grading vs labelled transcripts (tests/fixtures/grading)
+npm run case:paraphrases <caseId>  # thin intents, colliding paraphrases, fixture gaps
+npm run qa           # full QA gate: validate, typecheck, lint, test, anchors, intersections, catalog, visual, e2e, review-check
 ```
 
 Before every commit: `npm run validate && npm run typecheck && npm test && npm run lint`
@@ -66,9 +77,9 @@ src/domain/schemas.ts               TEAM CONTRACT (Zod) — heads-up to the team
 src/content/                        loaders + cross-reference validation
 src/engine/                         pure TS: resolveFinding, rules interpreter, evidence check, scoring
 src/input/adapters/                 click / text / toolbar → Action (+ tool, voice; vr is a stub)
-src/server/ai/                      the ONLY place that talks to Anthropic (models.ts, patient, wording, grader, mock)
+src/lang/                           deterministic language layer: normalise/split, bank + matcher, patient replies, grade/, embed/, webllm/
 src/server/db/                      Repo interface, Postgres (Drizzle) + file store
-src/server/                         session service, auth, rate limit, cost guards
+src/server/                         session service, chat, grading, auth, rate limit
 src/app/api/                        route handlers
 src/app/(pages)                     gate, home, station, results, coach
 src/scene/                          rigged patient (PatientModel, rig.ts pose maths, patientRig.generated.ts), room/ props, quality
@@ -108,8 +119,11 @@ would contradict the case (e.g. "unlaboured" breathing).
   `performedIn`, `submitted`, `said` (courtesy tags), `technique` (tool/mode/placement/duration/position),
   `hygieneBeforeTouch`, `happened` (any event ref, e.g. `room:exit`, `drape:cover`, `tag:closing`), `all`, `any`, `not`). Add `modes: ["exam"]` for time-dependent items. The single interpreter is `src/engine/rules.ts`;
   never write per-item code.
-- `scoring: "ai"` + `guidance` (what the grader looks for) + optional `mockKeywords` (used when AI_MOCK=true).
-  Grader output must quote evidence; quotes are verified verbatim server-side, otherwise `needs_review`.
+- `scoring: "match"` + `guidance` (what earns credit, for coaches) + a `match` spec: `sources`, `keywords`,
+  `patterns`, `exemplars` / `counterExemplars` (similarity), `topics` (history coverage), `form`, `window`,
+  `minMatches`, `penalties`. Credit quotes the student's own sentence verbatim; similarity in the review band
+  gives `needs_review`. Re-run `npm run lang:calibrate` after changing specs (targets: ≥ 90% agreement, ≤ 10% review).
+  A case can switch an item off with `itemsNotApplicable` (shown greyed, never scored).
 - `scoring: "not_assessable"` + `notAssessableReason`. Shown greyed out to coaches, never scored.
 
 **1B scoring** — every mark sheet has a `domain` (`patient_encounter` | `communication`) and a `passThreshold`;
@@ -120,15 +134,18 @@ their findings) so `src/engine/penCheck.ts` can flag note claims about exams tha
 Item ids must be unique across all of a case's sheets (`npm run validate` checks).
 
 **Courtesy tags** — what the student says is tagged server-side in `src/server/tags.ts` (regex
-first; `src/server/ai/tagger.ts` is the verified-quote model fallback). Add a phrasing there with a
+first; `src/lang/tags.ts` falls back to similarity with example phrasings). Add a phrasing there with a
 test in `tests/tags.test.ts`. Tags are never accepted from the browser. Positioning tags must only
 match requests, never symptom questions.
 
 **Add an input method (voice / VR)** — implement the adapter in `src/input/adapters/` so it returns
 `ActionInput`s and posts them like `click.ts` does. Do not touch the engine.
 
-**Add a model call** — only inside `src/server/ai/`, with model ids from `src/server/ai/models.ts`,
-a mock path for `AI_MOCK=true`, token usage recorded via `recordUsage`, and a raw-data fallback.
+**Add a language feature** — keep it deterministic and inside `src/lang/` (pure modules, data in
+`content/lang/` or the case). New history facts need `intents` (canonical + ≥ 5 paraphrases + keywords/topics);
+run `npm run lang:embed`, `npm run case:paraphrases <caseId>` and keep the chat fixtures ≥ 90%. Thresholds live in
+`src/lang/thresholds.ts`. A WebLLM use may only reword already-chosen text behind the faithfulness guard
+(`src/lang/webllm/guard.ts`) and must be tested with `FakeEngine`.
 
 ## Conventions
 
@@ -136,4 +153,4 @@ a mock path for `AI_MOCK=true`, token usage recorded via `recordUsage`, and a ra
 - Server-only modules import `"server-only"`.
 - Keep components small and inside your workstream's folder. If you must edit a shared file
   (`schemas.ts`, `regions.json`, `src/server/session.ts`), say so in your PR description.
-- Develop with `AI_MOCK=true` (default in `.env.example`) so building costs no API credit.
+- Tests may not reach the network (`tests/setup/no-network.ts`); the app needs no external service at all.

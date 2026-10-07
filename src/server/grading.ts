@@ -4,11 +4,15 @@ import { sessionMode, type Action, type Case, type GradingRun, type MarkSheet } 
 import { appliesInMode, applyPenCheck, scoreAiItems, scoreDeterministicItems } from "@/engine/scoring";
 import { penCheck } from "@/engine/penCheck";
 import { sheetsForCase as filterSheets } from "@/engine/sheets";
-import { gradeAiItems } from "./ai/grader";
+import { deterministicFeedback } from "@/engine/feedback";
+import { embedTexts } from "@/lang/embed/node";
+import { gradeMatchItems } from "@/lang/grade";
+import { candidatesFrom, specFor } from "@/lang/grade/match";
+import { makeNormalizer } from "@/lang/normalize";
 import { getRepo } from "./db";
 import { HttpError } from "./errors";
 import { newId } from "./ids";
-import { getCaseOr404, getSessionOr404, recordUsage } from "./session";
+import { getCaseOr404, getSessionOr404 } from "./session";
 
 export function sheetsForCase(kase: Case): MarkSheet[] {
   return filterSheets(kase, getContent().markSheetById);
@@ -17,8 +21,9 @@ export function sheetsForCase(kase: Case): MarkSheet[] {
 const inFlight = new Map<string, Promise<GradingRun>>();
 
 /**
- * Grades a session: deterministic `auto` items from the log, then one AI call for `ai` items
- * (quotes verified). Students get one grading run per session; coaches may re-run.
+ * Grades a session: `auto` items from the log by the rule interpreter, `match` items by the
+ * deterministic language matcher (src/lang/grade; quotes are the student's own sentences and are
+ * verified). No model is involved. Students get one grading run per session; coaches may re-run.
  */
 export function runGrading(sessionId: string, trigger: GradingRun["trigger"]): Promise<GradingRun> {
   const existing = inFlight.get(sessionId);
@@ -43,23 +48,21 @@ async function doGrade(sessionId: string, trigger: GradingRun["trigger"]): Promi
   const pen = penFor(log);
   const check = penCheck(pen?.payload.exam ?? "", content.maneuvers, kase.penKey?.exam ?? [], log);
   const deterministic = applyPenCheck(sheets.flatMap((s) => scoreDeterministicItems(s, log, mode)), check, pen);
-  const autoScored = deterministic.filter((s) => s.scoring === "auto");
-  const got = autoScored.reduce((n, s) => n + s.points, 0);
-  const max = autoScored.reduce((n, s) => n + s.maxPoints, 0);
-  const missed = autoScored
-    .filter((s) => s.value < 1)
-    .map((s) => sheets.find((x) => x.id === s.markSheetId)?.items.find((i) => i.id === s.itemId)?.label)
-    .filter(Boolean)
-    .slice(0, 25);
-  const flagged = check.claims.filter((c) => c.status === "flagged").map((c) => `“${c.text}”`);
-  const deterministicSummary =
-    `Exam checklist: ${round(got)}/${max} points. Not done or incomplete: ${missed.join("; ") || "none"}.` +
-    (pen ? ` Post-encounter note exam claims with no matching exam in the log: ${flagged.join("; ") || "none"}.` : "");
-
   const gradedSheets = sheets.map((s) => ({ ...s, items: s.items.filter((i) => appliesInMode(i, mode)) }));
-  const ai = await gradeAiItems({ kase, sheets: gradedSheets, log, content, deterministicSummary });
-  await recordUsage(sessionId, ai.usage);
-  const aiScores = sheets.flatMap((s) => scoreAiItems(s, ai.judgements, log, mode));
+  // embed every sentence and example the matcher may compare (once), then grade synchronously
+  const normalize = makeNormalizer(content.lang.synonyms);
+  const texts = new Set<string>(candidatesFrom(log, normalize).map((c) => c.sentence));
+  for (const sh of gradedSheets)
+    for (const it of sh.items) {
+      if (it.scoring !== "match") continue;
+      const spec = specFor(it);
+      for (const t of [...spec.exemplars, ...spec.counterExemplars, ...spec.penalties.flatMap((p) => p.exemplars)]) texts.add(t);
+    }
+  const list = [...texts];
+  const vecs = await embedTexts(list);
+  const byText = new Map(vecs ? list.map((t, i) => [t, vecs[i]!] as const) : []);
+  const judgements = gradeMatchItems({ kase, sheets: gradedSheets, log, check: pen ? check : null, normalize, embed: (t) => byText.get(t) ?? null });
+  const aiScores = sheets.flatMap((s) => scoreAiItems(s, judgements, log, mode));
 
   // keep mark-sheet item order
   const order = new Map(sheets.flatMap((s) => s.items.map((i, idx) => [`${s.id}/${i.id}`, idx] as const)));
@@ -73,19 +76,14 @@ async function doGrade(sessionId: string, trigger: GradingRun["trigger"]): Promi
     createdAt: new Date().toISOString(),
     trigger,
     mode,
-    summary: ai.summary,
-    strengths: ai.strengths,
-    improvements: ai.improvements,
+    ...deterministicFeedback({ sheets, scores, pen: pen ? check : null }),
     scores,
-    usage: ai.usage,
-    mocked: ai.mocked,
+    grader: "deterministic",
   };
   await repo.saveGradingRun(run);
   const fresh = await getSessionOr404(sessionId);
   await repo.updateSession(sessionId, { status: "graded", gradingRuns: fresh.gradingRuns + 1 });
   return run;
 }
-
-const round = (n: number) => Math.round(n * 100) / 100;
 
 export const penFor = (log: Action[]) => log.findLast((a): a is Extract<Action, { type: "submit_pen" }> => a.type === "submit_pen");

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { needsModelFallback, regexTags } from "@/server/tags";
+import { needsFallback, regexTags } from "@/server/tags";
 
 const tags = (t: string) => regexTags(t).map((h) => h.tag).sort();
 
@@ -38,27 +38,17 @@ describe("courtesy tags (regex pass)", () => {
   });
   it("history questions are not tagged; fallback only when cue words are present", () => {
     expect(regexTags("How long have you been short of breath?")).toEqual([]);
-    expect(needsModelFallback("How long have you been short of breath?", [])).toBe(false);
-    expect(needsModelFallback("Before we start, would you be alright with me examining you?", [])).toBe(true);
-    expect(needsModelFallback("Is it okay if I examine you?", regexTags("Is it okay if I examine you?"))).toBe(false);
+    expect(needsFallback("How long have you been short of breath?", [])).toBe(false);
+    expect(needsFallback("Before we start, would you be alright with me examining you?", [])).toBe(true);
+    expect(needsFallback("Is it okay if I examine you?", regexTags("Is it okay if I examine you?"))).toBe(false);
   });
 });
 
 import { ActionInput } from "@/domain/schemas";
-import { verifiedTags } from "@/server/ai/tagger";
 
 describe("tag integrity", () => {
   it("the browser cannot send tags: they are stripped from action input", () => {
     const parsed = ActionInput.parse({ type: "say", source: "text", payload: { text: "hi", tags: [{ tag: "closing", evidence: "hi", via: "regex" }] } });
     expect(parsed.type === "say" && "tags" in parsed.payload).toBe(false);
-  });
-  it("model tags survive only with verbatim evidence", () => {
-    const text = "Before we start, would you be alright with me examining you?";
-    const out = verifiedTags(text, [
-      { tag: "asked_consent_exam", evidence: "would you be alright with me examining you", position: null },
-      { tag: "introduced_name", evidence: "my name is Sam", position: null },
-      { tag: "requested_position", evidence: "Before we start", position: null },
-    ]);
-    expect(out).toEqual([{ tag: "asked_consent_exam", evidence: "would you be alright with me examining you", via: "model" }]);
   });
 });

@@ -27,13 +27,22 @@ export function Timeline({ actions, labels, highlight }: { actions: Action[]; la
                 {a.type === "say" && !!a.payload.tags?.length && (
                   <ul className="mt-1 flex flex-wrap gap-1" aria-label="Courtesy tags">
                     {a.payload.tags.map((t) => (
-                      <li key={t.tag} className="rounded bg-sky-50 px-1.5 py-0.5 text-[11px] text-sky-900" data-testid="courtesy-tag" title={t.via === "model" ? "Tagged by the model (quote verified)" : "Tagged by keyword match"}>
+                      <li key={t.tag} className="rounded bg-sky-50 px-1.5 py-0.5 text-[11px] text-sky-900" data-testid="courtesy-tag" title={t.via === "regex" ? "Tagged by keyword match" : t.via === "similarity" ? "Tagged by similarity to example phrasings (quote is the student's own sentence)" : "Tagged by the model (legacy session; quote verified)"}>
                         {TAG_LABELS[t.tag]}
                         {t.position ? ` (${t.position.replace(/_/g, " ")})` : ""}: <q className="italic">{t.evidence}</q>
-                        {t.via === "model" && <span className="ml-1 text-sky-600">· model</span>}
+                        {t.via !== "regex" && <span className="ml-1 text-sky-600">· {t.via === "similarity" ? "similar" : "model"}</span>}
                       </li>
                     ))}
                   </ul>
+                )}
+                {a.type === "patient_say" && a.payload.match && (
+                  <p className="mt-0.5 text-[11px] text-slate-500" data-testid="utterance-match" title="How the deterministic matcher understood the student's question (coach view only)">
+                    understood as{" "}
+                    {a.payload.match.clauses
+                      .map((c) => (c.kind === "unknown" ? `“${c.text}” → not recognised` : `${c.target.replace(/^[a-z_]+:/, "")} (${c.kind.replace("_", "-")}, ${c.via}${c.via === "none" ? "" : ` ${c.score.toFixed(2)}`})`))
+                      .join(" · ")}
+                    {a.payload.match.embedding !== "none" && <span> · embedded on the {a.payload.match.embedding}</span>}
+                  </p>
                 )}
                 {a.type === "examine" && <p className="mt-0.5 text-slate-600">→ {findingDisplay(a, labels)}</p>}
                 {a.type === "submit_pen" && (

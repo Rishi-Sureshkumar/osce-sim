@@ -68,6 +68,69 @@
           "course",
           "worse",
           "when did"
+        ],
+        "intents": {
+          "canonical": "When did the shortness of breath start?",
+          "paraphrases": [
+            "When did your breathing problems start?",
+            "When did you first notice being short of breath?",
+            "How long have you been short of breath?",
+            "How long has this breathlessness been going on?",
+            "When did the SOB begin?",
+            "When did you start getting breathless?",
+            "Since when have you had trouble breathing?",
+            "How long has it been hard to catch your breath?",
+            "Has your breathing been getting worse?",
+            "Is the shortness of breath getting better, worse or staying the same?",
+            "How has the breathlessness changed over the past two weeks?",
+            "Has the breathlessness been steadily getting worse?",
+            "What has the time course of your dyspnoea been?",
+            "Can you tell me more about the breathlessness?"
+          ],
+          "keywords": [
+            "onset",
+            "when did it start",
+            "when did this start",
+            "how long has this been going on",
+            "time course",
+            "since when"
+          ],
+          "patterns": [
+            "\\bhow long (have you been|has it been|have you had|has this been)\\b.*\\b(short of breath|shortness of breath|breathless|breathlessness|breathing|winded|out of breath)\\b",
+            "\\bwhen did\\b.*\\b(start|begin|began|first notice)\\b.*\\b(short of breath|shortness of breath|breathless|breathlessness|breathing|winded|out of breath)\\b",
+            "\\bwhen did\\b.*\\b(short of breath|shortness of breath|breathless|breathlessness|breathing|winded|out of breath)\\b.*\\b(start|begin|began)\\b"
+          ],
+          "topics": [
+            "hpi.onset",
+            "hpi.course"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "onset-gradual",
+            "intents": {
+              "canonical": "Did it come on suddenly or gradually?",
+              "paraphrases": [
+                "Was the onset sudden or gradual?",
+                "Did the breathlessness come on all of a sudden?",
+                "Did your breathing get bad suddenly or slowly?",
+                "Did the shortness of breath start abruptly?",
+                "Did the breathlessness come on gradually?",
+                "Was the start of the breathlessness sudden?"
+              ],
+              "keywords": [
+                "suddenly or gradually",
+                "sudden or gradual",
+                "all of a sudden",
+                "abruptly",
+                "came on suddenly"
+              ],
+              "topics": [
+                "hpi.onset"
+              ]
+            },
+            "answer": "It came on gradually and has got steadily worse."
+          }
         ]
       },
       {
@@ -83,6 +146,98 @@
           "activity",
           "exercise",
           "distance"
+        ],
+        "intents": {
+          "canonical": "How much can you do before you get short of breath?",
+          "paraphrases": [
+            "Do you get short of breath when you exert yourself?",
+            "Does walking make you breathless?",
+            "Do you get winded with activity?",
+            "How is your exercise tolerance?",
+            "What is your exercise tolerance like?",
+            "Are you short of breath on exertion?",
+            "Any SOB on exertion?",
+            "Do you get dyspnoea on exertion?",
+            "Has your breathing limited what you can do day to day?",
+            "Do you get breathless doing everyday things around the house?",
+            "Compared with two weeks ago, how much can you do now?",
+            "Does physical activity make your breathing worse?",
+            "Do you get out of breath when you move around?"
+          ],
+          "keywords": [
+            "exertion",
+            "exercise tolerance",
+            "exert yourself",
+            "winded",
+            "physical activity",
+            "dyspnea on exertion"
+          ],
+          "topics": [
+            "hpi.severity",
+            "hpi.aggravating"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "exertion-distance",
+            "intents": {
+              "canonical": "How far can you walk before you get short of breath?",
+              "paraphrases": [
+                "How far can you walk?",
+                "How many blocks can you walk?",
+                "What distance can you walk before you have to stop?",
+                "How far could you walk two weeks ago?",
+                "How far can you go on the flat before you have to stop?",
+                "How far can you walk without getting breathless?",
+                "Can you walk a block without stopping?"
+              ],
+              "keywords": [
+                "how far can you walk",
+                "how many blocks",
+                "walking distance",
+                "how far could you walk",
+                "on the flat"
+              ],
+              "patterns": [
+                "\\bhow far\\b.*\\bwalk(ing)?\\b",
+                "\\bhow many (blocks|metres|meters|yards)\\b"
+              ],
+              "topics": [
+                "hpi.severity"
+              ]
+            },
+            "answer": "Only from the bedroom to the kitchen now. Two weeks ago I could walk a few blocks."
+          },
+          {
+            "id": "exertion-stairs",
+            "intents": {
+              "canonical": "Can you manage stairs?",
+              "paraphrases": [
+                "How many stairs can you climb?",
+                "Do you get breathless climbing stairs?",
+                "How many flights of stairs can you manage?",
+                "Can you get up the stairs at home?",
+                "Are stairs a problem for you?",
+                "Do you get short of breath going upstairs?",
+                "Any trouble climbing stairs?"
+              ],
+              "keywords": [
+                "flights of stairs",
+                "flight of stairs",
+                "upstairs",
+                "climb stairs",
+                "climbing stairs",
+                "the stairs"
+              ],
+              "patterns": [
+                "\\b(climb|climbing|manage|get up|go up|going up)\\b.*\\b(stairs|steps|flights?)\\b"
+              ],
+              "topics": [
+                "hpi.severity"
+              ]
+            },
+            "answer": "I get winded going up the 12 stairs at home."
+          }
         ]
       },
       {
@@ -97,6 +252,73 @@
           "sleep",
           "lay down",
           "flat"
+        ],
+        "intents": {
+          "canonical": "Do you get short of breath when you lie flat?",
+          "paraphrases": [
+            "Can you lie flat?",
+            "Are you able to lie flat without getting breathless?",
+            "Does lying down make your breathing worse?",
+            "Is your breathing worse when you lie down?",
+            "Do you need to prop yourself up to breathe at night?",
+            "Do you sleep propped up?",
+            "Do you have orthopnoea?",
+            "Any orthopnea?",
+            "Can you lay down flat in bed?",
+            "Do you have to sit up to sleep?",
+            "Do you sleep sitting up?",
+            "How do you sleep at night, flat or propped up?",
+            "Does lying back make you more breathless?",
+            "Have you had to sleep in a chair?"
+          ],
+          "keywords": [
+            "lie flat",
+            "lying flat",
+            "lay flat",
+            "propped up",
+            "orthopnea",
+            "orthopnoea",
+            "sit up to sleep",
+            "sleep sitting up"
+          ],
+          "patterns": [
+            "\\b(lie|lying|lay|laying) (down )?flat\\b"
+          ],
+          "topics": [
+            "hpi.aggravating",
+            "hpi.associated"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "orthopnea-pillows",
+            "intents": {
+              "canonical": "How many pillows do you sleep on?",
+              "paraphrases": [
+                "How many pillows do you use at night?",
+                "How many pillows?",
+                "Do you use extra pillows?",
+                "Do you need more pillows than usual to sleep?",
+                "Have you had to add pillows at night?",
+                "How many pillows do you need to breathe comfortably?",
+                "Do you sleep on several pillows?"
+              ],
+              "keywords": [
+                "how many pillows",
+                "extra pillows",
+                "more pillows",
+                "several pillows",
+                "recliner"
+              ],
+              "patterns": [
+                "\\bhow many pillows?\\b"
+              ],
+              "topics": [
+                "hpi.aggravating"
+              ]
+            },
+            "answer": "Three pillows. Last night I slept in my recliner."
+          }
         ]
       },
       {
@@ -110,6 +332,68 @@
           "gasping",
           "middle of the night",
           "waking"
+        ],
+        "intents": {
+          "canonical": "Do you wake up at night short of breath?",
+          "paraphrases": [
+            "Do you ever wake up gasping for air?",
+            "Have you woken up in the night struggling to breathe?",
+            "Any PND?",
+            "Any paroxysmal nocturnal dyspnoea?",
+            "Do you wake up in the middle of the night breathless?",
+            "Has breathlessness woken you from sleep?",
+            "Do you ever wake up feeling like you are suffocating?",
+            "Do you have episodes at night where you wake up and need to sit up to catch your breath?",
+            "Does your breathing wake you up?",
+            "Are you waking up choking for air?",
+            "Do you wake up breathless?",
+            "Have you had any night-time attacks of breathlessness?"
+          ],
+          "keywords": [
+            "wake up gasping",
+            "woke up gasping",
+            "gasping for air",
+            "paroxysmal nocturnal",
+            "pnd",
+            "wake up breathless",
+            "wake up short of breath"
+          ],
+          "patterns": [
+            "\\b(wake|waking|woke|woken|wakes)\\b.*\\b(breathless|short of breath|gasping|choking|suffocating|struggling to breathe|catch your breath)\\b"
+          ],
+          "topics": [
+            "hpi.associated",
+            "hpi.timing"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "pnd-frequency",
+            "intents": {
+              "canonical": "How often do you wake up breathless at night?",
+              "paraphrases": [
+                "How many nights have you woken up gasping?",
+                "How often does the night-time breathlessness happen?",
+                "How often do you wake up gasping for air?",
+                "How many times this week have you woken up short of breath?",
+                "Is waking up breathless happening every night?",
+                "How frequently are you woken by breathlessness?"
+              ],
+              "keywords": [
+                "how often do you wake",
+                "how many nights",
+                "how many times have you woken",
+                "how frequently are you woken"
+              ],
+              "patterns": [
+                "\\bhow (often|many times|frequently)\\b.*\\b(wake|waking|woke|woken)\\b.*\\b(breathless|breathlessness|short of breath|gasping|choking)\\b"
+              ],
+              "topics": [
+                "hpi.timing"
+              ]
+            },
+            "answer": "A couple of times this week."
+          }
         ]
       },
       {
@@ -126,6 +410,65 @@
           "shoes",
           "puffy",
           "edema"
+        ],
+        "intents": {
+          "canonical": "Have you noticed any swelling in your legs or ankles?",
+          "paraphrases": [
+            "Any ankle swelling?",
+            "Are your feet swollen?",
+            "Have your legs been puffy?",
+            "Any leg swelling?",
+            "Have you had any oedema in your legs?",
+            "Any pedal edema?",
+            "Have your shoes been feeling tight?",
+            "Are your ankles swollen?",
+            "Any fluid build-up in your legs?",
+            "Do your legs swell up?",
+            "Have you had puffy ankles?",
+            "Is there any swelling in your feet?"
+          ],
+          "keywords": [
+            "ankle swelling",
+            "swollen ankles",
+            "leg swelling",
+            "swollen legs",
+            "swollen feet",
+            "oedema",
+            "fluid build-up"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.cardiac"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "swelling-timing",
+            "intents": {
+              "canonical": "Is the swelling worse at any particular time of day?",
+              "paraphrases": [
+                "Is the ankle swelling worse in the evening?",
+                "Does the swelling get worse as the day goes on?",
+                "Is the swelling better in the morning?",
+                "When in the day is the swelling worst?",
+                "Does the leg swelling change during the day?",
+                "Are your ankles more swollen at night than in the morning?"
+              ],
+              "keywords": [
+                "swelling worse in the evening",
+                "as the day goes on",
+                "ankles worse in the evening"
+              ],
+              "patterns": [
+                "\\b(swelling|swollen|swell|puffy)\\b.*\\b(evening|morning|time of day|during the day|day goes on|end of the day)\\b",
+                "\\b(evening|morning|time of day)\\b.*\\b(swelling|swollen|swell|puffy)\\b"
+              ],
+              "topics": [
+                "hpi.timing"
+              ]
+            },
+            "answer": "It’s worse by the evening."
+          }
         ]
       },
       {
@@ -139,6 +482,61 @@
           "pounds",
           "heavier",
           "gain"
+        ],
+        "intents": {
+          "canonical": "Have you noticed any change in your weight?",
+          "paraphrases": [
+            "Have you gained any weight recently?",
+            "Have you put on weight?",
+            "Any weight gain?",
+            "Any weight change?",
+            "Has your weight gone up or down?",
+            "Have you been feeling heavier lately?",
+            "Have your clothes been getting tighter?",
+            "Any weight loss?",
+            "Has your weight changed over the last couple of weeks?",
+            "Have you been weighing more than usual?",
+            "What has your weight been doing?",
+            "Have you weighed yourself recently?"
+          ],
+          "keywords": [
+            "weight gain",
+            "gained weight",
+            "put on weight",
+            "weight change",
+            "weigh",
+            "weight loss"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.constitutional"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "weight-amount",
+            "intents": {
+              "canonical": "How much weight have you gained?",
+              "paraphrases": [
+                "How much weight have you put on?",
+                "How many kilos have you gained?",
+                "How many pounds have you put on?",
+                "How much heavier are you?",
+                "How much has your weight gone up?",
+                "By how much has your weight changed?"
+              ],
+              "keywords": [
+                "how much weight",
+                "how many kilos",
+                "how many pounds",
+                "how much heavier"
+              ],
+              "topics": [
+                "ros.constitutional"
+              ]
+            },
+            "answer": "About 4 kilos — nine pounds — in the last two weeks."
+          }
         ]
       },
       {
@@ -151,6 +549,64 @@
           "phlegm",
           "sputum",
           "mucus"
+        ],
+        "intents": {
+          "canonical": "Do you have a cough?",
+          "paraphrases": [
+            "Any cough?",
+            "Have you been coughing?",
+            "Have you had a cough lately?",
+            "Tell me about your cough.",
+            "What is the cough like?",
+            "Is it a dry cough?",
+            "Have you noticed yourself coughing more?",
+            "Do you get a tickly cough?",
+            "Is the cough dry or chesty?",
+            "Any coughing recently?",
+            "Have you been bothered by a cough?"
+          ],
+          "keywords": [
+            "a cough",
+            "dry cough",
+            "tickly cough",
+            "tickly",
+            "chesty",
+            "been coughing"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.respiratory"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "cough-timing",
+            "intents": {
+              "canonical": "When is the cough worse?",
+              "paraphrases": [
+                "Is the cough worse at night?",
+                "Does the cough get worse when you lie down?",
+                "What time of day do you cough most?",
+                "Is your cough worse at any particular time?",
+                "Do you cough more at night?",
+                "Does lying down set off the cough?"
+              ],
+              "keywords": [
+                "cough worse",
+                "cough at night",
+                "cough more at night",
+                "cough when you lie down"
+              ],
+              "patterns": [
+                "\\bcough(ing)?\\b.*\\b(at night|lie down|lying down|time of day|worse at)\\b",
+                "\\b(at night|lying down|lie down)\\b.*\\bcough(ing)?\\b"
+              ],
+              "topics": [
+                "hpi.timing"
+              ]
+            },
+            "answer": "Mostly at night when I lie down."
+          }
         ]
       },
       {
@@ -166,7 +622,38 @@
           "full",
           "eating",
           "nausea"
-        ]
+        ],
+        "intents": {
+          "canonical": "Have you had any problems with your stomach or appetite?",
+          "paraphrases": [
+            "How is your appetite?",
+            "Has your appetite changed?",
+            "Any tummy pain?",
+            "Any abdominal pain?",
+            "Does your belly feel bloated or full?",
+            "Have you noticed any abdominal swelling or fullness?",
+            "Any discomfort in your abdomen?",
+            "Have you been off your food?",
+            "Any pain in your belly?",
+            "Is your stomach feeling OK?",
+            "Any GI symptoms?",
+            "Are you eating as much as usual?",
+            "Any pain in the right upper part of your tummy?"
+          ],
+          "keywords": [
+            "appetite",
+            "abdominal",
+            "tummy",
+            "bloated",
+            "off your food",
+            "stomach pain",
+            "belly pain"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.gi"
+          ]
+        }
       },
       {
         "id": "fatigue",
@@ -178,7 +665,37 @@
           "fatigue",
           "energy",
           "exhausted"
-        ]
+        ],
+        "intents": {
+          "canonical": "Have you been feeling tired?",
+          "paraphrases": [
+            "How is your energy?",
+            "How are your energy levels?",
+            "Any fatigue?",
+            "Have you been more tired than usual?",
+            "Do you feel exhausted?",
+            "Have you been feeling run down?",
+            "Are you lacking energy?",
+            "Do you feel worn out?",
+            "Do you get tired easily?",
+            "Any lethargy?",
+            "Have you been feeling drained lately?"
+          ],
+          "keywords": [
+            "fatigue",
+            "energy levels",
+            "run down",
+            "worn out",
+            "lethargic",
+            "lethargy",
+            "drained"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.constitutional"
+          ]
+        },
+        "emotion": "tired"
       },
       {
         "id": "nocturia",
@@ -191,7 +708,41 @@
           "bladder",
           "water works",
           "bathroom"
-        ]
+        ],
+        "intents": {
+          "canonical": "Do you have to get up at night to pass urine?",
+          "paraphrases": [
+            "How often do you get up at night to pee?",
+            "Do you wake up at night to go to the toilet?",
+            "Any nocturia?",
+            "Are you up at night to urinate?",
+            "How many times a night do you go to the bathroom?",
+            "Have you been passing water at night?",
+            "Any changes in your urination?",
+            "Any problems with your waterworks?",
+            "How are your waterworks?",
+            "Are you peeing more at night?",
+            "Do you need the loo during the night?",
+            "Any urinary symptoms?"
+          ],
+          "keywords": [
+            "nocturia",
+            "at night to pee",
+            "at night to urinate",
+            "pass urine at night",
+            "waterworks",
+            "urinary symptoms",
+            "toilet at night"
+          ],
+          "patterns": [
+            "\\b(night|nighttime|overnight)\\b.*\\b(pee|peeing|urinate|urinating|urine|toilet|bathroom|loo|pass water|passing water|wee)\\b",
+            "\\b(pee|peeing|urinate|urinating|urine|toilet|bathroom|loo|pass water|passing water|wee)\\b.*\\b(night|overnight)\\b"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.gu"
+          ]
+        }
       },
       {
         "id": "trigger-meds",
@@ -208,6 +759,66 @@
           "missed",
           "adherence",
           "stopped"
+        ],
+        "intents": {
+          "canonical": "Have you been taking your medications as prescribed?",
+          "paraphrases": [
+            "Have you missed any doses of your medicines?",
+            "Have you been taking your water pill?",
+            "Are you still taking your furosemide?",
+            "Have you run out of any of your tablets?",
+            "Have you stopped any of your medications recently?",
+            "Do you ever forget to take your pills?",
+            "Have you been taking all your heart medicines regularly?",
+            "Any problems sticking to your medication regimen?",
+            "Has anything changed with your medicines lately?",
+            "Are you compliant with your meds?",
+            "Have you been taking your diuretic?",
+            "Any missed doses?",
+            "How are you getting on with taking your medications?"
+          ],
+          "keywords": [
+            "missed doses",
+            "missed any doses",
+            "as prescribed",
+            "compliant",
+            "compliance",
+            "forget to take",
+            "medication regimen"
+          ],
+          "topics": [
+            "meds.adherence",
+            "hpi.triggers"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "meds-ran-out-when",
+            "intents": {
+              "canonical": "When did you run out of your water pill?",
+              "paraphrases": [
+                "When did you stop taking the furosemide?",
+                "How long ago did you run out of your water pill?",
+                "How long have you been without your diuretic?",
+                "When was your last dose of furosemide?",
+                "How many days have you been off the water pill?"
+              ],
+              "keywords": [
+                "when did you run out",
+                "how long ago did you run out",
+                "last dose",
+                "without your water pill",
+                "off the water pill"
+              ],
+              "patterns": [
+                "\\b(when|how long ago)\\b.*\\b(run out|ran out|stop taking|stopped taking)\\b"
+              ],
+              "topics": [
+                "meds.adherence"
+              ]
+            },
+            "answer": "About ten days ago."
+          }
         ]
       },
       {
@@ -221,7 +832,37 @@
           "food",
           "eating",
           "takeout"
-        ]
+        ],
+        "intents": {
+          "canonical": "Have you had more salt in your diet recently?",
+          "paraphrases": [
+            "What has your diet been like lately?",
+            "Have you been eating a lot of salty food?",
+            "Any changes to your diet?",
+            "Have you been watching your salt intake?",
+            "Have you been having takeaways or processed food?",
+            "How much salt do you eat?",
+            "Have you been sticking to a low-salt diet?",
+            "Have you eaten anything out of the ordinary recently?",
+            "Any dietary indiscretion?",
+            "Have you been eating fast food or takeout?",
+            "How is your sodium intake?"
+          ],
+          "keywords": [
+            "salty",
+            "sodium",
+            "takeaway",
+            "takeaways",
+            "low salt",
+            "dietary",
+            "fast food",
+            "processed food"
+          ],
+          "topics": [
+            "sh.diet",
+            "hpi.triggers"
+          ]
+        }
       },
       {
         "id": "pmh",
@@ -238,7 +879,39 @@
           "diabetes",
           "blood pressure",
           "conditions"
-        ]
+        ],
+        "intents": {
+          "canonical": "Do you have any medical conditions?",
+          "paraphrases": [
+            "What medical problems do you have?",
+            "Do you have any other health problems?",
+            "Tell me about your past medical history.",
+            "Have you been diagnosed with any illnesses in the past?",
+            "Any PMH?",
+            "Do you have high blood pressure?",
+            "Are you diabetic?",
+            "Have you ever had a heart attack?",
+            "Do you have any long-term conditions?",
+            "Any chronic illnesses?",
+            "Do you have high cholesterol?",
+            "Have you had any heart problems before?",
+            "What other conditions do you see the doctor for?",
+            "Any significant medical history?"
+          ],
+          "keywords": [
+            "medical history",
+            "health conditions",
+            "diabetic",
+            "hypertension",
+            "cholesterol",
+            "chronic illness",
+            "long-term conditions",
+            "been diagnosed with"
+          ],
+          "topics": [
+            "pmh.conditions"
+          ]
+        }
       },
       {
         "id": "ef",
@@ -253,7 +926,36 @@
           "weak heart",
           "heart failure",
           "cardiologist"
-        ]
+        ],
+        "intents": {
+          "canonical": "What have the doctors told you about your heart?",
+          "paraphrases": [
+            "Do you know how well your heart pumps?",
+            "Do you know your ejection fraction?",
+            "What is your EF?",
+            "Have you had an echo?",
+            "Have you had a heart scan?",
+            "When was your last echocardiogram?",
+            "What did your cardiologist say about your heart function?",
+            "Have you been told you have a weak heart?",
+            "Have you been told you have heart failure?",
+            "How strong is your heart pumping?",
+            "Do you see a heart specialist?",
+            "What did your last heart ultrasound show?"
+          ],
+          "keywords": [
+            "ejection fraction",
+            "echocardiogram",
+            "heart scan",
+            "heart doctor",
+            "heart function",
+            "heart specialist",
+            "heart ultrasound"
+          ],
+          "topics": [
+            "pmh.conditions"
+          ]
+        }
       },
       {
         "id": "psh",
@@ -267,7 +969,34 @@
           "procedure",
           "stent",
           "appendix"
-        ]
+        ],
+        "intents": {
+          "canonical": "Have you had any operations or procedures?",
+          "paraphrases": [
+            "Have you ever had surgery?",
+            "Any past surgeries?",
+            "Any previous operations?",
+            "What procedures have you had done?",
+            "Have you had a stent put in?",
+            "Have you had your appendix out?",
+            "Any PSH?",
+            "Have you ever been operated on?",
+            "Any past surgical history?",
+            "Have you had any heart procedures?",
+            "Have you ever had an operation under anaesthetic?"
+          ],
+          "keywords": [
+            "surgical history",
+            "operations",
+            "operated on",
+            "procedures",
+            "appendix out",
+            "appendectomy"
+          ],
+          "topics": [
+            "psh.surgery"
+          ]
+        }
       },
       {
         "id": "meds",
@@ -284,6 +1013,69 @@
           "supplements",
           "ibuprofen",
           "vitamins"
+        ],
+        "intents": {
+          "canonical": "What medications do you take?",
+          "paraphrases": [
+            "Are you on any medications?",
+            "What medicines are you currently taking?",
+            "Can you tell me all the tablets you take and the doses?",
+            "Any regular meds?",
+            "What pills do you take?",
+            "Do you take any prescription medicines?",
+            "What doses do you take of your medicines?",
+            "Do you take anything regularly?",
+            "What is on your medication list?",
+            "Which heart medicines are you on?",
+            "Are you taking any blood thinners?",
+            "Do you take any tablets for your diabetes?",
+            "Can you list your current medications?"
+          ],
+          "keywords": [
+            "what medications",
+            "what medicines",
+            "on any medications",
+            "medication list",
+            "regular meds",
+            "prescription medicines",
+            "currently taking",
+            "what tablets"
+          ],
+          "topics": [
+            "meds.current"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "meds-otc",
+            "intents": {
+              "canonical": "Do you take any over-the-counter medicines?",
+              "paraphrases": [
+                "Any over-the-counter medications?",
+                "Do you take anything you buy without a prescription?",
+                "Have you taken any painkillers like ibuprofen?",
+                "Any herbal remedies or supplements?",
+                "Have you taken any anti-inflammatories recently?",
+                "Any NSAIDs?",
+                "Do you take any vitamins or supplements?",
+                "Anything from the pharmacy that is not prescribed?"
+              ],
+              "keywords": [
+                "otc",
+                "without a prescription",
+                "anti-inflammatory",
+                "anti-inflammatories",
+                "nsaid",
+                "nsaids",
+                "herbal",
+                "painkillers"
+              ],
+              "topics": [
+                "meds.otc"
+              ]
+            },
+            "answer": "No over-the-counter stuff, except some ibuprofen for my knee last week."
+          }
         ]
       },
       {
@@ -294,7 +1086,37 @@
         "keywords": [
           "allerg",
           "reaction"
-        ]
+        ],
+        "intents": {
+          "canonical": "Do you have any allergies?",
+          "paraphrases": [
+            "Are you allergic to anything?",
+            "Any drug allergies?",
+            "Any allergies to medications?",
+            "Have you ever had a reaction to a medicine?",
+            "Any known allergies?",
+            "Are you allergic to penicillin?",
+            "Any food allergies?",
+            "NKDA?",
+            "Have you had a bad reaction to any antibiotics?",
+            "What reaction did you have to penicillin?"
+          ],
+          "keywords": [
+            "allergies",
+            "allergic",
+            "allergy",
+            "penicillin",
+            "reaction to",
+            "nkda"
+          ],
+          "patterns": [
+            "\\b(penicillin|allergy|allergic|allergies|antibiotics?)\\b.*\\brash\\b",
+            "\\brash\\b.*\\b(penicillin|allergy|allergic|antibiotics?|medicine|medication)\\b"
+          ],
+          "topics": [
+            "allergies"
+          ]
+        }
       },
       {
         "id": "fh",
@@ -311,7 +1133,35 @@
           "sister",
           "siblings",
           "parents"
-        ]
+        ],
+        "intents": {
+          "canonical": "Does anything run in your family?",
+          "paraphrases": [
+            "Tell me about your family history.",
+            "Any family history of heart disease?",
+            "Are your parents alive and well?",
+            "Has anyone in your family had heart problems?",
+            "What did your father die of?",
+            "Any illnesses that run in the family?",
+            "Any FHx?",
+            "Do you have any brothers or sisters?",
+            "Is there any history of heart attacks or strokes in your family?",
+            "How old were your parents when they died?",
+            "Does anyone in your family have diabetes?"
+          ],
+          "keywords": [
+            "family history",
+            "run in the family",
+            "runs in the family",
+            "your parents",
+            "your father",
+            "your mother",
+            "relatives"
+          ],
+          "topics": [
+            "fh"
+          ]
+        }
       },
       {
         "id": "smoking",
@@ -323,6 +1173,97 @@
           "cigarette",
           "tobacco",
           "vape"
+        ],
+        "intents": {
+          "canonical": "Do you smoke?",
+          "paraphrases": [
+            "Have you ever smoked?",
+            "Smoke?",
+            "Do you use tobacco?",
+            "Are you a smoker?",
+            "Any history of smoking?",
+            "Do you smoke cigarettes?",
+            "Have you ever been a smoker?",
+            "Do you vape?",
+            "What is your smoking history?",
+            "Any cigarettes?",
+            "Have you ever used tobacco products?"
+          ],
+          "keywords": [
+            "smoker",
+            "smoking",
+            "smoked",
+            "cigarettes",
+            "tobacco",
+            "vaping"
+          ],
+          "topics": [
+            "sh.smoking"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "smoking-amount",
+            "intents": {
+              "canonical": "How much did you smoke?",
+              "paraphrases": [
+                "How many cigarettes a day did you smoke?",
+                "How many packs a day?",
+                "How many pack-years?",
+                "How long did you smoke for?",
+                "How many years did you smoke?",
+                "How heavily did you smoke?"
+              ],
+              "keywords": [
+                "how much did you smoke",
+                "packs a day",
+                "pack-years",
+                "pack years",
+                "how many cigarettes",
+                "how long did you smoke"
+              ],
+              "patterns": [
+                "\\bhow (much|many cigarettes|many packs|heavily) did you smoke\\b",
+                "\\bpacks? (a|per) day\\b",
+                "\\bpack[- ]years?\\b"
+              ],
+              "topics": [
+                "sh.smoking"
+              ]
+            },
+            "answer": "A pack a day for 30 years."
+          },
+          {
+            "id": "smoking-quit",
+            "intents": {
+              "canonical": "When did you quit smoking?",
+              "paraphrases": [
+                "When did you stop smoking?",
+                "Do you still smoke?",
+                "Are you still smoking?",
+                "How long ago did you give up cigarettes?",
+                "When did you give up smoking?",
+                "Are you an ex-smoker?"
+              ],
+              "keywords": [
+                "quit smoking",
+                "stop smoking",
+                "stopped smoking",
+                "give up smoking",
+                "gave up smoking",
+                "still smoke",
+                "still smoking",
+                "ex-smoker"
+              ],
+              "patterns": [
+                "\\b(quit|stop|stopped|give up|gave up)\\b.*\\b(smoke|smoking|cigarettes)\\b"
+              ],
+              "topics": [
+                "sh.smoking"
+              ]
+            },
+            "answer": "I quit after the heart attack in 2019."
+          }
         ]
       },
       {
@@ -335,7 +1276,32 @@
           "drink",
           "beer",
           "wine"
-        ]
+        ],
+        "intents": {
+          "canonical": "Do you drink alcohol?",
+          "paraphrases": [
+            "How much alcohol do you drink?",
+            "Do you drink?",
+            "How many drinks a week do you have?",
+            "Any alcohol?",
+            "How much do you drink in a week?",
+            "Do you drink beer or wine?",
+            "How often do you have a drink?",
+            "How many units of alcohol a week?",
+            "Do you drink at all?"
+          ],
+          "keywords": [
+            "alcohol",
+            "drinks a week",
+            "units of alcohol",
+            "booze",
+            "drink alcohol",
+            "have a drink"
+          ],
+          "topics": [
+            "sh.alcohol"
+          ]
+        }
       },
       {
         "id": "drugs",
@@ -348,7 +1314,35 @@
           "marijuana",
           "cannabis",
           "cocaine"
-        ]
+        ],
+        "intents": {
+          "canonical": "Do you use any recreational drugs?",
+          "paraphrases": [
+            "Any recreational drug use?",
+            "Have you ever used street drugs?",
+            "Do you use marijuana?",
+            "Do you smoke weed?",
+            "Any cannabis use?",
+            "Have you ever used cocaine?",
+            "Do you take any illegal drugs?",
+            "Any illicit drugs?",
+            "Have you ever injected drugs?",
+            "Do you use any non-prescribed drugs?"
+          ],
+          "keywords": [
+            "recreational drugs",
+            "street drugs",
+            "illicit",
+            "illegal drugs",
+            "cannabis",
+            "marijuana",
+            "cocaine",
+            "weed"
+          ],
+          "topics": [
+            "sh.drugs"
+          ]
+        }
       },
       {
         "id": "occupation",
@@ -361,7 +1355,33 @@
           "occupation",
           "retired",
           "do for a living"
-        ]
+        ],
+        "intents": {
+          "canonical": "What do you do for work?",
+          "paraphrases": [
+            "What is your job?",
+            "Are you working at the moment?",
+            "What do you do for a living?",
+            "Are you retired?",
+            "What did you used to do for work?",
+            "What is your occupation?",
+            "Do you work?",
+            "What was your job before you retired?",
+            "Are you still working?"
+          ],
+          "keywords": [
+            "occupation",
+            "for work",
+            "for a living",
+            "your job",
+            "retired",
+            "still working",
+            "employed"
+          ],
+          "topics": [
+            "sh.occupation"
+          ]
+        }
       },
       {
         "id": "home",
@@ -374,7 +1394,34 @@
           "wife",
           "who is at home",
           "married"
-        ]
+        ],
+        "intents": {
+          "canonical": "Who do you live with?",
+          "paraphrases": [
+            "Do you live alone?",
+            "Who is at home with you?",
+            "What is your living situation?",
+            "Are you married?",
+            "Do you have family nearby?",
+            "Who lives with you?",
+            "Do you have support at home?",
+            "Is there anyone at home to help you?",
+            "Tell me about your home situation.",
+            "Do you have any children nearby?"
+          ],
+          "keywords": [
+            "live with",
+            "live alone",
+            "living situation",
+            "at home with you",
+            "lives with you",
+            "support at home",
+            "home situation"
+          ],
+          "topics": [
+            "sh.living"
+          ]
+        }
       },
       {
         "id": "meaning",
@@ -388,7 +1435,34 @@
           "hobbies",
           "fun",
           "like to do"
-        ]
+        ],
+        "intents": {
+          "canonical": "What do you enjoy doing?",
+          "paraphrases": [
+            "What are your hobbies?",
+            "What do you like to do for fun?",
+            "What matters most to you?",
+            "What brings you joy?",
+            "What do you do in your spare time?",
+            "What is important to you in life?",
+            "How do you like to spend your time?",
+            "Any hobbies or interests?",
+            "What keeps you going?"
+          ],
+          "keywords": [
+            "hobbies",
+            "for fun",
+            "spare time",
+            "free time",
+            "matters most to you",
+            "enjoy doing",
+            "interests",
+            "pastimes"
+          ],
+          "topics": [
+            "sh.meaning"
+          ]
+        }
       },
       {
         "id": "sexual",
@@ -399,7 +1473,31 @@
           "sexual",
           "partner",
           "sex"
-        ]
+        ],
+        "intents": {
+          "canonical": "Are you sexually active?",
+          "paraphrases": [
+            "Can I ask about your sexual history?",
+            "Do you have a sexual partner?",
+            "How many sexual partners have you had?",
+            "Any problems with sexual function?",
+            "Have you had any difficulties in your sex life?",
+            "Are you in a sexual relationship?",
+            "Have you had any new sexual partners?",
+            "Can I ask some questions about your sex life?"
+          ],
+          "keywords": [
+            "sexually active",
+            "sexual history",
+            "sex life",
+            "sexual partners",
+            "sexual function",
+            "intimacy"
+          ],
+          "topics": [
+            "sh.sexual"
+          ]
+        }
       },
       {
         "id": "travel",
@@ -413,7 +1511,33 @@
           "plane",
           "been away",
           "long drive"
-        ]
+        ],
+        "intents": {
+          "canonical": "Have you travelled anywhere recently?",
+          "paraphrases": [
+            "Any recent travel?",
+            "Have you been on any long trips lately?",
+            "Have you been on a plane recently?",
+            "Any long flights or car journeys?",
+            "Have you been away from home recently?",
+            "Have you traveled outside the country?",
+            "Been abroad lately?",
+            "Any long-haul flights?",
+            "Have you been on any long drives?"
+          ],
+          "keywords": [
+            "travelled",
+            "traveled",
+            "trips",
+            "long flights",
+            "abroad",
+            "car journeys",
+            "long-haul"
+          ],
+          "topics": [
+            "sh.travel"
+          ]
+        }
       },
       {
         "id": "concerns",
@@ -427,11 +1551,44 @@
           "think is going on",
           "expect",
           "hoping"
-        ]
+        ],
+        "intents": {
+          "canonical": "Is there anything you are worried about?",
+          "paraphrases": [
+            "What are you most worried about?",
+            "Do you have any concerns?",
+            "What do you think is going on?",
+            "What are you hoping we can do for you today?",
+            "What are you expecting from today?",
+            "Is anything in particular worrying you?",
+            "Have you had any thoughts about what might be causing this?",
+            "What is your biggest concern?",
+            "What would you like to get out of today's visit?",
+            "Is there anything you are scared of?",
+            "Do you have any ideas about what is causing your breathlessness?",
+            "What are your expectations?"
+          ],
+          "keywords": [
+            "worried",
+            "worrying you",
+            "concerns",
+            "concerned",
+            "scared",
+            "expectations",
+            "hoping",
+            "think is causing"
+          ],
+          "topics": [
+            "ice.concerns",
+            "ice.expectations"
+          ]
+        },
+        "emotion": "worried"
       }
     ],
     "pertinentNegatives": [
       {
+        "id": "neg-chest-pain-pressure",
         "topic": "Chest pain / pressure",
         "answer": "No chest pain or pressure. Not like the heart attack.",
         "keywords": [
@@ -439,9 +1596,36 @@
           "chest pressure",
           "tightness",
           "angina"
-        ]
+        ],
+        "intents": {
+          "canonical": "Do you have any chest pain?",
+          "paraphrases": [
+            "Any chest pain?",
+            "Have you had any chest pressure or tightness?",
+            "Any pain in your chest?",
+            "Does your chest feel tight?",
+            "Any angina?",
+            "Any discomfort in your chest?",
+            "Is this like your heart attack?",
+            "Have you had any chest discomfort with the breathlessness?",
+            "Any crushing feeling in your chest?"
+          ],
+          "keywords": [
+            "chest pain",
+            "chest pressure",
+            "chest tightness",
+            "tight chest",
+            "chest discomfort",
+            "pain in your chest",
+            "chest feel tight"
+          ],
+          "topics": [
+            "ros.cardiac"
+          ]
+        }
       },
       {
+        "id": "neg-fever-chills",
         "topic": "Fever / chills",
         "answer": "No fevers or chills.",
         "keywords": [
@@ -449,18 +1633,69 @@
           "chills",
           "temperature",
           "sweats"
-        ]
+        ],
+        "intents": {
+          "canonical": "Have you had any fevers or chills?",
+          "paraphrases": [
+            "Any fever?",
+            "Have you had a temperature?",
+            "Any chills or shivers?",
+            "Have you been feeling hot and cold?",
+            "Have you been running a temperature?",
+            "Any rigors?",
+            "Have you felt feverish?"
+          ],
+          "keywords": [
+            "fevers",
+            "feverish",
+            "rigors",
+            "shivers",
+            "running a temperature",
+            "hot and cold"
+          ],
+          "topics": [
+            "ros.constitutional"
+          ]
+        }
       },
       {
+        "id": "neg-productive-cough-blood",
         "topic": "Productive cough / blood",
         "answer": "Nothing coming up, and no blood.",
         "keywords": [
           "blood",
           "hemoptysis",
           "coughing up"
-        ]
+        ],
+        "intents": {
+          "canonical": "Are you coughing anything up?",
+          "paraphrases": [
+            "Are you bringing up any phlegm?",
+            "Any sputum?",
+            "Have you coughed up any blood?",
+            "Any blood when you cough?",
+            "Any haemoptysis?",
+            "Is your cough productive?",
+            "What colour is your phlegm?",
+            "Are you coughing up mucus?",
+            "Is there any blood in your phlegm?"
+          ],
+          "keywords": [
+            "coughing anything up",
+            "coughed up",
+            "productive",
+            "haemoptysis",
+            "hemoptysis",
+            "blood when you cough",
+            "bringing up"
+          ],
+          "topics": [
+            "ros.respiratory"
+          ]
+        }
       },
       {
+        "id": "neg-palpitations-fainting",
         "topic": "Palpitations / fainting",
         "answer": "No racing heart that I’ve noticed, and I haven’t passed out.",
         "keywords": [
@@ -471,9 +1706,38 @@
           "dizzy",
           "dizziness",
           "lightheaded"
-        ]
+        ],
+        "intents": {
+          "canonical": "Have you had any palpitations or fainting?",
+          "paraphrases": [
+            "Have you noticed your heart racing?",
+            "Any palpitations?",
+            "Have you passed out?",
+            "Have you fainted at all?",
+            "Does your heart ever pound or flutter?",
+            "Any blackouts?",
+            "Any irregular heartbeat?",
+            "Have you lost consciousness?",
+            "Any syncope?",
+            "Do you feel your heart skipping beats?"
+          ],
+          "keywords": [
+            "palpitations",
+            "heart racing",
+            "racing heart",
+            "fainted",
+            "fainting",
+            "passed out",
+            "blackouts",
+            "syncope"
+          ],
+          "topics": [
+            "ros.cardiac"
+          ]
+        }
       },
       {
+        "id": "neg-calf-pain-one-sided-swelling",
         "topic": "Calf pain / one-sided swelling",
         "answer": "No, both legs are the same. No pain in my calves.",
         "keywords": [
@@ -481,17 +1745,65 @@
           "one leg",
           "one side",
           "clot"
-        ]
+        ],
+        "intents": {
+          "canonical": "Is one leg more swollen than the other?",
+          "paraphrases": [
+            "Is the swelling worse on one side?",
+            "Is one calf bigger than the other?",
+            "Any calf pain?",
+            "Any pain in your calves?",
+            "Is the swelling only in one leg?",
+            "Is one ankle more swollen than the other?",
+            "Any tenderness in your calves?",
+            "Does one leg look bigger than the other?"
+          ],
+          "keywords": [
+            "calf pain",
+            "calves",
+            "calf tenderness",
+            "more swollen than the other",
+            "only in one leg",
+            "unilateral",
+            "bigger than the other"
+          ],
+          "topics": [
+            "ros.cardiac",
+            "ros.heme"
+          ]
+        }
       },
       {
+        "id": "neg-wheeze",
         "topic": "Wheeze",
         "answer": "No wheezing.",
         "keywords": [
           "wheez",
           "whistl"
-        ]
+        ],
+        "intents": {
+          "canonical": "Have you had any wheezing?",
+          "paraphrases": [
+            "Any wheeze?",
+            "Do you hear a whistling sound when you breathe?",
+            "Is your breathing noisy or wheezy?",
+            "Have you noticed any wheezing in your chest?",
+            "Do you get wheezy?",
+            "Any whistling in your chest?"
+          ],
+          "keywords": [
+            "wheeze",
+            "wheezing",
+            "wheezy",
+            "whistling"
+          ],
+          "topics": [
+            "ros.respiratory"
+          ]
+        }
       },
       {
+        "id": "neg-recent-illness-sick-contacts",
         "topic": "Recent illness / sick contacts",
         "answer": "No colds, nobody sick at home.",
         "keywords": [
@@ -500,9 +1812,38 @@
           "flu",
           "virus",
           "infection"
-        ]
+        ],
+        "intents": {
+          "canonical": "Have you had a recent cold or infection?",
+          "paraphrases": [
+            "Have you been unwell with a virus lately?",
+            "Has anyone around you been sick?",
+            "Any sick contacts?",
+            "Have you had the flu recently?",
+            "Any recent chest infection?",
+            "Have you been around anyone who is ill?",
+            "Any colds or flu at home?",
+            "Has anyone at home been unwell?",
+            "Any recent infections?"
+          ],
+          "keywords": [
+            "sick contacts",
+            "anyone sick",
+            "anyone around you",
+            "recent infection",
+            "chest infection",
+            "a cold",
+            "the flu",
+            "viral"
+          ],
+          "topics": [
+            "hpi.triggers",
+            "ros.constitutional"
+          ]
+        }
       },
       {
+        "id": "neg-neurological-symptoms",
         "topic": "Neurological symptoms",
         "answer": "No weakness, numbness or trouble speaking.",
         "keywords": [
@@ -511,27 +1852,103 @@
           "tingling",
           "speech",
           "vision"
-        ]
+        ],
+        "intents": {
+          "canonical": "Have you had any weakness, numbness or trouble speaking?",
+          "paraphrases": [
+            "Any weakness in your arms or legs?",
+            "Any numbness or tingling?",
+            "Any problems with your speech?",
+            "Have you had any stroke symptoms?",
+            "Any weakness in your face, arms or legs?",
+            "Any slurred speech?",
+            "Any neurological symptoms?",
+            "Have you had any trouble getting your words out?"
+          ],
+          "keywords": [
+            "weakness",
+            "numbness",
+            "trouble speaking",
+            "slurred speech",
+            "stroke symptoms",
+            "neurological",
+            "your speech"
+          ],
+          "topics": [
+            "ros.neuro"
+          ]
+        }
       },
       {
+        "id": "neg-urinary-symptoms-other-than-frequency-at-night",
         "topic": "Urinary symptoms other than frequency at night",
         "answer": "No burning or blood in the urine.",
         "keywords": [
           "burning",
           "blood in",
           "pain when"
-        ]
+        ],
+        "intents": {
+          "canonical": "Any burning or pain when you pass urine?",
+          "paraphrases": [
+            "Does it burn when you pee?",
+            "Any blood in your urine?",
+            "Any pain when urinating?",
+            "Have you noticed blood in the urine?",
+            "Any dysuria?",
+            "Any haematuria?",
+            "Is it painful to pass water?",
+            "Any stinging when you go to the toilet?"
+          ],
+          "keywords": [
+            "burn when",
+            "dysuria",
+            "blood in your urine",
+            "blood in the urine",
+            "haematuria",
+            "hematuria",
+            "painful to pass",
+            "stinging"
+          ],
+          "topics": [
+            "ros.gu"
+          ]
+        }
       },
       {
+        "id": "neg-skin",
         "topic": "Skin",
         "answer": "No rashes.",
         "keywords": [
           "rash",
           "skin",
           "itch"
-        ]
+        ],
+        "intents": {
+          "canonical": "Have you had any rashes?",
+          "paraphrases": [
+            "Any skin rashes?",
+            "Any changes to your skin?",
+            "Any itching?",
+            "Have you noticed any new rash?",
+            "Any skin problems?",
+            "Is your skin itchy anywhere?"
+          ],
+          "keywords": [
+            "rashes",
+            "skin rash",
+            "itchy",
+            "itching",
+            "skin problems",
+            "changes to your skin"
+          ],
+          "topics": [
+            "ros.skin"
+          ]
+        }
       },
       {
+        "id": "neg-mood",
         "topic": "Mood",
         "answer": "I’m a bit fed up, but not depressed.",
         "keywords": [
@@ -540,13 +1957,54 @@
           "anxious",
           "anxiety",
           "stress"
-        ]
+        ],
+        "intents": {
+          "canonical": "How has your mood been?",
+          "paraphrases": [
+            "Have you been feeling down or depressed?",
+            "Any low mood?",
+            "How are you coping emotionally?",
+            "Have you been feeling anxious or stressed?",
+            "How are your spirits?",
+            "Have you been feeling low lately?",
+            "Any anxiety or depression?",
+            "Is all this getting you down?"
+          ],
+          "keywords": [
+            "mood",
+            "depressed",
+            "depression",
+            "feeling down",
+            "feeling low",
+            "stressed",
+            "coping emotionally",
+            "getting you down"
+          ],
+          "topics": [
+            "ros.psych"
+          ]
+        },
+        "emotion": "frustrated"
       }
     ],
     "unknownPolicy": {
       "negativeReply": "No, nothing like that.",
       "unknownReply": "Hmm, I’m not sure. I haven’t noticed anything like that."
-    }
+    },
+    "emotionCues": [
+      {
+        "emotion": "worried",
+        "acknowledgement": "Thank you. I am worried about it, to be honest."
+      },
+      {
+        "emotion": "tired",
+        "acknowledgement": "Thanks. I’m just wiped out."
+      },
+      {
+        "emotion": "frustrated",
+        "acknowledgement": "Thanks for saying that. I’m just a bit fed up."
+      }
+    ]
   },
   "abnormalFindings": {
     "general_appearance": {
@@ -815,6 +2273,12 @@
   "markSheetIds": [
     "communication-1b",
     "encounter-1b"
+  ],
+  "itemsNotApplicable": [
+    {
+      "itemId": "sh-sexual",
+      "reason": "Sexual history is not relevant to this acute heart-failure presentation."
+    }
   ],
   "synthetic": true,
   "sourceNote": "Fully synthetic teaching case written by the team. Not based on any real patient.",
@@ -1414,6 +2878,10 @@
           "short of breath",
           "breathless",
           "SOB"
+        ],
+        "exemplars": [
+          "Two weeks of progressively worsening shortness of breath.",
+          "Increasingly breathless on exertion over the past fortnight."
         ]
       },
       {
@@ -1425,6 +2893,10 @@
           "orthopnoea",
           "pillows",
           "lie flat"
+        ],
+        "exemplars": [
+          "Sleeps on three pillows and cannot lie flat.",
+          "Breathlessness when lying down, slept in a recliner."
         ]
       },
       {
@@ -1436,6 +2908,10 @@
           "paroxysmal",
           "woke up gasping",
           "waking breathless"
+        ],
+        "exemplars": [
+          "Wakes at night gasping for air.",
+          "Episodes of waking up breathless at night this week."
         ]
       },
       {
@@ -1448,6 +2924,10 @@
           "weight gain",
           "4 kg",
           "kilos"
+        ],
+        "exemplars": [
+          "Swollen ankles and about 4 kg of weight gain.",
+          "Bilateral leg swelling with recent weight gain."
         ]
       },
       {
@@ -1461,6 +2941,10 @@
           "salt",
           "non-adherence",
           "nonadherence"
+        ],
+        "exemplars": [
+          "Ran out of his furosemide ten days ago.",
+          "Stopped his water pill and ate a salty diet recently."
         ]
       },
       {
@@ -1474,6 +2958,10 @@
           "EF",
           "ejection fraction",
           "30%"
+        ],
+        "exemplars": [
+          "Known heart failure after a heart attack with a stent.",
+          "History of myocardial infarction with reduced ejection fraction."
         ]
       },
       {
@@ -1484,6 +2972,10 @@
           "no chest pain",
           "denies chest pain",
           "no chest pressure"
+        ],
+        "exemplars": [
+          "Denies chest pain or pressure.",
+          "No chest pain."
         ]
       },
       {
@@ -1495,6 +2987,10 @@
           "afebrile",
           "denies fever",
           "no chills"
+        ],
+        "exemplars": [
+          "Denies fevers or chills.",
+          "No fever."
         ]
       },
       {
@@ -1506,6 +3002,10 @@
           "calf pain",
           "unilateral",
           "one-sided"
+        ],
+        "exemplars": [
+          "No calf pain or one-sided leg swelling.",
+          "Denies calf tenderness."
         ]
       }
     ],
@@ -1520,6 +3020,10 @@
           "JVP",
           "jugular venous",
           "neck veins"
+        ],
+        "exemplars": [
+          "JVP raised to the angle of the jaw.",
+          "Elevated jugular venous pressure."
         ]
       },
       {
@@ -1532,6 +3036,10 @@
           "hepatojugular",
           "HJR",
           "abdominojugular"
+        ],
+        "exemplars": [
+          "Positive hepatojugular reflux.",
+          "Abdominojugular test positive."
         ]
       },
       {
@@ -1544,6 +3052,10 @@
         "keywords": [
           "S3",
           "gallop"
+        ],
+        "exemplars": [
+          "S3 gallop heard at the apex.",
+          "Third heart sound present."
         ]
       },
       {
@@ -1556,6 +3068,10 @@
           "PMI",
           "apex beat",
           "displaced"
+        ],
+        "exemplars": [
+          "Apex beat displaced laterally.",
+          "PMI displaced to the anterior axillary line."
         ]
       },
       {
@@ -1567,6 +3083,10 @@
         "keywords": [
           "crackles",
           "rales"
+        ],
+        "exemplars": [
+          "Bibasal crackles on auscultation.",
+          "Fine crackles at both lung bases."
         ]
       },
       {
@@ -1579,6 +3099,10 @@
           "edema",
           "oedema",
           "pitting"
+        ],
+        "exemplars": [
+          "Pitting edema of both ankles.",
+          "Bilateral pitting oedema to the shins."
         ]
       }
     ],
@@ -1643,5 +3167,44 @@
         "rationale": "Smoking history, but no wheeze or sputum."
       }
     ]
-  }
+  },
+  "acceptableDiagnoses": [
+    {
+      "id": "ad-cardiogenic-pulmonary-edema",
+      "diagnosis": "Cardiogenic pulmonary edema",
+      "synonyms": [
+        "acute pulmonary edema",
+        "cardiogenic pulmonary oedema",
+        "acute pulmonary oedema",
+        "pulmonary edema from heart failure"
+      ],
+      "satisfies": [
+        "adhf"
+      ]
+    },
+    {
+      "id": "ad-cardiomyopathy-exacerbation",
+      "diagnosis": "Exacerbation of ischemic cardiomyopathy",
+      "synonyms": [
+        "ischaemic cardiomyopathy exacerbation",
+        "worsening ischemic cardiomyopathy",
+        "decompensated cardiomyopathy"
+      ],
+      "satisfies": [
+        "adhf"
+      ]
+    },
+    {
+      "id": "ad-nstemi",
+      "diagnosis": "Non-ST-elevation myocardial infarction",
+      "synonyms": [
+        "NSTE-ACS",
+        "unstable angina",
+        "type 2 MI"
+      ],
+      "satisfies": [
+        "acs"
+      ]
+    }
+  ]
 }

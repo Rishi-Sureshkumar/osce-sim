@@ -471,9 +471,9 @@ M6  UI polish
 | # | Milestone | Status |
 |---|---|---|
 | P | This plan | done |
-| S | Schema changes | planned |
-| M0 | QA harness | planned |
-| M1 | No external LLM | planned |
+| S | Schema changes | done |
+| M0 | QA harness | done: catalog 946 checks (627 pass, 319 xfail owned by M2/M3/M6), anchors 1493 pass / 307 xfail, intersections 71 pass / 139 xfail, 163 screenshots reviewed (qa/REVIEW.md: 12 high defects open, owned by M2/M3) |
+| M1 | No external LLM | done: chat fixtures HF 100% / screening 96%; grading calibration 94.0% agreement, 5.9% needs_review; no-network tests; in-browser embeddings e2e |
 | M2 | Bug fixes 1–10 | planned |
 | M3 | Models, drapes, room | planned |
 | M4 | Hide findings and mistake alerts | planned |
@@ -487,7 +487,7 @@ M6  UI polish
 - Room props, drapes, sounds: generated in code.
 
 ## Open questions
-1. Intent thresholds (accept 0.60 with a 0.04 margin; grading credit 0.70, review 0.55). Who signs off, and are per-item overrides allowed?
+1. Intent thresholds (accept 0.60 with a 0.04 margin; grading credit 0.70, review 0.63 — raised from 0.55 after calibration, because MiniLM puts unrelated questions at 0.55–0.65). Who signs off, and are per-item overrides allowed (`match.thresholds` exists)?
 2. Should WebLLM ship on the shared link? Considerations: size, HF CDN, model licence, WebGPU support, privacy.
 3. Model sources: MiniLM from an npm mirror whose upstream hash can't be verified here; MakeHuman CC0 targets; procedural hair; MPFB2 not used.
 4. Should exam mode ever show mistake alerts? Today the toggle can turn them on.
@@ -504,3 +504,8 @@ M6  UI polish
 15. Should faculty author or validate the fixtures and exemplars?
 16. How should onnxruntime-node be hosted on serverless?
 17. KTX2 vs WebP.
+18. (M1) Mark-sheet items whose guidance has two parts ("summarise and ask if accurate", "announce and ask permission", parents and siblings) earn full credit from one matching sentence. Split them into separate items, or add a multi-part match spec?
+19. (M1) "If relevant" items (sexual or travel history) need a per-case decision: `itemsNotApplicable` now switches an item off for a case (HF: sexual history). Who decides relevance for each case?
+20. (M1) The history bank answers generic yes/no questions with the case's `negativeReply`; it only answers when nothing in the case matches. Should every new case review the bank topics it leaves unanswered (`notRelevantTopics`)?
+21. (M1) No provider abstraction (`providers/anthropic-stub.ts`) was built: nothing plugs in beside the deterministic layer, and a stub would be dead code. Revisit if an external model is ever allowed back for advisory use.
+

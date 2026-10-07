@@ -8,6 +8,7 @@ const VITAL_KEYS = ["hr", "rr", "bpSystolic", "bpDiastolic", "tempC", "spo2", "s
 
 /** Cross-file checks the per-file Zod schemas can't do. Returns human-readable errors. */
 export function validateContentGraph(c: ContentIndex): string[] {
+  const topicIds = new Set(c.lang.topics.map((t) => t.id));
   const errors: string[] = [];
   const dup = <T extends { id: string }>(kind: string, xs: T[]) => {
     const seen = new Set<string>();
@@ -119,12 +120,37 @@ export function validateContentGraph(c: ContentIndex): string[] {
       if (n.intents) errors.push(...intentErrors(`case ${cs.id} negative ${n.id ?? n.topic}`, n.intents));
     }
     for (const cr of cs.history.conversation) if (cr.intents) errors.push(...intentErrors(`case ${cs.id} conversation ${cr.kind}`, cr.intents));
+    // phase 4 (M1): an encounter's history must be askable — every fact and negative has intents, with real topics
+    if (cs.mode === "encounter" && topicIds.size) {
+      for (const f of cs.history.facts) if (!f.intents) errors.push(`case ${cs.id}: fact "${f.id}" has no intents (how students ask for it)`);
+      for (const n of cs.history.pertinentNegatives) if (!n.intents) errors.push(`case ${cs.id}: pertinent negative "${n.id ?? n.topic}" has no intents`);
+    }
+    const intents = [...cs.history.facts.flatMap((f) => [f.intents, ...f.followUps.map((u) => u.intents)]), ...cs.history.pertinentNegatives.map((n) => n.intents)];
+    for (const it of intents) for (const t of it?.topics ?? []) if (topicIds.size && !topicIds.has(t)) errors.push(`case ${cs.id}: intent topic "${t}" is not in content/lang/topics.json`);
+    for (const nt of cs.history.notRelevantTopics) if (topicIds.size && !topicIds.has(nt)) errors.push(`case ${cs.id}: notRelevantTopics "${nt}" is not in content/lang/topics.json`);
     // phase 4: acceptable diagnoses earn penKey differential items; case mistake rules
     const ddxIds = new Set((cs.penKey?.differential ?? []).map((d) => d.id));
     for (const ad of cs.acceptableDiagnoses) {
       for (const sat of ad.satisfies) if (!ddxIds.has(sat)) errors.push(`case ${cs.id}: acceptable diagnosis "${ad.id}" satisfies unknown penKey differential "${sat}"`);
     }
     for (const mr of cs.mistakes) errors.push(...mistakeRuleErrors(`case ${cs.id} mistake ${mr.id}`, mr, c));
+    const caseItems = new Set(cs.markSheetIds.flatMap((id) => c.markSheets.find((m) => m.id === id)?.items.map((i) => i.id) ?? []));
+    for (const na of cs.itemsNotApplicable) if (!caseItems.has(na.itemId)) errors.push(`case ${cs.id}: itemsNotApplicable "${na.itemId}" is not an item of the case's mark sheets`);
+  }
+
+  // phase 4 (M1): language banks
+  const kinds = new Set<string>();
+  for (const r of c.lang.conversation) {
+    if (kinds.has(r.kind)) errors.push(`content/lang/conversation.json: kind "${r.kind}" appears twice`);
+    kinds.add(r.kind);
+    if (r.intents) errors.push(...intentErrors(`conversation ${r.kind}`, r.intents));
+  }
+  const bankIds = new Set<string>();
+  for (const h of c.lang.history) {
+    if (bankIds.has(h.id)) errors.push(`content/lang/history-bank.json: duplicate id "${h.id}"`);
+    bankIds.add(h.id);
+    if (topicIds.size && !topicIds.has(h.topic)) errors.push(`history-bank ${h.id}: topic "${h.topic}" is not in content/lang/topics.json`);
+    errors.push(...intentErrors(`history-bank ${h.id}`, h.intents));
   }
 
   for (const ms of c.markSheets) {
@@ -135,6 +161,14 @@ export function validateContentGraph(c: ContentIndex): string[] {
       ids.add(item.id);
       if (item.rule) for (const e of ruleRefErrors(item.rule, c)) errors.push(`mark sheet ${ms.id} item ${item.id}: ${e}`);
       if (item.sourceText) errors.push(`mark sheet ${ms.id} item ${item.id}: sourceText must stay empty until copyright is cleared`);
+      for (const pat of [...(item.match?.patterns ?? []), ...(item.match?.penalties ?? []).flatMap((p) => p.patterns)]) {
+        try {
+          new RegExp(pat, "i");
+        } catch {
+          errors.push(`mark sheet ${ms.id} item ${item.id}: pattern /${pat}/ does not compile`);
+        }
+      }
+      for (const t of item.match?.topics ?? []) if (topicIds.size && !topicIds.has(t)) errors.push(`mark sheet ${ms.id} item ${item.id}: topic "${t}" is not in content/lang/topics.json`);
     }
   }
   return errors;

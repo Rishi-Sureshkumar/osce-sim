@@ -2,7 +2,8 @@ import type { Action, Case, Domain, MarkSheet } from "@/domain/schemas";
 import { casePeSheet, penSheet } from "./penItems";
 
 /**
- * Mark sheets for a case: the listed sheets (restricted to Case.markSheetSections), then the
+ * Mark sheets for a case: the listed sheets (restricted to Case.markSheetSections, with the case's
+ * itemsNotApplicable turned into not_assessable items), then the
  * sheets generated from case data — the SP physical-exam checklist (`peChecklist`) and the
  * post-encounter note key (`penKey`) — which join the patient-encounter domain.
  */
@@ -11,7 +12,11 @@ export function sheetsForCase(kase: Case, markSheetById: Map<string, MarkSheet>)
     const sheet = markSheetById.get(id);
     if (!sheet) throw new Error(`case ${kase.id}: unknown mark sheet ${id}`);
     const sections = kase.markSheetSections?.[id];
-    return sections ? { ...sheet, items: sheet.items.filter((i) => sections.includes(i.section)) } : sheet;
+    const inSections = sections ? sheet.items.filter((i) => sections.includes(i.section)) : sheet.items;
+    // items the case marks as not applicable (e.g. sexual history for a heart-failure presentation) are shown greyed, never scored
+    const na = new Map((kase.itemsNotApplicable ?? []).map((n) => [n.itemId, n.reason] as const));
+    const items = na.size ? inSections.map((i) => (na.has(i.id) ? { ...i, scoring: "not_assessable" as const, notAssessableReason: na.get(i.id)!, rule: undefined } : i)) : inSections;
+    return sections || na.size ? { ...sheet, items } : sheet;
   });
   const peThreshold = listed.find((s) => domainOf(s) === "patient_encounter")?.passThreshold;
   return [...listed, casePeSheet(kase, peThreshold), penSheet(kase, peThreshold)].filter((s): s is MarkSheet => s !== null);

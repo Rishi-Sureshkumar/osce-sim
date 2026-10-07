@@ -1,0 +1,513 @@
+{
+  "replies": [
+    {
+      "kind": "opening",
+      "intents": {
+        "canonical": "What brings you in today?",
+        "paraphrases": [
+          "What brings you here today?",
+          "What's brought you in today?",
+          "What's brought you to the hospital?",
+          "How can I help you today?",
+          "How can I help?",
+          "What can I do for you today?",
+          "What seems to be the problem?",
+          "What's the problem today?",
+          "What made you come in today?",
+          "Why have you come in today?",
+          "What are you here for today?",
+          "Can you tell me what brought you in?",
+          "Tell me what's been going on.",
+          "What's been going on?",
+          "In your own words, what's been happening?",
+          "What's the main reason you came in?",
+          "What's the reason for your visit today?",
+          "Could you tell me why you're here today?",
+          "What happened that made you come to the emergency department?",
+          "So, what's going on with you today?",
+          "What's the matter?",
+          "Where would you like to start?"
+        ],
+        "keywords": ["what brings you", "what brought you", "brings you in", "brought you in", "brings you here", "brought you here", "how can i help", "reason for your visit", "made you come in", "here for today"],
+        "patterns": [
+          "\\bwhat (brings|brought|is bringing|has brought|is brought) you\\b",
+          "\\bhow can i help( you)?( today)?$",
+          "\\b(why have you|why did you|what made you) (come|came) (in|here|to)\\b",
+          "\\bwhat (are you|brings you) (here|in) (for|about)\\b",
+          "\\bwhat seems to be the (problem|matter|trouble)\\b"
+        ]
+      },
+      "replies": ["Well…", "Where do I start…", "Well, it's hard to know where to start."]
+    },
+    {
+      "kind": "greeting",
+      "intents": {
+        "canonical": "Hello.",
+        "paraphrases": [
+          "Hi.",
+          "Hi there.",
+          "Hello there.",
+          "Hey.",
+          "Hey there.",
+          "Hiya.",
+          "Good morning.",
+          "Good afternoon.",
+          "Good evening.",
+          "Morning!",
+          "Afternoon!",
+          "Hello, good morning.",
+          "Hi, good evening.",
+          "Hello, how do you do?",
+          "Hello again.",
+          "Hi, hello."
+        ],
+        "keywords": ["hello", "hiya", "hi there", "hey there", "good morning", "good afternoon", "good evening", "how do you do"],
+        "patterns": [
+          "^(hi|hello|hey|hiya|howdy|good (morning|afternoon|evening)|morning|afternoon)( there| again| hello| hi)?( good (morning|afternoon|evening))?$"
+        ]
+      },
+      "replies": ["Hello.", "Hi.", "Hello there."]
+    },
+    {
+      "kind": "introduction",
+      "intents": {
+        "canonical": "My name is Sam and I'm a medical student.",
+        "paraphrases": [
+          "Hi, I'm Priya, a third-year medical student.",
+          "Hello, my name's Tom and I'm one of the medical students working with the team today.",
+          "I'm Jordan, a student doctor.",
+          "I'm a medical student.",
+          "I'm one of the medical students.",
+          "Let me introduce myself, I'm Mei, a medical student.",
+          "My name is Omar, I'm a first-year med student.",
+          "I'm the medical student who'll be seeing you today.",
+          "I'm a student working with the medical team.",
+          "I'm a medical student working with Dr Patel.",
+          "Hi, I'm Sam, one of the students here.",
+          "I'm a student doctor and I'll be talking with you first.",
+          "Good morning, I'm Chris, I'm a medical student.",
+          "I'm a final-year medical student.",
+          "My name is Sam.",
+          "I'm Alex.",
+          "I'm a student from the medical school.",
+          "Hi there, I'm Lee and I'm training to be a doctor."
+        ],
+        "keywords": ["my name", "medical student", "student doctor", "introduce myself", "year medical student", "one of the students", "training to be"],
+        "patterns": [
+          "\\bmy name( is)? [a-z]+\\b",
+          "\\bi am (a|an|1 of the|one of the|the) ([a-z0-9]+ ){0,3}(medical )?students?\\b"
+        ]
+      },
+      "replies": ["Hello {student.name}, nice to meet you.", "Nice to meet you.", "Pleased to meet you."]
+    },
+    {
+      "kind": "how_are_you",
+      "intents": {
+        "canonical": "How are you feeling today?",
+        "paraphrases": [
+          "How are you?",
+          "How are you today?",
+          "How are you doing?",
+          "How are you doing today?",
+          "How are you feeling?",
+          "How are you feeling right now?",
+          "How are you feeling at the moment?",
+          "How have you been?",
+          "How's it going?",
+          "How are things?",
+          "How are you holding up?",
+          "How are you getting on?",
+          "How are you keeping?",
+          "How's everything with you?",
+          "How are you coping today?",
+          "Are you doing okay?",
+          "How do you feel today?"
+        ],
+        "keywords": ["how is it going", "how are things", "holding up", "how are you keeping"],
+        "patterns": [
+          "^(and |so |okay |alright |hi |hello |hey )*how are you( doing| feeling| keeping| getting on| holding up| coping)?( today| now| right now| at the moment| this morning| this afternoon| this evening)?$",
+          "^(and |so |okay |alright |hi |hello |hey )*how have you been( doing| feeling| keeping)?( lately| recently)?$"
+        ]
+      },
+      "replies": ["Okay, I suppose. Thanks for asking.", "Hanging in there, thanks.", "Not too bad, thanks."]
+    },
+    {
+      "kind": "consent",
+      "intents": {
+        "canonical": "Is it okay if I examine you?",
+        "paraphrases": [
+          "May I examine you?",
+          "Would it be alright for me to examine you now?",
+          "Do I have your permission to examine you?",
+          "Are you happy for me to examine you?",
+          "Is it okay if I listen to your chest?",
+          "Can I have a listen to your heart?",
+          "Do you mind if I have a feel of your tummy?",
+          "Is it alright if I take a look at your legs?",
+          "Can I examine your chest now?",
+          "Would you be okay with me pressing on your abdomen?",
+          "Is it okay if I lift your gown to look at your chest?",
+          "Do you consent to the examination?",
+          "Are you okay with me examining you?",
+          "Is that okay with you?",
+          "Is that alright?",
+          "Is that okay?",
+          "Is it okay if I ask you some questions?",
+          "Would you mind if I asked you a few questions?",
+          "Can I go ahead?",
+          "Shall I go ahead?",
+          "Is it okay to start the examination?"
+        ],
+        "keywords": ["permission", "consent", "happy for me to", "okay with me", "is that okay", "is that alright", "okay with you", "may i examine", "can i examine", "shall i go ahead"],
+        "patterns": [
+          "\\b(okay|alright|fine|happy|comfortable) (if|for|with) (i|me)( to)? (examine|examined|examining|listen|listened|listening|have a (look|listen|feel)|had a (look|listen|feel)|take a (look|listen)|feel|felt|press|pressed|pressing|look|looked|touch|touched|check|checked|lift|start|go ahead)\\b",
+          "\\b(may|can|could|shall) i (examine|have a (look|listen|feel)|take a (look|listen)|listen to|feel your|press on|go ahead|start the exam)",
+          "^(is that|would that be|will that be|are you) (okay|alright|fine)( with you)?$",
+          "\\b(do i have|have i got|can i have|can i get) your (permission|consent)\\b",
+          "\\b(do|would) you mind if i (examine|examined|listen|listened|have a|had a|take a|took a|feel|felt|press|pressed|look|looked)\\b"
+        ]
+      },
+      "replies": ["Yes, that's fine.", "Sure, go ahead.", "Of course.", "Yes, that's okay."]
+    },
+    {
+      "kind": "explain_exam",
+      "intents": {
+        "canonical": "I'm going to examine you now.",
+        "paraphrases": [
+          "I'm just going to listen to your chest.",
+          "Next I'm going to feel your abdomen.",
+          "I'm going to press on your tummy, let me know if anything hurts.",
+          "Now I'll have a look at your hands.",
+          "I'll start by washing my hands.",
+          "First I'm going to take your pulse.",
+          "I'm going to tap on your back.",
+          "I'll be listening to your heart with my stethoscope.",
+          "This might feel a little cold.",
+          "This may be a bit uncomfortable.",
+          "Let me explain what I'm going to do.",
+          "I'm going to do a quick examination of your heart and lungs.",
+          "Now I'd like to move on to the physical examination.",
+          "I'm going to look at your legs now.",
+          "I'll be as gentle as I can.",
+          "Tell me if anything is sore while I examine you.",
+          "I'm going to shine a light in your eyes.",
+          "I'll need you to breathe in and out through your mouth.",
+          "I'm going to start the examination now, beginning with your hands.",
+          "I'm going to examine your legs next.",
+          "I'm going to wash my hands first.",
+          "I'm going to take your blood pressure."
+        ],
+        "keywords": ["going to examine", "going to listen", "going to feel", "going to press", "going to tap", "going to look at", "take your pulse", "take your blood pressure", "i will listen", "i will examine", "let me explain", "head to toe", "wash my hands", "washing my hands", "physical examination", "as gentle as"],
+        "patterns": [
+          "\\b(i am|i will|i would like to|i want to|i need to|let me|now i will|next i will|first i will|next i am|now i am)( just)?( going to| be)?( now| next| first| quickly| just)? (examine|examining|listen|listening|feel|feeling|press|pressing|tap|tapping|look at|looking at|have a (look|listen|feel)|take your (pulse|blood pressure|temperature)|shine|wash|washing|start the exam|start the examination|start by|begin|do a ([a-z]+ ){0,2}(exam|examination|check))\\b",
+          "\\bthis (might|may|will|could) (feel|be) (a (little|bit) )?(cold|uncomfortable|strange|odd|tender|ticklish)\\b",
+          "\\blet me (explain|tell you) what i am (going to do|doing)\\b"
+        ]
+      },
+      "replies": ["Okay.", "Alright.", "Okay, no problem."]
+    },
+    {
+      "kind": "position_request",
+      "intents": {
+        "canonical": "Could you sit up for me, please?",
+        "paraphrases": [
+          "Can you lie back on the bed for me?",
+          "Please lie flat on the bed for me.",
+          "Could you roll onto your left side for me?",
+          "Can you turn onto your side, please?",
+          "Could you sit forward for me?",
+          "Lean forward for me, please.",
+          "Can you sit on the edge of the bed with your legs hanging down?",
+          "Could you swing your legs over the side of the bed?",
+          "Can you lie back at about 45 degrees for me?",
+          "Would you mind sitting up and leaning forward?",
+          "Please roll over onto your back.",
+          "Can you hop up onto the bed for me?",
+          "Could you pop yourself up onto the couch?",
+          "Would you mind lying back for me?",
+          "If you could just sit up straight for me.",
+          "Can you stand up for me, please?",
+          "Please lie back and relax.",
+          "Can you scoot up the bed a little?",
+          "Could you sit with your legs dangling over the side?",
+          "Can you bend your knees up for me?",
+          "Would you mind lying down on your back?"
+        ],
+        "keywords": ["roll onto your", "turn onto your", "swing your legs", "legs over the side", "legs hanging", "legs dangling", "45 degrees", "hop up", "pop yourself", "sit forward for me", "lean forward for me", "lie back for me", "sit up for me", "stand up for me", "lie flat for me", "lie down for me", "bend your knees"],
+        "patterns": [
+          "\\b(sit|sitting|lie|lying|roll|rolling|turn|turning|lean|leaning|stand|standing|swing|hop|pop|scoot|shuffle|bend)\\b.*\\bfor me\\b",
+          "^(okay |alright |now |right |so )*(please|if you could|would you mind|could i get you to|can i get you to|i would like you to|i need you to)( just)? (sit|sitting|lie|lying|roll|rolling|turn|turning|lean|leaning|stand|standing|swing|hop|pop|scoot)\\b",
+          "\\b(sit|lie|roll|turn|lean|stand|swing|hop|pop|scoot) [a-z0-9 ]*\\bplease$",
+          "\\b(roll|turn) (over )?onto your (left|right|back|side|front|tummy|abdomen)\\b"
+        ]
+      },
+      "replies": ["Sure.", "Okay, like this?", "Alright.", "Okay."]
+    },
+    {
+      "kind": "anything_else",
+      "intents": {
+        "canonical": "Is there anything else you'd like to tell me?",
+        "paraphrases": [
+          "Is there anything else?",
+          "Anything else?",
+          "Anything else at all?",
+          "Is there anything else I should know?",
+          "Is there anything else you want to mention?",
+          "Is there anything I haven't asked you about that you think is important?",
+          "Have I missed anything?",
+          "Is there anything we haven't covered?",
+          "Anything else you'd like to add?",
+          "Is there anything else going on that I should know about?",
+          "Do you have any questions for me?",
+          "Any questions so far?",
+          "Is there anything you'd like to ask me?",
+          "Before we move on, is there anything else?",
+          "Is there anything else you think I should know?",
+          "Anything you want to add before we move on?",
+          "Was there anything else you wanted to tell me?",
+          "Is there something else you'd like to discuss?",
+          "Any other things you'd like to mention?"
+        ],
+        "keywords": ["have i missed anything", "any questions for me", "anything else to add", "would like to mention", "have not asked about", "have not covered", "anything i should know", "like to ask me"],
+        "patterns": [
+          "^(and |so |okay |right |alright |lastly |finally |before we move on |before i go )*(is there |was there |have you got |do you have )?anything else( at all)?( you (would like|want|wanted|need|think)( to)?( (tell|share|mention|add|ask|discuss|say))?( me)?( about)?)?( i should know( about)?)?( that i have not (asked|covered)( you)?( about)?)?( before we (move on|finish|go on))?$",
+          "^(do you have |have you got |are there )?any (questions|other questions)( for me| so far| at all| before we (move on|finish))?$",
+          "\\bhave i missed anything\\b"
+        ]
+      },
+      "replies": ["No, I think that's everything.", "No, that's all for now.", "Not that I can think of."]
+    },
+    {
+      "kind": "empathy",
+      "intents": {
+        "canonical": "That sounds really difficult.",
+        "paraphrases": [
+          "I'm sorry to hear that.",
+          "I'm so sorry you've been going through this.",
+          "That must be really worrying for you.",
+          "That must be frightening.",
+          "That sounds really hard.",
+          "I can imagine that's been very stressful.",
+          "That sounds awful.",
+          "That must be exhausting.",
+          "It's completely understandable to feel that way.",
+          "I can see this is really getting you down.",
+          "I can hear how worried you are.",
+          "That must be tough for you and your family.",
+          "That sounds scary.",
+          "It sounds like you've had a really rough time.",
+          "I understand, that must be frustrating.",
+          "That can't have been easy.",
+          "I'm sorry, that sounds really unpleasant.",
+          "You've been through a lot.",
+          "Don't worry, we'll look after you.",
+          "That must be really hard, not getting a good night's sleep.",
+          "It must be frustrating not being able to do the things you used to.",
+          "That sounds really tough, struggling to breathe like that.",
+          "It must be horrible being in pain all the time.",
+          "That must be exhausting, being up so much at night.",
+          "I can imagine it's hard not being able to get out and about."
+        ],
+        "keywords": ["sorry to hear", "sorry you have been", "going through this", "must be hard", "must be really hard", "must be difficult", "must be horrible", "must be awful", "must be exhausting", "not being able to", "must be worrying", "must be frightening", "must be scary", "must be frustrating", "must be tough", "sounds really hard", "sounds really difficult", "sounds awful", "sounds scary", "understandable", "i can imagine", "cannot have been easy", "been through a lot", "rough time", "look after you"],
+        "patterns": [
+          "\\b(that|it|this) (sounds|must be|must have been|must feel|seems)( like it (is|has been|was))?( really| so| very| quite| incredibly| pretty)? (hard|difficult|tough|awful|horrible|terrible|frightening|scary|worrying|stressful|frustrating|upsetting|exhausting|unpleasant|distressing|overwhelming|painful|rough|miserable)\\b",
+          "\\bsorry (to hear|you (are|have been|were)|that you)\\b",
+          "\\b(completely |totally |very |perfectly )?understandable\\b",
+          "\\bi can (only )?imagine\\b"
+        ]
+      },
+      "replies": ["Thank you.", "Thanks, I appreciate that.", "Yes… it's been a lot."]
+    },
+    {
+      "kind": "thanks",
+      "intents": {
+        "canonical": "Thank you.",
+        "paraphrases": [
+          "Thanks.",
+          "Thank you very much.",
+          "Thanks so much.",
+          "Thank you for answering my questions.",
+          "Thanks for your patience.",
+          "Thank you for your time.",
+          "Thanks for letting me examine you.",
+          "Thank you for being so helpful.",
+          "Cheers.",
+          "Much appreciated.",
+          "I appreciate it.",
+          "Thanks for that.",
+          "Great, thank you.",
+          "Perfect, thanks.",
+          "Thank you for bearing with me.",
+          "Thanks for your help.",
+          "That's really helpful, thank you.",
+          "Thank you for telling me all of that."
+        ],
+        "keywords": ["thank you", "thanks", "cheers", "much appreciated", "i appreciate it"],
+        "patterns": [
+          "^(okay |great |perfect |lovely |brilliant |alright |right |that is (really |very )?helpful )*(thank you|thanks)( (so|very) much)?( for [a-z0-9 ]+)?$"
+        ]
+      },
+      "replies": ["You're welcome.", "No problem.", "That's alright."]
+    },
+    {
+      "kind": "closing",
+      "intents": {
+        "canonical": "Goodbye, take care.",
+        "paraphrases": [
+          "Bye.",
+          "Bye for now.",
+          "Take care.",
+          "See you later.",
+          "Have a good day.",
+          "Have a nice day.",
+          "Get well soon.",
+          "I hope you feel better soon.",
+          "That's everything from me, take care.",
+          "I'll leave you to rest now.",
+          "I'll let you get some rest.",
+          "The doctor will be in to see you shortly.",
+          "I'm going to discuss this with my senior and we'll come back to you.",
+          "We'll be back with a plan soon.",
+          "That's the end of the examination, you can get dressed.",
+          "We're all done here.",
+          "It was nice meeting you, take care.",
+          "All the best.",
+          "I'll see you again soon.",
+          "That's all from me for now."
+        ],
+        "keywords": ["goodbye", "bye", "take care", "see you later", "see you soon", "see you again", "get well soon", "feel better soon", "have a good day", "have a nice day", "have a lovely day", "have a great day", "leave you to rest", "get some rest", "get dressed", "all done", "all the best", "end of the examination"],
+        "patterns": [
+          "^(okay |alright |right |well )*(bye|goodbye|bye bye|take care|see you( later| soon| again)?)( now| then| for now)?$",
+          "^(okay |alright |right |well |and |so )*(you )?have a (good|nice|lovely|great) (day|evening|afternoon|weekend)( then| now)?$"
+        ]
+      },
+      "replies": ["Thank you. Bye.", "Okay, thank you.", "Bye now.", "Thanks, see you."]
+    },
+    {
+      "kind": "small_talk",
+      "intents": {
+        "canonical": "How was the traffic on the way in?",
+        "paraphrases": [
+          "Lovely weather today, isn't it?",
+          "It's freezing out there today.",
+          "Is it still raining outside?",
+          "Was it easy to park?",
+          "Did you find somewhere to park?",
+          "How was the drive in?",
+          "Did you get here alright?",
+          "Have you had to wait long?",
+          "Sorry about the wait.",
+          "Busy day today, isn't it?",
+          "Did you see the game last night?",
+          "It's a lovely sunny day out there.",
+          "Nice to see the sun out for once.",
+          "Did you come far today?",
+          "How was your journey here?",
+          "Hope the trip in wasn't too bad.",
+          "Did you find the clinic okay?",
+          "Did you have any trouble getting here?"
+        ],
+        "keywords": ["the traffic", "to park", "find parking", "parking", "lovely weather", "nice weather", "weather today", "raining outside", "the drive in", "your journey here", "about the wait", "wait long", "game last night", "get here alright", "come far", "trouble getting here", "sun out"],
+        "patterns": [
+          "\\b(traffic|parking|park the car|weather (today|outside|lately|like)|raining outside|sunny (day|out))\\b"
+        ]
+      },
+      "replies": ["Not too bad, thanks.", "Mm, yes.", "It's alright, I suppose."]
+    },
+    {
+      "kind": "repeat",
+      "intents": {
+        "canonical": "Sorry, could you say that again?",
+        "paraphrases": [
+          "Pardon?",
+          "Sorry?",
+          "Sorry, what was that?",
+          "Could you repeat that, please?",
+          "Can you repeat that?",
+          "Sorry, I didn't catch that.",
+          "Say that again?",
+          "Come again?",
+          "Sorry, I missed that.",
+          "Could you speak up a little?",
+          "Sorry, I didn't hear you.",
+          "Could you say that one more time?",
+          "What did you say?",
+          "Excuse me?",
+          "Can you repeat what you just said?",
+          "I didn't quite hear that, sorry.",
+          "One more time, please?",
+          "Sorry, could you repeat the last part?",
+          "Could you say that a bit louder?"
+        ],
+        "keywords": ["pardon", "say that again", "repeat that", "repeat what you", "did not catch", "come again", "speak up", "did not hear", "did not quite hear", "1 more time", "a bit louder", "repeat the last part"],
+        "patterns": [
+          "^(sorry|pardon|excuse me|what|sorry what|pardon me|i am sorry|sorry what was that|what was that)$",
+          "\\b(say|repeat) (that|it|what you (just )?said|the last part)( again| 1 more time| please| louder| a bit louder)?$",
+          "\\bdid not (quite )?(catch|hear) (that|you|what you said)\\b"
+        ]
+      },
+      "replies": ["Sorry.", "Oh, sorry about that.", "Sorry, I'll speak up."]
+    },
+    {
+      "kind": "clarify",
+      "intents": {
+        "canonical": "What do you mean?",
+        "paraphrases": [
+          "What do you mean by that?",
+          "Can you explain what you mean?",
+          "Could you clarify that for me?",
+          "What does that mean?",
+          "I'm not sure I understand.",
+          "Sorry, I don't quite follow.",
+          "Can you put that another way?",
+          "Could you be a bit more specific?",
+          "What do you mean exactly?",
+          "How do you mean?",
+          "In what way?",
+          "When you say that, what do you mean?",
+          "Could you explain that a bit more?",
+          "Sorry, I didn't understand that.",
+          "I'm not quite sure what you mean."
+        ],
+        "keywords": ["what do you mean", "how do you mean", "what does that mean", "clarify", "not sure i understand", "do not quite follow", "do not follow", "did not understand", "more specific", "another way", "what you mean"],
+        "patterns": [
+          "^(sorry |i am sorry |so |okay )?(what|how) do you mean( by that| exactly)?$",
+          "\\b(i do not|i did not|not sure i|i am not sure i)( quite)? (understand|follow)\\b",
+          "\\bnot (quite )?sure what you mean\\b"
+        ]
+      },
+      "replies": ["I'm not sure how else to put it.", "Just what I said, really.", "Hmm, it's hard to explain."]
+    },
+    {
+      "kind": "name_check",
+      "intents": {
+        "canonical": "Can you confirm your name and date of birth?",
+        "paraphrases": [
+          "What's your full name?",
+          "Could you tell me your name, please?",
+          "Can I just check your name?",
+          "What's your name?",
+          "Could you confirm your full name for me?",
+          "Can you tell me your name and date of birth?",
+          "Just to confirm, what's your name?",
+          "Can I check I've got the right person?",
+          "Am I speaking to the right patient?",
+          "What would you like me to call you?",
+          "How would you like to be addressed?",
+          "What should I call you?",
+          "What name do you go by?",
+          "Can you spell your name for me?",
+          "Could you state your name and date of birth?",
+          "Before we start, can I confirm your details?"
+        ],
+        "keywords": ["your name", "date of birth", "full name", "call you", "right patient", "right person", "your details", "be addressed"],
+        "patterns": [
+          "\\b(confirm|check|tell me|what is|state|spell|give me) your (full )?name\\b",
+          "\\bdate of birth\\b",
+          "\\b(what|how) (should|would you like|do you want|can|shall) (i|me to) (call|address) you\\b"
+        ]
+      },
+      "replies": ["It's {patient.name}.", "I'm {patient.name}.", "{patient.name}, that's me."]
+    }
+  ]
+}

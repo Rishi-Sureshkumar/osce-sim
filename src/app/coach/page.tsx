@@ -26,7 +26,6 @@ export default async function CoachHome() {
               <th className="px-3 py-2">Status</th>
               <th className="px-3 py-2">Score</th>
               <th className="px-3 py-2">Review</th>
-              <th className="px-3 py-2">Tokens</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
@@ -55,7 +54,6 @@ export default async function CoachHome() {
                   {r.overrides > 0 && <span className="ml-1 rounded bg-indigo-100 px-1.5 text-xs text-indigo-800">{r.overrides} overrides</span>}
                   {r.hints > 0 && <span className="ml-1 rounded bg-emerald-100 px-1.5 text-xs text-emerald-900">{r.hints} hints</span>}
                 </td>
-                <td className="px-3 py-2 font-mono text-xs">{r.tokens.toLocaleString()}</td>
               </tr>
             ))}
           </tbody>

@@ -66,6 +66,8 @@ export interface AiItemJudgement {
   score: number; // 0..1
   rationale: string;
   evidence: { actionId: string; quote: string }[];
+  /** Phase 4: similarity in the review band — a coach decides */
+  review?: boolean;
 }
 
 /**
@@ -99,6 +101,7 @@ export function scoreAiItems(sheet: MarkSheet, judgements: AiItemJudgement[], lo
       const reasons = [
         unverified ? "a quoted line could not be found verbatim in the transcript" : "",
         creditWithoutEvidence ? "credit was given without quoted evidence" : "",
+        j.review ? "a possible match below the credit threshold" : "",
       ].filter(Boolean);
       return {
         markSheetId: sheet.id,

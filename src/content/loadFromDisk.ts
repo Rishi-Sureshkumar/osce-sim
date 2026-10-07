@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { z } from "zod";
-import { Case, ManeuversFile, MarkSheet, RegionsFile } from "@/domain/schemas";
+import { Case, ConversationBankFile, HistoryBankFile, ManeuversFile, MarkSheet, RegionsFile, SynonymsFile, TopicsFile } from "@/domain/schemas";
 import type { ContentIndex } from "./types";
 import { validateContentGraph } from "./validate";
 
@@ -31,6 +31,13 @@ export function loadContentFromDisk(root = CONTENT_DIR): ContentIndex {
   const maneuvers = jsonFiles(path.join(root, "catalog/maneuvers")).flatMap((f) => readJson(f, ManeuversFile).maneuvers);
   const cases = jsonFiles(path.join(root, "cases")).map((f) => readJson(f, Case));
   const markSheets = jsonFiles(path.join(root, "marksheets")).map((f) => readJson(f, MarkSheet));
+  const optional = <T>(file: string, schema: z.ZodType<T>, empty: T): T => (fs.existsSync(path.join(root, file)) ? readJson(path.join(root, file), schema) : empty);
+  const lang = {
+    synonyms: optional("lang/synonyms.json", SynonymsFile, { entries: [] }).entries,
+    conversation: optional("lang/conversation.json", ConversationBankFile, { replies: [] }).replies,
+    history: optional("lang/history-bank.json", HistoryBankFile, { entries: [] }).entries,
+    topics: optional("lang/topics.json", TopicsFile, { topics: [] }).topics,
+  };
 
   const index: ContentIndex = {
     regions,
@@ -41,6 +48,7 @@ export function loadContentFromDisk(root = CONTENT_DIR): ContentIndex {
     caseById: new Map(cases.map((c) => [c.id, c])),
     markSheets,
     markSheetById: new Map(markSheets.map((m) => [m.id, m])),
+    lang,
   };
   const errors = validateContentGraph(index);
   if (errors.length) throw new Error(`Content cross-reference errors:\n- ${errors.join("\n- ")}`);

@@ -11,7 +11,7 @@
       "section": "Past history",
       "label": "PMH: conditions",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks about past medical conditions.",
       "mockKeywords": [
         "medical conditions",
@@ -19,6 +19,46 @@
         "health problems",
         "diagnosed with"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "past medical history",
+          "your medical history",
+          "your own health"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:family|parents|mother|father|mom|mum|dad|siblings|brothers?|sisters?|relatives|wife|husband|children|kids)\\b).*\\b(?:any|other|ongoing|chronic|long term|past|previous) (?:\\w+ )?(?:medical|health) (?:conditions?|problems?|issues?|history|illness\\w*)\\b",
+          "^(?!.*\\b(?:family|parents|mother|father|mom|mum|dad|siblings|brothers?|sisters?|relatives|wife|husband|children|kids)\\b).*\\b(?:medical|health) (?:conditions?|problems?|issues?)\\b.*\\b(?:you have|you had|have you|do you|are you)\\b",
+          "^(?!.*\\b(?:family|parents|mother|father|mom|mum|dad|siblings|brothers?|sisters?|relatives|wife|husband|children|kids)\\b).*\\b(?:doctor|doctors|anyone) (?:ever )?(?:told you|diagnosed you)\\b",
+          "^(?!.*\\b(?:family|parents|mother|father|mom|mum|dad|siblings|brothers?|sisters?|relatives|wife|husband|children|kids)\\b).*\\b(?:ever|been) diagnosed with\\b",
+          "^(?!.*\\b(?:family|parents|mother|father|mom|mum|dad|siblings|brothers?|sisters?|relatives|wife|husband|children|kids)\\b).*\\bdo you have (?:any )?(?:diabetes|high blood pressure|asthma|heart (?:problems|disease)|kidney (?:problems|disease)|lung (?:problems|disease))\\b",
+          "^(?!.*\\b(?:family|parents|mother|father|mom|mum|dad|siblings|brothers?|sisters?|relatives|wife|husband|children|kids)\\b).*\\bdo you (?:see a doctor|see anyone|get treated) (?:for|regularly)\\b"
+        ],
+        "exemplars": [
+          "Do you have any medical conditions?",
+          "What other health problems have you had in the past?",
+          "Has a doctor ever told you that you have diabetes or high blood pressure?",
+          "Tell me about your past medical history.",
+          "Are you being treated for any ongoing health conditions?",
+          "Have you been diagnosed with anything before, like heart or lung problems?",
+          "Any history of heart attacks, strokes, or kidney problems?",
+          "Do you see a doctor regularly for anything?"
+        ],
+        "counterExemplars": [
+          "Does anyone in your family have any medical conditions?",
+          "Have you ever had any surgeries?",
+          "What medications do you take?"
+        ],
+        "topics": [
+          "pmh.conditions"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -26,13 +66,52 @@
       "section": "Past history",
       "label": "PMH: when diagnosed",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks when conditions were diagnosed.",
       "mockKeywords": [
         "when were you diagnosed",
         "how long have you had",
         "what year"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "when were you diagnosed",
+          "when was that diagnosed",
+          "when was it diagnosed",
+          "how long ago were you diagnosed",
+          "how old were you when you were diagnosed",
+          "what year were you diagnosed"
+        ],
+        "patterns": [
+          "\\bwhen (?:were you|was (?:it|that|this|(?:the|your) (?:\\w+ ){1,3}?)) ?(?:first )?diagnosed\\b",
+          "\\b(?:what year|how long ago|how old were you when|at what age)\\b.*\\b(?:diagnos\\w*|told you)\\b",
+          "\\bhow long have you (?:had|been living with|known about|been treated for|been diagnosed with) (?:diabetes|sugar|high blood pressure|blood pressure|hypertension|high cholesterol|cholesterol|heart failure|heart condition|heart problems?|weak heart|asthma|copd|emphysema|kidney (?:disease|problems?)|thyroid|that condition|these conditions|the condition|your condition|those conditions|that diagnosis|it diagnosed|them diagnosed|that diagnosed|this diagnosed)\\b",
+          "\\b(?:when|what year|how long ago) (?:did you have|was|were you told about) (?:your|the|that) (?:heart attack|stroke|mi|diagnosis)\\b",
+          "\\bwhen did (?:you|they) (?:find out|first find out|learn|discover)\\b.*\\b(?:diabetes|sugar|high blood pressure|blood pressure|hypertension|high cholesterol|cholesterol|heart failure|heart condition|heart problems?|weak heart|asthma|copd|emphysema|kidney (?:disease|problems?)|thyroid|that condition|these conditions|the condition|your condition|those conditions|that diagnosis|it diagnosed|them diagnosed|that diagnosed|this diagnosed)\\b"
+        ],
+        "exemplars": [
+          "When were you diagnosed with that?",
+          "How long have you had high blood pressure?",
+          "What year was the heart attack?",
+          "How old were you when they told you about your heart?",
+          "When did you first find out you had a weak heart?",
+          "How long ago were you diagnosed with diabetes?",
+          "When was the heart failure first diagnosed?"
+        ],
+        "counterExemplars": [
+          "How long have you been short of breath?",
+          "When did the swelling start?",
+          "When was your last check-up?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -40,7 +119,7 @@
       "section": "Past history",
       "label": "PSH: surgeries / procedures",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks about past surgeries or procedures.",
       "mockKeywords": [
         "surgery",
@@ -48,6 +127,47 @@
         "operation",
         "procedure"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "any surgeries",
+          "had surgery",
+          "had any surgery",
+          "any operations",
+          "had an operation",
+          "any procedures",
+          "surgical history",
+          "past surgical history"
+        ],
+        "patterns": [
+          "\\b(?:any|ever had|had any|have had|previous|past|prior|other) (?:\\w+ )?(?:surgery|surgeries|operations?|procedures?)\\b",
+          "\\b(?:ever|been) (?:had |been )?(?:operated on|under the knife|put to sleep for)\\b",
+          "\\bsurgical history\\b"
+        ],
+        "exemplars": [
+          "Have you ever had any surgeries?",
+          "Any operations or procedures in the past?",
+          "Have you had any heart procedures, like a stent?",
+          "Tell me about any surgeries you've had.",
+          "Have you ever been operated on?",
+          "Have you been in hospital for any procedures?",
+          "Any past surgical history I should know about?"
+        ],
+        "counterExemplars": [
+          "Do you have any medical conditions?",
+          "Is there any family history of heart disease?",
+          "Have you been admitted to hospital before for your breathing?"
+        ],
+        "topics": [
+          "psh.surgery"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -55,13 +175,53 @@
       "section": "Past history",
       "label": "PSH: dates",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks when surgeries/procedures happened.",
       "mockKeywords": [
         "when was",
         "what year",
         "how long ago"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "when was the surgery",
+          "when was that surgery",
+          "when was the operation",
+          "when was the procedure",
+          "when did you have the surgery",
+          "when did you have the operation",
+          "when did you have the procedure",
+          "when did you have the stent"
+        ],
+        "patterns": [
+          "\\b(?:when|what year|how long ago) (?:was|were|did you have|did they (?:do|put in|place)|did you get) (?:the|that|your|those|these|it) ?(?:\\w+ )?(?:surgery|surgeries|operation|operations|procedure|procedures|stent|stents|appendix|appendectomy|bypass|catheteri[sz]ation|angioplasty)\\b",
+          "\\b(?:when|what year|how long ago) (?:was|were) (?:that|it|this|they) (?:done|performed|put in|placed)\\b",
+          "\\bhow old were you when (?:you had|they (?:did|took out|removed)|you got) (?:the|that|your)?\\s?(?:\\w+ )?(?:surgery|surgeries|operation|operations|procedure|procedures|stent|stents|appendix|appendectomy|bypass|catheteri[sz]ation|angioplasty)?\\b",
+          "\\b(?:surgery|surgeries|operation|operations|procedure|procedures|stent|stents|appendix|appendectomy|bypass|catheteri[sz]ation|angioplasty)\\b.*\\b(?:what year|how long ago|when was (?:that|it)|when did)\\b"
+        ],
+        "exemplars": [
+          "When was the stent put in?",
+          "What year did you have your appendix out?",
+          "How long ago was that operation?",
+          "When did you have the surgery?",
+          "How old were you when they took your appendix out?",
+          "And when was that procedure done?",
+          "What year was the heart procedure?"
+        ],
+        "counterExemplars": [
+          "When did the breathlessness start?",
+          "When were you diagnosed with high blood pressure?",
+          "When was your last doctor's appointment?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -69,7 +229,7 @@
       "section": "Medications and allergies",
       "label": "Medications: names",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks what medications the patient takes.",
       "mockKeywords": [
         "medications",
@@ -77,6 +237,52 @@
         "pills",
         "taking"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "what medications",
+          "what medicines",
+          "what pills",
+          "what tablets",
+          "medications do you take",
+          "medicines do you take",
+          "pills do you take",
+          "prescription medications",
+          "prescribed medications",
+          "regular medications",
+          "list of your medications"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:allerg\\w*|reactions?|side effects?|recreational|street|illegal)\\b).*\\b(?:what|which|any|other|regular|prescription|prescribed|daily) (?:\\w+ )?(?:medications?|medicines?|meds|pills|tablets|prescriptions)\\b",
+          "^(?!.*\\b(?:allerg\\w*|reactions?|side effects?|recreational|street|illegal)\\b).*\\b(?:are you|do you) (?:\\w+ )?(?:on|take|taking|use|using) (?:any |any other |any regular )?(?:medications?|medicines?|meds|pills|tablets|prescriptions)\\b",
+          "\\b(?:tell me|go over|walk me through) (?:about )?(?:your|the) (?:medications?|medicines?|meds|pills)\\b",
+          "^(?!.*\\b(?:allerg\\w*|reactions?|side effects?|recreational|street|illegal)\\b).*\\bare you taking anything (?:for|regularly|every day|daily)\\b"
+        ],
+        "exemplars": [
+          "What medications do you take?",
+          "Are you on any regular medicines?",
+          "Can you tell me which pills you take every day?",
+          "Do you take any prescription medications?",
+          "What medicines has your doctor put you on?",
+          "Let's go over your medications.",
+          "Are you taking anything for your heart or blood pressure?",
+          "Do you have a list of your medications with you?"
+        ],
+        "counterExemplars": [
+          "Do you have any allergies to medications?",
+          "Do you take any vitamins or herbal supplements?",
+          "Do you use any recreational drugs?"
+        ],
+        "topics": [
+          "meds.current"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -84,7 +290,7 @@
       "section": "Medications and allergies",
       "label": "Medications: doses",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks about doses / how often taken.",
       "mockKeywords": [
         "dose",
@@ -92,6 +298,50 @@
         "milligrams",
         "how often"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "what dose",
+          "what is the dose",
+          "which dose",
+          "how much do you take",
+          "how many milligrams",
+          "how often do you take",
+          "how many times a day",
+          "how many do you take",
+          "what strength",
+          "once or twice a day"
+        ],
+        "patterns": [
+          "\\b(?:what|which) (?:\\w+ )?(?:dose|doses|dosage|strength)\\b",
+          "\\bthe (?:dose|doses|dosage)\\b",
+          "\\bhow (?:much|many|many milligrams|many tablets|many pills) (?:of (?:it|that|each|the \\w+|your \\w+) )?(?:do|did|are) you (?:take|taking|on)\\b",
+          "\\bhow (?:often|many times (?:a|per) day) (?:do|did|are|should) you (?:take|taking|use)\\b",
+          "\\b(?:once|twice|3 times) (?:a|per) day\\b",
+          "\\b(?:milligrams|mg)\\b"
+        ],
+        "exemplars": [
+          "What dose of furosemide are you on?",
+          "How much of each medicine do you take?",
+          "How often do you take the carvedilol?",
+          "Is that once or twice a day?",
+          "Do you know how many milligrams that is?",
+          "How many times a day do you take your water pill?",
+          "What strength is your lisinopril?"
+        ],
+        "counterExemplars": [
+          "What medications do you take?",
+          "Have you been taking your pills as prescribed?",
+          "How much do you drink in a week?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -99,7 +349,7 @@
       "section": "Medications and allergies",
       "label": "Medications: over-the-counter and supplements",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks specifically about OTC medicines, herbal products or supplements.",
       "mockKeywords": [
         "over the counter",
@@ -107,6 +357,50 @@
         "vitamins",
         "herbal"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "over the counter",
+          "supplements",
+          "supplement",
+          "vitamins",
+          "herbal",
+          "herbal remedies",
+          "natural remedies",
+          "without a prescription",
+          "from the pharmacy",
+          "from the drugstore"
+        ],
+        "patterns": [
+          "\\bover the counter\\b",
+          "\\b(?:supplements?|vitamins?|herbal|herbs|natural (?:remedies|products|medicines)|home remedies)\\b",
+          "\\b(?:anything|medicines?|medications?|pills) (?:you (?:buy|get)|bought) (?:yourself|without a prescription|from the (?:pharmacy|drugstore|chemist|store|shop))\\b",
+          "\\b(?:painkillers|pain killers|ibuprofen|advil|aspirin|tylenol|anti inflammatories|nsaids)\\b"
+        ],
+        "exemplars": [
+          "Do you take any over-the-counter medicines?",
+          "Any vitamins or supplements?",
+          "Do you use any herbal remedies?",
+          "Anything you buy yourself at the pharmacy, like painkillers?",
+          "Have you been taking any ibuprofen or other anti-inflammatories?",
+          "Do you take anything without a prescription?",
+          "Any natural or home remedies?"
+        ],
+        "counterExemplars": [
+          "What prescription medications do you take?",
+          "Do you use any recreational drugs?",
+          "Have you been taking your medications as prescribed?"
+        ],
+        "topics": [
+          "meds.otc"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -114,12 +408,57 @@
       "section": "Medications and allergies",
       "label": "Allergies: drug",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks about medication allergies.",
       "mockKeywords": [
         "allergies",
         "allergic"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "drug allergies",
+          "drug allergy",
+          "medication allergies",
+          "medication allergy",
+          "allergic to any medications",
+          "allergic to any medicines",
+          "allergic to any medication",
+          "allergies to medications",
+          "allergies to medicines",
+          "reactions to medications"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:food|foods|eat|eating|nuts|peanuts|shellfish|eggs|latex|pollen|hay fever|seasonal|cats|dogs|dust)\\b).*\\ballerg\\w*\\b",
+          "\\ballerg\\w*\\b.*\\b(?:medications?|medicines?|drugs|antibiotics?|penicillin|pills|tablets)\\b",
+          "\\b(?:medications?|medicines?|drugs|antibiotics?|penicillin)\\b.*\\ballerg\\w*\\b",
+          "\\b(?:bad |any )?reactions? to (?:any )?(?:medications?|medicines?|drugs|antibiotics?|penicillin)\\b",
+          "\\b(?:medicine|medication|drug)s? (?:that )?you (?:cannot|can not|are not able to) take\\b"
+        ],
+        "exemplars": [
+          "Do you have any allergies?",
+          "Are you allergic to any medications?",
+          "Any drug allergies?",
+          "Have you ever had a bad reaction to a medicine?",
+          "Are you allergic to penicillin or any antibiotics?",
+          "Do you have any allergies to medications or anything else?",
+          "Is there any medicine you can't take because of an allergy?"
+        ],
+        "counterExemplars": [
+          "Do you have any food allergies?",
+          "Do you get hay fever?",
+          "Have you had any side effects from your water pill?"
+        ],
+        "topics": [
+          "allergies"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -127,12 +466,49 @@
       "section": "Medications and allergies",
       "label": "Allergies: food",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks about food allergies.",
       "mockKeywords": [
         "food allerg",
         "foods"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "food allergies",
+          "food allergy",
+          "allergic to any foods",
+          "allergic to any food",
+          "allergic to foods",
+          "allergies to food",
+          "allergies to foods"
+        ],
+        "patterns": [
+          "\\ballerg\\w*\\b.*\\b(?:food|foods|eat|eating|nuts|peanuts|shellfish|eggs|dairy|wheat|gluten|seafood)\\b",
+          "\\b(?:food|foods|nuts|peanuts|shellfish|eggs|seafood)\\b.*\\ballerg\\w*\\b",
+          "\\b(?:any )?foods? (?:that )?(?:you (?:cannot|can not|react to|avoid)|disagree with you|make you (?:sick|swell|itchy))\\b"
+        ],
+        "exemplars": [
+          "Do you have any food allergies?",
+          "Are you allergic to any foods, like nuts or shellfish?",
+          "Any allergies to medicines or foods?",
+          "What about food: are you allergic to anything you eat?",
+          "Do any foods give you a reaction?",
+          "Any allergies to food, latex or anything in the environment?"
+        ],
+        "counterExemplars": [
+          "Do you have any allergies?",
+          "What do you usually eat in a day?",
+          "Have you been eating a lot of salty food?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -140,13 +516,53 @@
       "section": "Medications and allergies",
       "label": "Allergies: type of reaction",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks what reaction occurred.",
       "mockKeywords": [
         "what happened",
         "reaction",
         "what kind of"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "what kind of reaction",
+          "what type of reaction",
+          "what sort of reaction",
+          "what was the reaction",
+          "what reaction did you have",
+          "how did you react"
+        ],
+        "patterns": [
+          "\\b(?:what|which) (?:kind of |sort of |type of )?reaction\\b",
+          "\\bwhat (?:happens|happened|would happen) (?:when|if) you (?:take|took|have|had|eat|ate|get|got|are given|were given) (?:it|that|them|penicillin|amoxicillin|antibiotics?|that (?:medicine|medication|drug|antibiotic)|the (?:medicine|medication|drug|antibiotic|penicillin))\\b",
+          "\\bwhat (?:did|does) (?:it|that|penicillin|the (?:medicine|medication|drug|antibiotic|penicillin)) do to you\\b",
+          "\\bhow (?:did|do|does) (?:you|your body) react\\b",
+          "\\b(?:reaction|allerg\\w*)\\b.*\\b(?:rash|hives|swell\\w*|throat|anaphyla\\w*|trouble breathing|mild|serious|severe)\\b",
+          "\\b(?:rash|hives|anaphyla\\w*)\\b.*\\b(?:reaction|allerg\\w*|penicillin|antibiotic\\w*)\\b"
+        ],
+        "exemplars": [
+          "What kind of reaction did you have?",
+          "What happened when you took penicillin?",
+          "What sort of reaction was it: a rash, or trouble breathing?",
+          "How did you react to it?",
+          "Did you get a rash or any swelling with that allergy?",
+          "What does it do to you?",
+          "Was it a mild reaction or a serious one?"
+        ],
+        "counterExemplars": [
+          "Do you have any allergies?",
+          "What happened when you ran out of your water pill?",
+          "Are you allergic to any foods?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -154,7 +570,7 @@
       "section": "Family and social history",
       "label": "FH: parents and siblings living / age and cause of death",
       "weight": 1,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks about the health of parents and siblings, and age/cause of death where applicable.",
       "mockKeywords": [
         "parents",
@@ -163,6 +579,56 @@
         "siblings",
         "family"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "family history",
+          "your parents",
+          "your mother",
+          "your father",
+          "your mom",
+          "your dad",
+          "your siblings",
+          "brothers or sisters",
+          "brother or sister",
+          "run in your family",
+          "runs in your family",
+          "anyone in your family"
+        ],
+        "patterns": [
+          "\\b(?:your|any) (?:parents|mother|father|mom|mum|dad|siblings|brothers?|sisters?)\\b",
+          "\\b(?:run|runs|running) in (?:the|your) family\\b",
+          "\\b(?:anyone|anybody|someone|relatives|family members?) in (?:the|your) family\\b",
+          "\\bfamily history\\b",
+          "\\b(?:are|is) (?:they|your \\w+) (?:still )?(?:alive|living|well|healthy)\\b",
+          "\\b(?:what|how old|how old was \\w+) (?:did (?:they|he|she) (?:die|pass)|when (?:they|he|she) (?:died|passed))\\b",
+          "\\bwhat did (?:they|he|she|your \\w+) (?:die|pass away) (?:of|from)\\b"
+        ],
+        "exemplars": [
+          "Are your parents still alive?",
+          "Does anything run in your family, like heart disease or diabetes?",
+          "How old was your father when he passed away, and what did he die of?",
+          "Do you have any brothers or sisters, and are they healthy?",
+          "Is there any family history of heart problems or strokes?",
+          "What did your mother die from?",
+          "Are your siblings in good health?",
+          "Tell me about the health of your parents and siblings."
+        ],
+        "counterExemplars": [
+          "Who do you live with?",
+          "How is your wife doing?",
+          "Do you have any children or grandchildren?"
+        ],
+        "topics": [
+          "fh"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -170,12 +636,53 @@
       "section": "Family and social history",
       "label": "SH: alcohol",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks about alcohol. For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
       "mockKeywords": [
         "alcohol",
         "drink"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "drink alcohol",
+          "any alcohol",
+          "how much alcohol",
+          "how much do you drink",
+          "how many drinks",
+          "glass of wine",
+          "beer"
+        ],
+        "patterns": [
+          "\\b(?:alcohol|alcoholic|booze|beers?|wine|spirits|liquor|whisk(?:e)?y|vodka)\\b(?!.*\\b(?:gel|rub|hand|hands|wipes?|sanitiz\\w*|sanitis\\w*|swabs?|foam)\\b)",
+          "^(?!.*\\b(?:water|fluids?|coffee|tea|milk|juice|soda|enough)\\b).*\\b(?:do|did) you (?:ever )?drink\\b",
+          "^(?!.*\\b(?:water|fluids?|coffee|tea|milk|juice|soda)\\b).*\\bhow (?:much|many|often) do you drink\\b",
+          "\\b(?:drinks|units) (?:a|per) (?:day|week|night)\\b"
+        ],
+        "exemplars": [
+          "Do you drink alcohol?",
+          "How much do you drink in a typical week?",
+          "Do you have a beer or a glass of wine now and then?",
+          "How many drinks would you have on a usual day?",
+          "Have you ever had any problems with alcohol?",
+          "Do you drink at all?",
+          "What about alcohol: how often do you have a drink?"
+        ],
+        "counterExemplars": [
+          "How much water do you drink in a day?",
+          "Let me just clean my hands with some alcohol gel first.",
+          "Have you been drinking enough fluids?"
+        ],
+        "topics": [
+          "sh.alcohol"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -183,13 +690,61 @@
       "section": "Family and social history",
       "label": "SH: smoking / tobacco",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks about smoking / tobacco. For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
       "mockKeywords": [
         "smoke",
         "tobacco",
         "cigarette"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "do you smoke",
+          "did you smoke",
+          "ever smoked",
+          "smoking",
+          "smoker",
+          "tobacco",
+          "cigarettes",
+          "cigarette",
+          "cigars",
+          "vape",
+          "vaping",
+          "pack a day",
+          "packs a day",
+          "chew tobacco"
+        ],
+        "patterns": [
+          "\\b(?:do|did|have) you (?:ever )?(?:smoke|smoked)\\b",
+          "\\b(?:quit|stopped|stop|give up|gave up) smoking\\b",
+          "\\b(?:smoking|smoker|tobacco|cigarettes?|cigars?|vape|vaping|e cigarettes?|nicotine)\\b(?!.*\\b(?:fumes|dust|chemicals|exposure|around)\\b)",
+          "\\bpacks? (?:a|per) day\\b"
+        ],
+        "exemplars": [
+          "Do you smoke?",
+          "Have you ever smoked cigarettes?",
+          "Do you use any tobacco products, like cigars or chewing tobacco?",
+          "How many packs a day did you smoke, and for how long?",
+          "Do you vape or use e-cigarettes?",
+          "When did you quit smoking?",
+          "Are you a smoker, or have you ever been one?"
+        ],
+        "counterExemplars": [
+          "Do you drink alcohol?",
+          "Do you use any recreational drugs?",
+          "Are you around a lot of smoke or fumes at work?"
+        ],
+        "topics": [
+          "sh.smoking"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -197,7 +752,7 @@
       "section": "Family and social history",
       "label": "SH: recreational drugs",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks about recreational drugs. For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
       "mockKeywords": [
         "drugs",
@@ -205,6 +760,53 @@
         "marijuana",
         "cannabis"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "recreational drugs",
+          "street drugs",
+          "illegal drugs",
+          "illicit drugs",
+          "recreational substances",
+          "marijuana",
+          "cannabis",
+          "cocaine",
+          "weed",
+          "heroin",
+          "inject drugs",
+          "injected drugs"
+        ],
+        "patterns": [
+          "\\b(?:recreational|street|illegal|illicit|non prescription|party) (?:drugs|substances)\\b",
+          "\\b(?:marijuana|cannabis|weed|cocaine|crack|heroin|meth|methamphetamine|amphetamines?|opioids?|ecstasy|mdma|lsd|mushrooms|edibles)\\b",
+          "^(?!.*\\b(?:allerg\\w*|prescri\\w*|over the counter|counter|medications?|medicines?)\\b).*\\b(?:use|used|tried|do|done|doing) (?:any )?(?:other )?(?:drugs|substances)\\b",
+          "\\binject(?:ed|ing)? (?:any )?(?:drugs|anything)\\b",
+          "\\bdrugs (?:that|which) (?:were|was) not prescribed\\b"
+        ],
+        "exemplars": [
+          "Do you use any recreational drugs?",
+          "Have you ever used marijuana, cocaine, or any other street drugs?",
+          "Do you take any drugs that weren't prescribed to you?",
+          "Have you ever injected drugs?",
+          "Any recreational substance use?",
+          "Do you use cannabis at all?",
+          "What about other drugs, like cocaine or opioids?"
+        ],
+        "counterExemplars": [
+          "What medications do you take?",
+          "Do you take any over-the-counter drugs?",
+          "Do you smoke cigarettes?"
+        ],
+        "topics": [
+          "sh.drugs"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -212,7 +814,7 @@
       "section": "Family and social history",
       "label": "SH: occupation",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks about occupation. For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
       "mockKeywords": [
         "work",
@@ -220,6 +822,53 @@
         "occupation",
         "retired"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "what do you do for work",
+          "what do you do for a living",
+          "what is your job",
+          "what kind of work",
+          "where do you work",
+          "are you working",
+          "are you retired",
+          "occupation",
+          "what did you do for work",
+          "what did you do for a living",
+          "line of work"
+        ],
+        "patterns": [
+          "\\bwhat (?:do|did) you do (?:for (?:work|a living|a job)|before you retired)\\b",
+          "\\b(?:what|where) (?:is|was|do|did) (?:your )?(?:job|occupation|work|profession)\\b",
+          "\\b(?:are|were) you (?:still )?(?:working|employed|retired)\\b",
+          "\\bwhat (?:kind|sort|type|line) of (?:work|job)\\b",
+          "\\b(?:occupation|profession|employment|line of work)\\b",
+          "\\bwhere do you work\\b"
+        ],
+        "exemplars": [
+          "What do you do for work?",
+          "Are you working at the moment, or are you retired?",
+          "What did you do before you retired?",
+          "What kind of job do you have?",
+          "Where do you work?",
+          "What's your occupation?",
+          "Have you ever worked around dust or chemicals?"
+        ],
+        "counterExemplars": [
+          "How has this affected your work?",
+          "What do you like to do for fun?",
+          "Does anything help when you work out?"
+        ],
+        "topics": [
+          "sh.occupation"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -227,13 +876,58 @@
       "section": "Family and social history",
       "label": "SH: who they live with",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks about who they live with. For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
       "mockKeywords": [
         "live with",
         "at home with",
         "who is at home"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "live with",
+          "who do you live with",
+          "do you live alone",
+          "live by yourself",
+          "who is at home",
+          "at home with you",
+          "who lives with you",
+          "anyone at home",
+          "home situation",
+          "living situation"
+        ],
+        "patterns": [
+          "\\b(?:who|anyone|anybody) (?:do you live|lives|living|else lives|else is) (?:with|at home|with you)\\b",
+          "\\b(?:do|did) you live (?:alone|by yourself|on your own|with)\\b",
+          "\\b(?:living|home) (?:situation|arrangements?|set up)\\b",
+          "\\bwho (?:is|else is) (?:at home|there with you|home with you)\\b",
+          "\\b(?:is there|do you have) (?:anyone|someone|somebody) (?:at home|to help you|who can help)\\b"
+        ],
+        "exemplars": [
+          "Who do you live with?",
+          "Do you live alone?",
+          "Is there anyone at home with you?",
+          "Tell me about your living situation.",
+          "Who's at home to help you if you need it?",
+          "Do you live with your wife?",
+          "What's your home set-up like: house, apartment, stairs?"
+        ],
+        "counterExemplars": [
+          "Where do you live?",
+          "How long have you lived in the city?",
+          "Is anyone in your family sick?"
+        ],
+        "topics": [
+          "sh.living"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -241,7 +935,7 @@
       "section": "Family and social history",
       "label": "SH: what gives them joy / meaning",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks about what gives them joy / meaning. For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
       "mockKeywords": [
         "enjoy",
@@ -250,6 +944,55 @@
         "hobbies",
         "what do you like"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "what do you enjoy",
+          "what do you like to do",
+          "for fun",
+          "hobbies",
+          "what gives you joy",
+          "brings you joy",
+          "what matters most to you",
+          "what is important to you",
+          "spare time",
+          "free time",
+          "what keeps you going",
+          "makes you happy"
+        ],
+        "patterns": [
+          "\\bwhat (?:do you|things do you) (?:enjoy|like to do|love doing|do for fun|do in your (?:spare|free) time)\\b",
+          "\\b(?:hobbies|hobby|pastimes|interests)\\b",
+          "\\b(?:gives|brings) you (?:joy|meaning|purpose|happiness)\\b",
+          "\\bwhat (?:matters|is (?:most )?important) (?:most )?to you\\b(?! (?:about|in) (?:the plan|today))",
+          "\\b(?:spare|free) time\\b",
+          "\\b(?:makes|keeps) you (?:happy|going)\\b",
+          "\\bfor fun\\b"
+        ],
+        "exemplars": [
+          "What do you enjoy doing in your free time?",
+          "What gives you joy these days?",
+          "Do you have any hobbies?",
+          "What matters most to you in your life?",
+          "What keeps you going?",
+          "What do you like to do for fun?",
+          "Who or what is most important to you?"
+        ],
+        "counterExemplars": [
+          "What do you do for work?",
+          "What do you think is causing this?",
+          "What would you like to get out of today's visit?"
+        ],
+        "topics": [
+          "sh.meaning"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -257,12 +1000,56 @@
       "section": "Family and social history",
       "label": "SH: sexual history (if relevant)",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks about sexual history (if relevant). For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
       "mockKeywords": [
         "sexual",
         "partner"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "sexually active",
+          "sexual partners",
+          "sexual partner",
+          "sexual history",
+          "sexual health",
+          "sex life",
+          "condoms",
+          "sexually transmitted"
+        ],
+        "patterns": [
+          "\\bsexual(?:ly)?\\b",
+          "\\b(?:sex|intercourse)\\b",
+          "\\b(?:how many|any new|new|other) (?:sexual )?partners\\b",
+          "\\b(?:condoms?|contraception|stis?|stds?|sexually transmitted)\\b",
+          "\\b(?:use|using) (?:any )?protection\\b",
+          "\\b(?:erections?|erectile)\\b"
+        ],
+        "exemplars": [
+          "Are you sexually active?",
+          "How many sexual partners have you had in the last year?",
+          "Do you use protection, like condoms?",
+          "Have you noticed any changes in your sex life?",
+          "Is it okay if I ask a few questions about your sexual health?",
+          "Do you have sex with men, women, or both?",
+          "Any problems with erections?"
+        ],
+        "counterExemplars": [
+          "Are you married?",
+          "Who do you live with?",
+          "Do you have any children?"
+        ],
+        "topics": [
+          "sh.sexual"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -270,13 +1057,60 @@
       "section": "Family and social history",
       "label": "SH: travel (if relevant)",
       "weight": 0.5,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks about travel (if relevant). For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
       "mockKeywords": [
         "travel",
         "trip",
         "been away"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "travelled anywhere",
+          "traveled anywhere",
+          "been travelling",
+          "been traveling",
+          "recent travel",
+          "any travel",
+          "any trips",
+          "been abroad",
+          "out of the country",
+          "long flight",
+          "long flights",
+          "long car ride",
+          "long car trip"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:does|did|do) (?:it|the pain|that|this|the \\w+) (?:ever )?travel\\b)(?!.*\\btravel\\w* (?:to|down|up|into|through|anywhere) (?:your|the|other) ?(?:arm|arms|jaw|back|neck|leg|legs|shoulders?|body|chest|parts)?\\b).*\\btravel\\w*\\b",
+          "\\b(?:any|recent|long) (?:trips?|flights?|journeys?|car (?:rides?|trips?)|drives?)\\b",
+          "\\b(?:been|gone|went|go) (?:away|abroad|anywhere|out of (?:the )?(?:country|town|state))\\b",
+          "\\b(?:on a plane|flown|flew)\\b"
+        ],
+        "exemplars": [
+          "Have you travelled anywhere recently?",
+          "Any long flights or car trips lately?",
+          "Have you been out of the country in the last few months?",
+          "Have you been away anywhere?",
+          "Any recent travel?",
+          "Have you been on a plane recently?",
+          "Did you go anywhere for the holidays?"
+        ],
+        "counterExemplars": [
+          "Does the pain travel anywhere?",
+          "How far can you walk?",
+          "Where do you live?"
+        ],
+        "topics": [
+          "sh.travel"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -284,7 +1118,7 @@
       "section": "Review of systems",
       "label": "ROS: General",
       "weight": 0.25,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks at least one screening question for the General system (either during the HPI or in a review of systems).",
       "mockKeywords": [
         "weight",
@@ -292,6 +1126,45 @@
         "tired",
         "fatigue"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "night sweats",
+          "weight loss",
+          "weight gain",
+          "any fevers",
+          "any fever",
+          "any chills",
+          "fevers or chills",
+          "more tired than usual"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:let me know|tell me if|i(?:'|’| a)m going to (?:look|listen|check|feel|press|examine|test|shine|tap)|(?:i will|i(?:'|’)ll) (?:look|listen|check|feel|press|examine|test|shine|tap)|let me (?:look|listen|check|feel|press|examine|test|just|have a)|(?:i would|i(?:'|’)d) like to (?:look|listen|check|feel|press|examine|test)|i need to (?:look|listen|check|feel|press|examine))\\b).*?\\b(?:any|anything|have you|had you|has|have there been|has there been|do you|did you|does|are you|were you|is there|are there|was there|how is|how are|how has|how have|how often|what about|how about|ever|no)\\b.*\\b(?:fevers?|feverish|temperature|chills|rigors|night sweats|sweating at night|sweats|weight|kilos|pounds|tired\\w*|fatigue\\w*|exhausted|energy|run down|worn out)\\b"
+        ],
+        "exemplars": [
+          "Have you had any fevers or chills?",
+          "Any night sweats?",
+          "Have you noticed any change in your weight?",
+          "Have you been feeling more tired than usual?",
+          "How is your energy level?",
+          "Have you lost or gained any weight recently?",
+          "Have your clothes or shoes been fitting differently?"
+        ],
+        "counterExemplars": [
+          "How much do you weigh?",
+          "Do you feel short of breath?",
+          "Are you feeling low in mood?"
+        ],
+        "topics": [
+          "ros.constitutional"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -299,7 +1172,7 @@
       "section": "Review of systems",
       "label": "ROS: HEENT",
       "weight": 0.25,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks at least one screening question for the HEENT system (either during the HPI or in a review of systems).",
       "mockKeywords": [
         "vision",
@@ -307,6 +1180,47 @@
         "headache",
         "sore throat"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "blurry vision",
+          "blurred vision",
+          "double vision",
+          "sore throat",
+          "runny nose",
+          "nosebleeds",
+          "ringing in your ears",
+          "trouble swallowing",
+          "changes in your vision",
+          "change in your vision"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:let me know|tell me if|i(?:'|’| a)m going to (?:look|listen|check|feel|press|examine|test|shine|tap)|(?:i will|i(?:'|’)ll) (?:look|listen|check|feel|press|examine|test|shine|tap)|let me (?:look|listen|check|feel|press|examine|test|just|have a)|(?:i would|i(?:'|’)d) like to (?:look|listen|check|feel|press|examine|test)|i need to (?:look|listen|check|feel|press|examine))\\b).*?\\b(?:any|anything|have you|had you|has|have there been|has there been|do you|did you|does|are you|were you|is there|are there|was there|how is|how are|how has|how have|how often|what about|how about|ever|no)\\b.*\\b(?:vision|eyesight|blurr\\w*|eyes?|hearing|ears?|ringing|tinnitus|headaches?|sore throat|throat|nose|nosebleeds?|runny|stuffy|congest\\w*|sinus\\w*|swallow\\w*|mouth|teeth|gums|hoarse\\w*|voice)\\b"
+        ],
+        "exemplars": [
+          "Any changes in your vision?",
+          "Have you had any headaches?",
+          "Any problems with your hearing or ringing in your ears?",
+          "Have you had a sore throat or a runny nose?",
+          "Any trouble swallowing?",
+          "Have you noticed any nosebleeds?",
+          "Any pain in your eyes or ears?"
+        ],
+        "counterExemplars": [
+          "Do you have any chest pain?",
+          "Can you hear me okay?",
+          "Can you see the chart over there?"
+        ],
+        "topics": [
+          "ros.heent"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -314,13 +1228,50 @@
       "section": "Review of systems",
       "label": "ROS: Pulmonary",
       "weight": 0.25,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks at least one screening question for the Pulmonary system (either during the HPI or in a review of systems).",
       "mockKeywords": [
         "cough",
         "wheez",
         "breath"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "wheezing",
+          "wheezy",
+          "phlegm",
+          "sputum",
+          "coughing up",
+          "coughed up"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:let me know|tell me if|i(?:'|’| a)m going to (?:look|listen|check|feel|press|examine|test|shine|tap)|(?:i will|i(?:'|’)ll) (?:look|listen|check|feel|press|examine|test|shine|tap)|let me (?:look|listen|check|feel|press|examine|test|just|have a)|(?:i would|i(?:'|’)d) like to (?:look|listen|check|feel|press|examine|test)|i need to (?:look|listen|check|feel|press|examine))\\b).*?\\b(?:any|anything|have you|had you|has|have there been|has there been|do you|did you|does|are you|were you|is there|are there|was there|how is|how are|how has|how have|how often|what about|how about|ever|no)\\b.*\\b(?:cough\\w*|wheez\\w*|sputum|phlegm|mucus|breath\\w*|winded|chest infections?|pneumonia)\\b"
+        ],
+        "exemplars": [
+          "Have you had a cough?",
+          "Are you bringing up any phlegm?",
+          "Any wheezing?",
+          "Have you coughed up any blood?",
+          "Do you get short of breath?",
+          "Any trouble with your breathing?",
+          "Have you had any chest infections recently?"
+        ],
+        "counterExemplars": [
+          "Do you smoke?",
+          "Take a deep breath in for me.",
+          "I'm going to listen to your breathing now."
+        ],
+        "topics": [
+          "ros.respiratory"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -328,13 +1279,54 @@
       "section": "Review of systems",
       "label": "ROS: Cardiac",
       "weight": 0.25,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks at least one screening question for the Cardiac system (either during the HPI or in a review of systems).",
       "mockKeywords": [
         "chest pain",
         "palpitation",
         "heart racing"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "palpitations",
+          "chest pain",
+          "chest tightness",
+          "chest pressure",
+          "heart racing",
+          "racing heart",
+          "skipped beats",
+          "passed out"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:let me know|tell me if|i(?:'|’| a)m going to (?:look|listen|check|feel|press|examine|test|shine|tap)|(?:i will|i(?:'|’)ll) (?:look|listen|check|feel|press|examine|test|shine|tap)|let me (?:look|listen|check|feel|press|examine|test|just|have a)|(?:i would|i(?:'|’)d) like to (?:look|listen|check|feel|press|examine|test)|i need to (?:look|listen|check|feel|press|examine))\\b).*?\\b(?:any|anything|have you|had you|has|have there been|has there been|do you|did you|does|are you|were you|is there|are there|was there|how is|how are|how has|how have|how often|what about|how about|ever|no)\\b.*\\b(?:chest (?:pain|tightness|pressure|discomfort|heaviness)|palpitations|heart (?:racing|pounding|fluttering|skipping|beating fast)|racing heart|skipp\\w* (?:a )?beats?|irregular heartbeat|faint\\w*|passed out|pass out|blacked out|black out)\\b",
+          "^(?!.*\\b(?:let me know|tell me if|i(?:'|’| a)m going to (?:look|listen|check|feel|press|examine|test|shine|tap)|(?:i will|i(?:'|’)ll) (?:look|listen|check|feel|press|examine|test|shine|tap)|let me (?:look|listen|check|feel|press|examine|test|just|have a)|(?:i would|i(?:'|’)d) like to (?:look|listen|check|feel|press|examine|test)|i need to (?:look|listen|check|feel|press|examine))\\b).*?\\b(?:any|anything|have you|had you|has|have there been|has there been|do you|did you|does|are you|were you|is there|are there|was there|how is|how are|how has|how have|how often|what about|how about|ever|no)\\b.*\\b(?:(?:swell\\w*|swollen|puffy|puffiness) (?:in |of |around )?(?:your )?(?:legs?|ankles?|feet|calves)|(?:legs?|ankles?|feet) (?:\\w+ )?(?:swell\\w*|swollen|puffy)|pain in your (?:calf|calves|legs) when you walk)\\b",
+          "^(?!.*\\b(?:let me know|tell me if|i(?:'|’| a)m going to (?:look|listen|check|feel|press|examine|test|shine|tap)|(?:i will|i(?:'|’)ll) (?:look|listen|check|feel|press|examine|test|shine|tap)|let me (?:look|listen|check|feel|press|examine|test|just|have a)|(?:i would|i(?:'|’)d) like to (?:look|listen|check|feel|press|examine|test)|i need to (?:look|listen|check|feel|press|examine))\\b).*?\\b(?:any|anything|have you|had you|has|have there been|has there been|do you|did you|does|are you|were you|is there|are there|was there|how is|how are|how has|how have|how often|what about|how about|ever|no)\\b.*\\b(?:(?:pressure|tightness|heaviness|discomfort|pain) in (?:your|the) chest)\\b"
+        ],
+        "exemplars": [
+          "Have you had any chest pain?",
+          "Do you ever feel your heart racing or pounding?",
+          "Any palpitations or skipped beats?",
+          "Have you fainted or passed out?",
+          "Any swelling in your ankles or legs?",
+          "Have you felt any pressure or tightness in your chest?",
+          "Do you get pain in your calves when you walk?"
+        ],
+        "counterExemplars": [
+          "Do you have any heart conditions in your family?",
+          "What medications do you take for your heart?",
+          "Have you had a heart attack before?"
+        ],
+        "topics": [
+          "ros.cardiac"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -342,7 +1334,7 @@
       "section": "Review of systems",
       "label": "ROS: GI",
       "weight": 0.25,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks at least one screening question for the GI system (either during the HPI or in a review of systems).",
       "mockKeywords": [
         "nausea",
@@ -351,6 +1343,45 @@
         "stool",
         "appetite"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "nausea",
+          "vomiting",
+          "diarrhea",
+          "diarrhoea",
+          "constipation",
+          "bowel movements",
+          "heartburn",
+          "indigestion"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:let me know|tell me if|i(?:'|’| a)m going to (?:look|listen|check|feel|press|examine|test|shine|tap)|(?:i will|i(?:'|’)ll) (?:look|listen|check|feel|press|examine|test|shine|tap)|let me (?:look|listen|check|feel|press|examine|test|just|have a)|(?:i would|i(?:'|’)d) like to (?:look|listen|check|feel|press|examine|test)|i need to (?:look|listen|check|feel|press|examine))\\b).*?\\b(?:any|anything|have you|had you|has|have there been|has there been|do you|did you|does|are you|were you|is there|are there|was there|how is|how are|how has|how have|how often|what about|how about|ever|no)\\b.*\\b(?:nause\\w*|vomit\\w*|throw\\w* up|threw up|bowels?|stools?|poo|poop|diarrh\\w*|constipat\\w*|appetite|stomach|tummy|belly|abdom\\w*|heartburn|indigestion|reflux|jaundice|bloat\\w*)\\b"
+        ],
+        "exemplars": [
+          "Have you had any nausea or vomiting?",
+          "How is your appetite?",
+          "Any changes in your bowel movements?",
+          "Any diarrhea or constipation?",
+          "Have you had any stomach pain?",
+          "Have you noticed any blood in your stool or black stools?",
+          "Does your belly feel full or bloated?"
+        ],
+        "counterExemplars": [
+          "What do you usually eat in a day?",
+          "Have you been eating a lot of salty food?",
+          "Any chest pain?"
+        ],
+        "topics": [
+          "ros.gi"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -358,13 +1389,50 @@
       "section": "Review of systems",
       "label": "ROS: GU",
       "weight": 0.25,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks at least one screening question for the GU system (either during the HPI or in a review of systems).",
       "mockKeywords": [
         "urin",
         "pee",
         "bladder"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "burning when you pee",
+          "pass water",
+          "passing water",
+          "urinating",
+          "urination",
+          "waterworks"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:let me know|tell me if|i(?:'|’| a)m going to (?:look|listen|check|feel|press|examine|test|shine|tap)|(?:i will|i(?:'|’)ll) (?:look|listen|check|feel|press|examine|test|shine|tap)|let me (?:look|listen|check|feel|press|examine|test|just|have a)|(?:i would|i(?:'|’)d) like to (?:look|listen|check|feel|press|examine|test)|i need to (?:look|listen|check|feel|press|examine))\\b).*?\\b(?:any|anything|have you|had you|has|have there been|has there been|do you|did you|does|are you|were you|is there|are there|was there|how is|how are|how has|how have|how often|what about|how about|ever|no)\\b.*\\b(?:urin\\w*|pee|peeing|wee|weeing|pass(?:ing)? water|bladder|waterworks|incontinen\\w*|leak\\w*|dysuria|prostate|dribbl\\w*|toilet|bathroom|loo)\\b"
+        ],
+        "exemplars": [
+          "Any changes with your urine?",
+          "Do you have any burning when you pee?",
+          "How often are you getting up at night to use the bathroom?",
+          "Have you noticed any blood in your urine?",
+          "Any trouble with your bladder or waterworks?",
+          "Are you passing more or less urine than usual?",
+          "Any problems with your stream or dribbling?"
+        ],
+        "counterExemplars": [
+          "Do you drink alcohol?",
+          "How much water do you drink?",
+          "Do you wake up at night short of breath?"
+        ],
+        "topics": [
+          "ros.gu"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -372,13 +1440,51 @@
       "section": "Review of systems",
       "label": "ROS: Musculoskeletal",
       "weight": 0.25,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks at least one screening question for the Musculoskeletal system (either during the HPI or in a review of systems).",
       "mockKeywords": [
         "joint",
         "muscle",
         "back pain"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "joint pain",
+          "joint pains",
+          "muscle aches",
+          "muscle pain",
+          "back pain",
+          "arthritis",
+          "aches and pains"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:let me know|tell me if|i(?:'|’| a)m going to (?:look|listen|check|feel|press|examine|test|shine|tap)|(?:i will|i(?:'|’)ll) (?:look|listen|check|feel|press|examine|test|shine|tap)|let me (?:look|listen|check|feel|press|examine|test|just|have a)|(?:i would|i(?:'|’)d) like to (?:look|listen|check|feel|press|examine|test)|i need to (?:look|listen|check|feel|press|examine))\\b).*?\\b(?:any|anything|have you|had you|has|have there been|has there been|do you|did you|does|are you|were you|is there|are there|was there|how is|how are|how has|how have|how often|what about|how about|ever|no)\\b.*\\b(?:joints?|muscles?|muscular|back pain|backache|stiff\\w*|arthritis|aches and pains|achy|cramps?|gout|hips?|knees?|shoulders?|neck pain)\\b"
+        ],
+        "exemplars": [
+          "Any joint pain or stiffness?",
+          "Have you had any muscle aches?",
+          "Any back pain?",
+          "Do you have any problems with your joints, like arthritis?",
+          "Any aches and pains anywhere?",
+          "Have you had any muscle cramps?",
+          "Any pain in your hips or knees?"
+        ],
+        "counterExemplars": [
+          "Do you exercise?",
+          "Any swelling in your legs?",
+          "Let me just check your shoulders and back."
+        ],
+        "topics": [
+          "ros.msk"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -386,7 +1492,7 @@
       "section": "Review of systems",
       "label": "ROS: Neuro",
       "weight": 0.25,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks at least one screening question for the Neuro system (either during the HPI or in a review of systems).",
       "mockKeywords": [
         "numb",
@@ -394,6 +1500,44 @@
         "dizz",
         "tingling"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "numbness",
+          "tingling",
+          "pins and needles",
+          "dizziness",
+          "lightheaded",
+          "light headed",
+          "seizures"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:let me know|tell me if|i(?:'|’| a)m going to (?:look|listen|check|feel|press|examine|test|shine|tap)|(?:i will|i(?:'|’)ll) (?:look|listen|check|feel|press|examine|test|shine|tap)|let me (?:look|listen|check|feel|press|examine|test|just|have a)|(?:i would|i(?:'|’)d) like to (?:look|listen|check|feel|press|examine|test)|i need to (?:look|listen|check|feel|press|examine))\\b).*?\\b(?:any|anything|have you|had you|has|have there been|has there been|do you|did you|does|are you|were you|is there|are there|was there|how is|how are|how has|how have|how often|what about|how about|ever|no)\\b.*\\b(?:numb\\w*|tingl\\w*|pins and needles|weak(?:ness)?(?! heart)|dizz\\w*|light ?headed\\w*|vertigo|spinning|seizures?|fits|confus\\w*|memory|slurred|speech|balance|unsteady|tremor|headaches?)\\b"
+        ],
+        "exemplars": [
+          "Any numbness or tingling anywhere?",
+          "Have you felt dizzy or lightheaded?",
+          "Any weakness in your arms or legs?",
+          "Any trouble with your memory or confusion?",
+          "Have you had any headaches?",
+          "Any problems with your balance?",
+          "Have you ever had a seizure?"
+        ],
+        "counterExemplars": [
+          "Do you feel tired all the time?",
+          "Any family history of stroke?",
+          "Do you have any joint pain?"
+        ],
+        "topics": [
+          "ros.neuro"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -401,12 +1545,48 @@
       "section": "Review of systems",
       "label": "ROS: Skin",
       "weight": 0.25,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks at least one screening question for the Skin system (either during the HPI or in a review of systems).",
       "mockKeywords": [
         "rash",
         "skin"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "rashes",
+          "itching",
+          "itchy skin",
+          "bruise easily",
+          "bruising"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:let me know|tell me if|i(?:'|’| a)m going to (?:look|listen|check|feel|press|examine|test|shine|tap)|(?:i will|i(?:'|’)ll) (?:look|listen|check|feel|press|examine|test|shine|tap)|let me (?:look|listen|check|feel|press|examine|test|just|have a)|(?:i would|i(?:'|’)d) like to (?:look|listen|check|feel|press|examine|test)|i need to (?:look|listen|check|feel|press|examine))\\b)(?!.*\\b(?:penicillin|allerg\\w*|reaction|antibiotic\\w*)\\b).*?\\b(?:any|anything|have you|had you|has|have there been|has there been|do you|did you|does|are you|were you|is there|are there|was there|how is|how are|how has|how have|how often|what about|how about|ever|no)\\b.*\\b(?:rash\\w*|skin|itch\\w*|bruis\\w*|sores|ulcers?|wounds?|moles?|lumps?|discolou?r\\w*|hives|blisters?)\\b"
+        ],
+        "exemplars": [
+          "Any rashes?",
+          "Have you noticed any changes in your skin?",
+          "Any itching?",
+          "Do you bruise easily?",
+          "Any sores or wounds that won't heal?",
+          "Have you noticed any new moles or lumps?",
+          "Has the skin on your legs changed colour?"
+        ],
+        "counterExemplars": [
+          "Did you get a rash from penicillin?",
+          "Any swelling in your ankles?",
+          "I'm going to take a look at the skin on your legs now."
+        ],
+        "topics": [
+          "ros.skin"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -414,7 +1594,7 @@
       "section": "Review of systems",
       "label": "ROS: Endocrine",
       "weight": 0.25,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks at least one screening question for the Endocrine system (either during the HPI or in a review of systems).",
       "mockKeywords": [
         "thirst",
@@ -422,6 +1602,42 @@
         "cold intolerance",
         "sugar"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "heat intolerance",
+          "cold intolerance",
+          "more thirsty",
+          "excessive thirst",
+          "thyroid"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:let me know|tell me if|i(?:'|’| a)m going to (?:look|listen|check|feel|press|examine|test|shine|tap)|(?:i will|i(?:'|’)ll) (?:look|listen|check|feel|press|examine|test|shine|tap)|let me (?:look|listen|check|feel|press|examine|test|just|have a)|(?:i would|i(?:'|’)d) like to (?:look|listen|check|feel|press|examine|test)|i need to (?:look|listen|check|feel|press|examine))\\b).*?\\b(?:any|anything|have you|had you|has|have there been|has there been|do you|did you|does|are you|were you|is there|are there|was there|how is|how are|how has|how have|how often|what about|how about|ever|no)\\b.*\\b(?:thirst\\w*|heat intolerance|cold intolerance|(?:too|very|always|more) (?:hot|cold)|(?:the )?(?:heat|cold) (?:bother|bothers|bothered)|feel(?:ing)? (?:hot|cold) when|thyroid|blood sugars?|sugar levels?|glucose|sweat\\w* (?:more|a lot)|drinking (?:a lot )?more (?:water|fluids)|hair (?:loss|thinning|changes))\\b"
+        ],
+        "exemplars": [
+          "Have you been more thirsty than usual?",
+          "Do you feel too hot or too cold when others are comfortable?",
+          "Any problems with your thyroid?",
+          "Have your blood sugars been high?",
+          "Have you been sweating more than usual?",
+          "Does the heat or cold bother you more than it used to?",
+          "Are you drinking a lot more water than before?"
+        ],
+        "counterExemplars": [
+          "Do you have diabetes in your family?",
+          "Have you had any fevers?",
+          "How much alcohol do you drink?"
+        ],
+        "topics": [
+          "ros.endocrine"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {
@@ -429,7 +1645,7 @@
       "section": "Review of systems",
       "label": "ROS: Psychiatric",
       "weight": 0.25,
-      "scoring": "ai",
+      "scoring": "match",
       "guidance": "Asks at least one screening question for the Psychiatric system (either during the HPI or in a review of systems).",
       "mockKeywords": [
         "mood",
@@ -437,6 +1653,47 @@
         "anxi",
         "stress"
       ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "low mood",
+          "your mood",
+          "feeling down",
+          "feeling depressed",
+          "depression",
+          "anxiety",
+          "lost interest",
+          "how are you sleeping",
+          "how have you been sleeping",
+          "harming yourself"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:let me know|tell me if|i(?:'|’| a)m going to (?:look|listen|check|feel|press|examine|test|shine|tap)|(?:i will|i(?:'|’)ll) (?:look|listen|check|feel|press|examine|test|shine|tap)|let me (?:look|listen|check|feel|press|examine|test|just|have a)|(?:i would|i(?:'|’)d) like to (?:look|listen|check|feel|press|examine|test)|i need to (?:look|listen|check|feel|press|examine))\\b)(?!.*\\b(?:pillows|flat|breath\\w*|gasping|propped|recliner|wake up short)\\b).*?\\b(?:any|anything|have you|had you|has|have there been|has there been|do you|did you|does|are you|were you|is there|are there|was there|how is|how are|how has|how have|how often|what about|how about|ever|no)\\b.*\\b(?:mood|depress\\w*|anxi\\w*|nervous|panic|stress\\w*|feeling (?:down|low|blue|hopeless|sad)|lost (?:interest|pleasure)|harm\\w* yourself|hurt\\w* yourself|suicid\\w*|sleeping|sleep)\\b"
+        ],
+        "exemplars": [
+          "How has your mood been lately?",
+          "Have you been feeling down or depressed?",
+          "Do you feel anxious or stressed a lot?",
+          "Have you lost interest in things you used to enjoy?",
+          "How have you been sleeping?",
+          "Have you had any thoughts of harming yourself?",
+          "Has anything been causing you a lot of stress?"
+        ],
+        "counterExemplars": [
+          "How many pillows do you sleep on?",
+          "Do you wake up at night short of breath?",
+          "Are you worried about what's causing this?"
+        ],
+        "topics": [
+          "ros.psych"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
       "sourceText": ""
     },
     {

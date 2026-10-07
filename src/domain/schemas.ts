@@ -667,7 +667,8 @@ export const TagHit = z.object({
   tag: CourtesyTag,
   /** Verbatim span of the utterance that triggered the tag. */
   evidence: z.string(),
-  via: z.enum(["regex", "model"]),
+  /** regex · similarity (Phase 4: embedding similarity to example phrasings) · model (legacy logs) */
+  via: z.enum(["regex", "similarity", "model"]),
   /** For requested_position: the position asked for. */
   position: Position.optional(),
 });
@@ -1326,3 +1327,37 @@ export const Feedback = z.object({
 export type Feedback = z.infer<typeof Feedback>;
 
 export const sessionMode = (s: Pick<Session, "mode">): SessionMode => s.mode ?? "exam";
+
+// ---------------------------------------------------------------- Phase 4: language banks (content/lang)
+/** content/lang/topics.json — history-coverage topics (intents and mark-sheet items refer to them). */
+export const TopicsFile = z
+  .object({ topics: z.array(z.object({ id: slug, label: z.string().min(1), group: z.string().min(1) }).strict()) })
+  .strict();
+/** content/lang/synonyms.json — normalisation: every `from` phrase is rewritten to `to` before matching. */
+export const SynonymsFile = z
+  .object({ entries: z.array(z.object({ to: z.string().min(1), from: z.array(z.string().min(1)).min(1) }).strict()) })
+  .strict();
+/** content/lang/conversation.json — the default conversational replies (a case's history.conversation overrides by kind). */
+export const ConversationBankFile = z.object({ replies: z.array(ConversationReply) }).strict();
+/**
+ * content/lang/history-bank.json — generic history questions (review of systems, social history…).
+ * When a case has no fact or negative for one, the patient gives the case's unknownPolicy reply:
+ * `negative` → negativeReply ("No, nothing like that"), `unknown` → unknownReply. Never new facts.
+ */
+export const HistoryBankFile = z
+  .object({ entries: z.array(z.object({ id: slug, topic: slug, intents: Intent, reply: z.enum(["negative", "unknown"]) }).strict()) })
+  .strict();
+/**
+ * tests/fixtures/chat/<caseId>.json — what students ask and what the patient should answer from.
+ * Targets: fact:<id> · neg:<id> · followup:<factId>/<id> · conv:<kind> · bank:<id> (bank:* = any generic
+ * history-bank question, for blind authors) · unknown.
+ * A bundled question lists every target. Written blind (without seeing the case's paraphrases).
+ */
+export const ChatFixtureFile = z
+  .object({
+    caseId: z.string().min(1),
+    author: z.string().min(1),
+    blind: z.boolean(),
+    items: z.array(z.object({ q: z.string().min(1), expect: z.array(z.string().regex(/^(fact|neg|followup|conv|bank):[a-z0-9_.\/*-]+$|^unknown$/)).min(1), note: z.string().optional() }).strict()).min(1),
+  })
+  .strict();

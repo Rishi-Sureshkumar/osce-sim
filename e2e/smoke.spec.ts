@@ -340,7 +340,8 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.locator('[data-testid="timeline"]')).toContainText(/stethoscope \(bell\) placed near Mitral area[^·]*· \d\.\d cm \(tolerance 2\.5 cm\)[^·]*·[^·]*· near the target/);
   await expect(page.locator('[data-testid="say-source"]').first()).toHaveText("voice");
   await expect(page.locator('[data-testid="say-source"]').nth(1)).toHaveText("typed");
-  await expect(page.locator('[data-testid="tokens"]')).toBeVisible();
+  // coaches see how each question was understood (never sent to the student)
+  await expect(page.locator('[data-testid="utterance-match"]').filter({ hasText: "orthopnea" }).first()).toBeVisible();
   await expect(page.locator('[data-testid="coach-mode"]')).toHaveText("Practice");
   // courtesy tags with the words that earned them, and the encounter events
   await expect(page.locator('[data-testid="courtesy-tag"]').filter({ hasText: "Introduced name" })).toContainText("my name is Sam Patel");
@@ -459,15 +460,26 @@ test("exam mode: door placard, You may begin, 15-minute encounter ends itself, t
   }
 });
 
-test("initial download stays within the 15 MB budget (JS + models)", () => {
+test("download budget: station first load ≤ 15 MB, all JS ≤ 15 MB, language libraries lazy", () => {
+  const MB = 1024 * 1024;
   const sum = (dir: string, ext: RegExp): number =>
     fs.readdirSync(dir).reduce((n, f) => {
       const p = path.join(dir, f);
       return n + (fs.statSync(p).isDirectory() ? sum(p, ext) : ext.test(f) ? fs.statSync(p).size : 0);
     }, 0);
-  const js = sum(".next/static", /\.js$/);
   const models = sum("public/models", /\.glb$/);
-  expect(js + models).toBeLessThan(15 * 1024 * 1024);
+  // (a) what the station page loads up front: its JS chunks plus the patient models
+  const manifest = JSON.parse(fs.readFileSync(".next/app-build-manifest.json", "utf8")) as { pages: Record<string, string[]> };
+  const stationFiles = manifest.pages["/station/[id]/page"]!.filter((f) => f.endsWith(".js"));
+  const stationJs = stationFiles.reduce((n, f) => n + fs.statSync(path.join(".next", f)).size, 0);
+  expect(stationJs + models).toBeLessThan(15 * MB);
+  // (b) every JS chunk, lazy ones included
+  expect(sum(".next/static", /\.js$/)).toBeLessThan(15 * MB);
+  // (c) the embedding runtime and WebLLM are separate chunks, fetched only when used (the model files
+  //     under /lang/ are covered by e2e/lang-browser.spec.ts)
+  const firstLoad = stationFiles.map((f) => fs.readFileSync(path.join(".next", f), "utf8")).join("\n");
+  expect(firstLoad).not.toContain("prebuiltAppConfig"); // inside @mlc-ai/web-llm
+  expect(firstLoad).not.toContain("InferenceSession"); // inside onnxruntime-web
 });
 
 test("no API key or framework text in client bundles", () => {
@@ -486,6 +498,9 @@ test("no API key or framework text in client bundles", () => {
   expect(bundle).not.toContain("ANTHROPIC_API_KEY");
   expect(bundle).not.toMatch(/sk-ant-[a-zA-Z0-9]/);
   expect(bundle).not.toContain("@anthropic-ai/sdk");
+  // the matcher's data stays on the server: case facts, paraphrase banks and phrase vectors
+  expect(bundle).not.toContain("I’ve been sleeping on three pillows");
+  expect(bundle).not.toMatch(/"model":"Xenova\/all-MiniLM-L6-v2:q8","normalizer"/);
   // a distinctive framework sentence (copyright) must not ship
   expect(bundle).not.toContain("Wash your hands in view of the Pt");
 });

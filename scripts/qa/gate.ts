@@ -10,8 +10,6 @@
 import { spawn, spawnSync } from "node:child_process";
 
 const SERVER_ENV: Record<string, string> = {
-  AI_MOCK: "true",
-  ANTHROPIC_API_KEY: "",
   DATABASE_URL: "",
   FILE_STORE_PATH: "test-results/e2e-store.json",
   ACCESS_CODE: "student-e2e",

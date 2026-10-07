@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { labelsFrom, modeLabel } from "@/components/common/format";
 import { Timeline } from "@/components/common/Timeline";
 import { OverrideForm } from "@/components/coach/OverrideForm";
+import { SecondOpinion } from "@/components/coach/SecondOpinion";
 import { RegradeButton } from "@/components/coach/RegradeButton";
 import { DomainCard, StationVerdict } from "@/components/results/DomainCard";
 import { PenReview } from "@/components/results/PenReview";
@@ -25,7 +26,6 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
   const { session, kase, run, runs, actions, sheets, overrides } = view;
   const labels = labelsFrom(view.catalog);
   const actionsById = new Map(actions.map((a) => [a.id, a]));
-  const u = session.usage ?? { inputTokens: 0, outputTokens: 0, cacheReadTokens: 0, cacheWriteTokens: 0 };
   const scoreByKey = new Map(sheets.flatMap((s) => s.scores.map((sc) => [`${sc.markSheetId}/${sc.itemId}`, sc] as const)));
 
   return (
@@ -41,10 +41,6 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
           <p className="text-sm text-slate-500">
             <span data-testid="coach-mode">{modeLabel(session.mode)}</span> · {session.status} · started {new Date(session.startedAt).toLocaleString()} · {session.patientTurns} patient turns ·{" "}
             {actions.filter((a) => a.type === "hint").length} hints used · {runs.length} grading run(s)
-          </p>
-          <p className="text-xs text-slate-500" data-testid="tokens">
-            Tokens — input {u.inputTokens.toLocaleString()}, output {u.outputTokens.toLocaleString()}, cache read {u.cacheReadTokens.toLocaleString()}, cache write{" "}
-            {u.cacheWriteTokens.toLocaleString()}
           </p>
         </div>
         {session.status !== "active" && <RegradeButton sessionId={id} label={run ? "Re-run grading" : "Grade now"} />}
@@ -67,7 +63,13 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
                   renderExtra={(sheetId, itemId) => {
                     const sc = scoreByKey.get(`${sheetId}/${itemId}`);
                     if (!sc || sc.status === "not_assessable") return null;
-                    return <OverrideForm sessionId={id} markSheetId={sheetId} itemId={itemId} maxPoints={sc.maxPoints} currentPoints={sc.points} />;
+                    const item = sheets.find((s) => s.sheet.id === sheetId)?.sheet.items.find((i) => i.id === itemId);
+                    return (
+                      <>
+                        {sc.status === "needs_review" && item && <SecondOpinion label={item.label} guidance={item.guidance} lines={sc.evidence.map((e) => e.quote).filter((q): q is string => !!q)} />}
+                        <OverrideForm sessionId={id} markSheetId={sheetId} itemId={itemId} maxPoints={sc.maxPoints} currentPoints={sc.points} />
+                      </>
+                    );
                   }}
                 />
               ))}

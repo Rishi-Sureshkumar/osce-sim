@@ -2,6 +2,8 @@
 import { useEffect, useRef, useState } from "react";
 import type { Action } from "@/domain/schemas";
 import { sendChat } from "@/input/chatClient";
+import { embedderState, warmUp } from "@/lang/embed/browser";
+import { useEnhancedPatient } from "./useEnhancedPatient";
 import { PushToTalk, WebSpeechProvider, type PushToTalkState } from "@/input/adapters/voice";
 
 const PREFS = "osce.voicePrefs";
@@ -27,6 +29,20 @@ export function ChatPanel({
   const [streaming, setStreaming] = useState<string | null>(null);
   const speakingRef = useRef(onSpeaking);
   speakingRef.current = onSpeaking;
+  // in-browser embeddings: loaded on first focus of the chat box or when the student is idle (never before the page has settled)
+  const [embedder, setEmbedder] = useState(embedderState());
+  const warm = () => {
+    setEmbedder(embedderState() === "idle" ? "loading" : embedderState());
+    void warmUp().then(() => setEmbedder(embedderState()));
+  };
+  useEffect(() => {
+    const id = window.setTimeout(() => {
+      const ric = (window as Window & { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback;
+      if (ric) ric(warm);
+      else warm();
+    }, 8000);
+    return () => window.clearTimeout(id);
+  }, []);
   useEffect(() => {
     speakingRef.current?.(streaming !== null && streaming.length > 0);
   }, [streaming]);
@@ -39,6 +55,7 @@ export function ChatPanel({
   const [supported, setSupported] = useState(true);
   const [autoSend, setAutoSend] = useState(false);
   const [speakReplies, setSpeakReplies] = useState(false);
+  const enhanced = useEnhancedPatient();
   const ptt = useRef<PushToTalk | null>(null);
   const sendRef = useRef<(msg: string, source: "text" | "voice") => Promise<void>>(async () => undefined);
   const prefsRef = useRef({ autoSend, speakReplies });
@@ -116,10 +133,14 @@ export function ChatPanel({
           onPatient: (a) => {
             append(a);
             setStreaming(null);
-            if (prefsRef.current.speakReplies && a.type === "patient_say" && typeof window !== "undefined" && "speechSynthesis" in window) {
-              window.speechSynthesis.cancel();
-              window.speechSynthesis.speak(new SpeechSynthesisUtterance(a.payload.text));
-            }
+            if (a.type !== "patient_say") return;
+            // optional display-only rewording; the log keeps the original
+            void enhanced.reword(a.id, a.payload.text).then((spoken) => {
+              if (prefsRef.current.speakReplies && typeof window !== "undefined" && "speechSynthesis" in window) {
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(new SpeechSynthesisUtterance(spoken));
+              }
+            });
           },
         },
         source,
@@ -139,7 +160,7 @@ export function ChatPanel({
   };
 
   return (
-    <section aria-labelledby="chat-h" className="flex min-h-[320px] flex-1 flex-col rounded-lg border border-slate-200 bg-white">
+    <section aria-labelledby="chat-h" className="flex min-h-[320px] flex-1 flex-col rounded-lg border border-slate-200 bg-white" data-embedder={embedder}>
       <h2 id="chat-h" className="border-b border-slate-200 px-3 py-2 text-sm font-semibold">
         Conversation with {patientName}
       </h2>
@@ -151,7 +172,7 @@ export function ChatPanel({
           a.type === "say" ? (
             <Bubble key={a.id} who={a.source === "voice" ? "You (voice)" : "You"} text={a.payload.text} mine />
           ) : a.type === "patient_say" ? (
-            <Bubble key={a.id} who={patientName} text={a.payload.text} />
+            <Bubble key={a.id} who={patientName} text={enhanced.reworded[a.id] ?? a.payload.text} original={enhanced.reworded[a.id] ? a.payload.text : undefined} />
           ) : null,
         )}
         {streaming !== null && <Bubble who={patientName} text={streaming || "…"} streaming />}
@@ -203,6 +224,7 @@ export function ChatPanel({
         <input
           id="chat-input"
           ref={inputRef}
+          onFocus={warm}
           value={text}
           onChange={(e) => {
             setText(e.target.value);
@@ -227,16 +249,50 @@ export function ChatPanel({
           <input type="checkbox" checked={speakReplies} onChange={(e) => setSpeakReplies(e.target.checked)} />
           Patient speaks replies aloud
         </label>
+        {enhanced.available && (
+          <label className="flex items-center gap-1.5" title="Rewords the patient's replies in your browser for more natural speech. The facts, and what is graded, never change.">
+            <input type="checkbox" checked={enhanced.state.status !== "off" && enhanced.state.status !== "error"} onChange={(e) => (e.target.checked ? enhanced.request() : enhanced.turnOff())} />
+            Enhanced patient (beta)
+          </label>
+        )}
       </div>
+      {enhanced.state.status === "confirm" && (
+        <div className="mx-3 mb-2 flex flex-wrap items-center gap-2 rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5 text-xs text-slate-700" data-testid="enhanced-confirm">
+          <span>Downloads a {enhanced.sizeMB} MB language model once, into this browser. Continue?</span>
+          <button type="button" className="rounded bg-cyan-700 px-2 py-0.5 font-medium text-white" onClick={() => void enhanced.load()}>
+            Download
+          </button>
+          <button type="button" className="rounded border border-slate-300 px-2 py-0.5" onClick={enhanced.turnOff}>
+            Not now
+          </button>
+        </div>
+      )}
+      {enhanced.state.status === "loading" && (
+        <p className="px-3 pb-2 text-xs text-slate-600" aria-live="polite">
+          Loading the enhanced patient… {Math.round(enhanced.state.progress * 100)}%
+        </p>
+      )}
+      {enhanced.state.status === "error" && (
+        <p className="px-3 pb-2 text-xs text-amber-800" role="status">
+          {enhanced.state.message}
+        </p>
+      )}
     </section>
   );
 }
 
-function Bubble({ who, text, mine, streaming }: { who: string; text: string; mine?: boolean; streaming?: boolean }) {
+function Bubble({ who, text, mine, streaming, original }: { who: string; text: string; mine?: boolean; streaming?: boolean; original?: string }) {
   return (
     <div className={`flex ${mine ? "justify-end" : "justify-start"}`} data-streaming={streaming || undefined} aria-busy={streaming || undefined}>
       <div className={`max-w-[85%] rounded-lg px-3 py-2 text-sm ${mine ? "bg-cyan-700 text-white" : "bg-slate-100"}`}>
-        <span className={`block text-[10px] font-semibold uppercase ${mine ? "text-cyan-100" : "text-slate-500"}`}>{who}</span>
+        <span className={`block text-[10px] font-semibold uppercase ${mine ? "text-cyan-100" : "text-slate-500"}`}>
+          {who}
+          {original && (
+            <span className="ml-1 font-normal normal-case text-slate-400" title={`Reworded in your browser. Original: ${original}`} data-testid="reworded">
+              · reworded
+            </span>
+          )}
+        </span>
         {text}
       </div>
     </div>

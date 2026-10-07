@@ -2,6 +2,9 @@
 import type { Action } from "@/domain/schemas";
 import { sayFromText } from "./adapters/text";
 import { sayFromVoice } from "./adapters/voice";
+import { embedClausesNow } from "@/lang/embed/browser";
+import { clientNormalizer } from "@/lang/clientNormalizer";
+import { splitClauses } from "@/lang/split";
 
 type ChatEvent =
   | { type: "student"; action: Action }
@@ -18,10 +21,12 @@ export async function sendChat(
   source: "text" | "voice" = "text",
 ): Promise<void> {
   const input = source === "voice" ? sayFromVoice(text) : sayFromText(text);
+  // the browser's own embeddings of each clause, if its model is already loaded (optional)
+  const embedding = await embedClausesNow(splitClauses(input.payload.text, clientNormalizer()));
   const res = await fetch(`/api/sessions/${sessionId}/chat`, {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({ text: input.payload.text, source: input.source }),
+    body: JSON.stringify({ text: input.payload.text, source: input.source, ...(embedding ? { embedding } : {}) }),
   });
   if (!res.ok || !res.body) {
     const body = await res.json().catch(() => ({}));

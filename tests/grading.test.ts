@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { loadContentFromDisk } from "@/content/loadFromDisk";
-import { mockJudgements } from "@/server/ai/mock";
 import { applyOverrides, scoreAiItems, scoreDeterministicItems, totals } from "@/engine/scoring";
+import { sheetsForCase } from "@/engine/sheets";
+import { gradeMatchItems } from "@/lang/grade";
+import { makeNormalizer } from "@/lang/normalize";
 import { courtesy, examine, makeLog, say } from "./helpers";
 
 const c = loadContentFromDisk();
@@ -21,7 +23,11 @@ const log = makeLog([
   examine("auscultate_lungs", "lung_post_rl"),
 ]);
 
-describe("grading pipeline (deterministic + mock AI)", () => {
+/** keyword/pattern-only grading (no embedding model): deterministic and fast */
+const grade = (sheet: typeof history) =>
+  gradeMatchItems({ kase: c.caseById.get("hf-decompensated-01")!, sheets: [sheet], log, check: null, normalize: makeNormalizer(c.lang.synonyms), embed: () => null });
+
+describe("grading pipeline (rules + deterministic language matching)", () => {
   const det = scoreDeterministicItems(exam, log);
   const by = Object.fromEntries(det.map((s) => [s.itemId, s]));
 
@@ -39,14 +45,15 @@ describe("grading pipeline (deterministic + mock AI)", () => {
     expect(by["fcm-02-notes"]!.status).toBe("not_assessable");
   });
 
-  it("mock AI judgements quote the transcript verbatim and pass verification", () => {
-    const ai = scoreAiItems(history, mockJudgements(history, log), log);
+  it("language-matched items quote the student's own sentence verbatim and pass verification", () => {
+    const ai = scoreAiItems(history, grade(history), log);
     const intro = ai.find((s) => s.itemId === "greet-by-name")!;
     expect(intro.status).toBe("scored");
     expect(intro.value).toBe(1);
     expect(intro.evidence[0]!.verified).toBe(true);
+    expect(intro.evidence[0]!.quote).toMatch(/Mr\. Bennett/);
     const enc = c.markSheetById.get("encounter-1b")!;
-    const ros = scoreAiItems(enc, mockJudgements(enc, log), log).find((s) => s.itemId === "ros-gu")!;
+    const ros = scoreAiItems(enc, grade(enc), log).find((s) => s.itemId === "ros-gu")!;
     expect(ros.value).toBe(0);
     expect(ros.status).toBe("scored");
   });
@@ -59,5 +66,30 @@ describe("grading pipeline (deterministic + mock AI)", () => {
     expect(eff!.points).toBe(1);
     expect(eff!.override?.originalPoints).toBe(0);
     expect(totals([eff!]).points).toBe(1);
+  });
+});
+
+describe("note items respect polarity", () => {
+  const kase = c.caseById.get("hf-decompensated-01")!;
+  const penSheet = sheetsForCase(kase, c.markSheetById).find((s) => s.items.some((i) => i.id.startsWith("pen-ex-")))!;
+  const gradeNote = (exam: string, history = "") =>
+    gradeMatchItems({
+      kase,
+      sheets: [penSheet],
+      log: makeLog([{ type: "submit_pen", source: "text", payload: { history, exam, diagnoses: [] } }]),
+      check: null,
+      normalize: makeNormalizer(c.lang.synonyms),
+      embed: () => null,
+    });
+  const score = (js: ReturnType<typeof gradeNote>, id: string) => js.find((j) => j.itemId === id)?.score;
+  it("a denied finding earns no credit for the positive item; a stated one does", () => {
+    const jvpId = penSheet.items.find((i) => i.id.startsWith("pen-ex-") && i.id.includes("jvp"))!.id;
+    expect(score(gradeNote("JVP not raised."), jvpId)).toBe(0);
+    expect(score(gradeNote("JVP raised to the jaw."), jvpId)).toBe(1);
+  });
+  it("a pertinent negative needs to be negated", () => {
+    const negId = penSheet.items.find((i) => i.id.includes("no-chest-pain"))!.id;
+    expect(score(gradeNote("", "Has chest pain."), negId)).toBe(0);
+    expect(score(gradeNote("", "Denies chest pain."), negId)).toBe(1);
   });
 });
