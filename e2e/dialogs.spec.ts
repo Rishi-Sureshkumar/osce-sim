@@ -6,78 +6,7 @@
 import type { Page } from "@playwright/test";
 import { DIALOG_IDS, type DialogId } from "../src/components/ui/dialogIds";
 import { expect, test, waitSettled } from "./qa/fixtures";
-
-type Opener = (page: Page) => Promise<void>;
-
-async function enterCode(page: Page, code: string) {
-  await page.getByLabel("Access code").fill(code);
-  await page.getByRole("button", { name: "Continue" }).click();
-}
-
-async function camera(page: Page, shot: string) {
-  await page.getByLabel("Camera shot").selectOption(shot);
-  await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", shot);
-  await waitSettled(page);
-}
-
-async function clickRegion(page: Page, region: string) {
-  await waitSettled(page);
-  const p = await page.evaluate((r) => window.__osce3d!.project(r), region);
-  expect(p, region).not.toBeNull();
-  await page.mouse.click(p!.x, p!.y);
-}
-
-async function pickTool(page: Page, dataTool: string) {
-  await page.getByRole("button", { name: "Tools…" }).click();
-  await page.locator(`[role=menuitem][data-tool="${dataTool}"]`).click();
-}
-
-async function openExamine(page: Page) {
-  await page.getByRole("button", { name: /^Examine…/ }).click();
-}
-
-const OPENERS = {
-  "examine-menu": openExamine,
-  "maneuver-menu": async (page) => {
-    await openExamine(page);
-    await page.locator('[data-dialog="examine-menu"] [data-region="neck_thyroid"]').click();
-  },
-  perform: async (page) => {
-    await openExamine(page);
-    await page.locator('[data-dialog="examine-menu"] [data-region="neck_thyroid"]').click();
-    await page.locator('[data-dialog="maneuver-menu"] [data-maneuver="thyroid_palpation"]').click();
-  },
-  "tool-chooser": async (page) => {
-    // hands on the right upper quadrant fit light/deep palpation and the liver: the student picks
-    await pickTool(page, "hands");
-    await camera(page, "abdomen");
-    await clickRegion(page, "abd_ruq");
-  },
-  describe: async (page) => {
-    await camera(page, "head_neck");
-    await clickRegion(page, "mouth");
-  },
-  "leave-confirm": async (page) => {
-    await page.getByRole("button", { name: "Leave the room" }).click();
-  },
-  "actions-menu": async (page) => {
-    await page.getByRole("button", { name: "Actions ▾" }).click();
-  },
-  "tools-menu": async (page) => {
-    await page.getByRole("button", { name: "Tools…" }).click();
-  },
-  "bed-hud": async (page) => {
-    await camera(page, "overview");
-    const p = await page.evaluate(() => window.__osce3d!.projectObject("table-head-control"));
-    await page.mouse.click(p!.x, p!.y);
-  },
-  "practice-help": async (page) => {
-    await page.getByRole("button", { name: "Hint" }).click();
-  },
-  finish: async (page) => {
-    await page.getByRole("button", { name: "Finish exam" }).click();
-  },
-} satisfies Record<DialogId, Opener>;
+import { OPENERS, enterCode } from "./qa/openers";
 
 /** Screening patient, practice mode, fast QA timings, inside the room. */
 async function startStation(page: Page) {

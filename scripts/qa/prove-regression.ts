@@ -42,6 +42,25 @@ function run(cmd: string, args: string[], cwd: string, env: Record<string, strin
   return { code: r.status ?? 1, out: `${r.stdout ?? ""}${r.stderr ?? ""}` };
 }
 
+/**
+ * The old app was green at its commit; the only new files in its tree are the copied tests, which
+ * use QA hooks the old code doesn't declare. Don't let `next build` typecheck/lint them.
+ */
+function oldBuildIgnoresNewFiles(wt: string) {
+  const cfg = ["next.config.ts", "next.config.mjs", "next.config.js"].map((f) => path.join(wt, f)).find((f) => fs.existsSync(f));
+  if (!cfg) return;
+  const src = fs.readFileSync(cfg, "utf8");
+  const patched = src.replace(/const nextConfig(: NextConfig)? = \{/, (m) => `${m}\n  typescript: { ignoreBuildErrors: true },\n  eslint: { ignoreDuringBuilds: true },`);
+  if (patched === src) throw new Error(`could not patch ${cfg} to skip typechecking the copied tests`);
+  fs.writeFileSync(cfg, patched);
+}
+
+/** a run that failed before any test body ran proves nothing */
+function infraFailure(out: string): string | null {
+  if (/was not able to start|webServer|EADDRINUSE|Cannot find module|Error: No tests found/.test(out) && !/\d+ failed/.test(out)) return "the old code's test run did not start (build/server error)";
+  return null;
+}
+
 function testCommand(p: Proof): [string, string[]] {
   return p.kind === "e2e" ? ["npx", ["playwright", "test", ...p.tests, "--reporter=line"]] : ["npx", ["vitest", "run", ...p.tests]];
 }
@@ -50,7 +69,7 @@ function testCommand(p: Proof): [string, string[]] {
 function failureSummary(out: string): string {
   const keep = out
     .split("\n")
-    .map((l) => l.replace(/\x1b\[[0-9;]*m/g, ""))
+    .map((l) => l.replace(/\x1b\[[0-9;]*[A-Za-z]/g, ""))
     .filter((l) => /Error:|expect\(|Expected|Received|AssertionError|✘|×|FAIL|failed|passed/.test(l));
   return keep.slice(0, 40).join("\n");
 }
@@ -77,6 +96,7 @@ function main() {
       fs.mkdirSync(path.dirname(path.join(wt, f)), { recursive: true });
       fs.copyFileSync(path.join(ROOT, f), path.join(wt, f));
     }
+    if (proof.kind === "e2e") oldBuildIgnoresNewFiles(wt);
     const [cmd, cmdArgs] = testCommand(proof);
     console.log(`old code (${commit}): ${cmd} ${cmdArgs.join(" ")}`);
     const old = run(cmd, cmdArgs, wt);
@@ -85,7 +105,9 @@ function main() {
     const now = run(cmd, cmdArgs, ROOT);
     console.log(`  exit ${now.code}`);
 
-    const ok = old.code !== 0 && now.code === 0;
+    const infra = infraFailure(old.out);
+    if (infra) console.log(`  ${infra}`);
+    const ok = old.code !== 0 && !infra && now.code === 0;
     const report = [
       `# Regression proof: ${bug}`,
       ``,
@@ -93,14 +115,14 @@ function main() {
       ``,
       `test:      ${proof.tests.join(", ")}`,
       `command:   ${cmd} ${cmdArgs.join(" ")}`,
-      `old code:  ${commit} (git worktree)  → exit ${old.code} ${old.code !== 0 ? "(FAILS, as it must)" : "(PASSED — the test does not catch the bug!)"}`,
+      `old code:  ${commit} (git worktree)  → exit ${old.code} ${infra ? `(INVALID: ${infra})` : old.code !== 0 ? "(FAILS, as it must)" : "(PASSED — the test does not catch the bug!)"}`,
       `new code:  ${head} + working tree     → exit ${now.code} ${now.code === 0 ? "(passes)" : "(FAILS)"}`,
       `result:    ${ok ? "PROVEN" : "NOT PROVEN"}`,
       `date:      ${new Date().toISOString()}`,
       ``,
       `## Old code: why it fails`,
       "```",
-      failureSummary(old.out),
+      failureSummary(old.out) || old.out.slice(-3000),
       "```",
       ``,
       `## New code`,

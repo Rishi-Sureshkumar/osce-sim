@@ -19,7 +19,14 @@
     "check:copyright": "tsx scripts/check-copyright.ts",
     "assets:patient": "tsx scripts/assets/build-patient.ts",
     "postinstall": "patch-package",
-    "qa:prove-regression": "tsx scripts/qa/prove-regression.ts"
+    "qa:prove-regression": "tsx scripts/qa/prove-regression.ts",
+    "test:anchors": "tsx scripts/qa/anchors.ts",
+    "test:intersections": "tsx scripts/qa/intersections.ts",
+    "test:catalog": "playwright test -c playwright.catalog.config.ts",
+    "test:visual": "playwright test -c playwright.visual.config.ts",
+    "qa:review-check": "tsx scripts/qa/review-check.ts",
+    "qa": "tsx scripts/qa/gate.ts",
+    "qa:catalog-report": "tsx scripts/qa/catalog-report.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.131.0",

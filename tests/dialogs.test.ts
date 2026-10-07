@@ -37,8 +37,8 @@ describe("dialog contract (static)", () => {
     for (const id of used) expect(DIALOG_IDS as readonly string[], id).toContain(id);
   });
 
-  it("the e2e spec has an opener for every dialog (typecheck enforces it via `satisfies`)", () => {
-    const spec = fs.readFileSync(path.join(process.cwd(), "e2e/dialogs.spec.ts"), "utf8");
+  it("e2e/qa/openers.ts has an opener for every dialog (typecheck enforces it via `satisfies`)", () => {
+    const spec = fs.readFileSync(path.join(process.cwd(), "e2e/qa/openers.ts"), "utf8");
     expect(spec).toMatch(/satisfies Record<DialogId, Opener>/);
   });
 });

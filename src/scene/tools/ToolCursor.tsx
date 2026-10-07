@@ -38,7 +38,7 @@ export function ToolCursor({ tool, at, toolMode, swingAt, vibrating }: { tool: T
     if (tool === "tuning_fork" && vibrating) h.position.x = Math.sin(performance.now() * 0.9) * 0.0012;
   });
   return (
-    <group ref={g} renderOrder={5}>
+    <group ref={g} renderOrder={5} name="tool-cursor">
       <group ref={head}>
         {tool === "stethoscope" && (
           <>

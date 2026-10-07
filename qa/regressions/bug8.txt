@@ -1,0 +1,26 @@
+# Regression proof: bug8
+
+Achilles reflex result card on the left ankle could not be closed (no ✕, Esc or outside click)
+
+test:      e2e/regressions/bug8-stuck-popup.spec.ts
+command:   npx playwright test e2e/regressions/bug8-stuck-popup.spec.ts --reporter=line
+old code:  be1700b (git worktree)  → exit 1 (FAILS, as it must)
+new code:  88e02c9 + working tree     → exit 0 (passes)
+result:    PROVEN
+date:      2026-10-07T21:42:11.994Z
+
+## Old code: why it fails
+```
+    Error: the result card has a visible ✕
+    expect(locator).toBeVisible() failed
+    Expected: visible
+    Error: element(s) not found
+    > 47 |   await expect(close, "the result card has a visible ✕").toBeVisible({ timeout: 3_000 });
+      49 |   await expect(page.getByRole("heading", { name: /Achilles/i })).toHaveCount(0);
+  1 failed
+```
+
+## New code
+```
+  1 passed (36.6s)
+```

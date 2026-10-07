@@ -14,3 +14,9 @@ next-env.d.ts
 source/*
 !source/README.md
 .cache/
+
+# QA screenshots (the manifest and qa/REVIEW.md are committed)
+qa/screens/**/*.png
+
+# language model + wasm runtime (npm run lang:vendor)
+public/lang/
