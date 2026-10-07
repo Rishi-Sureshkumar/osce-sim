@@ -44,9 +44,9 @@ async function ask(page: Page, text: string) {
   await expect(page.getByRole("button", { name: "Send" })).toBeDisabled(); // empty input, not streaming
 }
 
-/** Examine via the 3D view's accessible region list (part of the 3D view). */
 /** Press and hold a tool on a region (or a named landmark) of the 3D patient via the real canvas. */
 async function holdTool(page: Page, region: string, ms: number, landmark?: string) {
+  await page.locator('[data-testid="exam3d"]').scrollIntoViewIfNeeded();
   const p = await page.evaluate(([r, l]) => window.__osce3d!.project(r!, l), [region, landmark] as const);
   await page.mouse.move(p!.x, p!.y);
   await page.mouse.down();
@@ -66,10 +66,10 @@ async function camera(page: Page, preset: string) {
   await page.waitForTimeout(1500); // tween
 }
 
+/** Examine via the keyboard-operable "Examine…" command menu (region → maneuver). */
 async function examine(page: Page, region: string, maneuver: string) {
-  const picker = page.locator("details", { hasText: "Choose a region from a list" });
-  if (!(await picker.evaluate((d) => (d as HTMLDetailsElement).open))) await picker.locator("summary").click();
-  await picker.locator(`[data-region="${region}"]`).click();
+  await page.getByRole("button", { name: /^Examine…/ }).click();
+  await page.getByRole("dialog", { name: "Examine" }).locator(`[data-region="${region}"]`).click();
   await page.locator(`[data-maneuver="${maneuver}"]`).click();
   await expect(page.locator('[data-testid="perform-finding"] .font-medium')).toBeVisible();
   await page.getByRole("button", { name: "Continue" }).click();
@@ -178,10 +178,12 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.locator('[data-testid="findings"]')).toContainText("pitting edema");
   // the drape was exposed automatically and logged
   await expect(page.locator('[data-testid="action-log"]')).toContainText("Exposed a region");
-  // 2D fallback is still available
-  await page.getByRole("radio", { name: "2D diagram" }).click();
-  await expect(page.locator('[data-region="lung_ant_ru"]').first()).toBeVisible();
-  await page.getByRole("radio", { name: "3D patient" }).click();
+  // the keyboard "Examine…" menu is the non-visual route (no 2D diagram any more)
+  await expect(page.getByRole("radio", { name: "2D diagram" })).toHaveCount(0);
+  await page.keyboard.press("Escape");
+  await page.locator("body").press("e");
+  await expect(page.getByRole("dialog", { name: "Examine" })).toBeVisible();
+  await page.getByRole("dialog", { name: "Examine" }).getByRole("button", { name: "Close" }).click();
 
   // --- closing: goodbye, clean hands again (accessible hold button), leave → the presentation opens
   await ask(page, "Thank you for your time, take care.");
@@ -282,13 +284,11 @@ test("tuning forks: Weber and the Rinne sequence on the screening patient", asyn
   await expect(page.locator('[data-testid="practice-help"]')).toContainText("Consider: Cleans hands before first touching the patient");
   await page.getByRole("button", { name: "Check my progress" }).click();
   await expect(page.locator('[data-testid="practice-help"]')).toContainText("Clinical courtesy");
-  const picker = page.locator("details", { hasText: "Choose a region from a list" });
-  await picker.locator("summary").click();
-  await picker.locator('[data-region="neck_thyroid"]').click();
+  await page.getByRole("button", { name: /^Examine…/ }).click();
+  await page.getByRole("dialog", { name: "Examine" }).locator('[data-region="neck_thyroid"]').click();
   await page.locator('[data-show-me="thyroid_palpation"]').click();
   await expect(page.getByText("Demonstration only. Nothing was examined")).toBeVisible();
   await page.getByRole("button", { name: "Continue" }).click();
-  await picker.locator("summary").click();
   await expect(page.locator('[data-testid="voice-status"]')).toContainText("Voice input isn't available in this browser");
   await expect(page.getByRole("button", { name: "Hold to talk" })).toBeDisabled();
   await page.locator('[data-tool="tuning_fork"]').click();

@@ -27,7 +27,7 @@ VR (`vr.ts`), and cases beyond HF and screening.
 ## File layout
 ```
 content/
-  catalog/regions.json              86 canonical regions (2D/3D/VR all map to these ids)
+  catalog/regions.json              canonical regions (the 3D room and VR map to these ids)
   catalog/maneuvers/<system>.json   general, cardiovascular, pulmonary, heent, abdominal, neuro, msk, skin
   cases/hf-decompensated-01.json    synthetic decompensated HFrEF encounter
   cases/screening-normal.json       synthetic all-normal patient for the full screening exam

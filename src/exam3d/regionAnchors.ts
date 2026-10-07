@@ -1,6 +1,6 @@
 /**
  * 3D anchors for the canonical regions (content/catalog/regions.json). The 3D view never invents
- * region ids: every collider maps to one of these, and a hit emits the same `examine` Action as 2D.
+ * region ids: every collider maps to one of these, and a hit emits the same `examine` Action as the Examine… menu.
  *
  * Coordinate frame ("body frame", metres): the patient lies supine on the bed, hinge at the hips (origin).
  *   +Y = the patient's front (up when supine)     -X = the patient's RIGHT, +X = LEFT

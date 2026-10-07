@@ -10,7 +10,6 @@ import type { ToolUse } from "@/input/adapters/tool";
 import { CameraRig, PRESET_LABELS, presetGoal, regionGoal, type CameraPreset } from "./CameraRig";
 import { Patient3D } from "./Patient3D";
 import { ANCHOR_BY_REGION, SNAP_TOLERANCE, poseFor, snapToAnchor, type Vec3 } from "./regionAnchors";
-import { RegionPicker } from "./RegionPicker";
 import { Dispenser } from "./Dispenser";
 import { Room } from "./Room";
 import { TestHook } from "./TestHook";
@@ -111,7 +110,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
     return new Set(base);
   }, [tool, toolRegions, props.examinableRegionIds]);
   const edema = useMemo(() => Object.fromEntries((props.presentation.visibleSigns.edema ?? []).map((e) => [e.regionId, e.grade])), [props.presentation]);
-  const panelRegions = props.regions.filter((r) => r.view === "neuro");
+  const panelRegions = props.regions.filter((r) => r.group === "neuro");
   const backHidden = preset === "chest_back" && state.bedAngle < 45;
 
   const choosePreset = (p: CameraPreset) => {
@@ -389,7 +388,6 @@ export default function Exam3DView(props: Exam3DViewProps) {
           </button>
         ))}
       </div>
-      <RegionPicker regions={props.regions} onPick={props.onRegionClick} disabled={props.disabled} />
     </div>
   );
 }

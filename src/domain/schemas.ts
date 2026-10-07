@@ -36,10 +36,6 @@ export const System = z.enum([
 ]);
 export type System = z.infer<typeof System>;
 
-/** Which diagram a region is drawn on. Sub-diagrams are reached by zooming from the body views. */
-export const View = z.enum(["anterior", "posterior", "head_neck", "precordium", "neuro", "whole"]);
-export type View = z.infer<typeof View>;
-
 /**
  * Phase 3: where a region lives in the 3D room. Drives the region-focus camera shot, the
  * "Examine…" menu grouping and the panel buttons (whole patient, neuro domains).
@@ -63,7 +59,7 @@ export const Technique = z.enum(["inspect", "palpate", "percuss", "auscultate", 
 export type Technique = z.infer<typeof Technique>;
 
 // ---------------------------------------------------------------------------
-// Regions (canonical, stable — 2D, 3D and VR all map to these ids)
+// Regions (canonical, stable — the 3D room and any future VR renderer map to these ids)
 // ---------------------------------------------------------------------------
 
 export const Region = z.object({
@@ -76,10 +72,6 @@ export const Region = z.object({
   verbal: z.boolean().optional(),
   /** Kept for id stability but never offered for examination (old 2D zoom aliases). */
   hidden: z.boolean().optional(),
-  /** @deprecated 2D diagram fields — removed in phase 3 M1. */
-  view: View.optional(),
-  svgPathId: z.string().min(1).optional(),
-  zoomTo: View.optional(),
 });
 export type Region = z.infer<typeof Region>;
 

@@ -4,711 +4,533 @@
       "id": "general",
       "label": "Whole patient (general appearance)",
       "system": "general",
-      "group": "whole",
-      "view": "whole",
-      "svgPathId": "r-general"
+      "group": "whole"
     },
     {
       "id": "skin",
       "label": "Skin (general survey)",
       "system": "skin",
-      "group": "whole",
-      "view": "whole",
-      "svgPathId": "r-skin"
+      "group": "whole"
     },
     {
       "id": "head",
       "label": "Head & neck (zoom)",
       "system": "heent",
       "group": "head_neck",
-      "hidden": true,
-      "view": "anterior",
-      "svgPathId": "r-head",
-      "zoomTo": "head_neck"
+      "hidden": true
     },
     {
       "id": "precordium",
       "label": "Precordium (zoom)",
       "system": "cardiovascular",
       "group": "chest_front",
-      "hidden": true,
-      "view": "anterior",
-      "svgPathId": "r-precordium",
-      "zoomTo": "precordium"
+      "hidden": true
     },
     {
       "id": "lung_ant_ru",
       "label": "Right upper anterior chest",
       "system": "pulmonary",
-      "group": "chest_front",
-      "view": "anterior",
-      "svgPathId": "r-lung_ant_ru"
+      "group": "chest_front"
     },
     {
       "id": "lung_ant_rl",
       "label": "Right lower anterior chest",
       "system": "pulmonary",
-      "group": "chest_front",
-      "view": "anterior",
-      "svgPathId": "r-lung_ant_rl"
+      "group": "chest_front"
     },
     {
       "id": "lung_lat_r",
       "label": "Right lateral chest",
       "system": "pulmonary",
-      "group": "chest_front",
-      "view": "anterior",
-      "svgPathId": "r-lung_lat_r"
+      "group": "chest_front"
     },
     {
       "id": "lung_ant_lu",
       "label": "Left upper anterior chest",
       "system": "pulmonary",
-      "group": "chest_front",
-      "view": "anterior",
-      "svgPathId": "r-lung_ant_lu"
+      "group": "chest_front"
     },
     {
       "id": "lung_ant_ll",
       "label": "Left lower anterior chest",
       "system": "pulmonary",
-      "group": "chest_front",
-      "view": "anterior",
-      "svgPathId": "r-lung_ant_ll"
+      "group": "chest_front"
     },
     {
       "id": "lung_lat_l",
       "label": "Left lateral chest",
       "system": "pulmonary",
-      "group": "chest_front",
-      "view": "anterior",
-      "svgPathId": "r-lung_lat_l"
+      "group": "chest_front"
     },
     {
       "id": "abd_ruq",
       "label": "Abdomen – right upper quadrant",
       "system": "abdominal",
-      "group": "abdomen",
-      "view": "anterior",
-      "svgPathId": "r-abd_ruq"
+      "group": "abdomen"
     },
     {
       "id": "abd_luq",
       "label": "Abdomen – left upper quadrant",
       "system": "abdominal",
-      "group": "abdomen",
-      "view": "anterior",
-      "svgPathId": "r-abd_luq"
+      "group": "abdomen"
     },
     {
       "id": "abd_rlq",
       "label": "Abdomen – right lower quadrant",
       "system": "abdominal",
-      "group": "abdomen",
-      "view": "anterior",
-      "svgPathId": "r-abd_rlq"
+      "group": "abdomen"
     },
     {
       "id": "abd_llq",
       "label": "Abdomen – left lower quadrant",
       "system": "abdominal",
-      "group": "abdomen",
-      "view": "anterior",
-      "svgPathId": "r-abd_llq"
+      "group": "abdomen"
     },
     {
       "id": "abd_epigastric",
       "label": "Epigastrium / periumbilical (aorta)",
       "system": "abdominal",
-      "group": "abdomen",
-      "view": "anterior",
-      "svgPathId": "r-abd_epigastric"
+      "group": "abdomen"
     },
     {
       "id": "shoulder_right",
       "label": "Right shoulder",
       "system": "msk",
-      "group": "arms",
-      "view": "anterior",
-      "svgPathId": "r-shoulder_right"
+      "group": "arms"
     },
     {
       "id": "arm_right",
       "label": "Right upper arm / antecubital fossa",
       "system": "cardiovascular",
-      "group": "arms",
-      "view": "anterior",
-      "svgPathId": "r-arm_right"
+      "group": "arms"
     },
     {
       "id": "elbow_right",
       "label": "Right elbow",
       "system": "msk",
-      "group": "arms",
-      "view": "anterior",
-      "svgPathId": "r-elbow_right"
+      "group": "arms"
     },
     {
       "id": "wrist_right",
       "label": "Right wrist",
       "system": "cardiovascular",
-      "group": "hands",
-      "view": "anterior",
-      "svgPathId": "r-wrist_right"
+      "group": "hands"
     },
     {
       "id": "hand_right",
       "label": "Right hand",
       "system": "msk",
-      "group": "hands",
-      "view": "anterior",
-      "svgPathId": "r-hand_right"
+      "group": "hands"
     },
     {
       "id": "groin_right",
       "label": "Right groin (femoral)",
       "system": "cardiovascular",
-      "group": "abdomen",
-      "view": "anterior",
-      "svgPathId": "r-groin_right"
+      "group": "abdomen"
     },
     {
       "id": "hip_right",
       "label": "Right hip",
       "system": "msk",
-      "group": "legs",
-      "view": "anterior",
-      "svgPathId": "r-hip_right"
+      "group": "legs"
     },
     {
       "id": "knee_right",
       "label": "Right knee",
       "system": "msk",
-      "group": "legs",
-      "view": "anterior",
-      "svgPathId": "r-knee_right"
+      "group": "legs"
     },
     {
       "id": "shin_right",
       "label": "Right lower leg",
       "system": "cardiovascular",
-      "group": "legs",
-      "view": "anterior",
-      "svgPathId": "r-shin_right"
+      "group": "legs"
     },
     {
       "id": "ankle_right",
       "label": "Right ankle",
       "system": "msk",
-      "group": "feet",
-      "view": "anterior",
-      "svgPathId": "r-ankle_right"
+      "group": "feet"
     },
     {
       "id": "foot_right",
       "label": "Right foot",
       "system": "cardiovascular",
-      "group": "feet",
-      "view": "anterior",
-      "svgPathId": "r-foot_right"
+      "group": "feet"
     },
     {
       "id": "shoulder_left",
       "label": "Left shoulder",
       "system": "msk",
-      "group": "arms",
-      "view": "anterior",
-      "svgPathId": "r-shoulder_left"
+      "group": "arms"
     },
     {
       "id": "arm_left",
       "label": "Left upper arm / antecubital fossa",
       "system": "cardiovascular",
-      "group": "arms",
-      "view": "anterior",
-      "svgPathId": "r-arm_left"
+      "group": "arms"
     },
     {
       "id": "elbow_left",
       "label": "Left elbow",
       "system": "msk",
-      "group": "arms",
-      "view": "anterior",
-      "svgPathId": "r-elbow_left"
+      "group": "arms"
     },
     {
       "id": "wrist_left",
       "label": "Left wrist",
       "system": "cardiovascular",
-      "group": "hands",
-      "view": "anterior",
-      "svgPathId": "r-wrist_left"
+      "group": "hands"
     },
     {
       "id": "hand_left",
       "label": "Left hand",
       "system": "msk",
-      "group": "hands",
-      "view": "anterior",
-      "svgPathId": "r-hand_left"
+      "group": "hands"
     },
     {
       "id": "groin_left",
       "label": "Left groin (femoral)",
       "system": "cardiovascular",
-      "group": "abdomen",
-      "view": "anterior",
-      "svgPathId": "r-groin_left"
+      "group": "abdomen"
     },
     {
       "id": "hip_left",
       "label": "Left hip",
       "system": "msk",
-      "group": "legs",
-      "view": "anterior",
-      "svgPathId": "r-hip_left"
+      "group": "legs"
     },
     {
       "id": "knee_left",
       "label": "Left knee",
       "system": "msk",
-      "group": "legs",
-      "view": "anterior",
-      "svgPathId": "r-knee_left"
+      "group": "legs"
     },
     {
       "id": "shin_left",
       "label": "Left lower leg",
       "system": "cardiovascular",
-      "group": "legs",
-      "view": "anterior",
-      "svgPathId": "r-shin_left"
+      "group": "legs"
     },
     {
       "id": "ankle_left",
       "label": "Left ankle",
       "system": "msk",
-      "group": "feet",
-      "view": "anterior",
-      "svgPathId": "r-ankle_left"
+      "group": "feet"
     },
     {
       "id": "foot_left",
       "label": "Left foot",
       "system": "cardiovascular",
-      "group": "feet",
-      "view": "anterior",
-      "svgPathId": "r-foot_left"
+      "group": "feet"
     },
     {
       "id": "lung_post_ru",
       "label": "Right upper posterior chest",
       "system": "pulmonary",
-      "group": "chest_back",
-      "view": "posterior",
-      "svgPathId": "r-lung_post_ru"
+      "group": "chest_back"
     },
     {
       "id": "lung_post_rl",
       "label": "Right lower posterior chest (base)",
       "system": "pulmonary",
-      "group": "chest_back",
-      "view": "posterior",
-      "svgPathId": "r-lung_post_rl"
+      "group": "chest_back"
     },
     {
       "id": "lung_post_lu",
       "label": "Left upper posterior chest",
       "system": "pulmonary",
-      "group": "chest_back",
-      "view": "posterior",
-      "svgPathId": "r-lung_post_lu"
+      "group": "chest_back"
     },
     {
       "id": "lung_post_ll",
       "label": "Left lower posterior chest (base)",
       "system": "pulmonary",
-      "group": "chest_back",
-      "view": "posterior",
-      "svgPathId": "r-lung_post_ll"
+      "group": "chest_back"
     },
     {
       "id": "spine_cervical",
       "label": "Cervical spine",
       "system": "msk",
-      "group": "chest_back",
-      "view": "posterior",
-      "svgPathId": "r-spine_cervical"
+      "group": "chest_back"
     },
     {
       "id": "spine_thoracic",
       "label": "Thoracic spine",
       "system": "msk",
-      "group": "chest_back",
-      "view": "posterior",
-      "svgPathId": "r-spine_thoracic"
+      "group": "chest_back"
     },
     {
       "id": "spine_lumbar",
       "label": "Lumbar spine & paraspinals",
       "system": "msk",
-      "group": "chest_back",
-      "view": "posterior",
-      "svgPathId": "r-spine_lumbar"
+      "group": "chest_back"
     },
     {
       "id": "cva_right",
       "label": "Right costovertebral angle",
       "system": "abdominal",
-      "group": "chest_back",
-      "view": "posterior",
-      "svgPathId": "r-cva_right"
+      "group": "chest_back"
     },
     {
       "id": "cva_left",
       "label": "Left costovertebral angle",
       "system": "abdominal",
-      "group": "chest_back",
-      "view": "posterior",
-      "svgPathId": "r-cva_left"
+      "group": "chest_back"
     },
     {
       "id": "sacrum",
       "label": "Sacrum",
       "system": "cardiovascular",
-      "group": "chest_back",
-      "view": "posterior",
-      "svgPathId": "r-sacrum"
+      "group": "chest_back"
     },
     {
       "id": "calf_right",
       "label": "Right calf (posterior)",
       "system": "cardiovascular",
-      "group": "legs",
-      "view": "posterior",
-      "svgPathId": "r-calf_right"
+      "group": "legs"
     },
     {
       "id": "calf_left",
       "label": "Left calf (posterior)",
       "system": "cardiovascular",
-      "group": "legs",
-      "view": "posterior",
-      "svgPathId": "r-calf_left"
+      "group": "legs"
     },
     {
       "id": "scalp",
       "label": "Head / scalp",
       "system": "heent",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-scalp"
+      "group": "head_neck"
     },
     {
       "id": "eye_right",
       "label": "Right eye",
       "system": "heent",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-eye_right"
+      "group": "head_neck"
     },
     {
       "id": "eye_left",
       "label": "Left eye",
       "system": "heent",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-eye_left"
+      "group": "head_neck"
     },
     {
       "id": "ear_right",
       "label": "Right ear",
       "system": "heent",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-ear_right"
+      "group": "head_neck"
     },
     {
       "id": "ear_left",
       "label": "Left ear",
       "system": "heent",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-ear_left"
+      "group": "head_neck"
     },
     {
       "id": "nose",
       "label": "Nose",
       "system": "heent",
       "group": "head_neck",
-      "verbal": true,
-      "view": "head_neck",
-      "svgPathId": "r-nose"
+      "verbal": true
     },
     {
       "id": "mouth",
       "label": "Mouth & throat",
       "system": "heent",
       "group": "head_neck",
-      "verbal": true,
-      "view": "head_neck",
-      "svgPathId": "r-mouth"
+      "verbal": true
     },
     {
       "id": "face",
       "label": "Face",
       "system": "heent",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-face"
+      "group": "head_neck"
     },
     {
       "id": "ln_occipital",
       "label": "Occipital nodes",
       "system": "lymph",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-ln_occipital"
+      "group": "head_neck"
     },
     {
       "id": "ln_post_auricular",
       "label": "Posterior auricular nodes",
       "system": "lymph",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-ln_post_auricular"
+      "group": "head_neck"
     },
     {
       "id": "ln_pre_auricular",
       "label": "Preauricular nodes",
       "system": "lymph",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-ln_pre_auricular"
+      "group": "head_neck"
     },
     {
       "id": "ln_submandibular",
       "label": "Submandibular nodes",
       "system": "lymph",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-ln_submandibular"
+      "group": "head_neck"
     },
     {
       "id": "ln_submental",
       "label": "Submental nodes",
       "system": "lymph",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-ln_submental"
+      "group": "head_neck"
     },
     {
       "id": "ln_ant_cervical",
       "label": "Anterior cervical nodes",
       "system": "lymph",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-ln_ant_cervical"
+      "group": "head_neck"
     },
     {
       "id": "ln_post_cervical",
       "label": "Posterior cervical nodes",
       "system": "lymph",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-ln_post_cervical"
+      "group": "head_neck"
     },
     {
       "id": "ln_supraclavicular",
       "label": "Supraclavicular nodes",
       "system": "lymph",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-ln_supraclavicular"
+      "group": "head_neck"
     },
     {
       "id": "neck_trachea",
       "label": "Trachea",
       "system": "neck",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-neck_trachea"
+      "group": "head_neck"
     },
     {
       "id": "neck_thyroid",
       "label": "Thyroid",
       "system": "neck",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-neck_thyroid"
+      "group": "head_neck"
     },
     {
       "id": "neck_jvp_right",
       "label": "Right internal jugular (JVP)",
       "system": "cardiovascular",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-neck_jvp_right"
+      "group": "head_neck"
     },
     {
       "id": "carotid_right",
       "label": "Right carotid",
       "system": "cardiovascular",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-carotid_right"
+      "group": "head_neck"
     },
     {
       "id": "carotid_left",
       "label": "Left carotid",
       "system": "cardiovascular",
-      "group": "head_neck",
-      "view": "head_neck",
-      "svgPathId": "r-carotid_left"
+      "group": "head_neck"
     },
     {
       "id": "cardiac_aortic",
       "label": "Aortic area (R 2nd ICS)",
       "system": "cardiovascular",
-      "group": "chest_front",
-      "view": "precordium",
-      "svgPathId": "r-cardiac_aortic"
+      "group": "chest_front"
     },
     {
       "id": "cardiac_pulmonic",
       "label": "Pulmonic area (L 2nd ICS)",
       "system": "cardiovascular",
-      "group": "chest_front",
-      "view": "precordium",
-      "svgPathId": "r-cardiac_pulmonic"
+      "group": "chest_front"
     },
     {
       "id": "cardiac_erbs",
       "label": "Erb's point (L 3rd ICS)",
       "system": "cardiovascular",
-      "group": "chest_front",
-      "view": "precordium",
-      "svgPathId": "r-cardiac_erbs"
+      "group": "chest_front"
     },
     {
       "id": "cardiac_tricuspid",
       "label": "Tricuspid area (L lower sternal border)",
       "system": "cardiovascular",
-      "group": "chest_front",
-      "view": "precordium",
-      "svgPathId": "r-cardiac_tricuspid"
+      "group": "chest_front"
     },
     {
       "id": "cardiac_mitral",
       "label": "Mitral area / apex (L 5th ICS, MCL)",
       "system": "cardiovascular",
-      "group": "chest_front",
-      "view": "precordium",
-      "svgPathId": "r-cardiac_mitral"
+      "group": "chest_front"
     },
     {
       "id": "precordium_lsb",
       "label": "Left sternal border (heaves/thrills)",
       "system": "cardiovascular",
-      "group": "chest_front",
-      "view": "precordium",
-      "svgPathId": "r-precordium_lsb"
+      "group": "chest_front"
     },
     {
       "id": "precordium_wall",
       "label": "Precordium (whole)",
       "system": "cardiovascular",
-      "group": "chest_front",
-      "view": "precordium",
-      "svgPathId": "r-precordium_wall"
+      "group": "chest_front"
     },
     {
       "id": "neuro_mental_status",
       "label": "Orientation / mental status",
       "system": "neuro",
-      "group": "neuro",
-      "view": "neuro",
-      "svgPathId": "r-neuro_mental_status"
+      "group": "neuro"
     },
     {
       "id": "neuro_cranial_nerves",
       "label": "Cranial nerves",
       "system": "neuro",
-      "group": "neuro",
-      "view": "neuro",
-      "svgPathId": "r-neuro_cranial_nerves"
+      "group": "neuro"
     },
     {
       "id": "neuro_motor_upper",
       "label": "Motor – upper limbs",
       "system": "neuro",
-      "group": "neuro",
-      "view": "neuro",
-      "svgPathId": "r-neuro_motor_upper"
+      "group": "neuro"
     },
     {
       "id": "neuro_motor_lower",
       "label": "Motor – lower limbs",
       "system": "neuro",
-      "group": "neuro",
-      "view": "neuro",
-      "svgPathId": "r-neuro_motor_lower"
+      "group": "neuro"
     },
     {
       "id": "neuro_sensory",
       "label": "Sensation",
       "system": "neuro",
-      "group": "neuro",
-      "view": "neuro",
-      "svgPathId": "r-neuro_sensory"
+      "group": "neuro"
     },
     {
       "id": "neuro_reflexes",
       "label": "Reflexes",
       "system": "neuro",
-      "group": "neuro",
-      "view": "neuro",
-      "svgPathId": "r-neuro_reflexes"
+      "group": "neuro"
     },
     {
       "id": "neuro_cerebellar",
       "label": "Coordination (cerebellar)",
       "system": "neuro",
-      "group": "neuro",
-      "view": "neuro",
-      "svgPathId": "r-neuro_cerebellar"
+      "group": "neuro"
     },
     {
       "id": "neuro_gait",
       "label": "Gait & Romberg",
       "system": "neuro",
-      "group": "neuro",
-      "view": "neuro",
-      "svgPathId": "r-neuro_gait"
+      "group": "neuro"
     },
     {
       "id": "neuro_meningeal",
       "label": "Meningeal signs",
       "system": "neuro",
-      "group": "neuro",
-      "view": "neuro",
-      "svgPathId": "r-neuro_meningeal"
+      "group": "neuro"
     },
     {
       "id": "toe_great_right",
       "label": "Right great toe",
       "system": "neuro",
-      "group": "feet",
-      "view": "anterior",
-      "svgPathId": "r-toe_great_right"
+      "group": "feet"
     },
     {
       "id": "toe_great_left",
       "label": "Left great toe",
       "system": "neuro",
-      "group": "feet",
-      "view": "anterior",
-      "svgPathId": "r-toe_great_left"
+      "group": "feet"
     },
     {
       "id": "breast_right",

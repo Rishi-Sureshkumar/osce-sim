@@ -44,7 +44,7 @@ export const INITIAL_STATE: PatientState = {
   knocked: false,
 };
 
-/** Pure fold over the (canonically ordered) log. Shared by 2D, 3D, nudges and tests. */
+/** Pure fold over the (canonically ordered) log. Shared by the 3D view, nudges, scoring and tests. */
 export function patientState(log: readonly Action[], upTo = Infinity): PatientState {
   const s: PatientState = { ...INITIAL_STATE, drape: { ...INITIAL_STATE.drape } };
   for (const a of orderLog(log)) {

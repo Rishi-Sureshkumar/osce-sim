@@ -293,8 +293,8 @@ Lighting is stable: hemisphere light, one shadowed key light, and contact shadow
 ## Milestone status
 | # | Milestone | Status |
 |---|---|---|
-| S | Schema changes | planned |
-| M1 | 3D-only | planned |
+| S | Schema changes | done |
+| M1 | 3D-only | done |
 | M2 | Patient model and room | planned |
 | M3 | Cinematic navigation | planned |
 | M4 | Hidden targets | planned |

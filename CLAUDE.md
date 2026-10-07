@@ -1,7 +1,7 @@
 # OSCE Simulator — guide for Claude Code sessions
 
-Web-based OSCE simulator. Students take a history from an AI patient, examine a clickable
-patient (2D body diagram), present a differential, and get scored feedback against school
+Web-based OSCE simulator. Students take a history from an AI patient, examine a patient
+in a 3D exam room, present a differential, and get scored feedback against school
 mark sheets. Coaches review sessions and override scores. Read `docs/PLAN.md` for milestones
 and workstream ownership.
 
@@ -21,8 +21,10 @@ and workstream ownership.
    validated by Zod. Adding a case, maneuver or mark-sheet item must never need a code change.
 5. **The Anthropic API key is server-side only.** All model calls go through `src/server/ai/`.
    Never import that folder from a client component; never prefix env vars with `NEXT_PUBLIC_`.
-6. **Region ids are canonical and stable** (`content/catalog/regions.json`). 2D, 3D and VR
-   renderers all map to the same `regionId` strings. Never rename one; add new ones instead.
+6. **Region ids are canonical and stable** (`content/catalog/regions.json`). The 3D room (and any
+   future VR renderer) maps to the same `regionId` strings; each region has a `group` (focus shot /
+   menu grouping). Never rename or delete one; add new ones instead (retired ids get `hidden: true`).
+   The app is 3D-only; the keyboard "Examine…" menu (`src/exam3d/ExamineMenu.tsx`) is the non-visual route.
 7. **Copyright:** the FCM-1 framework is not cleared. Use `fcmId` numbers and our own short
    labels. Never paste framework text into the repo or UI. `sourceText` fields stay `""`.
    `/source` is git-ignored — never commit it.
@@ -68,7 +70,6 @@ src/server/db/                      Repo interface, Postgres (Drizzle) + file st
 src/server/                         session service, auth, rate limit, cost guards
 src/app/api/                        route handlers
 src/app/(pages)                     gate, home, station, results, coach
-src/components/body/                SVG body diagram (views, regions → svgPathId)
 src/components/station/             door, encounter bar (sanitise / bed / drape / Actions menu), chat, findings, log, maneuver menu, submit dialog
 src/components/results/, coach/     results and coach UI
 tests/                              vitest; e2e/ Playwright

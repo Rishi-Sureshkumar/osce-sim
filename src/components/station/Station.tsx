@@ -1,9 +1,8 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import type { Action, AudioSpec, CourtesyKind, DrapeZone, Position, PublicCase, Region, Session, View } from "@/domain/schemas";
+import type { Action, CourtesyKind, DrapeZone, Position, PublicCase, Region, Session } from "@/domain/schemas";
 import type { PublicCatalog } from "@/content/types";
-import { BodyDiagram } from "@/components/body/BodyDiagram";
 import { findingDisplay, labelsFrom } from "@/components/common/format";
 import { examineFromClick } from "@/input/adapters/click";
 import { examineFromTool, type ToolUse } from "@/input/adapters/tool";
@@ -25,7 +24,7 @@ import { SANITISE_HOLD_MS, useHold } from "./useHold";
 import { FindingsPanel } from "./FindingsPanel";
 import { ManeuverMenu } from "./ManeuverMenu";
 import { PerformOverlay } from "./PerformOverlay";
-import { ViewTabs } from "./ViewTabs";
+import { ExamineMenu } from "@/exam3d/ExamineMenu";
 
 const Exam3DView = dynamic(() => import("@/exam3d/Exam3DView"), {
   ssr: false,
@@ -36,11 +35,9 @@ const Exam3DView = dynamic(() => import("@/exam3d/Exam3DView"), {
   ),
 });
 
-type ExamView = "3d" | "2d";
-const VIEW_KEY = "osce.examView";
 
 /** menu performs block the view until "Continue"; tool findings are non-blocking cards */
-type Performing = { regionId: string; title: string; steps: string[]; finding: string | null; audio?: AudioSpec; kind: "menu" | "tool" };
+type Performing = { regionId: string; title: string; steps: string[]; finding: string | null; kind: "menu" | "tool" };
 
 /** why the presentation step opened by itself (it can't be dismissed) */
 export type ForceOpen = "time_up" | "left_room" | null;
@@ -58,25 +55,6 @@ export interface StationProps {
 
 export function Station({ session, kase, catalog, initialActions, chat, finish }: StationProps) {
   const [actions, setActions] = useState<Action[]>(initialActions);
-  const [view, setView] = useState<View>("anterior");
-  const [examView, setExamView] = useState<ExamView>("3d");
-  useEffect(() => {
-    try {
-      const v = localStorage.getItem(VIEW_KEY);
-      if (v === "2d" || v === "3d") setExamView(v);
-    } catch {
-      /* storage unavailable: keep the default */
-    }
-  }, []);
-  const switchView = (v: ExamView) => {
-    setExamView(v);
-    setSelected(null);
-    try {
-      localStorage.setItem(VIEW_KEY, v);
-    } catch {
-      /* ignore */
-    }
-  };
   const examinable = useMemo(() => new Set(catalog.maneuvers.flatMap((m) => m.allowedRegions)), [catalog]);
   const [selected, setSelected] = useState<Region | null>(null);
   const [performing, setPerforming] = useState<Performing | null>(null);
@@ -162,11 +140,6 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
   const onRegionClick = (r: Region) => {
     if (blocking) return;
     if (performing) setPerforming(null);
-    if (r.zoomTo) {
-      setView(r.zoomTo);
-      setSelected(null);
-      return;
-    }
     setSelected(r);
   };
 
@@ -175,7 +148,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
       if (!selected) return;
       // In 3D, maneuvers that need an instrument are done with it: pick up the tool instead.
       const needs = toolFor(m);
-      if (examView === "3d" && needs && needs !== "hands") {
+      if (needs && needs !== "hands") {
         setTool((t) => ({
           ...t,
           tool: needs,
@@ -192,7 +165,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
       try {
         const { action, appended } = await postAction(session.id, examineFromClick(regionId, m.id));
         appendAll(appended);
-        if (action.type === "examine") setPerforming((p) => (p ? { ...p, finding: findingDisplay(action, labels), audio: action.result?.audio } : p));
+        if (action.type === "examine") setPerforming((p) => (p ? { ...p, finding: findingDisplay(action, labels) } : p));
       } catch (e) {
         setPerforming(null);
         throw e;
@@ -246,7 +219,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
     });
   };
 
-  const whole = catalog.regions.filter((r) => r.view === "whole");
+  const whole = catalog.regions.filter((r) => r.group === "whole");
 
   return (
     <div className="mx-auto flex max-w-[1500px] flex-col gap-3 p-3 lg:h-[calc(100vh-30px)]">
@@ -306,14 +279,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
 
         <div className="flex min-h-0 flex-col gap-2 rounded-lg border border-slate-200 bg-white p-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <div role="radiogroup" aria-label="Exam view" className="flex overflow-hidden rounded-md border border-slate-300 text-xs">
-              {(["3d", "2d"] as const).map((v) => (
-                <button key={v} role="radio" aria-checked={examView === v} onClick={() => switchView(v)} className={`px-2.5 py-1 ${examView === v ? "bg-slate-800 text-white" : "bg-white"}`}>
-                  {v === "3d" ? "3D patient" : "2D diagram"}
-                </button>
-              ))}
-            </div>
-            {examView === "2d" && <ViewTabs view={view} onChange={(v) => (setView(v), setSelected(null))} />}
+            <ExamineMenu regions={catalog.regions} onPick={onRegionClick} disabled={locked || blocking} />
             <div className="flex gap-1">
               {whole.map((r) => (
                 <button
@@ -328,8 +294,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
             </div>
           </div>
           <div className="relative flex min-h-0 flex-1 flex-col">
-            {examView === "3d" ? (
-              <Exam3DView
+            <Exam3DView
                 sessionId={session.id}
                 maneuvers={catalog.maneuvers}
                 tool={tool}
@@ -350,17 +315,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
                 disabled={locked || blocking}
                 onRegionClick={onRegionClick}
               />
-            ) : (
-              <BodyDiagram
-                view={view}
-                regions={catalog.regions}
-                selectedRegionId={selected?.id}
-                performingRegionId={performing?.regionId}
-                examinedRegionIds={examined}
-                onRegionClick={locked ? () => undefined : onRegionClick}
-              />
-            )}
-            <div className={`absolute right-2 z-10 w-72 max-w-[90%] ${examView === "3d" ? "bottom-28 max-h-[45%] overflow-y-auto" : "top-2"} ${performing?.kind === "tool" && !choice ? "pointer-events-none [&_button]:pointer-events-auto" : ""}`}>
+            <div className={`absolute right-2 z-10 w-72 max-w-[90%] bottom-28 max-h-[45%] overflow-y-auto ${performing?.kind === "tool" && !choice ? "pointer-events-none [&_button]:pointer-events-auto" : ""}`}>
               {toast && !selected && !choice && performing?.kind !== "menu" && (
                 <p className="mb-2 rounded-md bg-cyan-50 px-3 py-2 text-sm text-cyan-900 shadow" role="status">
                   {toast}
@@ -385,9 +340,6 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
                   title={performing.title}
                   steps={performing.steps}
                   finding={performing.finding}
-                  audio={examView === "2d" ? performing.audio : undefined}
-                  hr={kase.presentation.hr}
-                  rr={kase.presentation.rr}
                   onDone={() => setPerforming(null)}
                 />
               ) : selected ? (
