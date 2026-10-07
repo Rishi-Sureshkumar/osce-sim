@@ -1,12 +1,20 @@
 "use client";
 import type { ThreeEvent } from "@react-three/fiber";
-import { useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
-import type { Mesh, MeshBasicMaterial } from "three";
+import type { Intersection } from "three";
 import type { DrapeZone } from "@/domain/schemas";
 import { PatientModel } from "@/scene/PatientModel";
 import type { VariantId } from "@/scene/rig";
-import { anchorWorldPoints, anchorsFor, pickRegion, type Pose, type RegionAnchor, type Vec3 } from "./regionAnchors";
+import type { CursorPoint } from "@/scene/tools/ToolCursor";
+import { snapToAnchor, type Pose, type Vec3 } from "./regionAnchors";
+
+export interface BodyHit {
+  point: Vec3;
+  normal: Vec3;
+  /** "body", or "gown:<zone>" when the click landed on the gown */
+  kind: string;
+  /** nearest region anchor (by tolerance boundary), when within reach */
+  regionId: string | null;
+}
 
 export interface Patient3DProps {
   pose: Pose;
@@ -19,60 +27,55 @@ export interface Patient3DProps {
   edema: Record<string, number>;
   speaking: boolean;
   quality: "high" | "low";
-  /** regions the current tool/menu can act on (others are hidden markers) */
-  showMarkers: boolean;
-  selectedRegionId?: string | null;
-  performingRegionId?: string | null;
-  examinedRegionIds: Set<string>;
-  enabledRegionIds: Set<string>;
-  onPick: (regionId: string, e: ThreeEvent<MouseEvent>) => void;
-  /** a tool is in hand: pointer down/move/up report world points instead of picking */
-  toolActive: boolean;
-  onToolDown: (point: Vec3) => void;
-  onToolMove: (point: Vec3) => void;
-  onToolUp: () => void;
   pupilScale: number;
-  onDoublePick: (regionId: string) => void;
-  onHover: (regionId: string | null) => void;
+  angle: { current: number };
+  jerk?: { bone: string; amount: number; at: number } | null;
+  /** regions a click can resolve to (examinable + prohibited, or the tool's regions) */
+  pickableRegionIds: readonly string[];
+  toolActive: boolean;
+  onBodyClick: (hit: BodyHit) => void;
+  onToolDown: (hit: BodyHit) => void;
+  onToolMove: (hit: BodyHit) => void;
+  onToolUp: () => void;
+  onHover: (hit: BodyHit | null) => void;
 }
 
-/** Where the ray meets the skin (not an invisible collider): tool placements are measured from it. */
-function surfacePoint(e: ThreeEvent<PointerEvent>): Vec3 {
-  const body = e.intersections.find((i) => i.object.userData.kind === "body");
-  const pt = body?.point ?? e.point;
-  return [pt.x, pt.y, pt.z];
-}
+/** A body hit is only resolved to a region when it lands this close to the region's tolerance boundary. */
+const REACH_CM = 9;
 
 /**
- * The rigged patient plus invisible anchor colliders at the pose's world anchor points. Picking
- * resolves ray hits to a canonical regionId, ignoring anchors hidden behind the skin.
+ * The rigged patient. Hits come from BVH proxies baked from the posed skin and gown; a hit is
+ * resolved to the nearest canonical region anchor. Nothing about the anchors is drawn.
  */
 export function Patient3D(p: Patient3DProps) {
-  const resolve = (e: ThreeEvent<MouseEvent | PointerEvent>): string | null => {
-    const bodyHit = e.intersections.find((i) => i.object.userData.kind === "body");
-    const limit = bodyHit ? bodyHit.distance + 0.03 : Infinity;
-    const hits = e.intersections
-      .filter((i) => typeof i.object.userData.regionId === "string" && i.distance <= limit)
-      .map((i) => ({ regionId: i.object.userData.regionId as string, distance: i.distance }))
-      .filter((h) => p.enabledRegionIds.has(h.regionId));
-    return pickRegion(hits);
+  const toHit = (e: ThreeEvent<MouseEvent | PointerEvent>): BodyHit | null => {
+    const i = e.intersections.find((x) => typeof x.object.userData.kind === "string" && (x.object.userData.kind === "body" || String(x.object.userData.kind).startsWith("gown:")));
+    if (!i) return null;
+    const point: Vec3 = [i.point.x, i.point.y, i.point.z];
+    const normal = worldNormal(i);
+    // gown hits measure from the skin underneath (the gown is ~1 cm out)
+    const skin = e.intersections.find((x) => x.object.userData.kind === "body");
+    const measure: Vec3 = skin ? [skin.point.x, skin.point.y, skin.point.z] : point;
+    const snap = snapToAnchor(measure, p.pickableRegionIds, p.pose);
+    const regionId = snap && snap.distanceCm - snap.toleranceCm <= REACH_CM ? snap.regionId : null;
+    return { point: measure, normal, kind: String(i.object.userData.kind), regionId };
   };
-  const anchors = anchorsFor(p.variant);
-  const placed = useMemo(() => anchors.map((a) => ({ a, points: anchorWorldPoints(a.regionId, p.pose) })), [anchors, p.pose]);
 
   return (
     <group
       onClick={(e) => {
         e.stopPropagation();
         if (p.toolActive) return;
-        const id = resolve(e);
-        if (id) p.onPick(id, e);
+        const h = toHit(e);
+        if (h) p.onBodyClick(h);
       }}
       onPointerDown={(e) => {
         if (!p.toolActive) return;
         e.stopPropagation();
+        const h = toHit(e);
+        if (!h) return;
         (e.target as unknown as Element).setPointerCapture?.(e.pointerId);
-        p.onToolDown(surfacePoint(e));
+        p.onToolDown(h);
       }}
       onPointerUp={(e) => {
         if (!p.toolActive) return;
@@ -80,15 +83,11 @@ export function Patient3D(p: Patient3DProps) {
         (e.target as unknown as Element).releasePointerCapture?.(e.pointerId);
         p.onToolUp();
       }}
-      onDoubleClick={(e) => {
-        e.stopPropagation();
-        const id = resolve(e);
-        if (id) p.onDoublePick(id);
-      }}
       onPointerMove={(e) => {
         e.stopPropagation();
-        if (p.toolActive && e.buttons) p.onToolMove(surfacePoint(e));
-        p.onHover(resolve(e));
+        const h = toHit(e);
+        if (p.toolActive && e.buttons && h) p.onToolMove(h);
+        p.onHover(h);
       }}
       onPointerOut={() => p.onHover(null)}
     >
@@ -96,6 +95,8 @@ export function Patient3D(p: Patient3DProps) {
         variant={p.variant}
         position={p.pose.position}
         bedAngle={p.pose.bedAngle}
+        angle={p.angle}
+        jerk={p.jerk}
         drape={p.drape}
         hr={p.hr}
         rr={p.rr}
@@ -106,42 +107,14 @@ export function Patient3D(p: Patient3DProps) {
         speaking={p.speaking}
         quality={p.quality}
       />
-      {placed.map(({ a, points }) => points.map((pt, i) => <AnchorMesh key={`${a.regionId}-${i}`} anchor={a} point={pt} {...p} />))}
     </group>
   );
 }
 
-function AnchorMesh({
-  anchor,
-  point,
-  showMarkers,
-  selectedRegionId,
-  performingRegionId,
-  examinedRegionIds,
-  enabledRegionIds,
-}: Patient3DProps & { anchor: RegionAnchor; point: Vec3 }) {
-  const dot = useRef<Mesh>(null);
-  const performing = performingRegionId === anchor.regionId;
-  const selected = selectedRegionId === anchor.regionId;
-  const examined = examinedRegionIds.has(anchor.regionId);
-  const enabled = enabledRegionIds.has(anchor.regionId);
-  const visible = enabled && (showMarkers || selected || performing || examined);
-  useFrame(({ clock }) => {
-    const m = dot.current?.material as MeshBasicMaterial | undefined;
-    if (!m) return;
-    m.opacity = !visible ? 0 : performing ? 0.55 + 0.4 * Math.sin(clock.elapsedTime * 9) : selected ? 0.95 : examined ? 0.85 : 0.6;
-  });
-  const color = selected || performing ? "#0e7490" : examined ? "#059669" : "#0891b2";
-  return (
-    <group position={point}>
-      <mesh userData={{ regionId: anchor.regionId }}>
-        <sphereGeometry args={[Math.max(0.015, anchor.radius), 12, 8]} />
-        <meshBasicMaterial transparent opacity={0} depthWrite={false} colorWrite={false} />
-      </mesh>
-      <mesh ref={dot} raycast={() => null} renderOrder={2}>
-        <sphereGeometry args={[0.008, 12, 8]} />
-        <meshBasicMaterial color={color} transparent opacity={0} depthWrite={false} />
-      </mesh>
-    </group>
-  );
+function worldNormal(i: Intersection): Vec3 {
+  if (!i.face) return [0, 1, 0];
+  const n = i.face.normal.clone().transformDirection(i.object.matrixWorld);
+  return [n.x, n.y, n.z];
 }
+
+export type { CursorPoint };

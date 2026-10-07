@@ -20,6 +20,29 @@
     "task": "Mr. Bennett, 68, presents with two weeks of worsening shortness of breath. Take a focused history, perform a focused cardiovascular and respiratory examination, then present your summary, differential diagnosis and initial plan.",
     "timeLimitMinutes": 15
   },
+  "doorInstructions": {
+    "reasonForVisit": "Shortness of breath",
+    "task": "Take a focused history and perform a focused physical examination. Share your impressions with the patient before you leave. You will then write a post-encounter note.",
+    "prohibitedExams": [
+      {
+        "label": "Breast exam",
+        "regionIds": [
+          "breast_left",
+          "breast_right"
+        ]
+      },
+      {
+        "label": "Pelvic / genital exam",
+        "regionIds": [
+          "pelvic"
+        ]
+      }
+    ]
+  },
+  "timeLimits": {
+    "encounterMin": 15,
+    "penMin": 10
+  },
   "vitals": {
     "hr": 104,
     "rr": 24,

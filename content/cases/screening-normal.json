@@ -20,6 +20,29 @@
     "task": "Ms. Lee is a healthy volunteer. Perform a complete screening physical examination following the FCM-1 framework, from clinical courtesy and vital signs through head-to-toe examination.",
     "timeLimitMinutes": 30
   },
+  "doorInstructions": {
+    "reasonForVisit": "Routine screening examination",
+    "task": "Perform a complete screening physical examination, head to toe.",
+    "prohibitedExams": [
+      {
+        "label": "Breast exam",
+        "regionIds": [
+          "breast_left",
+          "breast_right"
+        ]
+      },
+      {
+        "label": "Pelvic / genital exam",
+        "regionIds": [
+          "pelvic"
+        ]
+      }
+    ]
+  },
+  "timeLimits": {
+    "encounterMin": 30,
+    "penMin": 10
+  },
   "vitals": {
     "hr": 68,
     "rr": 14,

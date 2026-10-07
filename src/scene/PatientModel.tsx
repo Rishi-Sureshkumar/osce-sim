@@ -2,7 +2,8 @@
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
-import { Bone, Matrix4, Mesh, MeshStandardMaterial, Object3D, Quaternion, SkinnedMesh, Vector3, type Material } from "three";
+import { Bone, BufferGeometry, Float32BufferAttribute, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial, Object3D, Quaternion, SkinnedMesh, Vector3, type Material } from "three";
+import { MeshBVH, acceleratedRaycast } from "three-mesh-bvh";
 import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
 import type { DrapeZone, Position } from "@/domain/schemas";
 import { PATIENT_VARIANTS } from "./patientRig.generated";
@@ -25,7 +26,14 @@ export interface PatientModelProps {
   /** the patient is talking: turn the head toward the camera */
   speaking: boolean;
   quality: "high" | "low";
+  /** animated head-section angle (degrees), shared with the table so posture follows it smoothly */
+  angle?: { current: number };
+  /** a reflex jerk to animate: bone, size (grade), when (seconds, performance clock) */
+  jerk?: { bone: string; amount: number; at: number } | null;
 }
+
+/** Kinds of the invisible, BVH-accelerated raycast proxies baked from the posed meshes. */
+export const PROXY_KIND: Record<string, string> = { skin: "body", gown_chest: "gown:chest", gown_abdomen: "gown:abdomen", gown_back: "gown:chest" };
 
 const DEG = Math.PI / 180;
 const tmpQ = new Quaternion();
@@ -124,9 +132,9 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
   const drapeAlpha = useRef<Record<string, number>>({ gown_chest: 1, gown_abdomen: 1, gown_back: 1 });
   const root = useRef<Object3D>(null);
 
-  useFrame(({ clock, camera }, dt) => {
+  useFrame(({ clock, camera, scene: world }, dt) => {
     const t = clock.elapsedTime;
-    const rot = poseRotations(p.position, p.bedAngle);
+    const rot = poseRotations(p.position, p.angle?.current ?? p.bedAngle);
     // breathing: chest rises at the case RR (deeper and with accessory motion when laboured)
     const breath = Math.sin((t * p.rr * 2 * Math.PI) / 60);
     const amp = (p.laboured ? 2.2 : 1) * DEG;
@@ -172,6 +180,11 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
     lk.pitch += (target.pitch - lk.pitch) * kk;
     add("neck03", lk.pitch * 0.5, lk.yaw * 0.5);
     add("head", lk.pitch * 0.5, lk.yaw * 0.5);
+    // reflex jerk: a quick extension that settles (amount = grade)
+    if (p.jerk) {
+      const age = performance.now() / 1000 - p.jerk.at;
+      if (age >= 0 && age < 0.6) add(p.jerk.bone, -Math.sin(Math.min(1, age / 0.6) * Math.PI) * p.jerk.amount * 5 * DEG * Math.exp(-age * 3));
+    }
 
     for (const [name, bone] of bones) {
       if (name.startsWith("pupil_")) {
@@ -196,20 +209,26 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
     if (shader.current) {
       shader.current.uniforms.uTime!.value = t;
     }
+    // re-bake the raycast proxies once the posture has settled after a change (and when the gown changes)
+    const settled = Math.abs((p.angle?.current ?? p.bedAngle) - p.bedAngle) < 0.3;
+    const key = `${p.position}|${p.bedAngle}|${p.drape.chest}|${p.drape.abdomen}`;
+    if (!settled || !drapeSettled()) stableFrames.current = 0;
+    else stableFrames.current++;
+    // wait a few frames after the pose settles so bone and root matrices are current
+    if (stableFrames.current >= 3 && bakedKey.current !== key && proxyRoot.current) {
+      bakedKey.current = key;
+      world.updateMatrixWorld(true);
+      bakeProxies(meshes, proxyRoot.current);
+    }
   });
-
-  // skinned meshes cache their raycast bounds from the first hit test: drop them when the pose
-  // changes so clicks and tools find the body where it is now drawn
+  const drapeSettled = () => Object.values(drapeAlpha.current).every((a) => a < 0.03 || a > 0.97);
+  const bakedKey = useRef<string>("");
+  const stableFrames = useRef(0);
+  const proxyRoot = useRef<Object3D>(null);
   useEffect(() => {
-    const id = requestAnimationFrame(() => {
-      for (const m of meshes.values()) {
-        // three's types say non-null, but null is its "recompute on next raycast" marker
-        (m as unknown as { boundingSphere: null; boundingBox: null }).boundingSphere = null;
-        (m as unknown as { boundingSphere: null; boundingBox: null }).boundingBox = null;
-      }
-    });
-    return () => cancelAnimationFrame(id);
-  }, [meshes, p.position, p.bedAngle]);
+    // the skinned meshes are only drawn; hit testing uses the baked proxies (fast and pose-exact)
+    for (const m of meshes.values()) m.raycast = () => undefined;
+  }, [meshes]);
 
   const rootMatrix = useMemo(() => placement(p.position), [p.position]);
   useEffect(() => {
@@ -227,9 +246,12 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
   }, [meshes, p.quality]);
 
   return (
-    <group ref={root}>
-      <primitive object={scene} />
-    </group>
+    <>
+      <group ref={root}>
+        <primitive object={scene} />
+      </group>
+      <group ref={proxyRoot} name="patient-proxies" />
+    </>
   );
 }
 
@@ -240,4 +262,39 @@ export function preloadPatients() {
 
 export function isBody(o: Object3D): boolean {
   return (o as Mesh).userData?.kind === "body";
+}
+
+const PROXY_MATERIAL = new MeshBasicMaterial({ colorWrite: false, depthWrite: false, transparent: true, opacity: 0 });
+
+/** Bakes the posed skin (and visible gown panels) into static, BVH-indexed meshes for raycasting. */
+function bakeProxies(meshes: Map<string, SkinnedMesh>, root: Object3D) {
+  for (const old of [...root.children]) {
+    root.remove(old);
+    (old as Mesh).geometry?.dispose();
+  }
+  const v = new Vector3();
+  for (const [name, kind] of Object.entries(PROXY_KIND)) {
+    const src = meshes.get(name);
+    if (!src || (name !== "skin" && !src.visible)) continue;
+    src.updateMatrixWorld(true);
+    src.skeleton.update();
+    const pos = src.geometry.getAttribute("position");
+    const out = new Float32Array(pos.count * 3);
+    for (let i = 0; i < pos.count; i++) {
+      src.getVertexPosition(i, v); // skinned, in the mesh's local space
+      v.applyMatrix4(src.matrixWorld);
+      out[i * 3] = v.x;
+      out[i * 3 + 1] = v.y;
+      out[i * 3 + 2] = v.z;
+    }
+    const geom = new BufferGeometry();
+    geom.setAttribute("position", new Float32BufferAttribute(out, 3));
+    if (src.geometry.index) geom.setIndex(src.geometry.index.clone());
+    geom.boundsTree = new MeshBVH(geom);
+    const proxy = new Mesh(geom, PROXY_MATERIAL);
+    proxy.raycast = acceleratedRaycast;
+    proxy.userData.kind = kind;
+    proxy.name = `proxy:${name}`;
+    root.add(proxy);
+  }
 }

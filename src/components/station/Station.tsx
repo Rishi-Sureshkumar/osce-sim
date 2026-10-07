@@ -19,7 +19,7 @@ import { postAction } from "@/input/client";
 import { ActionLog } from "./ActionLog";
 import { DoorSign } from "./DoorSign";
 import { EncounterBar } from "./EncounterBar";
-import { RoomDoor } from "./RoomDoor";
+import { DescribeDialog } from "./DescribeDialog";
 import { SANITISE_HOLD_MS, useHold } from "./useHold";
 import { FindingsPanel } from "./FindingsPanel";
 import { ManeuverMenu } from "./ManeuverMenu";
@@ -74,6 +74,9 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
   const [speaking, setSpeaking] = useState(false);
   const [quality, setQuality] = useQuality();
   const [leaveNudge, setLeaveNudge] = useState<string | null>(null);
+  const [confirmLeave, setConfirmLeave] = useState(false);
+  const [describe, setDescribe] = useState<Region | null>(null);
+  const prohibited = useMemo(() => new Set((kase.doorInstructions?.prohibitedExams ?? []).flatMap((p) => p.regionIds)), [kase]);
 
   const append = (a: Action) => setActions((xs) => [...xs, a]);
   const appendAll = (list: Action[]) => {
@@ -191,6 +194,23 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
         setEntering(false);
       }
     });
+  const onWash = () =>
+    run(async () => {
+      await post({ type: "courtesy", source: "click", payload: { kind: "hand_hygiene" } });
+      setToast("Hands cleaned.");
+    });
+  const onSit = () => void run(() => post({ type: "sit_down", source: "click", payload: {} }));
+  const onProhibited = (r: Region) =>
+    void run(async () => {
+      await post({ type: "prohibited_attempt", source: "click", payload: { regionId: r.id } });
+      setToast(`${r.label}: not performed in this encounter (see the door instructions).`);
+    });
+  const onDescribeSubmit = async (text: string, source: "text" | "voice") => {
+    if (!describe) return;
+    await run(() => post({ type: "describe_exam", source, payload: { regionId: describe.id, text } }));
+    setToast(`${describe.label}: description noted.`);
+    setDescribe(null);
+  };
   const sanitise = useHold(SANITISE_HOLD_MS, () =>
     void run(async () => {
       await post({ type: "courtesy", source: "click", payload: { kind: "hand_hygiene" } });
@@ -262,17 +282,39 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
           Time is up. The examination is closed. Present your summary, differential and plan.
         </p>
       )}
-      {outside && !ended && !left && !timeUp ? (
-        <RoomDoor kase={kase} busy={entering} onEnter={onEnter} />
-      ) : (
-      <>
+      {confirmLeave && (
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/30 p-4" role="dialog" aria-modal="true" aria-labelledby="leave-h">
+          <div className="w-full max-w-sm space-y-3 rounded-lg bg-white p-5 shadow-xl">
+            <h2 id="leave-h" className="font-semibold">
+              Leave the room?
+            </h2>
+            <p className="text-sm text-slate-600">Leaving ends the encounter. No re-entry.</p>
+            <div className="flex justify-end gap-2">
+              <button type="button" onClick={() => setConfirmLeave(false)} className="rounded-md px-3 py-1.5 text-sm">
+                Stay
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setConfirmLeave(false);
+                  void onLeave();
+                }}
+                className="rounded-md bg-slate-800 px-4 py-1.5 text-sm font-medium text-white"
+              >
+                Leave
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {describe && <DescribeDialog region={describe} onSubmit={onDescribeSubmit} onClose={() => setDescribe(null)} />}
       {left && !ended && (
         <p role="status" className="rounded-md bg-slate-100 px-3 py-2 text-sm text-slate-800">
           You have left the room. Present your summary, differential and plan.
         </p>
       )}
       {mode === "practice" && !locked && <PracticeHelp sessionId={session.id} append={append} disabled={locked} />}
-      {!left && <EncounterBar state={state} disabled={locked} sanitise={sanitise} onBed={onBed} onDrape={onDrape} onMenu={onCourtesy} onLeave={onLeave} />}
+      {!left && !outside && <EncounterBar state={state} disabled={locked} sanitise={sanitise} onBed={onBed} onDrape={onDrape} onMenu={onCourtesy} onLeave={() => setConfirmLeave(true)} />}
       {leaveNudge && !left && (
         <p className="rounded-md bg-cyan-50 px-3 py-2 text-sm text-cyan-900" role="status" data-testid="leave-nudge">
           {leaveNudge}
@@ -282,7 +324,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
         </p>
       )}
 
-      <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-[minmax(280px,1fr)_minmax(360px,1.3fr)_minmax(280px,1fr)]">
+      <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-[minmax(250px,0.8fr)_minmax(460px,2fr)_minmax(250px,0.8fr)]">
         <div className="flex min-h-0 flex-col gap-3">
           <DoorSign kase={kase} />
           {chat?.({ actions, append, disabled: locked, onSpeaking: setSpeaking })}
@@ -315,7 +357,17 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
                 }}
                 onToolExamine={onToolExamine}
                 onToolAmbiguous={onToolAmbiguous}
-                sanitiser={sanitise}
+                mode={mode}
+                canEnter={!ended && !timeUp && !left && !entering}
+                onEnter={onEnter}
+                onWash={onWash}
+                onSit={onSit}
+                onBed={onBed}
+                onDrape={onDrape}
+                onLeaveRequest={() => setConfirmLeave(true)}
+                onDescribe={(r) => setDescribe(r)}
+                onProhibited={onProhibited}
+                prohibitedRegionIds={prohibited}
                 variant={variantFor(kase.patient.sex)}
                 speaking={speaking}
                 quality={quality}
@@ -368,8 +420,6 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
           <ActionLog actions={actions} labels={labels} />
         </div>
       </div>
-      </>
-      )}
     </div>
   );
 }

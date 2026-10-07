@@ -54,16 +54,35 @@ async function holdTool(page: Page, region: string, ms: number, landmark?: strin
   await page.mouse.up();
 }
 
-/** Outside the room: the door sign, then knock and enter. */
+/** Outside the room: the corridor and door; knock and enter with the accessible button. */
 async function knockAndEnter(page: Page) {
-  await expect(page.locator('[data-testid="room-door"]')).toContainText("Door sign");
+  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await expect(page.locator('[data-testid="corridor"]')).toBeVisible();
   await page.getByRole("button", { name: "Knock and enter" }).click();
-  await expect(page.locator('[data-testid="room-door"]')).toHaveCount(0);
+  await expect(page.locator('[data-testid="corridor"]')).toHaveCount(0, { timeout: 10_000 });
+  await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "overview");
+  await page.waitForTimeout(1400); // camera walks in
 }
 
-async function camera(page: Page, preset: string) {
-  await page.getByRole("tab", { name: preset }).click();
-  await page.waitForTimeout(1500); // tween
+/** Move the camera to a shot with the keyboard-accessible shot menu, and wait for the tween. */
+async function camera(page: Page, shot: string) {
+  await page.getByLabel("Camera shot").selectOption(shot);
+  await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", shot);
+  await page.waitForTimeout(1400);
+}
+
+/** Click a named object in the 3D scene (door, sanitiser-dispenser, stool, tool:stethoscope…) through the real canvas. */
+async function clickObject(page: Page, name: string) {
+  await page.locator('[data-testid="exam3d"]').scrollIntoViewIfNeeded();
+  const p = await page.evaluate((n) => window.__osce3d!.projectObject(n), name);
+  expect(p, name).not.toBeNull();
+  await page.mouse.click(p!.x, p!.y);
+}
+
+/** Pick an instrument from the keyboard "Tools…" menu (the non-visual route to the tool table). */
+async function pickTool(page: Page, dataTool: string) {
+  await page.getByRole("button", { name: "Tools…" }).click();
+  await page.locator(`[role=menuitem][data-tool="${dataTool}"]`).click();
 }
 
 /** Examine via the keyboard-operable "Examine…" command menu (region → maneuver). */
@@ -103,19 +122,27 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.locator('[data-testid="mode-badge"]')).toHaveText("Practice");
   await expect(page.getByText("Educational prototype. Synthetic cases. Not for clinical use.")).toBeVisible();
 
-  // --- room entry: door sign, knock, then sanitise at the dispenser in the 3D scene (press and hold ~3 s)
-  await expect(page.locator("#chat-input")).toHaveCount(0); // nothing to do outside the room but read the sign
-  await knockAndEnter(page);
+  // --- corridor → click the door in the 3D scene: knock, the door swings open, the camera walks in
   await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "corridor");
+  await expect(page.locator("#chat-input")).toBeDisabled(); // nothing to do outside the room but read the door
+  await page.waitForTimeout(1200);
+  await clickObject(page, "door");
+  await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "overview", { timeout: 10_000 });
+  await page.waitForTimeout(1400);
   await expect(page.locator('[data-testid="hands-status"]')).toHaveText("Hands: not cleaned");
-  await camera(page, "Sink");
-  await page.locator('[data-testid="exam3d"]').scrollIntoViewIfNeeded();
-  const dispenser = await page.evaluate(() => window.__osce3d!.projectObject("dispenser"));
-  await page.mouse.move(dispenser.x, dispenser.y);
-  await page.mouse.down();
-  await page.waitForTimeout(3_400);
-  await page.mouse.up();
-  await expect(page.locator('[data-testid="hands-status"]')).toHaveText("Hands: clean");
+  // --- the sanitiser on the left wall: first-person hand rub (~4 s), then hands are clean
+  await clickObject(page, "sanitiser-dispenser");
+  await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "sink");
+  await expect(page.locator('[data-testid="washing"]')).toContainText("Cleaning hands");
+  await expect(page.locator('[data-testid="hands-status"]')).toHaveText("Hands: clean", { timeout: 8_000 });
+  await page.getByRole("button", { name: "Back (Esc)" }).click();
+  await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "overview");
+  await page.waitForTimeout(1400);
+  // --- sit down on the stool (removes a barrier; logged)
+  await clickObject(page, "stool");
+  await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "seated");
+  await expect(page.locator('[data-testid="action-log"]')).toContainText("Sat down");
 
   // --- history (first question by voice: hold to talk, edit-able draft, then send); courtesy comes from what is said
   await page.evaluate(() => (window as unknown as { __sttScript: string[] }).__sttScript.push("Hello Mr. Bennett, my name is Sam Patel and I'm a medical student. What brings you in today?"));
@@ -139,19 +166,32 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.locator('[data-testid="position-label"]')).toHaveText("Reclined to 30°");
   await examine(page, "neck_jvp_right", "jvp_inspection");
   await expect(page.locator('[data-testid="findings"]')).toContainText("JVP clearly elevated");
-  // one real click on the canvas: project the apex anchor to the screen and click it (goes through raycasting)
-  await page.getByRole("tab", { name: "Chest (front)" }).click();
-  await page.waitForTimeout(1500); // camera tween
-  const apex = await page.evaluate(() => window.__osce3d!.project("cardiac_mitral"));
+  // real clicks on the canvas: the first click on the chest moves the camera close, the second opens the menu
+  await page.waitForTimeout(1500);
+  let apex = await page.evaluate(() => window.__osce3d!.project("cardiac_mitral"));
+  await page.mouse.click(apex!.x, apex!.y);
+  await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "chest_front");
+  await expect(page.locator('[data-testid="breadcrumb"]')).toContainText("Room › Chest (front)");
+  await page.waitForTimeout(1500);
+  apex = await page.evaluate(() => window.__osce3d!.project("cardiac_mitral"));
   await page.mouse.click(apex!.x, apex!.y);
   await expect(page.locator('section[aria-label="Examinations for Mitral area / apex (L 5th ICS, MCL)"]')).toBeVisible();
   await page.getByRole("button", { name: "Close menu" }).click();
+  // an exam the door instructions exclude (breast) is refused and logged
+  const breast = await page.evaluate(() => window.__osce3d!.project("breast_right"));
+  await page.mouse.click(breast!.x, breast!.y);
+  await expect(page.getByRole("status").filter({ hasText: "not performed in this encounter" })).toBeVisible();
+  await expect(page.locator('[data-testid="action-log"]')).toContainText("Attempted an exam not allowed in this encounter");
   // stethoscope: bell at the apex in left lateral decubitus, held for > 3 s
   await ask(page, "Could you roll onto your left side?");
   await expect(page.locator('[data-testid="position-label"]')).toHaveText("Left lateral decubitus");
-  await page.locator('[data-tool="stethoscope"]').click();
+  // pick up the stethoscope from the tool table: the camera tilts down, then returns to the patient
+  await camera(page, "tool_table");
+  await clickObject(page, "tool:stethoscope");
+  await expect(page.locator('[data-testid="tool-in-hand"]')).toContainText("Stethoscope");
+  await expect(page.locator('[data-testid="exam3d"]')).not.toHaveAttribute("data-camera", "tool_table");
   await page.getByRole("radio", { name: "Bell" }).click();
-  await camera(page, "Chest (front)");
+  await camera(page, "chest_front");
   const apexHold = page.evaluate(() => window.__osce3d!.project("cardiac_mitral"));
   const pt = await apexHold;
   await page.mouse.move(pt!.x, pt!.y);
@@ -160,7 +200,7 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await page.waitForTimeout(3_300);
   await page.mouse.up();
   await expect(page.locator('[data-testid="findings"]')).toContainText("Loud low-pitched S3 gallop");
-  await expect(page.locator('[data-testid="action-log"]')).toContainText(/stethoscope \(bell\) · (on|edge of) target/);
+  await expect(page.locator('[data-testid="action-log"]')).toContainText(/stethoscope \(bell\)/);
   // the chest was uncovered automatically for the exam; cover it again (direct manipulation)
   await page.getByRole("button", { name: "Chest: uncovered" }).click();
   await expect(page.getByRole("button", { name: "Chest: covered" })).toHaveAttribute("aria-pressed", "true");
@@ -168,13 +208,13 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await page.getByLabel("Bed angle").fill("3");
   await expect(page.locator('[data-testid="position-label"]')).toHaveText("Seated upright");
   await page.getByRole("radio", { name: "Diaphragm" }).click();
-  await camera(page, "Chest (back)");
+  await camera(page, "chest_back");
   await holdTool(page, "lung_post_rl", 3_400);
   await expect(page.locator('[data-testid="findings"]')).toContainText("fine end-inspiratory crackles just above");
   await holdTool(page, "lung_post_ll", 3_400);
   await expect(page.locator('[data-testid="sound-caption"]')).toContainText("fine crackles");
-  // back to the pointer for the menu-driven exams
-  await page.getByRole("button", { name: "Pointer (menu)" }).click();
+  // put the stethoscope down for the menu-driven exams
+  await page.getByRole("button", { name: "Put down" }).click();
   await examine(page, "shin_right", "edema_assessment");
   await expect(page.locator('[data-testid="findings"]')).toContainText("pitting edema");
   // the drape was exposed automatically and logged
@@ -194,7 +234,11 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await page.waitForTimeout(3_400);
   await page.mouse.up();
   await expect(page.locator('[data-testid="action-log"]')).toContainText("Cleaned hands");
+  // leaving: the door asks for confirmation (no re-entry)
+  await camera(page, "overview");
   await page.getByRole("button", { name: "Leave the room" }).click();
+  await expect(page.getByRole("dialog", { name: "Leave the room?" })).toContainText("No re-entry");
+  await page.getByRole("dialog", { name: "Leave the room?" }).getByRole("button", { name: "Leave" }).click();
   await expect(page.getByRole("heading", { name: "Present your findings" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Keep going" })).toHaveCount(0);
   await page.getByLabel("Summary statement").fill("68-year-old man with known HFrEF with 2 weeks of worsening dyspnoea, orthopnea, raised JVP, S3, crackles and edema.");
@@ -292,10 +336,19 @@ test("tuning forks: Weber and the Rinne sequence on the screening patient", asyn
   await page.getByRole("button", { name: "Continue" }).click();
   await expect(page.locator('[data-testid="voice-status"]')).toContainText("Voice input isn't available in this browser");
   await expect(page.getByRole("button", { name: "Hold to talk" })).toBeDisabled();
-  await page.locator('[data-tool="tuning_fork"]').click();
+  // verbal-only exam (masked patient): clicking the mouth in the head & neck shot asks for a description
+  await camera(page, "head_neck");
+  const mouth = await page.evaluate(() => window.__osce3d!.project("mouth"));
+  await page.mouse.click(mouth!.x, mouth!.y);
+  await expect(page.getByRole("dialog", { name: /Mouth & throat: verbal exam/ })).toBeVisible();
+  await page.getByLabel("Describe the exam").fill("I would use a penlight and tongue depressor to inspect the tongue, tonsils and posterior pharynx for redness, exudate or ulcers.");
+  await page.getByRole("button", { name: "Done" }).click();
+  await expect(page.locator('[data-testid="action-log"]')).toContainText("Described exam of Mouth & throat");
+  await pickTool(page, "tuning_fork");
+  await expect(page.locator('[data-testid="tool-in-hand"]')).toContainText("Tuning fork 512 Hz");
   // Weber at the vertex
   await page.getByRole("button", { name: "Strike fork" }).click();
-  await camera(page, "Head & neck");
+  await camera(page, "head_neck");
   await holdTool(page, "scalp", 80, "vertex");
   // touching the patient without hand hygiene is allowed but logged, with a practice nudge
   await expect(page.getByRole("status").filter({ hasText: "You haven't cleaned your hands yet" })).toBeVisible();
@@ -303,7 +356,7 @@ test("tuning forks: Weber and the Rinne sequence on the screening patient", asyn
   await expect(page.locator('[data-testid="sound-caption"]')).toContainText("heard equally in both ears");
   await expect(page.locator('[data-testid="findings"]')).toContainText("no lateralization");
   // Rinne: mastoid → patient signals → beside the ear canal
-  await camera(page, "Left side");
+  await camera(page, "ear_left");
   await page.getByRole("button", { name: "Strike fork" }).click();
   await holdTool(page, "ear_left", 80, "mastoid");
   await expect(page.locator('[data-testid="findings"] li').first()).toContainText("Step done: Base of the fork on the mastoid");

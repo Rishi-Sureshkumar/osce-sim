@@ -1,8 +1,8 @@
 "use client";
 import type { ThreeEvent } from "@react-three/fiber";
 
-/** Wall-mounted hand-sanitiser dispenser beside the sink, on the left wall as you enter. */
-export const DISPENSER_POS: [number, number, number] = [-2.33, 1.25, 1.35];
+/** Wall-mounted hand-sanitiser dispenser beside the sink, on the left wall (examiner side). */
+export const DISPENSER_POS: [number, number, number] = [-2.33, 1.25, -0.2];
 
 export function Dispenser({ progress, clean, onStart, onCancel }: { progress: number; clean: boolean; onStart: () => void; onCancel: () => void }) {
   const down = (e: ThreeEvent<PointerEvent>) => {

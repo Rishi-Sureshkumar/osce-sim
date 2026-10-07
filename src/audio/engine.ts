@@ -95,6 +95,26 @@ class AudioEngine {
     return { stop: () => src.stop() };
   }
 
+  /** Three knuckle knocks on a wooden door (procedural). */
+  knock() {
+    const ctx = this.ensure();
+    if (!ctx || !this.master) return;
+    const t0 = ctx.currentTime + 0.02;
+    [0, 0.22, 0.44].forEach((dt) => {
+      const osc = ctx.createOscillator();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(190, t0 + dt);
+      osc.frequency.exponentialRampToValueAtTime(70, t0 + dt + 0.09);
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.0001, t0 + dt);
+      g.gain.exponentialRampToValueAtTime(0.9, t0 + dt + 0.004);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + dt + 0.12);
+      osc.connect(g).connect(this.master!);
+      osc.start(t0 + dt);
+      osc.stop(t0 + dt + 0.14);
+    });
+  }
+
   private chain(ctx: AudioContext, opts: PlayOptions) {
     const gain = ctx.createGain();
     gain.gain.value = opts.attenuation ?? 1;

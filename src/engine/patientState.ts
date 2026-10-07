@@ -32,6 +32,8 @@ export interface PatientState {
   uncleanTouches: number;
   inRoom: boolean;
   knocked: boolean;
+  /** the student sat down on the stool */
+  seated: boolean;
 }
 
 export const INITIAL_STATE: PatientState = {
@@ -42,6 +44,7 @@ export const INITIAL_STATE: PatientState = {
   uncleanTouches: 0,
   inRoom: false,
   knocked: false,
+  seated: false,
 };
 
 /** Pure fold over the (canonically ordered) log. Shared by the 3D view, nudges, scoring and tests. */
@@ -70,6 +73,9 @@ export function patientState(log: readonly Action[], upTo = Infinity): PatientSt
           s.inRoom = false;
           s.handsClean = false;
         }
+        break;
+      case "sit_down":
+        s.seated = true;
         break;
       case "examine":
         if (a.payload.touch !== false && !s.handsClean) s.uncleanTouches++;

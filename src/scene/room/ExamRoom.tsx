@@ -8,10 +8,12 @@
  * Layout (metres): the table's long axis is Z with the head toward −Z; the door is in the wall at
  * +Z; the examiner works from the patient's right (−X).
  */
-import { DoubleSide } from "three";
+import { useFrame, type ThreeEvent } from "@react-three/fiber";
+import { useRef } from "react";
+import { DoubleSide, type Group } from "three";
 import { TABLE } from "../rig";
 import { Dispenser } from "./Dispenser";
-import { ToolTable } from "./ToolTable";
+import { ToolTable, type ToolTableProps } from "./ToolTable";
 
 const noRay = () => null;
 export const ROOM = { halfX: 2.4, backZ: -2.2, doorZ: 2.6, height: 2.7, door: { x0: -1.65, x1: -0.7 } };
@@ -33,17 +35,45 @@ function Cyl({ p, r, h, c, rot, rough = 0.5, metal = 0 }: { p: [number, number, 
   );
 }
 
-export interface ExamRoomProps {
-  /** head-section angle in degrees (0 = flat) */
-  bedAngle: number;
-  /** door swing 0 (closed) … 1 (open) */
-  doorOpen: number;
+/** Clickable things in the room; each gets a pointer cursor on hover. */
+export interface RoomHandlers {
+  onDoor?: () => void;
+  onSink?: () => void;
+  onToolTable?: () => void;
+  onStool?: () => void;
+  onHeadControl?: () => void;
+}
+
+export interface ExamRoomProps extends RoomHandlers {
+  /** animated head-section angle in degrees (0 = flat); read every frame */
+  angle: { current: number };
+  /** animated door swing 0 (closed) … 1 (open); read every frame */
+  door: { current: number };
   sanitiser?: { progress: number; clean: boolean; start: () => void; cancel: () => void; disabled?: boolean };
   /** door placard text lines (patient name, age, reason for visit…) */
   placard?: string[];
+  toolTable?: ToolTableProps;
 }
 
-export function ExamRoom({ bedAngle, doorOpen, sanitiser, placard }: ExamRoomProps) {
+/** onClick + pointer cursor for a clickable prop (no-op when the handler is absent). */
+export function clickable(handler?: () => void) {
+  if (!handler) return {};
+  return {
+    onClick: (e: ThreeEvent<MouseEvent>) => {
+      e.stopPropagation();
+      handler();
+    },
+    onPointerOver: (e: ThreeEvent<PointerEvent>) => {
+      e.stopPropagation();
+      document.body.style.cursor = "pointer";
+    },
+    onPointerOut: () => {
+      document.body.style.cursor = "";
+    },
+  };
+}
+
+export function ExamRoom({ angle, door, sanitiser, placard, toolTable, onDoor, onSink, onToolTable, onStool, onHeadControl }: ExamRoomProps) {
   const { halfX, backZ, doorZ, height } = ROOM;
   const wall = "#eef2f4";
   return (
@@ -77,27 +107,37 @@ export function ExamRoom({ bedAngle, doorOpen, sanitiser, placard }: ExamRoomPro
           <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.9} side={DoubleSide} />
         </mesh>
       ))}
-      <DoorWall doorOpen={doorOpen} placard={placard} />
+      <DoorWall door={door} placard={placard} onDoor={onDoor} />
       <Corridor />
-      <Sink />
+      <group name="sink" {...clickable(onSink)}>
+        <Sink />
+      </group>
       {sanitiser && (
         <Dispenser progress={sanitiser.progress} clean={sanitiser.clean} onStart={() => !sanitiser.disabled && sanitiser.start()} onCancel={sanitiser.cancel} />
       )}
-      <ExamTable bedAngle={bedAngle} />
-      <ToolTable />
-      <Stool />
+      <ExamTable angle={angle} onHeadControl={onHeadControl} />
+      <group {...clickable(onToolTable)}>
+        <ToolTable {...toolTable} />
+      </group>
+      <group {...clickable(onStool)}>
+        <Stool />
+      </group>
       <Chair />
       <WallComputer />
       <Curtain />
       {/* wastebasket by the sink */}
-      <Cyl p={[-2.1, 0.2, 2.15]} r={0.15} h={0.4} c="#64748b" rough={0.6} />
+      <Cyl p={[-2.12, 0.2, 0.85]} r={0.15} h={0.4} c="#64748b" rough={0.6} />
       {/* skirting */}
       <Box p={[0, 0.05, backZ + 0.01]} s={[halfX * 2, 0.1, 0.02]} c="#94a3b8" shadow={false} />
     </group>
   );
 }
 
-function DoorWall({ doorOpen, placard }: { doorOpen: number; placard?: string[] }) {
+function DoorWall({ door: doorRef, placard, onDoor }: { door: { current: number }; placard?: string[]; onDoor?: () => void }) {
+  const leaf = useRef<Group>(null);
+  useFrame(() => {
+    if (leaf.current) leaf.current.rotation.y = (doorRef.current * Math.PI) / 2.2;
+  });
   const { halfX, doorZ, height, door } = ROOM;
   const w = door.x1 - door.x0;
   const wallColor = "#e5ecef";
@@ -111,8 +151,8 @@ function DoorWall({ doorOpen, placard }: { doorOpen: number; placard?: string[] 
       <Box p={[door.x0 - 0.03, 1.05, doorZ]} s={[0.06, 2.1, 0.16]} c="#cbd5e1" shadow={false} />
       <Box p={[door.x1 + 0.03, 1.05, doorZ]} s={[0.06, 2.1, 0.16]} c="#cbd5e1" shadow={false} />
       {/* door leaf, hinged at x0, swings into the room */}
-      <group position={[door.x0, 0, doorZ]} rotation={[0, (doorOpen * Math.PI) / 2.2, 0]}>
-        <mesh position={[w / 2, 1.05, 0]} name="door" castShadow>
+      <group ref={leaf} position={[door.x0, 0, doorZ]}>
+        <mesh position={[w / 2, 1.05, 0]} name="door" castShadow {...clickable(onDoor)}>
           <boxGeometry args={[w - 0.02, 2.08, 0.05]} />
           <meshStandardMaterial color="#b45309" roughness={0.55} />
         </mesh>
@@ -151,7 +191,7 @@ function Corridor() {
 function Sink() {
   const x = -ROOM.halfX + 0.28;
   return (
-    <group position={[x, 0, 1.85]}>
+    <group position={[x, 0, 0.3]}>
       <Box p={[0, 0.42, 0]} s={[0.55, 0.84, 0.6]} c="#cbd5e1" r={0.5} />
       <Box p={[0, 0.86, 0]} s={[0.58, 0.04, 0.64]} c="#f1f5f9" r={0.2} />
       <mesh position={[0.02, 0.87, 0]} rotation={[-Math.PI / 2, 0, 0]} raycast={noRay}>
@@ -168,11 +208,16 @@ function Sink() {
   );
 }
 
-function ExamTable({ bedAngle }: { bedAngle: number }) {
+function ExamTable({ angle, onHeadControl }: { angle: { current: number }; onHeadControl?: () => void }) {
   const top = TABLE.topY;
   const headLen = 0.85;
   const footLen = 1.0;
-  const a = (bedAngle * Math.PI) / 180;
+  const head = useRef<Group>(null);
+  const pillow = useRef<Group>(null);
+  useFrame(() => {
+    if (head.current) head.current.rotation.x = (angle.current * Math.PI) / 180;
+    if (pillow.current) pillow.current.visible = angle.current < 50;
+  });
   const vinyl = "#475569";
   return (
     <group position={[TABLE.x, 0, TABLE.hingeZ]}>
@@ -183,21 +228,27 @@ function ExamTable({ bedAngle }: { bedAngle: number }) {
       <Box p={[0, top - 0.06, footLen / 2]} s={[TABLE.width, 0.12, footLen]} c={vinyl} r={0.55} />
       <Box p={[0, top + 0.002, footLen / 2]} s={[TABLE.width * 0.82, 0.002, footLen]} c="#f8fafc" r={0.9} shadow={false} />
       {/* head section hinges at the patient's hips */}
-      <group position={[0, top - 0.06, 0]} rotation={[a, 0, 0]}>
+      <group ref={head} position={[0, top - 0.06, 0]}>
         <Box p={[0, 0, -headLen / 2]} s={[TABLE.width, 0.12, headLen]} c={vinyl} r={0.55} />
         <Box p={[0, 0.062, -headLen / 2]} s={[TABLE.width * 0.82, 0.002, headLen]} c="#f8fafc" r={0.9} shadow={false} />
         {/* pillow (only when lying back) */}
-        <mesh visible={bedAngle < 50} position={[0, 0.095, -headLen + 0.16]} rotation={[0, 0, Math.PI / 2]} scale={[0.7, 1, 1]} raycast={noRay} castShadow>
+        <group ref={pillow}>
+        <mesh position={[0, 0.095, -headLen + 0.16]} rotation={[0, 0, Math.PI / 2]} scale={[0.7, 1, 1]} raycast={noRay} castShadow>
           <capsuleGeometry args={[0.05, 0.36, 6, 12]} />
           <meshStandardMaterial color="#f1f5f9" roughness={0.95} />
         </mesh>
+        </group>
       </group>
       {/* head-section control lever on the patient's right side */}
       <group position={[-TABLE.width / 2 - 0.03, top - 0.12, -0.15]}>
         <Box p={[0, 0, 0]} s={[0.03, 0.05, 0.12]} c="#334155" r={0.4} />
-        <mesh position={[-0.04, 0.02, 0]} name="table-head-control" castShadow>
+        <mesh position={[-0.04, 0.02, 0]} raycast={noRay} castShadow>
           <cylinderGeometry args={[0.018, 0.018, 0.09, 12]} />
           <meshStandardMaterial color="#0e7490" roughness={0.4} />
+        </mesh>
+        {/* larger invisible hit box for the lever */}
+        <mesh position={[-0.04, 0.02, 0]} name="table-head-control" visible={false} {...clickable(onHeadControl)}>
+          <boxGeometry args={[0.12, 0.14, 0.2]} />
         </mesh>
       </group>
       {/* step */}
@@ -206,9 +257,14 @@ function ExamTable({ bedAngle }: { bedAngle: number }) {
   );
 }
 
+export const STOOL_POS: [number, number, number] = [-0.85, 0, 0.35];
 function Stool() {
   return (
-    <group position={[-0.85, 0, 0.35]} name="stool">
+    <group position={STOOL_POS} name="stool">
+      {/* generous invisible hit volume */}
+      <mesh position={[0, 0.35, 0]} visible={false}>
+        <cylinderGeometry args={[0.25, 0.25, 0.7, 8]} />
+      </mesh>
       <Cyl p={[0, 0.52, 0]} r={0.2} h={0.08} c="#1e293b" rough={0.6} />
       <Cyl p={[0, 0.27, 0]} r={0.025} h={0.45} c="#94a3b8" metal={0.8} rough={0.3} />
       {[0, 1, 2, 3, 4].map((k) => (
