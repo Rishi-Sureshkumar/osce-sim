@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Region } from "@/domain/schemas";
 import { PushToTalk, WebSpeechProvider, type PushToTalkState } from "@/input/adapters/voice";
+import { Dialog } from "@/components/ui/Overlay";
 
 /**
  * Verbal-only exams (the standardized patient stays masked: mouth and nose). The student describes
@@ -19,7 +20,6 @@ export function DescribeDialog({ region, onSubmit, onClose }: { region: Region; 
       setText((x) => (x ? `${x} ${t}` : t));
       setFromVoice(true);
     });
-    area.current?.focus();
   }, []);
   const submit = async () => {
     if (!text.trim()) return;
@@ -31,11 +31,7 @@ export function DescribeDialog({ region, onSubmit, onClose }: { region: Region; 
     }
   };
   return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/30 p-4" role="dialog" aria-modal="true" aria-labelledby="describe-h" onKeyDown={(e) => e.key === "Escape" && onClose()}>
-      <div className="w-full max-w-lg space-y-3 rounded-lg bg-white p-5 shadow-xl">
-        <h2 id="describe-h" className="text-lg font-semibold">
-          {region.label}: verbal exam
-        </h2>
+    <Dialog id="describe" kind="modal" title={`${region.label}: verbal exam`} onClose={onClose} initialFocus={area} className="w-full max-w-lg space-y-3 rounded-lg bg-white p-5 shadow-xl">
         <p className="text-sm text-slate-600">The patient stays masked. Describe the maneuver and what you are looking for. Be specific.</p>
         <label className="block text-sm">
           <span className="sr-only">Your description</span>
@@ -70,7 +66,6 @@ export function DescribeDialog({ region, onSubmit, onClose }: { region: Region; 
             </button>
           </div>
         </div>
-      </div>
-    </div>
+    </Dialog>
   );
 }

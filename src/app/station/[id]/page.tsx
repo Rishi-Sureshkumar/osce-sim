@@ -10,7 +10,7 @@ export default async function StationPage({ params }: { params: Promise<{ id: st
   const { id } = await params;
   try {
     const view = await getStudentView(id);
-    return <StationClient session={view.session} kase={view.kase} catalog={getPublicCatalog()} initialActions={view.actions} />;
+    return <StationClient session={view.session} kase={view.kase} catalog={getPublicCatalog()} initialActions={view.actions} qa={process.env.QA_HOOKS === "true"} />;
   } catch (e) {
     if (e instanceof HttpError && e.status === 404) notFound();
     throw e;

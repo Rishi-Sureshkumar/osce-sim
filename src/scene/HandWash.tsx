@@ -10,6 +10,18 @@ import { Group, InstancedMesh, Matrix4, Quaternion, Vector3 } from "three";
 const SKIN = "#c99a82";
 const FOAM = 70;
 
+/** small seeded PRNG (mulberry32) so the foam pattern is the same every run (stable screenshots) */
+function seeded(seed: number) {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
 function Hand({ side }: { side: 1 | -1 }) {
   return (
     <group>
@@ -40,7 +52,10 @@ export function HandWash({ startedAt, durationMs }: { startedAt: number; duratio
   const left = useRef<Group>(null);
   const right = useRef<Group>(null);
   const foam = useRef<InstancedMesh>(null);
-  const seeds = useMemo(() => Array.from({ length: FOAM }, () => [Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5, 0.5 + Math.random()] as const), []);
+  const seeds = useMemo(() => {
+    const rnd = seeded(20251);
+    return Array.from({ length: FOAM }, () => [rnd() - 0.5, rnd() - 0.5, rnd() - 0.5, 0.5 + rnd()] as const);
+  }, []);
   const m = useMemo(() => new Matrix4(), []);
   const q = useMemo(() => new Quaternion(), []);
 

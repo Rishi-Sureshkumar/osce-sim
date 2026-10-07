@@ -12,6 +12,7 @@ import { useFrame, type ThreeEvent } from "@react-three/fiber";
 import { useRef } from "react";
 import { DoubleSide, type Group } from "three";
 import { TABLE } from "../rig";
+import { TABLE_PARTS } from "./tableGeometry";
 import { Dispenser } from "./Dispenser";
 import { ToolTable, type ToolTableProps } from "./ToolTable";
 
@@ -210,8 +211,7 @@ function Sink() {
 
 function ExamTable({ angle, onHeadControl }: { angle: { current: number }; onHeadControl?: () => void }) {
   const top = TABLE.topY;
-  const headLen = 0.85;
-  const footLen = 1.0;
+  const { headLen, footLen, mattress, cabinet, step } = TABLE_PARTS;
   const head = useRef<Group>(null);
   const pillow = useRef<Group>(null);
   useFrame(() => {
@@ -220,16 +220,16 @@ function ExamTable({ angle, onHeadControl }: { angle: { current: number }; onHea
   });
   const vinyl = "#475569";
   return (
-    <group position={[TABLE.x, 0, TABLE.hingeZ]}>
+    <group position={[TABLE.x, 0, TABLE.hingeZ]} name="exam-table">
       {/* base cabinet */}
-      <Box p={[0, (top - 0.12) / 2, 0.15]} s={[0.56, top - 0.12, 1.4]} c="#e2e8f0" r={0.45} />
+      <Box p={[0, (top - mattress) / 2, cabinet.z]} s={[cabinet.width, top - mattress, cabinet.depth]} c="#e2e8f0" r={0.45} />
       <Box p={[0, 0.03, 0.15]} s={[0.66, 0.06, 1.55]} c="#94a3b8" r={0.5} />
       {/* foot section mattress + paper roll */}
-      <Box p={[0, top - 0.06, footLen / 2]} s={[TABLE.width, 0.12, footLen]} c={vinyl} r={0.55} />
+      <Box p={[0, top - mattress / 2, footLen / 2]} s={[TABLE.width, mattress, footLen]} c={vinyl} r={0.55} />
       <Box p={[0, top + 0.002, footLen / 2]} s={[TABLE.width * 0.82, 0.002, footLen]} c="#f8fafc" r={0.9} shadow={false} />
       {/* head section hinges at the patient's hips */}
-      <group ref={head} position={[0, top - 0.06, 0]}>
-        <Box p={[0, 0, -headLen / 2]} s={[TABLE.width, 0.12, headLen]} c={vinyl} r={0.55} />
+      <group ref={head} position={[0, top - mattress / 2, 0]}>
+        <Box p={[0, 0, -headLen / 2]} s={[TABLE.width, mattress, headLen]} c={vinyl} r={0.55} />
         <Box p={[0, 0.062, -headLen / 2]} s={[TABLE.width * 0.82, 0.002, headLen]} c="#f8fafc" r={0.9} shadow={false} />
         {/* pillow (only when lying back) */}
         <group ref={pillow}>
@@ -252,7 +252,7 @@ function ExamTable({ angle, onHeadControl }: { angle: { current: number }; onHea
         </mesh>
       </group>
       {/* step */}
-      <Box p={[0, 0.16, footLen + 0.18]} s={[0.5, 0.06, 0.3]} c="#cbd5e1" r={0.5} />
+      <Box p={[0, step.y, footLen + 0.18]} s={[step.width, step.height, step.depth]} c="#cbd5e1" r={0.5} />
     </group>
   );
 }

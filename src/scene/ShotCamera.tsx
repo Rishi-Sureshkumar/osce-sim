@@ -8,6 +8,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { PerspectiveCamera, Vector3 } from "three";
 import type { Vec3 } from "@/exam3d/regionAnchors";
+import { QA } from "@/exam3d/qa";
 import { ease, tweenSeconds } from "./shots";
 
 export interface CameraGoal {
@@ -36,8 +37,9 @@ export function ShotCamera({ goal, freeLook, enabled = true }: { goal: CameraGoa
       fromTarget: lastTarget.current.clone(),
       fromFov: pc.fov,
       start: performance.now(),
-      dur: tweenSeconds([camera.position.x, camera.position.y, camera.position.z], goal.position) * 1000,
+      dur: QA.enabled && QA.fast ? 1 : tweenSeconds([camera.position.x, camera.position.y, camera.position.z], goal.position) * 1000,
     };
+    QA.cameraSettled = false;
     base.current = { pos: new Vector3(...goal.position), target: new Vector3(...goal.target), fov: goal.fov };
     look.current = { yaw: 0, zoom: 1 };
     invalidate();
@@ -88,7 +90,10 @@ export function ShotCamera({ goal, freeLook, enabled = true }: { goal: CameraGoa
       camera.position.lerpVectors(tw.fromPos, wantPos, k);
       lastTarget.current.lerpVectors(tw.fromTarget, b.target, k);
       pc.fov = tw.fromFov + (b.fov - tw.fromFov) * k;
-      if (k >= 1) tween.current = null;
+      if (k >= 1) {
+        tween.current = null;
+        QA.cameraSettled = true;
+      }
     } else {
       camera.position.copy(wantPos);
       lastTarget.current.copy(b.target);

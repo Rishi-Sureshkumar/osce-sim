@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
-import { expect, test, type Page } from "@playwright/test";
+import type { Page } from "@playwright/test";
+import { consoleAllow, expect, test, waitSettled } from "./qa/fixtures";
 
 test.beforeAll(() => fs.rmSync("test-results/e2e-store.json", { force: true }));
 
@@ -61,14 +62,14 @@ async function knockAndEnter(page: Page) {
   await page.getByRole("button", { name: "Knock and enter" }).click();
   await expect(page.locator('[data-testid="corridor"]')).toHaveCount(0, { timeout: 10_000 });
   await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "overview");
-  await page.waitForTimeout(1400); // camera walks in
+  await waitSettled(page); // camera walks in
 }
 
 /** Move the camera to a shot with the keyboard-accessible shot menu, and wait for the tween. */
 async function camera(page: Page, shot: string) {
   await page.getByLabel("Camera shot").selectOption(shot);
   await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", shot);
-  await page.waitForTimeout(1400);
+  await waitSettled(page);
 }
 
 /** Click a named object in the 3D scene (door, sanitiser-dispenser, stool, tool:stethoscope…) through the real canvas. */
@@ -101,6 +102,9 @@ test("student completes the HF case end to end; coach reviews and overrides", as
     if (m.type() === "error" && !/status of 40[13]/.test(m.text())) consoleErrors.push(m.text());
   });
   page.on("pageerror", (e) => consoleErrors.push(String(e)));
+  // the deliberate wrong access code below
+  consoleAllow(page, /^response: 401: POST \/api\/gate$/);
+  consoleAllow(page, /^console\.error: Failed to load resource: the server responded with a status of 401/);
   await page.addInitScript(FAKE_STT);
   // --- gate
   await page.goto("/");
@@ -184,8 +188,8 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await page.waitForTimeout(1500);
   apex = await page.evaluate(() => window.__osce3d!.project("cardiac_mitral"));
   await page.mouse.click(apex!.x, apex!.y);
-  await expect(page.locator('section[aria-label="Examinations for Mitral area / apex (L 5th ICS, MCL)"]')).toBeVisible();
-  await page.getByRole("button", { name: "Close menu" }).click();
+  await expect(page.getByRole("dialog", { name: "Mitral area / apex (L 5th ICS, MCL)" })).toBeVisible();
+  await page.getByRole("dialog", { name: "Mitral area / apex (L 5th ICS, MCL)" }).getByRole("button", { name: "Close" }).click();
   // an exam the door instructions exclude (breast) is refused and logged
   const breast = await page.evaluate(() => window.__osce3d!.project("breast_right"));
   await page.mouse.click(breast!.x, breast!.y);
@@ -206,10 +210,10 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.getByTestId("landmark-label").first()).toBeVisible();
   await expect(page.locator('[data-testid="action-log"]')).toContainText("Showed landmarks: Chest (front)");
   await expect(page.getByTestId("landmark-label")).toHaveCount(0, { timeout: 5_000 });
-  // no giveaway targets: 4 cm toward the head from the apex is "near" — muffled sound, no finding recorded
+  // no giveaway targets: 3.5 cm toward the head from the apex is "near" (2.5–5 cm) — muffled sound, no finding recorded
   const off = await page.evaluate(() => {
     const a = window.__osce3d!.anchor("cardiac_mitral")!;
-    return window.__osce3d!.projectPoint([a[0], a[1], a[2] - 0.04]);
+    return window.__osce3d!.projectPoint([a[0], a[1], a[2] - 0.035]);
   });
   await page.mouse.move(off.x, off.y);
   await page.mouse.down();

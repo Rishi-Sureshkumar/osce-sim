@@ -6,8 +6,10 @@ import { Bone, BufferGeometry, Float32BufferAttribute, Matrix4, Mesh, MeshBasicM
 import { MeshBVH, acceleratedRaycast } from "three-mesh-bvh";
 import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
 import type { DrapeZone, Position } from "@/domain/schemas";
+import { QA } from "@/exam3d/qa";
+import { liveRotations } from "./livePose";
 import { PATIENT_VARIANTS } from "./patientRig.generated";
-import { placement, poseRotations, rotationOf, type VariantId } from "./rig";
+import { placement, rotationOf, type VariantId } from "./rig";
 
 export interface PatientModelProps {
   variant: VariantId;
@@ -32,8 +34,19 @@ export interface PatientModelProps {
   jerk?: { bone: string; amount: number; at: number } | null;
 }
 
-/** Kinds of the invisible, BVH-accelerated raycast proxies baked from the posed meshes. */
-export const PROXY_KIND: Record<string, string> = { skin: "body", gown_chest: "gown:chest", gown_abdomen: "gown:abdomen", gown_back: "gown:chest" };
+/**
+ * Kinds of the invisible, BVH-accelerated raycast proxies baked from the posed meshes.
+ * Only "body" and "gown:*" resolve clicks (Patient3D); hair and eyes are there so a ray can be
+ * checked for what it hits first (QA probe).
+ */
+export const PROXY_KIND: Record<string, string> = {
+  skin: "body",
+  gown_chest: "gown:chest",
+  gown_abdomen: "gown:abdomen",
+  gown_back: "gown:chest",
+  hair: "hair",
+  eyes: "eye",
+};
 
 const DEG = Math.PI / 180;
 const tmpQ = new Quaternion();
@@ -133,33 +146,15 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
   const root = useRef<Object3D>(null);
 
   useFrame(({ clock, camera, scene: world }, dt) => {
-    const t = clock.elapsedTime;
-    const rot = poseRotations(p.position, p.angle?.current ?? p.bedAngle);
-    // breathing: chest rises at the case RR (deeper and with accessory motion when laboured)
-    const breath = Math.sin((t * p.rr * 2 * Math.PI) / 60);
-    const amp = (p.laboured ? 2.2 : 1) * DEG;
-    const add = (b: string, x: number, y = 0, z = 0) => {
-      const r = rot[b] ?? [0, 0, 0];
-      rot[b] = [r[0] + x, r[1] + y, r[2] + z];
-    };
-    add("spine02", -breath * amp * 0.6);
-    add("spine01", breath * amp);
-    if (p.laboured) {
-      add("clavicle_L", 0, 0, breath * 1.5 * DEG);
-      add("clavicle_R", 0, 0, -breath * 1.5 * DEG);
-    }
-    // idle sway
-    add("neck02", Math.sin(t * 0.31) * 0.6 * DEG, Math.sin(t * 0.23) * 1.2 * DEG);
+    const frozen = QA.enabled && QA.freeze;
+    const t = frozen ? 0 : clock.elapsedTime;
     // blink every 3–6 s
     const b = blink.current;
-    if (t > b.next && b.t < 0) b.t = 0;
-    if (b.t >= 0) {
+    let blinkK = 0;
+    if (!frozen && t > b.next && b.t < 0) b.t = 0;
+    if (!frozen && b.t >= 0) {
       b.t += dt;
-      const k = b.t < 0.08 ? b.t / 0.08 : b.t < 0.18 ? 1 - (b.t - 0.08) / 0.1 : 0;
-      add("orbicularis03_L", k * 26 * DEG);
-      add("orbicularis03_R", k * 26 * DEG);
-      add("orbicularis04_L", -k * 6 * DEG);
-      add("orbicularis04_R", -k * 6 * DEG);
+      blinkK = b.t < 0.08 ? b.t / 0.08 : b.t < 0.18 ? 1 - (b.t - 0.08) / 0.1 : 0;
       if (b.t > 0.2) {
         b.t = -1;
         b.next = t + 3 + Math.random() * 3;
@@ -168,7 +163,7 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
     // head turns toward the student while the patient speaks
     const neck = bones.get("neck03");
     const target = { yaw: 0, pitch: 0 };
-    if (p.speaking && neck?.parent) {
+    if (p.speaking && !frozen && neck?.parent) {
       tmpM.copy(neck.parent.matrixWorld).invert();
       tmpV.copy(camera.position).applyMatrix4(tmpM).sub(neck.position);
       target.yaw = Math.max(-55 * DEG, Math.min(55 * DEG, Math.atan2(tmpV.x, tmpV.z)));
@@ -178,13 +173,20 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
     const kk = 1 - Math.exp(-dt * 3);
     lk.yaw += (target.yaw - lk.yaw) * kk;
     lk.pitch += (target.pitch - lk.pitch) * kk;
-    add("neck03", lk.pitch * 0.5, lk.yaw * 0.5);
-    add("head", lk.pitch * 0.5, lk.yaw * 0.5);
-    // reflex jerk: a quick extension that settles (amount = grade)
-    if (p.jerk) {
-      const age = performance.now() / 1000 - p.jerk.at;
-      if (age >= 0 && age < 0.6) add(p.jerk.bone, -Math.sin(Math.min(1, age / 0.6) * Math.PI) * p.jerk.amount * 5 * DEG * Math.exp(-age * 3));
+    if (frozen) {
+      lk.yaw = 0;
+      lk.pitch = 0;
     }
+    const rot = liveRotations({
+      position: p.position,
+      angle: p.angle?.current ?? p.bedAngle,
+      t,
+      rr: p.rr,
+      laboured: p.laboured,
+      blink: blinkK,
+      look: lk,
+      jerk: p.jerk ? { bone: p.jerk.bone, amount: p.jerk.amount, ageSec: performance.now() / 1000 - p.jerk.at } : null,
+    });
 
     for (const [name, bone] of bones) {
       if (name.startsWith("pupil_")) {
@@ -206,12 +208,14 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
       mesh.visible = next > 0.02;
       mat.depthWrite = next > 0.98;
     }
+    QA.gownSettled = drapeSettled();
     if (shader.current) {
       shader.current.uniforms.uTime!.value = t;
     }
     // re-bake the raycast proxies once the posture has settled after a change (and when the gown changes)
     const settled = Math.abs((p.angle?.current ?? p.bedAngle) - p.bedAngle) < 0.3;
     const key = `${p.position}|${p.bedAngle}|${p.drape.chest}|${p.drape.abdomen}`;
+    QA.wantKey = key;
     if (!settled || !drapeSettled()) stableFrames.current = 0;
     else stableFrames.current++;
     // wait a few frames after the pose settles so bone and root matrices are current
@@ -219,6 +223,7 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
       bakedKey.current = key;
       world.updateMatrixWorld(true);
       bakeProxies(meshes, proxyRoot.current);
+      QA.bakedKey = key;
     }
   });
   const drapeSettled = () => Object.values(drapeAlpha.current).every((a) => a < 0.03 || a > 0.97);
@@ -275,7 +280,7 @@ function bakeProxies(meshes: Map<string, SkinnedMesh>, root: Object3D) {
   const v = new Vector3();
   for (const [name, kind] of Object.entries(PROXY_KIND)) {
     const src = meshes.get(name);
-    if (!src || (name !== "skin" && !src.visible)) continue;
+    if (!src || (name.startsWith("gown") && !src.visible)) continue;
     src.updateMatrixWorld(true);
     src.skeleton.update();
     const pos = src.geometry.getAttribute("position");
@@ -289,6 +294,9 @@ function bakeProxies(meshes: Map<string, SkinnedMesh>, root: Object3D) {
     }
     const geom = new BufferGeometry();
     geom.setAttribute("position", new Float32BufferAttribute(out, 3));
+    // QA body-part labels (asset build `_PART`) travel with the proxy
+    const part = src.geometry.getAttribute("_part");
+    if (part) geom.setAttribute("_part", part.clone());
     if (src.geometry.index) geom.setIndex(src.geometry.index.clone());
     geom.boundsTree = new MeshBVH(geom);
     const proxy = new Mesh(geom, PROXY_MATERIAL);

@@ -7,6 +7,8 @@ export default defineConfig({
   testDir: "./e2e",
   timeout: 120_000,
   retries: 0,
+  // one browser at a time: software WebGL is CPU-bound, and specs share the file store
+  workers: 1,
   reporter: [["list"]],
   use: {
     baseURL: `http://localhost:${PORT}`,
@@ -18,7 +20,8 @@ export default defineConfig({
     command: `npm run build && npx next start -p ${PORT}`,
     url: `http://localhost:${PORT}/gate`,
     timeout: 240_000,
-    reuseExistingServer: false,
+    // PW_REUSE=1: reuse a server you started yourself (same env as below) while iterating on specs
+    reuseExistingServer: !!process.env.PW_REUSE,
     env: {
       AI_MOCK: "true",
       ANTHROPIC_API_KEY: "",
@@ -33,6 +36,8 @@ export default defineConfig({
       // 1B flow (encounter cases): a 25 s encounter and a 20 s note
       ENCOUNTER_SECONDS_OVERRIDE: "25",
       PEN_SECONDS_OVERRIDE: "20",
+      // mounts window.__osce3d (TestHook) and the QA log route; never set in production
+      QA_HOOKS: "true",
     },
   },
 });

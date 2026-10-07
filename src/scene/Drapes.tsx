@@ -5,51 +5,17 @@
  * the zone again. Positions come from the patient's pose so they follow every position.
  */
 import { useMemo } from "react";
-import { Matrix4, Quaternion, Vector3 } from "three";
 import type { DrapeZone } from "@/domain/schemas";
-import { anchorWorldPoints, skinLandmark, type Pose, type Vec3 } from "@/exam3d/regionAnchors";
+import type { Pose } from "@/exam3d/regionAnchors";
+import { LEG_SHEET, gownRollFrames, legSheetFrame } from "./drapeGeometry";
 import { clickable } from "./room/ExamRoom";
 
 const SHEET = "#9cc3d3";
 
-/** Frame for a cylinder whose axis runs from a to b, with its +Z side facing `up`. */
-function frameBetween(a: Vec3, b: Vec3, up: Vec3) {
-  const va = new Vector3(...a);
-  const vb = new Vector3(...b);
-  const y = vb.clone().sub(va);
-  const len = y.length();
-  y.normalize();
-  const z = new Vector3(...up).sub(y.clone().multiplyScalar(new Vector3(...up).dot(y))).normalize();
-  const x = y.clone().cross(z).normalize();
-  const q = new Quaternion().setFromRotationMatrix(new Matrix4().makeBasis(x, y, z));
-  return { mid: va.add(vb).multiplyScalar(0.5), q, len, up: z };
-}
-
 export function Drapes({ pose, drape, onDrape, disabled }: { pose: Pose; drape: Record<DrapeZone, boolean>; onDrape?: (zone: DrapeZone, covered: boolean) => void; disabled?: boolean }) {
   const lateral = pose.position === "left_lateral_decubitus";
-  const legs = useMemo(() => {
-    const hip = anchorWorldPoints("hip_right", pose)[0]!;
-    const hipL = anchorWorldPoints("hip_left", pose)[0]!;
-    const ankle = anchorWorldPoints("ankle_right", pose)[0]!;
-    const ankleL = anchorWorldPoints("ankle_left", pose)[0]!;
-    // the sheet's axis runs down the middle of the legs, ~20 cm below the top of the arc
-    const top: Vec3 = [(hip[0] + hipL[0]) / 2, Math.max(hip[1], hipL[1]) - 0.17, (hip[2] + hipL[2]) / 2];
-    const bottom: Vec3 = [(ankle[0] + ankleL[0]) / 2, Math.max(ankle[1], ankleL[1]) - 0.16, (ankle[2] + ankleL[2]) / 2 + 0.12];
-    return frameBetween(top, bottom, [0, 1, 0]);
-  }, [pose]);
-  const rolls = useMemo(() => {
-    const nr = skinLandmark("nipple_r", pose).point;
-    const nl = skinLandmark("nipple_l", pose).point;
-    const xiph = skinLandmark("xiphoid", pose);
-    const umb = skinLandmark("umbilicus", pose);
-    const across = new Vector3(nl[0] - nr[0], nl[1] - nr[1], nl[2] - nr[2]).normalize();
-    const q = new Quaternion().setFromUnitVectors(new Vector3(0, 1, 0), across);
-    const at = (p: Vec3, n: Vec3, out: number): Vec3 => [p[0] + n[0] * out, p[1] + n[1] * out, p[2] + n[2] * out];
-    return {
-      chest: { pos: at(xiph.point, xiph.normal, 0.035), q },
-      abdomen: { pos: at(umb.point, umb.normal, 0.03).map((v, i) => v + [0, 0, 0.1][i]!) as Vec3, q },
-    };
-  }, [pose]);
+  const legs = useMemo(() => legSheetFrame(pose), [pose]);
+  const rolls = useMemo(() => gownRollFrames(pose), [pose]);
   const act = (zone: DrapeZone, covered: boolean) => (disabled || !onDrape ? undefined : () => onDrape(zone, covered));
 
   return (
@@ -57,7 +23,7 @@ export function Drapes({ pose, drape, onDrape, disabled }: { pose: Pose; drape: 
       {/* sheet over the legs (or a folded sheet at the foot of the bed when uncovered) */}
       {!lateral && drape.legs && (
         <mesh position={legs.mid} quaternion={legs.q} name="sheet-legs" castShadow receiveShadow {...clickable(act("legs", false))}>
-          <cylinderGeometry args={[0.24, 0.24, legs.len, 24, 1, true, -Math.PI * 0.4, Math.PI * 0.8]} />
+          <cylinderGeometry args={[LEG_SHEET.radius, LEG_SHEET.radius, legs.len, LEG_SHEET.segments, 1, true, LEG_SHEET.thetaStart, LEG_SHEET.thetaLength]} />
           <meshStandardMaterial color={SHEET} roughness={0.95} side={2} />
         </mesh>
       )}

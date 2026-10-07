@@ -1,7 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
+import { qaDelay } from "@/exam3d/qa";
+import { Dialog } from "@/components/ui/Overlay";
 
-/** Short "performed" visualisation: steps appear one by one while the finding resolves. */
+/**
+ * Short "performed" visualisation: steps appear one by one while the finding resolves. Closing it
+ * (✕, Esc, a click elsewhere, Continue) never loses anything: the exam is already in the log.
+ */
 export function PerformOverlay({
   title,
   steps,
@@ -16,14 +21,13 @@ export function PerformOverlay({
   const [shown, setShown] = useState(1);
   useEffect(() => {
     if (shown >= steps.length) return;
-    const id = setTimeout(() => setShown((n) => n + 1), 550);
+    const id = setTimeout(() => setShown((n) => n + 1), qaDelay(550));
     return () => clearTimeout(id);
   }, [shown, steps.length]);
   const stepsDone = shown >= steps.length;
 
   return (
-    <section aria-live="polite" className="rounded-lg border border-cyan-300 bg-cyan-50 p-3 shadow-md">
-      <h3 className="font-semibold text-cyan-900">{title}</h3>
+    <Dialog id="perform" kind="popover" title={title} onClose={onDone} className="rounded-lg border border-cyan-300 bg-cyan-50 p-3 text-cyan-950 shadow-md" panelProps={{ "aria-live": "polite" }}>
       <ol className="mt-1 list-decimal space-y-0.5 pl-5 text-sm text-cyan-950">
         {steps.slice(0, shown).map((s) => (
           <li key={s}>{s}</li>
@@ -49,6 +53,6 @@ export function PerformOverlay({
           </button>
         )}
       </div>
-    </section>
+    </Dialog>
   );
 }

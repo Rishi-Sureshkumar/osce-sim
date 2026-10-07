@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { Dialog } from "@/components/ui/Overlay";
 import type { Tool, ToolMode } from "@/domain/schemas";
 import type { TableItem } from "@/scene/room/ToolTable";
 
@@ -86,6 +87,7 @@ const MENU: { label: string; tool: Tool | null; item?: TableItem }[] = [
  */
 export function ToolHud({ state, onChange, disabled, onOpenTable }: { state: ToolState; onChange: (s: ToolState) => void; disabled?: boolean; onOpenTable?: () => void }) {
   const [open, setOpen] = useState(false);
+  const opener = useRef<HTMLButtonElement>(null);
   return (
     <div className="flex flex-wrap items-center gap-1.5 text-xs" role="toolbar" aria-label="Exam tools" data-testid="tool-hud">
       <span className="rounded bg-slate-100 px-2 py-1 text-slate-700" data-testid="tool-in-hand">
@@ -116,11 +118,11 @@ export function ToolHud({ state, onChange, disabled, onOpenTable }: { state: Too
         </button>
       )}
       <div className="relative">
-        <button type="button" disabled={disabled} aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)} className="rounded-md border border-slate-300 bg-white px-2.5 py-1">
+        <button ref={opener} type="button" disabled={disabled} aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)} className="rounded-md border border-slate-300 bg-white px-2.5 py-1">
           Tools…
         </button>
         {open && (
-          <div role="menu" aria-label="Tools" className="absolute bottom-full left-0 z-30 mb-1 w-56 rounded-md border border-slate-200 bg-white py-1 shadow-lg" onKeyDown={(e) => e.key === "Escape" && setOpen(false)}>
+          <Dialog id="tools-menu" kind="menu" title="Tools" hideTitle onClose={() => setOpen(false)} ignoreOutside={opener} className="absolute bottom-full left-0 z-30 mb-1 w-56 rounded-md border border-slate-200 bg-white py-1 pt-7 shadow-lg">
             {MENU.map((m) => (
               <button
                 key={m.label}
@@ -136,7 +138,7 @@ export function ToolHud({ state, onChange, disabled, onOpenTable }: { state: Too
                 {m.label}
               </button>
             ))}
-          </div>
+          </Dialog>
         )}
       </div>
       {state.tool && <span className="text-slate-500">{TOOL_HELP[state.tool]}</span>}

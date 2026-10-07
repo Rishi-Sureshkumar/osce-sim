@@ -1,20 +1,16 @@
 "use client";
 import type { ThreeEvent } from "@react-three/fiber";
-import type { Intersection } from "three";
+import type { BufferGeometry, Intersection, Mesh } from "three";
 import type { DrapeZone } from "@/domain/schemas";
 import { PatientModel } from "@/scene/PatientModel";
+import { PART_NAMES } from "@/scene/patientRig.generated";
 import type { VariantId } from "@/scene/rig";
 import type { CursorPoint } from "@/scene/tools/ToolCursor";
-import { snapToAnchor, type Pose, type Vec3 } from "./regionAnchors";
+import { resolveHit, type BodyHit, type RawHit } from "./hit";
+import { QA, recordPointer, type ProbeHit } from "./qa";
+import type { Pose, Vec3 } from "./regionAnchors";
 
-export interface BodyHit {
-  point: Vec3;
-  normal: Vec3;
-  /** "body", or "gown:<zone>" when the click landed on the gown */
-  kind: string;
-  /** nearest region anchor (by tolerance boundary), when within reach */
-  regionId: string | null;
-}
+export type { BodyHit };
 
 export interface Patient3DProps {
   pose: Pose;
@@ -40,25 +36,16 @@ export interface Patient3DProps {
   onHover: (hit: BodyHit | null) => void;
 }
 
-/** A body hit is only resolved to a region when it lands this close to the region's tolerance boundary. */
-const REACH_CM = 9;
-
 /**
  * The rigged patient. Hits come from BVH proxies baked from the posed skin and gown; a hit is
  * resolved to the nearest canonical region anchor. Nothing about the anchors is drawn.
  */
 export function Patient3D(p: Patient3DProps) {
-  const toHit = (e: ThreeEvent<MouseEvent | PointerEvent>): BodyHit | null => {
-    const i = e.intersections.find((x) => typeof x.object.userData.kind === "string" && (x.object.userData.kind === "body" || String(x.object.userData.kind).startsWith("gown:")));
-    if (!i) return null;
-    const point: Vec3 = [i.point.x, i.point.y, i.point.z];
-    const normal = worldNormal(i);
-    // gown hits measure from the skin underneath (the gown is ~1 cm out)
-    const skin = e.intersections.find((x) => x.object.userData.kind === "body");
-    const measure: Vec3 = skin ? [skin.point.x, skin.point.y, skin.point.z] : point;
-    const snap = snapToAnchor(measure, p.pickableRegionIds, p.pose);
-    const regionId = snap && snap.distanceCm - snap.toleranceCm <= REACH_CM ? snap.regionId : null;
-    return { point: measure, normal, kind: String(i.object.userData.kind), regionId };
+  const toHit = (e: ThreeEvent<MouseEvent | PointerEvent>, record = false): BodyHit | null => {
+    const raw: RawHit[] = e.intersections.map((x) => ({ kind: x.object.userData.kind as string | undefined, point: [x.point.x, x.point.y, x.point.z] as Vec3, normal: worldNormal(x) }));
+    const h = resolveHit(raw, p.pickableRegionIds, p.pose);
+    if (record && QA.enabled) recordPointer({ hits: e.intersections.map(probeHitOf), bodyHit: h ? { point: h.point, kind: h.kind, regionId: h.regionId } : null });
+    return h;
   };
 
   return (
@@ -66,13 +53,13 @@ export function Patient3D(p: Patient3DProps) {
       onClick={(e) => {
         e.stopPropagation();
         if (p.toolActive) return;
-        const h = toHit(e);
+        const h = toHit(e, true);
         if (h) p.onBodyClick(h);
       }}
       onPointerDown={(e) => {
         if (!p.toolActive) return;
         e.stopPropagation();
-        const h = toHit(e);
+        const h = toHit(e, true);
         if (!h) return;
         (e.target as unknown as Element).setPointerCapture?.(e.pointerId);
         p.onToolDown(h);
@@ -109,6 +96,14 @@ export function Patient3D(p: Patient3DProps) {
       />
     </group>
   );
+}
+
+/** QA: a ray hit described by kind and body part (from the asset build's `_PART` labels). */
+export function probeHitOf(x: Intersection): ProbeHit {
+  const geom = (x.object as Mesh).geometry as BufferGeometry | undefined;
+  const partAttr = geom?.getAttribute("_part");
+  const part = partAttr && x.face ? (PART_NAMES[partAttr.getX(x.face.a)] ?? null) : null;
+  return { name: x.object.name, kind: String(x.object.userData.kind ?? "prop"), part, point: [x.point.x, x.point.y, x.point.z], distance: x.distance };
 }
 
 function worldNormal(i: Intersection): Vec3 {

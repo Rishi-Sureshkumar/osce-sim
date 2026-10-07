@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import type { Region, RegionGroup } from "@/domain/schemas";
+import { Dialog } from "@/components/ui/Overlay";
 
 export const GROUP_LABELS: Record<RegionGroup, string> = {
   head_neck: "Head & neck",
@@ -41,9 +42,10 @@ export function ExamineMenu({ regions, onPick, disabled }: { regions: Region[]; 
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [disabled]);
-  useEffect(() => {
-    if (open) input.current?.focus();
-  }, [open]);
+  const close = () => {
+    setOpen(false);
+    setFilter("");
+  };
 
   return (
     <>
@@ -51,23 +53,12 @@ export function ExamineMenu({ regions, onPick, disabled }: { regions: Region[]; 
         Examine… <kbd className="ml-1 rounded border border-slate-300 px-1 text-[10px] text-slate-500">E</kbd>
       </button>
       {open && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Examine"
-          className="fixed inset-0 z-40 flex items-start justify-center bg-slate-900/30 p-4 pt-[10vh]"
-          onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
-          onClick={(e) => e.target === e.currentTarget && setOpen(false)}
-        >
-          <div className="flex max-h-[75vh] w-full max-w-2xl flex-col rounded-lg bg-white shadow-xl">
-            <div className="flex items-center gap-2 border-b border-slate-200 p-3">
-              <label className="flex-1">
+        <Dialog id="examine-menu" kind="modal" title="Examine" onClose={close} initialFocus={input} backdropClassName="items-start justify-center pt-[10vh]" className="flex max-h-[75vh] w-full max-w-2xl flex-col rounded-lg bg-white p-3 shadow-xl">
+            <div className="border-b border-slate-200 pb-2">
+              <label className="block">
                 <span className="sr-only">Find a region</span>
                 <input ref={input} value={filter} onChange={(e) => setFilter(e.target.value)} placeholder="Find a region (e.g. apex, knee)…" className="w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm" />
               </label>
-              <button type="button" onClick={() => setOpen(false)} className="rounded px-2 py-1 text-sm text-slate-600 hover:bg-slate-100">
-                Close
-              </button>
             </div>
             <div className="grid gap-3 overflow-y-auto p-3 sm:grid-cols-2" data-testid="examine-menu">
               {ORDER.map((g) => {
@@ -83,8 +74,7 @@ export function ExamineMenu({ regions, onPick, disabled }: { regions: Region[]; 
                             type="button"
                             data-region={r.id}
                             onClick={() => {
-                              setOpen(false);
-                              setFilter("");
+                              close();
                               onPick(r);
                             }}
                             className="w-full rounded px-1.5 py-0.5 text-left text-sm hover:bg-cyan-50 focus:bg-cyan-50 focus:outline-none"
@@ -98,8 +88,7 @@ export function ExamineMenu({ regions, onPick, disabled }: { regions: Region[]; 
                 );
               })}
             </div>
-          </div>
-        </div>
+        </Dialog>
       )}
     </>
   );

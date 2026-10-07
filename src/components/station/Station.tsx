@@ -31,6 +31,8 @@ import { FindingsPanel } from "./FindingsPanel";
 import { ManeuverMenu } from "./ManeuverMenu";
 import { PerformOverlay } from "./PerformOverlay";
 import { ExamineMenu } from "@/exam3d/ExamineMenu";
+import { Dialog } from "@/components/ui/Overlay";
+import { Toast } from "@/components/ui/Toast";
 import { variantFor } from "@/scene/rig";
 import { useQuality } from "@/scene/quality";
 
@@ -59,9 +61,11 @@ export interface StationProps {
   chat?: (ctx: { actions: Action[]; append: (a: Action) => void; disabled: boolean; onSpeaking: (speaking: boolean) => void }) => React.ReactNode;
   /** Slot for the finish/submit control. */
   finish?: (ctx: { append: (a: Action) => void; disabled: boolean; forceOpen: ForceOpen }) => React.ReactNode;
+  /** QA hooks (server env QA_HOOKS=true): test hook in the 3D view, ?qa=fast|freeze */
+  qa?: boolean;
 }
 
-export function Station({ session, kase, catalog, initialActions, chat, finish }: StationProps) {
+export function Station({ session, kase, catalog, initialActions, chat, finish, qa }: StationProps) {
   const [actions, setActions] = useState<Action[]>(initialActions);
   const examinable = useMemo(() => new Set(catalog.maneuvers.flatMap((m) => m.allowedRegions)), [catalog]);
   const [selected, setSelected] = useState<Region | null>(null);
@@ -119,6 +123,18 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
   const [tool, setTool] = useState<ToolState>({ tool: null, stethMode: "diaphragm", forkFreq: "512", struckAt: null });
   const [choice, setChoice] = useState<{ region: Region; ids: string[]; resolve: (id: string | null) => void } | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  // when the encounter locks (left the room, time up, auto-end, submitted) no exam popup may stay open
+  useEffect(() => {
+    if (!locked) return;
+    setSelected(null);
+    setPerforming(null);
+    setDescribe(null);
+    setConfirmLeave(false);
+    setChoice((c) => {
+      c?.resolve(null);
+      return null;
+    });
+  }, [locked]);
   const maneuverById = useMemo(() => new Map(catalog.maneuvers.map((m) => [m.id, m])), [catalog]);
   const regionById = useMemo(() => new Map(catalog.regions.map((r) => [r.id, r])), [catalog]);
 
@@ -316,11 +332,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
             {error}
           </p>
         )}
-        {toast && (
-          <p role="status" className="rounded-md bg-amber-50 px-3 py-2 text-sm text-amber-900">
-            {toast}
-          </p>
-        )}
+        {toast && <Toast message={toast} onDismiss={() => setToast(null)} tone="warn" />}
         <div className="grid gap-3 lg:grid-cols-[1fr_300px]">
           <PenForm sessionId={session.id} initial={session.penDraft} lockNow={penLock || !!flowState?.locked} endReason={flowState?.endReason ?? null} />
           <div className="space-y-3">
@@ -328,6 +340,28 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
             <DoorPlacard kase={kase} />
           </div>
         </div>
+      </div>
+    );
+  }
+
+  // time up / left the room (no 1B flow): the presentation step replaces the room (not a dialog)
+  const forcedFinish: ForceOpen = !flow && !ended ? (timeUp ? "time_up" : left ? "left_room" : null) : null;
+  if (forcedFinish) {
+    return (
+      <div className="mx-auto flex max-w-[900px] flex-col items-center gap-3 p-3">
+        <header className="flex w-full flex-wrap items-center justify-between gap-2">
+          <h1 className="text-lg font-semibold">{kase.title}</h1>
+          <ModeTimer mode={mode} startedAt={session.startedAt} limitSeconds={kase.timeLimitSeconds} actions={actions} stopped={ended || timeUp} onTimerEvent={onTimerEvent} />
+        </header>
+        {error && (
+          <p role="alert" className="w-full rounded-md bg-red-50 px-3 py-2 text-sm text-red-800">
+            {error}
+          </p>
+        )}
+        <p role="status" className="w-full rounded-md bg-slate-100 px-3 py-2 text-sm text-slate-800">
+          {forcedFinish === "time_up" ? "Time is up. The examination is closed." : "You have left the room."} Present your summary, differential and plan.
+        </p>
+        {finish?.({ append, disabled: false, forceOpen: forcedFinish })}
       </div>
     );
   }
@@ -363,7 +397,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
               View results
             </a>
           ) : (
-            !flow && finish?.({ append, disabled: ended, forceOpen: ended ? null : timeUp ? "time_up" : left ? "left_room" : null })
+            !flow && finish?.({ append, disabled: ended, forceOpen: null })
           )}
         </div>
       </header>
@@ -379,42 +413,27 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
           You may begin.
         </p>
       )}
-      {!flow && timeUp && !ended && (
-        <p role="alert" className="rounded-md bg-red-50 px-3 py-2 text-sm font-medium text-red-800">
-          Time is up. The examination is closed. Present your summary, differential and plan.
-        </p>
-      )}
       {confirmLeave && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/30 p-4" role="dialog" aria-modal="true" aria-labelledby="leave-h">
-          <div className="w-full max-w-sm space-y-3 rounded-lg bg-white p-5 shadow-xl">
-            <h2 id="leave-h" className="font-semibold">
-              Leave the room?
-            </h2>
-            <p className="text-sm text-slate-600">Leaving ends the encounter. No re-entry.</p>
-            <div className="flex justify-end gap-2">
-              <button type="button" onClick={() => setConfirmLeave(false)} className="rounded-md px-3 py-1.5 text-sm">
-                Stay
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setConfirmLeave(false);
-                  void onLeave();
-                }}
-                className="rounded-md bg-slate-800 px-4 py-1.5 text-sm font-medium text-white"
-              >
-                Leave
-              </button>
-            </div>
+        <Dialog id="leave-confirm" kind="confirm" title="Leave the room?" onClose={() => setConfirmLeave(false)} className="w-full max-w-sm space-y-3 rounded-lg bg-white p-5 shadow-xl">
+          <p className="text-sm text-slate-600">Leaving ends the encounter. No re-entry.</p>
+          <div className="flex justify-end gap-2">
+            <button type="button" onClick={() => setConfirmLeave(false)} className="rounded-md px-3 py-1.5 text-sm">
+              Stay
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setConfirmLeave(false);
+                void onLeave();
+              }}
+              className="rounded-md bg-slate-800 px-4 py-1.5 text-sm font-medium text-white"
+            >
+              Leave
+            </button>
           </div>
-        </div>
+        </Dialog>
       )}
       {describe && <DescribeDialog region={describe} onSubmit={onDescribeSubmit} onClose={() => setDescribe(null)} />}
-      {!flow && left && !ended && (
-        <p role="status" className="rounded-md bg-slate-100 px-3 py-2 text-sm text-slate-800">
-          You have left the room. Present your summary, differential and plan.
-        </p>
-      )}
       {mode === "practice" && !locked && <PracticeHelp sessionId={session.id} append={append} disabled={locked} />}
       {!left && !outside && <EncounterBar state={state} disabled={locked} sanitise={sanitise} onBed={onBed} onDrape={onDrape} onMenu={onCourtesy} onLeave={() => setConfirmLeave(true)} />}
       {leaveNudge && !left && (
@@ -464,6 +483,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
             <ErrorBoundary label="3D exam view">
             <Exam3DView
                 sessionId={session.id}
+                qa={qa}
                 maneuvers={catalog.maneuvers}
                 tool={tool}
                 onToolChange={(t) => {
@@ -500,13 +520,10 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
               />
             </ErrorBoundary>
             <div className={`absolute right-2 z-10 w-72 max-w-[90%] bottom-28 max-h-[45%] overflow-y-auto ${performing?.kind === "tool" && !choice ? "pointer-events-none [&_button]:pointer-events-auto" : ""}`}>
-              {toast && !selected && !choice && performing?.kind !== "menu" && (
-                <p className="mb-2 rounded-md bg-cyan-50 px-3 py-2 text-sm text-cyan-900 shadow" role="status">
-                  {toast}
-                </p>
-              )}
+              {toast && !selected && !choice && performing?.kind !== "menu" && <Toast message={toast} onDismiss={() => setToast(null)} className="mb-2" />}
               {choice ? (
                 <ManeuverMenu
+                  dialogId="tool-chooser"
                   region={choice.region}
                   maneuvers={catalog.maneuvers.filter((m) => choice.ids.includes(m.id))}
                   busy={false}

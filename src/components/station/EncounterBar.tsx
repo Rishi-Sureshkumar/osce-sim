@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { Dialog } from "@/components/ui/Overlay";
 import type { CourtesyKind, DrapeZone, Position } from "@/domain/schemas";
 import { POSITION_ANGLE, type PatientState } from "@/engine/patientState";
 import { POSITION_LABELS } from "@/components/common/format";
@@ -123,18 +124,15 @@ export function EncounterBar({
 function ActionsMenu({ disabled, onMenu }: { disabled: boolean; onMenu: (kind: CourtesyKind, position?: Position) => void }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const opener = useRef<HTMLButtonElement>(null);
   const items: { label: string; run: () => void }[] = [
     { label: "Clean hands (no hold)", run: () => onMenu("hand_hygiene") },
     { label: "Re-drape the patient", run: () => onMenu("drape") },
     ...[...BED_STOPS, ...OTHER_POSITIONS].map((p) => ({ label: `Position: ${POSITION_LABELS[p]}`, run: () => onMenu("position", p) })),
   ];
-  useEffect(() => {
-    if (open) ref.current?.querySelector<HTMLButtonElement>("[role=menuitem]")?.focus();
-  }, [open]);
   const onKey = (e: React.KeyboardEvent) => {
     const els = [...(ref.current?.querySelectorAll<HTMLButtonElement>("[role=menuitem]") ?? [])];
     const i = els.indexOf(document.activeElement as HTMLButtonElement);
-    if (e.key === "Escape") setOpen(false);
     if (e.key === "ArrowDown" || e.key === "ArrowUp") {
       e.preventDefault();
       els[(i + (e.key === "ArrowDown" ? 1 : -1) + els.length) % els.length]?.focus();
@@ -142,11 +140,11 @@ function ActionsMenu({ disabled, onMenu }: { disabled: boolean; onMenu: (kind: C
   };
   return (
     <div className="relative" ref={ref} onKeyDown={onKey}>
-      <button type="button" disabled={disabled} aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)} className="rounded-md border border-slate-300 px-2.5 py-1 text-xs hover:bg-slate-50">
+      <button ref={opener} type="button" disabled={disabled} aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)} className="rounded-md border border-slate-300 px-2.5 py-1 text-xs hover:bg-slate-50">
         Actions ▾
       </button>
       {open && (
-        <div role="menu" aria-label="Actions" className="absolute left-0 z-30 mt-1 w-60 rounded-md border border-slate-200 bg-white py-1 shadow-lg">
+        <Dialog id="actions-menu" kind="menu" title="Actions" hideTitle onClose={() => setOpen(false)} ignoreOutside={opener} className="absolute left-0 z-30 mt-1 w-60 rounded-md border border-slate-200 bg-white py-1 pt-7 shadow-lg">
           {items.map((it) => (
             <button
               key={it.label}
@@ -161,7 +159,7 @@ function ActionsMenu({ disabled, onMenu }: { disabled: boolean; onMenu: (kind: C
               {it.label}
             </button>
           ))}
-        </div>
+        </Dialog>
       )}
     </div>
   );

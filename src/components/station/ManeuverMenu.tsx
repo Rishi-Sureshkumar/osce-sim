@@ -1,5 +1,6 @@
 "use client";
 import type { Region } from "@/domain/schemas";
+import { Dialog } from "@/components/ui/Overlay";
 import type { PublicCatalog } from "@/content/types";
 
 type M = PublicCatalog["maneuvers"][number];
@@ -19,7 +20,10 @@ export function ManeuverMenu({
   onChoose,
   onShowMe,
   onClose,
+  dialogId = "maneuver-menu",
 }: {
+  /** "tool-chooser": several exams fit the tool placement — the student picks one */
+  dialogId?: "maneuver-menu" | "tool-chooser";
   region: Region;
   maneuvers: M[];
   busy: boolean;
@@ -30,13 +34,7 @@ export function ManeuverMenu({
 }) {
   const available = maneuvers.filter((m) => m.allowedRegions.includes(region.id));
   return (
-    <section aria-label={`Examinations for ${region.label}`} className="rounded-lg border border-cyan-200 bg-white p-3 shadow-md">
-      <div className="mb-2 flex items-start justify-between gap-2">
-        <h3 className="font-semibold">{region.label}</h3>
-        <button onClick={onClose} className="text-sm text-slate-500 hover:text-slate-800" aria-label="Close menu">
-          ✕
-        </button>
-      </div>
+    <Dialog id={dialogId} kind="popover" title={dialogId === "tool-chooser" ? `Which exam? ${region.label}` : region.label} onClose={onClose} className="rounded-lg border border-cyan-200 bg-white p-3 shadow-md">
       {available.length === 0 && <p className="text-sm text-slate-500">No examinations are defined for this region yet.</p>}
       {TECHNIQUE_ORDER.map((t) => {
         const list = available.filter((m) => m.technique === t);
@@ -67,6 +65,6 @@ export function ManeuverMenu({
           </div>
         );
       })}
-    </section>
+    </Dialog>
   );
 }

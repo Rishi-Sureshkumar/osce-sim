@@ -20,8 +20,12 @@ import { Patient3D, type BodyHit } from "./Patient3D";
 import { ANCHOR_BY_REGION, poseFor, snapToAnchor, type Vec3 } from "./regionAnchors";
 import { HINT_MS, LandmarkHints } from "./LandmarkHints";
 import { TestHook } from "./TestHook";
-import { MIN_LISTEN_MS, candidatesFor, regionsForTool, sequenceProgress, stepForPlacement } from "./tools/toolLogic";
+import { Dialog } from "@/components/ui/Overlay";
+import { MIN_LISTEN_MS, regionsForTool, sequenceProgress } from "./tools/toolLogic";
 import { backgroundKind, contactOutcome, contactSound, recordsFinding } from "./tools/contact";
+import { decidePlacement, holdCandidate } from "./tools/decide";
+import { JERK_BONE } from "@/scene/animation/reflex";
+import { QA, configureQa, qaDelay, recordDecision } from "./qa";
 import { ToolHud, itemInHand, pickFromTable, toolModeOf, type ToolState } from "./tools/ToolTray";
 
 type M = PublicCatalog["maneuvers"][number];
@@ -73,6 +77,8 @@ export interface Exam3DViewProps {
   variant: VariantId;
   speaking?: boolean;
   quality?: "high" | "low";
+  /** QA hooks (server env QA_HOOKS=true): mounts the test hook; ?qa=fast|freeze */
+  qa?: boolean;
 }
 
 interface Hold {
@@ -100,20 +106,6 @@ export function tableAngle(position: string, bedAngle: number): number {
   return bedAngle;
 }
 
-/** Reflexes: which limb bone jerks when a tendon on this region is tapped. */
-const JERK_BONE: Record<string, string> = {
-  knee_right: "lowerleg01_R",
-  knee_left: "lowerleg01_L",
-  ankle_right: "foot_R",
-  ankle_left: "foot_L",
-  elbow_right: "lowerarm01_R",
-  elbow_left: "lowerarm01_L",
-  wrist_right: "lowerarm01_R",
-  wrist_left: "lowerarm01_L",
-  arm_right: "lowerarm01_R",
-  arm_left: "lowerarm01_L",
-};
-
 type Anim = { current: number };
 /** Animates the table head section, the patient's trunk angle and the door toward their targets (inside the Canvas). */
 function Director({ table, tableTarget, trunk, trunkTarget, door, doorTarget }: { table: Anim; tableTarget: number; trunk: Anim; trunkTarget: number; door: Anim; doorTarget: number }) {
@@ -122,14 +114,18 @@ function Director({ table, tableTarget, trunk, trunkTarget, door, doorTarget }: 
       const d = target - a.current;
       a.current += Math.sign(d) * Math.min(Math.abs(d), dt * rate);
     };
-    step(table, tableTarget, 55); // ~55°/s, like a powered table
-    step(trunk, trunkTarget, 55);
-    step(door, doorTarget, 1.4);
+    const fast = QA.enabled && QA.fast;
+    step(table, tableTarget, fast ? 1e6 : 55); // ~55°/s, like a powered table
+    step(trunk, trunkTarget, fast ? 1e6 : 55);
+    step(door, doorTarget, fast ? 1e6 : 1.4);
+    QA.directorSettled = Math.abs(table.current - tableTarget) < 0.05 && Math.abs(trunk.current - trunkTarget) < 0.05 && Math.abs(door.current - doorTarget) < 0.001;
   });
   return null;
 }
 
 export default function Exam3DView(props: Exam3DViewProps) {
+  // configure before children render so the patient and camera read the QA flags
+  useMemo(() => configureQa(!!props.qa), [props.qa]);
   const state = useMemo(() => patientState(props.actions), [props.actions]);
   const pose = useMemo(() => poseFor(state.position, state.bedAngle, props.variant), [state.position, state.bedAngle, props.variant]);
   const quality = props.quality ?? "high";
@@ -190,7 +186,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement | null;
       if (e.key !== "Escape" || (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA"))) return;
-      if (document.querySelector("[role=dialog]")) return;
+      if (document.querySelector("[data-dialog]")) return; // the open dialog handles Esc
       goBack();
     };
     window.addEventListener("keydown", onKey);
@@ -222,21 +218,26 @@ export default function Exam3DView(props: Exam3DViewProps) {
   const panelRegions = props.regions.filter((r) => r.group === "neuro");
   const backHidden = shot.current === "chest_back" && state.bedAngle < 45;
   const busy = washing !== null || opening;
+  QA.busy = busy;
+  const washMs = QA.enabled && QA.fast ? 250 : WASH_MS;
 
   // ------------------------------------------------------------------ room interactions
   const enter = async () => {
     if (inside || opening || !props.canEnter) return;
     setOpening(true);
     audioEngine.knock();
-    await new Promise((r) => setTimeout(r, 700));
+    await new Promise((r) => setTimeout(r, qaDelay(700)));
     setDoorTarget(1);
     try {
       await props.onEnter();
     } finally {
-      setTimeout(() => {
-        setDoorTarget(0);
-        setOpening(false);
-      }, 1600);
+      setTimeout(
+        () => {
+          setDoorTarget(0);
+          setOpening(false);
+        },
+        qaDelay(1600),
+      );
     }
   };
   const onDoor = () => {
@@ -255,9 +256,9 @@ export default function Exam3DView(props: Exam3DViewProps) {
   }, [props]);
   useEffect(() => {
     if (washing === null) return;
-    const id = setTimeout(() => void finishWash(), WASH_MS);
+    const id = setTimeout(() => void finishWash(), washMs);
     return () => clearTimeout(id);
-  }, [washing, finishWash]);
+  }, [washing, finishWash, washMs]);
   const pickTool = (item: TableItem) => {
     const next = pickFromTable(props.tool, item);
     if (next === props.tool) {
@@ -354,9 +355,10 @@ export default function Exam3DView(props: Exam3DViewProps) {
 
   const holdAt = (hit: BodyHit, c: NonNullable<ReturnType<typeof contact>>): Hold | null => {
     if (!tool) return null;
-    const m = candidatesFor(props.maneuvers, tool, mode, c.regionId)[0];
-    if (!m) return null;
-    return { regionId: c.regionId, maneuverId: m.id, error: c.error, distanceCm: c.distanceCm, toleranceCm: c.toleranceCm, outcome: c.outcome, point: hit.point, startedAt: performance.now() };
+    const maneuverId = holdCandidate(props.maneuvers, tool, mode, c.regionId);
+    recordDecision({ regionId: c.regionId, maneuverId, distanceCm: c.distanceCm, toleranceCm: c.toleranceCm, outcome: c.outcome, hold: true });
+    if (!maneuverId) return null;
+    return { regionId: c.regionId, maneuverId, error: c.error, distanceCm: c.distanceCm, toleranceCm: c.toleranceCm, outcome: c.outcome, point: hit.point, startedAt: performance.now() };
   };
 
   const onToolDown = (hit: BodyHit) => {
@@ -396,27 +398,23 @@ export default function Exam3DView(props: Exam3DViewProps) {
 
   const instantTool = async (point: Vec3) => {
     if (!tool) return;
-    const s = snap(point);
-    if (!s) return;
-    const cands = candidatesFor(props.maneuvers, tool, mode, s.regionId);
-    if (!cands.length) return;
-    const m0 = maneuverById.get(cands[0]!.id)!;
-    // sequences measure placement against the step's landmark (e.g. mastoid vs ear canal)
-    const seqStep = m0.interaction === "sequence" && m0.steps ? stepForPlacement(m0.steps, s.regionId, point, pose, ANCHOR_BY_REGION.get(s.regionId)?.radius) : undefined;
-    const distanceCm = seqStep ? seqStep.error * s.toleranceCm : s.distanceCm;
-    const outcome = contactOutcome(distanceCm, s.toleranceCm, s.regionId);
+    const d = decidePlacement({ point, tool, mode, maneuvers: props.maneuvers, toolRegions, pose });
+    recordDecision(d ? { ...d } : { none: true });
+    if (!d) return;
+    const s = { regionId: d.regionId, toleranceCm: d.toleranceCm };
+    const { distanceCm, outcome } = d;
     if (tool === "reflex_hammer") setSwingAt(performance.now());
     if (outcome !== "finding") {
-      void props.onToolContact({ tool, toolMode: mode, maneuverId: m0.id, nearestRegionId: s.regionId, distanceCm, toleranceCm: s.toleranceCm, durationMs: 0, outcome });
+      void props.onToolContact({ tool, toolMode: mode, maneuverId: d.maneuverId, nearestRegionId: s.regionId, distanceCm, toleranceCm: s.toleranceCm, durationMs: 0, outcome });
       setCaption("Nothing notable here.");
       return;
     }
-    let maneuverId: string | null = m0.id;
-    if (cands.length > 1) maneuverId = await props.onToolAmbiguous(s.regionId, cands.map((c) => c.id));
+    let maneuverId: string | null = d.maneuverId;
+    if (d.candidates.length > 1) maneuverId = await props.onToolAmbiguous(s.regionId, d.candidates);
     if (!maneuverId) return;
     const m = maneuverById.get(maneuverId)!;
-    const error = seqStep?.error ?? s.error;
-    const step = m.interaction === "sequence" ? seqStep?.id : undefined;
+    const error = d.error;
+    const step = m.interaction === "sequence" ? d.stepId : undefined;
     void props.onToolContact({ tool, toolMode: mode, maneuverId, nearestRegionId: s.regionId, distanceCm, toleranceCm: s.toleranceCm, durationMs: 0, outcome });
     const action = await props.onToolExamine({ regionId: s.regionId, maneuverId, tool, toolMode: mode, placementError: error, distanceCm, toleranceCm: s.toleranceCm, ...(step ? { step } : {}) });
     if (!action || action.type !== "examine") return;
@@ -469,7 +467,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
       <div className="relative min-h-[380px] flex-1 overflow-hidden rounded-md bg-slate-100" data-testid="exam3d" data-camera={shot.current}>
         <Canvas
           dpr={quality === "high" ? [1, 1.5] : 1}
-          shadows={quality === "high"}
+          shadows={quality === "high" ? "percentage" : false}
           camera={{ fov: 45, near: 0.02, far: 30, position: goal.position as Vec3 }}
           gl={{ antialias: quality === "high" }}
           onCreated={({ gl }) => {
@@ -540,10 +538,10 @@ export default function Exam3DView(props: Exam3DViewProps) {
             <Drapes pose={pose} drape={state.drape} onDrape={inside && !props.disabled ? props.onDrape : undefined} />
           </Suspense>
           {tool && <ToolCursor tool={tool} at={cursor} toolMode={mode} swingAt={swingAt} vibrating={!!props.tool.struckAt && forkElapsed < 12} />}
-          {washing !== null && <HandWash startedAt={washing} durationMs={WASH_MS} />}
+          {washing !== null && <HandWash startedAt={washing} durationMs={washMs} />}
           <FpsMeter />
           <ShotCamera goal={goal} freeLook={SHOTS[shot.current].freeLook} enabled={!hold} />
-          <TestHook pose={pose} shot={shot.current} />
+          {props.qa && <TestHook pose={pose} shot={shot.current} />}
           {landmarksAt !== null && <LandmarkHints shot={shot.current} pose={pose} shownAt={landmarksAt} />}
         </Canvas>
 
@@ -595,7 +593,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
         {washing !== null && (
           <div className="absolute inset-x-0 bottom-3 z-10 flex justify-center" data-testid="washing">
             <div className="flex items-center gap-3 rounded-lg bg-white/95 px-4 py-2 text-sm shadow">
-              <span>Cleaning hands… {Math.max(0, Math.ceil((WASH_MS - (now - washing)) / 1000))} s</span>
+              <span>Cleaning hands… {Math.max(0, Math.ceil((washMs - (now - washing)) / 1000))} s</span>
               {props.mode === "practice" && (
                 <button type="button" onClick={() => void finishWash()} className="text-xs text-cyan-700 underline">
                   Skip
@@ -605,8 +603,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
           </div>
         )}
         {bedHud && (
-          <div className="absolute top-12 left-2 z-10 rounded-lg bg-white/95 p-2 text-xs shadow" role="group" aria-label="Table head section" data-testid="bed-hud">
-            <p className="mb-1 font-medium">Head of the table</p>
+          <Dialog id="bed-hud" kind="popover" title="Head of the table" onClose={() => setBedHud(false)} className="absolute top-12 left-2 z-10 rounded-lg bg-white/95 p-2 text-xs shadow" panelProps={{ "data-testid": "bed-hud" }}>
             <div className="flex gap-1">
               <button type="button" onClick={() => stepBed(1)} className="rounded border border-slate-300 px-2 py-1">
                 ▲ Raise
@@ -618,7 +615,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
                 Done
               </button>
             </div>
-          </div>
+          </Dialog>
         )}
         <div className="pointer-events-none absolute inset-x-0 bottom-1 text-center text-sm text-slate-700" aria-live="polite">
           {inside && !washing && (hover?.regionId && !tool ? byId.get(hover.regionId)?.label : !tool ? "Click the patient to move closer · click again to examine · drag to look around" : "")}

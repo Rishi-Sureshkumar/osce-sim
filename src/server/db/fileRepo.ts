@@ -14,15 +14,28 @@ interface Store {
 
 const empty = (): Store => ({ sessions: [], actions: [], gradingRuns: [], overrides: [], feedback: [] });
 
-/** Local-dev store: one JSON file, writes serialised through a promise chain. */
+/**
+ * Local-dev store: one JSON file, writes serialised through a promise chain. The parsed file is
+ * cached by (mtime, size) so reads don't re-parse it; getters hand out copies, never cache objects.
+ */
 export class FileRepo implements Repo {
   private chain: Promise<unknown> = Promise.resolve();
+  private cache: { mtimeMs: number; size: number; store: Store } | null = null;
 
   constructor(private file = process.env.FILE_STORE_PATH || path.join(process.cwd(), ".data", "store.json")) {}
 
   private read(): Store {
-    if (!fs.existsSync(this.file)) return empty();
-    return { ...empty(), ...JSON.parse(fs.readFileSync(this.file, "utf8")) };
+    let st: fs.Stats;
+    try {
+      st = fs.statSync(this.file);
+    } catch {
+      this.cache = null;
+      return empty();
+    }
+    if (this.cache && this.cache.mtimeMs === st.mtimeMs && this.cache.size === st.size) return this.cache.store;
+    const store: Store = { ...empty(), ...JSON.parse(fs.readFileSync(this.file, "utf8")) };
+    this.cache = { mtimeMs: st.mtimeMs, size: st.size, store };
+    return store;
   }
 
   private write(s: Store) {
@@ -30,11 +43,14 @@ export class FileRepo implements Repo {
     const tmp = `${this.file}.${process.pid}.tmp`;
     fs.writeFileSync(tmp, JSON.stringify(s));
     fs.renameSync(tmp, this.file);
+    const st = fs.statSync(this.file);
+    this.cache = { mtimeMs: st.mtimeMs, size: st.size, store: s };
   }
 
   private mutate<T>(fn: (s: Store) => T): Promise<T> {
     const next = this.chain.then(() => {
-      const s = this.read();
+      // mutate a copy: a throw inside fn must not leave the cache half-changed
+      const s = structuredClone(this.read());
       const out = fn(s);
       this.write(s);
       return out;
@@ -47,19 +63,20 @@ export class FileRepo implements Repo {
     await this.mutate((st) => void st.sessions.push(s));
   }
   async getSession(id: string) {
-    return this.read().sessions.find((s) => s.id === id) ?? null;
+    const s = this.read().sessions.find((x) => x.id === id);
+    return s ? structuredClone(s) : null;
   }
   async listSessions(limit = 200) {
-    return this.read()
-      .sessions.sort((a, b) => b.startedAt.localeCompare(a.startedAt))
-      .slice(0, limit);
+    return structuredClone(
+      [...this.read().sessions].sort((a, b) => b.startedAt.localeCompare(a.startedAt)).slice(0, limit),
+    );
   }
   async updateSession(id: string, patch: Partial<Omit<Session, "id">>) {
     return this.mutate((st) => {
       const s = st.sessions.find((x) => x.id === id);
       if (!s) throw new Error(`session ${id} not found`);
       Object.assign(s, patch);
-      return s;
+      return structuredClone(s);
     });
   }
   async appendAction(a: Action) {
@@ -70,30 +87,24 @@ export class FileRepo implements Repo {
   }
   async listActions(sessionId: string) {
     const all = this.read().actions;
-    return orderLog(all.map((a, i) => ({ ...a, seq: a.seq ?? i + 1 })).filter((a) => a.sessionId === sessionId));
+    return orderLog(structuredClone(all.map((a, i) => ({ ...a, seq: a.seq ?? i + 1 })).filter((a) => a.sessionId === sessionId)));
   }
   async saveGradingRun(run: GradingRun) {
     await this.mutate((st) => void st.gradingRuns.push(run));
   }
   async listGradingRuns(sessionId: string) {
-    return this.read()
-      .gradingRuns.filter((r) => r.sessionId === sessionId)
-      .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+    return structuredClone(this.read().gradingRuns.filter((r) => r.sessionId === sessionId)).sort((a, b) => a.createdAt.localeCompare(b.createdAt));
   }
   async addOverride(o: Override) {
     await this.mutate((st) => void st.overrides.push(o));
   }
   async listOverrides(sessionId: string) {
-    return this.read()
-      .overrides.filter((o) => o.sessionId === sessionId)
-      .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+    return structuredClone(this.read().overrides.filter((o) => o.sessionId === sessionId)).sort((a, b) => a.createdAt.localeCompare(b.createdAt));
   }
   async addFeedback(f: Feedback) {
     await this.mutate((st) => void st.feedback.push(f));
   }
   async listFeedback(limit = 200) {
-    return this.read()
-      .feedback.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-      .slice(0, limit);
+    return structuredClone([...this.read().feedback].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, limit));
   }
 }

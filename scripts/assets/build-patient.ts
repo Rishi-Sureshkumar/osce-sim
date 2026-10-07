@@ -47,6 +47,16 @@ const KEEP = new Set<string>([
 /** Extra bones added by us (not in MakeHuman): pupils scale for the penlight. */
 const PUPILS = ["pupil.L", "pupil.R"] as const;
 
+/**
+ * Body-part label per vertex (glTF attribute `_PART`, index into PART_NAMES). QA only: the
+ * catalog test and hit probe report which part a ray hit first (ear, hair, scalp, …).
+ */
+export const PART_NAMES = [
+  "torso", "neck", "face", "scalp", "ear_l", "ear_r", "upper_arm_l", "upper_arm_r", "forearm_l", "forearm_r", "hand_l", "hand_r",
+  "thigh_l", "thigh_r", "leg_l", "leg_r", "foot_l", "foot_r", "eye_l", "eye_r", "hair", "mouth", "gown",
+] as const;
+const PART = Object.fromEntries(PART_NAMES.map((n, i) => [n, i])) as Record<(typeof PART_NAMES)[number], number>;
+
 const add = (a: V3, b: V3): V3 => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
 const sub = (a: V3, b: V3): V3 => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 const scale = (a: V3, k: number): V3 => [a[0] * k, a[1] * k, a[2] * k];
@@ -75,6 +85,9 @@ export interface GeneratedAnchor { regionId: string; points: [number, number, nu
 export interface PatientVariant { glb: string; stats: { triangles: number; bones: number; glbBytes: number }; rig: RigBone[]; landmarks: Record<string, SkinPoint>; anchors: GeneratedAnchor[] }
 
 export const PATIENT_VARIANTS: Record<"male" | "female", PatientVariant> = ${JSON.stringify(results)};
+
+/** QA: body-part names for the meshes' \`_PART\` vertex attribute (index → name). */
+export const PART_NAMES = ${JSON.stringify(PART_NAMES)} as const;
 `;
   fs.writeFileSync(OUT_TS, ts);
 }
@@ -303,6 +316,28 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
     }
   }
 
+  // ---- body-part labels (QA): dominant bone + head geometry (ear / scalp / face)
+  const earX = Math.abs(landmarks.ear_canal_l!.point[0]);
+  const partOf = (i: number): number => {
+    const bone = dominant(skin.src[i]!);
+    const p = skin.pos[i]!;
+    const side = bone.endsWith(".L") ? "l" : bone.endsWith(".R") ? "r" : p[0] >= 0 ? "l" : "r";
+    if (/^(head|jaw|orbicularis|eye)/.test(bone)) {
+      const nearEar = Math.abs(p[0]) > earX - 0.012 && p[1] < earY + 0.035 && p[1] > earY - 0.035 && p[2] > headC[2] - 0.03;
+      if (nearEar) return PART[`ear_${side}` as "ear_l"];
+      return inHair(i) ? PART.scalp : PART.face;
+    }
+    if (bone.startsWith("neck")) return PART.neck;
+    if (/^(upperarm)/.test(bone)) return PART[`upper_arm_${side}` as "upper_arm_l"];
+    if (/^(lowerarm)/.test(bone)) return PART[`forearm_${side}` as "forearm_l"];
+    if (/^(wrist|finger)/.test(bone)) return PART[`hand_${side}` as "hand_l"];
+    if (/^(upperleg)/.test(bone)) return PART[`thigh_${side}` as "thigh_l"];
+    if (/^(lowerleg)/.test(bone)) return PART[`leg_${side}` as "leg_l"];
+    if (/^(foot|toe)/.test(bone)) return PART[`foot_${side}` as "foot_l"];
+    return PART.torso;
+  };
+  const skinParts = skin.pos.map((_, i) => partOf(i));
+
   // ---- pupils: small discs in front of each iris, on their own bones
   const eyes = built.eyes!;
   const pupilBones: Record<string, { head: V3; parent: string }> = {};
@@ -392,7 +427,7 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
     pupils: doc.createMaterial("pupils").setBaseColorFactor([0.01, 0.01, 0.01, 1]).setRoughnessFactor(0.1).setMetallicFactor(0),
   };
 
-  const addMesh = (name: string, b: Built, mat: keyof typeof mats, boneFor?: (i: number) => [string, number][]) => {
+  const addMesh = (name: string, b: Built, mat: keyof typeof mats, boneFor?: (i: number) => [string, number][], part?: (i: number) => number) => {
     const n = b.pos.length;
     const nrm = vertexNormals(b.pos, b.idx);
     const joints = new Uint8Array(n * 4);
@@ -414,15 +449,16 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
       .setAttribute("WEIGHTS_0", acc("VEC4", wts))
       .setIndices(acc("SCALAR", n > 65535 ? new Uint32Array(b.idx) : new Uint16Array(b.idx)))
       .setMaterial(mats[mat]);
+    if (part) prim.setAttribute("_PART", acc("SCALAR", Uint8Array.from({ length: n }, (_, i) => part(i))));
     const mesh = doc.createMesh(name).addPrimitive(prim);
     top.addChild(doc.createNode(name).setMesh(mesh).setSkin(skinObj));
   };
-  addMesh("skin", skin, "skin");
-  addMesh("eyes", eyes, "eyes");
-  addMesh("mouth", built.mouth!, "mouth");
-  for (const g of Object.keys(gown)) addMesh(g, gown[g]!, "gown");
-  addMesh("hair", hair, "hair");
-  addMesh("pupils", pupilMesh, "pupils", (i) => [[pupilBone[i]!, 1]]);
+  addMesh("skin", skin, "skin", undefined, (i) => skinParts[i]!);
+  addMesh("eyes", eyes, "eyes", undefined, (i) => (eyes.pos[i]![0] >= 0 ? PART.eye_l : PART.eye_r));
+  addMesh("mouth", built.mouth!, "mouth", undefined, () => PART.mouth);
+  for (const g of Object.keys(gown)) addMesh(g, gown[g]!, "gown", undefined, () => PART.gown);
+  addMesh("hair", hair, "hair", undefined, () => PART.hair);
+  addMesh("pupils", pupilMesh, "pupils", (i) => [[pupilBone[i]!, 1]], (i) => (pupilMesh.pos[i]![0] >= 0 ? PART.eye_l : PART.eye_r));
 
   doc.createExtension(EXTTextureWebP).setRequired(true);
   // positions stay float (metres) so shaders can use bind-space distances (JVP pulse, edema)
