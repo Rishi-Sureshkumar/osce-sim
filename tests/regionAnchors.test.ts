@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { loadContentFromDisk } from "@/content/loadFromDisk";
-import { ANCHOR_BY_REGION, LANDMARKS, PANEL_VIEWS, REGION_ANCHORS, pickRegion, poseFor, snapToAnchor, toWorld, HINGE_Y } from "@/exam3d/regionAnchors";
+import { ANCHOR_BY_REGION, LANDMARKS, PANEL_GROUPS, REGION_ANCHORS, pickRegion, poseFor, snapToAnchor, toWorld, HINGE_Y } from "@/exam3d/regionAnchors";
 
 const c = loadContentFromDisk();
 
 describe("3D region anchors", () => {
-  it("every canonical region is an anchor, a panel button, or a 2D zoom shortcut", () => {
+  it("every canonical region is an anchor, a panel button, or a hidden alias", () => {
     for (const r of c.regions) {
-      const ok = ANCHOR_BY_REGION.has(r.id) || PANEL_VIEWS.has(r.view) || !!r.zoomTo;
+      const ok = ANCHOR_BY_REGION.has(r.id) || PANEL_GROUPS.has(r.group) || !!r.hidden;
       expect(ok, r.id).toBe(true);
     }
   });

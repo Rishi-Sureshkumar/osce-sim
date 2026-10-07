@@ -70,6 +70,22 @@ export function validateContentGraph(c: ContentIndex): string[] {
     if ((cs.visibleSigns?.jvpCm ?? 0) > 3 && !cs.abnormalFindings.jvp_inspection) {
       errors.push(`case ${cs.id}: visibleSigns.jvpCm > 3 but jvp_inspection has no abnormal finding`);
     }
+    // phase 3: door instructions, PE checklist, PEN key
+    for (const pe of cs.doorInstructions?.prohibitedExams ?? []) {
+      for (const r of pe.regionIds) if (!c.regionById.has(r)) errors.push(`case ${cs.id}: prohibited exam "${pe.label}" names unknown region "${r}"`);
+    }
+    const peIds = new Set<string>();
+    for (const item of cs.peChecklist ?? []) {
+      if (peIds.has(item.id)) errors.push(`case ${cs.id}: duplicate peChecklist item "${item.id}"`);
+      peIds.add(item.id);
+      if (item.rule) for (const e of ruleRefErrors(item.rule, c)) errors.push(`case ${cs.id} peChecklist ${item.id}: ${e}`);
+      if (item.sourceText) errors.push(`case ${cs.id} peChecklist ${item.id}: sourceText must stay empty`);
+    }
+    for (const k of cs.penKey?.exam ?? []) {
+      for (const m of k.maneuverIds) if (!c.maneuverById.has(m)) errors.push(`case ${cs.id}: penKey exam "${k.id}" names unknown maneuver "${m}"`);
+    }
+    const keyIds = [...(cs.penKey?.history ?? []), ...(cs.penKey?.exam ?? []), ...(cs.penKey?.differential ?? [])].map((k) => k.id);
+    if (new Set(keyIds).size !== keyIds.length) errors.push(`case ${cs.id}: penKey ids must be unique across history, exam and differential`);
     const factIds = new Set<string>();
     for (const f of cs.history.facts) {
       if (factIds.has(f.id)) errors.push(`case ${cs.id}: duplicate history fact id "${f.id}"`);
@@ -78,6 +94,7 @@ export function validateContentGraph(c: ContentIndex): string[] {
   }
 
   for (const ms of c.markSheets) {
+    if (ms.domain && ms.passThreshold === undefined) errors.push(`mark sheet ${ms.id}: a domain sheet needs a passThreshold`);
     const ids = new Set<string>();
     for (const item of ms.items) {
       if (ids.has(item.id)) errors.push(`mark sheet ${ms.id}: duplicate item id "${item.id}"`);
@@ -124,6 +141,14 @@ export function ruleRefErrors(rule: Rule, c: ContentIndex): string[] {
   } else if ("technique" in rule) {
     maneuverList(rule.technique.maneuver).forEach(checkManeuver);
     for (const r of rule.technique.regions ?? []) if (!c.regionById.has(r)) out.push(`unknown region "${r}"`);
+  } else if ("placedWithin" in rule) {
+    maneuverList(rule.placedWithin.maneuver).forEach(checkManeuver);
+    for (const r of rule.placedWithin.regions ?? []) {
+      if (!c.regionById.has(r)) out.push(`unknown region "${r}"`);
+      else if (!maneuverList(rule.placedWithin.maneuver).some((m) => c.maneuverById.get(m)?.allowedRegions.includes(r))) {
+        out.push(`region "${r}" is not allowed for ${maneuverList(rule.placedWithin.maneuver).join("/")}`);
+      }
+    }
   } else if ("performedIn" in rule) {
     maneuverList(rule.performedIn.maneuver).forEach(checkManeuver);
   } else if ("all" in rule) {
@@ -136,11 +161,12 @@ export function ruleRefErrors(rule: Rule, c: ContentIndex): string[] {
   return out;
 }
 
-const TYPES = ["examine", "say", "courtesy", "submit_ddx", "note", "state_change", "hint", "room", "touch", "drape_change"];
+const TYPES = ["examine", "say", "courtesy", "submit_ddx", "submit_pen", "note", "state_change", "hint", "room", "touch", "drape_change", "describe_exam", "tool_contact"];
+const TIMER_EVENTS = ["pause", "resume", "warning", "auto_end", "begin", "encounter_warning", "encounter_end", "pen_warning", "pen_lock"];
 
 export function eventRefError(ref: string, c: ContentIndex): string | null {
   const [head, rest] = ref.includes(":") ? [ref.slice(0, ref.indexOf(":")), ref.slice(ref.indexOf(":") + 1)] : [ref, ""];
-  if (!rest) return CourtesyKind.safeParse(head).success || head === "drape_change" ? null : `unknown event ref "${ref}"`;
+  if (!rest) return CourtesyKind.safeParse(head).success || ["drape_change", "sit_down", "prohibited_attempt"].includes(head) ? null : `unknown event ref "${ref}"`;
   switch (head) {
     case "first":
     case "last":
@@ -156,7 +182,10 @@ export function eventRefError(ref: string, c: ContentIndex): string | null {
     case "room":
       return ["knock", "enter", "exit"].includes(rest) ? null : `unknown room event in "${ref}"`;
     case "timer":
-      return ["pause", "resume", "warning", "auto_end"].includes(rest) ? null : `unknown timer event in "${ref}"`;
+      return TIMER_EVENTS.includes(rest) ? null : `unknown timer event in "${ref}"`;
+    case "describe":
+    case "prohibited":
+      return c.regionById.has(rest) ? null : `unknown region in "${ref}"`;
     default:
       return `unknown event ref "${ref}"`;
   }

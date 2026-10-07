@@ -6,8 +6,8 @@ describe("body diagram shapes", () => {
   const { regions } = loadContentFromDisk();
 
   it("every region on a drawn view has exactly one shape with its svgPathId", () => {
-    for (const r of regions.filter((r) => r.view !== "whole")) {
-      const matches = (SHAPES[r.view] ?? []).filter((s) => s.svgPathId === r.svgPathId);
+    for (const r of regions.filter((r) => r.view && r.view !== "whole")) {
+      const matches = (SHAPES[r.view!] ?? []).filter((s: { svgPathId: string }) => s.svgPathId === r.svgPathId);
       expect(matches.length, `${r.id} on ${r.view}`).toBe(1);
     }
   });

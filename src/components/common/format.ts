@@ -28,7 +28,18 @@ export const COURTESY_LABELS = {
 export const modeLabel = (mode: "practice" | "exam" | undefined) => (mode === "practice" ? "Practice" : "Exam");
 
 export const HINT_LABELS = { hint: "Hint used", nudge: "Nudge shown", show_me: "“Show me how” used", section_check: "Section check used" } as const;
-export const TIMER_LABELS = { pause: "Timer paused", resume: "Timer resumed", warning: "2-minute warning", auto_end: "Time up — station ended" } as const;
+export const TIMER_LABELS = {
+  pause: "Timer paused",
+  resume: "Timer resumed",
+  warning: "2-minute warning",
+  auto_end: "Time up — station ended",
+  begin: "“You may begin” — encounter timer started",
+  encounter_warning: "5 minutes remaining in the encounter",
+  encounter_end: "Encounter time is up",
+  pen_warning: "2 minutes remaining for the note",
+  pen_lock: "Note time is up — note locked",
+} as const;
+export const OUTCOME_LABELS = { finding: "on target", near: "near the target", background: "off target", nothing: "no target nearby" } as const;
 export const TAG_LABELS: Record<CourtesyTag, string> = {
   introduced_name: "Introduced name",
   stated_role: "Stated role",
@@ -101,6 +112,22 @@ export function describeAction(a: Action, L: Labels): { who: "student" | "patien
       return { who: "student", text: `Note: ${a.payload.text}` };
     case "submit_ddx":
       return { who: "student", text: `Submitted differential: ${a.payload.differential.join("; ")}` };
+    case "submit_pen":
+      return { who: "student", text: `Submitted post-encounter note${a.payload.locked ? " (locked at time-up)" : ""}: ${a.payload.diagnoses.map((d) => d.diagnosis).join("; ")}` };
+    case "sit_down":
+      return { who: "student", text: "Sat down" };
+    case "describe_exam":
+      return { who: "student", text: `Described exam of ${L.region(a.payload.regionId)}: ${a.payload.text}` };
+    case "prohibited_attempt":
+      return { who: "student", text: `Attempted an exam not allowed in this encounter: ${L.region(a.payload.regionId)}` };
+    case "tool_contact": {
+      const p = a.payload;
+      const where = p.nearestRegionId ? L.region(p.nearestRegionId) : "body";
+      return {
+        who: "student",
+        text: `${p.tool}${p.toolMode ? ` (${p.toolMode})` : ""} placed near ${where} · ${p.distanceCm.toFixed(1)} cm (tolerance ${p.toleranceCm} cm) · ${(p.durationMs / 1000).toFixed(1)} s · ${OUTCOME_LABELS[p.outcome]}`,
+      };
+    }
     case "session_start":
       return { who: "system", text: "Session started" };
     case "session_end":

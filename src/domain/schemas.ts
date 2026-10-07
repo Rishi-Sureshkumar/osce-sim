@@ -40,6 +40,13 @@ export type System = z.infer<typeof System>;
 export const View = z.enum(["anterior", "posterior", "head_neck", "precordium", "neuro", "whole"]);
 export type View = z.infer<typeof View>;
 
+/**
+ * Phase 3: where a region lives in the 3D room. Drives the region-focus camera shot, the
+ * "Examine…" menu grouping and the panel buttons (whole patient, neuro domains).
+ */
+export const RegionGroup = z.enum(["head_neck", "chest_front", "chest_back", "abdomen", "arms", "hands", "legs", "feet", "whole", "neuro"]);
+export type RegionGroup = z.infer<typeof RegionGroup>;
+
 export const Position = z.enum([
   "seated",
   "seated_leaning_forward",
@@ -63,10 +70,15 @@ export const Region = z.object({
   id: RegionId,
   label: z.string().min(1),
   system: System,
-  view: View,
-  /** id of the SVG element that renders this region (see src/components/body/views). */
-  svgPathId: z.string().min(1),
-  /** Optional: clicking this region on a body view zooms into another view. */
+  /** Phase 3 grouping for the 3D room (see RegionGroup). */
+  group: RegionGroup,
+  /** Examined verbally only (standardized patients stay masked: mouth, nose). */
+  verbal: z.boolean().optional(),
+  /** Kept for id stability but never offered for examination (old 2D zoom aliases). */
+  hidden: z.boolean().optional(),
+  /** @deprecated 2D diagram fields — removed in phase 3 M1. */
+  view: View.optional(),
+  svgPathId: z.string().min(1).optional(),
   zoomTo: View.optional(),
 });
 export type Region = z.infer<typeof Region>;
@@ -201,6 +213,11 @@ export const ExamManeuver = z.object({
   steps: z.array(SequenceStep).optional(),
   /** Physical contact? Omitted = true unless technique is "inspect". Drives hand-hygiene rules. */
   touch: z.boolean().optional(),
+  /**
+   * Words a post-encounter note uses for this maneuver's findings (e.g. "S3", "gallop" for the bell).
+   * Used to flag notes that report findings from maneuvers that were never performed.
+   */
+  penTerms: z.array(z.string().min(1)).optional(),
   demo: z.object({
     steps: z.array(z.string().min(1)).min(1),
     mediaUrl: z.string().optional(),
@@ -264,6 +281,32 @@ export const DifferentialItem = z.object({
   rationale: z.string().min(1),
 });
 
+/** What the student reads on the door before the encounter (1B: vitals, task, exams not to perform). */
+export const DoorInstructions = z.object({
+  reasonForVisit: z.string().min(1),
+  task: z.string().min(1),
+  /** Exams that must not be done in this encounter; clicking these regions logs a prohibited_attempt. */
+  prohibitedExams: z.array(z.object({ label: z.string().min(1), regionIds: z.array(RegionId).min(1) })).default([]),
+});
+export type DoorInstructions = z.infer<typeof DoorInstructions>;
+
+export const TimeLimits = z.object({
+  encounterMin: z.number().int().min(1),
+  /** Post-encounter note (PEN). */
+  penMin: z.number().int().min(1),
+});
+export type TimeLimits = z.infer<typeof TimeLimits>;
+
+/** Faculty answer key for the post-encounter note (graded by the AI, quotes verified). */
+export const PenKey = z.object({
+  history: z.array(z.object({ id: slug, text: z.string().min(1), kind: z.enum(["positive", "negative"]), keywords: z.array(z.string()).default([]) })),
+  exam: z.array(z.object({ id: slug, text: z.string().min(1), maneuverIds: z.array(ManeuverId).default([]), keywords: z.array(z.string()).default([]) })),
+  differential: z.array(
+    z.object({ id: slug, diagnosis: z.string().min(1), aliases: z.array(z.string()).default([]), rank: z.number().int().min(1), rationale: z.string().min(1) }),
+  ),
+});
+export type PenKey = z.infer<typeof PenKey>;
+
 export const Case = z.object({
   id: CaseId,
   title: z.string().min(1),
@@ -317,6 +360,12 @@ export const Case = z.object({
    * (e.g. a focused CV/resp encounter only scores those sections of exam-fcm1).
    */
   markSheetSections: z.record(MarkSheetId, z.array(z.string().min(1)).min(1)).optional(),
+  /** Phase 3 (1B OSCE). */
+  doorInstructions: DoorInstructions.optional(),
+  timeLimits: TimeLimits.optional(),
+  /** Case-specific SP physical-exam checklist (auto rules). Joins the patient-encounter domain. */
+  peChecklist: z.array(z.lazy((): z.ZodType<MarkSheetItem> => MarkSheetItem as unknown as z.ZodType<MarkSheetItem>)).optional(),
+  penKey: PenKey.optional(),
   synthetic: z.literal(true),
   sourceNote: z.string().min(1),
 });
@@ -413,6 +462,9 @@ const ExamTechnique = {
   durationMs: z.number().int().min(0).max(600_000).optional(),
   /** Sequence step id (e.g. Rinne "bone" / "signal" / "air"). */
   step: z.string().max(40).optional(),
+  /** Phase 3: distance from the hidden anchor (cm) and that anchor's tolerance. */
+  distanceCm: z.number().min(0).max(500).optional(),
+  toleranceCm: z.number().min(0).max(50).optional(),
 };
 
 const ExaminePayload = z.object({ regionId: RegionId, maneuverId: ManeuverId, ...ExamTechnique });
@@ -438,8 +490,40 @@ const HintPayload = z.object({
   maneuverId: ManeuverId.optional(),
 });
 
-const TimerPayload = z.object({ event: z.enum(["pause", "resume", "warning", "auto_end"]) });
+const TimerPayload = z.object({
+  event: z.enum(["pause", "resume", "warning", "auto_end", "begin", "encounter_warning", "encounter_end", "pen_warning", "pen_lock"]),
+});
 const RoomPayload = z.object({ event: z.enum(["knock", "enter", "exit"]) });
+
+const DescribeExamPayload = z.object({ regionId: RegionId, text: z.string().min(1).max(2000) });
+const ProhibitedPayload = z.object({ regionId: RegionId });
+
+export const ContactOutcome = z.enum(["finding", "near", "background", "nothing"]);
+export type ContactOutcome = z.infer<typeof ContactOutcome>;
+/** One tool placement on the body. Logged for every contact; never shown to the student during the encounter. */
+const ToolContactPayload = z.object({
+  tool: Tool,
+  toolMode: ToolMode.optional(),
+  maneuverId: ManeuverId.optional(),
+  nearestRegionId: RegionId.nullable(),
+  distanceCm: z.number().min(0).max(500),
+  toleranceCm: z.number().min(0).max(50),
+  durationMs: z.number().int().min(0).max(600_000),
+  outcome: ContactOutcome,
+});
+
+/** 1B post-encounter note: history, physical exam, up to 3 diagnoses (no workup). */
+export const PenPayload = z.object({
+  history: z.string().max(6000),
+  exam: z.string().max(6000),
+  diagnoses: z
+    .array(z.object({ diagnosis: z.string().min(1).max(300), support: z.string().max(2000).optional() }))
+    .min(1)
+    .max(3),
+  /** set by the server when the note was locked at time-up from the last autosaved draft */
+  locked: z.boolean().optional(),
+});
+export type PenPayload = z.infer<typeof PenPayload>;
 
 const SubmitPayload = z.object({
   summary: z.string().max(4000),
@@ -458,6 +542,11 @@ export const ActionInput = z.discriminatedUnion("type", [
   z.object({ type: z.literal("hint"), source: ActionSource, payload: HintPayload }),
   z.object({ type: z.literal("timer"), source: ActionSource, payload: TimerPayload }),
   z.object({ type: z.literal("room"), source: ActionSource, payload: RoomPayload }),
+  z.object({ type: z.literal("sit_down"), source: ActionSource, payload: z.object({}).default({}) }),
+  z.object({ type: z.literal("describe_exam"), source: ActionSource, payload: DescribeExamPayload }),
+  z.object({ type: z.literal("prohibited_attempt"), source: ActionSource, payload: ProhibitedPayload }),
+  z.object({ type: z.literal("tool_contact"), source: ActionSource, payload: ToolContactPayload }),
+  z.object({ type: z.literal("submit_pen"), source: ActionSource, payload: PenPayload }),
 ]);
 export type ActionInput = z.infer<typeof ActionInput>;
 
@@ -509,6 +598,11 @@ export const Action = z.discriminatedUnion("type", [
   z.object({ ...actionMeta, type: z.literal("hint"), source: ActionSource, payload: HintPayload }),
   z.object({ ...actionMeta, type: z.literal("timer"), source: ActionSource, payload: TimerPayload }),
   z.object({ ...actionMeta, type: z.literal("room"), source: ActionSource, payload: RoomPayload }),
+  z.object({ ...actionMeta, type: z.literal("sit_down"), source: ActionSource, payload: z.object({}).default({}) }),
+  z.object({ ...actionMeta, type: z.literal("describe_exam"), source: ActionSource, payload: DescribeExamPayload }),
+  z.object({ ...actionMeta, type: z.literal("prohibited_attempt"), source: ActionSource, payload: ProhibitedPayload }),
+  z.object({ ...actionMeta, type: z.literal("tool_contact"), source: ActionSource, payload: ToolContactPayload }),
+  z.object({ ...actionMeta, type: z.literal("submit_pen"), source: ActionSource, payload: PenPayload }),
   z.object({
     ...actionMeta,
     type: z.literal("patient_say"),
@@ -538,6 +632,9 @@ export type ActionType = Action["type"];
  *   "timer:<pause|resume|warning|auto_end>"       a timer event
  *   "drape_change"                                draping, exposing or covering (courtesy or direct manipulation)
  *   "drape:cover" | "drape:expose"                a zone covered (incl. re-draping) / uncovered
+ *   "sit_down"                                    the student sat down (removes a barrier)
+ *   "describe:<regionId>"                         a verbal exam description for that region
+ *   "prohibited:<regionId>" | "prohibited_attempt"  an attempt at an exam the door instructions exclude
  *   "last:examine" | "last:say"                   last action of a type
  */
 export const EventRef = z.string().min(1);
@@ -560,11 +657,12 @@ export type Rule =
   | { said: CourtesyTag | CourtesyTag[] }
   | { technique: TechniqueRule }
   | { hygieneBeforeTouch: true }
+  | { placedWithin: { maneuver: string | string[]; regions?: string[]; position?: Position | Position[]; partial?: boolean } }
   | { happened: string }
   | { courtesy: CourtesyKind; position?: Position }
   | { before: [string, string] }
   | { performedIn: { maneuver: string | string[]; position: Position | Position[] } }
-  | { submitted: "submit_ddx" }
+  | { submitted: "submit_ddx" | "submit_pen" }
   | { all: Rule[] }
   | { any: Rule[] }
   | { not: Rule };
@@ -589,7 +687,7 @@ export const Rule: z.ZodType<Rule> = z.lazy(() =>
         position: z.union([Position, z.array(Position).min(1)]),
       }),
     }).strict(),
-    z.object({ submitted: z.literal("submit_ddx") }).strict(),
+    z.object({ submitted: z.enum(["submit_ddx", "submit_pen"]) }).strict(),
     z.object({ said: z.union([CourtesyTag, z.array(CourtesyTag).min(1)]) }).strict(),
     z
       .object({
@@ -608,6 +706,22 @@ export const Rule: z.ZodType<Rule> = z.lazy(() =>
       })
       .strict(),
     z.object({ hygieneBeforeTouch: z.literal(true) }).strict(),
+    /**
+     * 1 if the maneuver produced a recorded finding: a tool placement inside the anchor tolerance
+     * (tool_contact outcome "finding") or, for click maneuvers, an examine. Optional region/position filter.
+     */
+    z
+      .object({
+        placedWithin: z
+          .object({
+            maneuver: z.union([ManeuverId, z.array(ManeuverId).min(1)]),
+            regions: z.array(RegionId).min(1).optional(),
+            position: z.union([Position, z.array(Position).min(1)]).optional(),
+            partial: z.boolean().optional(),
+          })
+          .strict(),
+      })
+      .strict(),
     /** 1 if the event ref occurred at all (e.g. { not: { happened: "timer:auto_end" } }) */
     z.object({ happened: EventRef }).strict(),
     z.object({ all: z.array(Rule).min(1) }).strict(),
@@ -641,10 +755,20 @@ export const MarkSheetItem = z
   });
 export type MarkSheetItem = z.infer<typeof MarkSheetItem>;
 
+/** 1B OSCE scoring domains: a station passes only when every domain it scores passes. */
+export const Domain = z.enum(["patient_encounter", "communication"]);
+export type Domain = z.infer<typeof Domain>;
+
 export const MarkSheet = z.object({
   id: MarkSheetId,
   title: z.string().min(1),
   kind: z.enum(["exam", "history"]),
+  /** Phase 3: which pass/fail domain this sheet counts toward. */
+  domain: Domain.optional(),
+  /** Fraction of domain points needed to pass (data, e.g. 0.7). */
+  passThreshold: z.number().min(0).max(1).optional(),
+  /** Credit line kept with the sheet (e.g. the communication checklist's author). */
+  attribution: z.string().optional(),
   sourceNote: z.string(),
   items: z.array(MarkSheetItem).min(1),
 });

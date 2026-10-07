@@ -108,6 +108,10 @@ export const REGION_ANCHORS: RegionAnchor[] = [
 
   // ---- abdomen (upper, near the hinge) ----
   a("abd_epigastric", "upper", [[0, 0.112, -0.24]], 0.022),
+  // prohibited-exam targets (clicking logs a prohibited_attempt; never examined)
+  a("breast_right", "upper", [[-0.1, 0.122, -0.38]], 0.045),
+  a("breast_left", "upper", [L([-0.1, 0.122, -0.38])], 0.045),
+  a("pelvic", "upper", [[0, 0.085, 0.0]], 0.05),
   a("abd_ruq", "upper", [[-0.075, 0.1, -0.185]], 0.04),
   a("abd_luq", "upper", [L([-0.075, 0.1, -0.185])], 0.04),
   a("abd_rlq", "upper", [[-0.075, 0.092, -0.07]], 0.04),
@@ -244,5 +248,5 @@ export function snapToAnchor(world: Vec3, allowedRegionIds: readonly string[], p
 /** A placement counts as on target within this many anchor radii (tools snap inside it). */
 export const SNAP_TOLERANCE = 1.5;
 
-/** Regions the 3D view shows as buttons rather than body anchors. */
-export const PANEL_VIEWS = new Set(["whole", "neuro"]);
+/** Region groups shown as buttons (exam domains, whole-patient), not as places on the body. */
+export const PANEL_GROUPS = new Set<string>(["whole", "neuro"]);

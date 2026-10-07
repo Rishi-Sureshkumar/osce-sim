@@ -1,4 +1,9 @@
-import type { Action, Evidence } from "@/domain/schemas";
+import type { Action, Evidence, PenPayload } from "@/domain/schemas";
+
+/** The PEN as one quotable text (section headings are fixed, so quotes can't straddle sections usefully). */
+export function penText(p: PenPayload): string {
+  return [`HISTORY:\n${p.history}`, `PHYSICAL EXAMINATION:\n${p.exam}`, `DIAGNOSES:\n${p.diagnoses.map((d, i) => `${i + 1}. ${d.diagnosis}${d.support ? `\n   Supporting: ${d.support}` : ""}`).join("\n")}`].join("\n\n");
+}
 
 /** Normalise only typography and whitespace — wording must still match exactly. */
 export function normalizeForQuote(s: string): string {
@@ -19,6 +24,10 @@ export function quotableText(a: Action): string | null {
       return a.payload.text;
     case "submit_ddx":
       return [a.payload.summary, ...a.payload.differential, a.payload.plan].join("\n");
+    case "describe_exam":
+      return a.payload.text;
+    case "submit_pen":
+      return penText(a.payload);
     default:
       return null;
   }

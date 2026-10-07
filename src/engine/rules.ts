@@ -55,10 +55,14 @@ export function findEvent(log: Action[], ref: string): Action | undefined {
         (a.type === "state_change" && !!a.payload.drape && a.payload.drape.covered === cover)
       );
     }
+    if (body === "sit_down") return a.type === "sit_down";
+    if (body.startsWith("describe:")) return a.type === "describe_exam" && a.payload.regionId === body.slice(9);
+    if (body === "prohibited_attempt") return a.type === "prohibited_attempt";
+    if (body.startsWith("prohibited:")) return a.type === "prohibited_attempt" && a.payload.regionId === body.slice(11);
     if (body.startsWith("tag:")) return a.type === "say" && !!a.payload.tags?.some((t) => t.tag === body.slice(4));
     if (body.startsWith("room:")) return a.type === "room" && a.payload.event === body.slice(5);
     if (body.startsWith("timer:")) return a.type === "timer" && a.payload.event === body.slice(6);
-    if (["examine", "say", "courtesy", "submit_ddx", "note", "state_change", "hint", "room"].includes(body)) return a.type === body;
+    if (["examine", "say", "courtesy", "submit_ddx", "submit_pen", "note", "state_change", "hint", "room", "describe_exam", "tool_contact"].includes(body)) return a.type === body;
     return a.type === "courtesy" && a.payload.kind === body;
   };
   return mode === "first" ? log.find(match) : [...log].reverse().find(match);
@@ -157,8 +161,28 @@ function evaluate(rule: Rule, log: Action[]): RuleResult {
     return { value: good.length ? 1 : 0, actionIds: good.slice(0, 1).map((g) => g.id) };
   }
 
+  if ("placedWithin" in rule) {
+    const r = rule.placedWithin;
+    const ids = new Set(list(r.maneuver));
+    const positions = r.position ? new Set(list(r.position)) : null;
+    // A recorded finding: tool placements only produce an examine inside the anchor tolerance,
+    // so an examine of the maneuver (tool or click) is the evidence; its tool_contact gives the distance.
+    const good = log.filter((a, i) => {
+      if (a.type !== "examine" || !ids.has(a.payload.maneuverId)) return false;
+      if (a.payload.distanceCm !== undefined && a.payload.toleranceCm !== undefined && a.payload.distanceCm > a.payload.toleranceCm) return false;
+      if (positions && !positions.has(positionAt(log, i)!)) return false;
+      return true;
+    }) as Extract<Action, { type: "examine" }>[];
+    if (r.regions?.length) {
+      const covered = r.regions.filter((reg) => good.some((g) => g.payload.regionId === reg));
+      const frac = covered.length / r.regions.length;
+      return { value: r.partial ? frac : frac === 1 ? 1 : 0, actionIds: good.filter((g) => covered.includes(g.payload.regionId)).map((g) => g.id) };
+    }
+    return { value: good.length ? 1 : 0, actionIds: good.slice(0, 1).map((g) => g.id) };
+  }
+
   if ("submitted" in rule) {
-    const hit = log.find((a) => a.type === "submit_ddx");
+    const hit = log.find((a) => a.type === rule.submitted);
     return { value: hit ? 1 : 0, actionIds: hit ? [hit.id] : [] };
   }
 

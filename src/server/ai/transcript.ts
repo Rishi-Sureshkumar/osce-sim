@@ -2,6 +2,7 @@ import type { Action } from "@/domain/schemas";
 import { describeAction, mmss } from "@/components/common/format";
 import type { ContentIndex } from "@/content/types";
 import { orderLog } from "@/engine/order";
+import { penText } from "@/engine/evidence";
 
 /**
  * Plain-text transcript for the grader. Every line carries its action id so the grader can cite
@@ -31,6 +32,9 @@ export function renderTranscript(log: Action[], content: Pick<ContentIndex, "man
       case "courtesy":
       case "state_change":
       case "room":
+      case "sit_down":
+      case "prohibited_attempt":
+      case "tool_contact":
         lines.push(`${head} ACTION (not quotable): ${describeAction(a, labels).text}`);
         break;
       case "hint":
@@ -39,6 +43,12 @@ export function renderTranscript(log: Action[], content: Pick<ContentIndex, "man
         break;
       case "note":
         lines.push(`${head} STUDENT NOTE: ${a.payload.text}`);
+        break;
+      case "describe_exam":
+        lines.push(`${head} STUDENT VERBAL EXAM (${content.regionById.get(a.payload.regionId)?.label ?? a.payload.regionId}): ${a.payload.text}`);
+        break;
+      case "submit_pen":
+        lines.push(`${head} POST-ENCOUNTER NOTE:\n${penText(a.payload)}`);
         break;
       case "submit_ddx":
         lines.push(
