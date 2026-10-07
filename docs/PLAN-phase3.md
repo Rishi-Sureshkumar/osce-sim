@@ -297,9 +297,16 @@ Lighting is stable: hemisphere light, one shadowed key light, and contact shadow
 | M1 | 3D-only | done |
 | M2 | Patient model and room | done |
 | M3 | Cinematic navigation | done |
-| M4 | Hidden targets | planned |
+| M4 | Hidden targets | done |
 | M5 | 1B encounter flow and PEN | planned |
 | M6 | Two-domain scoring | planned |
+
+### M4 notes (as built)
+- `src/exam3d/tools/contact.ts` (pure, tested) decides `finding` / `near` / `background` / `nothing` from distance vs `toleranceCm`; the 3D view logs a `tool_contact` for every placement through `contactFromTool`.
+- A stethoscope inside the tolerance records its `examine` after 3 s of continuous contact; sliding across a band boundary restarts the clock. Off-target chest/back placements play the catalog's *normal* heart or breath sounds (`POST /listen { background }`), never the case's.
+- The server refuses a tool `examine` outside its tolerance or a stethoscope one shorter than 3 s, refuses hints in exam mode, and redacts distances (and hides `tool_contact`) from the student while the session is active. Coaches and results see them in full.
+- Snapping: inside several tolerances the most central anchor wins (relative distance), so the 6 cm breast zone never swallows the apex.
+- Practice "Show landmarks" shows labels only (no markers) for 3 s and logs a hint. `/dev/anchors` draws tolerance and 2× bands; `notFound()` in production.
 
 ## Open questions
 1. Domain pass thresholds: 70% is a placeholder.

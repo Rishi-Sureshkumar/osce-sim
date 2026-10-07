@@ -139,7 +139,9 @@ export function snapToAnchor(world: Vec3, allowedRegionIds: readonly string[], p
     if (!a) continue;
     for (const w of anchorWorldPoints(id, pose)) {
       const cm = distance(w, world) * 100;
-      const score = cm - a.toleranceCm;
+      // inside one or more tolerances the most central wins (relative distance, so a broad
+      // breast zone never swallows the apex); outside them, the nearest tolerance boundary wins
+      const score = cm <= a.toleranceCm ? cm / a.toleranceCm - 1 : cm - a.toleranceCm;
       if (score < bestScore) {
         bestScore = score;
         best = { regionId: id, error: cm / a.toleranceCm, distanceCm: cm, toleranceCm: a.toleranceCm, point: w };

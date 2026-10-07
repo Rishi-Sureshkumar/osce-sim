@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadContentFromDisk } from "@/content/loadFromDisk";
-import { candidatesFor, placementSound, regionsForTool, sequenceProgress, stepForPlacement, toolFor } from "@/exam3d/tools/toolLogic";
+import { candidatesFor, regionsForTool, sequenceProgress, stepForPlacement, toolFor } from "@/exam3d/tools/toolLogic";
 import { landmarkWorld, poseFor } from "@/exam3d/regionAnchors";
 
 const { maneuvers, maneuverById } = loadContentFromDisk();
@@ -24,13 +24,6 @@ describe("tool → maneuver resolution", () => {
   });
 });
 
-describe("placement sound", () => {
-  it("inside the tolerance is full; up to 2× is quieter and band-limited; beyond is muffled", () => {
-    expect(placementSound(0.5)).toMatchObject({ attenuation: 1, onTarget: true });
-    expect(placementSound(1.5)).toMatchObject({ attenuation: 0.75, onTarget: false });
-    expect(placementSound(2.5)).toMatchObject({ attenuation: 0.25, lowpassHz: 350, onTarget: false });
-  });
-});
 
 describe("Rinne sequence", () => {
   const steps = maneuverById.get("rinne_test")!.steps!;

@@ -1,12 +1,12 @@
 "use client";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { Action, AudioSpec, DrapeZone, Position, PublicCase, Region } from "@/domain/schemas";
+import type { Action, AudioSpec, ContactOutcome, DrapeZone, Position, PublicCase, Region } from "@/domain/schemas";
 import type { PublicCatalog } from "@/content/types";
 import { patientState } from "@/engine/patientState";
 import { audioEngine, type Playing } from "@/audio/engine";
 import { captionFor, toneEnvelope } from "@/audio/schedule";
-import type { ToolUse } from "@/input/adapters/tool";
+import type { ToolContact, ToolUse } from "@/input/adapters/tool";
 import { Drapes } from "@/scene/Drapes";
 import { HandWash } from "@/scene/HandWash";
 import { FpsMeter, LoadingOverlay } from "@/scene/Loading";
@@ -17,9 +17,11 @@ import { SHOTS, back, breadcrumb, focusShotFor, go, shotCamera, type ShotId, typ
 import { ToolCursor, type CursorPoint } from "@/scene/tools/ToolCursor";
 import type { TableItem } from "@/scene/room/ToolTable";
 import { Patient3D, type BodyHit } from "./Patient3D";
-import { ANCHOR_BY_REGION, SNAP_TOLERANCE, poseFor, snapToAnchor, type Vec3 } from "./regionAnchors";
+import { ANCHOR_BY_REGION, poseFor, snapToAnchor, type Vec3 } from "./regionAnchors";
+import { HINT_MS, LandmarkHints } from "./LandmarkHints";
 import { TestHook } from "./TestHook";
-import { MIN_LISTEN_MS, candidatesFor, placementSound, regionsForTool, sequenceProgress, stepForPlacement } from "./tools/toolLogic";
+import { MIN_LISTEN_MS, candidatesFor, regionsForTool, sequenceProgress, stepForPlacement } from "./tools/toolLogic";
+import { backgroundKind, contactOutcome, contactSound, recordsFinding } from "./tools/contact";
 import { ToolHud, itemInHand, pickFromTable, toolModeOf, type ToolState } from "./tools/ToolTray";
 
 type M = PublicCatalog["maneuvers"][number];
@@ -64,6 +66,10 @@ export interface Exam3DViewProps {
   onToolExamine: (u: ToolUse) => Promise<Action | null>;
   /** several maneuvers fit this placement: ask the student; resolves to the chosen maneuver id */
   onToolAmbiguous: (regionId: string, maneuverIds: string[]) => Promise<string | null>;
+  /** practice only: anatomical labels were shown (logged as a hint) */
+  onLandmarksHint?: (shotLabel: string) => void;
+  /** log every placement (hidden-anchor distance and outcome) */
+  onToolContact: (c: ToolContact) => Promise<void>;
   variant: VariantId;
   speaking?: boolean;
   quality?: "high" | "low";
@@ -75,6 +81,7 @@ interface Hold {
   error: number;
   distanceCm: number;
   toleranceCm: number;
+  outcome: ContactOutcome;
   point: Vec3;
   startedAt: number;
 }
@@ -87,7 +94,7 @@ interface Sequence {
 }
 
 /** The table's head section: flat for left lateral; behind the patient (back free) when sitting up. */
-function tableAngle(position: string, bedAngle: number): number {
+export function tableAngle(position: string, bedAngle: number): number {
   if (position === "left_lateral_decubitus" || position === "prone") return 0;
   if (position === "seated" || position === "seated_leaning_forward" || position === "standing") return 50;
   return bedAngle;
@@ -148,6 +155,13 @@ export default function Exam3DView(props: Exam3DViewProps) {
   const playing = useRef<Playing | null>(null);
   const pending = useRef<{ hit: BodyHit } | null>(null);
   const holdRef = useRef<Hold | null>(null);
+  const recorded = useRef<number | null>(null);
+  const [landmarksAt, setLandmarksAt] = useState<number | null>(null);
+  useEffect(() => {
+    if (landmarksAt === null) return;
+    const id = setTimeout(() => setLandmarksAt(null), HINT_MS);
+    return () => clearTimeout(id);
+  }, [landmarksAt]);
   holdRef.current = hold;
   const byId = useMemo(() => new Map(props.regions.map((r) => [r.id, r])), [props.regions]);
   const maneuverById = useMemo(() => new Map(props.maneuvers.map((m) => [m.id, m])), [props.maneuvers]);
@@ -277,47 +291,80 @@ export default function Exam3DView(props: Exam3DViewProps) {
   // ------------------------------------------------------------------ tools
   const snap = (point: Vec3) => snapToAnchor(point, toolRegions, pose);
 
+  /** Where a placement lands relative to the hidden anchors (nothing about them is shown). */
+  const contact = (point: Vec3) => {
+    const s = snap(point);
+    if (!s) return null;
+    return { ...s, outcome: contactOutcome(s.distanceCm, s.toleranceCm, s.regionId) };
+  };
+
+  const logContact = (h: Hold, durationMs: number) => {
+    if (!tool) return;
+    void props.onToolContact({ tool, toolMode: mode, maneuverId: h.maneuverId, nearestRegionId: h.regionId, distanceCm: h.distanceCm, toleranceCm: h.toleranceCm, durationMs, outcome: h.outcome });
+  };
+
   const startListening = async (h: Hold) => {
     setHold(h);
+    const sound = contactSound(h.outcome, h.distanceCm, h.toleranceCm);
+    if (!sound) {
+      setCaption("No sound here");
+      return;
+    }
+    // inside or near the anchor: the case's own sound; elsewhere on the chest/back: generic normal sounds
+    const body = h.outcome === "background" ? { background: backgroundKind(h.regionId) } : { maneuverId: h.maneuverId, regionId: h.regionId };
     const res = await fetch(`/api/sessions/${props.sessionId}/listen`, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ maneuverId: h.maneuverId, regionId: h.regionId }),
+      body: JSON.stringify(body),
     }).catch(() => null);
     const { audio } = res?.ok ? ((await res.json()) as { audio: AudioSpec | null }) : { audio: null };
     if (holdRef.current?.startedAt !== h.startedAt) return; // released already
-    setCaption(audio ? captionFor(audio) + (h.error > SNAP_TOLERANCE ? " (faint)" : "") : "No sound here");
+    setCaption(audio ? (h.outcome === "finding" ? captionFor(audio) : "Faint, distant sounds") : "No sound here");
     if (audio) {
-      playing.current = await audioEngine.loop(audio, { hr, rr, ...placementSound(h.error) });
+      playing.current = await audioEngine.loop(audio, { hr, rr, attenuation: sound.attenuation, lowpassHz: sound.lowpassHz });
       if (holdRef.current?.startedAt !== h.startedAt) playing.current.stop();
     }
   };
 
-  const endListening = async () => {
+  // a stethoscope held inside the tolerance records its finding after MIN_LISTEN_MS
+  const recordRef = useRef<(h: Hold) => void>(() => undefined);
+  recordRef.current = (h) => {
+    if (!tool || holdRef.current?.startedAt !== h.startedAt) return;
+    recorded.current = h.startedAt;
+    void props.onToolExamine({ regionId: h.regionId, maneuverId: h.maneuverId, tool, toolMode: mode, placementError: h.error, distanceCm: h.distanceCm, toleranceCm: h.toleranceCm, durationMs: MIN_LISTEN_MS });
+  };
+  useEffect(() => {
+    if (!hold || hold.outcome !== "finding") return;
+    const h = hold;
+    const id = setTimeout(() => recordRef.current(h), MIN_LISTEN_MS);
+    return () => clearTimeout(id);
+  }, [hold]);
+
+  const endListening = () => {
     const h = holdRef.current;
     playing.current?.stop();
     playing.current = null;
     setHold(null);
-    if (!h || !tool) return;
-    await props.onToolExamine({
-      regionId: h.regionId,
-      maneuverId: h.maneuverId,
-      tool,
-      toolMode: mode,
-      placementError: h.error,
-      distanceCm: h.distanceCm,
-      toleranceCm: h.toleranceCm,
-      durationMs: performance.now() - h.startedAt,
-    });
+    if (!h) return;
+    const durationMs = performance.now() - h.startedAt;
+    logContact(h, durationMs);
+    if (h.outcome === "finding" && recorded.current !== h.startedAt && !recordsFinding(h.outcome, durationMs, "stethoscope")) setCaption("Listen a little longer to be sure.");
+  };
+
+  const holdAt = (hit: BodyHit, c: NonNullable<ReturnType<typeof contact>>): Hold | null => {
+    if (!tool) return null;
+    const m = candidatesFor(props.maneuvers, tool, mode, c.regionId)[0];
+    if (!m) return null;
+    return { regionId: c.regionId, maneuverId: m.id, error: c.error, distanceCm: c.distanceCm, toleranceCm: c.toleranceCm, outcome: c.outcome, point: hit.point, startedAt: performance.now() };
   };
 
   const onToolDown = (hit: BodyHit) => {
     if (!tool || props.disabled || busy) return;
-    const s = snap(hit.point);
-    if (!s) return;
+    const c = contact(hit.point);
+    if (!c) return;
     if (tool === "stethoscope") {
-      const m = candidatesFor(props.maneuvers, tool, mode, s.regionId)[0];
-      if (m) void startListening({ regionId: s.regionId, maneuverId: m.id, error: s.error, distanceCm: s.distanceCm, toleranceCm: s.toleranceCm, point: hit.point, startedAt: performance.now() });
+      const h = holdAt(hit, c);
+      if (h) void startListening(h);
     } else {
       pending.current = { hit };
     }
@@ -326,20 +373,19 @@ export default function Exam3DView(props: Exam3DViewProps) {
   const onToolMove = (hit: BodyHit) => {
     const h = holdRef.current;
     if (!h || !tool) return;
-    const s = snap(hit.point);
-    if (!s) return;
-    if (s.regionId !== h.regionId) {
-      // slid onto another region: log the last spot and start listening at the new one
-      void endListening().then(() => {
-        const m = candidatesFor(props.maneuvers, tool, mode, s.regionId)[0];
-        if (m) void startListening({ regionId: s.regionId, maneuverId: m.id, error: s.error, distanceCm: s.distanceCm, toleranceCm: s.toleranceCm, point: hit.point, startedAt: performance.now() });
-      });
+    const c = contact(hit.point);
+    if (!c) return;
+    // slid to another anchor or across a tolerance band: log the last spot and listen afresh
+    if (c.regionId !== h.regionId || c.outcome !== h.outcome) {
+      endListening();
+      const next = holdAt(hit, c);
+      if (next) void startListening(next);
     }
   };
 
   const onToolUp = () => {
     if (holdRef.current) {
-      void endListening();
+      endListening();
       return;
     }
     const p = pending.current;
@@ -353,16 +399,24 @@ export default function Exam3DView(props: Exam3DViewProps) {
     if (!s) return;
     const cands = candidatesFor(props.maneuvers, tool, mode, s.regionId);
     if (!cands.length) return;
-    let maneuverId: string | null = cands[0]!.id;
+    const m0 = maneuverById.get(cands[0]!.id)!;
+    // sequences measure placement against the step's landmark (e.g. mastoid vs ear canal)
+    const seqStep = m0.interaction === "sequence" && m0.steps ? stepForPlacement(m0.steps, s.regionId, point, pose, ANCHOR_BY_REGION.get(s.regionId)?.radius) : undefined;
+    const distanceCm = seqStep ? seqStep.error * s.toleranceCm : s.distanceCm;
+    const outcome = contactOutcome(distanceCm, s.toleranceCm, s.regionId);
+    if (tool === "reflex_hammer") setSwingAt(performance.now());
+    if (outcome !== "finding") {
+      void props.onToolContact({ tool, toolMode: mode, maneuverId: m0.id, nearestRegionId: s.regionId, distanceCm, toleranceCm: s.toleranceCm, durationMs: 0, outcome });
+      setCaption("Nothing notable here.");
+      return;
+    }
+    let maneuverId: string | null = m0.id;
     if (cands.length > 1) maneuverId = await props.onToolAmbiguous(s.regionId, cands.map((c) => c.id));
     if (!maneuverId) return;
     const m = maneuverById.get(maneuverId)!;
-    // sequences measure placement against the step's landmark (e.g. mastoid vs ear canal)
-    const seqStep = m.interaction === "sequence" && m.steps ? stepForPlacement(m.steps, s.regionId, point, pose, ANCHOR_BY_REGION.get(s.regionId)?.radius) : undefined;
-    const distanceCm = seqStep ? seqStep.error * (ANCHOR_BY_REGION.get(s.regionId)?.toleranceCm ?? s.toleranceCm) : s.distanceCm;
     const error = seqStep?.error ?? s.error;
-    const step = seqStep?.id;
-    if (tool === "reflex_hammer") setSwingAt(performance.now());
+    const step = m.interaction === "sequence" ? seqStep?.id : undefined;
+    void props.onToolContact({ tool, toolMode: mode, maneuverId, nearestRegionId: s.regionId, distanceCm, toleranceCm: s.toleranceCm, durationMs: 0, outcome });
     const action = await props.onToolExamine({ regionId: s.regionId, maneuverId, tool, toolMode: mode, placementError: error, distanceCm, toleranceCm: s.toleranceCm, ...(step ? { step } : {}) });
     if (!action || action.type !== "examine") return;
     const result = action.result;
@@ -401,9 +455,13 @@ export default function Exam3DView(props: Exam3DViewProps) {
   const boneSec = sequence?.tone ? toneEnvelope(sequence.tone.params).boneSec : 3;
   const forkElapsed = props.tool.struckAt ? (now - props.tool.struckAt) / 1000 : 0;
   const signalReady = !!props.tool.struckAt && forkElapsed >= boneSec;
-  const holdMs = hold ? now - hold.startedAt : 0;
+  const holdMs = hold ? Math.max(0, now - hold.startedAt) : 0;
   const cursor: CursorPoint | null = tool && hover ? { point: hover.point, normal: hover.normal } : null;
   const crumbs = breadcrumb(shot.current);
+  const showLandmarks = () => {
+    setLandmarksAt(performance.now());
+    props.onLandmarksHint?.(SHOTS[shot.current].label);
+  };
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-2">
@@ -477,6 +535,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
           <FpsMeter />
           <ShotCamera goal={goal} freeLook={SHOTS[shot.current].freeLook} enabled={!hold} />
           <TestHook pose={pose} shot={shot.current} />
+          {landmarksAt !== null && <LandmarkHints shot={shot.current} pose={pose} shownAt={landmarksAt} />}
         </Canvas>
 
         <LoadingOverlay />
@@ -501,6 +560,11 @@ export default function Exam3DView(props: Exam3DViewProps) {
                   ))}
               </select>
             </label>
+          )}
+          {inside && props.mode === "practice" && props.onLandmarksHint && (
+            <button type="button" onClick={showLandmarks} className="rounded-md bg-white/95 px-2 py-1 shadow hover:bg-white" data-testid="show-landmarks">
+              Show landmarks
+            </button>
           )}
         </div>
         {!inside && (

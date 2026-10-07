@@ -158,7 +158,8 @@ export function techniqueSummary(a: Extract<Action, { type: "examine" }>): strin
   const p = a.payload;
   if (!p.tool) return "";
   const parts = [p.toolMode ? `${p.tool.replace("_", " ")} (${p.toolMode})` : p.tool.replace("_", " ")];
-  if (p.placementError !== undefined) parts.push(p.placementError <= 1 ? `on target (${p.placementError.toFixed(2)} r)` : p.placementError <= 1.5 ? `edge of target (${p.placementError.toFixed(2)} r)` : `off target (${p.placementError.toFixed(2)} r)`);
+  if (p.distanceCm !== undefined && p.toleranceCm !== undefined) parts.push(`${p.distanceCm.toFixed(1)} cm from the landmark (tolerance ${p.toleranceCm} cm)`);
+  else if (p.placementError !== undefined) parts.push(p.placementError <= 1 ? `on target (${p.placementError.toFixed(2)} r)` : `off target (${p.placementError.toFixed(2)} r)`);
   if (p.durationMs !== undefined) parts.push(`held ${(p.durationMs / 1000).toFixed(1)} s`);
   return parts.join(" · ");
 }

@@ -192,8 +192,24 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.locator('[data-testid="exam3d"]')).not.toHaveAttribute("data-camera", "tool_table");
   await page.getByRole("radio", { name: "Bell" }).click();
   await camera(page, "chest_front");
-  const apexHold = page.evaluate(() => window.__osce3d!.project("cardiac_mitral"));
-  const pt = await apexHold;
+  // practice only: anatomical labels (no target markers) fade in briefly; the hint is logged
+  await page.getByTestId("show-landmarks").click();
+  await expect(page.getByTestId("landmark-label").first()).toBeVisible();
+  await expect(page.locator('[data-testid="action-log"]')).toContainText("Showed landmarks: Chest (front)");
+  await expect(page.getByTestId("landmark-label")).toHaveCount(0, { timeout: 5_000 });
+  // no giveaway targets: 4 cm toward the head from the apex is "near" — muffled sound, no finding recorded
+  const off = await page.evaluate(() => {
+    const a = window.__osce3d!.anchor("cardiac_mitral")!;
+    return window.__osce3d!.projectPoint([a[0], a[1], a[2] - 0.04]);
+  });
+  await page.mouse.move(off.x, off.y);
+  await page.mouse.down();
+  await expect(page.locator('[data-testid="sound-caption"]')).toContainText("Faint, distant sounds", { timeout: 3_000 });
+  await page.waitForTimeout(3_300);
+  await page.mouse.up();
+  await expect(page.locator('[data-testid="findings"]')).not.toContainText("S3 gallop");
+  await expect(page.locator('[data-testid="action-log"]')).not.toContainText(/stethoscope \(bell\)/);
+  const pt = await page.evaluate(() => window.__osce3d!.project("cardiac_mitral"));
   await page.mouse.move(pt!.x, pt!.y);
   await page.mouse.down();
   await expect(page.locator('[data-testid="sound-caption"]')).toContainText("S3 (loud)", { timeout: 3_000 });
@@ -285,6 +301,8 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page).toHaveURL(new RegExp(`/coach/${sessionId}`));
   await expect(page.locator('[data-testid="timeline"]')).toContainText("Jugular venous pressure");
   await expect(page.locator('[data-testid="timeline"]')).toContainText("three pillows");
+  // every placement is logged for the coach with its nearest anchor and distance (never shown to the student)
+  await expect(page.locator('[data-testid="timeline"]')).toContainText(/stethoscope \(bell\) placed near Mitral area[^·]*· \d\.\d cm \(tolerance 2\.5 cm\)[^·]*·[^·]*· near the target/);
   await expect(page.locator('[data-testid="say-source"]').first()).toHaveText("voice");
   await expect(page.locator('[data-testid="say-source"]').nth(1)).toHaveText("typed");
   await expect(page.locator('[data-testid="tokens"]')).toBeVisible();

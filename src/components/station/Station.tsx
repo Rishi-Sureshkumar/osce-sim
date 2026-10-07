@@ -5,7 +5,7 @@ import type { Action, CourtesyKind, DrapeZone, Position, PublicCase, Region, Ses
 import type { PublicCatalog } from "@/content/types";
 import { findingDisplay, labelsFrom } from "@/components/common/format";
 import { examineFromClick } from "@/input/adapters/click";
-import { examineFromTool, type ToolUse } from "@/input/adapters/tool";
+import { contactFromTool, examineFromTool, type ToolContact, type ToolUse } from "@/input/adapters/tool";
 import { patientState } from "@/engine/patientState";
 import { toolFor } from "@/exam3d/tools/toolLogic";
 import { TOOL_LABELS, type ToolState } from "@/exam3d/tools/ToolTray";
@@ -124,6 +124,15 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
     } catch (e) {
       setError((e as Error).message);
       return null;
+    }
+  };
+
+  // logged silently: the student's log never shows contacts (or their distances) during the encounter
+  const onToolContact = async (c: ToolContact) => {
+    try {
+      await postAction(session.id, contactFromTool(c));
+    } catch (e) {
+      setError((e as Error).message);
     }
   };
 
@@ -357,6 +366,8 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
                 }}
                 onToolExamine={onToolExamine}
                 onToolAmbiguous={onToolAmbiguous}
+                onToolContact={onToolContact}
+                onLandmarksHint={mode === "practice" ? (where) => void run(async () => appendAll((await postAction(session.id, { type: "hint", source: "click", payload: { kind: "hint", text: `Showed landmarks: ${where}` } })).appended)) : undefined}
                 mode={mode}
                 canEnter={!ended && !timeUp && !left && !entering}
                 onEnter={onEnter}

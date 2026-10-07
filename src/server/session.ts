@@ -1,4 +1,5 @@
 import "server-only";
+import { MIN_LISTEN_MS } from "@/exam3d/tools/toolLogic";
 import { getContent, toPublicCase } from "@/content/load";
 import { sessionMode, type Action, type ActionInput, type Case, type PublicCase, type Session, type SessionMode, type TagHit, type Usage } from "@/domain/schemas";
 import { timeIsUp } from "@/engine/practice";
@@ -66,13 +67,26 @@ export async function appendStudentActions(sessionId: string, raw: unknown, serv
   const session = await getSessionOr404(sessionId);
   const kase = getCaseOr404(session.caseId);
   const all = [...before, action, ...after].map((a) => redactForStudent(a, kase, session));
-  return { action: all[before.length]!, appended: all };
+  return { action: all[before.length]!, appended: all.filter((a) => visibleToStudent(a, session)) };
 }
 
-/** Cases with findingsVisibility "end" keep finding text from the student until the station ends. */
+/**
+ * What the student may see while the station is active:
+ * - placement distances and tolerances (the hidden anchors) are stripped from tool exams and contacts;
+ * - cases with findingsVisibility "end" keep finding text from the student until the station ends.
+ */
 export function redactForStudent(a: Action, kase: Case, session: Session): Action {
-  if (a.type !== "examine" || !a.result || kase.findingsVisibility !== "end" || session.status !== "active") return a;
-  return { ...a, result: { ...a.result, findingText: "", wording: undefined, hidden: true } };
+  if (session.status !== "active") return a;
+  if (a.type === "tool_contact") return { ...a, payload: { ...a.payload, distanceCm: 0, toleranceCm: 0 } };
+  if (a.type !== "examine") return a;
+  const { placementError: _e, distanceCm: _d, toleranceCm: _t, ...payload } = a.payload;
+  const hide = a.result && kase.findingsVisibility === "end";
+  return { ...a, payload, ...(hide && a.result ? { result: { ...a.result, findingText: "", wording: undefined, hidden: true } } : {}) };
+}
+
+/** Tool contacts are logged for scoring and coaches only; the student's log never lists them while active. */
+export function visibleToStudent(a: Action, session: Session): boolean {
+  return session.status !== "active" || a.type !== "tool_contact";
 }
 
 const AFTER_TIME_UP = new Set(["submit_ddx", "timer", "hint", "note"]);
@@ -100,6 +114,7 @@ async function appendOne(sessionId: string, raw: unknown, implied: Action[], aft
   if (input.type === "timer" && (input.payload.event === "pause" || input.payload.event === "resume") && sessionMode(session) === "exam") {
     throw new HttpError(400, "The timer can't be paused in exam mode.");
   }
+  if (input.type === "hint" && sessionMode(session) === "exam") throw new HttpError(400, "Hints are not available in exam mode.");
   // t is taken just before appending so log order and timestamps agree (wording can take ~1s).
   const stamp = async () => ({ id: newId("act"), sessionId, t: await nextT(session) });
 
@@ -107,6 +122,10 @@ async function appendOne(sessionId: string, raw: unknown, implied: Action[], aft
   if (input.type === "examine") {
     const maneuver = getContent().maneuverById.get(input.payload.maneuverId);
     if (!maneuver) throw new HttpError(400, "Unknown maneuver");
+    // a tool finding is earned only inside the hidden anchor's tolerance (and, for the stethoscope, after MIN_LISTEN_MS)
+    const p = input.payload;
+    if (p.tool && p.distanceCm !== undefined && p.toleranceCm !== undefined && p.distanceCm > p.toleranceCm) throw new HttpError(400, "Off target: log a tool_contact instead");
+    if (p.tool === "stethoscope" && p.durationMs !== undefined && p.durationMs < MIN_LISTEN_MS) throw new HttpError(400, "Listen for longer to record a finding");
     const repo = await getRepo();
     const state = patientState(await repo.listActions(sessionId));
     // Examining a region that is still draped exposes it first (logged, so coaches see it).
@@ -172,6 +191,20 @@ export async function previewAudio(sessionId: string, maneuverId: string, region
   }
 }
 
+/**
+ * Generic normal background for an off-target stethoscope on the chest or back: the catalog's
+ * normal heart or breath sounds (never the case's abnormal ones), at the case's rates.
+ */
+export async function backgroundAudio(sessionId: string, kind: "heart" | "breath") {
+  const session = await getSessionOr404(sessionId);
+  if (session.status !== "active") throw new HttpError(409, "This session has ended");
+  const kase = getCaseOr404(session.caseId);
+  const [maneuverId, regionId] = kind === "heart" ? ["auscultate_heart_diaphragm", "cardiac_mitral"] : ["auscultate_lungs", "lung_post_rl"];
+  const maneuver = getContent().maneuverById.get(maneuverId);
+  if (!maneuver) return { audio: null };
+  return { audio: resolveFinding({ ...kase, abnormalFindings: {} }, maneuver, regionId).audio ?? null };
+}
+
 type SystemAppend =
   | Omit<Extract<Action, { source: "system" }>, "id" | "sessionId" | "t">
   | { type: "hint"; source: "system"; payload: Extract<Action, { type: "hint" }>["payload"] };
@@ -210,6 +243,6 @@ export interface StudentSessionView {
 export async function getStudentView(sessionId: string): Promise<StudentSessionView> {
   const session = await getSessionOr404(sessionId);
   const full = getCaseOr404(session.caseId);
-  const actions = (await (await getRepo()).listActions(sessionId)).map((a) => redactForStudent(a, full, session));
+  const actions = (await (await getRepo()).listActions(sessionId)).filter((a) => visibleToStudent(a, session)).map((a) => redactForStudent(a, full, session));
   return { session, kase: toPublicCase(full), actions };
 }

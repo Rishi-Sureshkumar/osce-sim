@@ -28,16 +28,6 @@ export function candidatesFor(maneuvers: readonly M[], tool: Tool, mode: ToolMod
   return exact.length ? exact : onRegion;
 }
 
-/**
- * Loudness/muffling from placement error (distance / tolerance): full inside the tolerance,
- * fading and band-limited up to 2×, then muffled.
- */
-export function placementSound(error: number): { attenuation: number; lowpassHz: number; onTarget: boolean } {
-  if (error <= 1) return { attenuation: 1, lowpassHz: 8000, onTarget: true };
-  if (error <= 2) return { attenuation: 1 - 0.5 * (error - 1), lowpassHz: 1800, onTarget: false };
-  return { attenuation: 0.25, lowpassHz: 350, onTarget: false };
-}
-
 export interface SequenceProgress {
   /** next expected step (undefined when complete) */
   next?: SequenceStep;

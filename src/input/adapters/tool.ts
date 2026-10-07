@@ -1,4 +1,4 @@
-import type { ActionInput, Tool, ToolMode } from "@/domain/schemas";
+import type { ActionInput, ContactOutcome, Tool, ToolMode } from "@/domain/schemas";
 
 export interface ToolUse {
   regionId: string;
@@ -24,4 +24,33 @@ export function examineFromTool(u: ToolUse): ActionInput {
   if (u.distanceCm !== undefined) payload.distanceCm = Math.round(u.distanceCm * 10) / 10;
   if (u.toleranceCm !== undefined) payload.toleranceCm = u.toleranceCm;
   return { type: "examine", source: "click", payload };
+}
+
+export interface ToolContact {
+  tool: Tool;
+  toolMode?: ToolMode;
+  maneuverId?: string;
+  nearestRegionId: string | null;
+  distanceCm: number;
+  toleranceCm: number;
+  durationMs: number;
+  outcome: ContactOutcome;
+}
+
+/** Every placement of a tool on the body, on target or not (hidden-anchor distance; never shown to the student). */
+export function contactFromTool(c: ToolContact): ActionInput {
+  return {
+    type: "tool_contact",
+    source: "click",
+    payload: {
+      tool: c.tool,
+      ...(c.toolMode ? { toolMode: c.toolMode } : {}),
+      ...(c.maneuverId ? { maneuverId: c.maneuverId } : {}),
+      nearestRegionId: c.nearestRegionId,
+      distanceCm: Math.min(500, Math.round(c.distanceCm * 10) / 10),
+      toleranceCm: c.toleranceCm,
+      durationMs: Math.min(600_000, Math.round(c.durationMs)),
+      outcome: c.outcome,
+    },
+  };
 }
