@@ -17,7 +17,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx scripts/migrate.ts",
     "check:copyright": "tsx scripts/check-copyright.ts",
-    "assets:patient": "tsx scripts/assets/build-patient.ts"
+    "assets:patient": "tsx scripts/assets/build-patient.ts",
+    "build:artifact": "tsx scripts/artifact/build.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.131.0",
@@ -47,6 +48,7 @@
     "drizzle-kit": "^0.31.0",
     "eslint": "^9.30.0",
     "eslint-config-next": "15.5.27",
+    "postcss": "^8.5.29",
     "server-only": "^0.0.1",
     "tailwindcss": "^4.1.0",
     "tsx": "^4.20.0",
