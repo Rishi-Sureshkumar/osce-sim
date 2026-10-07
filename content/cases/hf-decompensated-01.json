@@ -813,19 +813,835 @@
     }
   ],
   "markSheetIds": [
-    "history-communication",
-    "exam-fcm1",
-    "clinical-reasoning"
+    "communication-1b",
+    "encounter-1b"
   ],
-  "markSheetSections": {
-    "exam-fcm1": [
-      "Clinical courtesy",
-      "Vital signs",
-      "General appearance",
-      "Cardiovascular",
-      "Pulmonary"
-    ]
-  },
   "synthetic": true,
-  "sourceNote": "Fully synthetic teaching case written by the team. Not based on any real patient."
+  "sourceNote": "Fully synthetic teaching case written by the team. Not based on any real patient.",
+  "peChecklist": [
+    {
+      "id": "fcm-01-hand-hygiene",
+      "fcmId": 1,
+      "section": "Clinical courtesy",
+      "label": "Cleans hands before first touching the patient",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "hygieneBeforeTouch": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-02-notes",
+      "fcmId": 2,
+      "section": "Clinical courtesy",
+      "label": "Note-taking does not interfere with rapport",
+      "weight": 1,
+      "scoring": "not_assessable",
+      "notAssessableReason": "Note-taking behaviour and eye contact are not visible in this interface.",
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-03-drape",
+      "fcmId": 3,
+      "section": "Clinical courtesy",
+      "label": "Keeps the patient draped, covering areas again after examining them",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "courtesy": "drape"
+          },
+          {
+            "happened": "drape:cover"
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-consent",
+      "section": "Clinical courtesy",
+      "label": "Asks permission before the first physical contact",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "before": [
+          "tag:asked_consent_exam",
+          "first:touch"
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-04-comfort",
+      "fcmId": 4,
+      "section": "Clinical courtesy",
+      "label": "Verbally checks the patient's comfort during the exam",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Credit if the student, during the physical exam, says something that shows attention to the patient's comfort or dignity: asks if they are comfortable, warns before touching/cold stethoscope, asks them to say if anything hurts, offers help repositioning.",
+      "mockKeywords": [
+        "comfortable",
+        "let me know if",
+        "hurt",
+        "cold",
+        "okay if i"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-exit-hygiene",
+      "section": "Clinical courtesy",
+      "label": "Cleans hands again after the last contact, before leaving",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "all": [
+          {
+            "before": [
+              "last:touch",
+              "last:hand_hygiene"
+            ]
+          },
+          {
+            "happened": "room:exit"
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-closing",
+      "section": "Clinical courtesy",
+      "label": "Closes the encounter (thanks the patient / says goodbye)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "said": "closing"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-05-pulse",
+      "fcmId": 5,
+      "section": "Vital signs",
+      "label": "Radial pulse rate and rhythm",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "pulse_radial"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-06-resp-rate",
+      "fcmId": 6,
+      "section": "Vital signs",
+      "label": "Respiratory rate at rest",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "respiratory_rate"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-07-bp-cuff",
+      "fcmId": 7,
+      "section": "Vital signs",
+      "label": "BP: correct cuff, placed over the brachial artery",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "bp_cuff_placement"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-08-bp-arm",
+      "fcmId": 8,
+      "section": "Vital signs",
+      "label": "BP: arm flexed and supported",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "bp_arm_support"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-09-bp",
+      "fcmId": 9,
+      "section": "Vital signs",
+      "label": "BP measured after cuff placement (palpatory then auscultatory)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "all": [
+          {
+            "performed": "blood_pressure"
+          },
+          {
+            "before": [
+              "maneuver:bp_cuff_placement",
+              "maneuver:blood_pressure"
+            ]
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-10-general",
+      "fcmId": 10,
+      "section": "General appearance",
+      "label": "Comments on general appearance",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "general_appearance"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-33-jvp",
+      "fcmId": 33,
+      "section": "Cardiovascular",
+      "label": "Inspects the jugular venous pressure",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "jvp_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-33-jvp-position",
+      "fcmId": 33,
+      "section": "Cardiovascular",
+      "label": "Technique: JVP assessed with patient reclined to ~30°",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "jvp_inspection",
+          "position": "reclined_30"
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "hf-hjr",
+      "section": "Cardiovascular",
+      "label": "Checks for hepatojugular reflux",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "hepatojugular_reflux"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-34-carotid-palpation",
+      "fcmId": 34,
+      "section": "Cardiovascular",
+      "label": "Palpates both carotids (one side at a time)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "carotid_palpation",
+        "regions": [
+          "carotid_right",
+          "carotid_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-34-carotid-bruit",
+      "fcmId": 34,
+      "section": "Cardiovascular",
+      "label": "Auscultates both carotids for bruits",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "carotid_auscultation",
+        "regions": [
+          "carotid_right",
+          "carotid_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-35-precordium-inspect",
+      "fcmId": 35,
+      "section": "Cardiovascular",
+      "label": "Inspects the precordium",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "precordial_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-36-heaves-thrills",
+      "fcmId": 36,
+      "section": "Cardiovascular",
+      "label": "Palpates for heaves and thrills (sternal border and base)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "precordial_palpation",
+        "regions": [
+          "precordium_lsb",
+          "cardiac_aortic",
+          "cardiac_pulmonic"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-37-pmi",
+      "fcmId": 37,
+      "section": "Cardiovascular",
+      "label": "Locates the point of maximal impulse",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "pmi_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-37-pmi-position",
+      "fcmId": 37,
+      "section": "Cardiovascular",
+      "label": "Technique: PMI with patient supine or left lateral",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "pmi_palpation",
+          "position": [
+            "supine",
+            "left_lateral_decubitus"
+          ]
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-38-heart-diaphragm",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Auscultates all five areas with the diaphragm",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "auscultate_heart_diaphragm",
+        "regions": [
+          "cardiac_aortic",
+          "cardiac_pulmonic",
+          "cardiac_erbs",
+          "cardiac_tricuspid",
+          "cardiac_mitral"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-38-heart-bell",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Listens at the apex with the bell for extra heart sounds",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "auscultate_heart_bell",
+        "regions": [
+          "cardiac_mitral"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-38-bell-lld",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Technique: bell at apex with patient in left lateral decubitus",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "auscultate_heart_bell",
+          "position": "left_lateral_decubitus"
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-38-bell-technique",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Technique: bell placed accurately at the apex and held ≥ 3 s",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "technique": {
+          "maneuver": "auscultate_heart_bell",
+          "tool": "stethoscope",
+          "toolMode": "bell",
+          "regions": [
+            "cardiac_mitral"
+          ],
+          "maxPlacementError": 1.5,
+          "minDurationMs": 3000
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-39-pedal-pulses",
+      "fcmId": 39,
+      "section": "Cardiovascular",
+      "label": "Palpates pedal pulses bilaterally",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "peripheral_pulses",
+        "regions": [
+          "foot_right",
+          "foot_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-40-edema",
+      "fcmId": 40,
+      "section": "Cardiovascular",
+      "label": "Assesses lower-limb edema bilaterally",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "performed": "edema_assessment",
+            "regions": [
+              "shin_right",
+              "shin_left"
+            ],
+            "partial": false
+          },
+          {
+            "performed": "edema_assessment",
+            "regions": [
+              "ankle_right",
+              "ankle_left"
+            ],
+            "partial": false
+          },
+          {
+            "performed": "edema_assessment",
+            "regions": [
+              "foot_right",
+              "foot_left"
+            ],
+            "partial": false
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-41-chest-inspection",
+      "fcmId": 41,
+      "section": "Pulmonary",
+      "label": "Inspects the chest and work of breathing",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "chest_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-42-lung-ausc",
+      "fcmId": 42,
+      "section": "Pulmonary",
+      "label": "Auscultates front, sides and back, comparing sides",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "auscultate_lungs",
+        "regions": [
+          "lung_ant_ru",
+          "lung_ant_lu",
+          "lung_ant_rl",
+          "lung_ant_ll",
+          "lung_lat_r",
+          "lung_lat_l",
+          "lung_post_ru",
+          "lung_post_lu",
+          "lung_post_rl",
+          "lung_post_ll"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-42-lung-position",
+      "fcmId": 42,
+      "section": "Pulmonary",
+      "label": "Technique: posterior chest auscultated with patient sitting up",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "auscultate_lungs",
+          "position": [
+            "seated",
+            "seated_leaning_forward"
+          ]
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-42-lung-technique",
+      "fcmId": 42,
+      "section": "Pulmonary",
+      "label": "Technique: listens at both bases accurately for ≥ 3 s each",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "technique": {
+          "maneuver": "auscultate_lungs",
+          "tool": "stethoscope",
+          "regions": [
+            "lung_post_rl",
+            "lung_post_ll"
+          ],
+          "maxPlacementError": 1.5,
+          "minDurationMs": 3000,
+          "partial": true
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-43-vocal-resonance",
+      "fcmId": 43,
+      "section": "Pulmonary",
+      "label": "Vocal resonance / egophony over the posterior chest",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "vocal_resonance",
+        "regions": [
+          "lung_post_rl",
+          "lung_post_ll"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-44-fremitus",
+      "fcmId": 44,
+      "section": "Pulmonary",
+      "label": "Tactile fremitus, comparing sides",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "tactile_fremitus",
+        "regions": [
+          "lung_post_ru",
+          "lung_post_lu",
+          "lung_post_rl",
+          "lung_post_ll"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-45-percussion",
+      "fcmId": 45,
+      "section": "Pulmonary",
+      "label": "Percusses front and back, comparing sides",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "chest_percussion",
+        "regions": [
+          "lung_ant_ru",
+          "lung_ant_lu",
+          "lung_ant_rl",
+          "lung_ant_ll",
+          "lung_post_ru",
+          "lung_post_lu",
+          "lung_post_rl",
+          "lung_post_ll"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    }
+  ],
+  "penKey": {
+    "history": [
+      {
+        "id": "dyspnea-2wk",
+        "text": "Progressive shortness of breath over two weeks, now on minimal exertion",
+        "kind": "positive",
+        "keywords": [
+          "two weeks",
+          "2 weeks",
+          "dyspnea",
+          "dyspnoea",
+          "short of breath",
+          "breathless",
+          "SOB"
+        ]
+      },
+      {
+        "id": "orthopnea",
+        "text": "Orthopnea (three pillows / sleeping in a chair)",
+        "kind": "positive",
+        "keywords": [
+          "orthopnea",
+          "orthopnoea",
+          "pillows",
+          "lie flat"
+        ]
+      },
+      {
+        "id": "pnd",
+        "text": "Paroxysmal nocturnal dyspnea",
+        "kind": "positive",
+        "keywords": [
+          "PND",
+          "paroxysmal",
+          "woke up gasping",
+          "waking breathless"
+        ]
+      },
+      {
+        "id": "edema-weight",
+        "text": "Ankle swelling and ~4 kg weight gain",
+        "kind": "positive",
+        "keywords": [
+          "ankle",
+          "swelling",
+          "weight gain",
+          "4 kg",
+          "kilos"
+        ]
+      },
+      {
+        "id": "precipitant",
+        "text": "Ran out of furosemide ~10 days ago; recent salt load",
+        "kind": "positive",
+        "keywords": [
+          "ran out",
+          "furosemide",
+          "water pill",
+          "salt",
+          "non-adherence",
+          "nonadherence"
+        ]
+      },
+      {
+        "id": "hf-history",
+        "text": "Prior MI with stent (2019) and reduced ejection fraction (~30%)",
+        "kind": "positive",
+        "keywords": [
+          "MI",
+          "heart attack",
+          "stent",
+          "EF",
+          "ejection fraction",
+          "30%"
+        ]
+      },
+      {
+        "id": "no-chest-pain",
+        "text": "No chest pain or pressure",
+        "kind": "negative",
+        "keywords": [
+          "no chest pain",
+          "denies chest pain",
+          "no chest pressure"
+        ]
+      },
+      {
+        "id": "no-fever",
+        "text": "No fever or chills",
+        "kind": "negative",
+        "keywords": [
+          "no fever",
+          "afebrile",
+          "denies fever",
+          "no chills"
+        ]
+      },
+      {
+        "id": "no-calf",
+        "text": "No calf pain or one-sided leg swelling",
+        "kind": "negative",
+        "keywords": [
+          "no calf",
+          "calf pain",
+          "unilateral",
+          "one-sided"
+        ]
+      }
+    ],
+    "exam": [
+      {
+        "id": "jvp",
+        "text": "Raised JVP",
+        "maneuverIds": [
+          "jvp_inspection"
+        ],
+        "keywords": [
+          "JVP",
+          "jugular venous",
+          "neck veins"
+        ]
+      },
+      {
+        "id": "hjr",
+        "text": "Positive hepatojugular reflux",
+        "maneuverIds": [
+          "hepatojugular_reflux"
+        ],
+        "keywords": [
+          "hepatojugular",
+          "HJR",
+          "abdominojugular"
+        ]
+      },
+      {
+        "id": "s3",
+        "text": "S3 gallop at the apex",
+        "maneuverIds": [
+          "auscultate_heart_bell",
+          "auscultate_heart_diaphragm"
+        ],
+        "keywords": [
+          "S3",
+          "gallop"
+        ]
+      },
+      {
+        "id": "pmi",
+        "text": "Displaced point of maximal impulse",
+        "maneuverIds": [
+          "pmi_palpation"
+        ],
+        "keywords": [
+          "PMI",
+          "apex beat",
+          "displaced"
+        ]
+      },
+      {
+        "id": "crackles",
+        "text": "Bibasal fine crackles",
+        "maneuverIds": [
+          "auscultate_lungs"
+        ],
+        "keywords": [
+          "crackles",
+          "rales"
+        ]
+      },
+      {
+        "id": "edema",
+        "text": "Bilateral pitting edema of the lower legs",
+        "maneuverIds": [
+          "edema_assessment"
+        ],
+        "keywords": [
+          "edema",
+          "oedema",
+          "pitting"
+        ]
+      }
+    ],
+    "differential": [
+      {
+        "id": "adhf",
+        "diagnosis": "Acute decompensated heart failure",
+        "aliases": [
+          "heart failure",
+          "decompensated heart failure",
+          "CHF",
+          "HFrEF",
+          "congestive heart failure",
+          "CHF exacerbation"
+        ],
+        "rank": 1,
+        "rationale": "Known reduced EF with orthopnea, PND, weight gain, raised JVP, S3, crackles and edema; stopped diuretic and salt load."
+      },
+      {
+        "id": "acs",
+        "diagnosis": "Acute coronary syndrome",
+        "aliases": [
+          "ACS",
+          "myocardial infarction",
+          "MI",
+          "NSTEMI",
+          "ischemia",
+          "ischaemia"
+        ],
+        "rank": 2,
+        "rationale": "Prior MI and risk factors; must be excluded as a precipitant even without chest pain."
+      },
+      {
+        "id": "pneumonia",
+        "diagnosis": "Pneumonia",
+        "aliases": [
+          "community-acquired pneumonia",
+          "CAP",
+          "chest infection"
+        ],
+        "rank": 3,
+        "rationale": "Crackles and cough, though afebrile with bilateral findings and edema."
+      },
+      {
+        "id": "pe",
+        "diagnosis": "Pulmonary embolism",
+        "aliases": [
+          "PE",
+          "pulmonary embolus"
+        ],
+        "rank": 4,
+        "rationale": "Dyspnea and tachycardia; less likely with symmetric edema and gradual course."
+      },
+      {
+        "id": "copd",
+        "diagnosis": "COPD exacerbation",
+        "aliases": [
+          "COPD",
+          "AECOPD"
+        ],
+        "rank": 5,
+        "rationale": "Smoking history, but no wheeze or sputum."
+      }
+    ]
+  }
 }

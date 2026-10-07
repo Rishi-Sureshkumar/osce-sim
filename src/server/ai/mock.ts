@@ -37,7 +37,9 @@ export function mockJudgements(sheet: MarkSheet, log: Action[]): AiItemJudgement
   return sheet.items
     .filter((i) => i.scoring === "ai")
     .map((item) => {
-      for (const a of quotable) {
+      // note items are graded from the post-encounter note only (generated sheet, sections "PEN…")
+      const from = item.section.startsWith("PEN") ? quotable.filter((a) => a.type === "submit_pen") : quotable;
+      for (const a of from) {
         const text = quotableText(a) ?? "";
         const lower = text.toLowerCase().replace(/[‘’]/g, "'");
         for (const kw of item.mockKeywords ?? []) {

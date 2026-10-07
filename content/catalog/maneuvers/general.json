@@ -21,7 +21,13 @@
           "Count beats for at least 15 seconds and convert to a per-minute rate.",
           "Note regularity and volume."
         ]
-      }
+      },
+      "penTerms": [
+        "radial pulse",
+        "irregularly irregular",
+        "tachycardic",
+        "tachycardia"
+      ]
     },
     {
       "sourceText": "",
@@ -41,7 +47,13 @@
           "Watch the chest rise without telling the patient you are counting.",
           "Count breaths for at least 15 seconds and convert to a per-minute rate."
         ]
-      }
+      },
+      "penTerms": [
+        "respiratory rate",
+        "tachypnea",
+        "tachypnoea",
+        "tachypneic"
+      ]
     },
     {
       "sourceText": "",
@@ -115,7 +127,10 @@
         ]
       },
       "interaction": "place",
-      "tool": "bp_cuff"
+      "tool": "bp_cuff",
+      "penTerms": [
+        "blood pressure"
+      ]
     },
     {
       "sourceText": "",

@@ -8,7 +8,7 @@ import { makeLog } from "./helpers";
 
 const c = loadContentFromDisk();
 const exam = c.markSheetById.get("exam-fcm1")!;
-const history = c.markSheetById.get("history-communication")!;
+const history = c.markSheetById.get("communication-1b")!;
 
 /** a `say` tagged the way the chat service tags it */
 const said = (text: string): ActionInput => ({ type: "say", source: "voice", payload: { text, tags: regexTags(text) } }) as unknown as ActionInput;

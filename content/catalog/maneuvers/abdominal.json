@@ -239,7 +239,12 @@
           "Move your hand up a little at a time until the edge or costal margin is reached."
         ]
       },
-      "sourceText": ""
+      "sourceText": "",
+      "penTerms": [
+        "hepatomegaly",
+        "liver edge",
+        "liver span"
+      ]
     },
     {
       "id": "spleen_palpation",

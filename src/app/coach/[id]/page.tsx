@@ -4,7 +4,8 @@ import { labelsFrom, modeLabel } from "@/components/common/format";
 import { Timeline } from "@/components/common/Timeline";
 import { OverrideForm } from "@/components/coach/OverrideForm";
 import { RegradeButton } from "@/components/coach/RegradeButton";
-import { SheetCard } from "@/components/results/SheetCard";
+import { DomainCard, StationVerdict } from "@/components/results/DomainCard";
+import { PenReview } from "@/components/results/PenReview";
 import { FeedbackSummary } from "@/components/results/FeedbackSummary";
 import { FeedbackForm } from "@/components/common/FeedbackForm";
 import { HttpError } from "@/server/errors";
@@ -54,17 +55,19 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
           {run ? (
             <>
               <FeedbackSummary run={run} />
-              {sheets.map((s) => (
-                <SheetCard
-                  key={s.sheet.id}
-                  view={s}
+              <StationVerdict pass={view.pass} domains={view.domains} />
+              {view.domains.map((d) => (
+                <DomainCard
+                  key={d.domain}
+                  domain={d}
+                  sheets={sheets}
                   actionsById={actionsById}
                   labels={labels}
                   timelineHref={(aid) => `#a-${aid}`}
-                  renderExtra={(itemId) => {
-                    const sc = scoreByKey.get(`${s.sheet.id}/${itemId}`);
+                  renderExtra={(sheetId, itemId) => {
+                    const sc = scoreByKey.get(`${sheetId}/${itemId}`);
                     if (!sc || sc.status === "not_assessable") return null;
-                    return <OverrideForm sessionId={id} markSheetId={s.sheet.id} itemId={itemId} maxPoints={sc.maxPoints} currentPoints={sc.points} />;
+                    return <OverrideForm sessionId={id} markSheetId={sheetId} itemId={itemId} maxPoints={sc.maxPoints} currentPoints={sc.points} />;
                   }}
                 />
               ))}
@@ -98,6 +101,7 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
         </div>
 
         <section aria-labelledby="tl-h" className="space-y-2 lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:overflow-y-auto">
+          {view.penReview && <PenReview pen={view.penReview.pen} check={view.penReview.check} actionsById={actionsById} timelineHref={(aid) => `#a-${aid}`} />}
           <h2 id="tl-h" className="font-semibold">
             Transcript &amp; timeline
           </h2>

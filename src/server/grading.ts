@@ -1,7 +1,8 @@
 import "server-only";
 import { getContent } from "@/content/load";
 import { sessionMode, type Action, type Case, type GradingRun, type MarkSheet } from "@/domain/schemas";
-import { appliesInMode, scoreAiItems, scoreDeterministicItems } from "@/engine/scoring";
+import { appliesInMode, applyPenCheck, scoreAiItems, scoreDeterministicItems } from "@/engine/scoring";
+import { penCheck } from "@/engine/penCheck";
 import { sheetsForCase as filterSheets } from "@/engine/sheets";
 import { gradeAiItems } from "./ai/grader";
 import { getRepo } from "./db";
@@ -38,17 +39,22 @@ async function doGrade(sessionId: string, trigger: GradingRun["trigger"]): Promi
   const log: Action[] = await repo.listActions(sessionId);
   const mode = sessionMode(session);
   const sheets = sheetsForCase(kase);
-  const deterministic = sheets.flatMap((s) => scoreDeterministicItems(s, log, mode));
+  const content = getContent();
+  const pen = penFor(log);
+  const check = penCheck(pen?.payload.exam ?? "", content.maneuvers, kase.penKey?.exam ?? [], log);
+  const deterministic = applyPenCheck(sheets.flatMap((s) => scoreDeterministicItems(s, log, mode)), check, pen);
   const autoScored = deterministic.filter((s) => s.scoring === "auto");
   const got = autoScored.reduce((n, s) => n + s.points, 0);
   const max = autoScored.reduce((n, s) => n + s.maxPoints, 0);
-  const content = getContent();
   const missed = autoScored
     .filter((s) => s.value < 1)
     .map((s) => sheets.find((x) => x.id === s.markSheetId)?.items.find((i) => i.id === s.itemId)?.label)
     .filter(Boolean)
     .slice(0, 25);
-  const deterministicSummary = `Exam checklist: ${round(got)}/${max} points. Not done or incomplete: ${missed.join("; ") || "none"}.`;
+  const flagged = check.claims.filter((c) => c.status === "flagged").map((c) => `“${c.text}”`);
+  const deterministicSummary =
+    `Exam checklist: ${round(got)}/${max} points. Not done or incomplete: ${missed.join("; ") || "none"}.` +
+    (pen ? ` Post-encounter note exam claims with no matching exam in the log: ${flagged.join("; ") || "none"}.` : "");
 
   const gradedSheets = sheets.map((s) => ({ ...s, items: s.items.filter((i) => appliesInMode(i, mode)) }));
   const ai = await gradeAiItems({ kase, sheets: gradedSheets, log, content, deterministicSummary });
@@ -81,3 +87,5 @@ async function doGrade(sessionId: string, trigger: GradingRun["trigger"]): Promi
 }
 
 const round = (n: number) => Math.round(n * 100) / 100;
+
+export const penFor = (log: Action[]) => log.findLast((a): a is Extract<Action, { type: "submit_pen" }> => a.type === "submit_pen");

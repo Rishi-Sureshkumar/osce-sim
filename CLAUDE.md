@@ -112,6 +112,13 @@ would contradict the case (e.g. "unlaboured" breathing).
   Grader output must quote evidence; quotes are verified verbatim server-side, otherwise `needs_review`.
 - `scoring: "not_assessable"` + `notAssessableReason`. Shown greyed out to coaches, never scored.
 
+**1B scoring** — every mark sheet has a `domain` (`patient_encounter` | `communication`) and a `passThreshold`;
+the station passes only when both domains pass (`domainTotals` in `src/engine/scoring.ts`). A case adds its own
+SP exam checklist (`peChecklist`) and post-encounter note key (`penKey`); `src/engine/penItems.ts` turns them
+into sheets at grading time, so a new case needs no code. Give maneuvers `penTerms` (words a note uses for
+their findings) so `src/engine/penCheck.ts` can flag note claims about exams that were never performed.
+Item ids must be unique across all of a case's sheets (`npm run validate` checks).
+
 **Courtesy tags** — what the student says is tagged server-side in `src/server/tags.ts` (regex
 first; `src/server/ai/tagger.ts` is the verified-quote model fallback). Add a phrasing there with a
 test in `tests/tags.test.ts`. Tags are never accepted from the browser. Positioning tags must only

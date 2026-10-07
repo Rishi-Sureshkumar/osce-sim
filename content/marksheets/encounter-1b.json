@@ -1,0 +1,466 @@
+{
+  "id": "encounter-1b",
+  "title": "Patient Encounter Skills (1B)",
+  "kind": "history",
+  "domain": "patient_encounter",
+  "passThreshold": 0.7,
+  "sourceNote": "History coverage graded from the transcript. The case adds its SP physical exam checklist (peChecklist) and the post-encounter note key (penKey) at grading time. The pass threshold is a placeholder.",
+  "items": [
+    {
+      "id": "pmh-conditions",
+      "section": "Past history",
+      "label": "PMH: conditions",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks about past medical conditions.",
+      "mockKeywords": [
+        "medical conditions",
+        "medical problems",
+        "health problems",
+        "diagnosed with"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "pmh-dates",
+      "section": "Past history",
+      "label": "PMH: when diagnosed",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks when conditions were diagnosed.",
+      "mockKeywords": [
+        "when were you diagnosed",
+        "how long have you had",
+        "what year"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "psh-surgeries",
+      "section": "Past history",
+      "label": "PSH: surgeries / procedures",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks about past surgeries or procedures.",
+      "mockKeywords": [
+        "surgery",
+        "surgeries",
+        "operation",
+        "procedure"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "psh-dates",
+      "section": "Past history",
+      "label": "PSH: dates",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks when surgeries/procedures happened.",
+      "mockKeywords": [
+        "when was",
+        "what year",
+        "how long ago"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "meds-names",
+      "section": "Medications and allergies",
+      "label": "Medications: names",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks what medications the patient takes.",
+      "mockKeywords": [
+        "medications",
+        "medicines",
+        "pills",
+        "taking"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "meds-doses",
+      "section": "Medications and allergies",
+      "label": "Medications: doses",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks about doses / how often taken.",
+      "mockKeywords": [
+        "dose",
+        "how much",
+        "milligrams",
+        "how often"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "meds-otc",
+      "section": "Medications and allergies",
+      "label": "Medications: over-the-counter and supplements",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks specifically about OTC medicines, herbal products or supplements.",
+      "mockKeywords": [
+        "over the counter",
+        "supplements",
+        "vitamins",
+        "herbal"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "allergy-drug",
+      "section": "Medications and allergies",
+      "label": "Allergies: drug",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks about medication allergies.",
+      "mockKeywords": [
+        "allergies",
+        "allergic"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "allergy-food",
+      "section": "Medications and allergies",
+      "label": "Allergies: food",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks about food allergies.",
+      "mockKeywords": [
+        "food allerg",
+        "foods"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "allergy-reaction",
+      "section": "Medications and allergies",
+      "label": "Allergies: type of reaction",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks what reaction occurred.",
+      "mockKeywords": [
+        "what happened",
+        "reaction",
+        "what kind of"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "fh-parents-siblings",
+      "section": "Family and social history",
+      "label": "FH: parents and siblings living / age and cause of death",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Asks about the health of parents and siblings, and age/cause of death where applicable.",
+      "mockKeywords": [
+        "parents",
+        "mother",
+        "father",
+        "siblings",
+        "family"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "sh-alcohol",
+      "section": "Family and social history",
+      "label": "SH: alcohol",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks about alcohol. For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
+      "mockKeywords": [
+        "alcohol",
+        "drink"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "sh-smoking",
+      "section": "Family and social history",
+      "label": "SH: smoking / tobacco",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks about smoking / tobacco. For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
+      "mockKeywords": [
+        "smoke",
+        "tobacco",
+        "cigarette"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "sh-drugs",
+      "section": "Family and social history",
+      "label": "SH: recreational drugs",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks about recreational drugs. For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
+      "mockKeywords": [
+        "drugs",
+        "recreational",
+        "marijuana",
+        "cannabis"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "sh-occupation",
+      "section": "Family and social history",
+      "label": "SH: occupation",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks about occupation. For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
+      "mockKeywords": [
+        "work",
+        "job",
+        "occupation",
+        "retired"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "sh-lives-with",
+      "section": "Family and social history",
+      "label": "SH: who they live with",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks about who they live with. For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
+      "mockKeywords": [
+        "live with",
+        "at home with",
+        "who is at home"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "sh-meaning",
+      "section": "Family and social history",
+      "label": "SH: what gives them joy / meaning",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks about what gives them joy / meaning. For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
+      "mockKeywords": [
+        "enjoy",
+        "joy",
+        "meaning",
+        "hobbies",
+        "what do you like"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "sh-sexual",
+      "section": "Family and social history",
+      "label": "SH: sexual history (if relevant)",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks about sexual history (if relevant). For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
+      "mockKeywords": [
+        "sexual",
+        "partner"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "sh-travel",
+      "section": "Family and social history",
+      "label": "SH: travel (if relevant)",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks about travel (if relevant). For items marked \"if relevant\": score 1 if asked OR if clearly not relevant to this case and reasonably omitted; score 0 only if relevant and omitted.",
+      "mockKeywords": [
+        "travel",
+        "trip",
+        "been away"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "ros-general",
+      "section": "Review of systems",
+      "label": "ROS: General",
+      "weight": 0.25,
+      "scoring": "ai",
+      "guidance": "Asks at least one screening question for the General system (either during the HPI or in a review of systems).",
+      "mockKeywords": [
+        "weight",
+        "fever",
+        "tired",
+        "fatigue"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "ros-heent",
+      "section": "Review of systems",
+      "label": "ROS: HEENT",
+      "weight": 0.25,
+      "scoring": "ai",
+      "guidance": "Asks at least one screening question for the HEENT system (either during the HPI or in a review of systems).",
+      "mockKeywords": [
+        "vision",
+        "hearing",
+        "headache",
+        "sore throat"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "ros-pulmonary",
+      "section": "Review of systems",
+      "label": "ROS: Pulmonary",
+      "weight": 0.25,
+      "scoring": "ai",
+      "guidance": "Asks at least one screening question for the Pulmonary system (either during the HPI or in a review of systems).",
+      "mockKeywords": [
+        "cough",
+        "wheez",
+        "breath"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "ros-cardiac",
+      "section": "Review of systems",
+      "label": "ROS: Cardiac",
+      "weight": 0.25,
+      "scoring": "ai",
+      "guidance": "Asks at least one screening question for the Cardiac system (either during the HPI or in a review of systems).",
+      "mockKeywords": [
+        "chest pain",
+        "palpitation",
+        "heart racing"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "ros-gi",
+      "section": "Review of systems",
+      "label": "ROS: GI",
+      "weight": 0.25,
+      "scoring": "ai",
+      "guidance": "Asks at least one screening question for the GI system (either during the HPI or in a review of systems).",
+      "mockKeywords": [
+        "nausea",
+        "vomit",
+        "bowel",
+        "stool",
+        "appetite"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "ros-gu",
+      "section": "Review of systems",
+      "label": "ROS: GU",
+      "weight": 0.25,
+      "scoring": "ai",
+      "guidance": "Asks at least one screening question for the GU system (either during the HPI or in a review of systems).",
+      "mockKeywords": [
+        "urin",
+        "pee",
+        "bladder"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "ros-musculoskeletal",
+      "section": "Review of systems",
+      "label": "ROS: Musculoskeletal",
+      "weight": 0.25,
+      "scoring": "ai",
+      "guidance": "Asks at least one screening question for the Musculoskeletal system (either during the HPI or in a review of systems).",
+      "mockKeywords": [
+        "joint",
+        "muscle",
+        "back pain"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "ros-neuro",
+      "section": "Review of systems",
+      "label": "ROS: Neuro",
+      "weight": 0.25,
+      "scoring": "ai",
+      "guidance": "Asks at least one screening question for the Neuro system (either during the HPI or in a review of systems).",
+      "mockKeywords": [
+        "numb",
+        "weakness",
+        "dizz",
+        "tingling"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "ros-skin",
+      "section": "Review of systems",
+      "label": "ROS: Skin",
+      "weight": 0.25,
+      "scoring": "ai",
+      "guidance": "Asks at least one screening question for the Skin system (either during the HPI or in a review of systems).",
+      "mockKeywords": [
+        "rash",
+        "skin"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "ros-endocrine",
+      "section": "Review of systems",
+      "label": "ROS: Endocrine",
+      "weight": 0.25,
+      "scoring": "ai",
+      "guidance": "Asks at least one screening question for the Endocrine system (either during the HPI or in a review of systems).",
+      "mockKeywords": [
+        "thirst",
+        "heat",
+        "cold intolerance",
+        "sugar"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "ros-psychiatric",
+      "section": "Review of systems",
+      "label": "ROS: Psychiatric",
+      "weight": 0.25,
+      "scoring": "ai",
+      "guidance": "Asks at least one screening question for the Psychiatric system (either during the HPI or in a review of systems).",
+      "mockKeywords": [
+        "mood",
+        "depress",
+        "anxi",
+        "stress"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "within-time",
+      "section": "Timing",
+      "label": "Submits the note before it locks (exam mode only)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "not": {
+          "any": [
+            {
+              "happened": "timer:auto_end"
+            },
+            {
+              "happened": "timer:pen_lock"
+            }
+          ]
+        }
+      },
+      "modes": [
+        "exam"
+      ],
+      "sourceText": ""
+    }
+  ]
+}

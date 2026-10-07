@@ -1,10 +1,11 @@
 import "server-only";
 import { getContent, getPublicCatalog, toPublicCase } from "@/content/load";
 import type { Action, Case, GradingRun, MarkSheet, Override, PublicCase, Session } from "@/domain/schemas";
-import { applyOverrides, totals, type EffectiveScore, type SheetTotals } from "@/engine/scoring";
+import { applyOverrides, domainTotals, stationPass, totals, type DomainTotal, type EffectiveScore, type SheetTotals } from "@/engine/scoring";
+import { penCheck, type PenCheckResult } from "@/engine/penCheck";
 import { getRepo } from "./db";
 import { missedKeyFindings } from "@/engine/sheets";
-import { sheetsForCase } from "./grading";
+import { penFor, sheetsForCase } from "./grading";
 import { getCaseOr404, getSessionOr404 } from "./session";
 
 export interface SheetView {
@@ -21,6 +22,11 @@ export interface ResultsView {
   runs: GradingRun[];
   overrides: Override[];
   sheets: SheetView[];
+  /** 1B pass/fail per domain (from the latest run with overrides); empty before grading */
+  domains: DomainTotal[];
+  pass: boolean | null;
+  /** the post-encounter note with each exam claim linked to the log or flagged */
+  penReview: { pen: Extract<Action, { type: "submit_pen" }>; check: PenCheckResult } | null;
   /** Only revealed once the station has ended. */
   debrief: { expectedDifferential: Case["expectedDifferential"]; missed: { label: string; region: string | null }[] } | null;
   catalog: ReturnType<typeof getPublicCatalog>;
@@ -41,6 +47,8 @@ export async function getResultsView(sessionId: string): Promise<ResultsView> {
   });
   const content = getContent();
   const ended = session.status !== "active";
+  const domains = run ? domainTotals(sheets.flatMap((s) => s.scores), sheets.map((s) => s.sheet)) : [];
+  const pen = ended ? penFor(actions) : undefined;
   return {
     session,
     kase: toPublicCase(kase),
@@ -49,6 +57,9 @@ export async function getResultsView(sessionId: string): Promise<ResultsView> {
     runs,
     overrides,
     sheets,
+    domains,
+    pass: stationPass(domains),
+    penReview: pen ? { pen, check: penCheck(pen.payload.exam, content.maneuvers, kase.penKey?.exam ?? [], actions) } : null,
     debrief: ended
       ? {
           expectedDifferential: kase.expectedDifferential,

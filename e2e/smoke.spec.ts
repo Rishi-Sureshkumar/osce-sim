@@ -108,6 +108,8 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await enterCode(page, "wrong");
   await expect(page.getByText("That code isn't right.")).toBeVisible();
   await enterCode(page, "student-e2e");
+  // the gate page shares the heading: wait until the gate has redirected (cookie set)
+  await expect(page).not.toHaveURL(/\/gate/);
   await expect(page.getByRole("heading", { name: "OSCE Simulator" })).toBeVisible();
 
   // students can't reach coach pages
@@ -269,7 +271,8 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.getByLabel("Notepad text")).toHaveValue("SOB 2/52, orthopnea");
   await expect(page.getByLabel(/Initial plan/)).toHaveCount(0);
   await page.getByLabel("History").fill("68-year-old man with known HFrEF: 2 weeks of worsening dyspnoea, orthopnea (three pillows). No chest pain.");
-  await page.getByLabel("Physical examination").fill("JVP raised at 30 degrees. S3 at the apex in left lateral decubitus. Fine crackles at both bases. Pitting edema of the shins.");
+  // deliberately reports a hepatojugular reflux that was never examined: it must be flagged
+  await page.getByLabel("Physical examination").fill("JVP raised at 30 degrees.\nS3 at the apex in left lateral decubitus.\nFine crackles at both bases.\nPitting edema of the shins.\nPositive hepatojugular reflux.");
   await page.getByLabel("Diagnosis 1").fill("Acute decompensated heart failure");
   await page.getByLabel("Supporting findings 1").fill("orthopnea, raised JVP, S3, crackles, edema");
   await page.getByLabel("Diagnosis 2").fill("Pneumonia");
@@ -286,14 +289,28 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   const intro = page.locator('[data-item="introduce-self-role"]');
   await expect(intro).toContainText("1/1");
   await expect(intro).toContainText("my name is Sam Patel");
-  for (const id of ["fcm-01-hand-hygiene", "fcm-03-drape", "courtesy-introduce", "courtesy-consent", "courtesy-exit-hygiene", "courtesy-closing"]) {
+  // two 1B domains, each with its pass mark; communication credits the checklist's author
+  await expect(page.locator('[data-domain="patient_encounter"]')).toContainText("Patient Encounter Skills");
+  await expect(page.locator('[data-domain="patient_encounter"]')).toContainText("pass mark 70%");
+  await expect(page.locator('[data-domain="communication"]')).toContainText("Communication Skills");
+  await expect(page.locator('[data-domain="communication"]')).toContainText("Courtesy of Rebecca Kowalski");
+  await expect(page.getByTestId("domain-result")).toHaveCount(2);
+  await expect(page.getByTestId("station-verdict")).toBeVisible();
+  // the note: every exam claim linked to the log, except the unperformed one
+  await expect(page.locator('[data-testid="pen-review"] [data-claim="flagged"]')).toHaveText(/Positive hepatojugular reflux\.\s*Not performed in the encounter/);
+  await expect(page.locator('[data-testid="pen-review"] [data-claim="linked"]')).toHaveCount(4);
+  const consistency = page.locator('[data-item="pen-no-unperformed"]');
+  await expect(consistency).toContainText("1/2");
+  await expect(consistency).toContainText("Positive hepatojugular reflux.");
+  await expect(page.locator('[data-item="pen-dx-adhf"]')).toContainText("2/2");
+  await expect(page.locator('[data-item="remove-barriers"]')).toContainText("1/1"); // sat on the stool
+  for (const id of ["fcm-01-hand-hygiene", "fcm-03-drape", "courtesy-consent", "courtesy-exit-hygiene", "courtesy-closing"]) {
     await expect(page.locator(`[data-item="${id}"]`)).toContainText("1/1");
   }
   await expect(page.locator('[data-item="fcm-33-jvp-position"]')).toContainText("1/1");
   await expect(page.locator('[data-item="fcm-38-bell-lld"]')).toContainText("1/1");
   await expect(page.locator('[data-item="fcm-38-bell-technique"]')).toContainText("1/1");
   await expect(page.locator('[data-item="fcm-42-lung-technique"]')).toContainText("1/1");
-  await expect(page.locator('[data-item="remove-barriers"]')).toContainText("Not assessable");
   await expect(page.locator('[data-testid="missed-findings"]')).toContainText("Hepatojugular");
   // evidence link jumps to the timeline
   await intro.locator("a").first().click();

@@ -38,9 +38,11 @@ const SYSTEM = `You are an experienced OSCE examiner grading a medical student's
 Scoring rules:
 - Score every listed item with 0 (not done), 0.5 (partly done) or 1 (done well), following that item's guidance.
 - Credit only what the transcript shows. Do not assume anything happened that is not in it.
-- Evidence must be exact quotes: copy a short, contiguous span of the student's words character-for-character from ONE line, and give that line's id in actionId. Only lines marked STUDENT, STUDENT NOTE or SUBMISSION may be quoted. Quotes are checked by machine; any paraphrase will be rejected.
+- Evidence must be exact quotes: copy a short, contiguous span of the student's words character-for-character from ONE line, and give that line's id in actionId. Only lines marked STUDENT, STUDENT NOTE, STUDENT VERBAL EXAM, POST-ENCOUNTER NOTE or SUBMISSION may be quoted. Quotes are checked by machine; any paraphrase will be rejected.
 - Any score above 0 needs at least one quote. A score of 0 may have no evidence.
 - Keep each rationale to one sentence.
+- Items whose section starts with "PEN" are graded from the POST-ENCOUNTER NOTE only; quote the note. Never credit a note finding for an exam the transcript does not show; the deterministic summary lists exam claims with no matching exam.
+- This is a first-year (1B) station: students should introduce themselves as first-year medical students, share their impression near the end in plain language without jargon, and not simply defer ("my attending will decide").
 
 Then write feedback for the student:
 - summary: 3–5 sentences on overall performance, grounded in what they actually did (mention specific moments).
@@ -73,7 +75,7 @@ export async function gradeAiItems(args: {
   const caseBlock = [
     `CASE: ${c.title}`,
     `Patient: ${c.patient.name}, ${c.patient.age}, ${c.patient.sex}. Chief complaint: ${c.patient.chiefComplaint}.`,
-    `Task given to the student: ${c.doorSign.task}`,
+    `Task given to the student: ${c.doorInstructions?.task ?? c.doorSign.task}`,
     c.expectedDifferential.length
       ? `Expected differential (for grading reasoning items):\n${c.expectedDifferential.map((d) => `${d.rank}. ${d.diagnosis} — ${d.rationale}`).join("\n")}`
       : "No differential is expected for this station.",

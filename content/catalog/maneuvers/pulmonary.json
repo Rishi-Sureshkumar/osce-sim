@@ -32,7 +32,13 @@
           "Look at the neck muscles for extra effort with breathing.",
           "Check front, sides and back for scars, devices or skin changes."
         ]
-      }
+      },
+      "penTerms": [
+        "accessory muscle",
+        "accessory muscles",
+        "work of breathing",
+        "barrel chest"
+      ]
     },
     {
       "requiresPositioning": [
@@ -80,7 +86,17 @@
       },
       "interaction": "place",
       "tool": "stethoscope",
-      "toolMode": "diaphragm"
+      "toolMode": "diaphragm",
+      "penTerms": [
+        "crackles",
+        "rales",
+        "wheeze",
+        "wheezes",
+        "wheezing",
+        "breath sounds",
+        "rhonchi",
+        "air entry"
+      ]
     },
     {
       "requiresPositioning": [
@@ -108,7 +124,12 @@
           "Ask the patient to say \"ee\" and listen for a change in the sound.",
           "Compare sides."
         ]
-      }
+      },
+      "penTerms": [
+        "egophony",
+        "vocal resonance",
+        "whispered pectoriloquy"
+      ]
     },
     {
       "requiresPositioning": [
@@ -136,7 +157,10 @@
           "Ask them to repeat a short phrase while you feel the vibration.",
           "Compare upper, middle and lower zones on both sides."
         ]
-      }
+      },
+      "penTerms": [
+        "fremitus"
+      ]
     },
     {
       "requiresPositioning": [
@@ -170,7 +194,15 @@
           "Strike its middle phalanx with a quick tap from the other middle finger.",
           "Move side to side at several levels, comparing the notes."
         ]
-      }
+      },
+      "penTerms": [
+        "dull",
+        "dullness",
+        "percussion",
+        "resonant",
+        "hyperresonant",
+        "stony"
+      ]
     }
   ]
 }

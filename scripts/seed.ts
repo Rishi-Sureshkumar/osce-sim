@@ -8,7 +8,8 @@ import type { Action, ActionInput, GradingRun, Session } from "../src/domain/sch
 
 type SystemInput = Omit<Extract<Action, { source: "system" }>, "id" | "sessionId" | "t">;
 import { isTouch, resolveFinding } from "../src/engine/resolveFinding";
-import { scoreAiItems, scoreDeterministicItems } from "../src/engine/scoring";
+import { applyPenCheck, scoreAiItems, scoreDeterministicItems } from "../src/engine/scoring";
+import { penCheck } from "../src/engine/penCheck";
 import { sheetsForCase } from "../src/engine/sheets";
 import { mockJudgements, mockPatientReply } from "../src/server/ai/mock";
 import { regexTags } from "../src/server/tags";
@@ -45,9 +46,11 @@ const ex = (maneuverId: string, regionId: string) => {
 const pos = (position: string) => push({ type: "state_change", source: "click", payload: { position, via: "direct" } } as ActionInput, 5_000);
 
 push({ type: "session_start", source: "system", payload: { caseId: kase.id } }, 0);
-push({ type: "room", source: "click", payload: { event: "knock" } }, 30_000);
+push({ type: "timer", source: "click", payload: { event: "begin" } } as ActionInput, 20_000);
+push({ type: "room", source: "click", payload: { event: "knock" } }, 10_000);
 push({ type: "room", source: "click", payload: { event: "enter" } }, 3_000);
-say("Hello Mr. Bennett, my name is Alex Kim and I'm a medical student. What brings you in today?");
+push({ type: "sit_down", source: "click", payload: {} } as ActionInput, 4_000);
+say("Hello Mr. Bennett, my name is Alex Kim and I'm a first-year medical student. What brings you in today?");
 say("Tell me more about that. When did it start?");
 say("How far can you walk before you get breathless?");
 say("Do you get short of breath when you lie flat?");
@@ -82,18 +85,24 @@ say("Thank you for your time, Mr. Bennett. Take care.");
 push({ type: "courtesy", source: "click", payload: { kind: "hand_hygiene" } }, 5_000);
 push({ type: "room", source: "click", payload: { event: "exit" } }, 3_000);
 push({
-  type: "submit_ddx",
+  type: "submit_pen",
   source: "text",
   payload: {
-    summary: "68-year-old man with ischaemic cardiomyopathy (EF ~30%) presenting with 2 weeks of progressive dyspnoea, orthopnea, PND and leg swelling after stopping furosemide; raised JVP, positive HJR, displaced PMI, S3, bibasal crackles and pitting edema.",
-    differential: ["Acute decompensated heart failure", "Acute coronary syndrome", "Pneumonia", "Pulmonary embolism"],
-    plan: "Oxygen to target sats, IV furosemide, ECG and troponin, BNP, chest x-ray, electrolytes and renal function, daily weights.",
+    history: "68-year-old man with prior MI (stent 2019) and EF ~30%. 2 weeks of progressive dyspnoea, now on minimal exertion; orthopnea (three pillows), PND, ankle swelling and ~4 kg weight gain. Ran out of furosemide 10 days ago; salty food at a family party. No chest pain, no fever.",
+    exam: "JVP raised at 30 degrees.\nPositive hepatojugular reflux.\nDisplaced PMI.\nS3 at the apex in left lateral decubitus.\nFine crackles at both posterior bases, dull right base.\nBilateral pitting edema to the shins.",
+    diagnoses: [
+      { diagnosis: "Acute decompensated heart failure", support: "orthopnea, PND, raised JVP, S3, crackles, edema; stopped furosemide" },
+      { diagnosis: "Acute coronary syndrome", support: "prior MI; must exclude as precipitant" },
+      { diagnosis: "Pneumonia", support: "crackles, cough; but afebrile" },
+    ],
   },
-});
+} as ActionInput);
 push({ type: "session_end", source: "system", payload: { reason: "student_finished" } }, 1_000);
 
 const sheets = sheetsForCase(kase, content.markSheetById);
-const scores = sheets.flatMap((s) => [...scoreDeterministicItems(s, log), ...scoreAiItems(s, mockJudgements(s, log), log)]);
+const pen = log.findLast((a): a is Extract<Action, { type: "submit_pen" }> => a.type === "submit_pen");
+const check = penCheck(pen?.payload.exam ?? "", content.maneuvers, kase.penKey?.exam ?? [], log);
+const scores = sheets.flatMap((s) => [...applyPenCheck(scoreDeterministicItems(s, log), check, pen), ...scoreAiItems(s, mockJudgements(s, log), log)]);
 const session: Session = {
   id: sessionId,
   caseId: kase.id,
@@ -112,7 +121,7 @@ const run: GradingRun = {
   trigger: "student_submit",
   summary: "[Seeded mock feedback] Focused, well-ordered cardiorespiratory history and exam. See the item-level scores below.",
   strengths: ["Elicited orthopnea and medication non-adherence early.", "Assessed JVP at 30° and listened with the bell in left lateral decubitus."],
-  improvements: ["Ask about PND and weight gain explicitly.", "Percuss both bases and compare sides."],
+  improvements: ["Share your impression in plain words before leaving.", "Percuss both bases and compare sides."],
   scores,
   usage: session.usage,
   mocked: true,

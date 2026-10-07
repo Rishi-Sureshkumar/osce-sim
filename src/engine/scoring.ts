@@ -1,4 +1,7 @@
-import type { Action, ItemScore, MarkSheet, MarkSheetItem, Override, Rule, SessionMode } from "@/domain/schemas";
+import type { Action, Domain, ItemScore, MarkSheet, MarkSheetItem, Override, Rule, SessionMode } from "@/domain/schemas";
+import type { PenCheckResult } from "./penCheck";
+import { PEN_CONSISTENCY_ITEM, PEN_SHEET } from "./penItems";
+import { domainOf } from "./sheets";
 import { verifyEvidence } from "./evidence";
 import { evaluateRule } from "./rules";
 
@@ -148,6 +151,64 @@ export function totals(scores: EffectiveScore[]): SheetTotals {
     maxPoints += s.maxPoints;
   }
   return { points: round(points), maxPoints: round(maxPoints), needsReview, notAssessable };
+}
+
+export const DOMAIN_TITLES: Record<Domain, string> = { patient_encounter: "Patient Encounter Skills", communication: "Communication Skills" };
+
+export interface DomainTotal extends SheetTotals {
+  domain: Domain;
+  title: string;
+  /** 0..1 */
+  fraction: number;
+  /** fraction needed to pass (highest passThreshold among the domain's sheets), or null if none set */
+  threshold: number | null;
+  pass: boolean | null;
+}
+
+/**
+ * Pass/fail per 1B domain from the (overridden) item scores. A station passes only when every
+ * domain it scores passes. Items needing review still count at their current points.
+ */
+export function domainTotals(scores: EffectiveScore[], sheets: readonly Pick<MarkSheet, "id" | "domain" | "kind" | "passThreshold">[]): DomainTotal[] {
+  const out: DomainTotal[] = [];
+  for (const domain of ["patient_encounter", "communication"] as const) {
+    const ds = sheets.filter((s) => domainOf(s) === domain);
+    if (!ds.length) continue;
+    const ids = new Set(ds.map((s) => s.id));
+    const t = totals(scores.filter((s) => ids.has(s.markSheetId)));
+    const thresholds = ds.flatMap((s) => (s.passThreshold !== undefined ? [s.passThreshold] : []));
+    const threshold = thresholds.length ? Math.max(...thresholds) : null;
+    const fraction = t.maxPoints ? t.points / t.maxPoints : 0;
+    out.push({ ...t, domain, title: DOMAIN_TITLES[domain], fraction: round(fraction), threshold, pass: threshold === null ? null : fraction >= threshold - 1e-9 });
+  }
+  return out;
+}
+
+export function stationPass(domains: DomainTotal[]): boolean | null {
+  if (!domains.length || domains.some((d) => d.pass === null)) return null;
+  return domains.every((d) => d.pass);
+}
+
+/**
+ * The deterministic PEN consistency item: full credit for a note whose exam section reports only
+ * performed maneuvers; each flagged claim costs half the item (floor 0).
+ */
+export function applyPenCheck(scores: ItemScore[], check: PenCheckResult, pen: Extract<Action, { type: "submit_pen" }> | undefined): ItemScore[] {
+  return scores.map((s) => {
+    if (s.markSheetId !== PEN_SHEET || s.itemId !== PEN_CONSISTENCY_ITEM || s.status === "not_assessable") return s;
+    if (!pen) return { ...s, value: 0, points: 0, rationale: "No post-encounter note was submitted." };
+    const flagged = check.claims.filter((c) => c.status === "flagged");
+    const value = Math.max(0, 1 - 0.5 * flagged.length);
+    return {
+      ...s,
+      value,
+      points: round(value * s.maxPoints),
+      rationale: flagged.length
+        ? `Reported without performing the exam: ${flagged.map((c) => `“${c.text}”`).join("; ")}.`
+        : `All ${check.linked} exam claim(s) that name a maneuver are backed by an exam in the log.`,
+      evidence: flagged.map((c) => ({ actionId: pen.id, quote: c.text, verified: pen.payload.exam.includes(c.text) })),
+    };
+  });
 }
 
 export function itemFor(sheet: MarkSheet, itemId: string): MarkSheetItem | undefined {

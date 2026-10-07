@@ -1,0 +1,521 @@
+{
+  "id": "communication-1b",
+  "title": "Communication Skills (1B checklist)",
+  "kind": "history",
+  "domain": "communication",
+  "passThreshold": 0.7,
+  "attribution": "Courtesy of Rebecca Kowalski",
+  "sourceNote": "Sections follow the 1B communication checklist (V2); every label is paraphrased in our own words. The pass threshold is a placeholder pending faculty confirmation.",
+  "items": [
+    {
+      "id": "greet-by-name",
+      "section": "Setting the stage",
+      "label": "Greets the patient by name",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Student greets the patient and uses the patient’s name (any form, e.g. Mr./Ms. + surname or first name if invited).",
+      "mockKeywords": [
+        "mr.",
+        "mrs.",
+        "ms.",
+        "hello",
+        "hi "
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "introduce-self-role",
+      "section": "Setting the stage",
+      "label": "Introduces self (full name) and role",
+      "weight": 1,
+      "scoring": "auto",
+      "sourceText": "",
+      "rule": {
+        "all": [
+          {
+            "said": "introduced_name"
+          },
+          {
+            "said": "stated_role"
+          }
+        ]
+      }
+    },
+    {
+      "id": "introduce-first-year",
+      "section": "Setting the stage",
+      "label": "Says they are a first-year medical student",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Credit if the student tells the patient they are a first-year (or first year) medical student. Half credit for \"medical student\" without the year.",
+      "mockKeywords": [
+        "first-year",
+        "first year"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "remove-barriers",
+      "section": "Setting the stage",
+      "label": "Removes barriers to communication (sits down at eye level)",
+      "weight": 1,
+      "scoring": "auto",
+      "sourceText": "",
+      "rule": {
+        "happened": "sit_down"
+      }
+    },
+    {
+      "id": "comfort-privacy",
+      "section": "Setting the stage",
+      "label": "Checks comfort, readiness and privacy; puts patient at ease",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Student asks whether the patient is comfortable / ready, or addresses privacy, or makes a remark that puts the patient at ease.",
+      "mockKeywords": [
+        "comfortable",
+        "is now a good time",
+        "privacy",
+        "ready"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "cc-open-question",
+      "section": "Chief concern and agenda",
+      "label": "Elicits chief concern with an open-ended question",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "An open question to elicit the main concern (e.g. What brings you in today?). Closed questions do not count.",
+      "mockKeywords": [
+        "what brings you",
+        "how can i help",
+        "what can i do for you",
+        "tell me what"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "additional-concerns",
+      "section": "Chief concern and agenda",
+      "label": "Elicits additional concerns with an open-ended question",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Asks whether there is anything else the patient wants to address today, before diving into the HPI.",
+      "mockKeywords": [
+        "anything else",
+        "any other concerns",
+        "something else"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "note-issues",
+      "section": "Chief concern and agenda",
+      "label": "Notes additional issues to discuss today",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Acknowledges/lists the additional issues raised so they are not lost (e.g. We will also talk about X).",
+      "mockKeywords": [
+        "we will also",
+        "we’ll also",
+        "also talk about",
+        "come back to"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "prioritize",
+      "section": "Chief concern and agenda",
+      "label": "Prioritises concerns if necessary",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "If more than one concern exists, negotiates which to focus on first. If the patient raised only one concern, score 1 only if the student explicitly confirmed there was nothing else to prioritise; otherwise 0.",
+      "mockKeywords": [
+        "start with",
+        "focus on",
+        "most important"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "open-story",
+      "section": "Opening the interview",
+      "label": "Invites the patient’s story with an open-ended prompt",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Invites the patient’s narrative with an open prompt (e.g. Tell me about…).",
+      "mockKeywords": [
+        "tell me about",
+        "tell me more",
+        "walk me through",
+        "describe"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "nonverbal-encourage",
+      "section": "Opening the interview",
+      "label": "Uses paraverbal encouragement and silence",
+      "weight": 1,
+      "scoring": "not_assessable",
+      "notAssessableReason": "Needs voice timing and body language; not measured yet (silence could later come from voice timing).",
+      "sourceText": ""
+    },
+    {
+      "id": "second-open",
+      "section": "Opening the interview",
+      "label": "Uses a second or third open question / echoing to get more story",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "After the first answer, uses another open prompt or echoes the patient’s words to invite more.",
+      "mockKeywords": [
+        "tell me more",
+        "go on",
+        "what else",
+        "and then"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "summarize-clarify",
+      "section": "Focusing skills",
+      "label": "Clarifies by summarising",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Summarises or checks understanding (e.g. Let me make sure I have this right…).",
+      "mockKeywords": [
+        "let me make sure",
+        "so what i’m hearing",
+        "to summarize",
+        "to summarise",
+        "if i understand"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "emotional-context",
+      "section": "Focusing skills",
+      "label": "Elicits emotional context",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Asks how the problem is affecting the patient emotionally / how they are coping.",
+      "mockKeywords": [
+        "how are you feeling about",
+        "how are you coping",
+        "what is this like",
+        "worried"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "personal-context",
+      "section": "Focusing skills",
+      "label": "Elicits personal context",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Asks what the problem means for the patient’s life (work, family, activities, roles).",
+      "mockKeywords": [
+        "affect your",
+        "daily life",
+        "at home",
+        "your family",
+        "your work"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "respond-emotion",
+      "section": "Focusing skills",
+      "label": "Responds to emotional or personal context (empathy)",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Explicitly acknowledges or validates the patient’s feelings or situation.",
+      "mockKeywords": [
+        "that sounds",
+        "i can imagine",
+        "i’m sorry",
+        "must be hard",
+        "understandable"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "timeline",
+      "section": "History of present illness",
+      "label": "Clarifies the timeline",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Establishes when it started and how it evolved over time.",
+      "mockKeywords": [
+        "when did",
+        "how long",
+        "since when",
+        "getting worse"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "hpi-onset",
+      "section": "History of present illness",
+      "label": "Onset",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks how the symptom began (sudden vs gradual, what they were doing).",
+      "mockKeywords": [
+        "start",
+        "began",
+        "come on",
+        "onset"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "hpi-duration",
+      "section": "History of present illness",
+      "label": "Duration",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks how long the symptom has been present / how long episodes last.",
+      "mockKeywords": [
+        "how long",
+        "duration",
+        "weeks",
+        "days"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "hpi-quality",
+      "section": "History of present illness",
+      "label": "Quality",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks what the symptom feels like.",
+      "mockKeywords": [
+        "what does it feel like",
+        "describe the",
+        "feel like"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "hpi-quantification",
+      "section": "History of present illness",
+      "label": "Quantification / severity",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Quantifies severity or functional impact (scale, distance walked, number of pillows, etc.).",
+      "mockKeywords": [
+        "how far",
+        "how many",
+        "scale",
+        "how bad",
+        "stairs",
+        "pillows"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "hpi-related",
+      "section": "History of present illness",
+      "label": "Related symptoms",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks about associated symptoms.",
+      "mockKeywords": [
+        "any other symptoms",
+        "swelling",
+        "cough",
+        "chest pain",
+        "fever"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "hpi-setting",
+      "section": "History of present illness",
+      "label": "Setting",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks the setting in which it occurs (exertion, lying flat, time of day, at night).",
+      "mockKeywords": [
+        "when you lie",
+        "lying",
+        "at night",
+        "exertion",
+        "walking"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "hpi-transforming",
+      "section": "History of present illness",
+      "label": "Transforming factors",
+      "weight": 0.5,
+      "scoring": "ai",
+      "guidance": "Asks what makes it better or worse.",
+      "mockKeywords": [
+        "better",
+        "worse",
+        "helps",
+        "relieve"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "closed-ddx",
+      "section": "History of present illness",
+      "label": "Uses closed questions to narrow the differential",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Asks specific yes/no questions aimed at raising or lowering particular diagnoses (e.g. chest pain, fever, leg pain, medication adherence).",
+      "mockKeywords": [
+        "any chest pain",
+        "fever",
+        "calf",
+        "taking your",
+        "stopped"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "summarize-hpi",
+      "section": "Transition",
+      "label": "Summarises the HPI and checks accuracy",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Gives a summary of the HPI back to the patient and asks if it is accurate.",
+      "mockKeywords": [
+        "did i get that right",
+        "is that right",
+        "let me summarize",
+        "to summarize",
+        "let me make sure"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "signpost",
+      "section": "Transition",
+      "label": "Signposts the move to more directed questions",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Tells the patient they will now ask about past history / other questions.",
+      "mockKeywords": [
+        "now i’d like to ask",
+        "i’m going to ask",
+        "a few more questions",
+        "now i want to ask",
+        "some questions about your"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "transition-pe",
+      "section": "Ending the encounter",
+      "label": "Transitions to the physical exam",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Tells the patient they will now examine them and asks permission.",
+      "mockKeywords": [
+        "examine you",
+        "physical exam",
+        "take a look",
+        "listen to your"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "share-assessment",
+      "section": "Ending the encounter",
+      "label": "Shares impressions in plain language, without deferring",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Near the end, the student shares their impression of what may be going on, in plain language the patient can follow. Half credit if they use unexplained medical jargon (e.g. \"decompensated\", \"HFrEF\", \"edema\" without explanation). Zero if they only defer (\"my attending will decide\", \"the doctor will tell you\") without sharing any impression.",
+      "mockKeywords": [
+        "i think",
+        "what i think is going on",
+        "it sounds like",
+        "most likely",
+        "I think",
+        "might be"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "share-plan",
+      "section": "Ending the encounter",
+      "label": "Explains next steps in plain language",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "The student tells the patient what happens next (further tests, who they will see) in plain language. 1B has no management plan: credit next steps, not treatment decisions. Zero if they defer every question.",
+      "mockKeywords": [
+        "next step",
+        "we will",
+        "we’ll",
+        "plan",
+        "test"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "elicit-preferences",
+      "section": "Ending the encounter",
+      "label": "Elicits questions, concerns and preferences",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Asks what the patient thinks / prefers, or what concerns they have about the plan.",
+      "mockKeywords": [
+        "what do you think",
+        "how does that sound",
+        "any concerns",
+        "questions"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "teach-back",
+      "section": "Ending the encounter",
+      "label": "Confirms agreement and understanding (teach-back)",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Checks understanding, ideally by asking the patient to repeat back the plan.",
+      "mockKeywords": [
+        "repeat back",
+        "in your own words",
+        "make sure i explained",
+        "does that make sense"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "anything-else",
+      "section": "Ending the encounter",
+      "label": "Checks for any other questions before ending",
+      "weight": 1,
+      "scoring": "auto",
+      "sourceText": "",
+      "rule": {
+        "said": "offered_questions"
+      }
+    },
+    {
+      "id": "expectancies",
+      "section": "Ending the encounter",
+      "label": "Reviews expectancies and safety-netting",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Tells the patient what will happen next and what should prompt them to call/return.",
+      "mockKeywords": [
+        "i will be back",
+        "i’ll be back",
+        "attending",
+        "come back",
+        "if you notice",
+        "call us"
+      ],
+      "sourceText": ""
+    }
+  ]
+}

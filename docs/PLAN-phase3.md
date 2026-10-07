@@ -299,7 +299,7 @@ Lighting is stable: hemisphere light, one shadowed key light, and contact shadow
 | M3 | Cinematic navigation | done |
 | M4 | Hidden targets | done |
 | M5 | 1B encounter flow and PEN | done |
-| M6 | Two-domain scoring | planned |
+| M6 | Two-domain scoring | done |
 
 ### M4 notes (as built)
 - `src/exam3d/tools/contact.ts` (pure, tested) decides `finding` / `near` / `background` / `nothing` from distance vs `toleranceCm`; the 3D view logs a `tool_contact` for every placement through `contactFromTool`.
@@ -316,11 +316,21 @@ Lighting is stable: hemisphere light, one shadowed key light, and contact shadow
 - Notepad: scratch only, localStorage per session, never sent to the server.
 - Test overrides: `ENCOUNTER_SECONDS_OVERRIDE`, `PEN_SECONDS_OVERRIDE`.
 
+### M6 notes (as built)
+- `communication-1b.json` (communication domain, attribution "Courtesy of Rebecca Kowalski") keeps the paraphrased checklist sections; `remove-barriers` is now auto (`happened: sit_down`), "first-year student" is a new AI item, paraverbal/silence stays not assessable, and the impression item penalises jargon and deferral.
+- `encounter-1b.json` (patient-encounter domain) holds history coverage (PMH, PSH, meds, allergies, FH, SH, ROS) and the exam-mode timing item. At grading time `sheetsForCase` adds the case's `peChecklist` sheet (`case-pe`) and a sheet generated from `penKey` (`pen`: one AI item per history point, exam point and diagnosis, a justification item, and the deterministic "reports only performed exams" item). `history-communication` and `clinical-reasoning` are deleted; `exam-fcm1` remains for the screening case (patient-encounter domain).
+- `src/engine/penCheck.ts` splits the PEN exam section into claims, matches them to maneuvers by catalog `penTerms` and `penKey.exam` keywords, links supporting exams (or on-target tool contacts) and flags the rest. Each flagged claim costs half of the consistency item; the flags are also passed to the AI grader.
+- `domainTotals` / `stationPass` in `scoring.ts`: points, max, fraction, threshold and pass per domain; the station passes only if both domains pass. Results and coach views show a verdict, two domain cards (sheets inside, items grouped by section, overrides per item) and a PEN review beside the transcript with each claim linked or flagged. Placement distances appear in evidence once the session has ended.
+- Content validation now checks item ids are unique across all of a case's sheets, generated ones included (the grader matches judgements by id).
+
 ## Open questions
-1. Domain pass thresholds: 70% is a placeholder.
-2. Does the PEN have a justification field? The screenshot cuts off below item 3.
+1. Domain pass thresholds: 70% is a placeholder, applied to both domains.
+2. Does the PEN have a justification field? The screenshot cuts off below item 3. Built as an optional "supporting findings" field per diagnosis.
 3. Permission to use the communication checklist text and the FCM framework text verbatim.
 4. Patient model: is the MakeHuman CC0 build good enough, or should a commissioned or scanned model replace it?
 5. Which communication items stay not-assessable? Silence could later be measured from voice timing.
 6. KTX2 textures need `toktx` in the build environment; WebP for now.
 7. How should the real exam's announcement audio be reproduced (TTS vs recorded)?
+8. PEN consistency: each unperformed claim costs half of a 2-point item. Should faculty weight this differently, or treat any unperformed claim as a fail?
+9. The `penTerms` matching is keyword-based. Faculty should review the terms per maneuver, and decide whether a claim like "lungs clear" (no named maneuver) should require any auscultation.
+10. Communication HPI items stay in the communication domain (they're on the communication checklist); history coverage (PMH→ROS) counts toward the patient encounter. Confirm this split.

@@ -6,7 +6,8 @@ import { Debrief } from "@/components/results/Debrief";
 import { FeedbackForm } from "@/components/common/FeedbackForm";
 import { FeedbackSummary } from "@/components/results/FeedbackSummary";
 import { GradeTrigger } from "@/components/results/GradeTrigger";
-import { SheetCard } from "@/components/results/SheetCard";
+import { DomainCard, StationVerdict } from "@/components/results/DomainCard";
+import { PenReview } from "@/components/results/PenReview";
 import { HttpError } from "@/server/errors";
 import { getResultsView } from "@/server/results";
 
@@ -60,9 +61,11 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
           {run.mocked && <p className="rounded-md bg-slate-100 px-3 py-2 text-xs text-slate-600">AI_MOCK is on: transcript-graded items and feedback use canned logic, not the model.</p>}
           <FeedbackSummary run={run} />
           {debrief && <Debrief debrief={debrief} />}
-          {sheets.map((s) => (
-            <SheetCard key={s.sheet.id} view={s} actionsById={actionsById} labels={labels} timelineHref={href} />
+          <StationVerdict pass={view.pass} domains={view.domains} />
+          {view.domains.map((d) => (
+            <DomainCard key={d.domain} domain={d} sheets={sheets} actionsById={actionsById} labels={labels} timelineHref={href} />
           ))}
+          {view.penReview && <PenReview pen={view.penReview.pen} check={view.penReview.check} actionsById={actionsById} timelineHref={href} />}
           <FeedbackForm sessionId={id} page="results" />
         </>
       )}

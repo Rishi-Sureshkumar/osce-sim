@@ -1,6 +1,7 @@
 import type { Rule } from "@/domain/schemas";
 import { Position, CourtesyKind, CourtesyTag, type FindingValue } from "@/domain/schemas";
 import { findingValueText } from "@/engine/resolveFinding";
+import { sheetsForCase } from "@/engine/sheets";
 import type { ContentIndex } from "./types";
 
 const VITAL_KEYS = ["hr", "rr", "bpSystolic", "bpDiastolic", "tempC", "spo2", "spo2Context"];
@@ -86,6 +87,17 @@ export function validateContentGraph(c: ContentIndex): string[] {
     }
     const keyIds = [...(cs.penKey?.history ?? []), ...(cs.penKey?.exam ?? []), ...(cs.penKey?.differential ?? [])].map((k) => k.id);
     if (new Set(keyIds).size !== keyIds.length) errors.push(`case ${cs.id}: penKey ids must be unique across history, exam and differential`);
+    if (cs.markSheetIds.every((id) => c.markSheetById.has(id))) {
+      // the AI grader returns judgements by item id, so ids must be unique across a case's sheets
+      const seen = new Map<string, string>();
+      for (const sheet of sheetsForCase(cs, c.markSheetById)) {
+        for (const item of sheet.items) {
+          const prev = seen.get(item.id);
+          if (prev && prev !== sheet.id) errors.push(`case ${cs.id}: item id "${item.id}" appears in both ${prev} and ${sheet.id}`);
+          seen.set(item.id, sheet.id);
+        }
+      }
+    }
     const factIds = new Set<string>();
     for (const f of cs.history.facts) {
       if (factIds.has(f.id)) errors.push(`case ${cs.id}: duplicate history fact id "${f.id}"`);

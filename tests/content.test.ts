@@ -9,7 +9,7 @@ describe("content", () => {
     expect(c.maneuvers.length).toBeGreaterThan(100);
     expect(c.caseById.get("hf-decompensated-01")).toBeDefined();
     expect(c.markSheetById.get("exam-fcm1")).toBeDefined();
-    expect(c.markSheetById.get("history-communication")).toBeDefined();
+    expect(c.markSheetById.get("communication-1b")).toBeDefined();
   });
 
   it("maps every FCM item 1–120 that the framework numbers to a mark-sheet item", () => {

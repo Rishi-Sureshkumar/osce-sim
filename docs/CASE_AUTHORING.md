@@ -22,6 +22,10 @@ Start by copying `content/cases/hf-decompensated-01.json`.
 | `expectedDifferential[]` | `{ rank, diagnosis, rationale }`. Used by the grader and shown in the post-station debrief | grader; student after finishing |
 | `markSheetIds` | which mark sheets score this case | — |
 | `markSheetSections` | optional: limit a sheet to some sections (e.g. CV + pulmonary only) | — |
+| `doorInstructions` | 1B door placard: `reasonForVisit`, `task`, `prohibitedExams[] { label, regionIds }` (clicking those regions logs a `prohibited_attempt`) | student |
+| `timeLimits` | `{ encounterMin, penMin }` (1B: 15 and 10). With `mode: "encounter"` this turns on the 1B flow: "You may begin", timed encounter, then the post-encounter note | student |
+| `peChecklist[]` | the case's SP physical-exam checklist: mark-sheet items with `auto` rules. Scored in the patient-encounter domain | coaches; student after finishing |
+| `penKey` | faculty key for the post-encounter note: `history[] { id, text, kind: positive/negative, keywords }`, `exam[] { id, text, maneuverIds, keywords }`, `differential[] { id, diagnosis, aliases, rank, rationale }`. Ids unique across all three. `keywords` are also the mock grader's evidence | grader only |
 | `synthetic` | must be `true` | — |
 | `sourceNote` | where the case came from (e.g. "written by the team", or the permission reference) | coaches |
 

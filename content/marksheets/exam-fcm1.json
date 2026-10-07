@@ -1898,5 +1898,7 @@
       ],
       "sourceText": ""
     }
-  ]
+  ],
+  "domain": "patient_encounter",
+  "passThreshold": 0.7
 }

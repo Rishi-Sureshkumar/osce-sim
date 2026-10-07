@@ -23,7 +23,13 @@
           "Shine a penlight tangentially across the right side of the neck.",
           "Find the top of the venous pulsation and measure its vertical height above the sternal angle."
         ]
-      }
+      },
+      "penTerms": [
+        "jvp",
+        "jugular venous",
+        "jugular venous pressure",
+        "neck veins"
+      ]
     },
     {
       "requiresPositioning": [
@@ -48,7 +54,13 @@
           "Press firmly over the right upper quadrant for about 10 seconds.",
           "Watch whether the jugular column rises and stays up."
         ]
-      }
+      },
+      "penTerms": [
+        "hepatojugular",
+        "abdominojugular",
+        "hjr",
+        "ajr"
+      ]
     },
     {
       "sourceText": "",
@@ -69,7 +81,11 @@
           "Press gently below the angle of the jaw with your finger pads.",
           "Assess one side, then the other — never both together."
         ]
-      }
+      },
+      "penTerms": [
+        "carotid pulse",
+        "carotid upstroke"
+      ]
     },
     {
       "sourceText": "",
@@ -92,7 +108,11 @@
         ]
       },
       "interaction": "place",
-      "tool": "stethoscope"
+      "tool": "stethoscope",
+      "penTerms": [
+        "carotid bruit",
+        "bruit"
+      ]
     },
     {
       "requiresPositioning": [
@@ -142,7 +162,13 @@
           "Repeat at the base of the heart.",
           "Feel for a sustained lift (heave) or a buzzing vibration (thrill)."
         ]
-      }
+      },
+      "penTerms": [
+        "heave",
+        "heaves",
+        "thrill",
+        "thrills"
+      ]
     },
     {
       "requiresPositioning": [
@@ -167,7 +193,14 @@
           "If you cannot feel it, roll the patient onto their left side and try again.",
           "Locate it by intercostal space and relation to the midclavicular line."
         ]
-      }
+      },
+      "penTerms": [
+        "pmi",
+        "apex beat",
+        "apical impulse",
+        "point of maximal impulse",
+        "displaced apex"
+      ]
     },
     {
       "requiresPositioning": [
@@ -241,7 +274,18 @@
       },
       "interaction": "place",
       "tool": "stethoscope",
-      "toolMode": "diaphragm"
+      "toolMode": "diaphragm",
+      "penTerms": [
+        "murmur",
+        "s1",
+        "s2",
+        "heart sounds",
+        "systolic murmur",
+        "diastolic murmur",
+        "s3",
+        "s4",
+        "gallop"
+      ]
     },
     {
       "requiresPositioning": [
@@ -278,7 +322,12 @@
       },
       "interaction": "place",
       "tool": "stethoscope",
-      "toolMode": "bell"
+      "toolMode": "bell",
+      "penTerms": [
+        "s3",
+        "s4",
+        "gallop"
+      ]
     },
     {
       "sourceText": "",
@@ -313,7 +362,13 @@
           "Feel each pulse with your finger pads and compare left with right.",
           "Grade the strength (0 absent to 3+ bounding)."
         ]
-      }
+      },
+      "penTerms": [
+        "pedal pulses",
+        "dorsalis pedis",
+        "posterior tibial",
+        "femoral pulse"
+      ]
     },
     {
       "sourceText": "",
@@ -338,7 +393,12 @@
           "Feel the temperature of the extremity with the back of your hand.",
           "Press a nail bed for a few seconds, release, and time the colour return."
         ]
-      }
+      },
+      "penTerms": [
+        "capillary refill",
+        "cool peripheries",
+        "warm peripheries"
+      ]
     },
     {
       "sourceText": "",
@@ -366,7 +426,12 @@
           "Press firmly with your thumb for several seconds over a bony surface.",
           "Check how far up any pitting extends; check the sacrum in a patient who has been lying down."
         ]
-      }
+      },
+      "penTerms": [
+        "edema",
+        "oedema",
+        "pitting"
+      ]
     }
   ]
 }

@@ -6,7 +6,7 @@ import { courtesy, examine, makeLog, say } from "./helpers";
 
 const c = loadContentFromDisk();
 const exam = c.markSheetById.get("exam-fcm1")!;
-const history = c.markSheetById.get("history-communication")!;
+const history = c.markSheetById.get("communication-1b")!;
 
 const log = makeLog([
   say("Hello Mr. Bennett, my name is Sam Patel and I'm a medical student. What brings you in today?"),
@@ -45,7 +45,8 @@ describe("grading pipeline (deterministic + mock AI)", () => {
     expect(intro.status).toBe("scored");
     expect(intro.value).toBe(1);
     expect(intro.evidence[0]!.verified).toBe(true);
-    const ros = ai.find((s) => s.itemId === "ros-gu")!;
+    const enc = c.markSheetById.get("encounter-1b")!;
+    const ros = scoreAiItems(enc, mockJudgements(enc, log), log).find((s) => s.itemId === "ros-gu")!;
     expect(ros.value).toBe(0);
     expect(ros.status).toBe("scored");
   });
