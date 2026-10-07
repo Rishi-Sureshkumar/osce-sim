@@ -39,10 +39,10 @@ describe("scoreAiItems", () => {
     kind: "history",
     sourceNote: "",
     items: [
-      { id: "intro", section: "S", label: "Introduces self", weight: 2, scoring: "ai", guidance: "g", sourceText: "" },
-      { id: "comfort", section: "S", label: "Comfort", weight: 1, scoring: "ai", guidance: "g", sourceText: "" },
-      { id: "empathy", section: "S", label: "Empathy", weight: 1, scoring: "ai", guidance: "g", sourceText: "" },
-      { id: "missing", section: "S", label: "Missing", weight: 1, scoring: "ai", guidance: "g", sourceText: "" },
+      { id: "intro", section: "S", label: "Introduces self", weight: 2, scoring: "match", guidance: "g", sourceText: "" },
+      { id: "comfort", section: "S", label: "Comfort", weight: 1, scoring: "match", guidance: "g", sourceText: "" },
+      { id: "empathy", section: "S", label: "Empathy", weight: 1, scoring: "match", guidance: "g", sourceText: "" },
+      { id: "missing", section: "S", label: "Missing", weight: 1, scoring: "match", guidance: "g", sourceText: "" },
     ],
   };
   const scores = scoreAiItems(

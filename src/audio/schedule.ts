@@ -136,6 +136,9 @@ export function captionFor(spec: AudioSpec): string {
     if (p.wheeze) parts.push("wheeze");
     return parts.join(", ").replace(/^./, (c) => c.toUpperCase());
   }
+  if (spec.generator === "korotkoff") return "Korotkoff sounds";
+  if (spec.generator === "percussion") return `Percussion note: ${spec.params.note.replace("_", " ")}`;
+  if (spec.generator === "voice") return spec.params.egophony ? "Transmitted voice: \"ee\" sounds like \"ay\"" : `Transmitted voice (${spec.params.transmission})`;
   const t = toneEnvelope(spec.params);
   const side = t.pan < -0.2 ? "louder in the left ear" : t.pan > 0.2 ? "louder in the right ear" : "heard equally in both ears";
   return `Tuning fork ${t.freq} Hz, ${side}`;

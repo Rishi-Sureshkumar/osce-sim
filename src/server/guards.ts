@@ -16,7 +16,7 @@ export function limits() {
 }
 
 export function sessionTokens(s: Session): number {
-  const u = s.usage;
+  const u = s.usage ?? { inputTokens: 0, outputTokens: 0, cacheReadTokens: 0, cacheWriteTokens: 0 };
   return u.inputTokens + u.outputTokens + u.cacheReadTokens + u.cacheWriteTokens;
 }
 

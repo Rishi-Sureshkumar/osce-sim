@@ -52,8 +52,28 @@ export const Position = z.enum([
   "left_lateral_decubitus",
   "prone",
   "standing",
+  /** Phase 4: sitting on the edge of the table, knees flexed, lower legs hanging free (patellar/Achilles reflexes). */
+  "sitting_dangling",
 ]);
 export type Position = z.infer<typeof Position>;
+
+/**
+ * Phase 4: sectioned drapes. Each section is a separate cloth piece that can be folded back on its own.
+ * `pelvis` is never exposed. `back` is the back opening of the gown.
+ */
+export const DrapeSection = z.enum(["chest_left", "chest_right", "abdomen", "pelvis", "leg_left", "leg_right", "back"]);
+export type DrapeSection = z.infer<typeof DrapeSection>;
+
+/** Phase 4: emotional cue on a fact; drives how the patient acknowledges empathy. */
+export const Emotion = z.enum(["neutral", "worried", "anxious", "sad", "frustrated", "embarrassed", "in_pain", "tired", "relieved"]);
+export type Emotion = z.infer<typeof Emotion>;
+
+export const Severity = z.enum(["info", "minor", "major", "critical"]);
+export type Severity = z.infer<typeof Severity>;
+
+/** Phase 4: "show" = interpreted finding text; "hide" = raw stimulus only, the student interprets it. */
+export const FindingsDisplay = z.enum(["show", "hide"]);
+export type FindingsDisplay = z.infer<typeof FindingsDisplay>;
 
 export const Technique = z.enum(["inspect", "palpate", "percuss", "auscultate", "special"]);
 export type Technique = z.infer<typeof Technique>;
@@ -72,6 +92,8 @@ export const Region = z.object({
   verbal: z.boolean().optional(),
   /** Kept for id stability but never offered for examination (old 2D zoom aliases). */
   hidden: z.boolean().optional(),
+  /** Phase 4: drape sections that cover this region (exam through cover is a mistake). */
+  drapeSections: z.array(DrapeSection).optional(),
 });
 export type Region = z.infer<typeof Region>;
 
@@ -104,6 +126,10 @@ export const AudioSpec = z.union([
         intensity: z.number().min(0).max(1).default(0.8),
         /** ms between A2 and P2; 0 = single S2 */
         s2SplitMs: z.number().min(0).max(80).default(0),
+        /** Phase 4: S2 loudness relative to S1 (1 = normal); < 0.4 = soft S2 (e.g. aortic stenosis) */
+        s2Intensity: z.number().min(0).max(1).optional(),
+        /** Phase 4: early systolic ejection click loudness 0–1 */
+        ejectionClick: z.number().min(0).max(1).optional(),
       })
       .strict(),
   }),
@@ -134,21 +160,78 @@ export const AudioSpec = z.union([
       })
       .strict(),
   }),
+  /** Phase 4: Korotkoff sounds during cuff deflation. Pressures default to the case vitals at resolve time. */
+  z.object({
+    generator: z.literal("korotkoff"),
+    params: z
+      .object({
+        systolic: z.number().int().min(40).max(300).optional(),
+        diastolic: z.number().int().min(20).max(200).optional(),
+        /** phase IV (muffling) starts this many mmHg above diastolic */
+        muffleMmHg: z.number().min(0).max(20).default(6),
+        auscultatoryGap: z.tuple([z.number(), z.number()]).optional(),
+        intensity: z.number().min(0).max(1).default(0.7),
+      })
+      .strict(),
+  }),
+  /** Phase 4: percussion note under the finger. */
+  z.object({
+    generator: z.literal("percussion"),
+    params: z
+      .object({
+        note: z.enum(["resonant", "hyperresonant", "dull", "stony_dull", "tympanic", "flat"]),
+        intensity: z.number().min(0).max(1).default(0.8),
+      })
+      .strict(),
+  }),
+  /** Phase 4: transmitted voice through the stethoscope (vocal resonance, egophony, whispered pectoriloquy). */
+  z.object({
+    generator: z.literal("voice"),
+    params: z
+      .object({
+        phrase: z.enum(["ee", "ninety_nine", "whisper_123"]),
+        transmission: z.enum(["normal", "increased", "decreased", "absent"]).default("normal"),
+        /** "ee" heard as "ay" */
+        egophony: z.boolean().default(false),
+      })
+      .strict(),
+  }),
   z.object({ clipId: z.string().min(1) }).strict(),
 ]);
 export type AudioSpec = z.infer<typeof AudioSpec>;
 
-/** Animation drivers for tools (reflex jerk 0–4+, pupil constriction 0–1, …). */
+/**
+ * Animation drivers for tools. Known keys: reflex (0–4 grade), clonusBeats (0–10),
+ * pupilConstriction (0–1, direct), pupilConsensual (0–1), pittingDepthMm.
+ */
 export const VisualSpec = z.record(z.string(), z.number());
+
+/** Phase 4: the patient's own reaction to a maneuver (a stimulus in hide-findings mode). Case text only. */
+export const PatientResponse = z
+  .object({
+    /** what the patient says, e.g. "It feels duller on that side." */
+    say: z.string().min(1).optional(),
+    /** brief pain grimace */
+    wince: z.boolean().optional(),
+  })
+  .strict();
+export type PatientResponse = z.infer<typeof PatientResponse>;
 
 const FindingObject = z
   .object({
     text: z.string().min(1),
     audio: AudioSpec.optional(),
     visual: VisualSpec.optional(),
+    /** Phase 4: patient reaction (spoken words / wince). */
+    response: PatientResponse.optional(),
+    /** Phase 4: words a correct interpretation would use (hide-findings recognition). */
+    terms: z.array(z.string().min(1)).optional(),
     /** Position-specific variant (e.g. an S3 louder in left lateral decubitus). Keys are Position values. */
     byPosition: z
-      .record(z.string(), z.object({ text: z.string().min(1).optional(), audio: AudioSpec.optional(), visual: VisualSpec.optional() }).strict())
+      .record(
+        z.string(),
+        z.object({ text: z.string().min(1).optional(), audio: AudioSpec.optional(), visual: VisualSpec.optional(), response: PatientResponse.optional() }).strict(),
+      )
       .optional(),
   })
   .strict();
@@ -164,7 +247,7 @@ export type FindingValue = z.infer<typeof FindingValue>;
 export const NormalFinding = z.object({ default: FindingValue }).catchall(FindingValue);
 export type NormalFinding = z.infer<typeof NormalFinding>;
 
-export const Tool = z.enum(["stethoscope", "tuning_fork", "reflex_hammer", "penlight", "bp_cuff", "hands"]);
+export const Tool = z.enum(["stethoscope", "tuning_fork", "reflex_hammer", "penlight", "bp_cuff", "hands", "cotton_swab", "pin"]);
 export type Tool = z.infer<typeof Tool>;
 export const ToolMode = z.enum(["diaphragm", "bell", "128", "512"]);
 export type ToolMode = z.infer<typeof ToolMode>;
@@ -175,10 +258,22 @@ export const SequenceStep = z
   .object({
     id: slug,
     label: z.string().min(1),
-    /** "place": put the tool on a landmark; "signal": wait for the patient's signal (e.g. sound gone). */
-    kind: z.enum(["place", "signal"]).default("place"),
+    /**
+     * "place": put the tool on a landmark; "signal": wait for the patient's signal (e.g. sound gone);
+     * "control": operate an on-screen control (BP gauge, support the arm).
+     */
+    kind: z.enum(["place", "signal", "control"]).default("place"),
     /** Named 3D landmark (see src/exam3d/regionAnchors.ts), resolved per side from the region, e.g. "mastoid". */
     landmark: z.string().optional(),
+    /** Phase 4: tool for this step when it differs from the maneuver's (BP: cuff → hands → stethoscope). */
+    tool: Tool.optional(),
+    toolMode: ToolMode.optional(),
+    /** Phase 4: how close to the landmark counts (cm). */
+    toleranceCm: z.number().min(0.3).max(10).optional(),
+    minDurationMs: z.number().int().min(0).max(30_000).optional(),
+    /** Phase 4: also record this maneuver when the step is done (e.g. "wrap" records bp_cuff_placement). */
+    logsManeuver: ManeuverId.optional(),
+    control: z.enum(["bp_gauge", "support_arm"]).optional(),
   })
   .strict();
 export type SequenceStep = z.infer<typeof SequenceStep>;
@@ -210,6 +305,10 @@ export const ExamManeuver = z.object({
    * Used to flag notes that report findings from maneuvers that were never performed.
    */
   penTerms: z.array(z.string().min(1)).optional(),
+  /** Phase 4: tool tolerance for this maneuver (cm), overriding the anchor's (penlight = iris). */
+  toleranceCm: z.number().min(0.2).max(20).optional(),
+  /** Phase 4: must the region be uncovered? Default: true for touch maneuvers on draped regions. */
+  requiresExposure: z.boolean().optional(),
   demo: z.object({
     steps: z.array(z.string().min(1)).min(1),
     mediaUrl: z.string().optional(),
@@ -239,22 +338,83 @@ export const Vitals = z.object({
 });
 export type Vitals = z.infer<typeof Vitals>;
 
+/**
+ * Phase 4: how a student might ask for something. Matched deterministically (src/lang):
+ * exact paraphrase → keyword / pattern → embedding similarity to canonical + paraphrases.
+ */
+export const Intent = z
+  .object({
+    canonical: z.string().min(3),
+    paraphrases: z.array(z.string().min(3)).max(30).default([]),
+    /** word-boundary phrases matched after normalisation */
+    keywords: z.array(z.string().min(1)).default([]),
+    /** regular-expression sources (case-insensitive) */
+    patterns: z.array(z.string().min(1)).default([]),
+    /** history-coverage topics this question covers (content/lang/topics.json), e.g. "pmh.conditions" */
+    topics: z.array(slug).default([]),
+  })
+  .strict();
+export type Intent = z.infer<typeof Intent>;
+
+export const FollowUp = z
+  .object({ id: slug, intents: Intent, answer: z.string().min(1), emotion: Emotion.optional() })
+  .strict();
+
 export const HistoryFact = z.object({
   id: slug,
   topic: z.string().min(1),
   answer: z.string().min(1),
   /** true: only disclose when the student asks about this topic. false: patient may volunteer it. */
   revealOnlyIfAsked: z.boolean(),
-  /** Optional keywords used by the mock patient (AI_MOCK=true) to match questions. */
+  /** Legacy keywords (merged into intents.keywords by the matcher). */
   keywords: z.array(z.string()).optional(),
+  /** Phase 4: how students ask for this fact (required for encounter cases by `npm run validate`). */
+  intents: Intent.optional(),
+  /** Phase 4: narrower questions about the same fact ("how many pillows?"). */
+  followUps: z.array(FollowUp).default([]),
+  emotion: Emotion.optional(),
 });
 export type HistoryFact = z.infer<typeof HistoryFact>;
 
 export const PertinentNegative = z.object({
+  /** Phase 4: stable id (the matcher derives "neg-<topic slug>" when missing). */
+  id: slug.optional(),
   topic: z.string().min(1),
   answer: z.string().min(1),
   keywords: z.array(z.string()).optional(),
+  intents: Intent.optional(),
+  emotion: Emotion.optional(),
 });
+
+/** Phase 4: conversational turns that are not history facts (greeting, consent, empathy, …). */
+export const ConversationKind = z.enum([
+  "opening",
+  "greeting",
+  "introduction",
+  "how_are_you",
+  "consent",
+  "explain_exam",
+  "position_request",
+  "anything_else",
+  "empathy",
+  "thanks",
+  "closing",
+  "small_talk",
+  "repeat",
+  "clarify",
+  "name_check",
+]);
+export type ConversationKind = z.infer<typeof ConversationKind>;
+export const ConversationReply = z
+  .object({
+    kind: ConversationKind,
+    intents: Intent.optional(),
+    /** case text; may use {patient.name} {patient.firstName} {patient.lastName} {student.name} */
+    replies: z.array(z.string().min(1)).min(1),
+    emotion: Emotion.optional(),
+  })
+  .strict();
+export type ConversationReply = z.infer<typeof ConversationReply>;
 
 export const UnknownPolicy = z.object({
   /** Reply when asked about something listed as negative (e.g. review-of-systems items). */
@@ -291,13 +451,39 @@ export type TimeLimits = z.infer<typeof TimeLimits>;
 
 /** Faculty answer key for the post-encounter note (graded by the AI, quotes verified). */
 export const PenKey = z.object({
-  history: z.array(z.object({ id: slug, text: z.string().min(1), kind: z.enum(["positive", "negative"]), keywords: z.array(z.string()).default([]) })),
-  exam: z.array(z.object({ id: slug, text: z.string().min(1), maneuverIds: z.array(ManeuverId).default([]), keywords: z.array(z.string()).default([]) })),
+  history: z.array(
+    z.object({
+      id: slug,
+      text: z.string().min(1),
+      kind: z.enum(["positive", "negative"]),
+      keywords: z.array(z.string()).default([]),
+      /** Phase 4: accepted terms and synonyms (word-boundary match) */
+      terms: z.array(z.string()).default([]),
+      /** Phase 4: example note sentences (embedding similarity) */
+      exemplars: z.array(z.string()).default([]),
+    }),
+  ),
+  exam: z.array(
+    z.object({
+      id: slug,
+      text: z.string().min(1),
+      maneuverIds: z.array(ManeuverId).default([]),
+      keywords: z.array(z.string()).default([]),
+      terms: z.array(z.string()).default([]),
+      exemplars: z.array(z.string()).default([]),
+    }),
+  ),
   differential: z.array(
     z.object({ id: slug, diagnosis: z.string().min(1), aliases: z.array(z.string()).default([]), rank: z.number().int().min(1), rationale: z.string().min(1) }),
   ),
 });
 export type PenKey = z.infer<typeof PenKey>;
+
+/** Phase 4: diagnoses accepted in the post-encounter note (with synonyms); `satisfies` earns penKey.differential items. */
+export const AcceptableDiagnosis = z
+  .object({ id: slug, diagnosis: z.string().min(1), synonyms: z.array(z.string()).default([]), satisfies: z.array(slug).default([]) })
+  .strict();
+export type AcceptableDiagnosis = z.infer<typeof AcceptableDiagnosis>;
 
 export const Case = z.object({
   id: CaseId,
@@ -329,6 +515,12 @@ export const Case = z.object({
     facts: z.array(HistoryFact),
     pertinentNegatives: z.array(PertinentNegative),
     unknownPolicy: UnknownPolicy,
+    /** Phase 4: case-specific conversational replies (override content/lang/conversation.json). */
+    conversation: z.array(ConversationReply).default([]),
+    /** Phase 4: how the patient acknowledges empathy for each emotion. */
+    emotionCues: z.array(z.object({ emotion: Emotion, acknowledgement: z.string().min(1) })).default([]),
+    /** Phase 4: history topics that don't apply to this patient (e.g. "sh.sexual" for a child); credited with reason. */
+    notRelevantTopics: z.array(slug).default([]),
   }),
   abnormalFindings: AbnormalFindings,
   /**
@@ -358,6 +550,12 @@ export const Case = z.object({
   /** Case-specific SP physical-exam checklist (auto rules). Joins the patient-encounter domain. */
   peChecklist: z.array(z.lazy((): z.ZodType<MarkSheetItem> => MarkSheetItem as unknown as z.ZodType<MarkSheetItem>)).optional(),
   penKey: PenKey.optional(),
+  /** Phase 4 */
+  acceptableDiagnoses: z.array(AcceptableDiagnosis).default([]),
+  mistakes: z.array(z.lazy((): z.ZodType<MistakeRule> => MistakeRuleSchema as unknown as z.ZodType<MistakeRule>)).default([]),
+  itemsNotApplicable: z.array(z.object({ itemId: z.string().min(1), reason: z.string().min(1) })).default([]),
+  /** Phase 4: default findings display when a session starts (the student can change it in the case picker). */
+  defaultFindingsDisplay: FindingsDisplay.optional(),
   synthetic: z.literal(true),
   sourceNote: z.string().min(1),
 });
@@ -414,6 +612,12 @@ export const ExamResult = z.object({
   visual: VisualSpec.optional(),
   /** Set in responses to the student when the case reveals findings only at the end (text removed). */
   hidden: z.boolean().optional(),
+  /** Phase 4: what was done, without the finding ("Auscultated mitral area, bell, left lateral decubitus"). */
+  doneText: z.string().optional(),
+  /** Phase 4: a text-only finding with no sensory stimulus, shown even in hide-findings mode. */
+  reported: z.boolean().optional(),
+  /** Phase 4: the patient's reaction. */
+  response: PatientResponse.optional(),
 });
 export type ExamResult = z.infer<typeof ExamResult>;
 
@@ -436,8 +640,28 @@ export const CourtesyTag = z.enum([
   "offered_questions",
   "closing",
   "requested_position",
+  /** Phase 4: shared an impression / assessment with the patient */
+  "shared_impression",
 ]);
 export type CourtesyTag = z.infer<typeof CourtesyTag>;
+
+/** Phase 4: how the deterministic matcher understood one utterance (server-set, coach/dev only). */
+export const UtteranceMatch = z.object({
+  clauses: z
+    .array(
+      z.object({
+        text: z.string(),
+        target: z.string(),
+        kind: z.enum(["fact", "negative", "follow_up", "conversation", "bank", "unknown"]),
+        score: z.number(),
+        via: z.enum(["exact", "keyword", "pattern", "embedding", "none"]),
+      }),
+    )
+    .max(6),
+  topics: z.array(slug).default([]),
+  embedding: z.enum(["client", "server", "none"]),
+});
+export type UtteranceMatch = z.infer<typeof UtteranceMatch>;
 
 export const TagHit = z.object({
   tag: CourtesyTag,
@@ -471,10 +695,20 @@ const CourtesyPayload = z.object({ kind: CourtesyKind, position: Position.option
 export const DrapeZone = z.enum(["chest", "abdomen", "legs"]);
 export type DrapeZone = z.infer<typeof DrapeZone>;
 
+const DrapeChange = z
+  .object({
+    /** legacy (Phase 2–3) zone: chest | abdomen | legs */
+    zone: DrapeZone.optional(),
+    /** Phase 4 section */
+    section: DrapeSection.optional(),
+    covered: z.boolean(),
+  })
+  .refine((d) => !!d.zone !== !!d.section, "a drape change names exactly one of zone / section");
+
 const StateChangePayload = z
   .object({
     position: Position.optional(),
-    drape: z.object({ zone: DrapeZone, covered: z.boolean() }).optional(),
+    drape: DrapeChange.optional(),
     /** how the change was made */
     via: z.enum(["direct", "verbal", "menu"]),
   })
@@ -507,6 +741,37 @@ const ToolContactPayload = z.object({
   toleranceCm: z.number().min(0).max(50),
   durationMs: z.number().int().min(0).max(600_000),
   outcome: ContactOutcome,
+});
+
+/** Phase 4: the student's interpretation of a stimulus in hide-findings mode. */
+const InterpretationPayload = z.object({
+  examActionId: z.string().min(1),
+  regionId: RegionId,
+  maneuverId: ManeuverId,
+  text: z.string().min(1).max(500),
+});
+
+/** Phase 4: session settings. findingsDisplay is fixed at session start. */
+export const SessionSettings = z
+  .object({
+    findingsDisplay: FindingsDisplay.default("show"),
+    /** "default" = on in practice, off in exam */
+    alerts: z.enum(["default", "on", "off"]).default("default"),
+    /** optional in-browser LLM that rewords the chosen patient reply (display only) */
+    enhancedPatient: z.boolean().default(false),
+  })
+  .strict();
+export type SessionSettings = z.infer<typeof SessionSettings>;
+const SettingsChangePayload = z.object({ alerts: z.enum(["default", "on", "off"]).optional(), enhancedPatient: z.boolean().optional() }).strict();
+
+/** Phase 4: a mistake rule fired (server-generated). */
+const MistakePayload = z.object({
+  ruleId: slug,
+  severity: Severity,
+  message: z.string().max(200),
+  causeActionId: z.string().optional(),
+  /** shown to the student as an alert at the time (depends on mode and settings) */
+  alerted: z.boolean(),
 });
 
 /** 1B post-encounter note: history, physical exam, up to 3 diagnoses (no workup). */
@@ -552,6 +817,8 @@ export const ActionInput = z.discriminatedUnion("type", [
   z.object({ type: z.literal("prohibited_attempt"), source: ActionSource, payload: ProhibitedPayload }),
   z.object({ type: z.literal("tool_contact"), source: ActionSource, payload: ToolContactPayload }),
   z.object({ type: z.literal("submit_pen"), source: ActionSource, payload: PenPayload }),
+  z.object({ type: z.literal("interpretation"), source: ActionSource, payload: InterpretationPayload }),
+  z.object({ type: z.literal("settings"), source: ActionSource, payload: SettingsChangePayload }),
 ]);
 export type ActionInput = z.infer<typeof ActionInput>;
 
@@ -560,10 +827,15 @@ export const SystemActionInput = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("patient_say"),
     source: z.literal("system"),
-    payload: z.object({ text: z.string(), mocked: z.boolean().optional() }),
+    payload: z.object({ text: z.string(), mocked: z.boolean().optional(), match: UtteranceMatch.optional() }),
   }),
-  z.object({ type: z.literal("session_start"), source: z.literal("system"), payload: z.object({ caseId: CaseId }) }),
+  z.object({
+    type: z.literal("session_start"),
+    source: z.literal("system"),
+    payload: z.object({ caseId: CaseId, settings: SessionSettings.optional() }),
+  }),
   z.object({ type: z.literal("session_end"), source: z.literal("system"), payload: z.object({ reason: z.string() }) }),
+  z.object({ type: z.literal("mistake"), source: z.literal("system"), payload: MistakePayload }),
 ]);
 
 const actionMeta = {
@@ -580,8 +852,8 @@ export const Action = z.discriminatedUnion("type", [
     ...actionMeta,
     type: z.literal("say"),
     source: ActionSource,
-    /** tags are added server-side by the courtesy classifier */
-    payload: z.object({ text: z.string(), tags: z.array(TagHit).optional() }),
+    /** tags (and the Phase 4 match) are added server-side */
+    payload: z.object({ text: z.string(), tags: z.array(TagHit).optional(), match: UtteranceMatch.optional() }),
   }),
   z.object({
     ...actionMeta,
@@ -608,14 +880,22 @@ export const Action = z.discriminatedUnion("type", [
   z.object({ ...actionMeta, type: z.literal("prohibited_attempt"), source: ActionSource, payload: ProhibitedPayload }),
   z.object({ ...actionMeta, type: z.literal("tool_contact"), source: ActionSource, payload: ToolContactPayload }),
   z.object({ ...actionMeta, type: z.literal("submit_pen"), source: ActionSource, payload: PenPayload }),
+  z.object({ ...actionMeta, type: z.literal("interpretation"), source: ActionSource, payload: InterpretationPayload }),
+  z.object({ ...actionMeta, type: z.literal("settings"), source: ActionSource, payload: SettingsChangePayload }),
   z.object({
     ...actionMeta,
     type: z.literal("patient_say"),
     source: z.literal("system"),
-    payload: z.object({ text: z.string(), mocked: z.boolean().optional() }),
+    payload: z.object({ text: z.string(), mocked: z.boolean().optional(), match: UtteranceMatch.optional() }),
   }),
-  z.object({ ...actionMeta, type: z.literal("session_start"), source: z.literal("system"), payload: z.object({ caseId: z.string() }) }),
+  z.object({
+    ...actionMeta,
+    type: z.literal("session_start"),
+    source: z.literal("system"),
+    payload: z.object({ caseId: z.string(), settings: SessionSettings.optional() }),
+  }),
   z.object({ ...actionMeta, type: z.literal("session_end"), source: z.literal("system"), payload: z.object({ reason: z.string() }) }),
+  z.object({ ...actionMeta, type: z.literal("mistake"), source: z.literal("system"), payload: MistakePayload }),
 ]);
 export type Action = z.infer<typeof Action>;
 export type ActionType = Action["type"];
@@ -641,6 +921,11 @@ export type ActionType = Action["type"];
  *   "describe:<regionId>"                         a verbal exam description for that region
  *   "prohibited:<regionId>" | "prohibited_attempt"  an attempt at an exam the door instructions exclude
  *   "last:examine" | "last:say"                   last action of a type
+ * Phase 4:
+ *   "mistake:<ruleId>"                            a mistake rule fired
+ *   "interpretation" | "settings"                 a hide-mode interpretation / settings change
+ *   "drape:expose:<section>" | "drape:cover:<section>"  a specific drape section uncovered / covered
+ *   "region:<regionId>"                           an examine of that region (any maneuver)
  */
 export const EventRef = z.string().min(1);
 
@@ -657,6 +942,26 @@ export interface TechniqueRule {
   partial?: boolean;
 }
 
+/**
+ * Phase 4: the patient/room state at the time of the event being checked (or now, when there is none).
+ * Used by mistake triggers (`when` / `unless`) and comfort items.
+ */
+export interface StateCondition {
+  handsClean?: boolean;
+  position?: Position | Position[];
+  /** every listed section is uncovered */
+  exposedAll?: DrapeSection[];
+  /** at least one listed section is uncovered */
+  exposedAny?: DrapeSection[];
+  /** at least N sections uncovered at once */
+  exposedCountAtLeast?: number;
+  /** the region of the triggering examine/contact was under a covered drape section */
+  eventRegionCovered?: boolean;
+  /** some section has been uncovered for at least this long without an exam of a region it covers */
+  exposedIdleMsAtLeast?: number;
+  inRoom?: boolean;
+}
+
 export type Rule =
   | { performed: string | string[]; regions?: string[]; minRegions?: number; partial?: boolean }
   | { said: CourtesyTag | CourtesyTag[] }
@@ -668,6 +973,9 @@ export type Rule =
   | { before: [string, string] }
   | { performedIn: { maneuver: string | string[]; position: Position | Position[] } }
   | { submitted: "submit_ddx" | "submit_pen" }
+  | { state: StateCondition }
+  | { drapeDiscipline: { recoverWithinMs?: number; partial?: boolean } }
+  | { penUnperformed: { atLeast?: number } }
   | { all: Rule[] }
   | { any: Rule[] }
   | { not: Rule };
@@ -729,11 +1037,79 @@ export const Rule: z.ZodType<Rule> = z.lazy(() =>
       .strict(),
     /** 1 if the event ref occurred at all (e.g. { not: { happened: "timer:auto_end" } }) */
     z.object({ happened: EventRef }).strict(),
+    /** Phase 4: state at the event (mistake triggers) or now */
+    z
+      .object({
+        state: z
+          .object({
+            handsClean: z.boolean().optional(),
+            position: z.union([Position, z.array(Position).min(1)]).optional(),
+            exposedAll: z.array(DrapeSection).min(1).optional(),
+            exposedAny: z.array(DrapeSection).min(1).optional(),
+            exposedCountAtLeast: z.number().int().min(1).optional(),
+            eventRegionCovered: z.boolean().optional(),
+            exposedIdleMsAtLeast: z.number().int().min(0).optional(),
+            inRoom: z.boolean().optional(),
+          })
+          .strict(),
+      })
+      .strict(),
+    /** Phase 4: every exposed section re-covered after its exam (within recoverWithinMs, if given) */
+    z
+      .object({ drapeDiscipline: z.object({ recoverWithinMs: z.number().int().min(0).optional(), partial: z.boolean().optional() }).strict() })
+      .strict(),
+    /** Phase 4: the PEN reports at least N findings from maneuvers never performed (penCheck) */
+    z.object({ penUnperformed: z.object({ atLeast: z.number().int().min(1).optional() }).strict() }).strict(),
     z.object({ all: z.array(Rule).min(1) }).strict(),
     z.object({ any: z.array(Rule).min(1) }).strict(),
     z.object({ not: Rule }).strict(),
   ]),
 );
+
+/** Phase 4: where a `match` item looks for evidence. */
+export const MatchSource = z.enum(["say", "describe_exam", "pen_history", "pen_exam", "pen_diagnoses", "interpretation"]);
+export type MatchSource = z.infer<typeof MatchSource>;
+
+/**
+ * Phase 4: deterministic language matching for an item (src/lang/grade/match.ts):
+ * keyword / pattern hit, or embedding similarity to exemplars, over sentence-split student text.
+ * The matched sentence is the verbatim evidence quote.
+ */
+export const MatchSpec = z
+  .object({
+    sources: z.array(MatchSource).min(1).default(["say"]),
+    /** word-boundary phrases; may use {patient.name} {patient.firstName} {patient.lastName} */
+    keywords: z.array(z.string().min(1)).default([]),
+    patterns: z.array(z.string().min(1)).default([]),
+    exemplars: z.array(z.string().min(1)).default([]),
+    /** if one of these is closer than the best exemplar, no credit */
+    counterExemplars: z.array(z.string().min(1)).default([]),
+    /** credit when a student question covers one of these history topics */
+    topics: z.array(slug).default([]),
+    form: z.enum(["any", "open", "closed"]).default("any"),
+    polarity: z.enum(["any", "affirmed", "negated"]).default("any"),
+    minMatches: z.number().int().min(1).default(1),
+    window: z.enum(["any", "before_first_touch", "after_last_touch", "first_third", "last_third"]).default("any"),
+    /** deductions when the matched text also hits these (e.g. jargon, deferring to the attending) */
+    penalties: z
+      .array(
+        z
+          .object({
+            id: slug,
+            keywords: z.array(z.string()).default([]),
+            patterns: z.array(z.string()).default([]),
+            exemplars: z.array(z.string()).default([]),
+            value: z.number().min(0).max(1),
+            reason: z.string().min(1),
+          })
+          .strict(),
+      )
+      .default([]),
+    /** override the default credit / review similarity thresholds */
+    thresholds: z.object({ credit: z.number().min(0).max(1), review: z.number().min(0).max(1) }).optional(),
+  })
+  .strict();
+export type MatchSpec = z.infer<typeof MatchSpec>;
 
 export const MarkSheetItem = z
   .object({
@@ -742,11 +1118,16 @@ export const MarkSheetItem = z
     section: z.string().min(1),
     label: z.string().min(1),
     weight: z.number().min(0),
-    scoring: z.enum(["auto", "ai", "not_assessable"]),
+    /** Phase 4: "match" (deterministic language matching) replaces "ai"; legacy "ai" content is read as "match". */
+    scoring: z.preprocess((v) => (v === "ai" ? "match" : v), z.enum(["auto", "match", "not_assessable"])),
     rule: Rule.optional(),
-    /** For `ai` items: what the grader should look for, in our own words. */
+    /** What a coach should look for, in our own words (shown in the coach view). */
     guidance: z.string().optional(),
-    /** For `ai` items under AI_MOCK: phrases that count as evidence. */
+    /** Phase 4: how a `match` item is scored. */
+    match: MatchSpec.optional(),
+    /** Example student phrases (shorthand for match.exemplars). */
+    exemplars: z.array(z.string().min(1)).optional(),
+    /** Legacy (Phase 1–3 mock grader) phrases; read as match.keywords. */
     mockKeywords: z.array(z.string()).optional(),
     /** Only scored in these session modes (e.g. time-dependent items: ["exam"]). Omitted = all modes. */
     modes: z.array(z.enum(["practice", "exam"])).optional(),
@@ -756,7 +1137,7 @@ export const MarkSheetItem = z
   })
   .superRefine((item, ctx) => {
     if (item.scoring === "auto" && !item.rule) ctx.addIssue({ code: "custom", message: `auto item ${item.id} needs a rule` });
-    if (item.scoring === "ai" && !item.guidance) ctx.addIssue({ code: "custom", message: `ai item ${item.id} needs guidance` });
+    if (item.scoring === "match" && !item.guidance) ctx.addIssue({ code: "custom", message: `match item ${item.id} needs guidance` });
   });
 export type MarkSheetItem = z.infer<typeof MarkSheetItem>;
 
@@ -780,6 +1161,74 @@ export const MarkSheet = z.object({
 export type MarkSheet = z.infer<typeof MarkSheet>;
 
 // ---------------------------------------------------------------------------
+// Mistake rules (Phase 4): data, in the same rule language as mark sheets.
+// content/mistakes.json holds the shared set; a case can add its own (Case.mistakes).
+// ---------------------------------------------------------------------------
+
+export const SessionModeEnum = z.enum(["practice", "exam"]);
+
+export const MistakeTrigger = z
+  .object({
+    /** the action that can fire the rule (checked when it is appended) */
+    on: z
+      .object({
+        /** an action type, or "touch" (an examine/contact involving physical contact) */
+        type: z.string().min(1).optional(),
+        /** or an event ref (same syntax as rules, e.g. "room:exit", "drape:expose") */
+        ref: EventRef.optional(),
+        maneuver: z.union([ManeuverId, z.array(ManeuverId).min(1)]).optional(),
+        region: z.union([RegionId, z.array(RegionId).min(1)]).optional(),
+        tool: Tool.optional(),
+        toolMode: ToolMode.optional(),
+        /** the patient position at that moment */
+        position: z.union([Position, z.array(Position).min(1)]).optional(),
+      })
+      .strict(),
+    /** fire only if this rule is satisfied at that moment */
+    when: Rule.optional(),
+    /** never fire if this rule is satisfied at that moment */
+    unless: Rule.optional(),
+  })
+  .strict();
+export type MistakeTrigger = z.infer<typeof MistakeTrigger>;
+
+export interface MistakeRule {
+  id: string;
+  label: string;
+  message: string;
+  severity: Severity;
+  modes: ("practice" | "exam")[];
+  appliesTo?: { sex?: ("female" | "male" | "intersex")[]; caseModes?: ("encounter" | "screening")[] };
+  trigger: MistakeTrigger;
+  once: boolean;
+  anchor: "exam_view" | "chat" | "door" | "tool" | "drape" | "note";
+}
+export const MistakeRuleSchema = z
+  .object({
+    id: slug,
+    label: z.string().min(1),
+    /** one line shown in the alert */
+    message: z.string().min(1).max(140),
+    severity: Severity,
+    /** session modes in which the rule is checked (it is always logged when it fires; alerts depend on settings) */
+    modes: z.array(SessionModeEnum).default(["practice", "exam"]),
+    appliesTo: z
+      .object({
+        sex: z.array(z.enum(["female", "male", "intersex"])).optional(),
+        caseModes: z.array(z.enum(["encounter", "screening"])).optional(),
+      })
+      .strict()
+      .optional(),
+    trigger: MistakeTrigger,
+    /** fire at most once per session */
+    once: z.boolean().default(true),
+    /** where the red "!" appears */
+    anchor: z.enum(["exam_view", "chat", "door", "tool", "drape", "note"]).default("exam_view"),
+  })
+  .strict();
+export const MistakesFile = z.object({ mistakes: z.array(MistakeRuleSchema) });
+
+// ---------------------------------------------------------------------------
 // Sessions, scores, overrides, feedback (persisted)
 // ---------------------------------------------------------------------------
 
@@ -798,9 +1247,12 @@ export const Session = z.object({
   endedAt: z.string().nullable(),
   patientTurns: z.number().int(),
   gradingRuns: z.number().int(),
-  usage: Usage,
+  /** Legacy (Phase 1–3 model token usage). Not recorded from Phase 4. */
+  usage: Usage.optional(),
   /** Phase 3: last autosaved post-encounter note (never sent to scoring; submit_pen is). */
   penDraft: PenDraft.nullable().optional(),
+  /** Phase 4: mirror of the session settings (the log's session_start / settings actions are authoritative). */
+  settings: SessionSettings.nullable().optional(),
 });
 export type Session = z.infer<typeof Session>;
 
@@ -817,7 +1269,8 @@ export const ScoreStatus = z.enum(["scored", "needs_review", "not_assessable"]);
 export const ItemScore = z.object({
   markSheetId: MarkSheetId,
   itemId: z.string(),
-  scoring: z.enum(["auto", "ai", "not_assessable"]),
+  /** "ai" = legacy grading runs (Phase 1–3 model grader) */
+  scoring: z.enum(["auto", "match", "ai", "not_assessable"]),
   status: ScoreStatus,
   /** 0..1 fraction of the item achieved */
   value: z.number().min(0).max(1),
@@ -838,8 +1291,11 @@ export const GradingRun = z.object({
   strengths: z.array(z.string()),
   improvements: z.array(z.string()),
   scores: z.array(ItemScore),
-  usage: Usage,
-  mocked: z.boolean(),
+  /** Legacy (Phase 1–3) */
+  usage: Usage.optional(),
+  mocked: z.boolean().optional(),
+  /** Phase 4: "deterministic"; legacy runs were graded by a model */
+  grader: z.enum(["deterministic", "ai_legacy"]).optional(),
 });
 export type GradingRun = z.infer<typeof GradingRun>;
 

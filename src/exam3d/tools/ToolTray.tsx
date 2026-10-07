@@ -10,6 +10,8 @@ export const TOOL_LABELS: Record<Tool, string> = {
   penlight: "Penlight",
   bp_cuff: "BP cuff",
   hands: "Hands",
+  cotton_swab: "Cotton swab",
+  pin: "Neurotip (pin)",
 };
 
 export const TOOL_HELP: Record<Tool, string> = {
@@ -19,6 +21,8 @@ export const TOOL_HELP: Record<Tool, string> = {
   penlight: "Click an eye to shine the light.",
   bp_cuff: "Click an upper arm to place the cuff.",
   hands: "Click a region to palpate or percuss.",
+  cotton_swab: "Touch the skin lightly to test light-touch sensation.",
+  pin: "Touch the skin with the sharp end to test pinprick sensation.",
 };
 
 export interface ToolState {

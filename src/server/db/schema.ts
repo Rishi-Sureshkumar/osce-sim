@@ -1,5 +1,5 @@
 import { bigserial, index, integer, jsonb, pgTable, text, timestamp } from "drizzle-orm/pg-core";
-import type { Action, GradingRun, PenDraft, Usage } from "@/domain/schemas";
+import type { Action, GradingRun, PenDraft, SessionSettings, Usage } from "@/domain/schemas";
 
 export const sessions = pgTable("sessions", {
   id: text("id").primaryKey(),
@@ -13,6 +13,7 @@ export const sessions = pgTable("sessions", {
   gradingRuns: integer("grading_runs").notNull().default(0),
   usage: jsonb("usage").$type<Usage>().notNull(),
   penDraft: jsonb("pen_draft").$type<PenDraft>(),
+  settings: jsonb("settings").$type<SessionSettings>(),
 });
 
 /** Append-only. `seq` gives a stable total order within a session. */

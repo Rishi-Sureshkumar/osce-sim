@@ -177,6 +177,42 @@
       "group": "arms"
     },
     {
+      "id": "upper_arm_right",
+      "label": "Upper arm (BP cuff site), right",
+      "system": "general",
+      "group": "arms"
+    },
+    {
+      "id": "biceps_tendon_right",
+      "label": "Biceps tendon (antecubital fossa), right",
+      "system": "neuro",
+      "group": "arms"
+    },
+    {
+      "id": "triceps_tendon_right",
+      "label": "Triceps tendon (above the olecranon), right",
+      "system": "neuro",
+      "group": "arms"
+    },
+    {
+      "id": "upper_arm_left",
+      "label": "Upper arm (BP cuff site), left",
+      "system": "general",
+      "group": "arms"
+    },
+    {
+      "id": "biceps_tendon_left",
+      "label": "Biceps tendon (antecubital fossa), left",
+      "system": "neuro",
+      "group": "arms"
+    },
+    {
+      "id": "triceps_tendon_left",
+      "label": "Triceps tendon (above the olecranon), left",
+      "system": "neuro",
+      "group": "arms"
+    },
+    {
       "id": "wrist_left",
       "label": "Left wrist",
       "system": "cardiovascular",
@@ -186,6 +222,18 @@
       "id": "hand_left",
       "label": "Left hand",
       "system": "msk",
+      "group": "hands"
+    },
+    {
+      "id": "brachioradialis_right",
+      "label": "Distal radius (brachioradialis reflex), right",
+      "system": "neuro",
+      "group": "hands"
+    },
+    {
+      "id": "brachioradialis_left",
+      "label": "Distal radius (brachioradialis reflex), left",
+      "system": "neuro",
       "group": "hands"
     },
     {
@@ -294,6 +342,30 @@
       "id": "calf_left",
       "label": "Left calf (posterior)",
       "system": "cardiovascular",
+      "group": "legs"
+    },
+    {
+      "id": "patellar_tendon_right",
+      "label": "Patellar tendon, right",
+      "system": "neuro",
+      "group": "legs"
+    },
+    {
+      "id": "leg_medial_right",
+      "label": "Medial lower leg (L4 dermatome), right",
+      "system": "neuro",
+      "group": "legs"
+    },
+    {
+      "id": "patellar_tendon_left",
+      "label": "Patellar tendon, left",
+      "system": "neuro",
+      "group": "legs"
+    },
+    {
+      "id": "leg_medial_left",
+      "label": "Medial lower leg (L4 dermatome), left",
+      "system": "neuro",
       "group": "legs"
     },
     {
@@ -529,6 +601,42 @@
     {
       "id": "toe_great_left",
       "label": "Left great toe",
+      "system": "neuro",
+      "group": "feet"
+    },
+    {
+      "id": "achilles_right",
+      "label": "Achilles tendon, right",
+      "system": "neuro",
+      "group": "feet"
+    },
+    {
+      "id": "sole_right",
+      "label": "Sole of the foot, right",
+      "system": "neuro",
+      "group": "feet"
+    },
+    {
+      "id": "foot_lateral_right",
+      "label": "Lateral foot (S1 dermatome), right",
+      "system": "neuro",
+      "group": "feet"
+    },
+    {
+      "id": "achilles_left",
+      "label": "Achilles tendon, left",
+      "system": "neuro",
+      "group": "feet"
+    },
+    {
+      "id": "sole_left",
+      "label": "Sole of the foot, left",
+      "system": "neuro",
+      "group": "feet"
+    },
+    {
+      "id": "foot_lateral_left",
+      "label": "Lateral foot (S1 dermatome), left",
       "system": "neuro",
       "group": "feet"
     },

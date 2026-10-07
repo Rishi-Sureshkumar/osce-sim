@@ -25,7 +25,7 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
   const { session, kase, run, runs, actions, sheets, overrides } = view;
   const labels = labelsFrom(view.catalog);
   const actionsById = new Map(actions.map((a) => [a.id, a]));
-  const u = session.usage;
+  const u = session.usage ?? { inputTokens: 0, outputTokens: 0, cacheReadTokens: 0, cacheWriteTokens: 0 };
   const scoreByKey = new Map(sheets.flatMap((s) => s.scores.map((sc) => [`${sc.markSheetId}/${sc.itemId}`, sc] as const)));
 
   return (

@@ -28,6 +28,8 @@ export function quotableText(a: Action): string | null {
       return a.payload.text;
     case "submit_pen":
       return penText(a.payload);
+    case "interpretation":
+      return a.payload.text;
     default:
       return null;
   }

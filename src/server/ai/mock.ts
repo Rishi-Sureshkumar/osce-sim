@@ -35,7 +35,7 @@ export function mockPatientReply(c: Case, question: string, turnIndex: number): 
 export function mockJudgements(sheet: MarkSheet, log: Action[]): AiItemJudgement[] {
   const quotable = orderLog(log).filter((a) => a.type === "say" || a.type === "submit_ddx" || a.type === "submit_pen" || a.type === "describe_exam");
   return sheet.items
-    .filter((i) => i.scoring === "ai")
+    .filter((i) => i.scoring === "match")
     .map((item) => {
       // note items are graded from the post-encounter note only (generated sheet, sections "PEN…")
       const from = item.section.startsWith("PEN") ? quotable.filter((a) => a.type === "submit_pen") : quotable;

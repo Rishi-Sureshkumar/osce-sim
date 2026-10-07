@@ -337,12 +337,13 @@ export async function recordUsage(sessionId: string, u: Partial<Usage>): Promise
   const repo = await getRepo();
   const s = await repo.getSession(sessionId);
   if (!s) return;
+  const cur = s.usage ?? emptyUsage();
   await repo.updateSession(sessionId, {
     usage: {
-      inputTokens: s.usage.inputTokens + (u.inputTokens ?? 0),
-      outputTokens: s.usage.outputTokens + (u.outputTokens ?? 0),
-      cacheReadTokens: s.usage.cacheReadTokens + (u.cacheReadTokens ?? 0),
-      cacheWriteTokens: s.usage.cacheWriteTokens + (u.cacheWriteTokens ?? 0),
+      inputTokens: cur.inputTokens + (u.inputTokens ?? 0),
+      outputTokens: cur.outputTokens + (u.outputTokens ?? 0),
+      cacheReadTokens: cur.cacheReadTokens + (u.cacheReadTokens ?? 0),
+      cacheWriteTokens: cur.cacheWriteTokens + (u.cacheWriteTokens ?? 0),
     },
   });
 }

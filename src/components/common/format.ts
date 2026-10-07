@@ -11,6 +11,7 @@ export const POSITION_LABELS: Record<Position, string> = {
   left_lateral_decubitus: "Left lateral decubitus",
   prone: "Prone",
   standing: "Standing",
+  sitting_dangling: "Sitting, legs dangling",
 };
 
 export const COURTESY_LABELS = {
@@ -50,6 +51,7 @@ export const TAG_LABELS: Record<CourtesyTag, string> = {
   offered_questions: "Offered questions",
   closing: "Closing",
   requested_position: "Asked to change position",
+  shared_impression: "Shared impression",
 };
 export const ROOM_LABELS = { knock: "Knocked", enter: "Entered the room", exit: "Left the room" } as const;
 
@@ -97,7 +99,7 @@ export function describeAction(a: Action, L: Labels): { who: "student" | "patien
       const p = a.payload;
       const parts = [
         p.position ? `patient ${POSITION_LABELS[p.position].toLowerCase()}` : "",
-        p.drape ? `${p.drape.zone} ${p.drape.covered ? "covered" : "uncovered"}` : "",
+        p.drape ? `${(p.drape.section ?? p.drape.zone ?? "").replace("_", " ")} ${p.drape.covered ? "covered" : "uncovered"}` : "",
       ].filter(Boolean);
       const how = p.via === "verbal" ? "asked verbally" : p.via === "menu" ? "from the menu" : "directly";
       return { who: "student", text: `Changed ${parts.join(", ")} (${how})` };
@@ -128,6 +130,15 @@ export function describeAction(a: Action, L: Labels): { who: "student" | "patien
         text: `${p.tool}${p.toolMode ? ` (${p.toolMode})` : ""} placed near ${where} · ${p.distanceCm.toFixed(1)} cm (tolerance ${p.toleranceCm} cm) · ${(p.durationMs / 1000).toFixed(1)} s · ${OUTCOME_LABELS[p.outcome]}`,
       };
     }
+    case "interpretation":
+      return { who: "student", text: `Interpretation (${L.maneuver(a.payload.maneuverId)} — ${L.region(a.payload.regionId)}): ${a.payload.text}` };
+    case "settings":
+      return {
+        who: "student",
+        text: `Changed settings: ${[a.payload.alerts ? `alerts ${a.payload.alerts}` : "", a.payload.enhancedPatient !== undefined ? `enhanced patient ${a.payload.enhancedPatient ? "on" : "off"}` : ""].filter(Boolean).join(", ")}`,
+      };
+    case "mistake":
+      return { who: "system", text: `Mistake (${a.payload.severity}): ${a.payload.message}` };
     case "session_start":
       return { who: "system", text: "Session started" };
     case "session_end":

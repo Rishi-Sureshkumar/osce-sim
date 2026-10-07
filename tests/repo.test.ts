@@ -30,7 +30,7 @@ function contract(name: string, make: () => Promise<Repo>) {
 
       const updated = await repo.updateSession(id, { status: "graded", patientTurns: 3 });
       expect(updated.status).toBe("graded");
-      expect((await repo.getSession(id))?.usage.cacheWriteTokens).toBe(4);
+      expect((await repo.getSession(id))?.usage?.cacheWriteTokens).toBe(4);
 
       const run: GradingRun = { id: `${id}_g`, sessionId: id, createdAt: new Date().toISOString(), trigger: "student_submit", summary: "s", strengths: [], improvements: [], scores: [], usage: session(id).usage, mocked: true };
       await repo.saveGradingRun(run);

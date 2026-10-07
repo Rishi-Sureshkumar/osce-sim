@@ -65,10 +65,11 @@ export function encounterState(log: readonly Action[], mode: SessionMode, limits
 
 /** Which action types the student may add in each phase (the server enforces this). */
 export function allowedInPhase(phase: EncounterPhase, type: Action["type"]): boolean {
-  if (type === "note" || type === "timer") return phase !== "submitted";
+  if (type === "note" || type === "timer" || type === "settings") return phase !== "submitted";
   if (phase === "corridor") return false;
   if (phase === "encounter") return type !== "submit_pen" && type !== "submit_ddx";
-  if (phase === "pen") return type === "submit_pen";
+  // hide-findings interpretations may still be written while composing the note
+  if (phase === "pen") return type === "submit_pen" || type === "interpretation";
   return false;
 }
 

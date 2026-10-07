@@ -1,5 +1,5 @@
-import type { Rule } from "@/domain/schemas";
-import { Position, CourtesyKind, CourtesyTag, type FindingValue } from "@/domain/schemas";
+import type { Intent, MistakeRule, Rule } from "@/domain/schemas";
+import { Position, CourtesyKind, CourtesyTag, DrapeSection, type FindingValue } from "@/domain/schemas";
 import { findingValueText } from "@/engine/resolveFinding";
 import { sheetsForCase } from "@/engine/sheets";
 import type { ContentIndex } from "./types";
@@ -35,6 +35,10 @@ export function validateContentGraph(c: ContentIndex): string[] {
     if (m.interaction === "sequence" && !m.steps?.length) errors.push(`maneuver ${m.id}: sequence interaction needs steps`);
     if (m.toolMode && !m.tool) errors.push(`maneuver ${m.id}: toolMode without tool`);
     if (m.sourceText) errors.push(`maneuver ${m.id}: sourceText must stay empty until copyright is cleared`);
+    for (const st of m.steps ?? []) {
+      if (st.logsManeuver && !c.maneuverById.has(st.logsManeuver)) errors.push(`maneuver ${m.id} step ${st.id}: logsManeuver "${st.logsManeuver}" is unknown`);
+      if (st.kind === "control" && !st.control) errors.push(`maneuver ${m.id} step ${st.id}: control step needs a control`);
+    }
   }
 
   for (const cs of c.cases) {
@@ -102,7 +106,25 @@ export function validateContentGraph(c: ContentIndex): string[] {
     for (const f of cs.history.facts) {
       if (factIds.has(f.id)) errors.push(`case ${cs.id}: duplicate history fact id "${f.id}"`);
       factIds.add(f.id);
+      if (f.intents) errors.push(...intentErrors(`case ${cs.id} fact ${f.id}`, f.intents));
+      for (const fu of f.followUps) {
+        if (factIds.has(fu.id)) errors.push(`case ${cs.id}: duplicate history id "${fu.id}" (follow-up of ${f.id})`);
+        factIds.add(fu.id);
+        errors.push(...intentErrors(`case ${cs.id} follow-up ${fu.id}`, fu.intents));
+      }
     }
+    for (const n of cs.history.pertinentNegatives) {
+      if (n.id && factIds.has(n.id)) errors.push(`case ${cs.id}: duplicate history id "${n.id}" (pertinent negative)`);
+      if (n.id) factIds.add(n.id);
+      if (n.intents) errors.push(...intentErrors(`case ${cs.id} negative ${n.id ?? n.topic}`, n.intents));
+    }
+    for (const cr of cs.history.conversation) if (cr.intents) errors.push(...intentErrors(`case ${cs.id} conversation ${cr.kind}`, cr.intents));
+    // phase 4: acceptable diagnoses earn penKey differential items; case mistake rules
+    const ddxIds = new Set((cs.penKey?.differential ?? []).map((d) => d.id));
+    for (const ad of cs.acceptableDiagnoses) {
+      for (const sat of ad.satisfies) if (!ddxIds.has(sat)) errors.push(`case ${cs.id}: acceptable diagnosis "${ad.id}" satisfies unknown penKey differential "${sat}"`);
+    }
+    for (const mr of cs.mistakes) errors.push(...mistakeRuleErrors(`case ${cs.id} mistake ${mr.id}`, mr, c));
   }
 
   for (const ms of c.markSheets) {
@@ -116,6 +138,33 @@ export function validateContentGraph(c: ContentIndex): string[] {
     }
   }
   return errors;
+}
+
+/** Patterns must compile; ids must be unique. Paraphrase counts are enforced from M1 (src/lang). */
+export function intentErrors(where: string, intent: Intent): string[] {
+  const out: string[] = [];
+  for (const p of intent.patterns) {
+    try {
+      new RegExp(p, "i");
+    } catch {
+      out.push(`${where}: pattern /${p}/ does not compile`);
+    }
+  }
+  return out;
+}
+
+export function mistakeRuleErrors(where: string, r: MistakeRule, c: ContentIndex): string[] {
+  const out: string[] = [];
+  const on = r.trigger.on;
+  if (!on.type && !on.ref) out.push(`${where}: trigger.on needs a type or a ref`);
+  if (on.ref) {
+    const e = eventRefError(on.ref, c);
+    if (e) out.push(`${where}: ${e}`);
+  }
+  for (const m of on.maneuver ? maneuverList(on.maneuver) : []) if (!c.maneuverById.has(m)) out.push(`${where}: unknown maneuver "${m}"`);
+  for (const reg of on.region ? maneuverList(on.region) : []) if (!c.regionById.has(reg)) out.push(`${where}: unknown region "${reg}"`);
+  for (const rule of [r.trigger.when, r.trigger.unless]) if (rule) out.push(...ruleRefErrors(rule, c).map((e) => `${where}: ${e}`));
+  return out;
 }
 
 function findingValueErrors(where: string, v: FindingValue): string[] {
@@ -173,18 +222,46 @@ export function ruleRefErrors(rule: Rule, c: ContentIndex): string[] {
   return out;
 }
 
-const TYPES = ["examine", "say", "courtesy", "submit_ddx", "submit_pen", "note", "state_change", "hint", "room", "touch", "drape_change", "describe_exam", "tool_contact"];
+const TYPES = [
+  "examine",
+  "say",
+  "courtesy",
+  "submit_ddx",
+  "submit_pen",
+  "note",
+  "state_change",
+  "hint",
+  "room",
+  "touch",
+  "drape_change",
+  "describe_exam",
+  "tool_contact",
+  "interpretation",
+  "settings",
+  "mistake",
+  "patient_say",
+  "timer",
+  "sit_down",
+  "prohibited_attempt",
+];
 const TIMER_EVENTS = ["pause", "resume", "warning", "auto_end", "begin", "encounter_warning", "encounter_end", "pen_warning", "pen_lock"];
 
 export function eventRefError(ref: string, c: ContentIndex): string | null {
   const [head, rest] = ref.includes(":") ? [ref.slice(0, ref.indexOf(":")), ref.slice(ref.indexOf(":") + 1)] : [ref, ""];
-  if (!rest) return CourtesyKind.safeParse(head).success || ["drape_change", "sit_down", "prohibited_attempt"].includes(head) ? null : `unknown event ref "${ref}"`;
+  if (!rest) return CourtesyKind.safeParse(head).success || TYPES.includes(head) ? null : `unknown event ref "${ref}"`;
   switch (head) {
     case "first":
     case "last":
       return TYPES.includes(rest) || !eventRefError(rest, c) ? null : `unknown action type in "${ref}"`;
-    case "drape":
-      return rest === "cover" || rest === "expose" ? null : `unknown drape event in "${ref}"`;
+    case "drape": {
+      if (rest === "cover" || rest === "expose") return null;
+      const [ev, sec] = rest.split(":");
+      return (ev === "cover" || ev === "expose") && DrapeSection.safeParse(sec).success ? null : `unknown drape event in "${ref}"`;
+    }
+    case "mistake":
+      return /^[a-z0-9][a-z0-9_.-]*$/.test(rest) ? null : `bad mistake id in "${ref}"`;
+    case "region":
+      return c.regionById.has(rest) ? null : `unknown region in "${ref}"`;
     case "maneuver":
       return c.maneuverById.has(rest) ? null : `unknown maneuver in "${ref}"`;
     case "position":

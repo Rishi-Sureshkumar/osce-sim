@@ -20,7 +20,8 @@ export class PgRepo implements Repo {
   }
 
   async createSession(s: Session) {
-    await this.db.insert(t.sessions).values(s);
+    // the usage column is NOT NULL (Phase 1–3); Phase 4 no longer records tokens
+    await this.db.insert(t.sessions).values({ ...s, usage: s.usage ?? { inputTokens: 0, outputTokens: 0, cacheReadTokens: 0, cacheWriteTokens: 0 }, settings: s.settings ?? null });
   }
   async getSession(id: string) {
     const [r] = await this.db.select().from(t.sessions).where(eq(t.sessions.id, id));

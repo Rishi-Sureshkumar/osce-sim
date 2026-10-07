@@ -76,14 +76,14 @@ export interface AiItemJudgement {
 export function scoreAiItems(sheet: MarkSheet, judgements: AiItemJudgement[], log: Action[], mode: SessionMode = "exam"): ItemScore[] {
   const byId = new Map(judgements.map((j) => [j.itemId, j]));
   return sheet.items
-    .filter((i) => i.scoring === "ai" && appliesInMode(i, mode))
+    .filter((i) => i.scoring === "match" && appliesInMode(i, mode))
     .map((item): ItemScore => {
       const j = byId.get(item.id);
       if (!j) {
         return {
           markSheetId: sheet.id,
           itemId: item.id,
-          scoring: "ai",
+          scoring: "match",
           status: "needs_review",
           value: 0,
           points: 0,
@@ -103,7 +103,7 @@ export function scoreAiItems(sheet: MarkSheet, judgements: AiItemJudgement[], lo
       return {
         markSheetId: sheet.id,
         itemId: item.id,
-        scoring: "ai",
+        scoring: "match",
         status: reasons.length ? "needs_review" : "scored",
         value: round(value),
         points: round(value * item.weight),

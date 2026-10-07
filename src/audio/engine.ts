@@ -161,6 +161,10 @@ async function render(spec: Exclude<AudioSpec, { clipId: string }>, opts: PlayOp
     }
     return buf;
   }
+  if (spec.generator === "korotkoff" || spec.generator === "percussion" || spec.generator === "voice") {
+    // Phase 4 generators are rendered by their own schedules (added with the BP sequence and hide-findings stimuli)
+    return new OfflineAudioContext(1, SR / 10, SR).startRendering();
+  }
   const period = spec.generator === "heart" ? 60 / opts.hr : 60 / opts.rr;
   const cycles = Math.max(1, Math.round(6 / period));
   const seconds = cycles * period;

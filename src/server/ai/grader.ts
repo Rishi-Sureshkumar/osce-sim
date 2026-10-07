@@ -56,7 +56,7 @@ export async function gradeAiItems(args: {
   content: Pick<ContentIndex, "maneuverById" | "regionById">;
   deterministicSummary: string;
 }): Promise<GraderResult> {
-  const aiItems = args.sheets.flatMap((s) => s.items.filter((i) => i.scoring === "ai"));
+  const aiItems = args.sheets.flatMap((s) => s.items.filter((i) => i.scoring === "match"));
 
   if (isMockMode()) {
     const judgements = args.sheets.flatMap((s) => mockJudgements(s, args.log));

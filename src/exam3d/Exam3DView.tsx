@@ -95,7 +95,7 @@ interface Sequence {
 
 /** The table's head section: flat for left lateral; behind the patient (back free) when sitting up. */
 export function tableAngle(position: string, bedAngle: number): number {
-  if (position === "left_lateral_decubitus" || position === "prone") return 0;
+  if (position === "left_lateral_decubitus" || position === "prone" || position === "sitting_dangling") return 0;
   if (position === "seated" || position === "seated_leaning_forward" || position === "standing") return 50;
   return bedAngle;
 }

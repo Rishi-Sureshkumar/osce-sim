@@ -33,7 +33,7 @@ describe("hints and section checks", () => {
       { id: "hh", section: "Courtesy", label: "Washes hands", weight: 1, scoring: "auto", rule: { courtesy: "hand_hygiene" }, sourceText: "" },
       { id: "jvp", section: "CV", label: "Inspects JVP", weight: 1, scoring: "auto", rule: { performed: "jvp_inspection" }, sourceText: "" },
       { id: "time", section: "CV", label: "On time", weight: 1, scoring: "auto", rule: { not: { happened: "timer:auto_end" } }, modes: ["exam"], sourceText: "" },
-      { id: "talk", section: "CV", label: "Explains", weight: 1, scoring: "ai", guidance: "g", sourceText: "" },
+      { id: "talk", section: "CV", label: "Explains", weight: 1, scoring: "match", guidance: "g", sourceText: "" },
     ],
   };
   const log = [act({ type: "courtesy", source: "toolbar", payload: { kind: "hand_hygiene" } }, 1000)];

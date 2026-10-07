@@ -8,7 +8,7 @@ export function StatusBadge({ s }: { s: EffectiveScore }) {
   if (s.override) return <span className="rounded bg-indigo-100 px-1.5 py-0.5 text-xs text-indigo-800">Coach override</span>;
   if (s.status === "needs_review") return <span className="rounded bg-amber-100 px-1.5 py-0.5 text-xs text-amber-900">Needs review</span>;
   if (s.status === "not_assessable") return <span className="rounded bg-slate-100 px-1.5 py-0.5 text-xs text-slate-500">Not assessable</span>;
-  return <span className={`rounded px-1.5 py-0.5 text-xs ${s.scoring === "ai" ? "bg-violet-50 text-violet-800" : "bg-emerald-50 text-emerald-800"}`}>{s.scoring === "ai" ? "AI-graded" : "Auto"}</span>;
+  return <span className={`rounded px-1.5 py-0.5 text-xs ${s.scoring === "auto" ? "bg-emerald-50 text-emerald-800" : "bg-violet-50 text-violet-800"}`}>{s.scoring === "match" ? "Matched" : s.scoring === "ai" ? "AI (legacy)" : "Auto"}</span>;
 }
 
 /** One mark-sheet item: score, status, rationale and evidence linking to the timeline. */
