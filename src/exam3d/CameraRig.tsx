@@ -4,12 +4,14 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { Vector3 } from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
-import { ANCHOR_BY_REGION, dirToWorld, toWorld, type Pose, type Vec3 } from "./regionAnchors";
+import { DISPENSER_POS } from "@/scene/room/Dispenser";
+import { anchorWorldNormals, anchorWorldPoints, skinLandmark, type Pose, type Vec3 } from "./regionAnchors";
 
-export type CameraPreset = "body" | "head_neck" | "left_side" | "right_side" | "chest_front" | "chest_back" | "abdomen" | "hands" | "feet";
+export type CameraPreset = "body" | "sink" | "head_neck" | "left_side" | "right_side" | "chest_front" | "chest_back" | "abdomen" | "hands" | "feet";
 
 export const PRESET_LABELS: Record<CameraPreset, string> = {
   body: "Whole body",
+  sink: "Sink",
   head_neck: "Head & neck",
   left_side: "Left side",
   right_side: "Right side",
@@ -21,58 +23,61 @@ export const PRESET_LABELS: Record<CameraPreset, string> = {
 };
 
 const add = (a: Vec3, b: Vec3, k = 1): Vec3 => [a[0] + b[0] * k, a[1] + b[1] * k, a[2] + b[2] * k];
+const mid = (a: Vec3, b: Vec3): Vec3 => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2];
+const first = (regionId: string, pose: Pose): Vec3 => anchorWorldPoints(regionId, pose)[0] ?? [0, 1, 0];
 
-/** Camera goal for a preset given the current pose (pure, so presets follow the bed angle). */
+/** Camera goal for a preset given the current pose (pure; presets follow the patient's position). */
 export function presetGoal(preset: CameraPreset, pose: Pose): { position: Vec3; target: Vec3 } {
-  const front = dirToWorld([0, 1, 0], "upper", pose);
-  const lowerFront = dirToWorld([0, 1, 0], "lower", pose);
   const up: Vec3 = [0, 1, 0];
-  const side: Vec3 = [1, 0, 0];
+  const examiner: Vec3 = [-1, 0, 0]; // the examiner stands on the patient's right (−X)
+  const notch = skinLandmark("sternal_notch", pose);
+  const front = notch.normal;
   switch (preset) {
     case "head_neck": {
-      const t = toWorld([0, 0.03, -0.72], "upper", pose);
-      return { target: t, position: add(add(t, front, 0.55), side, 0.12) };
+      // frame the whole head and neck, vertex to sternal notch
+      const t = mid(skinLandmark("vertex", pose).point, notch.point);
+      return { target: t, position: add(add(add(t, front, 0.62), examiner, 0.12), up, 0.12) };
     }
     case "left_side":
     case "right_side": {
-      // the patient's own side (+X is the patient's left), framed on the head, neck and upper chest
-      const t = toWorld([0, 0.0, -0.66], "upper", pose);
-      const out = dirToWorld([preset === "left_side" ? 1 : -1, 0, 0], "upper", pose);
-      return { target: t, position: add(add(t, out, 0.7), up, 0.08) };
+      const ear = skinLandmark(preset === "left_side" ? "ear_canal_l" : "ear_canal_r", pose);
+      return { target: ear.point, position: add(add(ear.point, ear.normal, 0.6), up, 0.06) };
     }
     case "chest_front": {
-      const t = toWorld([0.02, 0.12, -0.4], "upper", pose);
-      return { target: t, position: add(add(t, front, 0.8), side, 0.15) };
+      const t = first("cardiac_erbs", pose);
+      return { target: t, position: add(add(t, front, 0.75), examiner, 0.18) };
     }
     case "chest_back": {
-      const t = toWorld([0, -0.12, -0.38], "upper", pose);
-      return { target: t, position: add(t, front, -0.85) };
+      const t = mid(first("lung_post_rl", pose), first("lung_post_ll", pose));
+      const back = anchorWorldNormals("lung_post_rl", pose)[0] ?? [0, 0, 1];
+      return { target: t, position: add(add(t, back, 0.6), up, 0.45) };
     }
     case "abdomen": {
-      const t = toWorld([0, 0.1, -0.13], "upper", pose);
-      return { target: t, position: add(add(t, front, 0.75), side, 0.1) };
+      const u = skinLandmark("umbilicus", pose);
+      return { target: u.point, position: add(add(u.point, u.normal, 0.75), examiner, 0.15) };
     }
+    case "sink":
+      return { target: DISPENSER_POS, position: add(DISPENSER_POS, [1.3, 0.15, -0.45]) };
     case "hands": {
-      const t = toWorld([0, 0.03, 0.04], "upper", pose);
-      return { target: t, position: add(add(t, front, 0.9), [0, 0, 1], 0.35) };
+      const t = mid(first("hand_right", pose), first("hand_left", pose));
+      return { target: t, position: add(add(t, up, 0.8), [0, 0, 1], 0.35) };
     }
     case "feet": {
-      const t = toWorld([0, 0.06, 0.85], "lower", pose);
-      return { target: t, position: add(add(t, lowerFront, 0.45), [0, 0, 1], 0.6) };
+      const t = mid(first("foot_right", pose), first("foot_left", pose));
+      return { target: t, position: add(add(t, up, 0.45), [0, 0, 1], 0.65) };
     }
     default: {
-      const t = toWorld([0, 0.05, -0.15], "upper", pose);
-      return { target: [0, t[1] + 0.05, 0.05], position: add([2.1, 0, 1.55], up, t[1] + 0.75) };
+      const t = mid(notch.point, skinLandmark("umbilicus", pose).point);
+      return { target: t, position: add(t, [-1.75, 0.85, 1.25]) };
     }
   }
 }
 
 /** Focus on a single region (double-click). */
 export function regionGoal(regionId: string, pose: Pose): { position: Vec3; target: Vec3 } | null {
-  const a = ANCHOR_BY_REGION.get(regionId);
-  if (!a) return null;
-  const t = toWorld(a.points[0]!, a.segment, pose);
-  const n = dirToWorld(a.normal, a.segment, pose);
+  const t = anchorWorldPoints(regionId, pose)[0];
+  const n = anchorWorldNormals(regionId, pose)[0];
+  if (!t || !n) return null;
   return { target: t, position: add(t, n, 0.42) };
 }
 

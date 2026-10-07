@@ -5,8 +5,11 @@ export interface ToolUse {
   maneuverId: string;
   tool: Tool;
   toolMode?: ToolMode;
-  /** distance from the target in anchor radii */
+  /** distance from the target / the target's tolerance (≤ 1 = inside) */
   placementError?: number;
+  /** distance from the hidden anchor in cm, and that anchor's tolerance */
+  distanceCm?: number;
+  toleranceCm?: number;
   durationMs?: number;
   step?: string;
 }
@@ -18,5 +21,7 @@ export function examineFromTool(u: ToolUse): ActionInput {
   if (u.placementError !== undefined) payload.placementError = Math.round(u.placementError * 100) / 100;
   if (u.durationMs !== undefined) payload.durationMs = Math.round(u.durationMs);
   if (u.step) payload.step = u.step;
+  if (u.distanceCm !== undefined) payload.distanceCm = Math.round(u.distanceCm * 10) / 10;
+  if (u.toleranceCm !== undefined) payload.toleranceCm = u.toleranceCm;
   return { type: "examine", source: "click", payload };
 }

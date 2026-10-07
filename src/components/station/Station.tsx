@@ -25,6 +25,8 @@ import { FindingsPanel } from "./FindingsPanel";
 import { ManeuverMenu } from "./ManeuverMenu";
 import { PerformOverlay } from "./PerformOverlay";
 import { ExamineMenu } from "@/exam3d/ExamineMenu";
+import { variantFor } from "@/scene/rig";
+import { useQuality } from "@/scene/quality";
 
 const Exam3DView = dynamic(() => import("@/exam3d/Exam3DView"), {
   ssr: false,
@@ -48,7 +50,7 @@ export interface StationProps {
   catalog: PublicCatalog;
   initialActions: Action[];
   /** Slot for the chat panel. */
-  chat?: (ctx: { actions: Action[]; append: (a: Action) => void; disabled: boolean }) => React.ReactNode;
+  chat?: (ctx: { actions: Action[]; append: (a: Action) => void; disabled: boolean; onSpeaking: (speaking: boolean) => void }) => React.ReactNode;
   /** Slot for the finish/submit control. */
   finish?: (ctx: { append: (a: Action) => void; disabled: boolean; forceOpen: ForceOpen }) => React.ReactNode;
 }
@@ -69,6 +71,8 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
   /** exam actions and chat stop outside the room, when the station ended or exam time ran out */
   const locked = ended || timeUp || outside;
   const [entering, setEntering] = useState(false);
+  const [speaking, setSpeaking] = useState(false);
+  const [quality, setQuality] = useQuality();
   const [leaveNudge, setLeaveNudge] = useState<string | null>(null);
 
   const append = (a: Action) => setActions((xs) => [...xs, a]);
@@ -235,6 +239,13 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
         </div>
         <div className="flex items-center gap-3">
           <AudioControls />
+          <label className="flex items-center gap-1 text-xs text-slate-600">
+            Graphics
+            <select aria-label="Graphics quality" value={quality} onChange={(e) => setQuality(e.target.value as "high" | "low")} className="rounded border border-slate-300 bg-white px-1 py-0.5">
+              <option value="high">High</option>
+              <option value="low">Low</option>
+            </select>
+          </label>
           <ModeTimer mode={mode} startedAt={session.startedAt} limitSeconds={kase.timeLimitSeconds} actions={actions} stopped={ended || timeUp} onTimerEvent={onTimerEvent} />
           {finish?.({ append, disabled: ended, forceOpen: ended ? null : timeUp ? "time_up" : left ? "left_room" : null })}
         </div>
@@ -274,7 +285,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
       <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-[minmax(280px,1fr)_minmax(360px,1.3fr)_minmax(280px,1fr)]">
         <div className="flex min-h-0 flex-col gap-3">
           <DoorSign kase={kase} />
-          {chat?.({ actions, append, disabled: locked })}
+          {chat?.({ actions, append, disabled: locked, onSpeaking: setSpeaking })}
         </div>
 
         <div className="flex min-h-0 flex-col gap-2 rounded-lg border border-slate-200 bg-white p-3">
@@ -305,6 +316,9 @@ export function Station({ session, kase, catalog, initialActions, chat, finish }
                 onToolExamine={onToolExamine}
                 onToolAmbiguous={onToolAmbiguous}
                 sanitiser={sanitise}
+                variant={variantFor(kase.patient.sex)}
+                speaking={speaking}
+                quality={quality}
                 regions={catalog.regions}
                 examinableRegionIds={examinable}
                 actions={actions}

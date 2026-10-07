@@ -70,6 +70,9 @@ src/server/db/                      Repo interface, Postgres (Drizzle) + file st
 src/server/                         session service, auth, rate limit, cost guards
 src/app/api/                        route handlers
 src/app/(pages)                     gate, home, station, results, coach
+src/scene/                          rigged patient (PatientModel, rig.ts pose maths, patientRig.generated.ts), room/ props, quality
+src/exam3d/                         3D exam view, hidden anchors (anchorDefs.ts → regionAnchors.ts), tools, camera, Examine… menu
+scripts/assets/build-patient.ts     builds public/models/patient*.glb from MakeHuman CC0 (npm run assets:patient); see docs/ASSETS.md
 src/components/station/             door, encounter bar (sanitise / bed / drape / Actions menu), chat, findings, log, maneuver menu, submit dialog
 src/components/results/, coach/     results and coach UI
 tests/                              vitest; e2e/ Playwright

@@ -13,3 +13,4 @@ next-env.d.ts
 # Source documents are not yet copyright-cleared: keep them local only.
 source/*
 !source/README.md
+.cache/

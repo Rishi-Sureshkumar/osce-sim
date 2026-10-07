@@ -13,15 +13,21 @@ export function ChatPanel({
   actions,
   append,
   disabled,
+  onSpeaking,
 }: {
   sessionId: string;
   patientName: string;
   actions: Action[];
   append: (a: Action) => void;
   disabled: boolean;
+  /** the patient's reply is streaming (the 3D patient turns toward the student) */
+  onSpeaking?: (speaking: boolean) => void;
 }) {
   const [text, setText] = useState("");
   const [streaming, setStreaming] = useState<string | null>(null);
+  const speakingRef = useRef(onSpeaking);
+  speakingRef.current = onSpeaking;
+  useEffect(() => speakingRef.current?.(streaming !== null && streaming.length > 0), [streaming]);
   const [error, setError] = useState<string | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);

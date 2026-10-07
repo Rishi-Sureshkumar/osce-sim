@@ -1,6 +1,6 @@
 "use client";
 import { Canvas } from "@react-three/fiber";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import type { Action, AudioSpec, PublicCase, Region } from "@/domain/schemas";
 import type { PublicCatalog } from "@/content/types";
 import { patientState } from "@/engine/patientState";
@@ -10,8 +10,9 @@ import type { ToolUse } from "@/input/adapters/tool";
 import { CameraRig, PRESET_LABELS, presetGoal, regionGoal, type CameraPreset } from "./CameraRig";
 import { Patient3D } from "./Patient3D";
 import { ANCHOR_BY_REGION, SNAP_TOLERANCE, poseFor, snapToAnchor, type Vec3 } from "./regionAnchors";
-import { Dispenser } from "./Dispenser";
-import { Room } from "./Room";
+import { ExamRoom } from "@/scene/room/ExamRoom";
+import { FpsMeter, LoadingOverlay } from "@/scene/Loading";
+import type { VariantId } from "@/scene/rig";
 import { TestHook } from "./TestHook";
 import { MIN_LISTEN_MS, candidatesFor, placementSound, regionsForTool, sequenceProgress, stepForPlacement } from "./tools/toolLogic";
 import { PulseRing, ToolMarker } from "./tools/ToolMarker";
@@ -40,12 +41,19 @@ export interface Exam3DViewProps {
   onToolAmbiguous: (regionId: string, maneuverIds: string[]) => Promise<string | null>;
   /** the sanitiser dispenser in the scene (press and hold) */
   sanitiser?: { progress: number; start: () => void; cancel: () => void };
+  /** which patient body to load (from the case's patient) */
+  variant: VariantId;
+  /** the patient is replying (head turns toward the student) */
+  speaking?: boolean;
+  quality?: "high" | "low";
 }
 
 interface Hold {
   regionId: string;
   maneuverId: string;
   error: number;
+  distanceCm: number;
+  toleranceCm: number;
   point: Vec3;
   startedAt: number;
   caption?: string;
@@ -58,9 +66,17 @@ interface Sequence {
   tone?: Extract<AudioSpec, { generator: "tone" }>;
 }
 
+/** The table's head section: flat for left lateral; behind the patient (back free) when sitting up. */
+function tableAngle(position: string, bedAngle: number): number {
+  if (position === "left_lateral_decubitus" || position === "prone") return 0;
+  if (position === "seated" || position === "seated_leaning_forward" || position === "standing") return 50;
+  return bedAngle;
+}
+
 export default function Exam3DView(props: Exam3DViewProps) {
   const state = useMemo(() => patientState(props.actions), [props.actions]);
-  const pose = useMemo(() => poseFor(state.position, state.bedAngle), [state.position, state.bedAngle]);
+  const pose = useMemo(() => poseFor(state.position, state.bedAngle, props.variant), [state.position, state.bedAngle, props.variant]);
+  const quality = props.quality ?? "high";
   const [preset, setPreset] = useState<CameraPreset>("body");
   const [focus, setFocus] = useState<string | null>(null);
   const [goalKey, setGoalKey] = useState(0);
@@ -152,6 +168,8 @@ export default function Exam3DView(props: Exam3DViewProps) {
       tool,
       toolMode: mode,
       placementError: h.error,
+      distanceCm: h.distanceCm,
+      toleranceCm: h.toleranceCm,
       durationMs: performance.now() - h.startedAt,
     });
   };
@@ -162,7 +180,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
     if (!s) return;
     if (tool === "stethoscope") {
       const m = candidatesFor(props.maneuvers, tool, mode, s.regionId)[0];
-      if (m) void startListening({ regionId: s.regionId, maneuverId: m.id, error: s.error, point: s.error <= SNAP_TOLERANCE ? s.point : point, startedAt: performance.now() });
+      if (m) void startListening({ regionId: s.regionId, maneuverId: m.id, error: s.error, distanceCm: s.distanceCm, toleranceCm: s.toleranceCm, point, startedAt: performance.now() });
     } else {
       pending.current = { point };
     }
@@ -177,10 +195,10 @@ export default function Exam3DView(props: Exam3DViewProps) {
       // slid onto another region: log the last spot and start listening at the new one
       void endListening().then(() => {
         const m = candidatesFor(props.maneuvers, tool, mode, s.regionId)[0];
-        if (m) void startListening({ regionId: s.regionId, maneuverId: m.id, error: s.error, point: s.point, startedAt: performance.now() });
+        if (m) void startListening({ regionId: s.regionId, maneuverId: m.id, error: s.error, distanceCm: s.distanceCm, toleranceCm: s.toleranceCm, point, startedAt: performance.now() });
       });
     } else {
-      setMarker({ point: s.error <= SNAP_TOLERANCE ? s.point : point, onTarget: s.error <= SNAP_TOLERANCE });
+      setMarker({ point, onTarget: s.error <= SNAP_TOLERANCE });
     }
   };
 
@@ -206,11 +224,13 @@ export default function Exam3DView(props: Exam3DViewProps) {
     const m = maneuverById.get(maneuverId)!;
     // sequences measure placement against the step's landmark (e.g. mastoid vs ear canal)
     const seqStep = m.interaction === "sequence" && m.steps ? stepForPlacement(m.steps, s.regionId, point, pose, ANCHOR_BY_REGION.get(s.regionId)?.radius) : undefined;
+    const distanceCm = seqStep ? seqStep.error * (ANCHOR_BY_REGION.get(s.regionId)?.toleranceCm ?? s.toleranceCm) : s.distanceCm;
     const error = seqStep?.error ?? s.error;
     const target = seqStep?.point ?? s.point;
     const step = seqStep?.id;
-    setMarker({ point: error <= SNAP_TOLERANCE ? target : point, onTarget: error <= SNAP_TOLERANCE });
-    const action = await props.onToolExamine({ regionId: s.regionId, maneuverId, tool, toolMode: mode, placementError: error, ...(step ? { step } : {}) });
+    void target;
+    setMarker({ point, onTarget: error <= SNAP_TOLERANCE });
+    const action = await props.onToolExamine({ regionId: s.regionId, maneuverId, tool, toolMode: mode, placementError: error, distanceCm, toleranceCm: s.toleranceCm, ...(step ? { step } : {}) });
     if (!action || action.type !== "examine") return;
     const result = action.result;
     if (tool === "tuning_fork" && result?.audio && "generator" in result.audio && result.audio.generator === "tone") {
@@ -272,17 +292,37 @@ export default function Exam3DView(props: Exam3DViewProps) {
       <ToolTray state={props.tool} onChange={props.onToolChange} disabled={props.disabled} />
 
       <div className="relative min-h-[360px] flex-1 overflow-hidden rounded-md bg-slate-100" data-testid="exam3d" data-camera={focus ? `focus:${focus}` : preset}>
-        <Canvas dpr={[1, 1.5]} camera={{ fov: 40, near: 0.02, far: 30, position: goal.position as Vec3 }} gl={{ antialias: true }}>
+        <Canvas
+          dpr={quality === "high" ? [1, 1.5] : 1}
+          shadows={quality === "high"}
+          camera={{ fov: 40, near: 0.02, far: 30, position: goal.position as Vec3 }}
+          gl={{ antialias: quality === "high" }}
+        >
           <color attach="background" args={["#e9eff2"]} />
-          <hemisphereLight args={["#ffffff", "#c8d2d8", 0.9]} />
-          <directionalLight position={[2, 4, 2]} intensity={1.1} />
-          <directionalLight position={[-2, 2, -1]} intensity={0.35} />
-          <Room backrest={pose.backrest} showBackrest={state.bedAngle < 60 && state.position !== "left_lateral_decubitus"} />
-          {props.sanitiser && (
-            <Dispenser progress={props.sanitiser.progress} clean={state.handsClean} onStart={() => !props.disabled && props.sanitiser!.start()} onCancel={props.sanitiser.cancel} />
-          )}
+          <hemisphereLight args={["#ffffff", "#b8c4cc", 1.05]} />
+          <directionalLight
+            position={[-1.6, 2.6, 1.4]}
+            intensity={1.5}
+            castShadow={quality === "high"}
+            shadow-mapSize={quality === "high" ? [2048, 2048] : [512, 512]}
+            shadow-camera-left={-2}
+            shadow-camera-right={2}
+            shadow-camera-top={2}
+            shadow-camera-bottom={-2}
+            shadow-bias={-0.0004}
+          />
+          <directionalLight position={[2, 2, -1]} intensity={0.35} />
+          <ExamRoom
+            bedAngle={tableAngle(state.position, state.bedAngle)}
+            doorOpen={1}
+            sanitiser={props.sanitiser ? { ...props.sanitiser, clean: state.handsClean, disabled: props.disabled } : undefined}
+          />
+          <Suspense fallback={null}>
           <Patient3D
             pose={pose}
+            variant={props.variant}
+            speaking={!!props.speaking}
+            quality={quality}
             drape={state.drape}
             rr={rr}
             hr={hr}
@@ -309,12 +349,15 @@ export default function Exam3DView(props: Exam3DViewProps) {
             }}
             onHover={setHover}
           />
+          </Suspense>
+          <FpsMeter />
           {tool && marker && <ToolMarker tool={tool} point={marker.point} onTarget={marker.onTarget} />}
           {pulse && <PulseRing key={pulse.startedAt} point={pulse.point} amount={pulse.amount} startedAt={pulse.startedAt} />}
           <CameraRig goal={goal} enabled={!hold} />
           <TestHook pose={pose} />
         </Canvas>
 
+        <LoadingOverlay />
         <div className="pointer-events-none absolute inset-x-0 bottom-1 text-center text-sm text-slate-700" aria-live="polite">
           {hover ? byId.get(hover)?.label : tool ? "" : "Click a region to examine · drag to orbit · scroll to zoom · double-click to focus"}
         </div>

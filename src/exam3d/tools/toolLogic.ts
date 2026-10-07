@@ -1,6 +1,6 @@
 /** Pure rules for tool interactions (no React / three), shared by the 3D view, Station and tests. */
 import type { ExamManeuver, SequenceStep, Tool, ToolMode } from "@/domain/schemas";
-import { LANDMARKS, distance, toWorld, type Pose, type Vec3 } from "../regionAnchors";
+import { distance, landmarkWorld, type Pose, type Vec3 } from "../regionAnchors";
 
 /** Minimum time the stethoscope must stay in place before the finding is described. */
 export const MIN_LISTEN_MS = 3000;
@@ -28,10 +28,13 @@ export function candidatesFor(maneuvers: readonly M[], tool: Tool, mode: ToolMod
   return exact.length ? exact : onRegion;
 }
 
-/** Loudness/muffling from placement error (in anchor radii). */
-export function placementSound(error: number, tolerance = 1.5): { attenuation: number; lowpassHz: number; onTarget: boolean } {
+/**
+ * Loudness/muffling from placement error (distance / tolerance): full inside the tolerance,
+ * fading and band-limited up to 2×, then muffled.
+ */
+export function placementSound(error: number): { attenuation: number; lowpassHz: number; onTarget: boolean } {
   if (error <= 1) return { attenuation: 1, lowpassHz: 8000, onTarget: true };
-  if (error <= tolerance) return { attenuation: 1 - 0.5 * ((error - 1) / (tolerance - 1)), lowpassHz: 2500, onTarget: true };
+  if (error <= 2) return { attenuation: 1 - 0.5 * (error - 1), lowpassHz: 1800, onTarget: false };
   return { attenuation: 0.25, lowpassHz: 350, onTarget: false };
 }
 
@@ -61,7 +64,7 @@ export function sequenceProgress(steps: readonly SequenceStep[], done: readonly 
 
 /**
  * Which sequence step a placement is (the nearest landmark among the "place" steps), with the
- * placement error measured from that landmark in units of `radius` (the region's anchor radius).
+ * placement error measured from that landmark in units of `radius` (metres; the region's tolerance).
  */
 export function stepForPlacement(
   steps: readonly SequenceStep[],
@@ -73,9 +76,8 @@ export function stepForPlacement(
   let best: { step: SequenceStep; d: number; point: Vec3 } | undefined;
   for (const step of steps) {
     if (step.kind !== "place" || !step.landmark) continue;
-    const lm = LANDMARKS.find((l) => l.id === step.landmark && l.regionId === regionId);
-    if (!lm) continue;
-    const point = toWorld(lm.point, lm.segment, pose);
+    const point = landmarkWorld(step.landmark, regionId, pose);
+    if (!point) continue;
     const d = distance(point, world);
     if (!best || d < best.d) best = { step, d, point };
   }

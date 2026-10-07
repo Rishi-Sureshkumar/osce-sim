@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { loadContentFromDisk } from "@/content/loadFromDisk";
 import { candidatesFor, placementSound, regionsForTool, sequenceProgress, stepForPlacement, toolFor } from "@/exam3d/tools/toolLogic";
-import { LANDMARKS, poseFor, toWorld } from "@/exam3d/regionAnchors";
+import { landmarkWorld, poseFor } from "@/exam3d/regionAnchors";
 
 const { maneuvers, maneuverById } = loadContentFromDisk();
 
@@ -25,10 +25,10 @@ describe("tool → maneuver resolution", () => {
 });
 
 describe("placement sound", () => {
-  it("on target is full; edge is quieter; off target is muffled", () => {
+  it("inside the tolerance is full; up to 2× is quieter and band-limited; beyond is muffled", () => {
     expect(placementSound(0.5)).toMatchObject({ attenuation: 1, onTarget: true });
-    expect(placementSound(1.25).attenuation).toBeCloseTo(0.75, 5);
-    expect(placementSound(2)).toMatchObject({ attenuation: 0.25, lowpassHz: 350, onTarget: false });
+    expect(placementSound(1.5)).toMatchObject({ attenuation: 0.75, onTarget: false });
+    expect(placementSound(2.5)).toMatchObject({ attenuation: 0.25, lowpassHz: 350, onTarget: false });
   });
 });
 
@@ -42,12 +42,12 @@ describe("Rinne sequence", () => {
   });
   it("maps a placement to the nearest landmark step", () => {
     const pose = poseFor("seated", 80);
-    const mastoid = LANDMARKS.find((l) => l.id === "mastoid" && l.regionId === "ear_left")!;
-    const canal = LANDMARKS.find((l) => l.id === "ear_canal" && l.regionId === "ear_left")!;
-    const bone = stepForPlacement(steps, "ear_left", toWorld(mastoid.point, "upper", pose), pose)!;
+    const mastoid = landmarkWorld("mastoid", "ear_left", pose)!;
+    const canal = landmarkWorld("ear_canal", "ear_left", pose)!;
+    const bone = stepForPlacement(steps, "ear_left", mastoid, pose)!;
     expect(bone.id).toBe("bone");
     expect(bone.error).toBeCloseTo(0, 5);
-    expect(stepForPlacement(steps, "ear_left", toWorld(canal.point, "upper", pose), pose)?.id).toBe("air");
+    expect(stepForPlacement(steps, "ear_left", canal, pose)?.id).toBe("air");
   });
 });
 

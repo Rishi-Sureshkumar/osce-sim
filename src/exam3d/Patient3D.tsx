@@ -1,22 +1,24 @@
 "use client";
 import type { ThreeEvent } from "@react-three/fiber";
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import type { Mesh, MeshBasicMaterial } from "three";
 import type { DrapeZone } from "@/domain/schemas";
-import { LowerDrape, UpperDrape } from "./Drape";
-import { LowerBody, UpperBody } from "./Mannequin";
-import { HINGE_Y, REGION_ANCHORS, pickRegion, type Pose, type RegionAnchor, type Vec3 } from "./regionAnchors";
-import { JvpStrip } from "./VisibleSigns";
+import { PatientModel } from "@/scene/PatientModel";
+import type { VariantId } from "@/scene/rig";
+import { anchorWorldPoints, anchorsFor, pickRegion, type Pose, type RegionAnchor, type Vec3 } from "./regionAnchors";
 
 export interface Patient3DProps {
   pose: Pose;
+  variant: VariantId;
   drape: Record<DrapeZone, boolean>;
   rr: number;
   hr: number;
   laboured: boolean;
   jvpCm: number;
   edema: Record<string, number>;
+  speaking: boolean;
+  quality: "high" | "low";
   /** regions the current tool/menu can act on (others are hidden markers) */
   showMarkers: boolean;
   selectedRegionId?: string | null;
@@ -34,18 +36,17 @@ export interface Patient3DProps {
   onHover: (regionId: string | null) => void;
 }
 
-/**
- * Scene graph mirrors regionAnchors.toWorld(): root at the hinge, rolled about the long axis;
- * the upper group tilts with the backrest. Picking resolves ray hits to a canonical regionId,
- * ignoring anchors hidden behind the body surface.
- */
-/** Where the ray meets the skin (not an invisible collider sphere): tool placements are measured from it. */
+/** Where the ray meets the skin (not an invisible collider): tool placements are measured from it. */
 function surfacePoint(e: ThreeEvent<PointerEvent>): Vec3 {
   const body = e.intersections.find((i) => i.object.userData.kind === "body");
   const pt = body?.point ?? e.point;
   return [pt.x, pt.y, pt.z];
 }
 
+/**
+ * The rigged patient plus invisible anchor colliders at the pose's world anchor points. Picking
+ * resolves ray hits to a canonical regionId, ignoring anchors hidden behind the skin.
+ */
 export function Patient3D(p: Patient3DProps) {
   const resolve = (e: ThreeEvent<MouseEvent | PointerEvent>): string | null => {
     const bodyHit = e.intersections.find((i) => i.object.userData.kind === "body");
@@ -56,11 +57,11 @@ export function Patient3D(p: Patient3DProps) {
       .filter((h) => p.enabledRegionIds.has(h.regionId));
     return pickRegion(hits);
   };
+  const anchors = anchorsFor(p.variant);
+  const placed = useMemo(() => anchors.map((a) => ({ a, points: anchorWorldPoints(a.regionId, p.pose) })), [anchors, p.pose]);
 
   return (
     <group
-      position={[0, HINGE_Y, 0]}
-      rotation={[0, 0, p.pose.roll]}
       onClick={(e) => {
         e.stopPropagation();
         if (p.toolActive) return;
@@ -91,26 +92,22 @@ export function Patient3D(p: Patient3DProps) {
       }}
       onPointerOut={() => p.onHover(null)}
     >
-      <group rotation={[p.pose.backrest, 0, 0]}>
-        <UpperBody rr={p.rr} laboured={p.laboured} pupilScale={p.pupilScale} />
-        <UpperDrape drape={p.drape} />
-        <JvpStrip jvpCm={p.jvpCm} hr={p.hr} />
-        <Anchors segment="upper" {...p} />
-      </group>
-      <LowerBody edema={p.edema} />
-      <LowerDrape drape={p.drape} />
-      <Anchors segment="lower" {...p} />
+      <PatientModel
+        variant={p.variant}
+        position={p.pose.position}
+        bedAngle={p.pose.bedAngle}
+        drape={p.drape}
+        hr={p.hr}
+        rr={p.rr}
+        laboured={p.laboured}
+        jvpCm={p.jvpCm}
+        edema={p.edema}
+        pupilScale={p.pupilScale}
+        speaking={p.speaking}
+        quality={p.quality}
+      />
+      {placed.map(({ a, points }) => points.map((pt, i) => <AnchorMesh key={`${a.regionId}-${i}`} anchor={a} point={pt} {...p} />))}
     </group>
-  );
-}
-
-function Anchors(props: Patient3DProps & { segment: "upper" | "lower" }) {
-  return (
-    <>
-      {REGION_ANCHORS.filter((a) => a.segment === props.segment).map((a) =>
-        a.points.map((pt, i) => <AnchorMesh key={`${a.regionId}-${i}`} anchor={a} point={pt} {...props} />),
-      )}
-    </>
   );
 }
 
@@ -122,7 +119,7 @@ function AnchorMesh({
   performingRegionId,
   examinedRegionIds,
   enabledRegionIds,
-}: Patient3DProps & { anchor: RegionAnchor; point: [number, number, number] }) {
+}: Patient3DProps & { anchor: RegionAnchor; point: Vec3 }) {
   const dot = useRef<Mesh>(null);
   const performing = performingRegionId === anchor.regionId;
   const selected = selectedRegionId === anchor.regionId;
@@ -135,15 +132,14 @@ function AnchorMesh({
     m.opacity = !visible ? 0 : performing ? 0.55 + 0.4 * Math.sin(clock.elapsedTime * 9) : selected ? 0.95 : examined ? 0.85 : 0.6;
   });
   const color = selected || performing ? "#0e7490" : examined ? "#059669" : "#0891b2";
-  // the collider keeps the full radius; only a small dot is drawn
   return (
     <group position={point}>
       <mesh userData={{ regionId: anchor.regionId }}>
-        <sphereGeometry args={[anchor.radius, 12, 8]} />
+        <sphereGeometry args={[Math.max(0.015, anchor.radius), 12, 8]} />
         <meshBasicMaterial transparent opacity={0} depthWrite={false} colorWrite={false} />
       </mesh>
       <mesh ref={dot} raycast={() => null} renderOrder={2}>
-        <sphereGeometry args={[Math.min(0.009, anchor.radius * 0.6), 12, 8]} />
+        <sphereGeometry args={[0.008, 12, 8]} />
         <meshBasicMaterial color={color} transparent opacity={0} depthWrite={false} />
       </mesh>
     </group>

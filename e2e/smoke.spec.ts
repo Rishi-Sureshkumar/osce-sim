@@ -108,7 +108,8 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await knockAndEnter(page);
   await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
   await expect(page.locator('[data-testid="hands-status"]')).toHaveText("Hands: not cleaned");
-  await page.waitForTimeout(1500); // initial camera settle
+  await camera(page, "Sink");
+  await page.locator('[data-testid="exam3d"]').scrollIntoViewIfNeeded();
   const dispenser = await page.evaluate(() => window.__osce3d!.projectObject("dispenser"));
   await page.mouse.move(dispenser.x, dispenser.y);
   await page.mouse.down();
@@ -343,6 +344,17 @@ test("exam mode: countdown, auto-end at zero, forced presentation, exam-only sco
   await expect(page.locator('[data-testid="mode-badge"]')).toHaveText("Exam");
   await expect(page.locator('[data-item="within-time"]')).toContainText("0/1");
   await expect(page.locator('[data-testid="timeline"]')).toContainText("Time up — station ended");
+});
+
+test("initial download stays within the 15 MB budget (JS + models)", () => {
+  const sum = (dir: string, ext: RegExp): number =>
+    fs.readdirSync(dir).reduce((n, f) => {
+      const p = path.join(dir, f);
+      return n + (fs.statSync(p).isDirectory() ? sum(p, ext) : ext.test(f) ? fs.statSync(p).size : 0);
+    }, 0);
+  const js = sum(".next/static", /\.js$/);
+  const models = sum("public/models", /\.glb$/);
+  expect(js + models).toBeLessThan(15 * 1024 * 1024);
 });
 
 test("no API key or framework text in client bundles", () => {

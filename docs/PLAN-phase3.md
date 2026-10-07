@@ -295,7 +295,7 @@ Lighting is stable: hemisphere light, one shadowed key light, and contact shadow
 |---|---|---|
 | S | Schema changes | done |
 | M1 | 3D-only | done |
-| M2 | Patient model and room | planned |
+| M2 | Patient model and room | done |
 | M3 | Cinematic navigation | planned |
 | M4 | Hidden targets | planned |
 | M5 | 1B encounter flow and PEN | planned |

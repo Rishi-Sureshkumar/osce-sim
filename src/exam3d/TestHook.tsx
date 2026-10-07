@@ -2,8 +2,8 @@
 import { useThree } from "@react-three/fiber";
 import { useEffect } from "react";
 import { Vector3 } from "three";
-import { DISPENSER_POS } from "./Dispenser";
-import { ANCHOR_BY_REGION, landmarkFor, toWorld, type Pose, type Vec3 } from "./regionAnchors";
+import { DISPENSER_POS } from "@/scene/room/Dispenser";
+import { anchorWorldPoints, landmarkWorld, type Pose, type Vec3 } from "./regionAnchors";
 
 declare global {
   interface Window {
@@ -32,10 +32,8 @@ export function TestHook({ pose }: { pose: Pose }) {
       ready: true,
       projectObject: () => toPage(DISPENSER_POS),
       project(regionId, landmark) {
-        const lm = landmark ? landmarkFor(landmark, regionId) : undefined;
-        const a = ANCHOR_BY_REGION.get(regionId);
-        if (!a && !lm) return null;
-        return toPage(lm ? toWorld(lm.point, lm.segment, pose) : toWorld(a!.points[0]!, a!.segment, pose));
+        const w = landmark ? landmarkWorld(landmark, regionId, pose) : (anchorWorldPoints(regionId, pose)[0] ?? null);
+        return w ? toPage(w) : null;
       },
     };
     return () => {
