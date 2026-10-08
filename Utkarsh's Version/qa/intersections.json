@@ -1,0 +1,2738 @@
+{
+ "generated": "npm run test:intersections",
+ "maxPercent": 0.5,
+ "results": [
+  {
+   "id": "intersections:male:supine:covered:bed",
+   "status": "XFAIL",
+   "detail": "198 of 14517 skin vertices (1.36%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:supine:covered:gown",
+   "status": "XFAIL",
+   "detail": "84 of 14517 skin vertices (0.58%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:supine:covered:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:supine:chest-exposed:bed",
+   "status": "XFAIL",
+   "detail": "198 of 14517 skin vertices (1.36%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:supine:chest-exposed:gown",
+   "status": "PASS",
+   "detail": "14 of 14517 skin vertices (0.10%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:supine:chest-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:supine:abdomen-exposed:bed",
+   "status": "XFAIL",
+   "detail": "198 of 14517 skin vertices (1.36%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:supine:abdomen-exposed:gown",
+   "status": "PASS",
+   "detail": "70 of 14517 skin vertices (0.48%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:supine:abdomen-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:supine:legs-exposed:bed",
+   "status": "XFAIL",
+   "detail": "198 of 14517 skin vertices (1.36%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:supine:legs-exposed:gown",
+   "status": "XFAIL",
+   "detail": "84 of 14517 skin vertices (0.58%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:supine:legs-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:supine:all-exposed:bed",
+   "status": "XFAIL",
+   "detail": "198 of 14517 skin vertices (1.36%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:supine:all-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:supine:all-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:covered:bed",
+   "status": "XFAIL",
+   "detail": "664 of 14517 skin vertices (4.57%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:covered:gown",
+   "status": "XFAIL",
+   "detail": "86 of 14517 skin vertices (0.59%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:covered:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:chest-exposed:bed",
+   "status": "XFAIL",
+   "detail": "664 of 14517 skin vertices (4.57%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:chest-exposed:gown",
+   "status": "XPASS",
+   "detail": "22 of 14517 skin vertices (0.15%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:chest-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:abdomen-exposed:bed",
+   "status": "XFAIL",
+   "detail": "664 of 14517 skin vertices (4.57%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:abdomen-exposed:gown",
+   "status": "PASS",
+   "detail": "64 of 14517 skin vertices (0.44%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:abdomen-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:legs-exposed:bed",
+   "status": "XFAIL",
+   "detail": "664 of 14517 skin vertices (4.57%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:legs-exposed:gown",
+   "status": "XFAIL",
+   "detail": "86 of 14517 skin vertices (0.59%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:legs-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:all-exposed:bed",
+   "status": "XFAIL",
+   "detail": "664 of 14517 skin vertices (4.57%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:all-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_30:all-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:covered:bed",
+   "status": "XFAIL",
+   "detail": "1184 of 14517 skin vertices (8.16%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:covered:gown",
+   "status": "XFAIL",
+   "detail": "80 of 14517 skin vertices (0.55%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:covered:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:chest-exposed:bed",
+   "status": "XFAIL",
+   "detail": "1184 of 14517 skin vertices (8.16%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:chest-exposed:gown",
+   "status": "XPASS",
+   "detail": "26 of 14517 skin vertices (0.18%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:chest-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:abdomen-exposed:bed",
+   "status": "XFAIL",
+   "detail": "1184 of 14517 skin vertices (8.16%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:abdomen-exposed:gown",
+   "status": "XPASS",
+   "detail": "54 of 14517 skin vertices (0.37%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:abdomen-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:legs-exposed:bed",
+   "status": "XFAIL",
+   "detail": "1184 of 14517 skin vertices (8.16%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:legs-exposed:gown",
+   "status": "XFAIL",
+   "detail": "80 of 14517 skin vertices (0.55%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:legs-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:all-exposed:bed",
+   "status": "XFAIL",
+   "detail": "1184 of 14517 skin vertices (8.16%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:all-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:reclined_45:all-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:covered:bed",
+   "status": "XFAIL",
+   "detail": "248 of 14517 skin vertices (1.71%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:covered:gown",
+   "status": "XFAIL",
+   "detail": "100 of 14517 skin vertices (0.69%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:covered:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:chest-exposed:bed",
+   "status": "XFAIL",
+   "detail": "248 of 14517 skin vertices (1.71%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:chest-exposed:gown",
+   "status": "PASS",
+   "detail": "44 of 14517 skin vertices (0.30%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:chest-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:abdomen-exposed:bed",
+   "status": "XFAIL",
+   "detail": "248 of 14517 skin vertices (1.71%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:abdomen-exposed:gown",
+   "status": "PASS",
+   "detail": "56 of 14517 skin vertices (0.39%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:abdomen-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:legs-exposed:bed",
+   "status": "XFAIL",
+   "detail": "248 of 14517 skin vertices (1.71%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:legs-exposed:gown",
+   "status": "XFAIL",
+   "detail": "100 of 14517 skin vertices (0.69%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:legs-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:all-exposed:bed",
+   "status": "XFAIL",
+   "detail": "248 of 14517 skin vertices (1.71%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:all-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated:all-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:covered:bed",
+   "status": "PASS",
+   "detail": "60 of 14517 skin vertices (0.41%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:covered:gown",
+   "status": "XFAIL",
+   "detail": "100 of 14517 skin vertices (0.69%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:covered:sheet",
+   "status": "XFAIL",
+   "detail": "390 of 14517 skin vertices (2.69%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:chest-exposed:bed",
+   "status": "PASS",
+   "detail": "60 of 14517 skin vertices (0.41%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:chest-exposed:gown",
+   "status": "PASS",
+   "detail": "44 of 14517 skin vertices (0.30%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:chest-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "390 of 14517 skin vertices (2.69%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:abdomen-exposed:bed",
+   "status": "PASS",
+   "detail": "60 of 14517 skin vertices (0.41%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:abdomen-exposed:gown",
+   "status": "PASS",
+   "detail": "56 of 14517 skin vertices (0.39%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:abdomen-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "390 of 14517 skin vertices (2.69%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:legs-exposed:bed",
+   "status": "PASS",
+   "detail": "60 of 14517 skin vertices (0.41%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:legs-exposed:gown",
+   "status": "XFAIL",
+   "detail": "100 of 14517 skin vertices (0.69%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:legs-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:all-exposed:bed",
+   "status": "PASS",
+   "detail": "60 of 14517 skin vertices (0.41%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:all-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:sitting_dangling:all-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:covered:bed",
+   "status": "XFAIL",
+   "detail": "277 of 14517 skin vertices (1.91%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:covered:gown",
+   "status": "PASS",
+   "detail": "3 of 14517 skin vertices (0.02%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:covered:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:chest-exposed:bed",
+   "status": "XFAIL",
+   "detail": "277 of 14517 skin vertices (1.91%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:chest-exposed:gown",
+   "status": "PASS",
+   "detail": "1 of 14517 skin vertices (0.01%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:chest-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:abdomen-exposed:bed",
+   "status": "XFAIL",
+   "detail": "277 of 14517 skin vertices (1.91%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:abdomen-exposed:gown",
+   "status": "PASS",
+   "detail": "2 of 14517 skin vertices (0.01%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:abdomen-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:legs-exposed:bed",
+   "status": "XFAIL",
+   "detail": "277 of 14517 skin vertices (1.91%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:legs-exposed:gown",
+   "status": "PASS",
+   "detail": "3 of 14517 skin vertices (0.02%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:legs-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:all-exposed:bed",
+   "status": "XFAIL",
+   "detail": "277 of 14517 skin vertices (1.91%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:all-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:left_lateral_decubitus:all-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:covered:bed",
+   "status": "XFAIL",
+   "detail": "196 of 14517 skin vertices (1.35%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:covered:gown",
+   "status": "PASS",
+   "detail": "58 of 14517 skin vertices (0.40%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:covered:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:chest-exposed:bed",
+   "status": "XFAIL",
+   "detail": "196 of 14517 skin vertices (1.35%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:chest-exposed:gown",
+   "status": "PASS",
+   "detail": "14 of 14517 skin vertices (0.10%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:chest-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:abdomen-exposed:bed",
+   "status": "XFAIL",
+   "detail": "196 of 14517 skin vertices (1.35%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:abdomen-exposed:gown",
+   "status": "PASS",
+   "detail": "44 of 14517 skin vertices (0.30%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:abdomen-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:legs-exposed:bed",
+   "status": "XFAIL",
+   "detail": "196 of 14517 skin vertices (1.35%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:legs-exposed:gown",
+   "status": "PASS",
+   "detail": "58 of 14517 skin vertices (0.40%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:legs-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:all-exposed:bed",
+   "status": "XFAIL",
+   "detail": "196 of 14517 skin vertices (1.35%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:all-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:male:seated_leaning_forward:all-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:covered:bed",
+   "status": "PASS",
+   "detail": "26 of 14517 skin vertices (0.18%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:covered:gown",
+   "status": "XFAIL",
+   "detail": "1339 of 14517 skin vertices (9.22%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:covered:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:chest-exposed:bed",
+   "status": "PASS",
+   "detail": "26 of 14517 skin vertices (0.18%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:chest-exposed:gown",
+   "status": "XFAIL",
+   "detail": "1275 of 14517 skin vertices (8.78%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:chest-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:abdomen-exposed:bed",
+   "status": "PASS",
+   "detail": "26 of 14517 skin vertices (0.18%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:abdomen-exposed:gown",
+   "status": "PASS",
+   "detail": "64 of 14517 skin vertices (0.44%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:abdomen-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:legs-exposed:bed",
+   "status": "PASS",
+   "detail": "26 of 14517 skin vertices (0.18%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:legs-exposed:gown",
+   "status": "XFAIL",
+   "detail": "1339 of 14517 skin vertices (9.22%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:legs-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:all-exposed:bed",
+   "status": "PASS",
+   "detail": "26 of 14517 skin vertices (0.18%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:all-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:supine:all-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:covered:bed",
+   "status": "XFAIL",
+   "detail": "306 of 14517 skin vertices (2.11%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:covered:gown",
+   "status": "XFAIL",
+   "detail": "823 of 14517 skin vertices (5.67%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:covered:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:chest-exposed:bed",
+   "status": "XFAIL",
+   "detail": "306 of 14517 skin vertices (2.11%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:chest-exposed:gown",
+   "status": "XFAIL",
+   "detail": "774 of 14517 skin vertices (5.33%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:chest-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:abdomen-exposed:bed",
+   "status": "XFAIL",
+   "detail": "306 of 14517 skin vertices (2.11%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:abdomen-exposed:gown",
+   "status": "PASS",
+   "detail": "49 of 14517 skin vertices (0.34%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:abdomen-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:legs-exposed:bed",
+   "status": "XFAIL",
+   "detail": "306 of 14517 skin vertices (2.11%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:legs-exposed:gown",
+   "status": "XFAIL",
+   "detail": "823 of 14517 skin vertices (5.67%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:legs-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:all-exposed:bed",
+   "status": "XFAIL",
+   "detail": "306 of 14517 skin vertices (2.11%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:all-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_30:all-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:covered:bed",
+   "status": "XFAIL",
+   "detail": "960 of 14517 skin vertices (6.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:covered:gown",
+   "status": "XFAIL",
+   "detail": "122 of 14517 skin vertices (0.84%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:covered:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:chest-exposed:bed",
+   "status": "XFAIL",
+   "detail": "960 of 14517 skin vertices (6.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:chest-exposed:gown",
+   "status": "XFAIL",
+   "detail": "80 of 14517 skin vertices (0.55%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:chest-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:abdomen-exposed:bed",
+   "status": "XFAIL",
+   "detail": "960 of 14517 skin vertices (6.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:abdomen-exposed:gown",
+   "status": "XPASS",
+   "detail": "42 of 14517 skin vertices (0.29%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:abdomen-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:legs-exposed:bed",
+   "status": "XFAIL",
+   "detail": "960 of 14517 skin vertices (6.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:legs-exposed:gown",
+   "status": "XFAIL",
+   "detail": "122 of 14517 skin vertices (0.84%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:legs-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:all-exposed:bed",
+   "status": "XFAIL",
+   "detail": "960 of 14517 skin vertices (6.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:all-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:reclined_45:all-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:covered:bed",
+   "status": "XFAIL",
+   "detail": "144 of 14517 skin vertices (0.99%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:covered:gown",
+   "status": "PASS",
+   "detail": "68 of 14517 skin vertices (0.47%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:covered:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:chest-exposed:bed",
+   "status": "XFAIL",
+   "detail": "144 of 14517 skin vertices (0.99%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:chest-exposed:gown",
+   "status": "PASS",
+   "detail": "18 of 14517 skin vertices (0.12%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:chest-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:abdomen-exposed:bed",
+   "status": "XFAIL",
+   "detail": "144 of 14517 skin vertices (0.99%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:abdomen-exposed:gown",
+   "status": "PASS",
+   "detail": "50 of 14517 skin vertices (0.34%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:abdomen-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:legs-exposed:bed",
+   "status": "XFAIL",
+   "detail": "144 of 14517 skin vertices (0.99%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:legs-exposed:gown",
+   "status": "PASS",
+   "detail": "68 of 14517 skin vertices (0.47%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:legs-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:all-exposed:bed",
+   "status": "XFAIL",
+   "detail": "144 of 14517 skin vertices (0.99%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:all-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated:all-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:covered:bed",
+   "status": "PASS",
+   "detail": "52 of 14517 skin vertices (0.36%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:covered:gown",
+   "status": "XFAIL",
+   "detail": "80 of 14517 skin vertices (0.55%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:covered:sheet",
+   "status": "XFAIL",
+   "detail": "408 of 14517 skin vertices (2.81%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:chest-exposed:bed",
+   "status": "PASS",
+   "detail": "52 of 14517 skin vertices (0.36%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:chest-exposed:gown",
+   "status": "PASS",
+   "detail": "30 of 14517 skin vertices (0.21%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:chest-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "408 of 14517 skin vertices (2.81%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:abdomen-exposed:bed",
+   "status": "PASS",
+   "detail": "52 of 14517 skin vertices (0.36%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:abdomen-exposed:gown",
+   "status": "PASS",
+   "detail": "50 of 14517 skin vertices (0.34%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:abdomen-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "408 of 14517 skin vertices (2.81%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:legs-exposed:bed",
+   "status": "PASS",
+   "detail": "52 of 14517 skin vertices (0.36%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:legs-exposed:gown",
+   "status": "XFAIL",
+   "detail": "80 of 14517 skin vertices (0.55%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:legs-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:all-exposed:bed",
+   "status": "PASS",
+   "detail": "52 of 14517 skin vertices (0.36%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:all-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:sitting_dangling:all-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:covered:bed",
+   "status": "XFAIL",
+   "detail": "230 of 14517 skin vertices (1.58%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:covered:gown",
+   "status": "PASS",
+   "detail": "1 of 14517 skin vertices (0.01%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:covered:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:chest-exposed:bed",
+   "status": "XFAIL",
+   "detail": "230 of 14517 skin vertices (1.58%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:chest-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:chest-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:abdomen-exposed:bed",
+   "status": "XFAIL",
+   "detail": "230 of 14517 skin vertices (1.58%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:abdomen-exposed:gown",
+   "status": "PASS",
+   "detail": "1 of 14517 skin vertices (0.01%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:abdomen-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:legs-exposed:bed",
+   "status": "XFAIL",
+   "detail": "230 of 14517 skin vertices (1.58%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:legs-exposed:gown",
+   "status": "PASS",
+   "detail": "1 of 14517 skin vertices (0.01%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:legs-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:all-exposed:bed",
+   "status": "XFAIL",
+   "detail": "230 of 14517 skin vertices (1.58%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:all-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:left_lateral_decubitus:all-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:covered:bed",
+   "status": "XFAIL",
+   "detail": "142 of 14517 skin vertices (0.98%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:covered:gown",
+   "status": "XFAIL",
+   "detail": "92 of 14517 skin vertices (0.63%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:covered:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:chest-exposed:bed",
+   "status": "XFAIL",
+   "detail": "142 of 14517 skin vertices (0.98%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:chest-exposed:gown",
+   "status": "PASS",
+   "detail": "46 of 14517 skin vertices (0.32%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:chest-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:abdomen-exposed:bed",
+   "status": "XFAIL",
+   "detail": "142 of 14517 skin vertices (0.98%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:abdomen-exposed:gown",
+   "status": "PASS",
+   "detail": "46 of 14517 skin vertices (0.32%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:abdomen-exposed:sheet",
+   "status": "XFAIL",
+   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:legs-exposed:bed",
+   "status": "XFAIL",
+   "detail": "142 of 14517 skin vertices (0.98%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:legs-exposed:gown",
+   "status": "XFAIL",
+   "detail": "92 of 14517 skin vertices (0.63%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:legs-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:all-exposed:bed",
+   "status": "XFAIL",
+   "detail": "142 of 14517 skin vertices (0.98%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:all-exposed:gown",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  },
+  {
+   "id": "intersections:female:seated_leaning_forward:all-exposed:sheet",
+   "status": "PASS",
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+  }
+ ],
+ "rows": [
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "covered",
+   "kind": "bed",
+   "vertices": 198,
+   "percent": 1.364
+  },
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "covered",
+   "kind": "gown",
+   "vertices": 84,
+   "percent": 0.579
+  },
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "covered",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "chest-exposed",
+   "kind": "bed",
+   "vertices": 198,
+   "percent": 1.364
+  },
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "chest-exposed",
+   "kind": "gown",
+   "vertices": 14,
+   "percent": 0.096
+  },
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "chest-exposed",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "abdomen-exposed",
+   "kind": "bed",
+   "vertices": 198,
+   "percent": 1.364
+  },
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "abdomen-exposed",
+   "kind": "gown",
+   "vertices": 70,
+   "percent": 0.482
+  },
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "abdomen-exposed",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "legs-exposed",
+   "kind": "bed",
+   "vertices": 198,
+   "percent": 1.364
+  },
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "legs-exposed",
+   "kind": "gown",
+   "vertices": 84,
+   "percent": 0.579
+  },
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "legs-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "all-exposed",
+   "kind": "bed",
+   "vertices": 198,
+   "percent": 1.364
+  },
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "all-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "supine",
+   "drape": "all-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "covered",
+   "kind": "bed",
+   "vertices": 664,
+   "percent": 4.574
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "covered",
+   "kind": "gown",
+   "vertices": 86,
+   "percent": 0.592
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "covered",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "chest-exposed",
+   "kind": "bed",
+   "vertices": 664,
+   "percent": 4.574
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "chest-exposed",
+   "kind": "gown",
+   "vertices": 22,
+   "percent": 0.152
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "chest-exposed",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "abdomen-exposed",
+   "kind": "bed",
+   "vertices": 664,
+   "percent": 4.574
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "abdomen-exposed",
+   "kind": "gown",
+   "vertices": 64,
+   "percent": 0.441
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "abdomen-exposed",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "legs-exposed",
+   "kind": "bed",
+   "vertices": 664,
+   "percent": 4.574
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "legs-exposed",
+   "kind": "gown",
+   "vertices": 86,
+   "percent": 0.592
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "legs-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "all-exposed",
+   "kind": "bed",
+   "vertices": 664,
+   "percent": 4.574
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "all-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "reclined_30",
+   "drape": "all-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "covered",
+   "kind": "bed",
+   "vertices": 1184,
+   "percent": 8.156
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "covered",
+   "kind": "gown",
+   "vertices": 80,
+   "percent": 0.551
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "covered",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "chest-exposed",
+   "kind": "bed",
+   "vertices": 1184,
+   "percent": 8.156
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "chest-exposed",
+   "kind": "gown",
+   "vertices": 26,
+   "percent": 0.179
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "chest-exposed",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "abdomen-exposed",
+   "kind": "bed",
+   "vertices": 1184,
+   "percent": 8.156
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "abdomen-exposed",
+   "kind": "gown",
+   "vertices": 54,
+   "percent": 0.372
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "abdomen-exposed",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "legs-exposed",
+   "kind": "bed",
+   "vertices": 1184,
+   "percent": 8.156
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "legs-exposed",
+   "kind": "gown",
+   "vertices": 80,
+   "percent": 0.551
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "legs-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "all-exposed",
+   "kind": "bed",
+   "vertices": 1184,
+   "percent": 8.156
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "all-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "reclined_45",
+   "drape": "all-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "covered",
+   "kind": "bed",
+   "vertices": 248,
+   "percent": 1.708
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "covered",
+   "kind": "gown",
+   "vertices": 100,
+   "percent": 0.689
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "covered",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "chest-exposed",
+   "kind": "bed",
+   "vertices": 248,
+   "percent": 1.708
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "chest-exposed",
+   "kind": "gown",
+   "vertices": 44,
+   "percent": 0.303
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "chest-exposed",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "abdomen-exposed",
+   "kind": "bed",
+   "vertices": 248,
+   "percent": 1.708
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "abdomen-exposed",
+   "kind": "gown",
+   "vertices": 56,
+   "percent": 0.386
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "abdomen-exposed",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "legs-exposed",
+   "kind": "bed",
+   "vertices": 248,
+   "percent": 1.708
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "legs-exposed",
+   "kind": "gown",
+   "vertices": 100,
+   "percent": 0.689
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "legs-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "all-exposed",
+   "kind": "bed",
+   "vertices": 248,
+   "percent": 1.708
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "all-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "seated",
+   "drape": "all-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "covered",
+   "kind": "bed",
+   "vertices": 60,
+   "percent": 0.413
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "covered",
+   "kind": "gown",
+   "vertices": 100,
+   "percent": 0.689
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "covered",
+   "kind": "sheet",
+   "vertices": 390,
+   "percent": 2.687
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "chest-exposed",
+   "kind": "bed",
+   "vertices": 60,
+   "percent": 0.413
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "chest-exposed",
+   "kind": "gown",
+   "vertices": 44,
+   "percent": 0.303
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "chest-exposed",
+   "kind": "sheet",
+   "vertices": 390,
+   "percent": 2.687
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "abdomen-exposed",
+   "kind": "bed",
+   "vertices": 60,
+   "percent": 0.413
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "abdomen-exposed",
+   "kind": "gown",
+   "vertices": 56,
+   "percent": 0.386
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "abdomen-exposed",
+   "kind": "sheet",
+   "vertices": 390,
+   "percent": 2.687
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "legs-exposed",
+   "kind": "bed",
+   "vertices": 60,
+   "percent": 0.413
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "legs-exposed",
+   "kind": "gown",
+   "vertices": 100,
+   "percent": 0.689
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "legs-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "all-exposed",
+   "kind": "bed",
+   "vertices": 60,
+   "percent": 0.413
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "all-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "sitting_dangling",
+   "drape": "all-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "covered",
+   "kind": "bed",
+   "vertices": 277,
+   "percent": 1.908
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "covered",
+   "kind": "gown",
+   "vertices": 3,
+   "percent": 0.021
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "covered",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "chest-exposed",
+   "kind": "bed",
+   "vertices": 277,
+   "percent": 1.908
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "chest-exposed",
+   "kind": "gown",
+   "vertices": 1,
+   "percent": 0.007
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "chest-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "abdomen-exposed",
+   "kind": "bed",
+   "vertices": 277,
+   "percent": 1.908
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "abdomen-exposed",
+   "kind": "gown",
+   "vertices": 2,
+   "percent": 0.014
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "abdomen-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "legs-exposed",
+   "kind": "bed",
+   "vertices": 277,
+   "percent": 1.908
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "legs-exposed",
+   "kind": "gown",
+   "vertices": 3,
+   "percent": 0.021
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "legs-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "all-exposed",
+   "kind": "bed",
+   "vertices": 277,
+   "percent": 1.908
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "all-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "left_lateral_decubitus",
+   "drape": "all-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "covered",
+   "kind": "bed",
+   "vertices": 196,
+   "percent": 1.35
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "covered",
+   "kind": "gown",
+   "vertices": 58,
+   "percent": 0.4
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "covered",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "chest-exposed",
+   "kind": "bed",
+   "vertices": 196,
+   "percent": 1.35
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "chest-exposed",
+   "kind": "gown",
+   "vertices": 14,
+   "percent": 0.096
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "chest-exposed",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "abdomen-exposed",
+   "kind": "bed",
+   "vertices": 196,
+   "percent": 1.35
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "abdomen-exposed",
+   "kind": "gown",
+   "vertices": 44,
+   "percent": 0.303
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "abdomen-exposed",
+   "kind": "sheet",
+   "vertices": 2198,
+   "percent": 15.141
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "legs-exposed",
+   "kind": "bed",
+   "vertices": 196,
+   "percent": 1.35
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "legs-exposed",
+   "kind": "gown",
+   "vertices": 58,
+   "percent": 0.4
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "legs-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "all-exposed",
+   "kind": "bed",
+   "vertices": 196,
+   "percent": 1.35
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "all-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "drape": "all-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "covered",
+   "kind": "bed",
+   "vertices": 26,
+   "percent": 0.179
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "covered",
+   "kind": "gown",
+   "vertices": 1339,
+   "percent": 9.224
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "covered",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "chest-exposed",
+   "kind": "bed",
+   "vertices": 26,
+   "percent": 0.179
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "chest-exposed",
+   "kind": "gown",
+   "vertices": 1275,
+   "percent": 8.783
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "chest-exposed",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "abdomen-exposed",
+   "kind": "bed",
+   "vertices": 26,
+   "percent": 0.179
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "abdomen-exposed",
+   "kind": "gown",
+   "vertices": 64,
+   "percent": 0.441
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "abdomen-exposed",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "legs-exposed",
+   "kind": "bed",
+   "vertices": 26,
+   "percent": 0.179
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "legs-exposed",
+   "kind": "gown",
+   "vertices": 1339,
+   "percent": 9.224
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "legs-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "all-exposed",
+   "kind": "bed",
+   "vertices": 26,
+   "percent": 0.179
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "all-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "supine",
+   "drape": "all-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "covered",
+   "kind": "bed",
+   "vertices": 306,
+   "percent": 2.108
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "covered",
+   "kind": "gown",
+   "vertices": 823,
+   "percent": 5.669
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "covered",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "chest-exposed",
+   "kind": "bed",
+   "vertices": 306,
+   "percent": 2.108
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "chest-exposed",
+   "kind": "gown",
+   "vertices": 774,
+   "percent": 5.332
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "chest-exposed",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "abdomen-exposed",
+   "kind": "bed",
+   "vertices": 306,
+   "percent": 2.108
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "abdomen-exposed",
+   "kind": "gown",
+   "vertices": 49,
+   "percent": 0.338
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "abdomen-exposed",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "legs-exposed",
+   "kind": "bed",
+   "vertices": 306,
+   "percent": 2.108
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "legs-exposed",
+   "kind": "gown",
+   "vertices": 823,
+   "percent": 5.669
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "legs-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "all-exposed",
+   "kind": "bed",
+   "vertices": 306,
+   "percent": 2.108
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "all-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "reclined_30",
+   "drape": "all-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "covered",
+   "kind": "bed",
+   "vertices": 960,
+   "percent": 6.613
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "covered",
+   "kind": "gown",
+   "vertices": 122,
+   "percent": 0.84
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "covered",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "chest-exposed",
+   "kind": "bed",
+   "vertices": 960,
+   "percent": 6.613
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "chest-exposed",
+   "kind": "gown",
+   "vertices": 80,
+   "percent": 0.551
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "chest-exposed",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "abdomen-exposed",
+   "kind": "bed",
+   "vertices": 960,
+   "percent": 6.613
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "abdomen-exposed",
+   "kind": "gown",
+   "vertices": 42,
+   "percent": 0.289
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "abdomen-exposed",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "legs-exposed",
+   "kind": "bed",
+   "vertices": 960,
+   "percent": 6.613
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "legs-exposed",
+   "kind": "gown",
+   "vertices": 122,
+   "percent": 0.84
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "legs-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "all-exposed",
+   "kind": "bed",
+   "vertices": 960,
+   "percent": 6.613
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "all-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "reclined_45",
+   "drape": "all-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "covered",
+   "kind": "bed",
+   "vertices": 144,
+   "percent": 0.992
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "covered",
+   "kind": "gown",
+   "vertices": 68,
+   "percent": 0.468
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "covered",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "chest-exposed",
+   "kind": "bed",
+   "vertices": 144,
+   "percent": 0.992
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "chest-exposed",
+   "kind": "gown",
+   "vertices": 18,
+   "percent": 0.124
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "chest-exposed",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "abdomen-exposed",
+   "kind": "bed",
+   "vertices": 144,
+   "percent": 0.992
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "abdomen-exposed",
+   "kind": "gown",
+   "vertices": 50,
+   "percent": 0.344
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "abdomen-exposed",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "legs-exposed",
+   "kind": "bed",
+   "vertices": 144,
+   "percent": 0.992
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "legs-exposed",
+   "kind": "gown",
+   "vertices": 68,
+   "percent": 0.468
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "legs-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "all-exposed",
+   "kind": "bed",
+   "vertices": 144,
+   "percent": 0.992
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "all-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "seated",
+   "drape": "all-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "covered",
+   "kind": "bed",
+   "vertices": 52,
+   "percent": 0.358
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "covered",
+   "kind": "gown",
+   "vertices": 80,
+   "percent": 0.551
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "covered",
+   "kind": "sheet",
+   "vertices": 408,
+   "percent": 2.81
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "chest-exposed",
+   "kind": "bed",
+   "vertices": 52,
+   "percent": 0.358
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "chest-exposed",
+   "kind": "gown",
+   "vertices": 30,
+   "percent": 0.207
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "chest-exposed",
+   "kind": "sheet",
+   "vertices": 408,
+   "percent": 2.81
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "abdomen-exposed",
+   "kind": "bed",
+   "vertices": 52,
+   "percent": 0.358
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "abdomen-exposed",
+   "kind": "gown",
+   "vertices": 50,
+   "percent": 0.344
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "abdomen-exposed",
+   "kind": "sheet",
+   "vertices": 408,
+   "percent": 2.81
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "legs-exposed",
+   "kind": "bed",
+   "vertices": 52,
+   "percent": 0.358
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "legs-exposed",
+   "kind": "gown",
+   "vertices": 80,
+   "percent": 0.551
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "legs-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "all-exposed",
+   "kind": "bed",
+   "vertices": 52,
+   "percent": 0.358
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "all-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "sitting_dangling",
+   "drape": "all-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "covered",
+   "kind": "bed",
+   "vertices": 230,
+   "percent": 1.584
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "covered",
+   "kind": "gown",
+   "vertices": 1,
+   "percent": 0.007
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "covered",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "chest-exposed",
+   "kind": "bed",
+   "vertices": 230,
+   "percent": 1.584
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "chest-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "chest-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "abdomen-exposed",
+   "kind": "bed",
+   "vertices": 230,
+   "percent": 1.584
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "abdomen-exposed",
+   "kind": "gown",
+   "vertices": 1,
+   "percent": 0.007
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "abdomen-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "legs-exposed",
+   "kind": "bed",
+   "vertices": 230,
+   "percent": 1.584
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "legs-exposed",
+   "kind": "gown",
+   "vertices": 1,
+   "percent": 0.007
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "legs-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "all-exposed",
+   "kind": "bed",
+   "vertices": 230,
+   "percent": 1.584
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "all-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "left_lateral_decubitus",
+   "drape": "all-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "covered",
+   "kind": "bed",
+   "vertices": 142,
+   "percent": 0.978
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "covered",
+   "kind": "gown",
+   "vertices": 92,
+   "percent": 0.634
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "covered",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "chest-exposed",
+   "kind": "bed",
+   "vertices": 142,
+   "percent": 0.978
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "chest-exposed",
+   "kind": "gown",
+   "vertices": 46,
+   "percent": 0.317
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "chest-exposed",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "abdomen-exposed",
+   "kind": "bed",
+   "vertices": 142,
+   "percent": 0.978
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "abdomen-exposed",
+   "kind": "gown",
+   "vertices": 46,
+   "percent": 0.317
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "abdomen-exposed",
+   "kind": "sheet",
+   "vertices": 2266,
+   "percent": 15.609
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "legs-exposed",
+   "kind": "bed",
+   "vertices": 142,
+   "percent": 0.978
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "legs-exposed",
+   "kind": "gown",
+   "vertices": 92,
+   "percent": 0.634
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "legs-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "all-exposed",
+   "kind": "bed",
+   "vertices": 142,
+   "percent": 0.978
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "all-exposed",
+   "kind": "gown",
+   "vertices": 0,
+   "percent": 0
+  },
+  {
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "drape": "all-exposed",
+   "kind": "sheet",
+   "vertices": 0,
+   "percent": 0
+  }
+ ]
+}

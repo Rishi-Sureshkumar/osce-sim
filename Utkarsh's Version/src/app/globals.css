@@ -1,0 +1,420 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens — clinical palette.
+ * The app's components use Tailwind's slate / cyan / sky / emerald / amber / red scales; they are remapped here
+ * so every screen shares one palette: cool neutral greys, a clinical blue brand (cyan), a hygiene teal (sky),
+ * and calm status colours. Change a colour here, not in components.
+ */
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* crisp, not bubbly: tighter corners everywhere */
+  --radius-md: 0.3125rem;
+  --radius-lg: 0.375rem;
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.625rem;
+
+  /* neutrals */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f4f8;
+  --color-slate-200: #e3e8ef;
+  --color-slate-300: #cdd5df;
+  --color-slate-400: #97a3b6;
+  --color-slate-500: #677489;
+  --color-slate-600: #4b5565;
+  --color-slate-700: #364152;
+  --color-slate-800: #202939;
+  --color-slate-900: #121926;
+  --color-slate-950: #0d121c;
+
+  /* brand: clinical blue */
+  --color-cyan-50: #f0f5ff;
+  --color-cyan-100: #e0eafe;
+  --color-cyan-200: #c3d6fc;
+  --color-cyan-300: #95b6f8;
+  --color-cyan-400: #5e8ef0;
+  --color-cyan-500: #366be3;
+  --color-cyan-600: #2152c8;
+  --color-cyan-700: #1b43a3;
+  --color-cyan-800: #1b3a84;
+  --color-cyan-900: #1b336b;
+  --color-cyan-950: #132147;
+
+  /* hygiene / room controls: teal */
+  --color-sky-50: #effbf9;
+  --color-sky-100: #d5f4ef;
+  --color-sky-200: #ade8df;
+  --color-sky-300: #78d4c9;
+  --color-sky-400: #46b8ad;
+  --color-sky-500: #2a9d93;
+  --color-sky-600: #1f7e77;
+  --color-sky-700: #1d6561;
+  --color-sky-800: #1b514f;
+  --color-sky-900: #1a4442;
+  --color-sky-950: #0a2827;
+
+  /* success */
+  --color-emerald-50: #ecfdf3;
+  --color-emerald-100: #d1fadf;
+  --color-emerald-200: #a6f0c6;
+  --color-emerald-300: #6ce0a1;
+  --color-emerald-400: #32c47a;
+  --color-emerald-500: #12a35f;
+  --color-emerald-600: #08874e;
+  --color-emerald-700: #076c41;
+  --color-emerald-800: #085637;
+  --color-emerald-900: #07472e;
+  --color-emerald-950: #032918;
+
+  /* warning / abnormal */
+  --color-amber-50: #fffaeb;
+  --color-amber-100: #fef0c7;
+  --color-amber-200: #fedf89;
+  --color-amber-300: #fec84b;
+  --color-amber-400: #fdb022;
+  --color-amber-500: #f79009;
+  --color-amber-600: #dc6803;
+  --color-amber-700: #b54708;
+  --color-amber-800: #93370d;
+  --color-amber-900: #7a2e0e;
+  --color-amber-950: #4e1d09;
+
+  /* error / critical */
+  --color-red-50: #fef3f2;
+  --color-red-100: #fee4e2;
+  --color-red-200: #fecdca;
+  --color-red-300: #fda29b;
+  --color-red-400: #f97066;
+  --color-red-500: #f04438;
+  --color-red-600: #d92d20;
+  --color-red-700: #b42318;
+  --color-red-800: #912018;
+  --color-red-900: #7a271a;
+  --color-red-950: #55160c;
+
+  /* semantic aliases */
+  --color-ink: #121926;
+  --color-muted: #677489;
+  --color-brand: #1b43a3;
+  --color-brand-soft: #e0eafe;
+  --color-abnormal: #b54708;
+  --color-canvas: #f6f8fb;
+  --color-line: #e3e8ef;
+
+  --shadow-card: 0 1px 2px 0 rgb(16 24 40 / 0.04), 0 1px 3px 0 rgb(16 24 40 / 0.06);
+  --shadow-raised: 0 4px 8px -2px rgb(16 24 40 / 0.08), 0 2px 4px -2px rgb(16 24 40 / 0.05);
+  --shadow-pop: 0 12px 24px -6px rgb(16 24 40 / 0.14), 0 4px 8px -4px rgb(16 24 40 / 0.06);
+
+  --radius-card: 0.5rem;
+  --surface: #ffffff;
+}
+
+html,
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-feature-settings: "ss01";
+  letter-spacing: -0.006em;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-slate-300) transparent;
+}
+
+::selection {
+  background: var(--color-cyan-100);
+  color: var(--color-cyan-900);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cyan-500);
+  outline-offset: 2px;
+}
+
+/* Shared building blocks. Prefer these over ad hoc utility strings for new UI. */
+@layer components {
+  .card {
+    border: 1px solid var(--color-line);
+    background: var(--surface);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+  .eyebrow {
+    font-size: 0.6875rem;
+    line-height: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-slate-500);
+  }
+  .panel-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-slate-800);
+  }
+  .btn {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    transition:
+      background-color 120ms ease,
+      border-color 120ms ease,
+      color 120ms ease,
+      box-shadow 120ms ease;
+    white-space: nowrap;
+  }
+  .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+  .btn-primary {
+    background: var(--color-cyan-700);
+    color: #fff;
+    box-shadow: 0 1px 2px rgb(16 24 40 / 0.08);
+  }
+  .btn-primary:not(:disabled):hover {
+    background: var(--color-cyan-800);
+  }
+  /* the slash: a skewed light bar sweeps across primary buttons on hover */
+  .btn-primary::after {
+    content: "";
+    position: absolute;
+    inset: -2px auto -2px 0;
+    width: 28%;
+    background: rgb(255 255 255 / 0.2);
+    transform: translateX(-160%) skewX(-22deg);
+    transition: transform 520ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .btn-primary:not(:disabled):hover::after {
+    transform: translateX(460%) skewX(-22deg);
+  }
+  .btn:not(:disabled):active {
+    transform: translateY(0.5px);
+  }
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--color-slate-700);
+    border: 1px solid var(--color-slate-300);
+    box-shadow: 0 1px 2px rgb(16 24 40 / 0.05);
+  }
+  .btn-secondary:not(:disabled):hover {
+    background: var(--color-slate-50);
+    color: var(--color-slate-900);
+  }
+  .btn-dark {
+    background: var(--color-slate-900);
+    color: #fff;
+  }
+  .btn-dark:not(:disabled):hover {
+    background: var(--color-slate-800);
+  }
+  .btn-ghost {
+    color: var(--color-slate-600);
+  }
+  .btn-ghost:not(:disabled):hover {
+    background: var(--color-slate-100);
+    color: var(--color-slate-900);
+  }
+  .btn-sm {
+    padding: 0.3125rem 0.625rem;
+    font-size: 0.8125rem;
+    border-radius: 0.3125rem;
+  }
+  .input {
+    width: 100%;
+    border-radius: 0.375rem;
+    border: 1px solid var(--color-slate-300);
+    background: var(--surface);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--color-slate-900);
+    box-shadow: 0 1px 2px rgb(16 24 40 / 0.04);
+    transition:
+      border-color 120ms ease,
+      box-shadow 120ms ease;
+  }
+  .input::placeholder {
+    color: var(--color-slate-400);
+  }
+  .input:focus {
+    outline: none;
+    border-color: var(--color-cyan-500);
+    box-shadow: 0 0 0 3px rgb(54 107 227 / 0.16);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 0.25rem;
+    padding: 0.0625rem 0.4375rem;
+    font-size: 0.6875rem;
+    line-height: 1.125rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .kbd-num {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@keyframes pulse-region {
+  0%,
+  100% {
+    fill-opacity: 0.35;
+  }
+  50% {
+    fill-opacity: 0.8;
+  }
+}
+@keyframes radar-grow {
+  from {
+    transform: scale(0.15);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.radar-grow {
+  animation: radar-grow 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary::after {
+    display: none;
+  }
+  .radar-grow {
+    animation: none;
+  }
+}
+
+/*
+ * Dark mode (opt-in via the header switch; html.dark). The same Tailwind scales are remapped:
+ * neutrals flip, 50–300 become dark tints, 500–700 stay saturated (buttons keep white text),
+ * 800–950 become light (text on tints).
+ */
+html.dark {
+  color-scheme: dark;
+  --surface: #111824;
+  --color-canvas: #0a0f17;
+  --color-line: #263044;
+  --color-ink: #e9eef5;
+  --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-raised: 0 4px 10px -2px rgb(0 0 0 / 0.5);
+  --shadow-pop: 0 14px 28px -8px rgb(0 0 0 / 0.65);
+
+  --color-slate-50: #151d2a;
+  --color-slate-100: #1b2433;
+  --color-slate-200: #263044;
+  --color-slate-300: #354157;
+  --color-slate-400: #5d6a7f;
+  --color-slate-500: #8794a8;
+  --color-slate-600: #a6b0c0;
+  --color-slate-700: #c3cbd8;
+  --color-slate-800: #dce2eb;
+  --color-slate-900: #edf1f6;
+  --color-slate-950: #f7f9fc;
+
+  --color-cyan-50: #111a2e;
+  --color-cyan-100: #15213f;
+  --color-cyan-200: #1d3060;
+  --color-cyan-300: #284794;
+  --color-cyan-400: #4f7de6;
+  --color-cyan-500: #6690ee;
+  --color-cyan-600: #4a7cec;
+  --color-cyan-700: #3d6ee3;
+  --color-cyan-800: #a8c0f7;
+  --color-cyan-900: #cad9fb;
+  --color-cyan-950: #e6eefe;
+
+  --color-sky-50: #0c1f1e;
+  --color-sky-100: #0f2a28;
+  --color-sky-200: #15403c;
+  --color-sky-300: #1d5d57;
+  --color-sky-400: #2f938a;
+  --color-sky-500: #36ada2;
+  --color-sky-600: #3ab0a5;
+  --color-sky-700: #4fc2b7;
+  --color-sky-800: #93e0d8;
+  --color-sky-900: #bdeee8;
+  --color-sky-950: #def7f4;
+
+  --color-emerald-50: #0c1f17;
+  --color-emerald-100: #10291e;
+  --color-emerald-200: #17402d;
+  --color-emerald-300: #1f5c40;
+  --color-emerald-400: #2f8a5d;
+  --color-emerald-500: #2fae6f;
+  --color-emerald-600: #23955c;
+  --color-emerald-700: #3fb57a;
+  --color-emerald-800: #8fe3b7;
+  --color-emerald-900: #b9f0d2;
+  --color-emerald-950: #dcf8e9;
+
+  --color-amber-50: #24190a;
+  --color-amber-100: #31220b;
+  --color-amber-200: #4a320f;
+  --color-amber-300: #6b4813;
+  --color-amber-400: #c47f12;
+  --color-amber-500: #f0a020;
+  --color-amber-600: #d98614;
+  --color-amber-700: #f2a93b;
+  --color-amber-800: #f8c977;
+  --color-amber-900: #fbdba3;
+  --color-amber-950: #fdeccc;
+
+  --color-red-50: #281213;
+  --color-red-100: #351617;
+  --color-red-200: #521e1d;
+  --color-red-300: #7a2a27;
+  --color-red-400: #e0605a;
+  --color-red-500: #ef5148;
+  --color-red-600: #dc4038;
+  --color-red-700: #f26d65;
+  --color-red-800: #f8a29c;
+  --color-red-900: #fbc4c0;
+  --color-red-950: #fde2e0;
+}
+html.dark .bg-white {
+  background-color: var(--surface);
+}
+html.dark :is(.bg-white\/75, .bg-white\/90, .bg-white\/95) {
+  background-color: rgb(17 24 36 / 0.92);
+}
+/* "inverse" chips (exam clock, exam badge, dark buttons) stay dark with white text */
+html.dark :is(.bg-slate-900, .bg-slate-800).text-white,
+html.dark .btn-dark {
+  background-color: #2a3447;
+}
+html.dark .bg-slate-900\/40 {
+  background-color: rgb(0 0 0 / 0.6);
+}
+html.dark .bg-slate-900\/80 {
+  background-color: rgb(10 15 23 / 0.85);
+}
+html.dark .hover\:bg-white:hover {
+  background-color: var(--color-slate-100);
+}
+
+.region-performing {
+  animation: pulse-region 0.7s ease-in-out infinite;
+}

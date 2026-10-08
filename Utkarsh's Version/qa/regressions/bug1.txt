@@ -1,0 +1,48 @@
+# Regression proof: bug1
+
+the penlight hit area was far too large: the eye target sat on the lids 1.4–1.9 cm from the pupil with a 1.5 cm tolerance, and only one eye could be lit per click (no sweep, no swinging-light test)
+
+test:      tests/regressions/bug1-penlight.test.ts
+command:   npx vitest run tests/regressions/bug1-penlight.test.ts
+old code:  b4e6d58 (git worktree)  → exit 1 (FAILS, as it must)
+new code:  b4e6d58 + working tree     → exit 0 (passes)
+result:    PROVEN
+date:      2026-10-08T03:27:52.243Z
+
+## Old code: why it fails
+```
+ ❯ tests/regressions/bug1-penlight.test.ts (7 tests | 5 failed) 13ms
+   × bug 1: the penlight lands on the pupil > male: each eye target is the pupil, in every position 5ms
+   × bug 1: the penlight lands on the pupil > female: each eye target is the pupil, in every position 1ms
+   × bug 1: the penlight lands on the pupil > a click on the eyeball resolves to that eye, measured at the eye (not the socket behind it) 2ms
+   × bug 1: the penlight lands on the pupil > sweeping the light across both eyes records both 1ms
+   × bug 1: the penlight lands on the pupil > swinging the light from one eye to the other and back records the swinging-light test 1ms
+ Test Files  1 failed (1)
+      Tests  5 failed | 2 passed (7)
+ FAIL  tests/regressions/bug1-penlight.test.ts > bug 1: the penlight lands on the pupil > male: each eye target is the pupil, in every position
+AssertionError: supine left: expected 1.4020698984002293 to be less than 0.3
+     43|         expect(distance(anchorWorldPoints("eye_left", pose)[0]!, pupil…
+     44|         expect(distance(anchorWorldPoints("eye_right", pose)[0]!, pupi…
+ FAIL  tests/regressions/bug1-penlight.test.ts > bug 1: the penlight lands on the pupil > female: each eye target is the pupil, in every position
+AssertionError: supine left: expected 1.8816216410320163 to be less than 0.3
+     43|         expect(distance(anchorWorldPoints("eye_left", pose)[0]!, pupil…
+     44|         expect(distance(anchorWorldPoints("eye_right", pose)[0]!, pupi…
+ FAIL  tests/regressions/bug1-penlight.test.ts > bug 1: the penlight lands on the pupil > a click on the eyeball resolves to that eye, measured at the eye (not the socket behind it)
+AssertionError: expected 'face' to be 'eye_right' // Object.is equality
+Expected: "eye_right"
+Received: "face"
+     66|     expect(h.regionId).toBe("eye_right");
+     67|     expect(distance(h.point, p)).toBeLessThan(0.001);
+ FAIL  tests/regressions/bug1-penlight.test.ts > bug 1: the penlight lands on the pupil > sweeping the light across both eyes records both
+TypeError: (0 , penlightSweeper) is not a function
+     76|     expect(events.map((e) => `${e.maneuverId}@${e.regionId}`)).toEqual…
+ FAIL  tests/regressions/bug1-penlight.test.ts > bug 1: the penlight lands on the pupil > swinging the light from one eye to the other and back records the swinging-light test
+TypeError: (0 , penlightSweeper) is not a function
+     85|     expect(events.map((e) => `${e.maneuverId}@${e.regionId}`)).toEqual…
+```
+
+## New code
+```
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+```

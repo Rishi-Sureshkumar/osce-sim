@@ -1,0 +1,25 @@
+node_modules/
+.next/
+out/
+.env
+.env.local
+.env*.local
+.data/
+test-results/
+playwright-report/
+*.tsbuildinfo
+next-env.d.ts
+.vercel
+# Source documents are not yet copyright-cleared: keep them local only.
+source/*
+!source/README.md
+.cache/
+
+# QA screenshots (the manifest and qa/REVIEW.md are committed)
+qa/screens/**/*.png
+
+# language model + wasm runtime (npm run lang:vendor)
+public/lang/
+
+# agent worktrees (workflows)
+.claude/worktrees/

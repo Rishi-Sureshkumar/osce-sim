@@ -1,0 +1,2583 @@
+{
+  "entries": [
+    {
+      "id": "ros.constitutional.fever",
+      "topic": "ros.constitutional",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any fevers?",
+        "paraphrases": [
+          "Any fevers?",
+          "Any fever or temperature?",
+          "Have you had a temperature?",
+          "Have you been running a temperature?",
+          "Have you felt feverish at all?",
+          "Have you had a high temperature recently?",
+          "Have you been feeling hot, like you've got a fever?"
+        ],
+        "keywords": ["fever", "fevers", "feverish", "a temperature", "high temperature"],
+        "topics": ["ros.constitutional"]
+      }
+    },
+    {
+      "id": "ros.constitutional.chills",
+      "topic": "ros.constitutional",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any chills or shivers?",
+        "paraphrases": [
+          "Any chills?",
+          "Any shivering?",
+          "Have you been shivery?",
+          "Have you had any rigors?",
+          "Have you been shaking with cold?",
+          "Have you felt cold and shivery even when it's warm?"
+        ],
+        "keywords": ["chills", "shaking chills", "shivering", "shivery", "shivers"],
+        "topics": ["ros.constitutional"]
+      }
+    },
+    {
+      "id": "ros.constitutional.night_sweats",
+      "topic": "ros.constitutional",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any night sweats?",
+        "paraphrases": [
+          "Any night sweats?",
+          "Do you wake up drenched in sweat?",
+          "Have you been sweaty at night?",
+          "Do you have to change your sheets because of sweating?",
+          "Do your pyjamas get soaked with sweat at night?",
+          "Any sweats at night?"
+        ],
+        "keywords": ["night sweats", "drenched in sweat", "soaking wet", "drenching sweats"],
+        "topics": ["ros.constitutional"]
+      }
+    },
+    {
+      "id": "ros.constitutional.weight_loss",
+      "topic": "ros.constitutional",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you lost any weight recently?",
+        "paraphrases": [
+          "Any weight loss?",
+          "Have you been losing weight?",
+          "Have you lost weight without trying?",
+          "Any unintentional weight loss?",
+          "Have your clothes been getting looser?",
+          "Has your weight dropped lately?",
+          "Have you noticed you're getting thinner?"
+        ],
+        "keywords": ["weight loss", "lost weight", "losing weight", "getting thinner", "clothes looser"],
+        "topics": ["ros.constitutional"]
+      }
+    },
+    {
+      "id": "ros.constitutional.fatigue",
+      "topic": "ros.constitutional",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you been feeling more tired lately?",
+        "paraphrases": [
+          "Any fatigue?",
+          "Have you had less energy than normal?",
+          "Do you feel exhausted all the time?",
+          "Have you been feeling run down?",
+          "Do you get tired easily?",
+          "Have you been feeling drained?",
+          "Any lethargy?"
+        ],
+        "keywords": ["tired", "tiredness", "less energy", "run down", "drained"],
+        "topics": ["ros.constitutional"]
+      }
+    },
+    {
+      "id": "ros.constitutional.recent_illness",
+      "topic": "ros.constitutional",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had a cold or flu recently?",
+        "paraphrases": [
+          "Any recent colds or chest infections?",
+          "Have you had any recent infections?",
+          "Have you had a virus lately?",
+          "Any flu-like symptoms recently?",
+          "Have you had covid recently?",
+          "Have you been ill with an infection in the last few weeks?"
+        ],
+        "keywords": ["a cold", "flu", "chest infection", "recent infection", "virus", "flu like", "covid"],
+        "topics": ["ros.constitutional"]
+      }
+    },
+    {
+      "id": "ros.constitutional.sick_contacts",
+      "topic": "ros.constitutional",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Has anyone close to you been ill lately?",
+        "paraphrases": [
+          "Any sick contacts?",
+          "Has anyone at home been ill?",
+          "Has anyone you've been in contact with had a cough or cold?",
+          "Is anyone you live with sick at the moment?",
+          "Have you been around anyone with an infection?",
+          "Has anyone at work been off sick?"
+        ],
+        "keywords": ["sick contacts", "anyone around you", "been around anyone", "off sick", "in contact with"],
+        "topics": ["ros.constitutional"]
+      }
+    },
+    {
+      "id": "ros.heent.eye_pain",
+      "topic": "ros.heent",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any pain or redness in your eyes?",
+        "paraphrases": [
+          "Any red eyes?",
+          "Any eye pain?",
+          "Have your eyes been sore?",
+          "Any discharge from your eyes?",
+          "Have your eyes been watering?",
+          "Have your eyes been itchy or gritty?"
+        ],
+        "keywords": ["eye pain", "red eyes", "sore eyes", "eyes watering", "gritty", "eyes"],
+        "topics": ["ros.heent"]
+      }
+    },
+    {
+      "id": "ros.heent.hearing",
+      "topic": "ros.heent",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed any change in your hearing?",
+        "paraphrases": [
+          "Any hearing loss?",
+          "Has your hearing got worse?",
+          "Are you having trouble hearing?",
+          "Do you struggle to hear people talking?",
+          "Any problems with your hearing?"
+        ],
+        "keywords": ["hearing", "hearing loss", "trouble hearing"],
+        "topics": ["ros.heent"]
+      }
+    },
+    {
+      "id": "ros.heent.ear_pain",
+      "topic": "ros.heent",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any ear pain?",
+        "paraphrases": [
+          "Any earache?",
+          "Do your ears hurt?",
+          "Any discharge from your ears?",
+          "Have your ears felt blocked?",
+          "Any pain in your ears?"
+        ],
+        "keywords": ["ear pain", "ears hurt", "blocked ears", "ear discharge", "ears"],
+        "topics": ["ros.heent"]
+      }
+    },
+    {
+      "id": "ros.heent.tinnitus",
+      "topic": "ros.heent",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any ringing in your ears?",
+        "paraphrases": [
+          "Any tinnitus?",
+          "Do you hear buzzing or ringing noises?",
+          "Any whooshing sound in your ears?",
+          "Do your ears ring?",
+          "Do you hear noises in your ears that other people can't?"
+        ],
+        "keywords": ["ringing", "buzzing", "ears ring", "whooshing", "in the ears"],
+        "topics": ["ros.heent"]
+      }
+    },
+    {
+      "id": "ros.heent.nose",
+      "topic": "ros.heent",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had a runny or blocked nose?",
+        "paraphrases": [
+          "Any runny nose?",
+          "Any nasal congestion?",
+          "Is your nose stuffy?",
+          "Have you been sneezing a lot?",
+          "Has your nose been streaming?"
+        ],
+        "keywords": ["runny nose", "blocked nose", "stuffy", "sneezing", "streaming"],
+        "topics": ["ros.heent"]
+      }
+    },
+    {
+      "id": "ros.heent.nosebleeds",
+      "topic": "ros.heent",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any nosebleeds?",
+        "paraphrases": [
+          "Any nosebleeds?",
+          "Does your nose ever bleed?",
+          "Have you had any bleeding from your nose?",
+          "Do you get nosebleeds often?",
+          "Has your nose been bleeding?"
+        ],
+        "keywords": ["nosebleeds", "nosebleed", "nose bleeding", "nose ever bleed"],
+        "topics": ["ros.heent"]
+      }
+    },
+    {
+      "id": "ros.heent.sore_throat",
+      "topic": "ros.heent",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had a sore throat?",
+        "paraphrases": [
+          "Any sore throat?",
+          "Is your throat sore?",
+          "Does it hurt to swallow?",
+          "Any pain in your throat?",
+          "Have you had a scratchy throat?"
+        ],
+        "keywords": ["sore throat", "throat sore", "hurt to swallow", "scratchy throat", "pain when swallowing"],
+        "topics": ["ros.heent"]
+      }
+    },
+    {
+      "id": "ros.heent.mouth_ulcers",
+      "topic": "ros.heent",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any mouth ulcers?",
+        "paraphrases": [
+          "Any ulcers in your mouth?",
+          "Any sores in your mouth?",
+          "Any canker sores?",
+          "Any painful spots on your tongue?",
+          "Have you had any problems with your mouth?"
+        ],
+        "keywords": ["mouth ulcers", "mouth sores", "in your mouth"],
+        "topics": ["ros.heent"]
+      }
+    },
+    {
+      "id": "ros.heent.hoarse_voice",
+      "topic": "ros.heent",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Has your voice become hoarse?",
+        "paraphrases": [
+          "Any hoarseness?",
+          "Has your voice been croaky?",
+          "Have you lost your voice?",
+          "Has your voice sounded different?",
+          "Any change in your voice?"
+        ],
+        "keywords": ["hoarse voice", "hoarse", "croaky", "lost your voice"],
+        "topics": ["ros.heent"]
+      }
+    },
+    {
+      "id": "ros.cardiac.chest_pain",
+      "topic": "ros.cardiac",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any chest pain?",
+        "paraphrases": [
+          "Any chest pain?",
+          "Any pain in your chest?",
+          "Have you had any chest tightness or pressure?",
+          "Does your chest ever feel tight or heavy?",
+          "Any discomfort in your chest?",
+          "Have you had any angina?",
+          "Do you get chest pain when you exert yourself?"
+        ],
+        "keywords": ["chest pain", "chest tightness", "chest pressure", "chest discomfort", "angina"],
+        "topics": ["ros.cardiac"]
+      }
+    },
+    {
+      "id": "ros.cardiac.palpitations",
+      "topic": "ros.cardiac",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any palpitations?",
+        "paraphrases": [
+          "Any palpitations?",
+          "Have you noticed your heart racing?",
+          "Does your heart ever skip a beat?",
+          "Have you felt your heart pounding or fluttering?",
+          "Have you been aware of your heartbeat?",
+          "Any episodes of a fast or irregular heartbeat?",
+          "Does your heart ever feel like it's beating out of your chest?"
+        ],
+        "keywords": ["palpitations", "palpitation", "heart racing", "racing heart", "skip a beat", "heart pounding", "fluttering", "irregular heartbeat"],
+        "topics": ["ros.cardiac"]
+      }
+    },
+    {
+      "id": "ros.cardiac.fainting",
+      "topic": "ros.cardiac",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any fainting episodes?",
+        "paraphrases": [
+          "Have you passed out at all?",
+          "Have you ever lost consciousness?",
+          "Any fainting?",
+          "Have you collapsed recently?",
+          "Have you felt like you were going to faint?",
+          "Have you ever fainted?",
+          "Any blackouts?"
+        ],
+        "keywords": ["fainting", "fainted", "faint", "loss of consciousness", "lost consciousness", "collapsed"],
+        "topics": ["ros.cardiac"]
+      }
+    },
+    {
+      "id": "ros.cardiac.leg_swelling",
+      "topic": "ros.cardiac",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed any swelling in your legs or ankles?",
+        "paraphrases": [
+          "Any ankle swelling?",
+          "Have your ankles been swollen?",
+          "Any leg swelling?",
+          "Have your feet or legs been puffy?",
+          "Have your shoes been feeling tight?",
+          "Do your socks leave marks on your legs?",
+          "Have you noticed fluid building up in your legs?"
+        ],
+        "keywords": ["ankle swelling", "leg swelling", "foot swelling", "ankles swollen", "socks leave marks"],
+        "topics": ["ros.cardiac"]
+      }
+    },
+    {
+      "id": "ros.cardiac.unilateral_leg_swelling",
+      "topic": "ros.cardiac",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Is one leg more swollen than the other?",
+        "paraphrases": [
+          "Any pain or swelling in one calf?",
+          "Has one of your legs been red, hot or swollen?",
+          "Is the swelling just on one side?",
+          "Any tenderness in one of your calves?",
+          "Has one calf been bigger than the other?"
+        ],
+        "keywords": ["one calf", "one leg", "other leg"],
+        "topics": ["ros.cardiac"]
+      }
+    },
+    {
+      "id": "ros.cardiac.orthopnea",
+      "topic": "ros.cardiac",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you get short of breath when you lie flat?",
+        "paraphrases": [
+          "Can you lie flat without getting breathless?",
+          "Do you need to prop yourself up on pillows to breathe at night?",
+          "Is your breathing worse lying down?",
+          "Any orthopnoea?",
+          "Do you have to sleep sitting up?",
+          "Have you had to sleep in a chair because of your breathing?",
+          "Do you need extra pillows to breathe at night?"
+        ],
+        "keywords": ["prop yourself up", "sleep sitting up", "extra pillows", "sleep upright"],
+        "topics": ["ros.cardiac"]
+      }
+    },
+    {
+      "id": "ros.cardiac.pnd",
+      "topic": "ros.cardiac",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you wake up at night short of breath?",
+        "paraphrases": [
+          "Any PND?",
+          "Do you ever wake up gasping for air?",
+          "Have you woken up in the night struggling to breathe?",
+          "Do you wake up at night needing to sit up to catch your breath?",
+          "Have you been waking up breathless in the night?"
+        ],
+        "keywords": ["wake up gasping", "woken up gasping", "gasping for air"],
+        "topics": ["ros.cardiac"]
+      }
+    },
+    {
+      "id": "ros.cardiac.claudication",
+      "topic": "ros.cardiac",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you get pain in your calves when you walk?",
+        "paraphrases": [
+          "Any calf pain when walking?",
+          "Do your legs cramp up when you walk and ease off when you rest?",
+          "Do you get leg pain on walking that goes away with rest?",
+          "Any claudication?",
+          "Do your calves ache after walking a short distance?"
+        ],
+        "keywords": ["calves ache", "cramp up", "calf pain"],
+        "topics": ["ros.cardiac"]
+      }
+    },
+    {
+      "id": "ros.respiratory.short_of_breath",
+      "topic": "ros.respiratory",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you been short of breath?",
+        "paraphrases": [
+          "Any shortness of breath?",
+          "Do you get breathless?",
+          "Have you had any trouble breathing?",
+          "Do you find it hard to catch your breath?",
+          "Do you get out of breath easily?",
+          "Are you breathless at rest?",
+          "Have you been struggling to breathe?"
+        ],
+        "keywords": ["short of breath", "catch your breath", "hard to breathe"],
+        "topics": ["ros.respiratory"]
+      }
+    },
+    {
+      "id": "ros.respiratory.exertional",
+      "topic": "ros.respiratory",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you get short of breath when you exert yourself?",
+        "paraphrases": [
+          "Any shortness of breath on exertion?",
+          "Do you get breathless walking up stairs?",
+          "Do you get out of breath when you walk?",
+          "Do you get winded with exercise?",
+          "Has your exercise tolerance changed?",
+          "Do you have to stop to catch your breath when walking?"
+        ],
+        "keywords": ["exert yourself", "exercise tolerance", "on exertion"],
+        "topics": ["ros.respiratory"]
+      }
+    },
+    {
+      "id": "ros.respiratory.cough",
+      "topic": "ros.respiratory",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had a cough?",
+        "paraphrases": [
+          "Any cough?",
+          "Have you been coughing?",
+          "Do you have a cough at the moment?",
+          "Have you noticed a new cough?",
+          "Any coughing fits?",
+          "Has a cough been troubling you?"
+        ],
+        "keywords": ["cough", "coughing", "coughing episodes"],
+        "topics": ["ros.respiratory"]
+      }
+    },
+    {
+      "id": "ros.respiratory.sputum",
+      "topic": "ros.respiratory",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Are you bringing up any phlegm?",
+        "paraphrases": [
+          "Any sputum?",
+          "Is your cough productive?",
+          "Are you coughing anything up?",
+          "Have you been coughing up mucus?",
+          "Any green or yellow phlegm?",
+          "Is it a productive cough?"
+        ],
+        "keywords": ["phlegm", "bringing up", "coughing anything up", "mucus", "productive", "cough with phlegm"],
+        "topics": ["ros.respiratory"]
+      }
+    },
+    {
+      "id": "ros.respiratory.hemoptysis",
+      "topic": "ros.respiratory",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you coughed up any blood?",
+        "paraphrases": [
+          "Any haemoptysis?",
+          "Have you noticed blood in your phlegm?",
+          "Any blood when you cough?",
+          "Have you been coughing up blood?",
+          "Is there ever blood in what you cough up?"
+        ],
+        "keywords": ["coughing up blood", "coughed up blood", "cough up"],
+        "topics": ["ros.respiratory"]
+      }
+    },
+    {
+      "id": "ros.respiratory.wheeze",
+      "topic": "ros.respiratory",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed any wheezing?",
+        "paraphrases": [
+          "Any wheeze?",
+          "Do you get wheezy?",
+          "Any whistling sound when you breathe?",
+          "Does your chest sound whistly?",
+          "Have you had any noisy breathing?"
+        ],
+        "keywords": ["wheezing", "wheeze", "wheezes", "whistling", "whistly", "noisy breathing"],
+        "topics": ["ros.respiratory"]
+      }
+    },
+    {
+      "id": "ros.respiratory.pleuritic",
+      "topic": "ros.respiratory",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Does it hurt when you take a deep breath?",
+        "paraphrases": [
+          "Any pain when you breathe in?",
+          "Do you get a sharp pain in your chest when breathing in?",
+          "Is there pain on deep breathing?",
+          "Any pleuritic chest pain?",
+          "Does breathing in make your chest hurt?"
+        ],
+        "keywords": ["breathing in", "deep breathing", "sharp pain"],
+        "topics": ["ros.respiratory"]
+      }
+    },
+    {
+      "id": "ros.respiratory.snoring",
+      "topic": "ros.respiratory",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Has anyone said you snore or stop breathing in your sleep?",
+        "paraphrases": [
+          "Do you snore?",
+          "Has anyone told you that you snore loudly?",
+          "Has anyone noticed you stop breathing while you sleep?",
+          "Any sleep apnoea?",
+          "Do you gasp or snort in your sleep?"
+        ],
+        "keywords": ["snore", "snoring", "sleep apnea", "stop breathing", "snort"],
+        "topics": ["ros.respiratory"]
+      }
+    },
+    {
+      "id": "ros.gi.appetite",
+      "topic": "ros.gi",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you lost your appetite?",
+        "paraphrases": [
+          "Any loss of appetite?",
+          "Have you gone off your food?",
+          "Are you eating less than usual?",
+          "Has your appetite gone down?",
+          "Have you not felt like eating?"
+        ],
+        "keywords": ["loss of appetite", "lost your appetite", "eating less", "off your food"],
+        "topics": ["ros.gi"]
+      }
+    },
+    {
+      "id": "ros.gi.nausea",
+      "topic": "ros.gi",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you felt nauseous?",
+        "paraphrases": [
+          "Any nausea?",
+          "Have you been feeling sick to your stomach?",
+          "Do you feel queasy?",
+          "Have you felt like you might be sick?",
+          "Have you had any nausea at all?"
+        ],
+        "keywords": ["nausea", "nauseous", "feel sick"],
+        "topics": ["ros.gi"]
+      }
+    },
+    {
+      "id": "ros.gi.vomiting",
+      "topic": "ros.gi",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you been vomiting?",
+        "paraphrases": [
+          "Any vomiting?",
+          "Have you been sick at all?",
+          "Have you thrown up?",
+          "Have you vomited recently?",
+          "Have you been throwing up?"
+        ],
+        "keywords": ["vomiting", "vomited", "vomit", "been sick"],
+        "topics": ["ros.gi"]
+      }
+    },
+    {
+      "id": "ros.gi.hematemesis",
+      "topic": "ros.gi",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you vomited any blood?",
+        "paraphrases": [
+          "Any blood in your vomit?",
+          "Have you thrown up blood?",
+          "Any haematemesis?",
+          "Has your vomit looked like coffee grounds?",
+          "Have you been sick with blood in it?"
+        ],
+        "keywords": ["vomiting blood", "vomited any blood", "coffee grounds", "sick with blood"],
+        "topics": ["ros.gi"]
+      }
+    },
+    {
+      "id": "ros.gi.diarrhea",
+      "topic": "ros.gi",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any diarrhoea?",
+        "paraphrases": [
+          "Any diarrhea?",
+          "Have your stools been loose or watery?",
+          "Have you had the runs?",
+          "Any loose bowel movements?",
+          "Have you had runny poo?",
+          "Have you been rushing to the toilet with loose stools?"
+        ],
+        "keywords": ["diarrhea", "loose bowel movements", "watery stool", "loose stool"],
+        "topics": ["ros.gi"]
+      }
+    },
+    {
+      "id": "ros.gi.constipation",
+      "topic": "ros.gi",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you been constipated?",
+        "paraphrases": [
+          "Any constipation?",
+          "Have you had trouble opening your bowels?",
+          "Are you having difficulty passing stools?",
+          "Have your bowels been slower than usual?",
+          "Do you have to strain when you go?",
+          "Have you gone a few days without a bowel movement?"
+        ],
+        "keywords": ["constipated", "constipation", "opening your bowels", "have to strain", "bowels been slower"],
+        "topics": ["ros.gi"]
+      }
+    },
+    {
+      "id": "ros.gi.bowel_habit",
+      "topic": "ros.gi",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed any change in your bowel habits?",
+        "paraphrases": [
+          "Any change in bowel habit?",
+          "Have your bowels been any different lately?",
+          "Have your bowel movements changed?",
+          "Any changes in how often you open your bowels?",
+          "Have your stools changed at all?"
+        ],
+        "keywords": ["bowel habit", "bowel habits", "bowels", "bowel movements"],
+        "topics": ["ros.gi"]
+      }
+    },
+    {
+      "id": "ros.gi.blood_in_stool",
+      "topic": "ros.gi",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed any blood in your stool?",
+        "paraphrases": [
+          "Any rectal bleeding?",
+          "Have you seen blood on the toilet paper?",
+          "Any bleeding from your back passage?",
+          "Have you had any red blood in your poo?",
+          "Have you passed any blood from your bottom?",
+          "Any blood when you open your bowels?"
+        ],
+        "keywords": ["blood in stool", "your rectum", "toilet paper", "red blood"],
+        "topics": ["ros.gi"]
+      }
+    },
+    {
+      "id": "ros.gi.melena",
+      "topic": "ros.gi",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have your stools been black or tarry?",
+        "paraphrases": [
+          "Any black stools?",
+          "Have you noticed your poo looking black?",
+          "Any melaena?",
+          "Have you passed black, sticky stools?",
+          "Has your stool been very dark?"
+        ],
+        "keywords": ["black tarry stool", "black stool", "black stools", "dark stool"],
+        "topics": ["ros.gi"]
+      }
+    },
+    {
+      "id": "ros.gi.abdominal_pain",
+      "topic": "ros.gi",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any abdominal pain?",
+        "paraphrases": [
+          "Any tummy pain?",
+          "Have you had pain in your stomach?",
+          "Does your belly hurt?",
+          "Have you had any cramps in your tummy?",
+          "Any pain in your belly?",
+          "Have you had any tummy aches?"
+        ],
+        "keywords": ["abdominal pain", "abdominal cramps", "abdomen hurt", "abdomen pain"],
+        "topics": ["ros.gi"]
+      }
+    },
+    {
+      "id": "ros.gi.heartburn",
+      "topic": "ros.gi",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you get heartburn?",
+        "paraphrases": [
+          "Any indigestion?",
+          "Any acid reflux?",
+          "Do you get a burning feeling in your chest after eating?",
+          "Do you get acid coming up into your throat?",
+          "Do you suffer from indigestion?",
+          "Any reflux symptoms?"
+        ],
+        "keywords": ["heartburn", "indigestion", "acid reflux", "reflux", "acid coming up"],
+        "topics": ["ros.gi"]
+      }
+    },
+    {
+      "id": "ros.gi.dysphagia",
+      "topic": "ros.gi",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any difficulty swallowing?",
+        "paraphrases": [
+          "Any trouble swallowing?",
+          "Does food get stuck when you swallow?",
+          "Do you have problems getting food down?",
+          "Do you choke or cough when eating?",
+          "Do you feel like food sticks in your throat?"
+        ],
+        "keywords": ["difficulty swallowing", "food get stuck", "food sticks", "getting food down", "choke", "when eating"],
+        "topics": ["ros.gi"]
+      }
+    },
+    {
+      "id": "ros.gi.bloating",
+      "topic": "ros.gi",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you been feeling bloated?",
+        "paraphrases": [
+          "Any bloating?",
+          "Do you feel bloated after meals?",
+          "Has your tummy looked swollen or distended?",
+          "Have you noticed your tummy getting bigger?",
+          "Do you feel gassy or bloated?"
+        ],
+        "keywords": ["bloated", "bloating", "distended", "gassy"],
+        "topics": ["ros.gi"]
+      }
+    },
+    {
+      "id": "ros.gi.jaundice",
+      "topic": "ros.gi",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed your skin or eyes turning yellow?",
+        "paraphrases": [
+          "Any jaundice?",
+          "Have the whites of your eyes looked yellow?",
+          "Has anyone said you look yellow?",
+          "Have you been jaundiced?",
+          "Has your skin gone a yellow colour?"
+        ],
+        "keywords": ["jaundice", "turning yellow", "look yellow", "looked yellow", "yellow eyes"],
+        "topics": ["ros.gi"]
+      }
+    },
+    {
+      "id": "ros.gu.dysuria",
+      "topic": "ros.gu",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Does it hurt when you pass urine?",
+        "paraphrases": [
+          "Any burning when you pee?",
+          "Any dysuria?",
+          "Is it painful to wee?",
+          "Do you get stinging when you go to the toilet?",
+          "Any pain or burning on urination?",
+          "Do you have discomfort when urinating?"
+        ],
+        "keywords": ["burning when", "painful to urinate", "stinging", "sting"],
+        "topics": ["ros.gu"]
+      }
+    },
+    {
+      "id": "ros.gu.frequency",
+      "topic": "ros.gu",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Are you passing urine more often than usual?",
+        "paraphrases": [
+          "Any urinary frequency?",
+          "Do you need to pee a lot?",
+          "Are you going to the toilet to pee more often?",
+          "Have you been weeing more than normal?",
+          "Do you feel like you're always needing the loo?"
+        ],
+        "keywords": ["urinating more often", "urinate a lot", "urinating a lot", "urinate more often"],
+        "topics": ["ros.gu"]
+      }
+    },
+    {
+      "id": "ros.gu.urgency",
+      "topic": "ros.gu",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you get a sudden urge to pass urine?",
+        "paraphrases": [
+          "Any urgency?",
+          "Do you have to rush to the toilet to pee?",
+          "Do you struggle to make it to the toilet in time?",
+          "Do you get a sudden need to wee that's hard to hold?",
+          "Any urinary urgency?"
+        ],
+        "keywords": ["sudden urge", "rush to", "urgency", "hard to hold"],
+        "topics": ["ros.gu"]
+      }
+    },
+    {
+      "id": "ros.gu.hematuria",
+      "topic": "ros.gu",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed any blood in your urine?",
+        "paraphrases": [
+          "Any haematuria?",
+          "Has your pee been red or pink?",
+          "Any blood when you wee?",
+          "Has your urine looked bloody?",
+          "Have you seen blood in the toilet after urinating?"
+        ],
+        "keywords": ["blood in urine", "pink urine", "red urine", "urine looked bloody"],
+        "topics": ["ros.gu"]
+      }
+    },
+    {
+      "id": "ros.gu.nocturia",
+      "topic": "ros.gu",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you get up at night to pass urine?",
+        "paraphrases": [
+          "Any nocturia?",
+          "Do you wake up in the night needing the toilet?",
+          "Are you up during the night to wee?",
+          "Do you have to get up to urinate at night?",
+          "Does your bladder wake you up at night?"
+        ],
+        "keywords": ["urinating at night", "nocturia", "up at night"],
+        "topics": ["ros.gu"]
+      }
+    },
+    {
+      "id": "ros.gu.incontinence",
+      "topic": "ros.gu",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any leaking of urine?",
+        "paraphrases": [
+          "Any incontinence?",
+          "Do you ever wet yourself?",
+          "Do you leak when you cough or sneeze?",
+          "Have you had any accidents with your bladder?",
+          "Do you have trouble holding your urine?"
+        ],
+        "keywords": ["incontinence", "leaking urine", "wet yourself", "leak when", "holding your urine", "accidents with"],
+        "topics": ["ros.gu"]
+      }
+    },
+    {
+      "id": "ros.gu.stream",
+      "topic": "ros.gu",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you have trouble starting to pass urine?",
+        "paraphrases": [
+          "Is your stream weak?",
+          "Any hesitancy?",
+          "Do you have to wait a while before the urine starts?",
+          "Do you feel like your bladder doesn't empty fully?",
+          "Do you dribble at the end?",
+          "Has your flow of urine changed?"
+        ],
+        "keywords": ["weak stream", "stream weak", "hesitancy", "flow of urine", "dribble", "dribbling"],
+        "topics": ["ros.gu"]
+      }
+    },
+    {
+      "id": "ros.gu.urine_appearance",
+      "topic": "ros.gu",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Has your urine changed colour or smell?",
+        "paraphrases": [
+          "Has your urine been cloudy?",
+          "Any foul-smelling urine?",
+          "Has your pee been darker than usual?",
+          "Have you noticed your urine looking frothy?",
+          "Does your urine smell strong?"
+        ],
+        "keywords": ["cloudy urine", "smelly urine", "dark urine", "frothy", "urine smell"],
+        "topics": ["ros.gu"]
+      }
+    },
+    {
+      "id": "ros.gu.loin_pain",
+      "topic": "ros.gu",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any pain in your loins or flanks?",
+        "paraphrases": [
+          "Any loin pain?",
+          "Any flank pain?",
+          "Have you had pain over your kidneys?",
+          "Any pain in your back around the kidneys?",
+          "Have you had any kidney pain?"
+        ],
+        "keywords": ["loin pain", "loins", "flank pain", "flanks", "kidney pain"],
+        "topics": ["ros.gu"]
+      }
+    },
+    {
+      "id": "ros.gu.discharge",
+      "topic": "ros.gu",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed any unusual discharge?",
+        "paraphrases": [
+          "Any discharge from your privates?",
+          "Any discharge from the penis or vagina?",
+          "Any unusual vaginal discharge?",
+          "Any penile discharge?",
+          "Have you noticed any discharge down below?"
+        ],
+        "keywords": ["vaginal discharge", "penile discharge", "genital discharge", "discharge down below"],
+        "topics": ["ros.gu"]
+      }
+    },
+    {
+      "id": "ros.neuro.headache",
+      "topic": "ros.neuro",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any headaches?",
+        "paraphrases": [
+          "Any headaches?",
+          "Have you been getting headaches?",
+          "Do you suffer from headaches?",
+          "Any migraines?",
+          "Has your head been hurting?",
+          "Any pain in your head?"
+        ],
+        "keywords": ["headache", "headaches", "migraine", "migraines"],
+        "topics": ["ros.neuro"]
+      }
+    },
+    {
+      "id": "ros.neuro.dizziness",
+      "topic": "ros.neuro",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you felt dizzy?",
+        "paraphrases": [
+          "Any dizziness?",
+          "Have you been lightheaded?",
+          "Any lightheadedness?",
+          "Do you feel woozy?",
+          "Do you get dizzy when you stand up?",
+          "Any dizzy spells?"
+        ],
+        "keywords": ["dizzy", "dizziness", "lightheaded", "lightheadedness", "woozy", "dizzy spells"],
+        "topics": ["ros.neuro"]
+      }
+    },
+    {
+      "id": "ros.neuro.weakness",
+      "topic": "ros.neuro",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed any weakness in your arms or legs?",
+        "paraphrases": [
+          "Any weakness?",
+          "Any loss of strength anywhere?",
+          "Have you had trouble lifting your arms?",
+          "Have your legs felt weak?",
+          "Any weakness down one side?",
+          "Have you been dropping things?"
+        ],
+        "keywords": ["weakness", "loss of strength", "legs felt weak", "arms felt weak", "dropping things"],
+        "topics": ["ros.neuro"]
+      }
+    },
+    {
+      "id": "ros.neuro.numbness",
+      "topic": "ros.neuro",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any numbness anywhere?",
+        "paraphrases": [
+          "Any numbness?",
+          "Any loss of feeling?",
+          "Have you noticed any parts of your body going numb?",
+          "Do your hands or feet feel numb?",
+          "Any reduced sensation anywhere?"
+        ],
+        "keywords": ["numbness", "numb", "loss of feeling", "reduced sensation"],
+        "topics": ["ros.neuro"]
+      }
+    },
+    {
+      "id": "ros.neuro.tingling",
+      "topic": "ros.neuro",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any pins and needles?",
+        "paraphrases": [
+          "Any tingly feelings?",
+          "Do your hands or feet tingle?",
+          "Have you had any strange sensations in your skin?",
+          "Any burning or prickling feelings in your feet?",
+          "Have you had funny sensations in your fingers?"
+        ],
+        "keywords": ["tingling", "tingle", "prickling", "strange sensations"],
+        "topics": ["ros.neuro"]
+      }
+    },
+    {
+      "id": "ros.neuro.vision_change",
+      "topic": "ros.neuro",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed any changes in your vision?",
+        "paraphrases": [
+          "Any vision problems?",
+          "Any blurred vision?",
+          "Has your eyesight changed?",
+          "Have you lost any vision?",
+          "Any problems with your eyesight?",
+          "Any visual disturbance?"
+        ],
+        "keywords": ["vision changes", "vision change", "blurred vision", "eyesight", "vision problems", "loss of vision"],
+        "topics": ["ros.neuro"]
+      }
+    },
+    {
+      "id": "ros.neuro.double_vision",
+      "topic": "ros.neuro",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any double vision?",
+        "paraphrases": [
+          "Any double vision?",
+          "Do you ever see two of things?",
+          "Have you seen double images?",
+          "Any diplopia when you look to the side?",
+          "Do things ever look doubled?"
+        ],
+        "keywords": ["double vision", "double images", "look doubled"],
+        "topics": ["ros.neuro"]
+      }
+    },
+    {
+      "id": "ros.neuro.seizures",
+      "topic": "ros.neuro",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any seizures?",
+        "paraphrases": [
+          "Any fits?",
+          "Have you ever had a convulsion?",
+          "Have you had any blackouts with shaking?",
+          "Have you ever been diagnosed with epilepsy?",
+          "Any episodes where your body shook and you couldn't control it?"
+        ],
+        "keywords": ["seizures", "seizure", "epilepsy", "convulsion", "with shaking"],
+        "topics": ["ros.neuro"]
+      }
+    },
+    {
+      "id": "ros.neuro.speech",
+      "topic": "ros.neuro",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any trouble with your speech?",
+        "paraphrases": [
+          "Any slurred speech?",
+          "Have you had difficulty finding words?",
+          "Has your speech changed?",
+          "Any trouble speaking?",
+          "Has anyone noticed your words coming out wrong?"
+        ],
+        "keywords": ["slurred speech", "trouble speaking", "speech changed", "finding words", "your speech"],
+        "topics": ["ros.neuro"]
+      }
+    },
+    {
+      "id": "ros.neuro.facial_droop",
+      "topic": "ros.neuro",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Has your face drooped on one side?",
+        "paraphrases": [
+          "Any facial drooping?",
+          "Has anyone noticed your face looking lopsided?",
+          "Has one side of your face felt weak?",
+          "Any weakness in your face?",
+          "Has your smile looked uneven?"
+        ],
+        "keywords": ["face drooped", "facial drooping", "lopsided", "smile", "your face"],
+        "topics": ["ros.neuro"]
+      }
+    },
+    {
+      "id": "ros.neuro.confusion",
+      "topic": "ros.neuro",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you been feeling confused?",
+        "paraphrases": [
+          "Any confusion?",
+          "Any memory problems?",
+          "Have you been more forgetful lately?",
+          "Has anyone said you seem muddled?",
+          "Have you had trouble concentrating?"
+        ],
+        "keywords": ["confused", "confusion", "memory problems", "forgetful", "muddled", "concentrating"],
+        "topics": ["ros.neuro"]
+      }
+    },
+    {
+      "id": "ros.neuro.balance",
+      "topic": "ros.neuro",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any problems with your balance?",
+        "paraphrases": [
+          "Any trouble walking?",
+          "Have you been unsteady on your feet?",
+          "Do you feel off balance?",
+          "Have you been stumbling or tripping?",
+          "Any clumsiness?"
+        ],
+        "keywords": ["balance", "unsteady", "off balance", "stumbling", "trouble walking", "clumsy"],
+        "topics": ["ros.neuro"]
+      }
+    },
+    {
+      "id": "ros.neuro.tremor",
+      "topic": "ros.neuro",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed any shaking or tremor?",
+        "paraphrases": [
+          "Any tremor?",
+          "Do your hands shake?",
+          "Have you noticed a shake in your hands?",
+          "Any trembling?",
+          "Do you get shaky hands?"
+        ],
+        "keywords": ["tremor", "hands shake", "shaky hands", "trembling"],
+        "topics": ["ros.neuro"]
+      }
+    },
+    {
+      "id": "ros.msk.joint_pain",
+      "topic": "ros.msk",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any joint pain?",
+        "paraphrases": [
+          "Any joint pains?",
+          "Are any of your joints sore?",
+          "Any aches in your joints?",
+          "Do your joints hurt?",
+          "Have your knees or hips been hurting?"
+        ],
+        "keywords": ["joint pain", "joint pains", "joints sore", "joints hurt"],
+        "topics": ["ros.msk"]
+      }
+    },
+    {
+      "id": "ros.msk.joint_swelling",
+      "topic": "ros.msk",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have any of your joints been swollen?",
+        "paraphrases": [
+          "Any joint swelling?",
+          "Have you noticed any swollen or red joints?",
+          "Any hot, swollen joints?",
+          "Have your fingers or knees been puffy?",
+          "Are any of your joints red and hot?"
+        ],
+        "keywords": ["joint swelling", "swollen joints", "red joints"],
+        "topics": ["ros.msk"]
+      }
+    },
+    {
+      "id": "ros.msk.back_pain",
+      "topic": "ros.msk",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any back pain?",
+        "paraphrases": [
+          "Any back pain?",
+          "Does your back hurt?",
+          "Have you had any pain in your lower back?",
+          "Any problems with your back?",
+          "Have you hurt your back recently?"
+        ],
+        "keywords": ["back pain", "back hurt", "lower back"],
+        "topics": ["ros.msk"]
+      }
+    },
+    {
+      "id": "ros.msk.muscle_aches",
+      "topic": "ros.msk",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any muscle aches?",
+        "paraphrases": [
+          "Any muscle pain?",
+          "Do your muscles ache?",
+          "Any aching all over?",
+          "Any myalgia?",
+          "Have your muscles been sore?"
+        ],
+        "keywords": ["muscle aches", "muscle pain", "muscles ache", "aching all over"],
+        "topics": ["ros.msk"]
+      }
+    },
+    {
+      "id": "ros.msk.stiffness",
+      "topic": "ros.msk",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do your joints feel stiff in the morning?",
+        "paraphrases": [
+          "Any morning stiffness?",
+          "Any joint stiffness?",
+          "Do you feel stiff when you get up?",
+          "Are your joints stiff?",
+          "Do you have stiff joints?"
+        ],
+        "keywords": ["morning stiffness", "joint stiffness", "joints stiff", "stiff joints", "feel stiff"],
+        "topics": ["ros.msk"]
+      }
+    },
+    {
+      "id": "ros.msk.neck_pain",
+      "topic": "ros.msk",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any neck pain or stiffness?",
+        "paraphrases": [
+          "Any neck pain?",
+          "Any stiff neck?",
+          "Does your neck hurt?",
+          "Is it painful to bend your neck forward?",
+          "Have you had a sore neck?"
+        ],
+        "keywords": ["neck pain", "stiff neck", "neck hurt", "sore neck"],
+        "topics": ["ros.msk"]
+      }
+    },
+    {
+      "id": "ros.msk.injury",
+      "topic": "ros.msk",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you injured yourself recently?",
+        "paraphrases": [
+          "Any recent injuries?",
+          "Have you hurt yourself recently?",
+          "Any trauma?",
+          "Have you had any accidents lately?",
+          "Have you knocked or banged yourself?"
+        ],
+        "keywords": ["injured", "injury", "injuries", "trauma", "any accidents"],
+        "topics": ["ros.msk"]
+      }
+    },
+    {
+      "id": "ros.skin.rash",
+      "topic": "ros.skin",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed any rash on your skin?",
+        "paraphrases": [
+          "Any rashes?",
+          "Any skin rash?",
+          "Any spots or blotches on your skin?",
+          "Has your skin broken out in anything?",
+          "Any hives?",
+          "Have you had a rash anywhere?"
+        ],
+        "keywords": ["rash", "rashes", "skin rash", "blotches", "hives"],
+        "topics": ["ros.skin"]
+      }
+    },
+    {
+      "id": "ros.skin.itching",
+      "topic": "ros.skin",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you been itchy?",
+        "paraphrases": [
+          "Any itching?",
+          "Is your skin itchy?",
+          "Have you been scratching a lot?",
+          "Any itchy skin?",
+          "Does your skin itch anywhere?"
+        ],
+        "keywords": ["itching", "itchy", "itch", "scratching"],
+        "topics": ["ros.skin"]
+      }
+    },
+    {
+      "id": "ros.skin.lumps",
+      "topic": "ros.skin",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed any new lumps or bumps?",
+        "paraphrases": [
+          "Any lumps?",
+          "Have you found any lumps anywhere on your body?",
+          "Any lumps under the skin?",
+          "Any growths on your skin?",
+          "Have you felt any new lumps?"
+        ],
+        "keywords": ["lumps", "lump", "bumps", "growths"],
+        "topics": ["ros.skin"]
+      }
+    },
+    {
+      "id": "ros.skin.moles",
+      "topic": "ros.skin",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have any of your moles changed?",
+        "paraphrases": [
+          "Any changing moles?",
+          "Have you noticed any new moles?",
+          "Has a mole grown, bled or changed colour?",
+          "Any skin spots that have changed shape?",
+          "Any moles that itch or bleed?"
+        ],
+        "keywords": ["moles", "mole", "changing moles"],
+        "topics": ["ros.skin"]
+      }
+    },
+    {
+      "id": "ros.skin.sores",
+      "topic": "ros.skin",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you have any sores or wounds that won't heal?",
+        "paraphrases": [
+          "Any non-healing wounds?",
+          "Any ulcers on your skin?",
+          "Any cuts that are slow to heal?",
+          "Do you have any open sores?",
+          "Any leg ulcers?"
+        ],
+        "keywords": ["sores", "wounds", "slow to heal", "not healing", "leg ulcers", "open sores"],
+        "topics": ["ros.skin"]
+      }
+    },
+    {
+      "id": "ros.skin.hair_loss",
+      "topic": "ros.skin",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed any hair loss?",
+        "paraphrases": [
+          "Any hair loss?",
+          "Has your hair been thinning?",
+          "Have you been losing hair?",
+          "Is your hair falling out?",
+          "Any changes to your hair or nails?"
+        ],
+        "keywords": ["hair loss", "hair thinning", "losing hair", "hair falling out", "thinning hair"],
+        "topics": ["ros.skin"]
+      }
+    },
+    {
+      "id": "ros.psych.low_mood",
+      "topic": "ros.psych",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you been feeling low in mood?",
+        "paraphrases": [
+          "Any low mood?",
+          "Have you been feeling down or depressed?",
+          "Have you been feeling sad a lot?",
+          "Have you been feeling hopeless?",
+          "Have you felt depressed recently?",
+          "Has your mood been low?"
+        ],
+        "keywords": ["low mood", "mood been low", "depressed", "depression", "feeling down", "feeling low", "hopeless"],
+        "topics": ["ros.psych"]
+      }
+    },
+    {
+      "id": "ros.psych.anhedonia",
+      "topic": "ros.psych",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you lost interest in things you used to enjoy?",
+        "paraphrases": [
+          "Any loss of interest in your hobbies?",
+          "Have you stopped enjoying things?",
+          "Do you find you can't be bothered with things you used to like?",
+          "Any anhedonia?",
+          "Has your motivation dropped?"
+        ],
+        "keywords": ["loss of interest", "lost interest", "stopped enjoying", "cannot be bothered", "motivation"],
+        "topics": ["ros.psych"]
+      }
+    },
+    {
+      "id": "ros.psych.anxiety",
+      "topic": "ros.psych",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you been feeling anxious?",
+        "paraphrases": [
+          "Any anxiety?",
+          "Have you been feeling nervous or on edge?",
+          "Do you worry a lot?",
+          "Have you been feeling worried all the time?",
+          "Do you feel tense or wound up?"
+        ],
+        "keywords": ["anxious", "anxiety", "on edge", "nervous", "worry a lot"],
+        "topics": ["ros.psych"]
+      }
+    },
+    {
+      "id": "ros.psych.panic",
+      "topic": "ros.psych",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any panic attacks?",
+        "paraphrases": [
+          "Any panic attacks?",
+          "Do you get sudden episodes of intense fear?",
+          "Do you ever feel panicky?",
+          "Have you had attacks of panic where you can't catch your breath?",
+          "Do you get sudden waves of fear?"
+        ],
+        "keywords": ["panic attacks", "panic attack", "panicky", "intense fear", "attacks of panic", "panic"],
+        "topics": ["ros.psych"]
+      }
+    },
+    {
+      "id": "ros.psych.sleep",
+      "topic": "ros.psych",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any trouble sleeping?",
+        "paraphrases": [
+          "Any problems sleeping?",
+          "Do you have difficulty getting to sleep?",
+          "Do you wake up early and can't get back to sleep?",
+          "Is your sleep disturbed?",
+          "Do you have trouble staying asleep?"
+        ],
+        "keywords": ["trouble sleeping", "getting to sleep", "staying asleep", "sleep disturbed"],
+        "topics": ["ros.psych"]
+      }
+    },
+    {
+      "id": "ros.psych.stress",
+      "topic": "ros.psych",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you been under a lot of stress lately?",
+        "paraphrases": [
+          "Any stress?",
+          "Are you feeling stressed?",
+          "Has anything been stressing you out?",
+          "Is anything causing you stress at the moment?",
+          "Have things been stressful at home or at work?"
+        ],
+        "keywords": ["stress", "stressed", "stressing"],
+        "topics": ["ros.psych"]
+      }
+    },
+    {
+      "id": "ros.psych.self_harm",
+      "topic": "ros.psych",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any thoughts of harming yourself?",
+        "paraphrases": [
+          "Have you ever thought about ending your life?",
+          "Any suicidal thoughts?",
+          "Have you felt that life isn't worth living?",
+          "Have you ever hurt yourself on purpose?",
+          "Any thoughts of self-harm?"
+        ],
+        "keywords": ["harming yourself", "suicidal thoughts", "ending your life", "not worth living", "self harm", "kill yourself"],
+        "topics": ["ros.psych"]
+      }
+    },
+    {
+      "id": "ros.heme.bruising",
+      "topic": "ros.heme",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you bruise easily?",
+        "paraphrases": [
+          "Any easy bruising?",
+          "Have you noticed bruises you can't explain?",
+          "Do you bruise or bleed easily?",
+          "Have you had more bruises than usual?",
+          "Do you get bruises without knocking yourself?"
+        ],
+        "keywords": ["bruise easily", "bruising", "bruises", "bruise"],
+        "topics": ["ros.heme"]
+      }
+    },
+    {
+      "id": "ros.heme.bleeding",
+      "topic": "ros.heme",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you bleed for a long time after a cut?",
+        "paraphrases": [
+          "Any bleeding problems?",
+          "Do your gums bleed?",
+          "Any unusual bleeding?",
+          "Have you had heavy bleeding after the dentist or an operation?",
+          "Does it take a long time for bleeding to stop?",
+          "Any bleeding gums?"
+        ],
+        "keywords": ["bleeding gums", "gums bleed", "unusual bleeding", "bleeding problems", "heavy bleeding", "bleeding to stop"],
+        "topics": ["ros.heme"]
+      }
+    },
+    {
+      "id": "ros.heme.clots",
+      "topic": "ros.heme",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you ever had a blood clot?",
+        "paraphrases": [
+          "Any history of blood clots?",
+          "Have you ever had a DVT or PE?",
+          "Have you had a clot in your leg or lungs?",
+          "Have you ever been treated for a blood clot?",
+          "Any clots in your legs?",
+          "Have you had a DVT?"
+        ],
+        "keywords": ["blood clot", "blood clots", "clot", "clots"],
+        "topics": ["ros.heme"]
+      }
+    },
+    {
+      "id": "ros.heme.anemia",
+      "topic": "ros.heme",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you ever been told you're anaemic?",
+        "paraphrases": [
+          "Any anaemia?",
+          "Have you been told you have low iron?",
+          "Have you ever needed iron tablets?",
+          "Has anyone said your blood count was low?",
+          "Any history of anemia?"
+        ],
+        "keywords": ["anemia", "anemic", "low iron", "iron tablets", "blood count"],
+        "topics": ["ros.heme"]
+      }
+    },
+    {
+      "id": "ros.heme.lymph_nodes",
+      "topic": "ros.heme",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you noticed any swollen glands?",
+        "paraphrases": [
+          "Any swollen lymph nodes?",
+          "Have you felt any lumps in your neck, armpits or groin?",
+          "Any enlarged glands?",
+          "Have your glands been up?",
+          "Have the glands in your neck been swollen?"
+        ],
+        "keywords": ["swollen lymph nodes", "lymph nodes", "glands", "armpits", "groin"],
+        "topics": ["ros.heme"]
+      }
+    },
+    {
+      "id": "ros.endocrine.thirst",
+      "topic": "ros.endocrine",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you been feeling more thirsty than usual?",
+        "paraphrases": [
+          "Any excessive thirst?",
+          "Are you drinking a lot more water than normal?",
+          "Do you feel thirsty all the time?",
+          "Is your mouth always dry?",
+          "Have you been really thirsty lately?"
+        ],
+        "keywords": ["thirsty", "thirst", "excessive thirst", "dry mouth", "mouth always dry"],
+        "topics": ["ros.endocrine"]
+      }
+    },
+    {
+      "id": "ros.endocrine.heat_intolerance",
+      "topic": "ros.endocrine",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you find hot weather hard to tolerate?",
+        "paraphrases": [
+          "Any heat intolerance?",
+          "Do you feel too hot when others are comfortable?",
+          "Do you struggle in warm rooms more than other people?",
+          "Are you more sensitive to heat than you used to be?",
+          "Do you find the heat difficult?"
+        ],
+        "keywords": ["heat intolerance", "too hot", "sensitive to heat", "hot weather"],
+        "topics": ["ros.endocrine"]
+      }
+    },
+    {
+      "id": "ros.endocrine.cold_intolerance",
+      "topic": "ros.endocrine",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you feel the cold more than other people?",
+        "paraphrases": [
+          "Any cold intolerance?",
+          "Are you always cold?",
+          "Do you need extra layers when others are warm?",
+          "Are you more sensitive to the cold than you used to be?",
+          "Do your hands and feet always feel cold?"
+        ],
+        "keywords": ["cold intolerance", "feel the cold", "always cold", "extra layers"],
+        "topics": ["ros.endocrine"]
+      }
+    },
+    {
+      "id": "ros.endocrine.sweating",
+      "topic": "ros.endocrine",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you been sweating more than usual?",
+        "paraphrases": [
+          "Any excessive sweating?",
+          "Do you sweat a lot during the day?",
+          "Have you noticed you're sweating a lot?",
+          "Do you get sweaty for no reason?",
+          "Are you sweating more than other people?"
+        ],
+        "keywords": ["excessive sweating", "sweating more", "sweat a lot", "sweating a lot", "sweaty"],
+        "topics": ["ros.endocrine"]
+      }
+    },
+    {
+      "id": "hpi.prior.similar_episode",
+      "topic": "hpi.prior",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Has this ever happened before?",
+        "paraphrases": [
+          "Have you had anything like this before?",
+          "Have you had similar episodes in the past?",
+          "Has this happened to you before?",
+          "Have you ever felt like this before?",
+          "Any previous episodes like this?",
+          "Have you been treated for this before?"
+        ],
+        "keywords": ["happened before", "like this before", "similar episodes", "previous episodes"],
+        "topics": ["hpi.prior"]
+      }
+    },
+    {
+      "id": "hpi.triggers.cause",
+      "topic": "hpi.triggers",
+      "reply": "unknown",
+      "intents": {
+        "canonical": "Do you know what might have set this off?",
+        "paraphrases": [
+          "Did anything trigger it?",
+          "Was there anything that brought it on?",
+          "Can you think of anything that started it?",
+          "Any idea what might have triggered this?",
+          "Did something happen just before it started?"
+        ],
+        "keywords": ["set this off", "set it off", "trigger", "triggered", "brought it on"],
+        "topics": ["hpi.triggers"]
+      }
+    },
+    {
+      "id": "hpi.relieving.tried",
+      "topic": "hpi.relieving",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you tried anything to help with it?",
+        "paraphrases": [
+          "Have you taken anything for it?",
+          "Have you tried any treatments for this?",
+          "Has anything helped so far?",
+          "Did you try anything at home before coming in?",
+          "Have you used anything to ease it?"
+        ],
+        "keywords": ["tried anything", "taken anything", "anything helped", "tried any treatments"],
+        "topics": ["hpi.relieving"]
+      }
+    },
+    {
+      "id": "pmh.hospital.admissions",
+      "topic": "pmh.hospital",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you ever been admitted to hospital?",
+        "paraphrases": [
+          "Any hospital admissions?",
+          "Have you had to stay in hospital before?",
+          "Have you been in hospital recently?",
+          "Have you ever been hospitalised?",
+          "Have you ever had to stay in overnight?",
+          "Any previous admissions?"
+        ],
+        "keywords": ["admitted to hospital", "hospital admissions", "in hospital", "hospitalized", "previous admissions"],
+        "topics": ["pmh.hospital"]
+      }
+    },
+    {
+      "id": "psh.surgery.operations",
+      "topic": "psh.surgery",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any surgery in the past?",
+        "paraphrases": [
+          "Any previous operations?",
+          "Have you ever had an operation?",
+          "Any surgeries?",
+          "Have you had any procedures done?",
+          "Any past surgical history?",
+          "Have you ever been put to sleep for an operation?"
+        ],
+        "keywords": ["operation", "operations", "surgery", "surgeries", "procedures"],
+        "topics": ["psh.surgery"]
+      }
+    },
+    {
+      "id": "psh.surgery.recent",
+      "topic": "psh.surgery",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any surgery recently?",
+        "paraphrases": [
+          "Any recent operations?",
+          "Have you had an operation in the last few weeks?",
+          "Have you had any recent procedures?",
+          "Have you been laid up after an operation recently?",
+          "Any surgery in the last couple of months?"
+        ],
+        "keywords": ["recent operations", "surgery recently", "recent surgery", "recent procedures"],
+        "topics": ["psh.surgery"]
+      }
+    },
+    {
+      "id": "psh.transfusion",
+      "topic": "psh.surgery",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you ever had a blood transfusion?",
+        "paraphrases": [
+          "Any blood transfusions?",
+          "Have you ever needed blood?",
+          "Have you been given blood before?",
+          "Have you ever received blood products?",
+          "Have you had a transfusion?"
+        ],
+        "keywords": ["blood transfusion", "transfusion", "transfusions", "given blood", "blood products"],
+        "topics": ["psh.surgery"]
+      }
+    },
+    {
+      "id": "pmh.vaccinations",
+      "topic": "pmh.conditions",
+      "reply": "unknown",
+      "intents": {
+        "canonical": "Are your vaccinations up to date?",
+        "paraphrases": [
+          "Have you had all your jabs?",
+          "Have you had your flu jab this year?",
+          "Have you had your covid boosters?",
+          "Are you up to date with your immunisations?",
+          "Have you had a tetanus shot recently?",
+          "Did you have all your childhood vaccines?"
+        ],
+        "keywords": ["vaccinations", "vaccination", "flu vaccination", "covid vaccination", "tetanus"],
+        "topics": ["pmh.conditions"]
+      }
+    },
+    {
+      "id": "pmh.obgyn.pregnancy",
+      "topic": "pmh.obgyn",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Is there any chance you could be pregnant?",
+        "paraphrases": [
+          "Could you be pregnant?",
+          "Are you pregnant?",
+          "Any possibility of pregnancy?",
+          "Have you missed a period?",
+          "Are you currently pregnant or breastfeeding?"
+        ],
+        "keywords": ["pregnant", "pregnancy", "missed a period", "breastfeeding"],
+        "topics": ["pmh.obgyn"]
+      }
+    },
+    {
+      "id": "pmh.obgyn.heavy_periods",
+      "topic": "pmh.obgyn",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have your periods been heavy?",
+        "paraphrases": [
+          "Any heavy periods?",
+          "Do you bleed a lot during your periods?",
+          "Any bleeding between periods?",
+          "Any problems with your periods?",
+          "Have your periods been different lately?"
+        ],
+        "keywords": ["heavy periods", "periods been heavy", "bleeding between periods", "your periods"],
+        "topics": ["pmh.obgyn"]
+      }
+    },
+    {
+      "id": "meds.otc.over_the_counter",
+      "topic": "meds.otc",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you take any over-the-counter medicines?",
+        "paraphrases": [
+          "Any OTC meds?",
+          "Have you bought any medicines from the pharmacy yourself?",
+          "Do you take anything you buy without a prescription?",
+          "Any medicines from the chemist?",
+          "Any non-prescription medications?"
+        ],
+        "keywords": ["over the counter", "without a prescription", "non prescription", "from the pharmacy", "chemist"],
+        "topics": ["meds.otc"]
+      }
+    },
+    {
+      "id": "meds.otc.herbal",
+      "topic": "meds.otc",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you use any herbal or natural remedies?",
+        "paraphrases": [
+          "Any herbal medicines?",
+          "Do you take anything from the health food shop?",
+          "Any traditional or alternative medicines?",
+          "Do you take any supplements like fish oil or St John's wort?",
+          "Any herbal teas or remedies you use regularly?"
+        ],
+        "keywords": ["herbal remedies", "herbal", "supplements", "alternative medicines", "fish oil", "st john wort"],
+        "topics": ["meds.otc"]
+      }
+    },
+    {
+      "id": "meds.current.changes",
+      "topic": "meds.current",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have any of your medications been changed recently?",
+        "paraphrases": [
+          "Any recent changes to your medicines?",
+          "Have you started any new medications lately?",
+          "Has your doctor changed any of your tablets recently?",
+          "Any new prescriptions recently?",
+          "Have any of your doses been changed?"
+        ],
+        "keywords": ["changed recently", "new medications", "recent changes", "doses changed", "new prescriptions"],
+        "topics": ["meds.current"]
+      }
+    },
+    {
+      "id": "meds.adherence.missed_doses",
+      "topic": "meds.adherence",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you missed any doses of your medication?",
+        "paraphrases": [
+          "Do you ever forget to take your tablets?",
+          "Have you been skipping any doses?",
+          "Any missed doses recently?",
+          "Do you sometimes miss your pills?",
+          "Have you forgotten any tablets this week?"
+        ],
+        "keywords": ["missed any doses", "missed doses", "forget to take", "skipping doses", "miss your pills"],
+        "topics": ["meds.adherence"]
+      }
+    },
+    {
+      "id": "meds.current.side_effects",
+      "topic": "meds.current",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any side effects from your medications?",
+        "paraphrases": [
+          "Any side effects?",
+          "Are your tablets causing you any problems?",
+          "Have any medicines disagreed with you?",
+          "Do any of your medicines make you feel unwell?",
+          "Any problems with the tablets you take?"
+        ],
+        "keywords": ["side effects", "side effect", "disagreed with you"],
+        "topics": ["meds.current"]
+      }
+    },
+    {
+      "id": "meds.current.contraceptive_pill",
+      "topic": "meds.current",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Are you on the contraceptive pill?",
+        "paraphrases": [
+          "Are you taking the pill?",
+          "Do you use any hormonal contraception?",
+          "Are you on any birth control?",
+          "Do you take the combined pill?",
+          "Do you use the mini pill or an implant?"
+        ],
+        "keywords": ["contraceptive pill", "the pill", "contraception", "birth control", "mini pill"],
+        "topics": ["meds.current"]
+      }
+    },
+    {
+      "id": "meds.current.antibiotics",
+      "topic": "meds.current",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any antibiotics recently?",
+        "paraphrases": [
+          "Any recent antibiotics?",
+          "Have you taken a course of antibiotics lately?",
+          "Have you been on antibiotics in the last few months?",
+          "Did anyone give you antibiotics for this?",
+          "Have you finished a course of antibiotics recently?"
+        ],
+        "keywords": ["antibiotics", "course of antibiotics"],
+        "topics": ["meds.current"]
+      }
+    },
+    {
+      "id": "allergies.food",
+      "topic": "allergies",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you have any food allergies?",
+        "paraphrases": [
+          "Are you allergic to any foods?",
+          "Any allergies to nuts, shellfish or eggs?",
+          "Do any foods make you swell up or come out in a rash?",
+          "Any food intolerances?",
+          "Have you ever reacted badly to something you ate?"
+        ],
+        "keywords": ["food allergies", "food allergy", "nuts", "shellfish", "food intolerances", "foods make you"],
+        "topics": ["allergies"]
+      }
+    },
+    {
+      "id": "allergies.latex",
+      "topic": "allergies",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Are you allergic to latex?",
+        "paraphrases": [
+          "Any latex allergy?",
+          "Do rubber gloves give you a reaction?",
+          "Have you ever reacted to plasters or gloves?",
+          "Any problems with latex gloves?",
+          "Are you sensitive to latex or sticky tape?"
+        ],
+        "keywords": ["latex", "rubber gloves", "plasters", "sticky tape"],
+        "topics": ["allergies"]
+      }
+    },
+    {
+      "id": "allergies.environmental",
+      "topic": "allergies",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you get hay fever?",
+        "paraphrases": [
+          "Any hay fever?",
+          "Are you allergic to pollen, dust or animals?",
+          "Do you get seasonal allergies?",
+          "Are you allergic to cats or dogs?",
+          "Does dust make you sneeze?"
+        ],
+        "keywords": ["hay fever", "pollen", "allergic to dust", "seasonal allergies", "allergic to cats", "dust mites"],
+        "topics": ["allergies"]
+      }
+    },
+    {
+      "id": "fh.heart_disease",
+      "topic": "fh",
+      "reply": "unknown",
+      "intents": {
+        "canonical": "Does anyone in your family have heart problems?",
+        "paraphrases": [
+          "Any heart disease in the family?",
+          "Has anyone in your family had a heart attack?",
+          "Any family history of heart problems?",
+          "Did your parents have any heart trouble?",
+          "Is there heart disease in your family?"
+        ],
+        "keywords": ["heart problems in", "heart disease in", "heart attack in"],
+        "topics": ["fh"]
+      }
+    },
+    {
+      "id": "fh.cancer",
+      "topic": "fh",
+      "reply": "unknown",
+      "intents": {
+        "canonical": "Has anyone in your family had cancer?",
+        "paraphrases": [
+          "Any cancer in the family?",
+          "Is there a family history of cancer?",
+          "Did any of your relatives have cancer?",
+          "Any bowel or breast cancer in your family?",
+          "Has a close relative been diagnosed with cancer?"
+        ],
+        "keywords": ["cancer in", "had cancer", "relatives have cancer"],
+        "topics": ["fh"]
+      }
+    },
+    {
+      "id": "fh.diabetes",
+      "topic": "fh",
+      "reply": "unknown",
+      "intents": {
+        "canonical": "Does diabetes run in your family?",
+        "paraphrases": [
+          "Anyone in the family with diabetes?",
+          "Any family history of diabetes?",
+          "Do your parents or siblings have diabetes?",
+          "Has anyone in your family got sugar diabetes?",
+          "Is there type 2 diabetes in your family?"
+        ],
+        "keywords": ["diabetes run", "diabetes in", "with diabetes"],
+        "topics": ["fh"]
+      }
+    },
+    {
+      "id": "fh.sudden_death",
+      "topic": "fh",
+      "reply": "unknown",
+      "intents": {
+        "canonical": "Has anyone in your family died suddenly at a young age?",
+        "paraphrases": [
+          "Any sudden deaths in the family?",
+          "Did anyone in your family die young of a heart problem?",
+          "Any unexplained deaths in your family?",
+          "Has a relative died suddenly under the age of 50?",
+          "Any family history of sudden cardiac death?"
+        ],
+        "keywords": ["died suddenly", "sudden deaths", "sudden death", "die young", "unexplained deaths"],
+        "topics": ["fh"]
+      }
+    },
+    {
+      "id": "fh.stroke",
+      "topic": "fh",
+      "reply": "unknown",
+      "intents": {
+        "canonical": "Has anyone in your family had a stroke?",
+        "paraphrases": [
+          "Any strokes in the family?",
+          "Is there a family history of stroke?",
+          "Did your parents have strokes?",
+          "Has a relative had a mini-stroke or stroke?",
+          "Has anyone in your family been affected by strokes?"
+        ],
+        "keywords": ["stroke in", "strokes in", "parents have strokes"],
+        "topics": ["fh"]
+      }
+    },
+    {
+      "id": "fh.high_blood_pressure",
+      "topic": "fh",
+      "reply": "unknown",
+      "intents": {
+        "canonical": "Does high blood pressure run in your family?",
+        "paraphrases": [
+          "Any family history of high blood pressure?",
+          "Do your parents have high blood pressure?",
+          "Anyone in the family with hypertension?",
+          "Is blood pressure a problem in your family?",
+          "Does anyone in your family take tablets for blood pressure?"
+        ],
+        "keywords": ["blood pressure run", "blood pressure in"],
+        "topics": ["fh"]
+      }
+    },
+    {
+      "id": "sh.smoking.current",
+      "topic": "sh.smoking",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you smoke?",
+        "paraphrases": [
+          "Are you a smoker?",
+          "Do you smoke cigarettes?",
+          "Do you use any tobacco?",
+          "Any smoking?",
+          "Do you smoke at all?",
+          "Do you smoke roll-ups or cigars?"
+        ],
+        "keywords": ["smoke", "smoker", "smoking", "cigarettes", "tobacco", "cigars", "roll ups"],
+        "topics": ["sh.smoking"]
+      }
+    },
+    {
+      "id": "sh.smoking.ever",
+      "topic": "sh.smoking",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you ever smoked?",
+        "paraphrases": [
+          "Did you used to smoke?",
+          "Are you an ex-smoker?",
+          "Have you smoked in the past?",
+          "Did you ever smoke cigarettes?",
+          "Have you ever been a smoker?"
+        ],
+        "keywords": ["ever smoked", "used to smoke", "ex smoker", "ever smoke", "been a smoker"],
+        "topics": ["sh.smoking"]
+      }
+    },
+    {
+      "id": "sh.smoking.vaping",
+      "topic": "sh.smoking",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you vape?",
+        "paraphrases": [
+          "Do you use e-cigarettes?",
+          "Any vaping?",
+          "Have you ever vaped?",
+          "Do you use a vape?",
+          "Do you vape instead of smoking?"
+        ],
+        "keywords": ["vape", "vaping", "vapes", "vaped"],
+        "topics": ["sh.smoking"]
+      }
+    },
+    {
+      "id": "sh.smoking.secondhand",
+      "topic": "sh.smoking",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Are you around anyone who smokes?",
+        "paraphrases": [
+          "Does anyone at home smoke?",
+          "Are you exposed to second-hand smoke?",
+          "Do people smoke around you?",
+          "Does your partner smoke?",
+          "Do you live with a smoker?"
+        ],
+        "keywords": ["second hand smoke", "smoke around you", "partner smoke", "anyone who smokes", "with a smoker"],
+        "topics": ["sh.smoking"]
+      }
+    },
+    {
+      "id": "sh.alcohol.any",
+      "topic": "sh.alcohol",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you drink alcohol?",
+        "paraphrases": [
+          "Do you drink?",
+          "Do you have the odd drink?",
+          "Any alcohol?",
+          "Do you drink beer, wine or spirits?",
+          "Do you ever have a drink?"
+        ],
+        "keywords": ["alcohol", "drink alcohol", "beer", "wine", "spirits", "odd drink"],
+        "topics": ["sh.alcohol"]
+      }
+    },
+    {
+      "id": "sh.alcohol.cage",
+      "topic": "sh.alcohol",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you ever felt you should cut down on your drinking?",
+        "paraphrases": [
+          "Has anyone criticised your drinking?",
+          "Do you ever feel guilty about drinking?",
+          "Do you ever need a drink first thing in the morning?",
+          "Has drinking ever caused you problems?",
+          "Do you ever drink more than you mean to?"
+        ],
+        "keywords": ["cut down", "criticized your drinking", "guilty about drinking", "drink first thing", "eye opener"],
+        "topics": ["sh.alcohol"]
+      }
+    },
+    {
+      "id": "sh.drugs.recreational",
+      "topic": "sh.drugs",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you use any recreational drugs?",
+        "paraphrases": [
+          "Do you take any drugs?",
+          "Any drug use?",
+          "Have you ever used street drugs?",
+          "Do you use anything like cocaine or ecstasy?",
+          "Have you ever taken illegal drugs?"
+        ],
+        "keywords": ["recreational drugs", "drug use", "cocaine", "ecstasy", "heroin", "mdma"],
+        "topics": ["sh.drugs"]
+      }
+    },
+    {
+      "id": "sh.drugs.cannabis",
+      "topic": "sh.drugs",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you smoke cannabis?",
+        "paraphrases": [
+          "Do you use weed?",
+          "Any marijuana?",
+          "Have you ever smoked pot?",
+          "Do you use any cannabis products?",
+          "Do you take edibles?"
+        ],
+        "keywords": ["cannabis", "edibles", "thc"],
+        "topics": ["sh.drugs"]
+      }
+    },
+    {
+      "id": "sh.drugs.injecting",
+      "topic": "sh.drugs",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you ever injected drugs?",
+        "paraphrases": [
+          "Any IV drug use?",
+          "Have you ever used needles to take drugs?",
+          "Have you ever shared needles?",
+          "Have you ever injected anything?",
+          "Have you ever used heroin or injected any drugs?"
+        ],
+        "keywords": ["injected drugs", "injecting drugs", "injecting drug use", "shared needles", "injected anything"],
+        "topics": ["sh.drugs"]
+      }
+    },
+    {
+      "id": "sh.occupation.exposures",
+      "topic": "sh.occupation",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you been exposed to anything harmful at work, like dust or chemicals?",
+        "paraphrases": [
+          "Any exposure to asbestos?",
+          "Have you worked with chemicals or fumes?",
+          "Have you had any dusty jobs in the past?",
+          "Have you been exposed to anything at work that might affect your health?",
+          "Do you work around loud noise, dust or chemicals?"
+        ],
+        "keywords": ["asbestos", "chemicals", "fumes", "dusty jobs", "dust at work", "harmful at work"],
+        "topics": ["sh.occupation"]
+      }
+    },
+    {
+      "id": "sh.diet.special",
+      "topic": "sh.diet",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you follow any special diet?",
+        "paraphrases": [
+          "Are you on any particular diet?",
+          "Are you vegetarian or vegan?",
+          "Do you avoid any foods?",
+          "Any dietary restrictions?",
+          "Do you have any rules about what you eat?"
+        ],
+        "keywords": ["special diet", "particular diet", "vegetarian", "vegan", "dietary restrictions"],
+        "topics": ["sh.diet"]
+      }
+    },
+    {
+      "id": "sh.diet.caffeine",
+      "topic": "sh.diet",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you drink much coffee or tea?",
+        "paraphrases": [
+          "Do you drink a lot of coffee?",
+          "Any caffeine?",
+          "Do you have energy drinks?",
+          "Do you drink cola or other fizzy drinks with caffeine?",
+          "Are you a big tea drinker?"
+        ],
+        "keywords": ["caffeine", "coffee", "energy drinks", "cups of tea", "tea drinker", "cola"],
+        "topics": ["sh.diet"]
+      }
+    },
+    {
+      "id": "sh.exercise.sport",
+      "topic": "sh.exercise",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you play any sports?",
+        "paraphrases": [
+          "Do you go to the gym?",
+          "Do you do any sport?",
+          "Are you part of any sports team?",
+          "Do you go running or cycling?",
+          "Do you go swimming regularly?"
+        ],
+        "keywords": ["sport", "sports", "gym", "go running", "cycling", "swimming"],
+        "topics": ["sh.exercise"]
+      }
+    },
+    {
+      "id": "sh.living.support",
+      "topic": "sh.living",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you have any carers or help at home?",
+        "paraphrases": [
+          "Does anyone come in to help you?",
+          "Do you get any support at home?",
+          "Do you have a care package?",
+          "Does anyone help you with shopping or cleaning?",
+          "Do you have any home help?"
+        ],
+        "keywords": ["caregivers", "help at home", "home help", "care package", "support at home"],
+        "topics": ["sh.living"]
+      }
+    },
+    {
+      "id": "sh.pets",
+      "topic": "sh.living",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you have any pets?",
+        "paraphrases": [
+          "Any pets at home?",
+          "Do you have a cat or dog?",
+          "Have you been around any animals or birds?",
+          "Do you keep any birds?",
+          "Any contact with farm animals?"
+        ],
+        "keywords": ["pets", "pet", "cat", "dog", "birds", "farm animals"],
+        "topics": ["sh.living"]
+      }
+    },
+    {
+      "id": "sh.function.daily_activities",
+      "topic": "sh.function",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you have any trouble looking after yourself day to day?",
+        "paraphrases": [
+          "Do you need help with washing or dressing?",
+          "Do you struggle with everyday tasks like cooking or shopping?",
+          "Do you need help getting about?",
+          "Do you have difficulty with personal care?",
+          "Do you need help around the house?"
+        ],
+        "keywords": ["looking after yourself", "washing or dressing", "everyday tasks", "personal care", "getting about"],
+        "topics": ["sh.function"]
+      }
+    },
+    {
+      "id": "sh.function.walking_aid",
+      "topic": "sh.function",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Do you use a walking aid?",
+        "paraphrases": [
+          "Do you use a stick or frame to get around?",
+          "Do you use a walker or a cane?",
+          "Do you need a wheelchair?",
+          "Do you use anything to help you walk?",
+          "Any mobility aids?"
+        ],
+        "keywords": ["walking aid", "walker", "cane", "wheelchair", "mobility aids", "stick or frame"],
+        "topics": ["sh.function"]
+      }
+    },
+    {
+      "id": "sh.function.falls",
+      "topic": "sh.function",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any falls recently?",
+        "paraphrases": [
+          "Any falls?",
+          "Have you fallen over lately?",
+          "Have you had any trips or falls?",
+          "Have you lost your footing at all?",
+          "Have you had a fall in the last few months?"
+        ],
+        "keywords": ["falls", "fallen", "fall over", "had a fall", "lost your footing"],
+        "topics": ["sh.function"]
+      }
+    },
+    {
+      "id": "sh.travel.recent",
+      "topic": "sh.travel",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you travelled anywhere recently?",
+        "paraphrases": [
+          "Any recent travel?",
+          "Have you been overseas in the last few months?",
+          "Have you been on holiday recently?",
+          "Any trips out of the country?",
+          "Have you been anywhere tropical?"
+        ],
+        "keywords": ["travel", "traveled", "abroad", "vacation", "trips", "tropical"],
+        "topics": ["sh.travel"]
+      }
+    },
+    {
+      "id": "sh.travel.long_journey",
+      "topic": "sh.travel",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you been on any long journeys recently?",
+        "paraphrases": [
+          "Any long flights lately?",
+          "Have you been sitting still for a long time, like on a long car trip?",
+          "Have you been on a plane recently?",
+          "Any long-haul travel recently?",
+          "Have you been immobile for any length of time?"
+        ],
+        "keywords": ["long journeys", "long journey", "long flights", "long flight", "long haul", "on a plane", "immobile"],
+        "topics": ["sh.travel"]
+      }
+    },
+    {
+      "id": "sh.sexual.new_partner",
+      "topic": "sh.sexual",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you had any new sexual partners recently?",
+        "paraphrases": [
+          "Any new partners?",
+          "Have you had unprotected sex recently?",
+          "Have you had sex with anyone new lately?",
+          "Any new relationships recently?",
+          "Have you had more than one partner recently?"
+        ],
+        "keywords": ["new sexual partners", "new partners", "new partner", "unprotected sex", "anyone new"],
+        "topics": ["sh.sexual"]
+      }
+    },
+    {
+      "id": "sh.sexual.sti",
+      "topic": "sh.sexual",
+      "reply": "negative",
+      "intents": {
+        "canonical": "Have you ever had a sexually transmitted infection?",
+        "paraphrases": [
+          "Any history of STIs?",
+          "Have you ever been treated for chlamydia or gonorrhoea?",
+          "Have you ever tested positive for an STI?",
+          "Any concerns about sexually transmitted infections?",
+          "Have you had an STD before?"
+        ],
+        "keywords": ["sexually transmitted infection", "sexually transmitted infections", "chlamydia", "gonorrhea", "syphilis"],
+        "topics": ["sh.sexual"]
+      }
+    },
+    {
+      "id": "ice.ideas.cause",
+      "topic": "ice.ideas",
+      "reply": "unknown",
+      "intents": {
+        "canonical": "What do you think is going on?",
+        "paraphrases": [
+          "Do you have any thoughts about what's causing it?",
+          "Have you had any ideas yourself about what this could be?",
+          "What's your own theory about it?",
+          "Do you have any idea what might be wrong?",
+          "What did you think it might be?"
+        ],
+        "keywords": ["think is causing", "think is going", "think it is", "your own theory", "your theory"],
+        "topics": ["ice.ideas"]
+      }
+    },
+    {
+      "id": "ice.concerns.worries",
+      "topic": "ice.concerns",
+      "reply": "unknown",
+      "intents": {
+        "canonical": "Is there anything you're particularly worried about?",
+        "paraphrases": [
+          "What's worrying you most?",
+          "Do you have any particular concerns?",
+          "Is anything in particular worrying you?",
+          "What are you most concerned about?",
+          "Are you worried it might be something serious?"
+        ],
+        "keywords": ["worried about", "worrying you", "concerns", "concerned about", "something serious"],
+        "topics": ["ice.concerns"]
+      }
+    },
+    {
+      "id": "ice.expectations.hoping",
+      "topic": "ice.expectations",
+      "reply": "unknown",
+      "intents": {
+        "canonical": "What are you hoping for from today's visit?",
+        "paraphrases": [
+          "What would you like to get out of today?",
+          "What were you expecting to happen today?",
+          "Were you hoping for something in particular from us?",
+          "What would you like to happen next?",
+          "Were you hoping for any particular tests or treatment?"
+        ],
+        "keywords": ["hoping we can", "hoping for", "expecting from today", "out of today", "like to happen"],
+        "topics": ["ice.expectations"]
+      }
+    }
+  ]
+}

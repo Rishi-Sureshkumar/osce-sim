@@ -1,0 +1,127 @@
+import Link from "next/link";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { notFound } from "next/navigation";
+import { labelsFrom, modeLabel } from "@/components/common/format";
+import { Timeline } from "@/components/common/Timeline";
+import { OverrideForm } from "@/components/coach/OverrideForm";
+import { SecondOpinion } from "@/components/coach/SecondOpinion";
+import { RegradeButton } from "@/components/coach/RegradeButton";
+import { DomainCard, StationVerdict } from "@/components/results/DomainCard";
+import { SkillsHexagon } from "@/components/results/SkillsHexagon";
+import { PenReview } from "@/components/results/PenReview";
+import { MistakesSection, RecognitionSection } from "@/components/results/HideModeSections";
+import { FeedbackSummary } from "@/components/results/FeedbackSummary";
+import { FeedbackForm } from "@/components/common/FeedbackForm";
+import { HttpError } from "@/server/errors";
+import { getResultsView } from "@/server/results";
+
+export const dynamic = "force-dynamic";
+
+export default async function CoachSession({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  let view;
+  try {
+    view = await getResultsView(id, "coach");
+  } catch (e) {
+    if (e instanceof HttpError && e.status === 404) notFound();
+    throw e;
+  }
+  const { session, kase, run, runs, actions, sheets, overrides } = view;
+  const labels = labelsFrom(view.catalog);
+  const actionsById = new Map(actions.map((a) => [a.id, a]));
+  const scoreByKey = new Map(sheets.flatMap((s) => s.scores.map((sc) => [`${sc.markSheetId}/${sc.itemId}`, sc] as const)));
+
+  return (
+    <main className="mx-auto max-w-[1400px] px-4 pt-6 pb-16 sm:px-6">
+      <ScrollProgress />
+      <Link href="/coach" className="text-xs font-medium text-slate-500 hover:text-slate-800">
+        ← All sessions
+      </Link>
+      <header className="mt-2 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
+            {session.studentLabel} — {kase.title}
+          </h1>
+          <p className="text-sm text-slate-500">
+            <span data-testid="coach-mode">{modeLabel(session.mode)}</span> · {session.status} · started <span data-volatile>{new Date(session.startedAt).toLocaleString()}</span> · {session.patientTurns} patient turns ·{" "}
+            {actions.filter((a) => a.type === "hint").length} hints used · {runs.length} grading run(s)
+            {run?.embeddings === false && (
+              <span className="ml-1 text-amber-700" title="The server's sentence-embedding model was unavailable: language items were matched by keywords and patterns only">
+                · graded without embeddings
+              </span>
+            )}
+          </p>
+        </div>
+        {session.status !== "active" && <RegradeButton sessionId={id} label={run ? "Re-run grading" : "Grade now"} />}
+      </header>
+
+      <div className="mt-6 grid gap-5 lg:grid-cols-[1.2fr_1fr]">
+        <div className="space-y-4">
+          {run ? (
+            <>
+              <StationVerdict pass={view.pass} domains={view.domains} />
+              <SkillsHexagon sheets={sheets} passMark={view.domains.reduce((m, d) => Math.max(m, d.threshold ?? 0), 0) || 0.7} />
+              <FeedbackSummary run={run} />
+              {view.domains.map((d) => (
+                <DomainCard
+                  key={d.domain}
+                  domain={d}
+                  sheets={sheets}
+                  actionsById={actionsById}
+                  labels={labels}
+                  timelineHref={(aid) => `#a-${aid}`}
+                  renderExtra={(sheetId, itemId) => {
+                    const sc = scoreByKey.get(`${sheetId}/${itemId}`);
+                    if (!sc || sc.status === "not_assessable") return null;
+                    const item = sheets.find((s) => s.sheet.id === sheetId)?.sheet.items.find((i) => i.id === itemId);
+                    return (
+                      <>
+                        {sc.status === "needs_review" && item && <SecondOpinion label={item.label} guidance={item.guidance} lines={sc.evidence.map((e) => e.quote).filter((q): q is string => !!q)} />}
+                        <OverrideForm sessionId={id} markSheetId={sheetId} itemId={itemId} maxPoints={sc.maxPoints} currentPoints={sc.points} />
+                      </>
+                    );
+                  }}
+                />
+              ))}
+            </>
+          ) : (
+            <p className="rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-600 shadow-card">Not graded yet.</p>
+          )}
+
+          <FeedbackForm sessionId={id} page="coach-session" prompt="Coach feedback on this simulator / grading" />
+
+          <section className="rounded-xl border border-slate-200 bg-white shadow-card p-5" aria-labelledby="ovr-h">
+            <h2 id="ovr-h" className="text-[15px] font-semibold text-slate-900">
+              Override history
+            </h2>
+            {overrides.length === 0 ? (
+              <p className="mt-1 text-sm text-slate-500">No overrides yet.</p>
+            ) : (
+              <ul className="mt-2 divide-y divide-slate-100 text-sm" data-testid="override-history">
+                {overrides.map((o) => (
+                  <li key={o.id} className="py-1.5">
+                    <span className="text-slate-500" data-volatile>{new Date(o.createdAt).toLocaleString()}</span> — <span className="font-medium">{o.coach}</span> changed{" "}
+                    <code className="text-xs">
+                      {o.markSheetId}/{o.itemId}
+                    </code>{" "}
+                    from {o.originalPoints} to {o.newPoints}: “{o.reason}”{o.gradingRunId !== run?.id && <span className="ml-1 text-xs text-slate-400">(earlier grading run)</span>}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        </div>
+
+        <section aria-labelledby="tl-h" className="space-y-2 lg:sticky lg:top-16 lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto">
+          {view.penReview && <PenReview pen={view.penReview.pen} check={view.penReview.check} actionsById={actionsById} timelineHref={(aid) => `#a-${aid}`} />}
+          {session.settings?.findingsDisplay === "hide" && <RecognitionSection actions={actions} labels={labels} timelineHref={(aid) => `#a-${aid}`} />}
+          <MistakesSection actions={actions} timelineHref={(aid) => `#a-${aid}`} />
+          <h2 id="tl-h" className="text-[15px] font-semibold text-slate-900">
+            Transcript &amp; timeline
+          </h2>
+          <Timeline actions={actions} labels={labels} />
+        </section>
+      </div>
+    </main>
+  );
+}

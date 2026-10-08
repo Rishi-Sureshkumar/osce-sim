@@ -1,0 +1,3226 @@
+{
+  "id": "hf-decompensated-01",
+  "title": "Shortness of breath in a 68-year-old (ED)",
+  "mode": "encounter",
+  "patient": {
+    "name": "Harold Bennett",
+    "age": 68,
+    "sex": "male",
+    "pronouns": "he/him",
+    "chiefComplaint": "Worsening shortness of breath for two weeks",
+    "setting": "Emergency department, sitting upright on a stretcher",
+    "persona": {
+      "affect": "Tired, a little breathless, polite, worried but trying to make light of it",
+      "speakingStyle": "Short sentences; pauses to catch his breath after longer answers; plain everyday words, no medical jargon",
+      "worries": "Worried he will be admitted and miss his granddaughter’s birthday this weekend; quietly worried it is his heart again",
+      "background": "Retired city bus driver, married, enjoys fishing and his grandchildren"
+    }
+  },
+  "doorSign": {
+    "task": "Mr. Bennett, 68, presents with two weeks of worsening shortness of breath. Take a focused history, perform a focused cardiovascular and respiratory examination, then present your summary, differential diagnosis and initial plan.",
+    "timeLimitMinutes": 15
+  },
+  "doorInstructions": {
+    "reasonForVisit": "Shortness of breath",
+    "task": "Take a focused history and perform a focused physical examination. Share your impressions with the patient before you leave. You will then write a post-encounter note.",
+    "prohibitedExams": [
+      {
+        "label": "Breast exam",
+        "regionIds": [
+          "breast_left",
+          "breast_right"
+        ]
+      },
+      {
+        "label": "Pelvic / genital exam",
+        "regionIds": [
+          "pelvic"
+        ]
+      }
+    ]
+  },
+  "timeLimits": {
+    "encounterMin": 15,
+    "penMin": 10
+  },
+  "vitals": {
+    "hr": 104,
+    "rr": 24,
+    "bpSystolic": 148,
+    "bpDiastolic": 92,
+    "tempC": 36.8,
+    "spo2": 89,
+    "spo2Context": "on room air"
+  },
+  "history": {
+    "openingStatement": "I just can’t catch my breath. It’s been getting worse for a couple of weeks.",
+    "facts": [
+      {
+        "id": "dyspnea-onset",
+        "topic": "Onset and course of breathlessness",
+        "answer": "It came on gradually about two weeks ago and has got steadily worse. The last three days have been the worst.",
+        "revealOnlyIfAsked": false,
+        "keywords": [
+          "start",
+          "began",
+          "how long",
+          "onset",
+          "course",
+          "worse",
+          "when did"
+        ],
+        "intents": {
+          "canonical": "When did the shortness of breath start?",
+          "paraphrases": [
+            "When did your breathing problems start?",
+            "When did you first notice being short of breath?",
+            "How long have you been short of breath?",
+            "How long has this breathlessness been going on?",
+            "When did the SOB begin?",
+            "When did you start getting breathless?",
+            "Since when have you had trouble breathing?",
+            "How long has it been hard to catch your breath?",
+            "Has your breathing been getting worse?",
+            "Is the shortness of breath getting better, worse or staying the same?",
+            "How has the breathlessness changed over the past two weeks?",
+            "Has the breathlessness been steadily getting worse?",
+            "What has the time course of your dyspnoea been?",
+            "Can you tell me more about the breathlessness?"
+          ],
+          "keywords": [
+            "onset",
+            "when did it start",
+            "when did this start",
+            "how long has this been going on",
+            "time course",
+            "since when"
+          ],
+          "patterns": [
+            "\\bhow long (have you been|has it been|have you had|has this been)\\b.*\\b(short of breath|shortness of breath|breathless|breathlessness|breathing|winded|out of breath)\\b",
+            "\\bwhen did\\b.*\\b(start|begin|began|first notice)\\b.*\\b(short of breath|shortness of breath|breathless|breathlessness|breathing|winded|out of breath)\\b",
+            "\\bwhen did\\b.*\\b(short of breath|shortness of breath|breathless|breathlessness|breathing|winded|out of breath)\\b.*\\b(start|begin|began)\\b"
+          ],
+          "topics": [
+            "hpi.onset",
+            "hpi.course"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "onset-gradual",
+            "intents": {
+              "canonical": "Did it come on suddenly or gradually?",
+              "paraphrases": [
+                "Was the onset sudden or gradual?",
+                "Did the breathlessness come on all of a sudden?",
+                "Did your breathing get bad suddenly or slowly?",
+                "Did the shortness of breath start abruptly?",
+                "Did the breathlessness come on gradually?",
+                "Was the start of the breathlessness sudden?"
+              ],
+              "keywords": [
+                "suddenly or gradually",
+                "sudden or gradual",
+                "all of a sudden",
+                "abruptly",
+                "came on suddenly"
+              ],
+              "topics": [
+                "hpi.onset"
+              ]
+            },
+            "answer": "It came on gradually and has got steadily worse."
+          }
+        ]
+      },
+      {
+        "id": "dyspnea-exertion",
+        "topic": "Exertional limit",
+        "answer": "Two weeks ago I could walk a few blocks. Now I get winded walking from the bedroom to the kitchen, or going up the 12 stairs at home.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "walk",
+          "stairs",
+          "how far",
+          "exert",
+          "activity",
+          "exercise",
+          "distance"
+        ],
+        "intents": {
+          "canonical": "How much can you do before you get short of breath?",
+          "paraphrases": [
+            "Do you get short of breath when you exert yourself?",
+            "Does walking make you breathless?",
+            "Do you get winded with activity?",
+            "How is your exercise tolerance?",
+            "What is your exercise tolerance like?",
+            "Are you short of breath on exertion?",
+            "Any SOB on exertion?",
+            "Do you get dyspnoea on exertion?",
+            "Has your breathing limited what you can do day to day?",
+            "Do you get breathless doing everyday things around the house?",
+            "Compared with two weeks ago, how much can you do now?",
+            "Does physical activity make your breathing worse?",
+            "Do you get out of breath when you move around?"
+          ],
+          "keywords": [
+            "exertion",
+            "exercise tolerance",
+            "exert yourself",
+            "winded",
+            "physical activity",
+            "dyspnea on exertion"
+          ],
+          "topics": [
+            "hpi.severity",
+            "hpi.aggravating"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "exertion-distance",
+            "intents": {
+              "canonical": "How far can you walk before you get short of breath?",
+              "paraphrases": [
+                "How far can you walk?",
+                "How many blocks can you walk?",
+                "What distance can you walk before you have to stop?",
+                "How far could you walk two weeks ago?",
+                "How far can you go on the flat before you have to stop?",
+                "How far can you walk without getting breathless?",
+                "Can you walk a block without stopping?"
+              ],
+              "keywords": [
+                "how far can you walk",
+                "how many blocks",
+                "walking distance",
+                "how far could you walk",
+                "on the flat"
+              ],
+              "patterns": [
+                "\\bhow far\\b.*\\bwalk(ing)?\\b",
+                "\\bhow many (blocks|metres|meters|yards)\\b"
+              ],
+              "topics": [
+                "hpi.severity"
+              ]
+            },
+            "answer": "Only from the bedroom to the kitchen now. Two weeks ago I could walk a few blocks."
+          },
+          {
+            "id": "exertion-stairs",
+            "intents": {
+              "canonical": "Can you manage stairs?",
+              "paraphrases": [
+                "How many stairs can you climb?",
+                "Do you get breathless climbing stairs?",
+                "How many flights of stairs can you manage?",
+                "Can you get up the stairs at home?",
+                "Are stairs a problem for you?",
+                "Do you get short of breath going upstairs?",
+                "Any trouble climbing stairs?"
+              ],
+              "keywords": [
+                "flights of stairs",
+                "flight of stairs",
+                "upstairs",
+                "climb stairs",
+                "climbing stairs",
+                "the stairs"
+              ],
+              "patterns": [
+                "\\b(climb|climbing|manage|get up|go up|going up)\\b.*\\b(stairs|steps|flights?)\\b"
+              ],
+              "topics": [
+                "hpi.severity"
+              ]
+            },
+            "answer": "I get winded going up the 12 stairs at home."
+          }
+        ]
+      },
+      {
+        "id": "orthopnea",
+        "topic": "Breathlessness lying flat",
+        "answer": "I can’t lie flat any more. I’ve been sleeping on three pillows, and last night I slept in my recliner.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "lie flat",
+          "lying",
+          "pillows",
+          "sleep",
+          "lay down",
+          "flat"
+        ],
+        "intents": {
+          "canonical": "Do you get short of breath when you lie flat?",
+          "paraphrases": [
+            "Can you lie flat?",
+            "Are you able to lie flat without getting breathless?",
+            "Does lying down make your breathing worse?",
+            "Is your breathing worse when you lie down?",
+            "Do you need to prop yourself up to breathe at night?",
+            "Do you sleep propped up?",
+            "Do you have orthopnoea?",
+            "Any orthopnea?",
+            "Can you lay down flat in bed?",
+            "Do you have to sit up to sleep?",
+            "Do you sleep sitting up?",
+            "How do you sleep at night, flat or propped up?",
+            "Does lying back make you more breathless?",
+            "Have you had to sleep in a chair?"
+          ],
+          "keywords": [
+            "lie flat",
+            "lying flat",
+            "lay flat",
+            "propped up",
+            "orthopnea",
+            "orthopnoea",
+            "sit up to sleep",
+            "sleep sitting up"
+          ],
+          "patterns": [
+            "\\b(lie|lying|lay|laying) (down )?flat\\b"
+          ],
+          "topics": [
+            "hpi.aggravating",
+            "hpi.associated"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "orthopnea-pillows",
+            "intents": {
+              "canonical": "How many pillows do you sleep on?",
+              "paraphrases": [
+                "How many pillows do you use at night?",
+                "How many pillows?",
+                "Do you use extra pillows?",
+                "Do you need more pillows than usual to sleep?",
+                "Have you had to add pillows at night?",
+                "How many pillows do you need to breathe comfortably?",
+                "Do you sleep on several pillows?"
+              ],
+              "keywords": [
+                "how many pillows",
+                "extra pillows",
+                "more pillows",
+                "several pillows",
+                "recliner"
+              ],
+              "patterns": [
+                "\\bhow many pillows?\\b"
+              ],
+              "topics": [
+                "hpi.aggravating"
+              ]
+            },
+            "answer": "Three pillows. Last night I slept in my recliner."
+          }
+        ]
+      },
+      {
+        "id": "pnd",
+        "topic": "Waking up breathless at night",
+        "answer": "Yes, a couple of times this week I woke up gasping and had to sit on the edge of the bed for a few minutes.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "wake",
+          "night",
+          "gasping",
+          "middle of the night",
+          "waking"
+        ],
+        "intents": {
+          "canonical": "Do you wake up at night short of breath?",
+          "paraphrases": [
+            "Do you ever wake up gasping for air?",
+            "Have you woken up in the night struggling to breathe?",
+            "Any PND?",
+            "Any paroxysmal nocturnal dyspnoea?",
+            "Do you wake up in the middle of the night breathless?",
+            "Has breathlessness woken you from sleep?",
+            "Do you ever wake up feeling like you are suffocating?",
+            "Do you have episodes at night where you wake up and need to sit up to catch your breath?",
+            "Does your breathing wake you up?",
+            "Are you waking up choking for air?",
+            "Do you wake up breathless?",
+            "Have you had any night-time attacks of breathlessness?"
+          ],
+          "keywords": [
+            "wake up gasping",
+            "woke up gasping",
+            "gasping for air",
+            "paroxysmal nocturnal",
+            "pnd",
+            "wake up breathless",
+            "wake up short of breath"
+          ],
+          "patterns": [
+            "\\b(wake|waking|woke|woken|wakes)\\b.*\\b(breathless|short of breath|gasping|choking|suffocating|struggling to breathe|catch your breath)\\b"
+          ],
+          "topics": [
+            "hpi.associated",
+            "hpi.timing"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "pnd-frequency",
+            "intents": {
+              "canonical": "How often do you wake up breathless at night?",
+              "paraphrases": [
+                "How many nights have you woken up gasping?",
+                "How often does the night-time breathlessness happen?",
+                "How often do you wake up gasping for air?",
+                "How many times this week have you woken up short of breath?",
+                "Is waking up breathless happening every night?",
+                "How frequently are you woken by breathlessness?"
+              ],
+              "keywords": [
+                "how often do you wake",
+                "how many nights",
+                "how many times have you woken",
+                "how frequently are you woken"
+              ],
+              "patterns": [
+                "\\bhow (often|many times|frequently)\\b.*\\b(wake|waking|woke|woken)\\b.*\\b(breathless|breathlessness|short of breath|gasping|choking)\\b"
+              ],
+              "topics": [
+                "hpi.timing"
+              ]
+            },
+            "answer": "A couple of times this week."
+          }
+        ]
+      },
+      {
+        "id": "swelling",
+        "topic": "Leg swelling",
+        "answer": "My ankles have been puffy for about a week, worse by the evening. My shoes are tight.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "swelling",
+          "swollen",
+          "ankle",
+          "legs",
+          "feet",
+          "shoes",
+          "puffy",
+          "edema"
+        ],
+        "intents": {
+          "canonical": "Have you noticed any swelling in your legs or ankles?",
+          "paraphrases": [
+            "Any ankle swelling?",
+            "Are your feet swollen?",
+            "Have your legs been puffy?",
+            "Any leg swelling?",
+            "Have you had any oedema in your legs?",
+            "Any pedal edema?",
+            "Have your shoes been feeling tight?",
+            "Are your ankles swollen?",
+            "Any fluid build-up in your legs?",
+            "Do your legs swell up?",
+            "Have you had puffy ankles?",
+            "Is there any swelling in your feet?"
+          ],
+          "keywords": [
+            "ankle swelling",
+            "swollen ankles",
+            "leg swelling",
+            "swollen legs",
+            "swollen feet",
+            "oedema",
+            "fluid build-up"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.cardiac"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "swelling-timing",
+            "intents": {
+              "canonical": "Is the swelling worse at any particular time of day?",
+              "paraphrases": [
+                "Is the ankle swelling worse in the evening?",
+                "Does the swelling get worse as the day goes on?",
+                "Is the swelling better in the morning?",
+                "When in the day is the swelling worst?",
+                "Does the leg swelling change during the day?",
+                "Are your ankles more swollen at night than in the morning?"
+              ],
+              "keywords": [
+                "swelling worse in the evening",
+                "as the day goes on",
+                "ankles worse in the evening"
+              ],
+              "patterns": [
+                "\\b(swelling|swollen|swell|puffy)\\b.*\\b(evening|morning|time of day|during the day|day goes on|end of the day)\\b",
+                "\\b(evening|morning|time of day)\\b.*\\b(swelling|swollen|swell|puffy)\\b"
+              ],
+              "topics": [
+                "hpi.timing"
+              ]
+            },
+            "answer": "It’s worse by the evening."
+          }
+        ]
+      },
+      {
+        "id": "weight",
+        "topic": "Weight change",
+        "answer": "I’ve put on about 4 kilos — nine pounds — in the last two weeks, even though I’m not eating much.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "weight",
+          "kilos",
+          "pounds",
+          "heavier",
+          "gain"
+        ],
+        "intents": {
+          "canonical": "Have you noticed any change in your weight?",
+          "paraphrases": [
+            "Have you gained any weight recently?",
+            "Have you put on weight?",
+            "Any weight gain?",
+            "Any weight change?",
+            "Has your weight gone up or down?",
+            "Have you been feeling heavier lately?",
+            "Have your clothes been getting tighter?",
+            "Any weight loss?",
+            "Has your weight changed over the last couple of weeks?",
+            "Have you been weighing more than usual?",
+            "What has your weight been doing?",
+            "Have you weighed yourself recently?"
+          ],
+          "keywords": [
+            "weight gain",
+            "gained weight",
+            "put on weight",
+            "weight change",
+            "weigh",
+            "weight loss"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.constitutional"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "weight-amount",
+            "intents": {
+              "canonical": "How much weight have you gained?",
+              "paraphrases": [
+                "How much weight have you put on?",
+                "How many kilos have you gained?",
+                "How many pounds have you put on?",
+                "How much heavier are you?",
+                "How much has your weight gone up?",
+                "By how much has your weight changed?"
+              ],
+              "keywords": [
+                "how much weight",
+                "how many kilos",
+                "how many pounds",
+                "how much heavier"
+              ],
+              "topics": [
+                "ros.constitutional"
+              ]
+            },
+            "answer": "About 4 kilos — nine pounds — in the last two weeks."
+          }
+        ]
+      },
+      {
+        "id": "cough",
+        "topic": "Cough",
+        "answer": "A dry tickly cough, mostly at night when I lie down. Nothing coming up.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "cough",
+          "phlegm",
+          "sputum",
+          "mucus"
+        ],
+        "intents": {
+          "canonical": "Do you have a cough?",
+          "paraphrases": [
+            "Any cough?",
+            "Have you been coughing?",
+            "Have you had a cough lately?",
+            "Tell me about your cough.",
+            "What is the cough like?",
+            "Is it a dry cough?",
+            "Have you noticed yourself coughing more?",
+            "Do you get a tickly cough?",
+            "Is the cough dry or chesty?",
+            "Any coughing recently?",
+            "Have you been bothered by a cough?"
+          ],
+          "keywords": [
+            "a cough",
+            "dry cough",
+            "tickly cough",
+            "tickly",
+            "chesty",
+            "been coughing"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.respiratory"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "cough-timing",
+            "intents": {
+              "canonical": "When is the cough worse?",
+              "paraphrases": [
+                "Is the cough worse at night?",
+                "Does the cough get worse when you lie down?",
+                "What time of day do you cough most?",
+                "Is your cough worse at any particular time?",
+                "Do you cough more at night?",
+                "Does lying down set off the cough?"
+              ],
+              "keywords": [
+                "cough worse",
+                "cough at night",
+                "cough more at night",
+                "cough when you lie down"
+              ],
+              "patterns": [
+                "\\bcough(ing)?\\b.*\\b(at night|lie down|lying down|time of day|worse at)\\b",
+                "\\b(at night|lying down|lie down)\\b.*\\bcough(ing)?\\b"
+              ],
+              "topics": [
+                "hpi.timing"
+              ]
+            },
+            "answer": "Mostly at night when I lie down."
+          }
+        ]
+      },
+      {
+        "id": "abdomen",
+        "topic": "Abdominal fullness and appetite",
+        "answer": "My belly feels full and a bit sore on the right side, and I’ve not had much appetite.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "appetite",
+          "belly",
+          "stomach",
+          "abdomen",
+          "full",
+          "eating",
+          "nausea"
+        ],
+        "intents": {
+          "canonical": "Have you had any problems with your stomach or appetite?",
+          "paraphrases": [
+            "How is your appetite?",
+            "Has your appetite changed?",
+            "Any tummy pain?",
+            "Any abdominal pain?",
+            "Does your belly feel bloated or full?",
+            "Have you noticed any abdominal swelling or fullness?",
+            "Any discomfort in your abdomen?",
+            "Have you been off your food?",
+            "Any pain in your belly?",
+            "Is your stomach feeling OK?",
+            "Any GI symptoms?",
+            "Are you eating as much as usual?",
+            "Any pain in the right upper part of your tummy?"
+          ],
+          "keywords": [
+            "appetite",
+            "abdominal",
+            "tummy",
+            "bloated",
+            "off your food",
+            "stomach pain",
+            "belly pain"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.gi"
+          ]
+        }
+      },
+      {
+        "id": "fatigue",
+        "topic": "Fatigue",
+        "answer": "I’m wiped out all the time.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "tired",
+          "fatigue",
+          "energy",
+          "exhausted"
+        ],
+        "intents": {
+          "canonical": "Have you been feeling tired?",
+          "paraphrases": [
+            "How is your energy?",
+            "How are your energy levels?",
+            "Any fatigue?",
+            "Have you been more tired than usual?",
+            "Do you feel exhausted?",
+            "Have you been feeling run down?",
+            "Are you lacking energy?",
+            "Do you feel worn out?",
+            "Do you get tired easily?",
+            "Any lethargy?",
+            "Have you been feeling drained lately?"
+          ],
+          "keywords": [
+            "fatigue",
+            "energy levels",
+            "run down",
+            "worn out",
+            "lethargic",
+            "lethargy",
+            "drained"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.constitutional"
+          ]
+        },
+        "emotion": "tired"
+      },
+      {
+        "id": "nocturia",
+        "topic": "Night-time urination",
+        "answer": "I’m up two or three times a night to pass water.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "urin",
+          "pee",
+          "bladder",
+          "water works",
+          "bathroom"
+        ],
+        "intents": {
+          "canonical": "Do you have to get up at night to pass urine?",
+          "paraphrases": [
+            "How often do you get up at night to pee?",
+            "Do you wake up at night to go to the toilet?",
+            "Any nocturia?",
+            "Are you up at night to urinate?",
+            "How many times a night do you go to the bathroom?",
+            "Have you been passing water at night?",
+            "Any changes in your urination?",
+            "Any problems with your waterworks?",
+            "How are your waterworks?",
+            "Are you peeing more at night?",
+            "Do you need the loo during the night?",
+            "Any urinary symptoms?"
+          ],
+          "keywords": [
+            "nocturia",
+            "at night to pee",
+            "at night to urinate",
+            "pass urine at night",
+            "waterworks",
+            "urinary symptoms",
+            "toilet at night"
+          ],
+          "patterns": [
+            "\\b(night|nighttime|overnight)\\b.*\\b(pee|peeing|urinate|urinating|urine|toilet|bathroom|loo|pass water|passing water|wee)\\b",
+            "\\b(pee|peeing|urinate|urinating|urine|toilet|bathroom|loo|pass water|passing water|wee)\\b.*\\b(night|overnight)\\b"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.gu"
+          ]
+        }
+      },
+      {
+        "id": "trigger-meds",
+        "topic": "Medication adherence",
+        "answer": "I ran out of my water pill about ten days ago and didn’t get it refilled — I hate being stuck near a bathroom when I’m out.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "water pill",
+          "furosemide",
+          "lasix",
+          "taking your",
+          "run out",
+          "ran out",
+          "missed",
+          "adherence",
+          "stopped"
+        ],
+        "intents": {
+          "canonical": "Have you been taking your medications as prescribed?",
+          "paraphrases": [
+            "Have you missed any doses of your medicines?",
+            "Have you been taking your water pill?",
+            "Are you still taking your furosemide?",
+            "Have you run out of any of your tablets?",
+            "Have you stopped any of your medications recently?",
+            "Do you ever forget to take your pills?",
+            "Have you been taking all your heart medicines regularly?",
+            "Any problems sticking to your medication regimen?",
+            "Has anything changed with your medicines lately?",
+            "Are you compliant with your meds?",
+            "Have you been taking your diuretic?",
+            "Any missed doses?",
+            "How are you getting on with taking your medications?"
+          ],
+          "keywords": [
+            "missed doses",
+            "missed any doses",
+            "as prescribed",
+            "compliant",
+            "compliance",
+            "forget to take",
+            "medication regimen"
+          ],
+          "topics": [
+            "meds.adherence",
+            "hpi.triggers"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "meds-ran-out-when",
+            "intents": {
+              "canonical": "When did you run out of your water pill?",
+              "paraphrases": [
+                "When did you stop taking the furosemide?",
+                "How long ago did you run out of your water pill?",
+                "How long have you been without your diuretic?",
+                "When was your last dose of furosemide?",
+                "How many days have you been off the water pill?"
+              ],
+              "keywords": [
+                "when did you run out",
+                "how long ago did you run out",
+                "last dose",
+                "without your water pill",
+                "off the water pill"
+              ],
+              "patterns": [
+                "\\b(when|how long ago)\\b.*\\b(run out|ran out|stop taking|stopped taking)\\b"
+              ],
+              "topics": [
+                "meds.adherence"
+              ]
+            },
+            "answer": "About ten days ago."
+          }
+        ]
+      },
+      {
+        "id": "trigger-diet",
+        "topic": "Diet / salt",
+        "answer": "We had a lot of family over for my wife’s 70th — lots of takeout, ham, chips. More salt than I’m supposed to have.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "salt",
+          "diet",
+          "food",
+          "eating",
+          "takeout"
+        ],
+        "intents": {
+          "canonical": "Have you had more salt in your diet recently?",
+          "paraphrases": [
+            "What has your diet been like lately?",
+            "Have you been eating a lot of salty food?",
+            "Any changes to your diet?",
+            "Have you been watching your salt intake?",
+            "Have you been having takeaways or processed food?",
+            "How much salt do you eat?",
+            "Have you been sticking to a low-salt diet?",
+            "Have you eaten anything out of the ordinary recently?",
+            "Any dietary indiscretion?",
+            "Have you been eating fast food or takeout?",
+            "How is your sodium intake?"
+          ],
+          "keywords": [
+            "salty",
+            "sodium",
+            "takeaway",
+            "takeaways",
+            "low salt",
+            "dietary",
+            "fast food",
+            "processed food"
+          ],
+          "topics": [
+            "sh.diet",
+            "hpi.triggers"
+          ]
+        }
+      },
+      {
+        "id": "pmh",
+        "topic": "Past medical history",
+        "answer": "I had a heart attack in 2019 — they put a stent in. Since then they’ve said my heart pumps weakly. I also have high blood pressure, type 2 diabetes and high cholesterol.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "medical conditions",
+          "medical problems",
+          "health problems",
+          "past medical",
+          "history",
+          "heart attack",
+          "diabetes",
+          "blood pressure",
+          "conditions"
+        ],
+        "intents": {
+          "canonical": "Do you have any medical conditions?",
+          "paraphrases": [
+            "What medical problems do you have?",
+            "Do you have any other health problems?",
+            "Tell me about your past medical history.",
+            "Have you been diagnosed with any illnesses in the past?",
+            "Any PMH?",
+            "Do you have high blood pressure?",
+            "Are you diabetic?",
+            "Have you ever had a heart attack?",
+            "Do you have any long-term conditions?",
+            "Any chronic illnesses?",
+            "Do you have high cholesterol?",
+            "Have you had any heart problems before?",
+            "What other conditions do you see the doctor for?",
+            "Any significant medical history?"
+          ],
+          "keywords": [
+            "medical history",
+            "health conditions",
+            "diabetic",
+            "hypertension",
+            "cholesterol",
+            "chronic illness",
+            "long-term conditions",
+            "been diagnosed with"
+          ],
+          "topics": [
+            "pmh.conditions"
+          ]
+        }
+      },
+      {
+        "id": "ef",
+        "topic": "What he was told about his heart",
+        "answer": "The heart doctor said it pumps at about 30 percent. I had a scan last spring.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "pump",
+          "ejection",
+          "echo",
+          "scan",
+          "weak heart",
+          "heart failure",
+          "cardiologist"
+        ],
+        "intents": {
+          "canonical": "What have the doctors told you about your heart?",
+          "paraphrases": [
+            "Do you know how well your heart pumps?",
+            "Do you know your ejection fraction?",
+            "What is your EF?",
+            "Have you had an echo?",
+            "Have you had a heart scan?",
+            "When was your last echocardiogram?",
+            "What did your cardiologist say about your heart function?",
+            "Have you been told you have a weak heart?",
+            "Have you been told you have heart failure?",
+            "How strong is your heart pumping?",
+            "Do you see a heart specialist?",
+            "What did your last heart ultrasound show?"
+          ],
+          "keywords": [
+            "ejection fraction",
+            "echocardiogram",
+            "heart scan",
+            "heart doctor",
+            "heart function",
+            "heart specialist",
+            "heart ultrasound"
+          ],
+          "topics": [
+            "pmh.conditions"
+          ]
+        }
+      },
+      {
+        "id": "psh",
+        "topic": "Past surgeries and procedures",
+        "answer": "The stent in 2019 through my wrist, and my appendix out when I was 20.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "surgery",
+          "surgeries",
+          "operation",
+          "procedure",
+          "stent",
+          "appendix"
+        ],
+        "intents": {
+          "canonical": "Have you had any operations or procedures?",
+          "paraphrases": [
+            "Have you ever had surgery?",
+            "Any past surgeries?",
+            "Any previous operations?",
+            "What procedures have you had done?",
+            "Have you had a stent put in?",
+            "Have you had your appendix out?",
+            "Any PSH?",
+            "Have you ever been operated on?",
+            "Any past surgical history?",
+            "Have you had any heart procedures?",
+            "Have you ever had an operation under anaesthetic?"
+          ],
+          "keywords": [
+            "surgical history",
+            "operations",
+            "operated on",
+            "procedures",
+            "appendix out",
+            "appendectomy"
+          ],
+          "topics": [
+            "psh.surgery"
+          ]
+        }
+      },
+      {
+        "id": "meds",
+        "topic": "Medications and doses",
+        "answer": "Furosemide 40 mg in the morning — the one I ran out of. Carvedilol 12.5 mg twice a day, lisinopril 10 mg once a day, spironolactone 25 mg, aspirin 81 mg, atorvastatin 80 mg at night, and metformin 1000 mg twice a day. No over-the-counter stuff except some ibuprofen for my knee last week.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "medication",
+          "medicine",
+          "pills",
+          "taking",
+          "dose",
+          "over the counter",
+          "supplements",
+          "ibuprofen",
+          "vitamins"
+        ],
+        "intents": {
+          "canonical": "What medications do you take?",
+          "paraphrases": [
+            "Are you on any medications?",
+            "What medicines are you currently taking?",
+            "Can you tell me all the tablets you take and the doses?",
+            "Any regular meds?",
+            "What pills do you take?",
+            "Do you take any prescription medicines?",
+            "What doses do you take of your medicines?",
+            "Do you take anything regularly?",
+            "What is on your medication list?",
+            "Which heart medicines are you on?",
+            "Are you taking any blood thinners?",
+            "Do you take any tablets for your diabetes?",
+            "Can you list your current medications?"
+          ],
+          "keywords": [
+            "what medications",
+            "what medicines",
+            "on any medications",
+            "medication list",
+            "regular meds",
+            "prescription medicines",
+            "currently taking",
+            "what tablets"
+          ],
+          "topics": [
+            "meds.current"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "meds-otc",
+            "intents": {
+              "canonical": "Do you take any over-the-counter medicines?",
+              "paraphrases": [
+                "Any over-the-counter medications?",
+                "Do you take anything you buy without a prescription?",
+                "Have you taken any painkillers like ibuprofen?",
+                "Any herbal remedies or supplements?",
+                "Have you taken any anti-inflammatories recently?",
+                "Any NSAIDs?",
+                "Do you take any vitamins or supplements?",
+                "Anything from the pharmacy that is not prescribed?"
+              ],
+              "keywords": [
+                "otc",
+                "without a prescription",
+                "anti-inflammatory",
+                "anti-inflammatories",
+                "nsaid",
+                "nsaids",
+                "herbal",
+                "painkillers"
+              ],
+              "topics": [
+                "meds.otc"
+              ]
+            },
+            "answer": "No over-the-counter stuff, except some ibuprofen for my knee last week."
+          }
+        ]
+      },
+      {
+        "id": "allergies",
+        "topic": "Allergies",
+        "answer": "Penicillin gave me a rash all over as a kid. No food allergies.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "allerg",
+          "reaction"
+        ],
+        "intents": {
+          "canonical": "Do you have any allergies?",
+          "paraphrases": [
+            "Are you allergic to anything?",
+            "Any drug allergies?",
+            "Any allergies to medications?",
+            "Have you ever had a reaction to a medicine?",
+            "Any known allergies?",
+            "Are you allergic to penicillin?",
+            "Any food allergies?",
+            "NKDA?",
+            "Have you had a bad reaction to any antibiotics?",
+            "What reaction did you have to penicillin?"
+          ],
+          "keywords": [
+            "allergies",
+            "allergic",
+            "allergy",
+            "penicillin",
+            "reaction to",
+            "nkda"
+          ],
+          "patterns": [
+            "\\b(penicillin|allergy|allergic|allergies|antibiotics?)\\b.*\\brash\\b",
+            "\\brash\\b.*\\b(penicillin|allergy|allergic|antibiotics?|medicine|medication)\\b"
+          ],
+          "topics": [
+            "allergies"
+          ]
+        }
+      },
+      {
+        "id": "fh",
+        "topic": "Family history",
+        "answer": "My dad died of a heart attack at 62. My mom had a stroke and died at 80. I have one brother, he’s 71 and has diabetes.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "family",
+          "father",
+          "mother",
+          "dad",
+          "mom",
+          "brother",
+          "sister",
+          "siblings",
+          "parents"
+        ],
+        "intents": {
+          "canonical": "Does anything run in your family?",
+          "paraphrases": [
+            "Tell me about your family history.",
+            "Any family history of heart disease?",
+            "Are your parents alive and well?",
+            "Has anyone in your family had heart problems?",
+            "What did your father die of?",
+            "Any illnesses that run in the family?",
+            "Any FHx?",
+            "Do you have any brothers or sisters?",
+            "Is there any history of heart attacks or strokes in your family?",
+            "How old were your parents when they died?",
+            "Does anyone in your family have diabetes?"
+          ],
+          "keywords": [
+            "family history",
+            "run in the family",
+            "runs in the family",
+            "your parents",
+            "your father",
+            "your mother",
+            "relatives"
+          ],
+          "topics": [
+            "fh"
+          ]
+        }
+      },
+      {
+        "id": "smoking",
+        "topic": "Smoking",
+        "answer": "I smoked a pack a day for 30 years and quit after the heart attack in 2019.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "smoke",
+          "cigarette",
+          "tobacco",
+          "vape"
+        ],
+        "intents": {
+          "canonical": "Do you smoke?",
+          "paraphrases": [
+            "Have you ever smoked?",
+            "Smoke?",
+            "Do you use tobacco?",
+            "Are you a smoker?",
+            "Any history of smoking?",
+            "Do you smoke cigarettes?",
+            "Have you ever been a smoker?",
+            "Do you vape?",
+            "What is your smoking history?",
+            "Any cigarettes?",
+            "Have you ever used tobacco products?"
+          ],
+          "keywords": [
+            "smoker",
+            "smoking",
+            "smoked",
+            "cigarettes",
+            "tobacco",
+            "vaping"
+          ],
+          "topics": [
+            "sh.smoking"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "smoking-amount",
+            "intents": {
+              "canonical": "How much did you smoke?",
+              "paraphrases": [
+                "How many cigarettes a day did you smoke?",
+                "How many packs a day?",
+                "How many pack-years?",
+                "How long did you smoke for?",
+                "How many years did you smoke?",
+                "How heavily did you smoke?"
+              ],
+              "keywords": [
+                "how much did you smoke",
+                "packs a day",
+                "pack-years",
+                "pack years",
+                "how many cigarettes",
+                "how long did you smoke"
+              ],
+              "patterns": [
+                "\\bhow (much|many cigarettes|many packs|heavily) did you smoke\\b",
+                "\\bpacks? (a|per) day\\b",
+                "\\bpack[- ]years?\\b"
+              ],
+              "topics": [
+                "sh.smoking"
+              ]
+            },
+            "answer": "A pack a day for 30 years."
+          },
+          {
+            "id": "smoking-quit",
+            "intents": {
+              "canonical": "When did you quit smoking?",
+              "paraphrases": [
+                "When did you stop smoking?",
+                "Do you still smoke?",
+                "Are you still smoking?",
+                "How long ago did you give up cigarettes?",
+                "When did you give up smoking?",
+                "Are you an ex-smoker?"
+              ],
+              "keywords": [
+                "quit smoking",
+                "stop smoking",
+                "stopped smoking",
+                "give up smoking",
+                "gave up smoking",
+                "still smoke",
+                "still smoking",
+                "ex-smoker"
+              ],
+              "patterns": [
+                "\\b(quit|stop|stopped|give up|gave up)\\b.*\\b(smoke|smoking|cigarettes)\\b"
+              ],
+              "topics": [
+                "sh.smoking"
+              ]
+            },
+            "answer": "I quit after the heart attack in 2019."
+          }
+        ]
+      },
+      {
+        "id": "alcohol",
+        "topic": "Alcohol",
+        "answer": "A beer or two on the weekend. Not more.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "alcohol",
+          "drink",
+          "beer",
+          "wine"
+        ],
+        "intents": {
+          "canonical": "Do you drink alcohol?",
+          "paraphrases": [
+            "How much alcohol do you drink?",
+            "Do you drink?",
+            "How many drinks a week do you have?",
+            "Any alcohol?",
+            "How much do you drink in a week?",
+            "Do you drink beer or wine?",
+            "How often do you have a drink?",
+            "How many units of alcohol a week?",
+            "Do you drink at all?"
+          ],
+          "keywords": [
+            "alcohol",
+            "drinks a week",
+            "units of alcohol",
+            "booze",
+            "drink alcohol",
+            "have a drink"
+          ],
+          "topics": [
+            "sh.alcohol"
+          ]
+        }
+      },
+      {
+        "id": "drugs",
+        "topic": "Recreational drugs",
+        "answer": "No, never.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "drugs",
+          "recreational",
+          "marijuana",
+          "cannabis",
+          "cocaine"
+        ],
+        "intents": {
+          "canonical": "Do you use any recreational drugs?",
+          "paraphrases": [
+            "Any recreational drug use?",
+            "Have you ever used street drugs?",
+            "Do you use marijuana?",
+            "Do you smoke weed?",
+            "Any cannabis use?",
+            "Have you ever used cocaine?",
+            "Do you take any illegal drugs?",
+            "Any illicit drugs?",
+            "Have you ever injected drugs?",
+            "Do you use any non-prescribed drugs?"
+          ],
+          "keywords": [
+            "recreational drugs",
+            "street drugs",
+            "illicit",
+            "illegal drugs",
+            "cannabis",
+            "marijuana",
+            "cocaine",
+            "weed"
+          ],
+          "topics": [
+            "sh.drugs"
+          ]
+        }
+      },
+      {
+        "id": "occupation",
+        "topic": "Occupation",
+        "answer": "Retired. I drove city buses for 35 years.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "work",
+          "job",
+          "occupation",
+          "retired",
+          "do for a living"
+        ],
+        "intents": {
+          "canonical": "What do you do for work?",
+          "paraphrases": [
+            "What is your job?",
+            "Are you working at the moment?",
+            "What do you do for a living?",
+            "Are you retired?",
+            "What did you used to do for work?",
+            "What is your occupation?",
+            "Do you work?",
+            "What was your job before you retired?",
+            "Are you still working?"
+          ],
+          "keywords": [
+            "occupation",
+            "for work",
+            "for a living",
+            "your job",
+            "retired",
+            "still working",
+            "employed"
+          ],
+          "topics": [
+            "sh.occupation"
+          ]
+        }
+      },
+      {
+        "id": "home",
+        "topic": "Who he lives with",
+        "answer": "With my wife, Carol. Our daughter lives ten minutes away.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "live with",
+          "home",
+          "wife",
+          "who is at home",
+          "married"
+        ],
+        "intents": {
+          "canonical": "Who do you live with?",
+          "paraphrases": [
+            "Do you live alone?",
+            "Who is at home with you?",
+            "What is your living situation?",
+            "Are you married?",
+            "Do you have family nearby?",
+            "Who lives with you?",
+            "Do you have support at home?",
+            "Is there anyone at home to help you?",
+            "Tell me about your home situation.",
+            "Do you have any children nearby?"
+          ],
+          "keywords": [
+            "live with",
+            "live alone",
+            "living situation",
+            "at home with you",
+            "lives with you",
+            "support at home",
+            "home situation"
+          ],
+          "topics": [
+            "sh.living"
+          ]
+        }
+      },
+      {
+        "id": "meaning",
+        "topic": "What gives him joy",
+        "answer": "My grandkids, and fishing at the lake with my brother.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "enjoy",
+          "joy",
+          "meaning",
+          "hobbies",
+          "fun",
+          "like to do"
+        ],
+        "intents": {
+          "canonical": "What do you enjoy doing?",
+          "paraphrases": [
+            "What are your hobbies?",
+            "What do you like to do for fun?",
+            "What matters most to you?",
+            "What brings you joy?",
+            "What do you do in your spare time?",
+            "What is important to you in life?",
+            "How do you like to spend your time?",
+            "Any hobbies or interests?",
+            "What keeps you going?"
+          ],
+          "keywords": [
+            "hobbies",
+            "for fun",
+            "spare time",
+            "free time",
+            "matters most to you",
+            "enjoy doing",
+            "interests",
+            "pastimes"
+          ],
+          "topics": [
+            "sh.meaning"
+          ]
+        }
+      },
+      {
+        "id": "sexual",
+        "topic": "Sexual history",
+        "answer": "Married forty-five years, just my wife. Not much going on lately with how tired I’ve been.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "sexual",
+          "partner",
+          "sex"
+        ],
+        "intents": {
+          "canonical": "Are you sexually active?",
+          "paraphrases": [
+            "Can I ask about your sexual history?",
+            "Do you have a sexual partner?",
+            "How many sexual partners have you had?",
+            "Any problems with sexual function?",
+            "Have you had any difficulties in your sex life?",
+            "Are you in a sexual relationship?",
+            "Have you had any new sexual partners?",
+            "Can I ask some questions about your sex life?"
+          ],
+          "keywords": [
+            "sexually active",
+            "sexual history",
+            "sex life",
+            "sexual partners",
+            "sexual function",
+            "intimacy"
+          ],
+          "topics": [
+            "sh.sexual"
+          ]
+        }
+      },
+      {
+        "id": "travel",
+        "topic": "Travel",
+        "answer": "No trips. Haven’t been further than the grocery store in a month.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "travel",
+          "trip",
+          "flight",
+          "plane",
+          "been away",
+          "long drive"
+        ],
+        "intents": {
+          "canonical": "Have you travelled anywhere recently?",
+          "paraphrases": [
+            "Any recent travel?",
+            "Have you been on any long trips lately?",
+            "Have you been on a plane recently?",
+            "Any long flights or car journeys?",
+            "Have you been away from home recently?",
+            "Have you traveled outside the country?",
+            "Been abroad lately?",
+            "Any long-haul flights?",
+            "Have you been on any long drives?"
+          ],
+          "keywords": [
+            "travelled",
+            "traveled",
+            "trips",
+            "long flights",
+            "abroad",
+            "car journeys",
+            "long-haul"
+          ],
+          "topics": [
+            "sh.travel"
+          ]
+        }
+      },
+      {
+        "id": "concerns",
+        "topic": "Patient concerns and expectations",
+        "answer": "I’m scared it’s my heart again. And I really want to be home for my granddaughter’s birthday on Saturday.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "worried",
+          "concern",
+          "scared",
+          "think is going on",
+          "expect",
+          "hoping"
+        ],
+        "intents": {
+          "canonical": "Is there anything you are worried about?",
+          "paraphrases": [
+            "What are you most worried about?",
+            "Do you have any concerns?",
+            "What do you think is going on?",
+            "What are you hoping we can do for you today?",
+            "What are you expecting from today?",
+            "Is anything in particular worrying you?",
+            "Have you had any thoughts about what might be causing this?",
+            "What is your biggest concern?",
+            "What would you like to get out of today's visit?",
+            "Is there anything you are scared of?",
+            "Do you have any ideas about what is causing your breathlessness?",
+            "What are your expectations?"
+          ],
+          "keywords": [
+            "worried",
+            "worrying you",
+            "concerns",
+            "concerned",
+            "scared",
+            "expectations",
+            "hoping",
+            "think is causing"
+          ],
+          "topics": [
+            "ice.concerns",
+            "ice.expectations"
+          ]
+        },
+        "emotion": "worried"
+      }
+    ],
+    "pertinentNegatives": [
+      {
+        "id": "neg-chest-pain-pressure",
+        "topic": "Chest pain / pressure",
+        "answer": "No chest pain or pressure. Not like the heart attack.",
+        "keywords": [
+          "chest pain",
+          "chest pressure",
+          "tightness",
+          "angina"
+        ],
+        "intents": {
+          "canonical": "Do you have any chest pain?",
+          "paraphrases": [
+            "Any chest pain?",
+            "Have you had any chest pressure or tightness?",
+            "Any pain in your chest?",
+            "Does your chest feel tight?",
+            "Any angina?",
+            "Any discomfort in your chest?",
+            "Is this like your heart attack?",
+            "Have you had any chest discomfort with the breathlessness?",
+            "Any crushing feeling in your chest?"
+          ],
+          "keywords": [
+            "chest pain",
+            "chest pressure",
+            "chest tightness",
+            "tight chest",
+            "chest discomfort",
+            "pain in your chest",
+            "chest feel tight"
+          ],
+          "topics": [
+            "ros.cardiac"
+          ]
+        }
+      },
+      {
+        "id": "neg-fever-chills",
+        "topic": "Fever / chills",
+        "answer": "No fevers or chills.",
+        "keywords": [
+          "fever",
+          "chills",
+          "temperature",
+          "sweats"
+        ],
+        "intents": {
+          "canonical": "Have you had any fevers or chills?",
+          "paraphrases": [
+            "Any fever?",
+            "Have you had a temperature?",
+            "Any chills or shivers?",
+            "Have you been feeling hot and cold?",
+            "Have you been running a temperature?",
+            "Any rigors?",
+            "Have you felt feverish?"
+          ],
+          "keywords": [
+            "fevers",
+            "feverish",
+            "rigors",
+            "shivers",
+            "running a temperature",
+            "hot and cold"
+          ],
+          "topics": [
+            "ros.constitutional"
+          ]
+        }
+      },
+      {
+        "id": "neg-productive-cough-blood",
+        "topic": "Productive cough / blood",
+        "answer": "Nothing coming up, and no blood.",
+        "keywords": [
+          "blood",
+          "hemoptysis",
+          "coughing up"
+        ],
+        "intents": {
+          "canonical": "Are you coughing anything up?",
+          "paraphrases": [
+            "Are you bringing up any phlegm?",
+            "Any sputum?",
+            "Have you coughed up any blood?",
+            "Any blood when you cough?",
+            "Any haemoptysis?",
+            "Is your cough productive?",
+            "What colour is your phlegm?",
+            "Are you coughing up mucus?",
+            "Is there any blood in your phlegm?"
+          ],
+          "keywords": [
+            "coughing anything up",
+            "coughed up",
+            "productive",
+            "haemoptysis",
+            "hemoptysis",
+            "blood when you cough",
+            "bringing up"
+          ],
+          "topics": [
+            "ros.respiratory"
+          ]
+        }
+      },
+      {
+        "id": "neg-palpitations-fainting",
+        "topic": "Palpitations / fainting",
+        "answer": "No racing heart that I’ve noticed, and I haven’t passed out.",
+        "keywords": [
+          "palpitation",
+          "racing",
+          "faint",
+          "pass out",
+          "dizzy",
+          "dizziness",
+          "lightheaded"
+        ],
+        "intents": {
+          "canonical": "Have you had any palpitations or fainting?",
+          "paraphrases": [
+            "Have you noticed your heart racing?",
+            "Any palpitations?",
+            "Have you passed out?",
+            "Have you fainted at all?",
+            "Does your heart ever pound or flutter?",
+            "Any blackouts?",
+            "Any irregular heartbeat?",
+            "Have you lost consciousness?",
+            "Any syncope?",
+            "Do you feel your heart skipping beats?"
+          ],
+          "keywords": [
+            "palpitations",
+            "heart racing",
+            "racing heart",
+            "fainted",
+            "fainting",
+            "passed out",
+            "blackouts",
+            "syncope"
+          ],
+          "topics": [
+            "ros.cardiac"
+          ]
+        }
+      },
+      {
+        "id": "neg-calf-pain-one-sided-swelling",
+        "topic": "Calf pain / one-sided swelling",
+        "answer": "No, both legs are the same. No pain in my calves.",
+        "keywords": [
+          "calf",
+          "one leg",
+          "one side",
+          "clot"
+        ],
+        "intents": {
+          "canonical": "Is one leg more swollen than the other?",
+          "paraphrases": [
+            "Is the swelling worse on one side?",
+            "Is one calf bigger than the other?",
+            "Any calf pain?",
+            "Any pain in your calves?",
+            "Is the swelling only in one leg?",
+            "Is one ankle more swollen than the other?",
+            "Any tenderness in your calves?",
+            "Does one leg look bigger than the other?"
+          ],
+          "keywords": [
+            "calf pain",
+            "calves",
+            "calf tenderness",
+            "more swollen than the other",
+            "only in one leg",
+            "unilateral",
+            "bigger than the other"
+          ],
+          "topics": [
+            "ros.cardiac",
+            "ros.heme"
+          ]
+        }
+      },
+      {
+        "id": "neg-wheeze",
+        "topic": "Wheeze",
+        "answer": "No wheezing.",
+        "keywords": [
+          "wheez",
+          "whistl"
+        ],
+        "intents": {
+          "canonical": "Have you had any wheezing?",
+          "paraphrases": [
+            "Any wheeze?",
+            "Do you hear a whistling sound when you breathe?",
+            "Is your breathing noisy or wheezy?",
+            "Have you noticed any wheezing in your chest?",
+            "Do you get wheezy?",
+            "Any whistling in your chest?"
+          ],
+          "keywords": [
+            "wheeze",
+            "wheezing",
+            "wheezy",
+            "whistling"
+          ],
+          "topics": [
+            "ros.respiratory"
+          ]
+        }
+      },
+      {
+        "id": "neg-recent-illness-sick-contacts",
+        "topic": "Recent illness / sick contacts",
+        "answer": "No colds, nobody sick at home.",
+        "keywords": [
+          "sick contacts",
+          "cold",
+          "flu",
+          "virus",
+          "infection"
+        ],
+        "intents": {
+          "canonical": "Have you had a recent cold or infection?",
+          "paraphrases": [
+            "Have you been unwell with a virus lately?",
+            "Has anyone around you been sick?",
+            "Any sick contacts?",
+            "Have you had the flu recently?",
+            "Any recent chest infection?",
+            "Have you been around anyone who is ill?",
+            "Any colds or flu at home?",
+            "Has anyone at home been unwell?",
+            "Any recent infections?"
+          ],
+          "keywords": [
+            "sick contacts",
+            "anyone sick",
+            "anyone around you",
+            "recent infection",
+            "chest infection",
+            "a cold",
+            "the flu",
+            "viral"
+          ],
+          "topics": [
+            "hpi.triggers",
+            "ros.constitutional"
+          ]
+        }
+      },
+      {
+        "id": "neg-neurological-symptoms",
+        "topic": "Neurological symptoms",
+        "answer": "No weakness, numbness or trouble speaking.",
+        "keywords": [
+          "weakness",
+          "numb",
+          "tingling",
+          "speech",
+          "vision"
+        ],
+        "intents": {
+          "canonical": "Have you had any weakness, numbness or trouble speaking?",
+          "paraphrases": [
+            "Any weakness in your arms or legs?",
+            "Any numbness or tingling?",
+            "Any problems with your speech?",
+            "Have you had any stroke symptoms?",
+            "Any weakness in your face, arms or legs?",
+            "Any slurred speech?",
+            "Any neurological symptoms?",
+            "Have you had any trouble getting your words out?"
+          ],
+          "keywords": [
+            "weakness",
+            "numbness",
+            "trouble speaking",
+            "slurred speech",
+            "stroke symptoms",
+            "neurological",
+            "your speech"
+          ],
+          "topics": [
+            "ros.neuro"
+          ]
+        }
+      },
+      {
+        "id": "neg-urinary-symptoms-other-than-frequency-at-night",
+        "topic": "Urinary symptoms other than frequency at night",
+        "answer": "No burning or blood in the urine.",
+        "keywords": [
+          "burning",
+          "blood in",
+          "pain when"
+        ],
+        "intents": {
+          "canonical": "Any burning or pain when you pass urine?",
+          "paraphrases": [
+            "Does it burn when you pee?",
+            "Any blood in your urine?",
+            "Any pain when urinating?",
+            "Have you noticed blood in the urine?",
+            "Any dysuria?",
+            "Any haematuria?",
+            "Is it painful to pass water?",
+            "Any stinging when you go to the toilet?"
+          ],
+          "keywords": [
+            "burn when",
+            "dysuria",
+            "blood in your urine",
+            "blood in the urine",
+            "haematuria",
+            "hematuria",
+            "painful to pass",
+            "stinging"
+          ],
+          "topics": [
+            "ros.gu"
+          ]
+        }
+      },
+      {
+        "id": "neg-skin",
+        "topic": "Skin",
+        "answer": "No rashes.",
+        "keywords": [
+          "rash",
+          "skin",
+          "itch"
+        ],
+        "intents": {
+          "canonical": "Have you had any rashes?",
+          "paraphrases": [
+            "Any skin rashes?",
+            "Any changes to your skin?",
+            "Any itching?",
+            "Have you noticed any new rash?",
+            "Any skin problems?",
+            "Is your skin itchy anywhere?"
+          ],
+          "keywords": [
+            "rashes",
+            "skin rash",
+            "itchy",
+            "itching",
+            "skin problems",
+            "changes to your skin"
+          ],
+          "topics": [
+            "ros.skin"
+          ]
+        }
+      },
+      {
+        "id": "neg-mood",
+        "topic": "Mood",
+        "answer": "I’m a bit fed up, but not depressed.",
+        "keywords": [
+          "mood",
+          "depress",
+          "anxious",
+          "anxiety",
+          "stress"
+        ],
+        "intents": {
+          "canonical": "How has your mood been?",
+          "paraphrases": [
+            "Have you been feeling down or depressed?",
+            "Any low mood?",
+            "How are you coping emotionally?",
+            "Have you been feeling anxious or stressed?",
+            "How are your spirits?",
+            "Have you been feeling low lately?",
+            "Any anxiety or depression?",
+            "Is all this getting you down?"
+          ],
+          "keywords": [
+            "mood",
+            "depressed",
+            "depression",
+            "feeling down",
+            "feeling low",
+            "stressed",
+            "coping emotionally",
+            "getting you down"
+          ],
+          "topics": [
+            "ros.psych"
+          ]
+        },
+        "emotion": "frustrated"
+      }
+    ],
+    "unknownPolicy": {
+      "negativeReply": "No, nothing like that.",
+      "unknownReply": "Hmm, I’m not sure. I haven’t noticed anything like that."
+    },
+    "emotionCues": [
+      {
+        "emotion": "worried",
+        "acknowledgement": "Thank you. I am worried about it, to be honest."
+      },
+      {
+        "emotion": "tired",
+        "acknowledgement": "Thanks. I’m just wiped out."
+      },
+      {
+        "emotion": "frustrated",
+        "acknowledgement": "Thanks for saying that. I’m just a bit fed up."
+      }
+    ]
+  },
+  "abnormalFindings": {
+    "general_appearance": {
+      "default": "Older man sitting bolt upright, mildly breathless at rest, pausing mid-sentence to breathe; alert and oriented; looks tired."
+    },
+    "pulse_radial": {
+      "default": "Radial pulse {vitals.hr} beats/min, regular rhythm, low volume."
+    },
+    "respiratory_rate": {
+      "default": "Respiratory rate {vitals.rr} breaths/min, mildly laboured."
+    },
+    "jvp_inspection": {
+      "default": "JVP clearly elevated: venous column about 9 cm above the sternal angle at 30° (estimated RAP ~14 cmH2O), pulsating up to the angle of the jaw."
+    },
+    "hepatojugular_reflux": {
+      "default": "Positive: with sustained right upper quadrant pressure the JVP rises about 4 cm and stays up while pressure is held."
+    },
+    "precordial_inspection": {
+      "default": "Apical impulse visible lateral to the midclavicular line; no scars or deformity."
+    },
+    "pmi_palpation": {
+      "cardiac_mitral": "PMI displaced laterally to the 6th intercostal space at the anterior axillary line; diffuse (about 4 cm)."
+    },
+    "auscultate_heart_diaphragm": {
+      "cardiac_mitral": {
+        "text": "Tachycardic, regular. Soft grade 2/6 holosystolic murmur at the apex radiating toward the axilla. A low-pitched extra sound after S2 is faintly audible.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.75,
+            "s2SplitMs": 0,
+            "s3": 0.25,
+            "murmur": {
+              "phase": "systolic",
+              "shape": "holosystolic",
+              "grade": 2,
+              "pitch": "high"
+            }
+          }
+        }
+      },
+      "default": {
+        "text": "Tachycardic, regular rhythm; normal S1 and S2; no murmur at this area.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.75,
+            "s2SplitMs": 0
+          }
+        }
+      }
+    },
+    "auscultate_heart_bell": {
+      "cardiac_mitral": {
+        "text": "Low-pitched S3 gallop at the apex, loudest with the patient rolled onto the left side.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.7,
+            "s2SplitMs": 0,
+            "s3": 0.55
+          }
+        },
+        "byPosition": {
+          "left_lateral_decubitus": {
+            "text": "Loud low-pitched S3 gallop at the apex — clearest with the patient rolled onto the left side.",
+            "audio": {
+              "generator": "heart",
+              "params": {
+                "intensity": 0.75,
+                "s2SplitMs": 0,
+                "s3": 0.95
+              }
+            }
+          }
+        }
+      },
+      "cardiac_tricuspid": {
+        "text": "Faint low-pitched extra sound after S2, better heard at the apex.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.65,
+            "s2SplitMs": 0,
+            "s3": 0.2
+          }
+        }
+      }
+    },
+    "peripheral_pulses": {
+      "foot_right": "Dorsalis pedis and posterior tibial pulses 1+, hard to feel through the edema.",
+      "foot_left": "Dorsalis pedis and posterior tibial pulses 1+, hard to feel through the edema."
+    },
+    "edema_assessment": {
+      "shin_right": "3+ pitting edema extending to mid-shin.",
+      "shin_left": "3+ pitting edema extending to mid-shin.",
+      "ankle_right": "3+ pitting edema; deep impression persists after pressure.",
+      "ankle_left": "3+ pitting edema; deep impression persists after pressure.",
+      "foot_right": "Pitting edema over the dorsum of the foot.",
+      "foot_left": "Pitting edema over the dorsum of the foot.",
+      "sacrum": "Trace sacral edema."
+    },
+    "chest_inspection": {
+      "default": "Mildly increased work of breathing with visible neck accessory muscle use; symmetric expansion; no scars."
+    },
+    "auscultate_lungs": {
+      "lung_post_rl": {
+        "text": "Breath sounds reduced at the very base, with fine end-inspiratory crackles just above.",
+        "audio": {
+          "generator": "breath",
+          "params": {
+            "type": "reduced",
+            "crackles": "fine",
+            "cracklesDensity": 0.6,
+            "wheeze": false,
+            "intensity": 0.7
+          }
+        }
+      },
+      "lung_post_ll": {
+        "text": "Fine end-inspiratory crackles over the lower third of the lung field.",
+        "audio": {
+          "generator": "breath",
+          "params": {
+            "type": "vesicular",
+            "crackles": "fine",
+            "cracklesDensity": 0.75,
+            "wheeze": false,
+            "intensity": 0.7
+          }
+        }
+      },
+      "lung_lat_r": {
+        "text": "Fine crackles at the lateral base.",
+        "audio": {
+          "generator": "breath",
+          "params": {
+            "type": "vesicular",
+            "crackles": "fine",
+            "cracklesDensity": 0.5,
+            "wheeze": false,
+            "intensity": 0.7
+          }
+        }
+      },
+      "lung_lat_l": {
+        "text": "Fine crackles at the lateral base.",
+        "audio": {
+          "generator": "breath",
+          "params": {
+            "type": "vesicular",
+            "crackles": "fine",
+            "cracklesDensity": 0.5,
+            "wheeze": false,
+            "intensity": 0.7
+          }
+        }
+      },
+      "lung_ant_rl": {
+        "text": "Scattered fine crackles at end inspiration.",
+        "audio": {
+          "generator": "breath",
+          "params": {
+            "type": "vesicular",
+            "crackles": "fine",
+            "cracklesDensity": 0.3,
+            "wheeze": false,
+            "intensity": 0.7
+          }
+        }
+      },
+      "lung_ant_ll": {
+        "text": "Scattered fine crackles at end inspiration.",
+        "audio": {
+          "generator": "breath",
+          "params": {
+            "type": "vesicular",
+            "crackles": "fine",
+            "cracklesDensity": 0.3,
+            "wheeze": false,
+            "intensity": 0.7
+          }
+        }
+      }
+    },
+    "chest_percussion": {
+      "lung_post_rl": "Dull to percussion over the lowest part of the right base.",
+      "lung_post_ll": "Slightly dull at the left base.",
+      "lung_lat_r": "Dull at the right lateral base."
+    },
+    "tactile_fremitus": {
+      "lung_post_rl": "Tactile fremitus reduced at the right base."
+    },
+    "vocal_resonance": {
+      "lung_post_rl": "Vocal resonance reduced at the right base; no egophony."
+    },
+    "abd_inspection": {
+      "default": "Mildly distended; no visible veins or bruising.",
+      "abd_rlq": "Small, well-healed oblique scar in the right lower quadrant."
+    },
+    "abd_light_palpation": {
+      "abd_ruq": "Mild tenderness in the right upper quadrant without guarding."
+    },
+    "liver_palpation": {
+      "abd_ruq": "Smooth, mildly tender liver edge palpable about 3 cm below the right costal margin."
+    },
+    "skin_inspection": {
+      "shin_right": "Shiny, taut skin over the swollen shin; no ulcers or erythema.",
+      "shin_left": "Shiny, taut skin over the swollen shin; no ulcers or erythema."
+    }
+  },
+  "visibleSigns": {
+    "jvpCm": 9,
+    "edema": [
+      {
+        "regionId": "shin_right",
+        "grade": 3
+      },
+      {
+        "regionId": "shin_left",
+        "grade": 3
+      },
+      {
+        "regionId": "ankle_right",
+        "grade": 3
+      },
+      {
+        "regionId": "ankle_left",
+        "grade": 3
+      }
+    ],
+    "breathing": "laboured"
+  },
+  "expectedDifferential": [
+    {
+      "rank": 1,
+      "diagnosis": "Acute decompensated heart failure (HFrEF, ischaemic cardiomyopathy)",
+      "rationale": "Known EF ~30% after MI; orthopnea, PND, weight gain, bilateral pitting edema, raised JVP, positive HJR, displaced PMI, S3, bibasal crackles and right effusion. Precipitants: stopped furosemide, dietary salt load, recent NSAID."
+    },
+    {
+      "rank": 2,
+      "diagnosis": "Acute coronary syndrome as a precipitant",
+      "rationale": "Prior MI and multiple risk factors; must be excluded with ECG and troponin even without chest pain (silent ischaemia in diabetes)."
+    },
+    {
+      "rank": 3,
+      "diagnosis": "Community-acquired pneumonia",
+      "rationale": "Crackles and hypoxia, but afebrile, dry cough and bilateral findings with edema argue against."
+    },
+    {
+      "rank": 4,
+      "diagnosis": "Pulmonary embolism",
+      "rationale": "Tachycardia and hypoxia; less likely given symmetric edema, gradual course and clear volume overload."
+    },
+    {
+      "rank": 5,
+      "diagnosis": "COPD exacerbation",
+      "rationale": "30 pack-year history, but no wheeze or sputum and clear signs of fluid overload."
+    },
+    {
+      "rank": 6,
+      "diagnosis": "Other causes of fluid overload (renal failure, cirrhosis)",
+      "rationale": "Consider with labs; cardiac signs make these less likely."
+    }
+  ],
+  "markSheetIds": [
+    "communication-1b",
+    "encounter-1b"
+  ],
+  "itemsNotApplicable": [
+    {
+      "itemId": "sh-sexual",
+      "reason": "Sexual history is not relevant to this acute heart-failure presentation."
+    }
+  ],
+  "synthetic": true,
+  "sourceNote": "Fully synthetic teaching case written by the team. Not based on any real patient.",
+  "peChecklist": [
+    {
+      "id": "fcm-01-hand-hygiene",
+      "fcmId": 1,
+      "section": "Clinical courtesy",
+      "label": "Cleans hands before first touching the patient",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "hygieneBeforeTouch": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-02-notes",
+      "fcmId": 2,
+      "section": "Clinical courtesy",
+      "label": "Note-taking does not interfere with rapport",
+      "weight": 1,
+      "scoring": "not_assessable",
+      "notAssessableReason": "Note-taking behaviour and eye contact are not visible in this interface.",
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-03-drape",
+      "fcmId": 3,
+      "section": "Clinical courtesy",
+      "label": "Keeps the patient draped, covering areas again after examining them",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "courtesy": "drape"
+          },
+          {
+            "happened": "drape:cover"
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-consent",
+      "section": "Clinical courtesy",
+      "label": "Asks permission before the first physical contact",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "before": [
+          "tag:asked_consent_exam",
+          "first:touch"
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-04-comfort",
+      "fcmId": 4,
+      "section": "Clinical courtesy",
+      "label": "Verbally checks the patient's comfort during the exam",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Credit if the student, during the physical exam, says something that shows attention to the patient's comfort or dignity: asks if they are comfortable, warns before touching/cold stethoscope, asks them to say if anything hurts, offers help repositioning.",
+      "mockKeywords": [
+        "comfortable",
+        "let me know if",
+        "hurt",
+        "cold",
+        "okay if i"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-exit-hygiene",
+      "section": "Clinical courtesy",
+      "label": "Cleans hands again after the last contact, before leaving",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "all": [
+          {
+            "before": [
+              "last:touch",
+              "last:hand_hygiene"
+            ]
+          },
+          {
+            "happened": "room:exit"
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-closing",
+      "section": "Clinical courtesy",
+      "label": "Closes the encounter (thanks the patient / says goodbye)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "said": "closing"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-05-pulse",
+      "fcmId": 5,
+      "section": "Vital signs",
+      "label": "Radial pulse rate and rhythm",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "pulse_radial"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-06-resp-rate",
+      "fcmId": 6,
+      "section": "Vital signs",
+      "label": "Respiratory rate at rest",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "respiratory_rate"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-07-bp-cuff",
+      "fcmId": 7,
+      "section": "Vital signs",
+      "label": "BP: correct cuff, placed over the brachial artery",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "bp_cuff_placement"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-08-bp-arm",
+      "fcmId": 8,
+      "section": "Vital signs",
+      "label": "BP: arm flexed and supported",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "bp_arm_support"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-09-bp",
+      "fcmId": 9,
+      "section": "Vital signs",
+      "label": "BP measured after cuff placement (palpatory then auscultatory)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "all": [
+          {
+            "performed": "blood_pressure"
+          },
+          {
+            "before": [
+              "maneuver:bp_cuff_placement",
+              "maneuver:blood_pressure"
+            ]
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-10-general",
+      "fcmId": 10,
+      "section": "General appearance",
+      "label": "Comments on general appearance",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "general_appearance"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-33-jvp",
+      "fcmId": 33,
+      "section": "Cardiovascular",
+      "label": "Inspects the jugular venous pressure",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "jvp_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-33-jvp-position",
+      "fcmId": 33,
+      "section": "Cardiovascular",
+      "label": "Technique: JVP assessed with patient reclined to ~30°",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "jvp_inspection",
+          "position": "reclined_30"
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "hf-hjr",
+      "section": "Cardiovascular",
+      "label": "Checks for hepatojugular reflux",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "hepatojugular_reflux"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-34-carotid-palpation",
+      "fcmId": 34,
+      "section": "Cardiovascular",
+      "label": "Palpates both carotids (one side at a time)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "carotid_palpation",
+        "regions": [
+          "carotid_right",
+          "carotid_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-34-carotid-bruit",
+      "fcmId": 34,
+      "section": "Cardiovascular",
+      "label": "Auscultates both carotids for bruits",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "carotid_auscultation",
+        "regions": [
+          "carotid_right",
+          "carotid_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-35-precordium-inspect",
+      "fcmId": 35,
+      "section": "Cardiovascular",
+      "label": "Inspects the precordium",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "precordial_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-36-heaves-thrills",
+      "fcmId": 36,
+      "section": "Cardiovascular",
+      "label": "Palpates for heaves and thrills (sternal border and base)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "precordial_palpation",
+        "regions": [
+          "precordium_lsb",
+          "cardiac_aortic",
+          "cardiac_pulmonic"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-37-pmi",
+      "fcmId": 37,
+      "section": "Cardiovascular",
+      "label": "Locates the point of maximal impulse",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "pmi_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-37-pmi-position",
+      "fcmId": 37,
+      "section": "Cardiovascular",
+      "label": "Technique: PMI with patient supine or left lateral",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "pmi_palpation",
+          "position": [
+            "supine",
+            "left_lateral_decubitus"
+          ]
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-38-heart-diaphragm",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Auscultates all five areas with the diaphragm",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "auscultate_heart_diaphragm",
+        "regions": [
+          "cardiac_aortic",
+          "cardiac_pulmonic",
+          "cardiac_erbs",
+          "cardiac_tricuspid",
+          "cardiac_mitral"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-38-heart-bell",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Listens at the apex with the bell for extra heart sounds",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "auscultate_heart_bell",
+        "regions": [
+          "cardiac_mitral"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-38-bell-lld",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Technique: bell at apex with patient in left lateral decubitus",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "auscultate_heart_bell",
+          "position": "left_lateral_decubitus"
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-38-bell-technique",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Technique: bell placed accurately at the apex and held ≥ 3 s",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "technique": {
+          "maneuver": "auscultate_heart_bell",
+          "tool": "stethoscope",
+          "toolMode": "bell",
+          "regions": [
+            "cardiac_mitral"
+          ],
+          "maxPlacementError": 1.5,
+          "minDurationMs": 3000
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-39-pedal-pulses",
+      "fcmId": 39,
+      "section": "Cardiovascular",
+      "label": "Palpates pedal pulses bilaterally",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "peripheral_pulses",
+        "regions": [
+          "foot_right",
+          "foot_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-40-edema",
+      "fcmId": 40,
+      "section": "Cardiovascular",
+      "label": "Assesses lower-limb edema bilaterally",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "performed": "edema_assessment",
+            "regions": [
+              "shin_right",
+              "shin_left"
+            ],
+            "partial": false
+          },
+          {
+            "performed": "edema_assessment",
+            "regions": [
+              "ankle_right",
+              "ankle_left"
+            ],
+            "partial": false
+          },
+          {
+            "performed": "edema_assessment",
+            "regions": [
+              "foot_right",
+              "foot_left"
+            ],
+            "partial": false
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-41-chest-inspection",
+      "fcmId": 41,
+      "section": "Pulmonary",
+      "label": "Inspects the chest and work of breathing",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "chest_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-42-lung-ausc",
+      "fcmId": 42,
+      "section": "Pulmonary",
+      "label": "Auscultates front, sides and back, comparing sides",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "auscultate_lungs",
+        "regions": [
+          "lung_ant_ru",
+          "lung_ant_lu",
+          "lung_ant_rl",
+          "lung_ant_ll",
+          "lung_lat_r",
+          "lung_lat_l",
+          "lung_post_ru",
+          "lung_post_lu",
+          "lung_post_rl",
+          "lung_post_ll"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-42-lung-position",
+      "fcmId": 42,
+      "section": "Pulmonary",
+      "label": "Technique: posterior chest auscultated with patient sitting up",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "auscultate_lungs",
+          "position": [
+            "seated",
+            "seated_leaning_forward"
+          ]
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-42-lung-technique",
+      "fcmId": 42,
+      "section": "Pulmonary",
+      "label": "Technique: listens at both bases accurately for ≥ 3 s each",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "technique": {
+          "maneuver": "auscultate_lungs",
+          "tool": "stethoscope",
+          "regions": [
+            "lung_post_rl",
+            "lung_post_ll"
+          ],
+          "maxPlacementError": 1.5,
+          "minDurationMs": 3000,
+          "partial": true
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-43-vocal-resonance",
+      "fcmId": 43,
+      "section": "Pulmonary",
+      "label": "Vocal resonance / egophony over the posterior chest",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "vocal_resonance",
+        "regions": [
+          "lung_post_rl",
+          "lung_post_ll"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-44-fremitus",
+      "fcmId": 44,
+      "section": "Pulmonary",
+      "label": "Tactile fremitus, comparing sides",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "tactile_fremitus",
+        "regions": [
+          "lung_post_ru",
+          "lung_post_lu",
+          "lung_post_rl",
+          "lung_post_ll"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-45-percussion",
+      "fcmId": 45,
+      "section": "Pulmonary",
+      "label": "Percusses front and back, comparing sides",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "chest_percussion",
+        "regions": [
+          "lung_ant_ru",
+          "lung_ant_lu",
+          "lung_ant_rl",
+          "lung_ant_ll",
+          "lung_post_ru",
+          "lung_post_lu",
+          "lung_post_rl",
+          "lung_post_ll"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    }
+  ],
+  "penKey": {
+    "history": [
+      {
+        "id": "dyspnea-2wk",
+        "text": "Progressive shortness of breath over two weeks, now on minimal exertion",
+        "kind": "positive",
+        "keywords": [
+          "two weeks",
+          "2 weeks",
+          "dyspnea",
+          "dyspnoea",
+          "short of breath",
+          "breathless",
+          "SOB"
+        ],
+        "exemplars": [
+          "Two weeks of progressively worsening shortness of breath.",
+          "Increasingly breathless on exertion over the past fortnight."
+        ]
+      },
+      {
+        "id": "orthopnea",
+        "text": "Orthopnea (three pillows / sleeping in a chair)",
+        "kind": "positive",
+        "keywords": [
+          "orthopnea",
+          "orthopnoea",
+          "pillows",
+          "lie flat"
+        ],
+        "exemplars": [
+          "Sleeps on three pillows and cannot lie flat.",
+          "Breathlessness when lying down, slept in a recliner."
+        ]
+      },
+      {
+        "id": "pnd",
+        "text": "Paroxysmal nocturnal dyspnea",
+        "kind": "positive",
+        "keywords": [
+          "PND",
+          "paroxysmal",
+          "woke up gasping",
+          "waking breathless"
+        ],
+        "exemplars": [
+          "Wakes at night gasping for air.",
+          "Episodes of waking up breathless at night this week."
+        ]
+      },
+      {
+        "id": "edema-weight",
+        "text": "Ankle swelling and ~4 kg weight gain",
+        "kind": "positive",
+        "keywords": [
+          "ankle",
+          "swelling",
+          "weight gain",
+          "4 kg",
+          "kilos"
+        ],
+        "exemplars": [
+          "Swollen ankles and about 4 kg of weight gain.",
+          "Bilateral leg swelling with recent weight gain."
+        ]
+      },
+      {
+        "id": "precipitant",
+        "text": "Ran out of furosemide ~10 days ago; recent salt load",
+        "kind": "positive",
+        "keywords": [
+          "ran out",
+          "furosemide",
+          "water pill",
+          "salt",
+          "non-adherence",
+          "nonadherence"
+        ],
+        "exemplars": [
+          "Ran out of his furosemide ten days ago.",
+          "Stopped his water pill and ate a salty diet recently."
+        ]
+      },
+      {
+        "id": "hf-history",
+        "text": "Prior MI with stent (2019) and reduced ejection fraction (~30%)",
+        "kind": "positive",
+        "keywords": [
+          "MI",
+          "heart attack",
+          "stent",
+          "EF",
+          "ejection fraction",
+          "30%"
+        ],
+        "exemplars": [
+          "Known heart failure after a heart attack with a stent.",
+          "History of myocardial infarction with reduced ejection fraction."
+        ]
+      },
+      {
+        "id": "no-chest-pain",
+        "text": "No chest pain or pressure",
+        "kind": "negative",
+        "keywords": [
+          "no chest pain",
+          "denies chest pain",
+          "no chest pressure"
+        ],
+        "exemplars": [
+          "Denies chest pain or pressure.",
+          "No chest pain."
+        ],
+        "terms": [
+          "chest pain",
+          "chest pressure",
+          "chest tightness"
+        ]
+      },
+      {
+        "id": "no-fever",
+        "text": "No fever or chills",
+        "kind": "negative",
+        "keywords": [
+          "no fever",
+          "afebrile",
+          "denies fever",
+          "no chills"
+        ],
+        "exemplars": [
+          "Denies fevers or chills.",
+          "No fever."
+        ],
+        "terms": [
+          "fever",
+          "fevers",
+          "chills",
+          "febrile"
+        ]
+      },
+      {
+        "id": "no-calf",
+        "text": "No calf pain or one-sided leg swelling",
+        "kind": "negative",
+        "keywords": [
+          "no calf",
+          "calf pain",
+          "unilateral",
+          "one-sided"
+        ],
+        "exemplars": [
+          "No calf pain or one-sided leg swelling.",
+          "Denies calf tenderness."
+        ],
+        "terms": [
+          "calf pain",
+          "calf swelling",
+          "calf tenderness"
+        ]
+      }
+    ],
+    "exam": [
+      {
+        "id": "jvp",
+        "text": "Raised JVP",
+        "maneuverIds": [
+          "jvp_inspection"
+        ],
+        "keywords": [
+          "JVP",
+          "jugular venous",
+          "neck veins"
+        ],
+        "exemplars": [
+          "JVP raised to the angle of the jaw.",
+          "Elevated jugular venous pressure."
+        ]
+      },
+      {
+        "id": "hjr",
+        "text": "Positive hepatojugular reflux",
+        "maneuverIds": [
+          "hepatojugular_reflux"
+        ],
+        "keywords": [
+          "hepatojugular",
+          "HJR",
+          "abdominojugular"
+        ],
+        "exemplars": [
+          "Positive hepatojugular reflux.",
+          "Abdominojugular test positive."
+        ]
+      },
+      {
+        "id": "s3",
+        "text": "S3 gallop at the apex",
+        "maneuverIds": [
+          "auscultate_heart_bell",
+          "auscultate_heart_diaphragm"
+        ],
+        "keywords": [
+          "S3",
+          "gallop"
+        ],
+        "exemplars": [
+          "S3 gallop heard at the apex.",
+          "Third heart sound present."
+        ]
+      },
+      {
+        "id": "pmi",
+        "text": "Displaced point of maximal impulse",
+        "maneuverIds": [
+          "pmi_palpation"
+        ],
+        "keywords": [
+          "PMI",
+          "apex beat",
+          "displaced"
+        ],
+        "exemplars": [
+          "Apex beat displaced laterally.",
+          "PMI displaced to the anterior axillary line."
+        ]
+      },
+      {
+        "id": "crackles",
+        "text": "Bibasal fine crackles",
+        "maneuverIds": [
+          "auscultate_lungs"
+        ],
+        "keywords": [
+          "crackles",
+          "rales"
+        ],
+        "exemplars": [
+          "Bibasal crackles on auscultation.",
+          "Fine crackles at both lung bases."
+        ]
+      },
+      {
+        "id": "edema",
+        "text": "Bilateral pitting edema of the lower legs",
+        "maneuverIds": [
+          "edema_assessment"
+        ],
+        "keywords": [
+          "edema",
+          "oedema",
+          "pitting"
+        ],
+        "exemplars": [
+          "Pitting edema of both ankles.",
+          "Bilateral pitting oedema to the shins."
+        ]
+      }
+    ],
+    "differential": [
+      {
+        "id": "adhf",
+        "diagnosis": "Acute decompensated heart failure",
+        "aliases": [
+          "heart failure",
+          "decompensated heart failure",
+          "CHF",
+          "HFrEF",
+          "congestive heart failure",
+          "CHF exacerbation"
+        ],
+        "rank": 1,
+        "rationale": "Known reduced EF with orthopnea, PND, weight gain, raised JVP, S3, crackles and edema; stopped diuretic and salt load."
+      },
+      {
+        "id": "acs",
+        "diagnosis": "Acute coronary syndrome",
+        "aliases": [
+          "ACS",
+          "myocardial infarction",
+          "MI",
+          "NSTEMI",
+          "ischemia",
+          "ischaemia"
+        ],
+        "rank": 2,
+        "rationale": "Prior MI and risk factors; must be excluded as a precipitant even without chest pain."
+      },
+      {
+        "id": "pneumonia",
+        "diagnosis": "Pneumonia",
+        "aliases": [
+          "community-acquired pneumonia",
+          "CAP",
+          "chest infection"
+        ],
+        "rank": 3,
+        "rationale": "Crackles and cough, though afebrile with bilateral findings and edema."
+      },
+      {
+        "id": "pe",
+        "diagnosis": "Pulmonary embolism",
+        "aliases": [
+          "PE",
+          "pulmonary embolus"
+        ],
+        "rank": 4,
+        "rationale": "Dyspnea and tachycardia; less likely with symmetric edema and gradual course."
+      },
+      {
+        "id": "copd",
+        "diagnosis": "COPD exacerbation",
+        "aliases": [
+          "COPD",
+          "AECOPD"
+        ],
+        "rank": 5,
+        "rationale": "Smoking history, but no wheeze or sputum."
+      }
+    ]
+  },
+  "acceptableDiagnoses": [
+    {
+      "id": "ad-cardiogenic-pulmonary-edema",
+      "diagnosis": "Cardiogenic pulmonary edema",
+      "synonyms": [
+        "acute pulmonary edema",
+        "cardiogenic pulmonary oedema",
+        "acute pulmonary oedema",
+        "pulmonary edema from heart failure"
+      ],
+      "satisfies": [
+        "adhf"
+      ]
+    },
+    {
+      "id": "ad-cardiomyopathy-exacerbation",
+      "diagnosis": "Exacerbation of ischemic cardiomyopathy",
+      "synonyms": [
+        "ischaemic cardiomyopathy exacerbation",
+        "worsening ischemic cardiomyopathy",
+        "decompensated cardiomyopathy"
+      ],
+      "satisfies": [
+        "adhf"
+      ]
+    },
+    {
+      "id": "ad-nstemi",
+      "diagnosis": "Non-ST-elevation myocardial infarction",
+      "synonyms": [
+        "NSTE-ACS",
+        "unstable angina",
+        "type 2 MI"
+      ],
+      "satisfies": [
+        "acs"
+      ]
+    }
+  ]
+}

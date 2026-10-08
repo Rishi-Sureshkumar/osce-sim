@@ -1,0 +1,60 @@
+# Regression proof: m2-review
+
+M2 review findings: the Achilles close-up camera inside the table when the legs lie on it; a hands clonus test that never moved the foot; a wobble hiding the swinging-light test; touching the upper arm with the hands logging a cuff placement; a click just off the male apex logged as a prohibited breast exam
+
+test:      tests/m2-review.test.ts
+command:   npx vitest run tests/m2-review.test.ts
+old code:  0de4946 (git worktree)  → exit 1 (FAILS, as it must)
+new code:  b8192cd + working tree     → exit 0 (passes)
+result:    PROVEN
+date:      2026-10-08T06:00:58.115Z
+
+## Old code: why it fails
+```
+ ❯ tests/m2-review.test.ts (10 tests | 10 failed) 26ms
+   × the Achilles (and back-of-neck, top-of-head) close-ups stay out of the table > male: in every position the camera is outside the table, and its line of sight clears it (bar the back of the neck lying on it) 9ms
+   × the Achilles (and back-of-neck, top-of-head) close-ups stay out of the table > female: in every position the camera is outside the table, and its line of sight clears it (bar the back of the neck lying on it) 1ms
+   × the Achilles (and back-of-neck, top-of-head) close-ups stay out of the table > sitting with the legs hanging the view is unchanged (no lift needed); lying, a hint says why the tendon is hidden 2ms
+   × a clonus test moves the foot > grade 0 with clonus beats (the hands clonus test) beats after the (absent) jerk 1ms
+   × the swinging-light test survives a wobble > right, left, off the left eye and back into it, then right: still a swing 4ms
+   × the BP cuff placement is not a hands exam > bp_cuff_placement has no tool, and the hands never resolve to it on the arm 1ms
+   × a click near the male apex is not a prohibited breast exam > male, reclined_30: around the apex → the apex; on the nipple → the breast 3ms
+   × a click near the male apex is not a prohibited breast exam > male, reclined_45: around the apex → the apex; on the nipple → the breast 2ms
+   × a click near the male apex is not a prohibited breast exam > male, seated: around the apex → the apex; on the nipple → the breast 2ms
+   × a click near the male apex is not a prohibited breast exam > male, supine: around the apex → the apex; on the nipple → the breast 2ms
+ Test Files  1 failed (1)
+      Tests  10 failed (10)
+ FAIL  tests/m2-review.test.ts > the Achilles (and back-of-neck, top-of-head) close-ups stay out of the table > male: in every position the camera is outside the table, and its line of sight clears it (bar the back of the neck lying on it)
+AssertionError: ankle_left supine: sight line inside the table at 43%: expected true to be false // Object.is equality
+- Expected
++ Received
+     43|             expect(boxes.some((b) => insideBox(p, b)), `${shot} ${posi…
+ FAIL  tests/m2-review.test.ts > the Achilles (and back-of-neck, top-of-head) close-ups stay out of the table > female: in every position the camera is outside the table, and its line of sight clears it (bar the back of the neck lying on it)
+AssertionError: ankle_left supine: sight line inside the table at 35%: expected true to be false // Object.is equality
+- Expected
++ Received
+     43|             expect(boxes.some((b) => insideBox(p, b)), `${shot} ${posi…
+ FAIL  tests/m2-review.test.ts > the Achilles (and back-of-neck, top-of-head) close-ups stay out of the table > sitting with the legs hanging the view is unchanged (no lift needed); lying, a hint says why the tendon is hidden
+TypeError: .toMatch() expects to receive a string, but got object
+     53|     expect(Math.abs(cam.position[1] - cam.target[1])).toBeLessThan(0.0…
+     54|     expect(shotHint("ankle_left", "sitting_dangling")).toBeNull();
+     55|     expect(shotHint("ankle_right", "supine")).toMatch(/rests on the ta…
+ FAIL  tests/m2-review.test.ts > a clonus test moves the foot > grade 0 with clonus beats (the hands clonus test) beats after the (absent) jerk
+AssertionError: expected 0 to be greater than 0.05
+     63|     expect(Math.max(...late.map((t) => Math.abs(jerkDelta(j, t))))).to…
+     65|     expect(jerkDelta(j, JERK_RISE)).toBe(0);
+ FAIL  tests/m2-review.test.ts > the swinging-light test survives a wobble > right, left, off the left eye and back into it, then right: still a swing
+AssertionError: expected [ 'pupils_light_reflex', …(1) ] to include 'swinging_flashlight'
+     91|     expect(events.map((e) => e.maneuverId)).toContain("swinging_flashl…
+ FAIL  tests/m2-review.test.ts > the BP cuff placement is not a hands exam > bp_cuff_placement has no tool, and the hands never resolve to it on the arm
+AssertionError: expected 'hands' to be undefined
+- Expected: 
++ Received: 
+ FAIL  tests/m2-review.test.ts > a click near the male apex is not a prohibited breast exam > male, reclined_30: around the apex → the apex; on the nipple → the breast
+```
+
+## New code
+```
+ Test Files  1 passed (1)
+      Tests  10 passed (10)
+```

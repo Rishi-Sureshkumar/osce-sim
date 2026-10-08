@@ -1,0 +1,35 @@
+# Regression proof: bug5
+
+exam landmarks drifted between views: each anchor rode one bone rigidly while the skin blends several, so near joints the targets floated off the skin and slid along it from pose to pose
+
+test:      tests/regressions/bug5-skinned-anchors.test.ts
+command:   npx vitest run tests/regressions/bug5-skinned-anchors.test.ts
+old code:  9ae450b (git worktree)  → exit 1 (FAILS, as it must)
+new code:  9ae450b + working tree     → exit 0 (passes)
+result:    PROVEN
+date:      2026-10-08T00:58:59.917Z
+
+## Old code: why it fails
+```
+ ❯ tests/regressions/bug5-skinned-anchors.test.ts (2 tests | 2 failed) 721ms
+   × bug 5: anchors and landmarks follow the skin in every pose > male: every anchor and landmark stays on its own skin vertex (≤ 3 mm) 479ms
+   × bug 5: anchors and landmarks follow the skin in every pose > female: every anchor and landmark stays on its own skin vertex (≤ 3 mm) 241ms
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+ FAIL  tests/regressions/bug5-skinned-anchors.test.ts > bug 5: anchors and landmarks follow the skin in every pose > male: every anchor and landmark stays on its own skin vertex (≤ 3 mm)
+AssertionError: supine neck_thyroid#0: 3.2 mm off the skin
+- Expected
++ Received
+     59|       expect(off, off.slice(0, 20).join("\n")).toEqual([]);
+ FAIL  tests/regressions/bug5-skinned-anchors.test.ts > bug 5: anchors and landmarks follow the skin in every pose > female: every anchor and landmark stays on its own skin vertex (≤ 3 mm)
+AssertionError: supine carotid_left#0: slid 6.1 mm from its skin vertex
+- Expected
++ Received
+     59|       expect(off, off.slice(0, 20).join("\n")).toEqual([]);
+```
+
+## New code
+```
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+```

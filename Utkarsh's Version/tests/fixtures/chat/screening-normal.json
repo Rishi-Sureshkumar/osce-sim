@@ -1,0 +1,32 @@
+{
+  "caseId": "screening-normal",
+  "author": "blind-fixture-agent",
+  "blind": true,
+  "items": [
+    { "q": "Hi, good morning!", "expect": ["conv:greeting"] },
+    { "q": "I'm Daniel, I'm a first year medical student.", "expect": ["conv:introduction"] },
+    { "q": "Can I just check your full name and date of birth?", "expect": ["conv:name_check"] },
+    { "q": "Did you manage to find parking ok?", "expect": ["conv:small_talk"] },
+    { "q": "How are you doing today?", "expect": ["conv:how_are_you"], "note": "social greeting, not a symptom screen" },
+    { "q": "So what are you here for today?", "expect": ["conv:opening"] },
+    { "q": "Do you have any medical problems?", "expect": ["fact:health"] },
+    { "q": "Have you ever been diagnosed with anything like asthma or diabetes?", "expect": ["fact:health"] },
+    { "q": "any regular meds?", "expect": ["fact:meds"], "note": "abbreviation 'meds'" },
+    { "q": "Do you take any vitamins or supplements?", "expect": ["fact:meds"] },
+    { "q": "any alergies?", "expect": ["fact:allergies"], "note": "typo 'alergies'" },
+    { "q": "Do you react badly to any medicines, like penicillin?", "expect": ["fact:allergies"], "note": "mentions medicines but asks about reactions" },
+    { "q": "Are you having any pain anywhere today?", "expect": ["neg:neg-any-symptoms"] },
+    { "q": "Any symptoms bothering you at the moment?", "expect": ["neg:neg-any-symptoms"] },
+    { "q": "Feeling unwell in any way?", "expect": ["neg:neg-any-symptoms"] },
+    { "q": "Do you smoke?", "expect": ["bank:*"], "note": "case has no social history" },
+    { "q": "Any heart problems in your family?", "expect": ["bank:*"], "note": "family history not in case; 'problems' should not pull to general health" },
+    { "q": "Sorry, could you say that again?", "expect": ["conv:repeat"] },
+    { "q": "Do you know your blood group?", "expect": ["unknown"] },
+    { "q": "So I'm going to do a full head-to-toe exam, starting with your hands and working my way up.", "expect": ["conv:explain_exam"] },
+    { "q": "Are you happy for me to go ahead and examine you?", "expect": ["conv:consent"] },
+    { "q": "Could you lie down flat on the couch for me?", "expect": ["conv:position_request"] },
+    { "q": "What's your favourite colour?", "expect": ["unknown"], "note": "off-topic; British spelling" },
+    { "q": "Thank you so much for your time.", "expect": ["conv:thanks"] },
+    { "q": "That's everything, you can get dressed now. Have a lovely day!", "expect": ["conv:closing"] }
+  ]
+}

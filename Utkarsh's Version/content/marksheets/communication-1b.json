@@ -1,0 +1,1944 @@
+{
+  "id": "communication-1b",
+  "title": "Communication Skills (1B checklist)",
+  "kind": "history",
+  "domain": "communication",
+  "passThreshold": 0.7,
+  "attribution": "Courtesy of Rebecca Kowalski",
+  "sourceNote": "Sections follow the 1B communication checklist (V2); every label is paraphrased in our own words. The pass threshold is a placeholder pending faculty confirmation.",
+  "items": [
+    {
+      "id": "greet-by-name",
+      "section": "Setting the stage",
+      "label": "Greets the patient by name",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Student greets the patient and uses the patient’s name (any form, e.g. Mr./Ms. + surname or first name if invited).",
+      "mockKeywords": [
+        "mr.",
+        "mrs.",
+        "ms.",
+        "hello",
+        "hi "
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "{patient.lastName}",
+          "{patient.firstName}",
+          "{patient.name}"
+        ],
+        "patterns": [
+          "\\b(?:hi|hello|hey|good (?:morning|afternoon|evening)|nice to meet you|pleased to meet you|welcome)\\b.*\\b(?:mr|mrs|ms|miss|mx)\\b",
+          "^(?:(?:hi|hello|hey|good (?:morning|afternoon|evening)) )?(?:mr|mrs|ms|miss|mx) [a-z]+\\b"
+        ],
+        "exemplars": [
+          "Hello Mr. Bennett, nice to meet you.",
+          "Good morning, Mrs. Garcia.",
+          "Hi, are you Mr. Bennett?",
+          "Hello Harold, is it okay if I call you Harold?",
+          "Good afternoon Ms. Okafor, thanks for waiting.",
+          "Hi there, Mr. Lee, how are you doing today?",
+          "Mr. Bennett? Hello, it's nice to meet you.",
+          "Hello, you must be Mr. Bennett."
+        ],
+        "counterExemplars": [
+          "Hello, how are you today?",
+          "Hi, my name is Alex and I'm a first-year medical student.",
+          "Good morning!",
+          "Can you tell me your full name and date of birth?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "first_third"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "introduce-self-role",
+      "section": "Setting the stage",
+      "label": "Introduces self (full name) and role",
+      "weight": 1,
+      "scoring": "auto",
+      "sourceText": "",
+      "rule": {
+        "all": [
+          {
+            "said": "introduced_name"
+          },
+          {
+            "said": "stated_role"
+          }
+        ]
+      }
+    },
+    {
+      "id": "introduce-first-year",
+      "section": "Setting the stage",
+      "label": "Says they are a first-year medical student",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Credit if the student tells the patient they are a first-year (or first year) medical student. Half credit for \"medical student\" without the year.",
+      "mockKeywords": [
+        "first-year",
+        "first year"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "first year medical student",
+          "first year med student",
+          "first year student",
+          "1st year medical student",
+          "1st year student",
+          "first year of medical school"
+        ],
+        "patterns": [
+          "\\b(?:first|1st) year\\b"
+        ],
+        "exemplars": [
+          "I'm a first-year medical student.",
+          "I'm a first year med student working with the team today.",
+          "My name is Sam and I'm a first-year student at the medical school.",
+          "I'm in my first year of medical school.",
+          "I'm one of the first-year medical students here.",
+          "I'm a first-year student doctor, and I'll be talking with you before the doctor comes in.",
+          "I'm a 1st year medical student."
+        ],
+        "counterExemplars": [
+          "I'm a medical student.",
+          "I'm a third-year medical student.",
+          "I'm a student doctor working with the team.",
+          "Is this your first time in the emergency department?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "first_third"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "remove-barriers",
+      "section": "Setting the stage",
+      "label": "Removes barriers to communication (sits down at eye level)",
+      "weight": 1,
+      "scoring": "auto",
+      "sourceText": "",
+      "rule": {
+        "happened": "sit_down"
+      }
+    },
+    {
+      "id": "comfort-privacy",
+      "section": "Setting the stage",
+      "label": "Checks comfort, readiness and privacy; puts patient at ease",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Student asks whether the patient is comfortable / ready, or addresses privacy, or makes a remark that puts the patient at ease.",
+      "mockKeywords": [
+        "comfortable",
+        "is now a good time",
+        "privacy",
+        "ready"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "is now a good time",
+          "is this a good time",
+          "is now an okay time",
+          "is now ok",
+          "for some privacy",
+          "close the curtain",
+          "close the door",
+          "make you more comfortable",
+          "are you warm enough",
+          "no rush",
+          "take your time"
+        ],
+        "patterns": [
+          "\\b(?:are you|you are|you|is that|is everything) (?:sitting |feeling |still )?(?:comfortable|comfy)\\b(?!.*\\b(?:at night|when you (?:sleep|lie)|sleeping|in bed|lying flat|lie flat|overnight)\\b)",
+          "\\bis (?:now|this|it) (?:a |an )?(?:good|ok|okay|alright|all right|convenient) time\\b",
+          "\\b(?:is it|would it be) (?:ok|okay|alright|all right) (?:if|to|for) (?:we|i|me) (?:talk|chat|start|begin|ask)\\b",
+          "\\bare you (?:ready|okay|ok) (?:to|for us to|if we) (?:talk|chat|start|begin|get started)\\b",
+          "\\b(?:privacy|private)\\b",
+          "\\b(?:close|pull|draw) the (?:door|curtain|curtains)\\b",
+          "\\b(?:can|could|shall) i (?:get|bring|grab|fetch) you (?:anything|something|a blanket|some water|a pillow)\\b"
+        ],
+        "exemplars": [
+          "Are you comfortable sitting like that?",
+          "Is now a good time for us to talk?",
+          "Would you like me to close the curtain for some privacy?",
+          "Before we start, can I get you anything to make you more comfortable?",
+          "Is it alright if I ask you some questions about what's been going on?",
+          "Are you ready to get started, or do you need a moment?",
+          "Take your time, there's no rush at all.",
+          "Are you warm enough? I can grab you a blanket.",
+          "Let me pull the curtain so we have a bit more privacy."
+        ],
+        "counterExemplars": [
+          "How are you today?",
+          "Are you comfortable lying flat at night?",
+          "Does anything make your breathing more comfortable?",
+          "Have you been sleeping comfortably?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "first_third"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "cc-open-question",
+      "section": "Chief concern and agenda",
+      "label": "Elicits chief concern with an open-ended question",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "An open question to elicit the main concern (e.g. What brings you in today?). Closed questions do not count.",
+      "mockKeywords": [
+        "what brings you",
+        "how can i help",
+        "what can i do for you",
+        "tell me what"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "what brings you in",
+          "what brings you here",
+          "what brings you to",
+          "what brought you in",
+          "what brought you here",
+          "what brought you to",
+          "how can i help",
+          "how can we help",
+          "what can i do for you",
+          "what can we do for you",
+          "what seems to be the problem",
+          "what seems to be the trouble"
+        ],
+        "patterns": [
+          "\\bwhat (?:brings|brought|has brought) you\\b",
+          "\\bhow (?:can|may) (?:i|we) help\\b",
+          "\\bwhat can (?:i|we) (?:do for you|help you with)\\b",
+          "\\bwhat (?:is|has been) (?:going on|bothering you|troubling you|the problem|the matter)\\b",
+          "\\bwhat (?:made|prompted) you (?:decide to )?(?:come|to come)\\b",
+          "\\bwhat would you like to (?:talk about|discuss) today\\b"
+        ],
+        "exemplars": [
+          "What brings you in today?",
+          "What brought you to the emergency department?",
+          "How can I help you today?",
+          "So, tell me what's been going on.",
+          "What's been bothering you?",
+          "Can you tell me what brought you in today?",
+          "What made you decide to come to the hospital today?",
+          "What would you like to talk about today?",
+          "What can we do for you this morning?"
+        ],
+        "counterExemplars": [
+          "Are you here because of your breathing?",
+          "So you're here for shortness of breath, is that right?",
+          "Is it your chest that's bothering you?",
+          "What do you think is causing this?"
+        ],
+        "topics": [],
+        "form": "open",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "first_third"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "additional-concerns",
+      "section": "Chief concern and agenda",
+      "label": "Elicits additional concerns with an open-ended question",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Asks whether there is anything else the patient wants to address today, before diving into the HPI.",
+      "mockKeywords": [
+        "anything else",
+        "any other concerns",
+        "something else"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "any other concerns",
+          "any other issues",
+          "anything else you would like to talk about",
+          "anything else you would like to discuss",
+          "anything else you wanted to talk about",
+          "anything else you wanted to discuss",
+          "anything else you would like to cover",
+          "anything else on your mind",
+          "anything else bothering you",
+          "something else you would like to discuss",
+          "something else you wanted to discuss"
+        ],
+        "patterns": [
+          "\\b(?:anything|something) else (?:that )?(?:you would like|you wanted|you want|you were hoping|we should|i should know about today|on your mind|bothering you|you are (?:worried|concerned) about|to (?:talk about|discuss|cover|add|bring up|address))\\b",
+          "\\bany other (?:concerns|issues|problems|worries|things) (?:you|that|for|to|today)\\b",
+          "\\bwhat else (?:would you like|did you want|do you want|were you hoping|is (?:on your mind|bothering you)|are you (?:worried|concerned) about|brings you)\\b",
+          "\\b(?:apart from|besides|other than|in addition to|aside from)\\b.*\\b(?:anything|something|what) else\\b",
+          "^(?:(?:and|so|ok|okay|alright|right|now|before we start) )*(?:is there |was there )?(?:anything|something) else(?: today)?$"
+        ],
+        "exemplars": [
+          "Before we get into that, is there anything else you'd like to talk about today?",
+          "Is there something else you were hoping to discuss while you're here?",
+          "What else would you like to cover today?",
+          "Are there any other concerns you'd like to bring up?",
+          "Besides your breathing, is there anything else on your mind?",
+          "Apart from that, what else did you want to talk about?",
+          "Anything else bothering you that we should address today?",
+          "Is there anything else?"
+        ],
+        "counterExemplars": [
+          "Any other symptoms?",
+          "Does anything else make it worse?",
+          "Do you have any other questions for me before I go?",
+          "Do you have any other medical conditions?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "first_third"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "note-issues",
+      "section": "Chief concern and agenda",
+      "label": "Notes additional issues to discuss today",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Acknowledges/lists the additional issues raised so they are not lost (e.g. We will also talk about X).",
+      "mockKeywords": [
+        "we will also",
+        "we’ll also",
+        "also talk about",
+        "come back to"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "we will also talk about",
+          "we will also discuss",
+          "we will also cover",
+          "we will come back to",
+          "we can come back to",
+          "let me make a note",
+          "i will make a note",
+          "i will write that down",
+          "let me write that down",
+          "we will get to that",
+          "we will cover both"
+        ],
+        "patterns": [
+          "\\b(?:we|i) (?:will|can|should|are going to|shall) (?:also |definitely |make sure to |make sure we )?(?:talk about|discuss|come back to|get to|cover|address|go over) (?:that|those|both|it|this|them|the|your)\\b",
+          "\\b(?:i will|let me|i am going to|i have|i just want to|i will just) (?:make a note of (?:that|this|it|your|the|those)|make a note so|note (?:that|this|it|your|the|those) (?:down|too|as well)|noted (?:that|this|it|your|the|those)|jot (?:that|this|it) down|write (?:that|this|it|those) down)\\b",
+          "\\bmake sure (?:we|i) (?:talk about|discuss|cover|get to|address|come back to)\\b",
+          "\\bso (?:the|your) (?:main )?(?:things|concerns|issues) (?:today )?(?:are|is)\\b"
+        ],
+        "exemplars": [
+          "Okay, so we'll talk about your breathing and we'll also get to the ankle swelling.",
+          "I'll make a note of that so we can come back to it.",
+          "Let me write that down so we don't forget to discuss it.",
+          "So we have your breathing and your cough, and we'll cover both today.",
+          "Got it, we'll make sure to talk about your sleep as well.",
+          "I've noted the leg swelling too; we'll come back to that in a bit.",
+          "So the main things today are your breathing and the swelling in your legs."
+        ],
+        "counterExemplars": [
+          "I'm going to jot down a few notes while we talk, if that's alright.",
+          "Okay.",
+          "Let's go back to when the breathing started."
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "first_third"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "prioritize",
+      "section": "Chief concern and agenda",
+      "label": "Prioritises concerns if necessary",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "If more than one concern exists, negotiates which to focus on first. If the patient raised only one concern, score 1 only if the student explicitly confirmed there was nothing else to prioritise; otherwise 0.",
+      "mockKeywords": [
+        "start with",
+        "focus on",
+        "most important"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "focus on first",
+          "talk about first",
+          "start with first",
+          "most important to you",
+          "most important for you",
+          "most pressing",
+          "nothing else you wanted to discuss",
+          "nothing else you would like to discuss"
+        ],
+        "patterns": [
+          "\\b(?:would you like|do you want|should we|shall we|can we|let us|could we|is it ok(?:ay)? if we|i would like to|i suggest we|we will|we can|we could) (?:to )?(?:start|begin|focus|concentrate) (?:with|on)\\b",
+          "\\b(?:most|more|the most) (?:important|pressing|urgent) (?:to you|for you|for today|today|thing)\\b",
+          "\\bwhich (?:one|of (?:these|those|them|the two)|concern|issue|problem|thing)\\b.*\\b(?:first|most|today|start)\\b",
+          "\\b(?:so )?(?:it is|is it|is that) (?:just|only) (?:the|your)\\b.*\\b(?:today|you want|you would like|you wanted)\\b",
+          "\\b(?:nothing|no) (?:else|other) (?:you|that you|concerns you) (?:would like|want|wanted|need) to (?:talk about|discuss|cover|add)\\b",
+          "\\b(?:just|only) (?:the|your) (?:\\w+ ){1,3}(?:today|to focus on|to talk about)\\b"
+        ],
+        "exemplars": [
+          "Which of those would you like to start with?",
+          "Since your breathing seems to bother you most, shall we focus on that first?",
+          "Would it be okay if we start with the breathing and then talk about the cough?",
+          "What's most important for you to sort out today?",
+          "So it's just the breathing you want to focus on today, nothing else?",
+          "Just to confirm, there's nothing else you'd like to discuss besides your breathing?",
+          "Let's start with your breathing since that sounds most pressing, and then we'll get to the swelling.",
+          "Of the things you mentioned, which one worries you the most?"
+        ],
+        "counterExemplars": [
+          "Did it start with a cough?",
+          "When did it start?",
+          "Is there anything that makes it better?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "first_third"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "open-story",
+      "section": "Opening the interview",
+      "label": "Invites the patient’s story with an open-ended prompt",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Invites the patient’s narrative with an open prompt (e.g. Tell me about…).",
+      "mockKeywords": [
+        "tell me about",
+        "tell me more",
+        "walk me through",
+        "describe"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "tell me more about your",
+          "tell me more about it",
+          "tell me more about that",
+          "walk me through",
+          "talk me through",
+          "take me through",
+          "tell me what happened",
+          "tell me what has been happening",
+          "tell me what has been going on",
+          "start from the beginning",
+          "tell me everything",
+          "in your own words"
+        ],
+        "patterns": [
+          "\\b(?:tell|walk|talk|take) me (?:a bit |a little )?(?:more )?(?:through|about) (?:what|how|it|this|that|everything|when|your (?:breathing|symptoms?|problem|concern|story|cough|pain|chest|legs)|the (?:breathing|symptoms?|problem|cough|pain|swelling))\\b",
+          "\\b(?:could|can|would) you (?:please )?(?:describe|tell me about|walk me through|talk me through) (?:what|how|it|this|that|everything|your|the)\\b",
+          "\\bstart(?:ing)? (?:from|at) the (?:beginning|start)\\b",
+          "\\bwhat has (?:it|this|the \\w+) been like\\b"
+        ],
+        "exemplars": [
+          "Tell me more about your breathing.",
+          "Can you walk me through what's been happening over the last couple of weeks?",
+          "Start from the beginning and tell me what's been going on.",
+          "Could you describe what the breathlessness has been like for you?",
+          "Tell me all about it.",
+          "In your own words, what has this been like?",
+          "Take me back to when this all started and tell me how it's gone since.",
+          "I'd like to hear the whole story, starting from when you first noticed it."
+        ],
+        "counterExemplars": [
+          "Is it worse when you walk?",
+          "When did it start?",
+          "Can you tell me your full name?",
+          "Do you get short of breath at night?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "first_third"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "nonverbal-encourage",
+      "section": "Opening the interview",
+      "label": "Uses paraverbal encouragement and silence",
+      "weight": 1,
+      "scoring": "not_assessable",
+      "notAssessableReason": "Needs voice timing and body language; not measured yet (silence could later come from voice timing).",
+      "sourceText": ""
+    },
+    {
+      "id": "second-open",
+      "section": "Opening the interview",
+      "label": "Uses a second or third open question / echoing to get more story",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "After the first answer, uses another open prompt or echoes the patient’s words to invite more.",
+      "mockKeywords": [
+        "tell me more",
+        "go on",
+        "what else",
+        "and then"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "tell me more",
+          "tell me more about that",
+          "go on",
+          "what else",
+          "and then what",
+          "what happened next",
+          "what happened then",
+          "what happened after that",
+          "say more about",
+          "can you say more",
+          "keep going",
+          "please continue"
+        ],
+        "patterns": [
+          "\\b(?:tell|walk|talk|take) me (?:a bit |a little )?(?:more|through|about|what)\\b",
+          "\\bwhat (?:else|happened (?:next|then|after))\\b",
+          "\\b(?:and then|then) what\\b",
+          "\\b(?:can|could) you (?:say|tell me) (?:a bit |a little )?more\\b",
+          "\\bhow has (?:it|this|that|the \\w+) been (?:since|over|for)\\b",
+          "^(?:(?:ok|okay|mm|hmm|mhm|right|i see) )*(?:go on|please go on|keep going|carry on|please continue)$"
+        ],
+        "exemplars": [
+          "Tell me more about that.",
+          "Go on.",
+          "What else have you noticed?",
+          "And then what happened?",
+          "Okay, and how has it been since then?",
+          "You said you can't catch your breath; can you tell me more about that?",
+          "What happened after that?",
+          "Can you say a bit more about what happens at night?",
+          "Can't lie flat?"
+        ],
+        "counterExemplars": [
+          "Does anything else make it worse?",
+          "Is it worse at night?",
+          "Do you have any allergies?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 2,
+        "window": "before_first_touch"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "summarize-clarify",
+      "section": "Focusing skills",
+      "label": "Clarifies by summarising",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Summarises or checks understanding (e.g. Let me make sure I have this right…).",
+      "mockKeywords": [
+        "let me make sure",
+        "so what i’m hearing",
+        "to summarize",
+        "to summarise",
+        "if i understand"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "let me make sure",
+          "so what i am hearing",
+          "what i am hearing is",
+          "to summarize",
+          "to summarise",
+          "if i understand",
+          "if i understood",
+          "just to recap",
+          "so to recap",
+          "let me recap",
+          "let me see if i have",
+          "let me check i have",
+          "so you are saying",
+          "did i get that right",
+          "if i heard you correctly",
+          "correct me if i am wrong",
+          "just to clarify",
+          "just to make sure i understand",
+          "let me see if i understand"
+        ],
+        "patterns": [
+          "\\b(?:let me|i want to|i would like to|just want to|just to) (?:make sure|check|confirm|clarify|see if) (?:i|that i)? ?(?:have|got|understand|understood|heard|have got|am understanding)\\b",
+          "\\bso (?:you are saying|what you are saying is|you said|if i (?:understand|heard))\\b",
+          "\\b(?:to|let me|let us|i will) (?:summarize|summarise|recap|sum up)\\b",
+          "\\b(?:did i|have i) (?:get|got|understand) (?:that|this|it|everything) (?:right|correct)\\b",
+          "\\bdid you say\\b"
+        ],
+        "exemplars": [
+          "Let me make sure I have this right: you've been more short of breath for about two weeks?",
+          "So what I'm hearing is that it's been getting worse, especially at night.",
+          "Just to recap, you ran out of your water pill about ten days ago.",
+          "If I understand correctly, you need three pillows to sleep now.",
+          "So you're saying the swelling started about a week ago, is that right?",
+          "Correct me if I'm wrong, but it sounds like the breathing is worse when you lie down.",
+          "Just to clarify, did you say the cough is dry?",
+          "Okay, so far I've got breathlessness, swollen ankles and a dry cough."
+        ],
+        "counterExemplars": [
+          "Can you tell me more about the cough?",
+          "What do you think is going on?",
+          "Sorry, could you repeat that? I didn't catch it."
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "emotional-context",
+      "section": "Focusing skills",
+      "label": "Elicits emotional context",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Asks how the problem is affecting the patient emotionally / how they are coping.",
+      "mockKeywords": [
+        "how are you feeling about",
+        "how are you coping",
+        "what is this like",
+        "worried"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "how are you feeling about",
+          "how do you feel about",
+          "how are you coping",
+          "how have you been coping",
+          "how are you managing",
+          "how are you holding up",
+          "how has this made you feel",
+          "how does that make you feel",
+          "how does this make you feel",
+          "what is this like for you",
+          "what has this been like for you",
+          "is anything worrying you",
+          "what worries you",
+          "what are you worried about",
+          "are you worried about",
+          "affecting you emotionally"
+        ],
+        "patterns": [
+          "\\bhow (?:are|have) you (?:been )?(?:feeling about|coping|managing|holding up|dealing with)\\b",
+          "\\bhow (?:does|did|has) (?:this|that|it|all this|all of this) (?:made|make) you feel\\b",
+          "\\b(?:are you|is anything|is something|what is|what are you|is there anything you are|have you been) (?:most |been )?(?:worried|worrying|anxious|scared|concerned|frightened|stressed|upset|nervous)\\b",
+          "\\bwhat (?:worries|concerns|scares|frightens|upsets) you\\b",
+          "\\b(?:emotionally|emotional)\\b",
+          "\\bwhat (?:has|is) (?:been )?the hardest (?:part|thing)\\b"
+        ],
+        "exemplars": [
+          "How are you feeling about all of this?",
+          "How have you been coping with the breathlessness?",
+          "Is anything about this worrying you?",
+          "What's been the hardest part of this for you?",
+          "How has this made you feel?",
+          "That sounds scary. How are you holding up?",
+          "What worries you most about what's been happening?",
+          "Has all this been stressful for you?"
+        ],
+        "counterExemplars": [
+          "How are you feeling today?",
+          "Do you feel short of breath right now?",
+          "Have you been feeling low or depressed lately?",
+          "Have you had any chest pain?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "personal-context",
+      "section": "Focusing skills",
+      "label": "Elicits personal context",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Asks what the problem means for the patient’s life (work, family, activities, roles).",
+      "mockKeywords": [
+        "affect your",
+        "daily life",
+        "at home",
+        "your family",
+        "your work"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "affect your daily life",
+          "affecting your daily life",
+          "affected your daily life",
+          "day to day life",
+          "daily activities",
+          "affected your work",
+          "affecting your work",
+          "stopped you from doing",
+          "stopping you from doing",
+          "getting in the way",
+          "what does this mean for you",
+          "impact on your life",
+          "impacting your life"
+        ],
+        "patterns": [
+          "\\bhow (?:is|has|have|does|did) (?:this|that|it|all this|the \\w+|your \\w+)(?: been)? (?:affect|affecting|affected|impact|impacting|impacted|interfere|interfering|interfered)\\b",
+          "\\b(?:affect|affecting|affected|impact|impacting|impacted|interfere|interfering|interfered|changed|change) (?:with |on )?(?:your|you) (?:daily|day to day|everyday|life|work|job|family|activities|routine|hobbies|ability|plans|independence|time with)\\b",
+          "\\b(?:stopped|stopping|keeping|kept|prevent|preventing|prevented) you from\\b",
+          "\\bwhat (?:can you not|are you not able to|can you no longer|could you do before|have you had to (?:stop|give up))\\b",
+          "\\bwhat does (?:this|that|it|all this) mean for (?:you|your)\\b",
+          "\\bgetting in the way of\\b"
+        ],
+        "exemplars": [
+          "How has this been affecting your day-to-day life?",
+          "Has the breathlessness stopped you from doing the things you enjoy?",
+          "How is this impacting things at home with your family?",
+          "What can't you do now that you could do a month ago?",
+          "Has this affected your ability to get around or look after yourself?",
+          "What does all this mean for you and your plans this week?",
+          "How has this changed your routine?",
+          "Is it getting in the way of spending time with your grandchildren?"
+        ],
+        "counterExemplars": [
+          "Does anyone in your family have heart problems?",
+          "Who do you live with at home?",
+          "What do you do for work?",
+          "Has it been getting worse over time?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "respond-emotion",
+      "section": "Focusing skills",
+      "label": "Responds to emotional or personal context (empathy)",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Explicitly acknowledges or validates the patient’s feelings or situation.",
+      "mockKeywords": [
+        "that sounds",
+        "i can imagine",
+        "i’m sorry",
+        "must be hard",
+        "understandable"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "i can imagine",
+          "i am sorry to hear",
+          "sorry to hear that",
+          "sorry you are going through",
+          "i am so sorry",
+          "must be hard",
+          "must be difficult",
+          "must be frightening",
+          "must be scary",
+          "must be frustrating",
+          "must be exhausting",
+          "must be worrying",
+          "completely understandable",
+          "totally understandable",
+          "that is understandable",
+          "no wonder you",
+          "that is a lot to deal with"
+        ],
+        "patterns": [
+          "\\b(?:that|it|this|all this|all of that) (?:sounds|must be|must have been|seems|has been) (?:really |very |so |quite |pretty |incredibly )?(?:hard|difficult|tough|scary|frightening|frustrating|worrying|stressful|exhausting|upsetting|awful|overwhelming|challenging|a lot|distressing|uncomfortable)\\b",
+          "\\b(?:it is|that is|it is completely|that is completely|it is totally|that is totally|it is very|that is very|it is really|that is really|very) understandable\\b",
+          "\\bi (?:can )?(?:imagine|understand|see) (?:how|why)\\b",
+          "\\bi can (?:only )?imagine\\b",
+          "\\b(?:i am|i am really|i am so|i am very) sorry (?:to hear|that you|you are|you have|about (?:that|this|all))\\b",
+          "\\bno wonder (?:you|that)\\b",
+          "\\b(?:it|that) makes (?:total |complete |a lot of |perfect )?sense (?:that )?(?:you|that you)\\b",
+          "\\bof course you (?:are|would be|feel)\\b"
+        ],
+        "exemplars": [
+          "That sounds really frightening.",
+          "I can imagine how exhausting that must be.",
+          "I'm sorry you've been going through this.",
+          "It's completely understandable that you're worried about missing the birthday.",
+          "That must be really hard, not being able to sleep lying down.",
+          "No wonder you're feeling worn out.",
+          "It makes sense that you'd be scared it's your heart again.",
+          "Thank you for telling me that; I know it isn't easy to talk about."
+        ],
+        "counterExemplars": [
+          "That sounds like it could be fluid on your lungs.",
+          "I'm sorry, could you repeat that?",
+          "Okay, got it. And when did the swelling start?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "timeline",
+      "section": "History of present illness",
+      "label": "Clarifies the timeline",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Establishes when it started and how it evolved over time.",
+      "mockKeywords": [
+        "when did",
+        "how long",
+        "since when",
+        "getting worse"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "since when",
+          "getting worse",
+          "getting better",
+          "staying the same",
+          "when did it start",
+          "when did this start",
+          "when did it begin",
+          "when did this begin",
+          "when did this all start",
+          "how long has this been going on",
+          "how long has it been going on",
+          "how has it changed",
+          "how has it progressed",
+          "how has this changed"
+        ],
+        "patterns": [
+          "\\bwhen did (?:this|it|that|all this|all of this|the \\w+|your \\w+|you first)\\b.*\\b(?:start|begin|began|notice|come on|first)\\b",
+          "\\bhow long (?:has|have) (?:this|it|that|the \\w+|your \\w+|you been)\\b.*\\b(?:going on|been|had|noticed|feeling|having)\\b",
+          "\\b(?:getting|got|gotten|been getting|become|becoming) (?:any )?(?:worse|better)\\b",
+          "\\bhow (?:has|have) (?:it|this|that|they|the \\w+|your \\w+) (?:changed|progressed|developed|evolved|been changing)\\b(?! (?:your|you|for you|things))",
+          "\\b(?:sudden|suddenly|gradual|gradually)\\b",
+          "\\bsince (?:when|then)\\b"
+        ],
+        "exemplars": [
+          "When did this all start?",
+          "How long has this been going on?",
+          "Has it been getting worse, better, or staying the same?",
+          "How has it changed over the past two weeks?",
+          "Walk me through how it's progressed since it started.",
+          "Was it sudden, or did it build up gradually?",
+          "When did you first notice the swelling, and has it changed since?",
+          "What was it like at the beginning compared with now?"
+        ],
+        "counterExemplars": [
+          "When did you have your heart attack?",
+          "How long have you been taking carvedilol?",
+          "When did you last take your water pill?"
+        ],
+        "topics": [
+          "hpi.onset",
+          "hpi.course"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "hpi-onset",
+      "section": "History of present illness",
+      "label": "Onset",
+      "weight": 0.5,
+      "scoring": "match",
+      "guidance": "Asks how the symptom began (sudden vs gradual, what they were doing).",
+      "mockKeywords": [
+        "start",
+        "began",
+        "come on",
+        "onset"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "come on suddenly",
+          "came on suddenly",
+          "suddenly or gradually",
+          "sudden or gradual",
+          "all at once",
+          "out of the blue",
+          "how did it start",
+          "how did it begin",
+          "how did this start",
+          "how did this begin",
+          "when did it start",
+          "when did this start",
+          "what were you doing when"
+        ],
+        "patterns": [
+          "\\b(?:sudden|suddenly|gradual|gradually|all at once|out of the blue|overnight|creep up|crept up)\\b",
+          "\\b(?:did|does|has|had) (?:it|this|the \\w+|your \\w+) (?:come|came) on\\b",
+          "\\bhow did (?:it|this|that|the \\w+|your \\w+) (?:start|begin|come on|first start)\\b",
+          "\\bwhen did (?:it|this|that|all this|the \\w+|your \\w+|you first)\\b.*\\b(?:start|begin|began|notice|come on)\\b",
+          "\\bwhat were you doing when\\b"
+        ],
+        "exemplars": [
+          "Did it come on suddenly or gradually?",
+          "How did it first start?",
+          "What were you doing when you first noticed it?",
+          "Was it all at once, or did it creep up on you?",
+          "When did the breathlessness begin?",
+          "Can you remember when you first noticed it?",
+          "Did it start out of the blue?",
+          "When did you first start feeling short of breath?"
+        ],
+        "counterExemplars": [
+          "When did you start taking furosemide?",
+          "When did you stop taking your water pill?",
+          "When did your heart attack happen?"
+        ],
+        "topics": [
+          "hpi.onset"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "hpi-duration",
+      "section": "History of present illness",
+      "label": "Duration",
+      "weight": 0.5,
+      "scoring": "match",
+      "guidance": "Asks how long the symptom has been present / how long episodes last.",
+      "mockKeywords": [
+        "how long",
+        "duration",
+        "weeks",
+        "days"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "how long has this been going on",
+          "how long has it been going on",
+          "how long have you been short of breath",
+          "how long does it last",
+          "how long do they last",
+          "how long does each episode last"
+        ],
+        "patterns": [
+          "\\bhow long (?:does|do|did|would) (?:it|they|each|an|the|that|this)\\b.*\\b(?:last|go on|take|stay|persist)\\b",
+          "\\bhow long (?:has|have) (?:this|it|that|the \\w+|your \\w+)(?: \\w+)? (?:been|going on|lasted)\\b",
+          "\\bhow long have you (?:been|had|noticed|felt)\\b(?!.*\\b(?:taking|on|smok\\w*|drink\\w*|retired|married|lived|living|known|worked|working|diabetes|blood pressure|hypertension|cholesterol|asthma|copd|condition|diagnos\\w*|heart failure|weak heart|stent)\\b)",
+          "\\bfor how long (?:have|has) (?:you had|you been|this|it|the \\w+)\\b(?!.*\\b(?:smok\\w*|drink\\w*|taking|retired|married|lived)\\b)",
+          "\\bhow many (?:days|weeks|months|minutes|hours)\\b(?!.*\\b(?:drink|smoke|cigarettes|pills|tablets)\\b)"
+        ],
+        "exemplars": [
+          "How long has this been going on?",
+          "How long have you been short of breath?",
+          "How many days has your breathing been like this?",
+          "How long do the episodes at night last?",
+          "When you wake up gasping, how long does it take to settle?",
+          "So it's been going on for about two weeks?",
+          "How long have your ankles been swollen?",
+          "For how long have you had the cough?"
+        ],
+        "counterExemplars": [
+          "How long did you smoke for?",
+          "How long have you been taking carvedilol?",
+          "How long can you walk before you need to stop?"
+        ],
+        "topics": [
+          "hpi.onset"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "hpi-quality",
+      "section": "History of present illness",
+      "label": "Quality",
+      "weight": 0.5,
+      "scoring": "match",
+      "guidance": "Asks what the symptom feels like.",
+      "mockKeywords": [
+        "what does it feel like",
+        "describe the",
+        "feel like"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "what does it feel like",
+          "what does that feel like",
+          "what does the breathlessness feel like",
+          "how would you describe",
+          "describe the feeling",
+          "can you describe the feeling",
+          "what is the feeling like",
+          "what kind of feeling"
+        ],
+        "patterns": [
+          "\\bwhat (?:does|did|do) (?:it|that|this|they|the \\w+|your \\w+) (?:\\w+ )?feel like\\b",
+          "\\bhow would you describe (?:it|that|this|the|your)\\b",
+          "\\bdescribe (?:the|what the|how the|what it|how it|what that|how that) (?:\\w+ )?(?:feels?|feeling|sensation|like|is like)\\b",
+          "\\bwhat (?:kind|sort|type) of (?:pain|feeling|sensation|breathlessness|cough|discomfort|swelling|tightness)\\b",
+          "\\bis (?:it|the \\w+) (?:more )?(?:a )?(?:sharp|dull|tight|heavy|pressure|burning|crushing|aching|stabbing|dry|wet|productive)\\b",
+          "\\b(?:cannot|not able to|unable to) (?:get enough air|catch your breath|get a full breath|take a deep breath)\\b.*\\bor\\b"
+        ],
+        "exemplars": [
+          "What does the breathlessness feel like?",
+          "How would you describe the feeling?",
+          "Is it more like you can't get enough air, or a tightness in your chest?",
+          "Can you describe what the cough is like?",
+          "What kind of feeling is it: tight, heavy, or something else?",
+          "Is the cough dry, or are you bringing anything up?",
+          "When you say you're winded, what does that feel like for you?",
+          "What does it feel like when you wake up at night?"
+        ],
+        "counterExemplars": [
+          "How do you feel today?",
+          "How are you feeling about all this?",
+          "Do you feel short of breath right now?"
+        ],
+        "topics": [
+          "hpi.character"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "hpi-quantification",
+      "section": "History of present illness",
+      "label": "Quantification / severity",
+      "weight": 0.5,
+      "scoring": "match",
+      "guidance": "Quantifies severity or functional impact (scale, distance walked, number of pillows, etc.).",
+      "mockKeywords": [
+        "how far",
+        "how many",
+        "scale",
+        "how bad",
+        "stairs",
+        "pillows"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "how far can you walk",
+          "how far are you able to walk",
+          "how far could you walk",
+          "how many pillows",
+          "flight of stairs",
+          "flights of stairs",
+          "on a scale",
+          "how bad is it",
+          "how severe",
+          "how many blocks",
+          "how much can you do"
+        ],
+        "patterns": [
+          "\\bon a scale\\b",
+          "\\bscale (?:of |from )?(?:0|1) to 10\\b",
+          "\\b(?:out of|from 0 to|from 1 to) 10\\b",
+          "\\bhow (?:far|many blocks|many steps|many flights|long|much) (?:can|could|are|were|do|did) you (?:walk|go|climb|manage|able to walk|able to go|get)\\b",
+          "\\bhow many (?:pillows|blocks|flights|stairs|steps)\\b",
+          "\\bhow (?:bad|severe|serious) (?:is|has|was|does|did|would)\\b",
+          "\\b(?:can|are you able to|could|do you manage to) (?:you )?(?:climb|walk up|manage|get up) (?:a |one |the )?(?:flight of |few )?(?:stairs|steps)\\b",
+          "\\b(?:get|getting) dressed\\b.*\\b(?:breath|winded|stop|rest)\\b"
+        ],
+        "exemplars": [
+          "How far can you walk before you have to stop?",
+          "On a scale of one to ten, how bad is your breathing?",
+          "How many pillows do you sleep on?",
+          "Can you manage a flight of stairs?",
+          "How many blocks could you walk two weeks ago compared with now?",
+          "How much has it limited what you can do?",
+          "Are you able to get dressed without getting winded?",
+          "How severe would you say it is right now?"
+        ],
+        "counterExemplars": [
+          "How many children do you have?",
+          "How many cigarettes a day did you smoke?",
+          "How much do you drink in a week?"
+        ],
+        "topics": [
+          "hpi.severity"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "hpi-related",
+      "section": "History of present illness",
+      "label": "Related symptoms",
+      "weight": 0.5,
+      "scoring": "match",
+      "guidance": "Asks about associated symptoms.",
+      "mockKeywords": [
+        "any other symptoms",
+        "swelling",
+        "cough",
+        "chest pain",
+        "fever"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "any other symptoms",
+          "other symptoms",
+          "noticed anything else",
+          "anything else you have noticed"
+        ],
+        "patterns": [
+          "\\b(?:any|other|additional|associated) (?:other )?symptoms?\\b",
+          "\\bhave you (?:noticed|had|been having|felt) anything else\\b",
+          "\\b(?:along with|alongside|together with|at the same time as|accompanied by|apart from|besides|as well as) (?:the |your |that |this )?(?:breath\\w*|shortness|cough\\w*|pain|symptoms?|swelling|it|this|that)\\b.*\\b(?:noticed|notice|symptoms?|feel|felt|experienc\\w*|happen\\w*|had|having|get|getting)\\b",
+          "\\b(?:noticed|symptoms?|feel|felt|experienc\\w*|had|having)\\b.*\\b(?:along with|alongside|together with|at the same time as|accompanied by|apart from|besides|as well as) (?:the |your |that |this )?(?:breath\\w*|shortness|cough\\w*|pain|swelling|it|this|that)\\b",
+          "\\banything else (?:happen|happens|happening|going on) (?:when|with|at the same time)\\b"
+        ],
+        "exemplars": [
+          "Have you noticed any other symptoms along with the breathlessness?",
+          "Any swelling in your legs or ankles?",
+          "Have you had a cough?",
+          "Does anything else happen when you get short of breath, like chest pain or dizziness?",
+          "Have you noticed any weight gain?",
+          "Any fevers or chills?",
+          "Have you been waking up at night short of breath?",
+          "Is there anything else you've noticed that seems related?"
+        ],
+        "counterExemplars": [
+          "Do you have any other medical conditions?",
+          "Any other concerns you want to discuss today?",
+          "Do you have any other questions for me?"
+        ],
+        "topics": [
+          "hpi.associated"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "hpi-setting",
+      "section": "History of present illness",
+      "label": "Setting",
+      "weight": 0.5,
+      "scoring": "match",
+      "guidance": "Asks the setting in which it occurs (exertion, lying flat, time of day, at night).",
+      "mockKeywords": [
+        "when you lie",
+        "lying",
+        "at night",
+        "exertion",
+        "walking"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "on exertion",
+          "time of day",
+          "at rest",
+          "when you exert yourself",
+          "worse at night",
+          "worse in the morning",
+          "when do you notice it",
+          "when do you notice it most",
+          "when does it happen",
+          "when does it come on"
+        ],
+        "patterns": [
+          "\\b(?:lie|lying|lay|laying) (?:down )?flat\\b.*\\b(?:at night|breath\\w*|winded|worse|better|sleep\\w*|cough\\w*|wake|waking|pillows)\\b",
+          "\\b(?:breath\\w*|winded|worse|better|sleep|sleeping|cough\\w*|trouble|difficult\\w*|able|manage)\\b.*\\b(?:lie|lying|lay|laying) (?:down )?flat\\b(?!.*\\bfor me\\b)",
+          "\\b(?:worse|better|happen|happens|come on|comes on|notice it|get it|get them|bother you|bothers you|breathless|short of breath|winded)\\b.*\\b(?:at night|in the morning|in the evening|during the day|at rest|when you (?:lie|walk|exert|exercise|climb|sleep|rest|bend|are (?:walking|resting|lying|climbing)))\\b",
+          "\\bwhen (?:do|does) (?:you|it|this|the \\w+) (?:usually |mostly )?(?:notice|get|feel|happen|come on|occur|bother)\\b",
+          "\\bwhat (?:are|were) you (?:usually )?doing when\\b",
+          "\\b(?:on|with) (?:exertion|exercise|activity)\\b",
+          "\\btime of (?:the )?day\\b",
+          "\\b(?:wake|waking|woke) (?:up )?(?:at night )?(?:short of breath|breathless|gasping|struggling)\\b"
+        ],
+        "exemplars": [
+          "Is it worse when you lie flat?",
+          "Do you get short of breath at night?",
+          "Does it happen when you're walking, or also at rest?",
+          "Is there a particular time of day when it's worse?",
+          "Do you notice it more when you're climbing stairs?",
+          "Have you ever woken up at night struggling to breathe?",
+          "When do you notice it most?",
+          "What are you usually doing when you get breathless?"
+        ],
+        "counterExemplars": [
+          "Do you get up at night to pass urine?",
+          "Do you walk for exercise?",
+          "Where do you live?"
+        ],
+        "topics": [
+          "hpi.timing"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "hpi-transforming",
+      "section": "History of present illness",
+      "label": "Transforming factors",
+      "weight": 0.5,
+      "scoring": "match",
+      "guidance": "Asks what makes it better or worse.",
+      "mockKeywords": [
+        "better",
+        "worse",
+        "helps",
+        "relieve"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "makes it better",
+          "makes it worse",
+          "make it better",
+          "make it worse",
+          "makes it easier",
+          "anything that helps",
+          "tried anything",
+          "relieves it",
+          "eases it",
+          "brings it on",
+          "triggers it"
+        ],
+        "patterns": [
+          "\\b(?:make|makes|made|making) (?:it|this|that|them|the \\w+|your \\w+|things|you feel|breathing) (?:\\w+ )?(?:better|worse|easier|harder|go away|ease)\\b",
+          "\\b(?:anything|something|what) (?:that )?(?:helps|helped|relieves|relieved|eases|eased|brings (?:it|this|them) on|brought (?:it|this|them) on|triggers|triggered)\\b",
+          "\\bhave you tried (?:anything|taking|using|doing)\\b",
+          "\\b(?:does|do|did) (?:sitting up|sitting forward|resting|rest|propping|your inhaler|anything|the \\w+|that) (?:\\w+ )?(?:help|helps|relieve|ease|make (?:it|you|things|the \\w+) (?:feel )?(?:better|worse|easier))\\b",
+          "\\bis (?:it|this|the \\w+) (?:better|worse) (?:when|if|with|after|in)\\b"
+        ],
+        "exemplars": [
+          "Does anything make it better?",
+          "What makes it worse?",
+          "Is there anything that helps you breathe easier?",
+          "Does sitting up help?",
+          "Have you tried anything to relieve it?",
+          "Does resting make it go away?",
+          "What brings it on?",
+          "Is it better or worse when you lie down?"
+        ],
+        "counterExemplars": [
+          "Has it been getting better or worse over time?",
+          "Are you feeling any better today?",
+          "Do you feel better than you did yesterday?"
+        ],
+        "topics": [
+          "hpi.aggravating",
+          "hpi.relieving"
+        ],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "closed-ddx",
+      "section": "History of present illness",
+      "label": "Uses closed questions to narrow the differential",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Asks specific yes/no questions aimed at raising or lowering particular diagnoses (e.g. chest pain, fever, leg pain, medication adherence).",
+      "mockKeywords": [
+        "any chest pain",
+        "fever",
+        "calf",
+        "taking your",
+        "stopped"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "any chest pain",
+          "chest pain",
+          "any fever",
+          "any fevers",
+          "calf pain",
+          "pain in your calf",
+          "pain in your legs",
+          "coughing up blood",
+          "coughed up blood",
+          "missed any doses",
+          "stopped taking",
+          "ran out of",
+          "taking your medications as prescribed",
+          "palpitations",
+          "heart racing",
+          "long flight",
+          "salty food"
+        ],
+        "patterns": [
+          "\\b(?:any|have you had|have you noticed|do you have|did you have|have you been having)\\b.*\\b(?:chest (?:pain|tightness|pressure)|fevers?|chills|calf|calves|leg pain|blood|palpitations|racing|skipping|faint|fainted|passed out|dizzy|wheez\\w*|sputum|phlegm)\\b",
+          "\\b(?:have|did) you (?:been )?(?:missed|miss|stopped|stop|run out|ran out|forgotten|forget)\\b.*\\b(?:medication|medications|medicine|medicines|pills|tablets|doses|water pill|furosemide|inhaler)\\b",
+          "\\b(?:have|are) you (?:been )?taking (?:all )?(?:your|the) (?:\\w+ )?(?:medication|medications|medicine|medicines|pills|tablets)\\b",
+          "\\b(?:recent|recently)\\b.*\\b(?:flight|trip|travel|surgery|infection|cold|salt|salty)\\b"
+        ],
+        "exemplars": [
+          "Have you had any chest pain?",
+          "Any fevers or chills?",
+          "Have you noticed any pain or swelling in your calves?",
+          "Have you been taking all your medications as prescribed?",
+          "Have you missed any doses of your water pill?",
+          "Have you coughed up any blood?",
+          "Have you eaten a lot of salty food recently?",
+          "Any recent long flights or car trips?",
+          "Have you felt your heart racing or skipping beats?",
+          "Did you have a cold or chest infection before this started?"
+        ],
+        "counterExemplars": [
+          "Tell me about your medications.",
+          "What makes it worse?",
+          "What other symptoms have you noticed?"
+        ],
+        "topics": [
+          "hpi.associated",
+          "hpi.triggers",
+          "hpi.prior",
+          "meds.adherence",
+          "ros.cardiac",
+          "ros.respiratory",
+          "ros.constitutional",
+          "ros.heme"
+        ],
+        "form": "closed",
+        "polarity": "any",
+        "minMatches": 2,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "summarize-hpi",
+      "section": "Transition",
+      "label": "Summarises the HPI and checks accuracy",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Gives a summary of the HPI back to the patient and asks if it is accurate.",
+      "mockKeywords": [
+        "did i get that right",
+        "is that right",
+        "let me summarize",
+        "to summarize",
+        "let me make sure"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "let me summarize",
+          "let me summarise",
+          "to summarize",
+          "to summarise",
+          "just to recap",
+          "let me recap",
+          "so to recap",
+          "to sum up",
+          "did i get that right",
+          "did i get everything",
+          "did i miss anything",
+          "have i missed anything",
+          "is that an accurate summary",
+          "does that sound right",
+          "does that sound accurate",
+          "have i got that right",
+          "let me go over what you have told me"
+        ],
+        "patterns": [
+          "\\b(?:let me|i would like to|i want to|so just to|just to|so to|to|let us|i will|i am going to) (?:quickly )?(?:summarize|summarise|recap|sum up|go over what|run through what|review what)\\b",
+          "\\b(?:did i|have i) (?:get|got|miss|missed|leave|left|forget|forgotten)\\b.*\\b(?:right|anything|out|correct)\\b",
+          "\\b(?:does|did) (?:that|this|it|all that|all of that|everything) (?:all )?sound (?:right|correct|accurate|about right)\\b",
+          "\\bis (?:that|this|all that|all of that|everything) (?:an )?(?:accurate|a fair|a good|a correct)(?: summary| picture)?\\b",
+          "\\b(?:is there )?anything (?:i (?:missed|left out|got wrong|have missed|have left out|have got wrong))\\b"
+        ],
+        "exemplars": [
+          "So, to summarize: for the past two weeks you've been getting more short of breath, you need three pillows to sleep, and your ankles have been swelling. Did I get that right?",
+          "Let me recap what you've told me so far, and you tell me if I've missed anything.",
+          "Just to make sure I have the whole picture: the breathing started two weeks ago and has got worse, especially at night. Is that accurate?",
+          "Before we move on, let me go over what you've told me.",
+          "Okay, so it's breathlessness getting worse over two weeks, worse lying flat, with swollen ankles and a dry cough. Have I got that right?",
+          "Did I miss anything important?",
+          "Is there anything I left out or got wrong?"
+        ],
+        "counterExemplars": [
+          "Is that right, you have a dry cough?",
+          "Did you say three pillows?",
+          "Can you tell me more about that?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "before_first_touch"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "signpost",
+      "section": "Transition",
+      "label": "Signposts the move to more directed questions",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Tells the patient they will now ask about past history / other questions.",
+      "mockKeywords": [
+        "now i’d like to ask",
+        "i’m going to ask",
+        "a few more questions",
+        "now i want to ask",
+        "some questions about your"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "now i would like to ask",
+          "a few more questions",
+          "some more questions",
+          "some questions about your past",
+          "some questions about your health",
+          "some questions about your background",
+          "some questions about your medical",
+          "now i want to ask",
+          "i would like to move on to",
+          "let us move on to",
+          "switch gears",
+          "switching gears",
+          "change topics",
+          "shift gears",
+          "next i would like to ask",
+          "some general questions",
+          "some routine questions",
+          "some background questions"
+        ],
+        "patterns": [
+          "\\b(?:now|next|at this point|moving on)\\b.*\\b(?:i would like to|i want to|i am going to|i will|let me|let us|we will|i need to)\\b.*\\b(?:ask|talk about|go over|move on|switch|learn)\\b",
+          "\\b(?:move|moving|go|going) on to (?:your|some|a few|the|other) (?!(?:physical )?exam)",
+          "\\b(?:switch|change|shift)(?:ing)? (?:gears|topics|subjects)\\b",
+          "\\b(?:a few|some|a couple of|several) (?:more|other|different|general|routine|background|quick)(?: \\w+)? questions\\b",
+          "\\b(?:series|list) of (?:quick )?(?:yes or no )?questions\\b"
+        ],
+        "exemplars": [
+          "Now I'd like to ask you some questions about your past health.",
+          "Thank you, that's really helpful. Next I'm going to ask about your medications and your family.",
+          "I'm going to switch gears a bit and ask some more general questions.",
+          "Let's move on to your medical history.",
+          "I'm going to ask a series of quick yes-or-no questions about other parts of your body.",
+          "Now I want to learn a bit more about your background, if that's okay.",
+          "Next, I'd like to ask about your lifestyle and home life.",
+          "I have a few more questions about your general health."
+        ],
+        "counterExemplars": [
+          "Now I'd like to examine you, if that's okay.",
+          "Do you have any questions for me?",
+          "Can I ask what brings you in today?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "before_first_touch"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "transition-pe",
+      "section": "Ending the encounter",
+      "label": "Transitions to the physical exam",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Tells the patient they will now examine them and asks permission.",
+      "mockKeywords": [
+        "examine you",
+        "physical exam",
+        "take a look",
+        "listen to your"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "examine you",
+          "physical exam",
+          "physical examination",
+          "move on to the exam",
+          "move on to the examination"
+        ],
+        "patterns": [
+          "\\b(?:i would like to|i am going to|i will|i want to|i need to|let me|may i|can i|could i|is it ok(?:ay)? if i|would it be ok(?:ay)? if i|is it alright if i|do you mind if i|would you mind if i|we will|we are going to)\\b.*\\b(?:examine|examination|exam|listen to your (?:heart|chest|lungs|breathing)|take a look at your|check your (?:heart|chest|lungs|legs|ankles|belly))\\b",
+          "\\b(?:move|moving|go|going|get|proceed|turn) (?:on )?to (?:the |a |your )?(?:physical )?(?:exam|examination)\\b",
+          "\\b(?:would you mind if i|do you mind if i|may i|can i|is it ok(?:ay)? if i) (?:listened|listen|looked|look|felt|feel|pressed|press|checked|check)\\b"
+        ],
+        "exemplars": [
+          "Now I'd like to do a physical exam, is that okay with you?",
+          "If it's alright, I'm going to examine you now.",
+          "Would you mind if I listened to your heart and lungs?",
+          "Next I'll do a quick examination; let me know if anything is uncomfortable.",
+          "Is it okay if we move on to the physical exam?",
+          "I'd like to take a look at your legs and listen to your chest, if that's all right.",
+          "May I examine you now?",
+          "We're going to move on to the exam part now. Are you okay with that?"
+        ],
+        "counterExemplars": [
+          "Has a doctor examined you recently?",
+          "Now I'd like to ask some questions about your past medical history.",
+          "Did they do an exam when you came in?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "before_first_touch"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "share-assessment",
+      "section": "Ending the encounter",
+      "label": "Shares impressions in plain language, without deferring",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Near the end, the student shares their impression of what may be going on, in plain language the patient can follow. Half credit if they use unexplained medical jargon (e.g. \"decompensated\", \"HFrEF\", \"edema\" without explanation). Zero if they only defer (\"my attending will decide\", \"the doctor will tell you\") without sharing any impression.",
+      "mockKeywords": [
+        "i think",
+        "what i think is going on",
+        "it sounds like",
+        "most likely",
+        "I think",
+        "might be"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "what i think is going on",
+          "what i think is happening",
+          "my impression is",
+          "my main concern is",
+          "most likely cause",
+          "most likely explanation",
+          "most likely reason",
+          "what i found today",
+          "from what you have told me"
+        ],
+        "patterns": [
+          "\\b(?:i think|i suspect|i believe|my (?:impression|concern|main concern|biggest concern|thinking|best guess|sense) is|what i think (?:is going on|is happening|might be going on)|it (?:sounds|looks|seems) like|(?:the )?most likely|i am (?:worried|concerned) (?:that|it)|one (?:possibility|explanation) is|this (?:could|might|may) be|it (?:could|might|may) be)\\b.*\\b(?:your heart|heart is|heart has|heart (?:is not|has been)|fluid|infection|pump\\w*|clot|caus\\w*|because|due to|reason|explain\\w*|normal|healthy|reassuring|nothing (?:serious|worrying|concerning))\\b",
+          "\\b(?:everything|all) (?:i (?:found|checked|examined)|on your exam|looks|looked|seems|sounded|sounds) (?:\\w+ ){0,3}(?:normal|healthy|good|fine|reassuring)\\b",
+          "^(?:(?:so|ok|okay|well|basically|right|now|i think|i suspect) )*(?:you have|you have got|you are having|this is|it is|this looks like|it looks like|that is) (?:probably |likely |most likely |a |an |some |what we call )*(?:\\w+ ){0,3}(?:heart failure|fluid|infection|pneumonia|clot|flare|flare up|attack|overload)\\b"
+        ],
+        "exemplars": [
+          "From what you've told me and what I found, I think extra fluid is building up because your heart isn't pumping as strongly as it should.",
+          "I'm worried that your heart is struggling to keep up, and that's why fluid has collected in your lungs and legs.",
+          "It sounds like running out of your water pill may have let fluid build up, which is making it hard to breathe.",
+          "What I think is going on is that fluid is backing up into your lungs.",
+          "The most likely explanation is that your heart is having trouble pumping, so fluid is collecting in your body.",
+          "I think this is probably your heart rather than a chest infection, but we need some tests to be sure.",
+          "One possibility is a chest infection, but I think fluid from the heart is more likely.",
+          "Everything I found on your exam today looks healthy and normal, which is reassuring.",
+          "So far, I don't see anything worrying on your exam."
+        ],
+        "counterExemplars": [
+          "My attending will come in and talk to you about what's going on.",
+          "I'm just a student, so the doctor will tell you what we think.",
+          "I'm not sure what's causing it yet; the doctor will go over that with you.",
+          "Do you have any idea what might be causing this?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "after_last_touch",
+        "penalties": [
+          {
+            "id": "unexplained-jargon",
+            "keywords": [],
+            "patterns": [
+              "\\b(?:decompensat\\w*|hfref|hfpef|ejection fraction|cardiomyopathy|o?edema|oedematous|edematous|exacerbation|orthopno?ea|dyspno?ea|paroxysmal nocturnal|jvd|jvp|jugular venous|pleural effusions?|effusions?|pulmonary (?:edema|oedema|congestion|embolism|embolus)|congestive|chf|adhf|myocardial infarction|isch(?:a)?emi\\w*|etiology|aetiology|diures\\w*|diuretics?|volume overload|hypervolemi\\w*|cardiogenic|reduced ejection|systolic dysfunction|diastolic dysfunction|ventricular|acute coronary syndrome|nstemi|stemi|dvt|deep vein thrombosis|tachycardi\\w*|tachypn\\w*|hypoxi\\w*|crackles|rales|s3 gallop|hepatomegaly|ascites)\\b(?![^.?!]*\\b(?:which means|that means|meaning|in other words|basically means|is when|which is when|is a word for|is the medical word|is just a fancy word)\\b)"
+            ],
+            "exemplars": [],
+            "value": 0.5,
+            "reason": "Uses medical jargon without explaining it in plain words (half credit)."
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "share-plan",
+      "section": "Ending the encounter",
+      "label": "Explains next steps in plain language",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "The student tells the patient what happens next (further tests, who they will see) in plain language. 1B has no management plan: credit next steps, not treatment decisions. Zero if they defer every question.",
+      "mockKeywords": [
+        "next step",
+        "we will",
+        "we’ll",
+        "plan",
+        "test"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "run some tests",
+          "do some tests",
+          "get some tests",
+          "will come in to see you",
+          "will come in and see you",
+          "will come and see you"
+        ],
+        "patterns": [
+          "\\b(?:the )?next (?:step|steps|thing) (?:is|are|will be|would be|we will|we are going to)\\b",
+          "\\b(?:as|for) (?:the |a |our )?next step\\b",
+          "\\b(?:we will|we are going to|we would like to|we want to|we need to|we will probably|they will|the team will|the doctor will|they are going to)\\b.*\\b(?:tests?|blood ?work|bloods|x ray|scan|ultrasound|tracing|ecg|ekg|echo|results)\\b",
+          "\\b(?:my attending|the attending|the doctor|my supervisor|the team|a doctor|the resident|the physician)\\b.*\\b(?:come in|come back|see you|talk (?:with|to) you|go over|discuss|review)\\b",
+          "\\b(?:after this|after that|once we|when the results)\\b.*\\b(?:we will|the doctor will|the team will|they will|i will)\\b",
+          "\\bwhat (?:happens|will happen) (?:next|now) is\\b"
+        ],
+        "exemplars": [
+          "The next step is some blood tests and a chest X-ray to look for fluid in your lungs.",
+          "My attending physician will come in shortly to see you and go over everything.",
+          "We'll do a heart tracing and some bloodwork, and then the doctor will talk with you about the results.",
+          "Next, we'd like to do an ultrasound of your heart to see how well it's pumping.",
+          "After this, the team will review everything and come back to talk with you.",
+          "I'm going to share what I found with the doctor, and they'll come in to see you in a few minutes.",
+          "We'll probably check your kidneys and salt levels with a blood test.",
+          "So what happens next is that we'll run a few tests to find out what's causing this."
+        ],
+        "counterExemplars": [
+          "We're going to increase your water pill to 80 milligrams twice a day.",
+          "I'll start you on a new heart medication today.",
+          "I don't know; you'll have to ask the doctor.",
+          "Have you had any blood tests recently?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "after_last_touch"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "elicit-preferences",
+      "section": "Ending the encounter",
+      "label": "Elicits questions, concerns and preferences",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Asks what the patient thinks / prefers, or what concerns they have about the plan.",
+      "mockKeywords": [
+        "what do you think",
+        "how does that sound",
+        "any concerns",
+        "questions"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "how does that sound",
+          "how does that plan sound",
+          "what do you think about that",
+          "what do you think of that",
+          "what do you think of the plan",
+          "what do you think about the plan",
+          "any concerns about",
+          "concerns about the plan",
+          "does that sound okay",
+          "does that sound ok",
+          "does that sound alright",
+          "how do you feel about that",
+          "how do you feel about the plan",
+          "what would you prefer",
+          "what are your thoughts",
+          "questions or concerns"
+        ],
+        "patterns": [
+          "\\bhow (?:does|do) (?:that|this|the plan|it|all that|all of that) (?:plan )?sound\\b",
+          "\\bwhat (?:do|did) you think (?:about|of) (?:that|this|the plan|the tests|staying|it|what)\\b",
+          "\\b(?:any|what) (?:questions or )?(?:concerns|worries|questions) (?:about|with|regarding) (?:that|this|the plan|the tests|staying|it|what)\\b",
+          "\\b(?:does|would) (?:that|this) (?:sound|be|work) (?:ok|okay|alright|all right|good|reasonable) (?:with|for|to) you\\b",
+          "\\b(?:what|which) would you (?:prefer|like to do|rather)\\b",
+          "\\bwhat (?:matters|is important) (?:most )?to you\\b",
+          "\\bhow do you feel about\\b"
+        ],
+        "exemplars": [
+          "How does that plan sound to you?",
+          "What do you think about that?",
+          "Do you have any questions or concerns about the tests we talked about?",
+          "Is there anything about that plan that worries you?",
+          "How do you feel about possibly staying in the hospital tonight?",
+          "What's most important to you as we figure this out?",
+          "Is that okay with you, or would you prefer something different?",
+          "What are your thoughts on that?"
+        ],
+        "counterExemplars": [
+          "What do you think is causing your breathlessness?",
+          "How are you feeling today?",
+          "Is it okay if I listen to your heart?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "after_last_touch"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "teach-back",
+      "section": "Ending the encounter",
+      "label": "Confirms agreement and understanding (teach-back)",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Checks understanding, ideally by asking the patient to repeat back the plan.",
+      "mockKeywords": [
+        "repeat back",
+        "in your own words",
+        "make sure i explained",
+        "does that make sense"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "repeat back",
+          "make sure i explained",
+          "make sure i have explained",
+          "make sure i was clear",
+          "make sure i have been clear",
+          "does that make sense",
+          "does that all make sense",
+          "what is your understanding",
+          "tell me back",
+          "explain it back",
+          "explain back",
+          "what will you tell your",
+          "what are you going to tell your"
+        ],
+        "patterns": [
+          "\\b(?:repeat|explain|say|tell|summarize|summarise|go over) (?:it |that |this |the plan |what we discussed |what we talked about )?back (?:to me)?\\b",
+          "\\bin your own words\\b.*\\b(?:plan|next|happen\\w*|we (?:discussed|talked|agreed)|i (?:said|explained|told you)|going to|take away|tell your)\\b",
+          "\\b(?:make sure|check|be sure) (?:that )?i (?:have )?(?:explained|was clear|have been clear|made (?:it|that|things) clear)\\b",
+          "\\bwhat (?:is|was) your understanding\\b",
+          "\\bwhat (?:will|are) you (?:going to )?tell (?:your|the)\\b",
+          "\\bdoes (?:that|this|all that|all of that|everything) (?:all )?make sense\\b",
+          "\\b(?:is there )?anything (?:i said |i explained )?(?:that )?(?:was not|is not|was unclear|was confusing|did not make sense)\\b",
+          "\\bcan you (?:walk me through|tell me) what (?:we|we have|we just) (?:talked about|discussed|agreed)\\b"
+        ],
+        "exemplars": [
+          "Just to make sure I explained things clearly, can you tell me in your own words what's going to happen next?",
+          "Could you repeat back to me what the plan is?",
+          "What will you tell your wife about what we discussed today?",
+          "To check I've been clear, what's your understanding of the next steps?",
+          "Does that all make sense?",
+          "Can you walk me through what we just talked about?",
+          "I want to be sure I explained it well; what are the main things you'll take away from today?",
+          "Is there anything I said that wasn't clear?"
+        ],
+        "counterExemplars": [
+          "Sorry, can you repeat that? I didn't catch it.",
+          "Can you tell me in your own words what's been going on?",
+          "Does it hurt when you breathe in?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "after_last_touch"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "anything-else",
+      "section": "Ending the encounter",
+      "label": "Checks for any other questions before ending",
+      "weight": 1,
+      "scoring": "auto",
+      "sourceText": "",
+      "rule": {
+        "said": "offered_questions"
+      }
+    },
+    {
+      "id": "expectancies",
+      "section": "Ending the encounter",
+      "label": "Reviews expectancies and safety-netting",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Tells the patient what will happen next and what should prompt them to call/return.",
+      "mockKeywords": [
+        "i will be back",
+        "i’ll be back",
+        "attending",
+        "come back",
+        "if you notice",
+        "call us"
+      ],
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "i will be back",
+          "i will come back",
+          "be right back",
+          "be back shortly",
+          "press the call button",
+          "call button",
+          "let the nurse know",
+          "call us",
+          "if anything changes",
+          "come straight back",
+          "call 911",
+          "go to the emergency department",
+          "come back to the emergency department"
+        ],
+        "patterns": [
+          "^(?!.*\\b(?:sore|hurts?|uncomfortable|tender|when i press|while i)\\b).*\\bif (?:you|your|the|anything|it|things|that|this)\\b(?: \\w+){0,5} (?:worse|changes?|changed|notice|develop|start|feel|get|gets|becomes?)\\b.*\\b(?:call|press|tell|let|come back|return|get help|ring|seek|come in|go to)\\b",
+          "\\b(?:call|press|ring|use) (?:the )?(?:call )?(?:button|bell|nurse)\\b",
+          "\\b(?:i will|i am going to|we will|we are going to|the doctor will|my attending will|i will be|we will be) (?:\\w+ )?(?:be|come) (?:right |straight )?back\\b",
+          "\\b(?:results|tests)\\b.*\\b(?:in about|in a few|within|by)\\b.*\\b(?:minutes|hours|hour|today|tonight|tomorrow)\\b"
+        ],
+        "exemplars": [
+          "If your breathing gets worse or you get any chest pain, press the call button and let the nurse know right away.",
+          "I'll be back in a few minutes with my attending.",
+          "While you wait, if anything changes, just call us.",
+          "If you start to feel more short of breath, don't wait; let someone know.",
+          "My attending will come in shortly, and I'll come back with them.",
+          "If you notice any chest pain or feel faint, tell the nurse immediately.",
+          "Once you're home, if the swelling or breathlessness gets worse, come straight back to the emergency department.",
+          "We should have the test results in about an hour, and then we'll come back to go over them."
+        ],
+        "counterExemplars": [
+          "Have you noticed if it gets worse when you walk?",
+          "Did you call anyone before you came in?",
+          "Does it get worse if you lie down?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 1,
+        "window": "after_last_touch"
+      },
+      "sourceText": ""
+    }
+  ]
+}

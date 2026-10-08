@@ -1,0 +1,5075 @@
+{
+ "generated": "npm run test:catalog → npm run qa:catalog-report",
+ "results": [
+  {
+   "id": "catalog-neg:female:abd_bruits@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:abd_bruits@abd_llq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:abd_bruits@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:abd_bruits@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:abd_bruits@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_heart_bell@cardiac_mitral",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_heart_bell@cardiac_tricuspid",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_heart_diaphragm@cardiac_aortic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_heart_diaphragm@cardiac_erbs",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_heart_diaphragm@cardiac_mitral",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_heart_diaphragm@cardiac_pulmonic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_heart_diaphragm@cardiac_tricuspid",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_lungs@lung_ant_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_lungs@lung_ant_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_lungs@lung_ant_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_lungs@lung_ant_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_lungs@lung_lat_l",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_lungs@lung_lat_r",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_lungs@lung_post_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_lungs@lung_post_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_lungs@lung_post_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:auscultate_lungs@lung_post_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:babinski@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:babinski@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:bowel_sounds@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:bowel_sounds@abd_llq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:bowel_sounds@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:bowel_sounds@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:bowel_sounds@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:bp_cuff_placement@arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:bp_cuff_placement@arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:carotid_auscultation@carotid_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:carotid_auscultation@carotid_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:pupils_light_reflex@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:pupils_light_reflex@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:reflex_achilles@achilles_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:reflex_achilles@achilles_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:reflex_biceps@biceps_tendon_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:reflex_biceps@biceps_tendon_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:reflex_brachioradialis@brachioradialis_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:reflex_brachioradialis@brachioradialis_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:reflex_patellar@patellar_tendon_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:reflex_patellar@patellar_tendon_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:reflex_triceps@triceps_tendon_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:reflex_triceps@triceps_tendon_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:rinne_test@ear_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:rinne_test@ear_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_light_touch_swab@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_light_touch_swab@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_light_touch_swab@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_light_touch_swab@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_light_touch_swab@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_light_touch_swab@leg_medial_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_pinprick_pin@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_pinprick_pin@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_pinprick_pin@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_pinprick_pin@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_pinprick_pin@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_pinprick_pin@leg_medial_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_vibration@toe_great_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_vibration@toe_great_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:weber_test@scalp",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:abd_bruits@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:abd_bruits@abd_llq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:abd_bruits@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:abd_bruits@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:abd_bruits@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_heart_bell@cardiac_mitral",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_heart_bell@cardiac_tricuspid",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_heart_diaphragm@cardiac_aortic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_heart_diaphragm@cardiac_erbs",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_heart_diaphragm@cardiac_mitral",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_heart_diaphragm@cardiac_pulmonic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_heart_diaphragm@cardiac_tricuspid",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_lungs@lung_ant_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_lungs@lung_ant_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_lungs@lung_ant_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_lungs@lung_ant_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_lungs@lung_lat_l",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_lungs@lung_lat_r",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_lungs@lung_post_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_lungs@lung_post_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_lungs@lung_post_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:auscultate_lungs@lung_post_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:babinski@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:babinski@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:bowel_sounds@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:bowel_sounds@abd_llq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:bowel_sounds@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:bowel_sounds@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:bowel_sounds@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:bp_cuff_placement@arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:bp_cuff_placement@arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:carotid_auscultation@carotid_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:carotid_auscultation@carotid_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:pupils_light_reflex@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:pupils_light_reflex@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:reflex_achilles@achilles_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:reflex_achilles@achilles_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:reflex_biceps@biceps_tendon_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:reflex_biceps@biceps_tendon_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:reflex_brachioradialis@brachioradialis_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:reflex_brachioradialis@brachioradialis_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:reflex_patellar@patellar_tendon_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:reflex_patellar@patellar_tendon_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:reflex_triceps@triceps_tendon_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:reflex_triceps@triceps_tendon_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:rinne_test@ear_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:rinne_test@ear_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_light_touch_swab@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_light_touch_swab@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_light_touch_swab@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_light_touch_swab@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_light_touch_swab@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_light_touch_swab@leg_medial_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_pinprick_pin@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_pinprick_pin@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_pinprick_pin@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_pinprick_pin@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_pinprick_pin@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_pinprick_pin@leg_medial_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_vibration@toe_great_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_vibration@toe_great_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:weber_test@scalp",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_bruits@abd_llq",
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_bruits@abd_luq",
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_bruits@abd_rlq",
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_bruits@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_deep_palpation@abd_llq",
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_deep_palpation@abd_luq",
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_deep_palpation@abd_rlq",
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_deep_palpation@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_inspection@abd_llq",
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_inspection@abd_luq",
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_inspection@abd_rlq",
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_inspection@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_light_palpation@abd_llq",
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_light_palpation@abd_luq",
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_light_palpation@abd_rlq",
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:abd_light_palpation@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:ankle_clonus@achilles_left",
+   "detail": "at the anatomical point (achilles_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:ankle_clonus@achilles_right",
+   "detail": "at the anatomical point (achilles_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:auscultate_heart_bell@cardiac_mitral",
+   "detail": "at the anatomical point (cardiac_mitral): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:auscultate_heart_bell@cardiac_tricuspid",
+   "detail": "at the anatomical point (cardiac_tricuspid): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:auscultate_heart_diaphragm@cardiac_aortic",
+   "detail": "at the anatomical point (cardiac_aortic): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:auscultate_heart_diaphragm@cardiac_erbs",
+   "detail": "at the anatomical point (cardiac_erbs): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:auscultate_heart_diaphragm@cardiac_mitral",
+   "detail": "at the anatomical point (cardiac_mitral): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:auscultate_heart_diaphragm@cardiac_pulmonic",
+   "detail": "at the anatomical point (cardiac_pulmonic): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:auscultate_heart_diaphragm@cardiac_tricuspid",
+   "detail": "at the anatomical point (cardiac_tricuspid): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:bowel_sounds@abd_llq",
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:bowel_sounds@abd_luq",
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:bowel_sounds@abd_rlq",
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:bowel_sounds@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:cn_ii_acuity@eye_left",
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:cn_ii_acuity@eye_right",
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:cn_iii_iv_vi_eom@eye_left",
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:cn_iii_iv_vi_eom@eye_right",
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:eom_accommodation@eye_left",
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:eom_accommodation@eye_right",
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:eye_inspection@eye_left",
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:eye_inspection@eye_right",
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:hepatojugular_reflux@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:liver_palpation@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:mcburney_point@abd_rlq",
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:murphys_sign@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:ophthalmoscopy@eye_left",
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:ophthalmoscopy@eye_right",
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:pmi_palpation@cardiac_mitral",
+   "detail": "at the anatomical point (cardiac_mitral): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:precordial_palpation@cardiac_aortic",
+   "detail": "at the anatomical point (cardiac_aortic): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:precordial_palpation@cardiac_pulmonic",
+   "detail": "at the anatomical point (cardiac_pulmonic): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:pulse_radial@wrist_left",
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:pulse_radial@wrist_right",
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:pupils_light_reflex@eye_left",
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:pupils_light_reflex@eye_right",
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:reflex_achilles@achilles_left",
+   "detail": "at the anatomical point (achilles_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:reflex_achilles@achilles_right",
+   "detail": "at the anatomical point (achilles_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:reflex_biceps@biceps_tendon_left",
+   "detail": "at the anatomical point (biceps_tendon_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:reflex_biceps@biceps_tendon_right",
+   "detail": "at the anatomical point (biceps_tendon_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:reflex_brachioradialis@brachioradialis_left",
+   "detail": "at the anatomical point (brachioradialis_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:reflex_brachioradialis@brachioradialis_right",
+   "detail": "at the anatomical point (brachioradialis_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:reflex_patellar@patellar_tendon_left",
+   "detail": "at the anatomical point (patellar_tendon_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:reflex_patellar@patellar_tendon_right",
+   "detail": "at the anatomical point (patellar_tendon_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:reflex_triceps@triceps_tendon_left",
+   "detail": "at the anatomical point (triceps_tendon_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:reflex_triceps@triceps_tendon_right",
+   "detail": "at the anatomical point (triceps_tendon_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:rinne_test@ear_left",
+   "detail": "at the anatomical point (ear_left#mastoid, bone step): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:rinne_test@ear_right",
+   "detail": "at the anatomical point (ear_right#mastoid, bone step): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_light_touch_swab@foot_lateral_left",
+   "detail": "at the anatomical point (foot_lateral_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_light_touch_swab@foot_lateral_right",
+   "detail": "at the anatomical point (foot_lateral_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_light_touch_swab@leg_medial_left",
+   "detail": "at the anatomical point (leg_medial_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_light_touch_swab@leg_medial_right",
+   "detail": "at the anatomical point (leg_medial_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_pinprick_pin@foot_lateral_left",
+   "detail": "at the anatomical point (foot_lateral_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_pinprick_pin@foot_lateral_right",
+   "detail": "at the anatomical point (foot_lateral_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_pinprick_pin@leg_medial_left",
+   "detail": "at the anatomical point (leg_medial_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_pinprick_pin@leg_medial_right",
+   "detail": "at the anatomical point (leg_medial_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:spleen_palpation@abd_luq",
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:strength_c6_8_wrist_extension@wrist_left",
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:strength_c6_8_wrist_extension@wrist_right",
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:visual_fields_confrontation@eye_left",
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:visual_fields_confrontation@eye_right",
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:wrist_hand_inspection@wrist_left",
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:wrist_hand_inspection@wrist_right",
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:wrist_hand_palpation@wrist_left",
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:wrist_hand_palpation@wrist_right",
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:wrist_hand_rom@wrist_left",
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:wrist_hand_rom@wrist_right",
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_bruits@abd_llq",
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_bruits@abd_luq",
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_bruits@abd_rlq",
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_bruits@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_deep_palpation@abd_llq",
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_deep_palpation@abd_luq",
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_deep_palpation@abd_rlq",
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_deep_palpation@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_inspection@abd_llq",
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_inspection@abd_luq",
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_inspection@abd_rlq",
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_inspection@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_light_palpation@abd_llq",
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_light_palpation@abd_luq",
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_light_palpation@abd_rlq",
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:abd_light_palpation@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:ankle_clonus@achilles_left",
+   "detail": "at the anatomical point (achilles_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:ankle_clonus@achilles_right",
+   "detail": "at the anatomical point (achilles_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:auscultate_heart_bell@cardiac_mitral",
+   "detail": "at the anatomical point (cardiac_mitral): (a) first hit is drape (roll-chest), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog-oracle:male:auscultate_heart_bell@cardiac_tricuspid",
+   "detail": "at the anatomical point (cardiac_tricuspid): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:auscultate_heart_diaphragm@cardiac_aortic",
+   "detail": "at the anatomical point (cardiac_aortic): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:auscultate_heart_diaphragm@cardiac_erbs",
+   "detail": "at the anatomical point (cardiac_erbs): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:auscultate_heart_diaphragm@cardiac_mitral",
+   "detail": "at the anatomical point (cardiac_mitral): (a) first hit is drape (roll-chest), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog-oracle:male:auscultate_heart_diaphragm@cardiac_pulmonic",
+   "detail": "at the anatomical point (cardiac_pulmonic): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:auscultate_heart_diaphragm@cardiac_tricuspid",
+   "detail": "at the anatomical point (cardiac_tricuspid): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:bowel_sounds@abd_llq",
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:bowel_sounds@abd_luq",
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:bowel_sounds@abd_rlq",
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:bowel_sounds@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:cn_ii_acuity@eye_left",
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:cn_ii_acuity@eye_right",
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:cn_iii_iv_vi_eom@eye_left",
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:cn_iii_iv_vi_eom@eye_right",
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:eom_accommodation@eye_left",
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:eom_accommodation@eye_right",
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:eye_inspection@eye_left",
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:eye_inspection@eye_right",
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:hepatojugular_reflux@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:liver_palpation@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:mcburney_point@abd_rlq",
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:murphys_sign@abd_ruq",
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:ophthalmoscopy@eye_left",
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:ophthalmoscopy@eye_right",
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:pmi_palpation@cardiac_mitral",
+   "detail": "at the anatomical point (cardiac_mitral): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:precordial_palpation@cardiac_aortic",
+   "detail": "at the anatomical point (cardiac_aortic): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:precordial_palpation@cardiac_pulmonic",
+   "detail": "at the anatomical point (cardiac_pulmonic): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:pulse_radial@wrist_left",
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:pulse_radial@wrist_right",
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:pupils_light_reflex@eye_left",
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:pupils_light_reflex@eye_right",
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:reflex_achilles@achilles_left",
+   "detail": "at the anatomical point (achilles_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:reflex_achilles@achilles_right",
+   "detail": "at the anatomical point (achilles_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:reflex_biceps@biceps_tendon_left",
+   "detail": "at the anatomical point (biceps_tendon_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:reflex_biceps@biceps_tendon_right",
+   "detail": "at the anatomical point (biceps_tendon_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:reflex_brachioradialis@brachioradialis_left",
+   "detail": "at the anatomical point (brachioradialis_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:reflex_brachioradialis@brachioradialis_right",
+   "detail": "at the anatomical point (brachioradialis_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:reflex_patellar@patellar_tendon_left",
+   "detail": "at the anatomical point (patellar_tendon_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:reflex_patellar@patellar_tendon_right",
+   "detail": "at the anatomical point (patellar_tendon_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:reflex_triceps@triceps_tendon_left",
+   "detail": "at the anatomical point (triceps_tendon_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:reflex_triceps@triceps_tendon_right",
+   "detail": "at the anatomical point (triceps_tendon_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:rinne_test@ear_left",
+   "detail": "at the anatomical point (ear_left#mastoid, bone step): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:rinne_test@ear_right",
+   "detail": "at the anatomical point (ear_right#mastoid, bone step): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_light_touch_swab@foot_lateral_left",
+   "detail": "at the anatomical point (foot_lateral_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_light_touch_swab@foot_lateral_right",
+   "detail": "at the anatomical point (foot_lateral_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_light_touch_swab@leg_medial_left",
+   "detail": "at the anatomical point (leg_medial_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_light_touch_swab@leg_medial_right",
+   "detail": "at the anatomical point (leg_medial_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_pinprick_pin@foot_lateral_left",
+   "detail": "at the anatomical point (foot_lateral_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_pinprick_pin@foot_lateral_right",
+   "detail": "at the anatomical point (foot_lateral_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_pinprick_pin@leg_medial_left",
+   "detail": "at the anatomical point (leg_medial_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_pinprick_pin@leg_medial_right",
+   "detail": "at the anatomical point (leg_medial_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:spleen_palpation@abd_luq",
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:strength_c6_8_wrist_extension@wrist_left",
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:strength_c6_8_wrist_extension@wrist_right",
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:visual_fields_confrontation@eye_left",
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:visual_fields_confrontation@eye_right",
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:wrist_hand_inspection@wrist_left",
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:wrist_hand_inspection@wrist_right",
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:wrist_hand_palpation@wrist_left",
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:wrist_hand_palpation@wrist_right",
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:wrist_hand_rom@wrist_left",
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:wrist_hand_rom@wrist_right",
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_bruits@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_bruits@abd_llq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_bruits@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_bruits@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_bruits@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_deep_palpation@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_deep_palpation@abd_llq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_deep_palpation@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_deep_palpation@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_deep_palpation@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_inspection@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_inspection@abd_llq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_inspection@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_inspection@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_inspection@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_light_palpation@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_light_palpation@abd_llq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_light_palpation@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_light_palpation@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:abd_light_palpation@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_clonus@achilles_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_clonus@achilles_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_clonus@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_foot_inspection@ankle_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_foot_inspection@ankle_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_foot_inspection@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_foot_inspection@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_foot_palpation@ankle_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_foot_palpation@ankle_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_foot_palpation@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_foot_palpation@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_foot_rom@ankle_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_foot_rom@ankle_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_foot_rom@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_foot_rom@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:aorta_palpation@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_heart_bell@cardiac_mitral",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_heart_bell@cardiac_tricuspid",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_heart_diaphragm@cardiac_aortic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_heart_diaphragm@cardiac_erbs",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_heart_diaphragm@cardiac_mitral",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_heart_diaphragm@cardiac_pulmonic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_heart_diaphragm@cardiac_tricuspid",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_lungs@lung_ant_ll",
+   "detail": "(a) first hit is drape (fold-chest), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:auscultate_lungs@lung_ant_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_lungs@lung_ant_rl",
+   "detail": "(a) first hit is drape (fold-chest), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:auscultate_lungs@lung_ant_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_lungs@lung_lat_l",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_lungs@lung_lat_r",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_lungs@lung_post_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_lungs@lung_post_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_lungs@lung_post_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:auscultate_lungs@lung_post_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:babinski@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:babinski@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:babinski@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:back_inspection@sacrum",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click resolved to spine_lumbar; (c) no examine for back_inspection@sacrum (got back_inspection@spine_lumbar)",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:back_inspection@spine_cervical",
+   "detail": "(a) the page covers the canvas here (div.flex.flex-wrap); (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:back_inspection@spine_lumbar",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:back_inspection@spine_thoracic",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:back_palpation@sacrum",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click resolved to spine_lumbar; (c) no examine for back_palpation@sacrum (got back_palpation@spine_lumbar)",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:back_palpation@spine_cervical",
+   "detail": "(a) the page covers the canvas here (div.flex.flex-wrap); (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:back_palpation@spine_lumbar",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:back_palpation@spine_thoracic",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:back_rom@spine_cervical",
+   "detail": "(a) the page covers the canvas here (div.flex.flex-wrap); (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:back_rom@spine_lumbar",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:back_rom@spine_thoracic",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:bowel_sounds@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bowel_sounds@abd_llq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bowel_sounds@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bowel_sounds@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bowel_sounds@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bp_arm_support@arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bp_arm_support@arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bp_arm_support@upper_arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bp_arm_support@upper_arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bp_cuff_placement@arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bp_cuff_placement@arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bp_cuff_placement@upper_arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bp_cuff_placement@upper_arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:carotid_auscultation@carotid_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:carotid_auscultation@carotid_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:carotid_palpation@carotid_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:carotid_palpation@carotid_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:chest_inspection@lung_ant_ll",
+   "detail": "(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:chest_inspection@lung_ant_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:chest_inspection@lung_ant_rl",
+   "detail": "(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:chest_inspection@lung_ant_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:chest_inspection@lung_lat_l",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:chest_inspection@lung_lat_r",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:chest_inspection@lung_post_ll",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:chest_inspection@lung_post_lu",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:chest_inspection@lung_post_rl",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:chest_inspection@lung_post_ru",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:chest_percussion@lung_ant_ll",
+   "detail": "(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:chest_percussion@lung_ant_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:chest_percussion@lung_ant_rl",
+   "detail": "(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:chest_percussion@lung_ant_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:chest_percussion@lung_lat_l",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:chest_percussion@lung_lat_r",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:chest_percussion@lung_post_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:chest_percussion@lung_post_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:chest_percussion@lung_post_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:chest_percussion@lung_post_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_i_smell@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_i_smell@nose",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_ii_acuity@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_ii_acuity@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_ii_acuity@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_iii_iv_vi_eom@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_iii_iv_vi_eom@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_iii_iv_vi_eom@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_ix_x_palate@mouth",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_ix_x_palate@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_v_trigeminal@face",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_v_trigeminal@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_vii_facial@face",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_vii_facial@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_viii_hearing@ear_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_viii_hearing@ear_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_viii_hearing@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_xi_shrug@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_xi_shrug@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_xi_shrug@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_xii_tongue@mouth",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cn_xii_tongue@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:cva_tenderness@cva_left",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:cva_tenderness@cva_right",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:edema_assessment@ankle_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:edema_assessment@ankle_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:edema_assessment@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:edema_assessment@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:edema_assessment@sacrum",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click resolved to spine_lumbar; (b) edema_assessment is not in the menu for this region",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:edema_assessment@shin_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:edema_assessment@shin_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:elbow_inspection@elbow_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:elbow_inspection@elbow_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:elbow_palpation@elbow_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:elbow_palpation@elbow_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:elbow_rom@elbow_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:elbow_rom@elbow_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:eom_accommodation@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:eom_accommodation@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:eom_accommodation@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:extremity_perfusion@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:extremity_perfusion@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:extremity_perfusion@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:extremity_perfusion@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:extremity_perfusion@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:extremity_perfusion@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:eye_inspection@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:eye_inspection@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:faber_test@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:faber_test@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:faber_test@sacrum",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:finger_nose_finger@neuro_cerebellar",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:floor_of_mouth_tongue@mouth",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:gait@neuro_gait",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:general_appearance@general",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:heel_knee_shin@neuro_cerebellar",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:hepatojugular_reflux@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:hepatojugular_reflux@neck_jvp_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:hip_abduction_adduction@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:hip_abduction_adduction@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:hip_extension@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:hip_extension@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:hip_flexion@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:hip_flexion@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:hip_palpation@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:hip_palpation@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:hip_rotation@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:hip_rotation@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:jvp_inspection@neck_jvp_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:knee_drawer@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:knee_drawer@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:knee_inspection@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:knee_inspection@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:knee_palpation@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:knee_palpation@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:knee_rom@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:knee_rom@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:knee_varus_valgus@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:knee_varus_valgus@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:liver_palpation@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ln_ant_cervical_palpation@ln_ant_cervical",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ln_occipital_palpation@ln_occipital",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ln_post_auricular_palpation@ln_post_auricular",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ln_post_cervical_palpation@ln_post_cervical",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ln_pre_auricular_palpation@ln_pre_auricular",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ln_submandibular_palpation@ln_submandibular",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ln_submental_palpation@ln_submental",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ln_supraclavicular_palpation@ln_supraclavicular",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:lower_limb_standing_inspection@ankle_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:lower_limb_standing_inspection@ankle_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:lower_limb_standing_inspection@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:lower_limb_standing_inspection@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:lower_limb_standing_inspection@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:lower_limb_standing_inspection@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:lower_limb_standing_inspection@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:lower_limb_standing_inspection@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:mcburney_point@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:motor_tone@neuro_motor_lower",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:motor_tone@neuro_motor_upper",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:mouth_throat_inspection@mouth",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:murphys_sign@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:nares_inspection@nose",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:nuchal_rigidity@neuro_meningeal",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:nuchal_rigidity@spine_cervical",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ophthalmoscopy@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ophthalmoscopy@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:orientation@neuro_mental_status",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:otoscopy@ear_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:otoscopy@ear_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:oxygen_saturation@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:oxygen_saturation@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:peripheral_pulses@arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:peripheral_pulses@arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:peripheral_pulses@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:peripheral_pulses@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:peripheral_pulses@groin_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:peripheral_pulses@groin_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:peripheral_pulses@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:peripheral_pulses@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:pmi_palpation@cardiac_mitral",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:precordial_inspection@precordium_wall",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:precordial_palpation@cardiac_aortic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:precordial_palpation@cardiac_pulmonic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:precordial_palpation@precordium_lsb",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:prohibited@breast_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:prohibited@breast_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:prohibited@pelvic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:pulse_radial@wrist_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:pulse_radial@wrist_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:pupils_light_reflex@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:pupils_light_reflex@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_achilles@achilles_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_achilles@achilles_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_achilles@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_biceps@biceps_tendon_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_biceps@biceps_tendon_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_biceps@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_brachioradialis@brachioradialis_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_brachioradialis@brachioradialis_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_brachioradialis@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_patellar@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_patellar@patellar_tendon_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_patellar@patellar_tendon_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_triceps@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_triceps@triceps_tendon_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_triceps@triceps_tendon_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:respiratory_rate@general",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:rinne_test@ear_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:rinne_test@ear_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:rise_from_chair@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:rise_from_chair@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:rise_from_chair@neuro_motor_lower",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:romberg@neuro_gait",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_light_touch_swab@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_light_touch_swab@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_light_touch_swab@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_light_touch_swab@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_light_touch_swab@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_light_touch_swab@leg_medial_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_light_touch@neuro_sensory",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_pin_prick@neuro_sensory",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_pinprick_pin@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_pinprick_pin@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_pinprick_pin@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_pinprick_pin@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_pinprick_pin@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_pinprick_pin@leg_medial_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_proprioception@neuro_sensory",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_proprioception@toe_great_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_proprioception@toe_great_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_vibration@neuro_sensory",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_vibration@toe_great_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_vibration@toe_great_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:shoulder_empty_can@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:shoulder_empty_can@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:shoulder_hawkins@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:shoulder_hawkins@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:shoulder_infraspinatus@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:shoulder_infraspinatus@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:shoulder_inspection@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:shoulder_inspection@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:shoulder_neer@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:shoulder_neer@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:shoulder_palpation@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:shoulder_palpation@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:shoulder_rom@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:shoulder_rom@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:skin_inspection@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:skin_inspection@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:skin_inspection@shin_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:skin_inspection@shin_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:skin_inspection@skin",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:skin_turgor@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:skin_turgor@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:skin_turgor@skin",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:spleen_palpation@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:straight_leg_raise@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:straight_leg_raise@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:straight_leg_raise@spine_lumbar",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c5_6_elbow_flexion@elbow_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c5_6_elbow_flexion@elbow_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c5_6_elbow_flexion@neuro_motor_upper",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c5_7_elbow_extension@elbow_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c5_7_elbow_extension@elbow_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c5_7_elbow_extension@neuro_motor_upper",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c5_shoulder_abduction@neuro_motor_upper",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c5_shoulder_abduction@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c5_shoulder_abduction@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c6_8_wrist_extension@neuro_motor_upper",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c6_8_wrist_extension@wrist_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c6_8_wrist_extension@wrist_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c7_t1_grip@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c7_t1_grip@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c7_t1_grip@neuro_motor_upper",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c8_t1_finger_abduction@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c8_t1_finger_abduction@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_c8_t1_finger_abduction@neuro_motor_upper",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_l2_4_hip_flexion@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_l2_4_hip_flexion@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_l2_4_hip_flexion@neuro_motor_lower",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_l2_4_knee_extension@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_l2_4_knee_extension@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_l2_4_knee_extension@neuro_motor_lower",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_l4_s1_ankle@ankle_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_l4_s1_ankle@ankle_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_l4_s1_ankle@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_l4_s1_ankle@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_l4_s1_ankle@neuro_motor_lower",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_l4_s2_knee_flexion@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_l4_s2_knee_flexion@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:strength_l4_s2_knee_flexion@neuro_motor_lower",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:swinging_flashlight@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:tactile_fremitus@lung_post_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:tactile_fremitus@lung_post_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:tactile_fremitus@lung_post_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:tactile_fremitus@lung_post_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:teeth_gums_inspection@mouth",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:temperature@general",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:thyroid_palpation@neck_thyroid",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:trachea_palpation@neck_trachea",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:visual_fields_confrontation@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:visual_fields_confrontation@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:visual_fields_confrontation@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:vocal_resonance@lung_post_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:vocal_resonance@lung_post_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:vocal_resonance@lung_post_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:vocal_resonance@lung_post_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:weber_test@scalp",
+   "detail": "(a) the page covers the canvas here (select.bg-transparent.text-xs); (b) the placement never reached the patient; (c) no examine for weber_test@scalp (got none)",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:female:wrist_hand_inspection@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:wrist_hand_inspection@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:wrist_hand_inspection@wrist_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:wrist_hand_inspection@wrist_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:wrist_hand_palpation@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:wrist_hand_palpation@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:wrist_hand_palpation@wrist_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:wrist_hand_palpation@wrist_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:wrist_hand_rom@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:wrist_hand_rom@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:wrist_hand_rom@wrist_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:wrist_hand_rom@wrist_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_bruits@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_bruits@abd_llq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_bruits@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_bruits@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_bruits@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_deep_palpation@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_deep_palpation@abd_llq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_deep_palpation@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_deep_palpation@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_deep_palpation@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_inspection@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_inspection@abd_llq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_inspection@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_inspection@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_inspection@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_light_palpation@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_light_palpation@abd_llq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_light_palpation@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_light_palpation@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:abd_light_palpation@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_clonus@achilles_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_clonus@achilles_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_clonus@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_foot_inspection@ankle_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_foot_inspection@ankle_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_foot_inspection@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_foot_inspection@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_foot_palpation@ankle_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_foot_palpation@ankle_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_foot_palpation@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_foot_palpation@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_foot_rom@ankle_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_foot_rom@ankle_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_foot_rom@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_foot_rom@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:aorta_palpation@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_heart_bell@cardiac_mitral",
+   "detail": "(a) first hit is drape (roll-chest), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:male:auscultate_heart_bell@cardiac_tricuspid",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_heart_diaphragm@cardiac_aortic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_heart_diaphragm@cardiac_erbs",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_heart_diaphragm@cardiac_mitral",
+   "detail": "(a) first hit is drape (roll-chest), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:male:auscultate_heart_diaphragm@cardiac_pulmonic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_heart_diaphragm@cardiac_tricuspid",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_lungs@lung_ant_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_lungs@lung_ant_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_lungs@lung_ant_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_lungs@lung_ant_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_lungs@lung_lat_l",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_lungs@lung_lat_r",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_lungs@lung_post_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_lungs@lung_post_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_lungs@lung_post_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:auscultate_lungs@lung_post_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:babinski@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:babinski@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:babinski@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:back_inspection@sacrum",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click resolved to spine_lumbar; (c) no examine for back_inspection@sacrum (got back_inspection@spine_lumbar)",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:male:back_inspection@spine_cervical",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:back_inspection@spine_lumbar",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:male:back_inspection@spine_thoracic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:back_palpation@sacrum",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click resolved to spine_lumbar; (c) no examine for back_palpation@sacrum (got back_palpation@spine_lumbar)",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:male:back_palpation@spine_cervical",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:back_palpation@spine_lumbar",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:male:back_palpation@spine_thoracic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:back_rom@spine_cervical",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:back_rom@spine_lumbar",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:male:back_rom@spine_thoracic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bowel_sounds@abd_epigastric",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bowel_sounds@abd_llq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bowel_sounds@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bowel_sounds@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bowel_sounds@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bp_arm_support@arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bp_arm_support@arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bp_arm_support@upper_arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bp_arm_support@upper_arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bp_cuff_placement@arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bp_cuff_placement@arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bp_cuff_placement@upper_arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bp_cuff_placement@upper_arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:carotid_auscultation@carotid_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:carotid_auscultation@carotid_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:carotid_palpation@carotid_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:carotid_palpation@carotid_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_inspection@lung_ant_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_inspection@lung_ant_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_inspection@lung_ant_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_inspection@lung_ant_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_inspection@lung_lat_l",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_inspection@lung_lat_r",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_inspection@lung_post_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_inspection@lung_post_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_inspection@lung_post_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_inspection@lung_post_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_percussion@lung_ant_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_percussion@lung_ant_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_percussion@lung_ant_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_percussion@lung_ant_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_percussion@lung_lat_l",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_percussion@lung_lat_r",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_percussion@lung_post_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_percussion@lung_post_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_percussion@lung_post_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:chest_percussion@lung_post_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_i_smell@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_i_smell@nose",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_ii_acuity@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_ii_acuity@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_ii_acuity@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_iii_iv_vi_eom@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_iii_iv_vi_eom@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_iii_iv_vi_eom@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_ix_x_palate@mouth",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_ix_x_palate@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_v_trigeminal@face",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_v_trigeminal@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_vii_facial@face",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_vii_facial@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_viii_hearing@ear_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_viii_hearing@ear_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_viii_hearing@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_xi_shrug@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_xi_shrug@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_xi_shrug@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_xii_tongue@mouth",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cn_xii_tongue@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:cva_tenderness@cva_left",
+   "detail": "(b) the click resolved to lung_post_ll; (b) cva_tenderness is not in the menu for this region",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:male:cva_tenderness@cva_right",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:male:edema_assessment@ankle_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:edema_assessment@ankle_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:edema_assessment@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:edema_assessment@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:edema_assessment@sacrum",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click resolved to spine_lumbar; (b) edema_assessment is not in the menu for this region",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:male:edema_assessment@shin_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:edema_assessment@shin_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:elbow_inspection@elbow_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:elbow_inspection@elbow_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:elbow_palpation@elbow_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:elbow_palpation@elbow_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:elbow_rom@elbow_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:elbow_rom@elbow_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:eom_accommodation@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:eom_accommodation@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:eom_accommodation@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:extremity_perfusion@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:extremity_perfusion@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:extremity_perfusion@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:extremity_perfusion@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:extremity_perfusion@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:extremity_perfusion@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:eye_inspection@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:eye_inspection@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:faber_test@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:faber_test@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:faber_test@sacrum",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:finger_nose_finger@neuro_cerebellar",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:floor_of_mouth_tongue@mouth",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:gait@neuro_gait",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:general_appearance@general",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:heel_knee_shin@neuro_cerebellar",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:hepatojugular_reflux@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:hepatojugular_reflux@neck_jvp_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:hip_abduction_adduction@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:hip_abduction_adduction@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:hip_extension@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:hip_extension@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:hip_flexion@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:hip_flexion@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:hip_palpation@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:hip_palpation@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:hip_rotation@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:hip_rotation@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:jvp_inspection@neck_jvp_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:knee_drawer@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:knee_drawer@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:knee_inspection@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:knee_inspection@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:knee_palpation@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:knee_palpation@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:knee_rom@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:knee_rom@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:knee_varus_valgus@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:knee_varus_valgus@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:liver_palpation@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ln_ant_cervical_palpation@ln_ant_cervical",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ln_occipital_palpation@ln_occipital",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ln_post_auricular_palpation@ln_post_auricular",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ln_post_cervical_palpation@ln_post_cervical",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ln_pre_auricular_palpation@ln_pre_auricular",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ln_submandibular_palpation@ln_submandibular",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ln_submental_palpation@ln_submental",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ln_supraclavicular_palpation@ln_supraclavicular",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:lower_limb_standing_inspection@ankle_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:lower_limb_standing_inspection@ankle_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:lower_limb_standing_inspection@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:lower_limb_standing_inspection@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:lower_limb_standing_inspection@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:lower_limb_standing_inspection@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:lower_limb_standing_inspection@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:lower_limb_standing_inspection@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:mcburney_point@abd_rlq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:motor_tone@neuro_motor_lower",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:motor_tone@neuro_motor_upper",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:mouth_throat_inspection@mouth",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:murphys_sign@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:nares_inspection@nose",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:nuchal_rigidity@neuro_meningeal",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:nuchal_rigidity@spine_cervical",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ophthalmoscopy@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ophthalmoscopy@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:orientation@neuro_mental_status",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:otoscopy@ear_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:otoscopy@ear_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:oxygen_saturation@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:oxygen_saturation@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:peripheral_pulses@arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:peripheral_pulses@arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:peripheral_pulses@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:peripheral_pulses@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:peripheral_pulses@groin_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:peripheral_pulses@groin_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:peripheral_pulses@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:peripheral_pulses@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:pmi_palpation@cardiac_mitral",
+   "detail": "(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:male:precordial_inspection@precordium_wall",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:precordial_palpation@cardiac_aortic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:precordial_palpation@cardiac_pulmonic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:precordial_palpation@precordium_lsb",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:prohibited@breast_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:prohibited@breast_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:prohibited@pelvic",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:pulse_radial@wrist_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:pulse_radial@wrist_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:pupils_light_reflex@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:pupils_light_reflex@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_achilles@achilles_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_achilles@achilles_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_achilles@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_biceps@biceps_tendon_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_biceps@biceps_tendon_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_biceps@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_brachioradialis@brachioradialis_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_brachioradialis@brachioradialis_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_brachioradialis@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_patellar@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_patellar@patellar_tendon_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_patellar@patellar_tendon_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_triceps@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_triceps@triceps_tendon_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_triceps@triceps_tendon_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:respiratory_rate@general",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:rinne_test@ear_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:rinne_test@ear_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:rise_from_chair@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:rise_from_chair@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:rise_from_chair@neuro_motor_lower",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:romberg@neuro_gait",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_light_touch_swab@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_light_touch_swab@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_light_touch_swab@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_light_touch_swab@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_light_touch_swab@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_light_touch_swab@leg_medial_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_light_touch@neuro_sensory",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_pin_prick@neuro_sensory",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_pinprick_pin@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_pinprick_pin@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_pinprick_pin@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_pinprick_pin@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_pinprick_pin@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_pinprick_pin@leg_medial_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_proprioception@neuro_sensory",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_proprioception@toe_great_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_proprioception@toe_great_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_vibration@neuro_sensory",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_vibration@toe_great_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_vibration@toe_great_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:shoulder_empty_can@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:shoulder_empty_can@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:shoulder_hawkins@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:shoulder_hawkins@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:shoulder_infraspinatus@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:shoulder_infraspinatus@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:shoulder_inspection@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:shoulder_inspection@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:shoulder_neer@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:shoulder_neer@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:shoulder_palpation@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:shoulder_palpation@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:shoulder_rom@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:shoulder_rom@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:skin_inspection@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:skin_inspection@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:skin_inspection@shin_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:skin_inspection@shin_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:skin_inspection@skin",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:skin_turgor@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:skin_turgor@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:skin_turgor@skin",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:spleen_palpation@abd_luq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:straight_leg_raise@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:straight_leg_raise@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:straight_leg_raise@spine_lumbar",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c5_6_elbow_flexion@elbow_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c5_6_elbow_flexion@elbow_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c5_6_elbow_flexion@neuro_motor_upper",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c5_7_elbow_extension@elbow_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c5_7_elbow_extension@elbow_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c5_7_elbow_extension@neuro_motor_upper",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c5_shoulder_abduction@neuro_motor_upper",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c5_shoulder_abduction@shoulder_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c5_shoulder_abduction@shoulder_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c6_8_wrist_extension@neuro_motor_upper",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c6_8_wrist_extension@wrist_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c6_8_wrist_extension@wrist_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c7_t1_grip@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c7_t1_grip@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c7_t1_grip@neuro_motor_upper",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c8_t1_finger_abduction@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c8_t1_finger_abduction@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_c8_t1_finger_abduction@neuro_motor_upper",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_l2_4_hip_flexion@hip_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_l2_4_hip_flexion@hip_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_l2_4_hip_flexion@neuro_motor_lower",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_l2_4_knee_extension@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_l2_4_knee_extension@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_l2_4_knee_extension@neuro_motor_lower",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_l4_s1_ankle@ankle_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_l4_s1_ankle@ankle_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_l4_s1_ankle@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_l4_s1_ankle@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_l4_s1_ankle@neuro_motor_lower",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_l4_s2_knee_flexion@knee_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_l4_s2_knee_flexion@knee_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:strength_l4_s2_knee_flexion@neuro_motor_lower",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:swinging_flashlight@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:tactile_fremitus@lung_post_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:tactile_fremitus@lung_post_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:tactile_fremitus@lung_post_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:tactile_fremitus@lung_post_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:teeth_gums_inspection@mouth",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:temperature@general",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:thyroid_palpation@neck_thyroid",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:trachea_palpation@neck_trachea",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:visual_fields_confrontation@eye_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:visual_fields_confrontation@eye_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:visual_fields_confrontation@neuro_cranial_nerves",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:vocal_resonance@lung_post_ll",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:vocal_resonance@lung_post_lu",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:vocal_resonance@lung_post_rl",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:vocal_resonance@lung_post_ru",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:weber_test@scalp",
+   "detail": "(a) the page covers the canvas here (select.bg-transparent.text-xs); (b) the placement never reached the patient; (c) no examine for weber_test@scalp (got none)",
+   "status": "XFAIL"
+  },
+  {
+   "id": "catalog:male:wrist_hand_inspection@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:wrist_hand_inspection@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:wrist_hand_inspection@wrist_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:wrist_hand_inspection@wrist_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:wrist_hand_palpation@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:wrist_hand_palpation@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:wrist_hand_palpation@wrist_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:wrist_hand_palpation@wrist_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:wrist_hand_rom@hand_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:wrist_hand_rom@hand_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:wrist_hand_rom@wrist_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:wrist_hand_rom@wrist_right",
+   "detail": "",
+   "status": "PASS"
+  }
+ ]
+}

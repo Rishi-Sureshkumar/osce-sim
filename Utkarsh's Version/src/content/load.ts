@@ -1,0 +1,60 @@
+import "server-only";
+import { loadContentFromDisk } from "./loadFromDisk";
+import type { ContentIndex, PublicCatalog } from "./types";
+import type { Case, PublicCase } from "@/domain/schemas";
+
+let cached: ContentIndex | null = null;
+
+/** Validated content, cached per server instance. Throws with a readable message if content is invalid. */
+export function getContent(): ContentIndex {
+  if (!cached || process.env.NODE_ENV === "development") cached = loadContentFromDisk();
+  return cached;
+}
+
+export function getPublicCatalog(): PublicCatalog {
+  const c = getContent();
+  return {
+    regions: c.regions,
+    maneuvers: c.maneuvers.map(({ id, fcmId, label, system, technique, allowedRegions, demo, interaction, tool, toolMode, steps, toleranceCm, requiresPositioning }) => ({
+      id,
+      fcmId,
+      label,
+      system,
+      technique,
+      allowedRegions,
+      demo,
+      ...(interaction ? { interaction } : {}),
+      ...(tool ? { tool } : {}),
+      ...(toolMode ? { toolMode } : {}),
+      ...(steps ? { steps } : {}),
+      ...(toleranceCm ? { toleranceCm } : {}),
+      ...(requiresPositioning ? { requiresPositioning } : {}),
+    })),
+  };
+}
+
+export function toPublicCase(c: Case): PublicCase {
+  const { name, age, sex, pronouns, chiefComplaint, setting } = c.patient;
+  return {
+    id: c.id,
+    title: c.title,
+    mode: c.mode,
+    doorSign: c.doorSign,
+    markSheetIds: c.markSheetIds,
+    ...(c.doorInstructions ? { doorInstructions: c.doorInstructions } : {}),
+    ...(c.timeLimits ? { timeLimits: c.timeLimits } : {}),
+    vitals: c.vitals,
+    ...(c.findingsVisibility ? { findingsVisibility: c.findingsVisibility } : {}),
+    patient: { name, age, sex, pronouns, chiefComplaint, setting },
+    presentation: { visibleSigns: c.visibleSigns ?? {}, hr: c.vitals.hr, rr: c.vitals.rr },
+    timeLimitSeconds: Number(process.env.TIME_LIMIT_SECONDS_OVERRIDE) > 0 ? Number(process.env.TIME_LIMIT_SECONDS_OVERRIDE) : c.doorSign.timeLimitMinutes * 60,
+    ...(flowLimits(c) ? { flow: flowLimits(c)! } : {}),
+  };
+}
+
+/** 1B flow limits for encounter cases with timeLimits (env overrides shorten them for tests). */
+export function flowLimits(c: Case): { encounterSeconds: number; penSeconds: number } | null {
+  if (c.mode !== "encounter" || !c.timeLimits) return null;
+  const env = (k: string) => (Number(process.env[k]) > 0 ? Number(process.env[k]) : null);
+  return { encounterSeconds: env("ENCOUNTER_SECONDS_OVERRIDE") ?? c.timeLimits.encounterMin * 60, penSeconds: env("PEN_SECONDS_OVERRIDE") ?? c.timeLimits.penMin * 60 };
+}

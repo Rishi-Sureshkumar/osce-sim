@@ -1,0 +1,3087 @@
+{
+  "caseId": "hf-decompensated-01",
+  "author": "blind-grading-agent",
+  "blind": true,
+  "labelledAgainst": "content/marksheets/communication-1b.json and encounter-1b.json at commit 88e02c9 (scoring: \"ai\" items only)",
+  "conventions": [
+    "Labels judge what the student SAID, applying each item's label and guidance literally; information the patient volunteered without being asked does not earn an 'Asks…' item.",
+    "Half-credit items (introduce-first-year, share-assessment) are labelled 1 only for full performance; the partial version is recorded under 'half'.",
+    "sh-sexual: not relevant to this presentation, so omission scores 1. sh-travel: relevant (pulmonary embolism is on the expected differential), so omission scores 0 and is marked borderline.",
+    "ROS items need a question about a symptom of that system beyond exploring the chief concern itself (e.g. pulmonary = cough/wheeze/sputum; cardiac = chest pain/palpitations/leg swelling; neuro = dizziness/fainting/numbness/weakness). Emotional-context questions are not psychiatric ROS.",
+    "elicit-preferences needs the patient's views/concerns about the plan; a generic 'Any (other) questions?' alone scores 0 (borderline). teach-back needs more than 'Does that make sense?' (borderline). transition-pe needs both the announcement and a request for permission.",
+    "prioritize follows the guidance literally: with a single concern it scores 1 only when the student explicitly confirmed there was nothing else; note-issues scores 0 when no additional issue was raised (borderline)."
+  ],
+  "transcripts": [
+    {
+      "id": "t01-strong",
+      "summary": "Comprehensive, patient-centred interview: full agenda-setting with prioritising, OPQRST HPI with targeted negatives, empathy, complete PMH/meds/allergy/FH/SH/ROS, plain-language impression, teach-back and safety-netting.",
+      "turns": [
+        {
+          "say": "Hi there, are you Mr. Bennett? Hello Mr. Bennett, I'm Priya Sharma, I'm a first-year medical student working with the team in the emergency department today."
+        },
+        {
+          "patient": "That's me. Harold Bennett. Nice to meet you."
+        },
+        {
+          "say": "Nice to meet you too. Would it be okay if I pull up a chair and ask you some questions? Are you comfortable sitting up like that, or can I adjust the bed for you?"
+        },
+        {
+          "patient": "This is fine. Sitting up is better. Go ahead."
+        },
+        {
+          "say": "Okay, great. So what brings you in today?"
+        },
+        {
+          "patient": "I just can't catch my breath. It's been getting worse for a couple of weeks."
+        },
+        {
+          "say": "I'm sorry, that sounds really uncomfortable. Before we dig into that, is there anything else you were hoping to talk about today?"
+        },
+        {
+          "patient": "Well... my ankles have been puffy. And I'm hoping I can be home by Saturday. It's my granddaughter's birthday."
+        },
+        {
+          "say": "Okay, so the breathing, your ankles, and getting home for Saturday — I've made a note, and we'll come back to all of those. Is it alright if we start with the breathing, since that seems like the most pressing?"
+        },
+        {
+          "patient": "Yes. The breathing's the big one."
+        },
+        {
+          "say": "Okay. Tell me about the breathing."
+        },
+        {
+          "patient": "I just get winded doing anything. Even little things. It wears me right out."
+        },
+        {
+          "say": "Mm-hm. Go on — what else have you noticed?"
+        },
+        {
+          "patient": "I can't sleep properly. I keep having to sit up."
+        },
+        {
+          "say": "When did this all start, and did it come on suddenly or gradually? Has it been getting worse since?"
+        },
+        {
+          "patient": "It came on gradually about two weeks ago and has got steadily worse. The last three days have been the worst."
+        },
+        {
+          "say": "When you say you can't catch your breath, what does it actually feel like?"
+        },
+        {
+          "patient": "Like I can't get a full breath in. Like I've just run up a hill."
+        },
+        {
+          "say": "How far can you walk now before you have to stop, compared to two weeks ago?"
+        },
+        {
+          "patient": "Two weeks ago I could walk a few blocks. Now I get winded walking from the bedroom to the kitchen, or going up the 12 stairs at home."
+        },
+        {
+          "say": "You mentioned having to sit up — can you lie flat at all? How many pillows do you sleep on? And have you woken up in the night gasping for air?"
+        },
+        {
+          "patient": "I can't lie flat any more. I've been sleeping on three pillows, and last night I slept in my recliner. And yes, a couple of times this week I woke up gasping and had to sit on the edge of the bed for a few minutes."
+        },
+        {
+          "say": "That sounds frightening. Is there anything that makes the breathing better, or anything else that makes it worse?"
+        },
+        {
+          "patient": "Sitting up helps. Moving around makes it worse."
+        },
+        {
+          "say": "And the ankles you mentioned — when did that start, and is it both legs the same? Any pain in your calves?"
+        },
+        {
+          "patient": "My ankles have been puffy for about a week, worse by the evening. My shoes are tight. Both legs are the same. No pain in my calves."
+        },
+        {
+          "say": "Have you noticed any change in your weight? Any cough or wheezing? Any chest pain or pressure, or fevers or chills?"
+        },
+        {
+          "patient": "I've put on about 4 kilos — nine pounds — in the last two weeks, even though I'm not eating much. A dry tickly cough, mostly at night when I lie down. Nothing coming up. No wheezing. No chest pain or pressure — not like the heart attack. No fevers or chills."
+        },
+        {
+          "say": "Have you been able to take all of your medicines as usual lately? And has anything changed with your diet, like more salty food?"
+        },
+        {
+          "patient": "I ran out of my water pill about ten days ago and didn't get it refilled — I hate being stuck near a bathroom when I'm out. And we had a lot of family over for my wife's 70th — lots of takeout, ham, chips. More salt than I'm supposed to have."
+        },
+        {
+          "say": "That's really understandable — a lot of people find the water pill a hassle. How has all of this been affecting your day-to-day life, and how are you feeling about it?"
+        },
+        {
+          "patient": "I can't do much. My wife's doing everything, and I haven't been out fishing in weeks. I'm scared it's my heart again. And I really want to be home for my granddaughter's birthday on Saturday."
+        },
+        {
+          "say": "That makes complete sense. After what you went through before, I can imagine this is frightening, and I can see how much Saturday means to you. We'll keep that in mind."
+        },
+        {
+          "patient": "Thanks. I appreciate that."
+        },
+        {
+          "say": "Let me make sure I have this right. Over the last two weeks your breathing has gradually got worse, so now you're winded walking to the kitchen, you can't lie flat and you've woken up gasping. Your ankles have been swollen for about a week, you've put on about four kilos, and you ran out of your water pill ten days ago after a salty couple of weeks. No chest pain or fever. Did I get that right?"
+        },
+        {
+          "patient": "Yes, that's it."
+        },
+        {
+          "say": "Thank you. Now I'd like to ask you some questions about your health in general. What medical conditions have you been diagnosed with, and when was each one diagnosed?"
+        },
+        {
+          "patient": "I had a heart attack in 2019 — they put a stent in. Since then they've said my heart pumps weakly. I also have high blood pressure, type 2 diabetes and high cholesterol. The others I've had for years — I couldn't tell you exactly when."
+        },
+        {
+          "say": "Any surgeries or procedures, and roughly when were they?"
+        },
+        {
+          "patient": "The stent in 2019 through my wrist, and my appendix out when I was 20."
+        },
+        {
+          "say": "What medications do you take, and what doses? Any over-the-counter medicines, vitamins or supplements?"
+        },
+        {
+          "patient": "Furosemide 40 mg in the morning — the one I ran out of. Carvedilol 12.5 mg twice a day, lisinopril 10 mg once a day, spironolactone 25 mg, aspirin 81 mg, atorvastatin 80 mg at night, and metformin 1000 mg twice a day. No over-the-counter stuff except some ibuprofen for my knee last week."
+        },
+        {
+          "say": "Thanks — good to know about the ibuprofen. Any allergies, to medications or to any foods? And what happened when you had the reaction?"
+        },
+        {
+          "patient": "Penicillin gave me a rash all over as a kid. No food allergies."
+        },
+        {
+          "say": "Are your parents living? And do you have any brothers or sisters — how's their health?"
+        },
+        {
+          "patient": "My dad died of a heart attack at 62. My mom had a stroke and died at 80. I have one brother, he's 71 and has diabetes."
+        },
+        {
+          "say": "Do you smoke, or have you ever? Do you drink alcohol? Any recreational drugs?"
+        },
+        {
+          "patient": "I smoked a pack a day for 30 years and quit after the heart attack in 2019. A beer or two on the weekend. Not more. Drugs, no, never."
+        },
+        {
+          "say": "What do you do for work, or did you? And who do you live with?"
+        },
+        {
+          "patient": "Retired. I drove city buses for 35 years. I live with my wife, Carol. Our daughter lives ten minutes away."
+        },
+        {
+          "say": "What do you enjoy, what gives you joy these days? And have you done any travelling recently — long car trips or flights?"
+        },
+        {
+          "patient": "My grandkids, and fishing at the lake with my brother. No trips. Haven't been further than the grocery store in a month."
+        },
+        {
+          "say": "Just a few quick yes-or-no questions now. Any nausea or belly pain, or changes in appetite? Any changes with peeing? Headaches or problems with your vision?"
+        },
+        {
+          "patient": "My belly feels full and a bit sore on the right side, and I've not had much appetite. I'm up two or three times a night to pass water. No headaches, nothing with my eyes."
+        },
+        {
+          "say": "Any dizziness, numbness or weakness? Rashes or skin changes? Joint or muscle pain? Feeling unusually thirsty, or always too hot or too cold? And how has your mood been?"
+        },
+        {
+          "patient": "No dizziness. No weakness, numbness or trouble speaking. No rashes. Just my knee last week, that's what the ibuprofen was for. Not thirsty, nothing like that. I'm a bit fed up, but not depressed."
+        },
+        {
+          "say": "Thank you, that's really helpful. Next I'd like to examine you — look at your neck, listen to your heart and lungs, and check your legs. Is that okay with you?"
+        },
+        {
+          "patient": "Sure, go ahead."
+        },
+        {
+          "say": "I'll clean my hands first. The stethoscope might feel a bit cold — let me know if anything is uncomfortable. Could you roll onto your left side for me? Take your time... great, and now if you can sit forward I'll listen to your back. Deep breaths in and out through your mouth."
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Thanks, Mr. Bennett, you can sit back. So from what you've told me and what I found, I think your heart isn't pumping strongly enough right now, so fluid is backing up into your lungs and your legs — that's why you're short of breath, can't lie flat, and your ankles are swollen. Running out of the water pill and the salty food probably tipped things over."
+        },
+        {
+          "patient": "So it is my heart."
+        },
+        {
+          "say": "It looks that way, yes. Next, I'll talk with the doctor, who will come and see you. We'll most likely do some blood tests, a chest x-ray and a heart tracing, to check on your heart and look for anything else that could be going on. How does that sound to you, and what worries you most about it?"
+        },
+        {
+          "patient": "Sounds fine. I just want to be home for Saturday."
+        },
+        {
+          "say": "I hear you. I can't promise anything about Saturday, but I'll make sure the doctor knows how important it is so you can talk it through together. Just so I know I explained things clearly, can you tell me in your own words what's going to happen next?"
+        },
+        {
+          "patient": "The doctor's coming, and they'll do blood tests, an x-ray and a heart test."
+        },
+        {
+          "say": "Exactly. If your breathing gets worse or you get any chest pain while you're waiting, press the call button straight away and tell the nurse. Do you have any other questions for me?"
+        },
+        {
+          "patient": "No, I think that's it."
+        },
+        {
+          "say": "Okay. Thank you so much, Mr. Bennett. I'll be back with the doctor shortly."
+        }
+      ],
+      "pen": {
+        "history": "68M with known ischemic cardiomyopathy (MI with stent 2019, EF ~30% per cardiologist), HTN, T2DM and hyperlipidemia presents with 2 weeks of gradually progressive shortness of breath, worst over last 3 days. Exercise tolerance down from a few blocks to bedroom-to-kitchen / 12 stairs. Orthopnea (3 pillows, slept in recliner last night) and PND x2 this week. Bilateral ankle swelling x1 week, worse in evening; ~4 kg weight gain in 2 weeks despite poor appetite. Dry nocturnal cough, nocturia 2-3x/night, RUQ fullness/soreness, fatigue. Ran out of furosemide ~10 days ago; high-salt diet recently (family party); ibuprofen for knee last week. Denies chest pain/pressure, fever/chills, wheeze, sputum, palpitations, syncope, calf pain, neuro symptoms, rash. Meds: furosemide 40 mg qAM (not taking), carvedilol 12.5 mg BID, lisinopril 10 mg daily, spironolactone 25 mg, aspirin 81 mg, atorvastatin 80 mg qHS, metformin 1000 mg BID. Allergy: penicillin (rash). PSH: PCI/stent 2019 (radial), appendectomy age 20. FH: father MI age 62 (died), mother stroke age 80 (died), brother 71 with T2DM. SH: ex-smoker 30 pack-years, quit 2019; 1-2 beers on weekends; no drugs; retired bus driver; lives with wife; no recent travel.",
+        "exam": "HR 104, RR 24, BP 148/92, T 36.8 C, SpO2 89% on room air. Older man sitting upright, mildly breathless at rest, pausing mid-sentence. JVP elevated ~9 cm above sternal angle at 30 degrees; hepatojugular reflux positive. PMI displaced laterally (6th ICS, anterior axillary line), diffuse. Tachycardic, regular; S3 at apex with bell, louder in left lateral decubitus; soft 2/6 holosystolic murmur at apex. Fine bibasilar crackles; reduced breath sounds and dullness to percussion at the right base. 3+ bilateral pitting edema to mid-shin; pedal pulses 1+.",
+        "diagnoses": [
+          {
+            "diagnosis": "Acute decompensated heart failure (HFrEF)",
+            "findings": "Known EF ~30% after MI; orthopnea, PND, 4 kg weight gain, ankle swelling; precipitated by running out of furosemide, salt load and NSAID use. Raised JVP, positive HJR, displaced PMI, S3, bibasilar crackles, bilateral pitting edema, hypoxia."
+          },
+          {
+            "diagnosis": "Acute coronary syndrome",
+            "findings": "Prior MI, diabetes, HTN, hyperlipidemia, ex-smoker, father with early MI; tachycardic. Against: no chest pain, but diabetics can have silent ischemia."
+          },
+          {
+            "diagnosis": "Pneumonia",
+            "findings": "Cough, crackles and hypoxia. Against: afebrile, dry cough, bilateral findings with edema."
+          }
+        ]
+      },
+      "expect": {
+        "greet-by-name": 1,
+        "introduce-first-year": 1,
+        "comfort-privacy": 1,
+        "cc-open-question": 1,
+        "additional-concerns": 1,
+        "note-issues": 1,
+        "prioritize": 1,
+        "open-story": 1,
+        "second-open": 1,
+        "summarize-clarify": 1,
+        "emotional-context": 1,
+        "personal-context": 1,
+        "respond-emotion": 1,
+        "timeline": 1,
+        "hpi-onset": 1,
+        "hpi-duration": 1,
+        "hpi-quality": 1,
+        "hpi-quantification": 1,
+        "hpi-related": 1,
+        "hpi-setting": 1,
+        "hpi-transforming": 1,
+        "closed-ddx": 1,
+        "summarize-hpi": 1,
+        "signpost": 1,
+        "transition-pe": 1,
+        "share-assessment": 1,
+        "share-plan": 1,
+        "elicit-preferences": 1,
+        "teach-back": 1,
+        "expectancies": 1,
+        "pmh-conditions": 1,
+        "pmh-dates": 1,
+        "psh-surgeries": 1,
+        "psh-dates": 1,
+        "meds-names": 1,
+        "meds-doses": 1,
+        "meds-otc": 1,
+        "allergy-drug": 1,
+        "allergy-food": 1,
+        "allergy-reaction": 1,
+        "fh-parents-siblings": 1,
+        "sh-alcohol": 1,
+        "sh-smoking": 1,
+        "sh-drugs": 1,
+        "sh-occupation": 1,
+        "sh-lives-with": 1,
+        "sh-meaning": 1,
+        "sh-sexual": 1,
+        "sh-travel": 1,
+        "ros-general": 1,
+        "ros-heent": 1,
+        "ros-pulmonary": 1,
+        "ros-cardiac": 1,
+        "ros-gi": 1,
+        "ros-gu": 1,
+        "ros-musculoskeletal": 1,
+        "ros-neuro": 1,
+        "ros-skin": 1,
+        "ros-endocrine": 1,
+        "ros-psychiatric": 1
+      }
+    },
+    {
+      "id": "t02-strong",
+      "summary": "Strong, efficient interview with agenda-setting, OPQRST HPI, summary and empathy; misses OTC meds, food allergy, surgery dates (volunteered, not asked), travel and several ROS systems; checks understanding only with 'Does that make sense?'.",
+      "turns": [
+        {
+          "say": "Good afternoon — Mr. Bennett? Hi, my name's Marcus Lee, I'm a first-year medical student. I'll be chatting with you for a bit before the doctor comes in."
+        },
+        {
+          "patient": "Hello. Yes, that's me."
+        },
+        {
+          "say": "Do you mind if I sit down here? And is now an okay time to talk — are you comfortable enough sitting like that?"
+        },
+        {
+          "patient": "Go ahead. I'm okay sitting up like this."
+        },
+        {
+          "say": "So, what's brought you to the emergency department today?"
+        },
+        {
+          "patient": "I just can't catch my breath. It's been getting worse for a couple of weeks."
+        },
+        {
+          "say": "Okay. Before we go into that, is there anything else that's been bothering you that you'd like to talk about today?"
+        },
+        {
+          "patient": "I'm wiped out all the time. That's about it."
+        },
+        {
+          "say": "Okay, so the breathing and feeling wiped out — we'll make sure we talk about both. Would it be alright to start with the breathing?"
+        },
+        {
+          "patient": "Yeah. The breathing first."
+        },
+        {
+          "say": "Tell me what's been going on with your breathing."
+        },
+        {
+          "patient": "I get out of breath with everything. Walking, getting dressed. It just keeps getting worse."
+        },
+        {
+          "say": "Mm. What else have you noticed?"
+        },
+        {
+          "patient": "I can't sleep lying down any more. I end up sitting up."
+        },
+        {
+          "say": "When did all this start? Did it come on all at once, or gradually?"
+        },
+        {
+          "patient": "It came on gradually about two weeks ago and has got steadily worse. The last three days have been the worst."
+        },
+        {
+          "say": "How would you describe the feeling — more like you can't get enough air, or more like a tightness?"
+        },
+        {
+          "patient": "Like I can't get enough air. It's not a tightness."
+        },
+        {
+          "say": "How far can you walk now before you get winded? And how many pillows do you need at night?"
+        },
+        {
+          "patient": "Two weeks ago I could walk a few blocks. Now I get winded walking from the bedroom to the kitchen, or going up the 12 stairs at home. I've been sleeping on three pillows, and last night I slept in my recliner."
+        },
+        {
+          "say": "Has it ever woken you up at night, short of breath?"
+        },
+        {
+          "patient": "Yes, a couple of times this week I woke up gasping and had to sit on the edge of the bed for a few minutes."
+        },
+        {
+          "say": "Does anything make it better or worse?"
+        },
+        {
+          "patient": "Sitting up helps. Moving about makes it worse."
+        },
+        {
+          "say": "Have you noticed any swelling in your legs or feet, or any weight gain?"
+        },
+        {
+          "patient": "My ankles have been puffy for about a week, worse by the evening. My shoes are tight. I've put on about 4 kilos — nine pounds — in the last two weeks, even though I'm not eating much."
+        },
+        {
+          "say": "Is the swelling in both legs? Any calf pain? And any chest pain, fevers or cough?"
+        },
+        {
+          "patient": "Both legs are the same. No pain in my calves. No chest pain or pressure. No fevers or chills. A dry tickly cough, mostly at night when I lie down. Nothing coming up."
+        },
+        {
+          "say": "Have you been taking all your medications like normal?"
+        },
+        {
+          "patient": "I ran out of my water pill about ten days ago and didn't get it refilled — I hate being stuck near a bathroom when I'm out."
+        },
+        {
+          "say": "Okay, thanks for telling me. And how about salt in your diet lately?"
+        },
+        {
+          "patient": "We had a lot of family over for my wife's 70th — lots of takeout, ham, chips. More salt than I'm supposed to have."
+        },
+        {
+          "say": "So let me check I've got this right: about two weeks of breathing getting gradually worse, now you're winded walking to the kitchen, you need three pillows and you've woken up gasping, your ankles are swollen and you've put on four kilos — and you ran out of your water pill about ten days ago. Is that right?"
+        },
+        {
+          "patient": "Yes, that's right."
+        },
+        {
+          "say": "How's all this been for you? How are you coping with it?"
+        },
+        {
+          "patient": "I'm scared it's my heart again. And I really want to be home for my granddaughter's birthday on Saturday."
+        },
+        {
+          "say": "That sounds really hard, especially with her birthday coming up. Has the breathing stopped you doing things you'd normally do?"
+        },
+        {
+          "patient": "I can't do much at all. I haven't been fishing in weeks."
+        },
+        {
+          "say": "I'm going to switch gears now and ask about your past health. Do you have any medical conditions?"
+        },
+        {
+          "patient": "I had a heart attack in 2019 — they put a stent in. Since then they've said my heart pumps weakly. I also have high blood pressure, type 2 diabetes and high cholesterol."
+        },
+        {
+          "say": "When were you diagnosed with the diabetes and the blood pressure?"
+        },
+        {
+          "patient": "Oh, years ago. I couldn't tell you exactly."
+        },
+        {
+          "say": "Any surgeries?"
+        },
+        {
+          "patient": "The stent, and my appendix out when I was 20."
+        },
+        {
+          "say": "What medications are you on, and what are the doses?"
+        },
+        {
+          "patient": "Furosemide 40 mg in the morning — the one I ran out of. Carvedilol 12.5 mg twice a day, lisinopril 10 mg once a day, spironolactone 25 mg, aspirin 81 mg, atorvastatin 80 mg at night, and metformin 1000 mg twice a day."
+        },
+        {
+          "say": "Any allergies to medications?"
+        },
+        {
+          "patient": "Penicillin."
+        },
+        {
+          "say": "What happened with the penicillin?"
+        },
+        {
+          "patient": "It gave me a rash all over as a kid."
+        },
+        {
+          "say": "What about your family — are your parents still living, and do you have any brothers or sisters? Any health problems?"
+        },
+        {
+          "patient": "My dad died of a heart attack at 62. My mom had a stroke and died at 80. I have one brother, he's 71 and has diabetes."
+        },
+        {
+          "say": "Do you smoke or drink at all? Any drug use?"
+        },
+        {
+          "patient": "I smoked a pack a day for 30 years and quit after the heart attack in 2019. A beer or two on the weekend. Not more. No drugs, never."
+        },
+        {
+          "say": "Who's at home with you, are you working, and what do you like to do for fun?"
+        },
+        {
+          "patient": "My wife, Carol. Our daughter lives ten minutes away. I'm retired — I drove city buses for 35 years. And my grandkids, and fishing at the lake with my brother."
+        },
+        {
+          "say": "A few more quick ones — any belly pain or nausea? Any trouble with peeing? Any dizziness or fainting? And how's your mood been?"
+        },
+        {
+          "patient": "My belly feels full and a bit sore on the right side, and I've not had much appetite. I'm up two or three times a night to pass water. No dizziness, and I haven't passed out. I'm a bit fed up, but not depressed."
+        },
+        {
+          "say": "Thanks. Now I'd like to do a physical exam — listen to your heart and lungs, and check your neck and legs. Is that alright?"
+        },
+        {
+          "patient": "Sure."
+        },
+        {
+          "say": "Let me know if anything hurts. Can you lean forward a little so I can listen to your back?"
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Okay Mr. Bennett, thanks. So what I think might be going on is that your heart isn't pumping as well as it should, and fluid has built up in your lungs and your legs. Missing the water pill and the extra salt probably made it worse. Next, the doctor will come and see you, and we'll probably do some blood tests, a chest x-ray and a tracing of your heart. Does that make sense?"
+        },
+        {
+          "patient": "Yes, I think so."
+        },
+        {
+          "say": "What are you most worried about with all of that?"
+        },
+        {
+          "patient": "Missing Saturday. My granddaughter's birthday."
+        },
+        {
+          "say": "I understand — I'll make sure the doctor knows. I'll be back with the doctor in a few minutes, and if your breathing gets worse before then, use the call button. Any other questions?"
+        },
+        {
+          "patient": "No, that's all."
+        },
+        {
+          "say": "Thanks very much, Mr. Bennett."
+        }
+      ],
+      "pen": {
+        "history": "68 y/o M with hx MI s/p stent (2019) and reduced EF, HTN, T2DM, HLD presents with 2 wk of gradually worsening SOB. Now dyspneic walking bedroom to kitchen (previously several blocks). 3-pillow orthopnea, slept in recliner; PND x2 this week. Bilateral ankle swelling x1 wk, 4 kg weight gain over 2 wk. Dry cough at night, fatigue, poor appetite with RUQ fullness, nocturia. Ran out of furosemide ~10 days ago; high-salt food recently. No chest pain, fever/chills, calf pain, dizziness or syncope. Meds: furosemide 40 mg daily (out), carvedilol 12.5 mg BID, lisinopril 10 mg, spironolactone 25 mg, ASA 81 mg, atorvastatin 80 mg, metformin 1000 mg BID. Allergy: PCN (rash). PSH: stent, appendectomy. FH: father died of MI at 62, mother died of stroke at 80, brother 71 with DM. SH: 30 pack-yr smoker, quit 2019; 1-2 beers/wk; no drugs; retired bus driver, lives with wife.",
+        "exam": "Vitals: HR 104, RR 24, BP 148/92, afebrile, SpO2 89% RA. Sitting upright, mildly short of breath. JVP elevated about 9 cm. S3 heard at apex, regular tachycardia. Crackles at both lung bases. Bilateral pitting edema of shins and ankles.",
+        "diagnoses": [
+          {
+            "diagnosis": "Acute decompensated heart failure",
+            "findings": "Low EF, orthopnea, PND, weight gain, edema, raised JVP, S3, crackles; ran out of furosemide and ate high-salt food."
+          },
+          {
+            "diagnosis": "Acute coronary syndrome",
+            "findings": "Previous MI, diabetes, smoking history, tachycardia; no chest pain."
+          },
+          {
+            "diagnosis": "Pulmonary embolism",
+            "findings": "Tachycardia and low oxygen; less likely because swelling is in both legs with no calf pain and onset was gradual."
+          }
+        ]
+      },
+      "expect": {
+        "greet-by-name": 1,
+        "introduce-first-year": 1,
+        "comfort-privacy": 1,
+        "cc-open-question": 1,
+        "additional-concerns": 1,
+        "note-issues": 1,
+        "prioritize": 1,
+        "open-story": 1,
+        "second-open": 1,
+        "summarize-clarify": 1,
+        "emotional-context": 1,
+        "personal-context": 1,
+        "respond-emotion": 1,
+        "timeline": 1,
+        "hpi-onset": 1,
+        "hpi-duration": 1,
+        "hpi-quality": 1,
+        "hpi-quantification": 1,
+        "hpi-related": 1,
+        "hpi-setting": 1,
+        "hpi-transforming": 1,
+        "closed-ddx": 1,
+        "summarize-hpi": 1,
+        "signpost": 1,
+        "transition-pe": 1,
+        "share-assessment": 1,
+        "share-plan": 1,
+        "elicit-preferences": 1,
+        "teach-back": 0,
+        "expectancies": 1,
+        "pmh-conditions": 1,
+        "pmh-dates": 1,
+        "psh-surgeries": 1,
+        "psh-dates": 0,
+        "meds-names": 1,
+        "meds-doses": 1,
+        "meds-otc": 0,
+        "allergy-drug": 1,
+        "allergy-food": 0,
+        "allergy-reaction": 1,
+        "fh-parents-siblings": 1,
+        "sh-alcohol": 1,
+        "sh-smoking": 1,
+        "sh-drugs": 1,
+        "sh-occupation": 1,
+        "sh-lives-with": 1,
+        "sh-meaning": 1,
+        "sh-sexual": 1,
+        "sh-travel": 0,
+        "ros-general": 1,
+        "ros-heent": 0,
+        "ros-pulmonary": 1,
+        "ros-cardiac": 1,
+        "ros-gi": 1,
+        "ros-gu": 1,
+        "ros-musculoskeletal": 0,
+        "ros-neuro": 1,
+        "ros-skin": 0,
+        "ros-endocrine": 0,
+        "ros-psychiatric": 1
+      },
+      "borderline": [
+        "psh-dates",
+        "teach-back",
+        "sh-travel"
+      ]
+    },
+    {
+      "id": "t03-strong",
+      "summary": "Warm, empathic interview with echoing, a full HPI summary and true teach-back; asks for additional concerns only after the HPI (so no prioritising); no diagnosis dates, medication doses or drug use; thin ROS.",
+      "turns": [
+        {
+          "say": "Hi, Mr. Bennett? My name is Aisha Okafor, I'm a first-year medical student here. Is it okay if I talk with you for a few minutes before the doctor comes by?"
+        },
+        {
+          "patient": "Sure. Harold. You can call me Harold."
+        },
+        {
+          "say": "Thanks, Harold. I'll grab a seat so we're at the same level. Are you comfortable like that? I can raise the head of the bed if it helps your breathing."
+        },
+        {
+          "patient": "I'm alright sitting up. Thanks."
+        },
+        {
+          "say": "So tell me, what brought you in today?"
+        },
+        {
+          "patient": "I just can't catch my breath. It's been getting worse for a couple of weeks."
+        },
+        {
+          "say": "Can't catch your breath... tell me more about that."
+        },
+        {
+          "patient": "Everything's an effort. I get winded so easily now. I'm wiped out all the time."
+        },
+        {
+          "say": "Mm-hm. And what else have you noticed?"
+        },
+        {
+          "patient": "My ankles have been puffy. My shoes are tight."
+        },
+        {
+          "say": "When did the breathing first start — was it sudden, or did it creep up on you? And has it been changing?"
+        },
+        {
+          "patient": "It came on gradually about two weeks ago and has got steadily worse. The last three days have been the worst."
+        },
+        {
+          "say": "What does it feel like when you're short of breath?"
+        },
+        {
+          "patient": "Like I can't get a full breath in."
+        },
+        {
+          "say": "What can you manage now, compared to before? Like how far you can walk, or stairs?"
+        },
+        {
+          "patient": "Two weeks ago I could walk a few blocks. Now I get winded walking from the bedroom to the kitchen, or going up the 12 stairs at home."
+        },
+        {
+          "say": "That's a big change. How about at night — can you lie flat to sleep?"
+        },
+        {
+          "patient": "I can't lie flat any more. I've been sleeping on three pillows, and last night I slept in my recliner."
+        },
+        {
+          "say": "Has it ever woken you up gasping?"
+        },
+        {
+          "patient": "Yes, a couple of times this week I woke up gasping and had to sit on the edge of the bed for a few minutes."
+        },
+        {
+          "say": "What helps, and what makes it worse?"
+        },
+        {
+          "patient": "Sitting up helps. Moving around makes it worse."
+        },
+        {
+          "say": "You mentioned your ankles — when did you notice that, and is it both sides? Any pain in your calves?"
+        },
+        {
+          "patient": "My ankles have been puffy for about a week, worse by the evening. Both legs are the same. No pain in my calves."
+        },
+        {
+          "say": "Any weight change, cough, chest pain, or fevers?"
+        },
+        {
+          "patient": "I've put on about 4 kilos — nine pounds — in the last two weeks, even though I'm not eating much. A dry tickly cough, mostly at night. No chest pain or pressure. No fevers or chills."
+        },
+        {
+          "say": "Have you been taking your medicines the way you usually do?"
+        },
+        {
+          "patient": "I ran out of my water pill about ten days ago and didn't get it refilled — I hate being stuck near a bathroom when I'm out."
+        },
+        {
+          "say": "That makes sense — being stuck near a bathroom is no fun. How's all of this been affecting your life — your day to day, your family?"
+        },
+        {
+          "patient": "I can't do much. My wife's doing everything. I haven't been fishing in weeks."
+        },
+        {
+          "say": "And how are you feeling about it, emotionally?"
+        },
+        {
+          "patient": "I'm scared it's my heart again."
+        },
+        {
+          "say": "That sounds really frightening, Harold. It's completely understandable to feel that way."
+        },
+        {
+          "patient": "Thanks."
+        },
+        {
+          "say": "Let me make sure I've understood. For two weeks your breathing has gradually got worse, so now even walking to the kitchen is hard, you can't lie flat and you've woken up gasping. Your ankles are swollen, you've gained about four kilos, and you ran out of your water pill ten days ago. Is that right?"
+        },
+        {
+          "patient": "Yes. That's it."
+        },
+        {
+          "say": "Before we go on, is there anything else you were hoping we'd cover today?"
+        },
+        {
+          "patient": "I really want to be home for my granddaughter's birthday on Saturday."
+        },
+        {
+          "say": "Okay, that's really important — I've written it down, and we'll come back to it before I leave. Now I'd like to ask some questions about your past health. Do you have any medical conditions?"
+        },
+        {
+          "patient": "I had a heart attack — they put a stent in. Since then they've said my heart pumps weakly. I also have high blood pressure, type 2 diabetes and high cholesterol."
+        },
+        {
+          "say": "Have you had any surgeries or procedures, and when?"
+        },
+        {
+          "patient": "The stent in 2019 through my wrist, and my appendix out when I was 20."
+        },
+        {
+          "say": "What medications are you taking? Anything over the counter, or vitamins?"
+        },
+        {
+          "patient": "Furosemide — the one I ran out of. Carvedilol, lisinopril, spironolactone, aspirin, atorvastatin and metformin. No over-the-counter stuff except some ibuprofen for my knee last week."
+        },
+        {
+          "say": "Thanks. Any allergies to medicines or foods? What kind of reaction?"
+        },
+        {
+          "patient": "Penicillin gave me a rash all over as a kid. No food allergies."
+        },
+        {
+          "say": "Tell me about your family's health — your parents and any brothers or sisters?"
+        },
+        {
+          "patient": "My dad died of a heart attack at 62. My mom had a stroke and died at 80. I have one brother, he's 71 and has diabetes."
+        },
+        {
+          "say": "Who do you live with at home? And what did you do for work?"
+        },
+        {
+          "patient": "With my wife, Carol. Our daughter lives ten minutes away. Retired. I drove city buses for 35 years."
+        },
+        {
+          "say": "Do you smoke, or did you ever? And alcohol?"
+        },
+        {
+          "patient": "I smoked a pack a day for 30 years and quit after the heart attack in 2019. A beer or two on the weekend. Not more."
+        },
+        {
+          "say": "And what brings you joy these days? Have you travelled anywhere recently?"
+        },
+        {
+          "patient": "My grandkids, and fishing at the lake with my brother. No trips. Haven't been further than the grocery store in a month."
+        },
+        {
+          "say": "How's your appetite been? Any nausea?"
+        },
+        {
+          "patient": "My belly feels full and a bit sore on the right side, and I've not had much appetite."
+        },
+        {
+          "say": "Thank you, Harold. I'd like to examine you now — I'll listen to your heart and lungs and look at your neck and legs. Is that alright?"
+        },
+        {
+          "patient": "Yes, go ahead."
+        },
+        {
+          "say": "I'll warm the stethoscope a bit. Tell me if anything's uncomfortable. Could you lean forward for me?"
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Thank you. So, what I think is happening is that your heart, which was already a bit weak after the heart attack, is struggling to keep up, and extra fluid has built up in your lungs and legs. Running out of the water pill and the salty food likely made that worse."
+        },
+        {
+          "patient": "So it is my heart."
+        },
+        {
+          "say": "I think so, yes. Next, the doctor will come and see you, and they'll probably want some blood tests, a chest x-ray and a heart tracing. You may need to stay in for a bit, but the doctor will talk that through with you. What questions or worries do you have about that — I know Saturday is on your mind?"
+        },
+        {
+          "patient": "I just want to be there for her birthday."
+        },
+        {
+          "say": "I understand. I'll tell the doctor how important that is so you can talk it through. Can you tell me in your own words what's going to happen next, just to make sure I explained it well?"
+        },
+        {
+          "patient": "The doctor comes, and they do some blood tests, an x-ray and a heart tracing."
+        },
+        {
+          "say": "That's exactly right. If you feel more short of breath or get any chest pain while you're waiting, push the call button right away. Anything else you want to ask me?"
+        },
+        {
+          "patient": "No, that's all. Thanks."
+        },
+        {
+          "say": "Thank you, Harold. I'll be back with the doctor soon."
+        }
+      ],
+      "pen": {
+        "history": "68M presenting with 2 weeks of gradually worsening dyspnea, worst the last 3 days. Can now only walk from bedroom to kitchen (was a few blocks). Orthopnea - 3 pillows, slept in recliner. PND twice this week. Bilateral ankle swelling for 1 week, 4 kg weight gain, fatigue, dry cough at night, decreased appetite with RUQ fullness. Ran out of his water pill (furosemide) 10 days ago. Denies chest pain, fever, calf pain. PMH: MI with stent, weak heart, HTN, T2DM, high cholesterol. PSH: stent 2019, appendectomy at 20. Meds: furosemide, carvedilol, lisinopril, spironolactone, aspirin, atorvastatin, metformin; ibuprofen last week. Allergies: penicillin (rash), no food allergies. FH: father MI (d. 62), mother stroke (d. 80), brother DM. SH: former smoker (1 ppd x 30 yrs, quit 2019), 1-2 beers on weekends, retired bus driver, lives with wife. Worried about missing granddaughter's birthday.",
+        "exam": "HR 104, RR 24, BP 148/92, SpO2 89% RA, afebrile. Appears tired and breathless at rest, sitting upright. Neck veins distended. Heart: regular, tachycardic, extra heart sound (S3) at apex. Lungs: crackles at both bases posteriorly. Legs: pitting edema bilaterally up to mid-shin.",
+        "diagnoses": [
+          {
+            "diagnosis": "Heart failure exacerbation",
+            "findings": "History of MI and weak heart, orthopnea, PND, weight gain, leg swelling, stopped furosemide; distended neck veins, S3, crackles, pitting edema."
+          },
+          {
+            "diagnosis": "Pneumonia",
+            "findings": "Cough and crackles with low oxygen, but no fever and cough is dry."
+          },
+          {
+            "diagnosis": "Heart attack",
+            "findings": "Prior MI and risk factors (diabetes, HTN, smoking), but no chest pain."
+          }
+        ]
+      },
+      "expect": {
+        "greet-by-name": 1,
+        "introduce-first-year": 1,
+        "comfort-privacy": 1,
+        "cc-open-question": 1,
+        "additional-concerns": 0,
+        "note-issues": 1,
+        "prioritize": 0,
+        "open-story": 1,
+        "second-open": 1,
+        "summarize-clarify": 1,
+        "emotional-context": 1,
+        "personal-context": 1,
+        "respond-emotion": 1,
+        "timeline": 1,
+        "hpi-onset": 1,
+        "hpi-duration": 1,
+        "hpi-quality": 1,
+        "hpi-quantification": 1,
+        "hpi-related": 1,
+        "hpi-setting": 1,
+        "hpi-transforming": 1,
+        "closed-ddx": 1,
+        "summarize-hpi": 1,
+        "signpost": 1,
+        "transition-pe": 1,
+        "share-assessment": 1,
+        "share-plan": 1,
+        "elicit-preferences": 1,
+        "teach-back": 1,
+        "expectancies": 1,
+        "pmh-conditions": 1,
+        "pmh-dates": 0,
+        "psh-surgeries": 1,
+        "psh-dates": 1,
+        "meds-names": 1,
+        "meds-doses": 0,
+        "meds-otc": 1,
+        "allergy-drug": 1,
+        "allergy-food": 1,
+        "allergy-reaction": 1,
+        "fh-parents-siblings": 1,
+        "sh-alcohol": 1,
+        "sh-smoking": 1,
+        "sh-drugs": 0,
+        "sh-occupation": 1,
+        "sh-lives-with": 1,
+        "sh-meaning": 1,
+        "sh-sexual": 1,
+        "sh-travel": 1,
+        "ros-general": 1,
+        "ros-heent": 0,
+        "ros-pulmonary": 1,
+        "ros-cardiac": 1,
+        "ros-gi": 1,
+        "ros-gu": 0,
+        "ros-musculoskeletal": 0,
+        "ros-neuro": 0,
+        "ros-skin": 0,
+        "ros-endocrine": 0,
+        "ros-psychiatric": 0
+      },
+      "borderline": [
+        "additional-concerns"
+      ]
+    },
+    {
+      "id": "t04-average",
+      "summary": "Reasonable structure with a signpost and plain-language impression, but no comfort check, agenda-setting, emotional context or summary; asks only 'how long' for the timeline; partial family history; vague plan, generic 'any questions?' and no safety-netting.",
+      "turns": [
+        {
+          "say": "Hi, Mr. Bennett? I'm Daniel Cho, I'm a first-year medical student."
+        },
+        {
+          "patient": "Hello."
+        },
+        {
+          "say": "Mind if I sit down?"
+        },
+        {
+          "patient": "Go ahead."
+        },
+        {
+          "say": "So what brings you in today?"
+        },
+        {
+          "patient": "I just can't catch my breath. It's been getting worse for a couple of weeks."
+        },
+        {
+          "say": "Okay. Can you tell me more about that?"
+        },
+        {
+          "patient": "I get out of breath with everything now. Even walking around the house."
+        },
+        {
+          "say": "How long has it been going on for?"
+        },
+        {
+          "patient": "About two weeks. It's got steadily worse. The last three days have been the worst."
+        },
+        {
+          "say": "When do you notice it most? Like, how far can you walk before you're out of breath?"
+        },
+        {
+          "patient": "Two weeks ago I could walk a few blocks. Now I get winded walking from the bedroom to the kitchen, or going up the 12 stairs at home."
+        },
+        {
+          "say": "What about at night, lying down?"
+        },
+        {
+          "patient": "I can't lie flat any more. I've been sleeping on three pillows, and last night I slept in my recliner."
+        },
+        {
+          "say": "Any swelling in your legs?"
+        },
+        {
+          "patient": "My ankles have been puffy for about a week, worse by the evening. My shoes are tight."
+        },
+        {
+          "say": "Any chest pain? Fever?"
+        },
+        {
+          "patient": "No chest pain or pressure. Not like the heart attack. No fevers or chills."
+        },
+        {
+          "say": "Any cough?"
+        },
+        {
+          "patient": "A dry tickly cough, mostly at night when I lie down. Nothing coming up."
+        },
+        {
+          "say": "Okay. Now I'm going to ask about your medical history. Do you have any medical problems?"
+        },
+        {
+          "patient": "I had a heart attack — they put a stent in. Since then they've said my heart pumps weakly. I also have high blood pressure, type 2 diabetes and high cholesterol."
+        },
+        {
+          "say": "Any surgeries?"
+        },
+        {
+          "patient": "The stent, and my appendix out."
+        },
+        {
+          "say": "What medications do you take?"
+        },
+        {
+          "patient": "Furosemide — the one I ran out of. Carvedilol, lisinopril, spironolactone, aspirin, atorvastatin and metformin."
+        },
+        {
+          "say": "Oh, you ran out of the furosemide? When was that?"
+        },
+        {
+          "patient": "I ran out of my water pill about ten days ago and didn't get it refilled — I hate being stuck near a bathroom when I'm out."
+        },
+        {
+          "say": "Any allergies?"
+        },
+        {
+          "patient": "Penicillin."
+        },
+        {
+          "say": "Does anyone in your family have heart problems? Like your parents?"
+        },
+        {
+          "patient": "My dad died of a heart attack at 62. My mom had a stroke and died at 80."
+        },
+        {
+          "say": "Do you smoke?"
+        },
+        {
+          "patient": "I smoked a pack a day for 30 years and quit after the heart attack in 2019."
+        },
+        {
+          "say": "Do you drink?"
+        },
+        {
+          "patient": "A beer or two on the weekend. Not more."
+        },
+        {
+          "say": "What do you do for work?"
+        },
+        {
+          "patient": "Retired. I drove city buses for 35 years."
+        },
+        {
+          "say": "Okay. Any problems with peeing, or with your stomach?"
+        },
+        {
+          "patient": "I'm up two or three times a night to pass water. My belly feels full and a bit sore on the right side, and I've not had much appetite."
+        },
+        {
+          "say": "Okay, thank you. I'm going to examine you now, if that's okay?"
+        },
+        {
+          "patient": "Sure."
+        },
+        {
+          "say": "Can you take some deep breaths for me?"
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Okay. So, I think it might be your heart. Like, your heart's not pumping well, and there's fluid building up, which is why you're short of breath and your legs are swollen."
+        },
+        {
+          "patient": "My heart again?"
+        },
+        {
+          "say": "Yeah, it could be. The doctor will come in and probably do some tests to check."
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Do you have any questions?"
+        },
+        {
+          "patient": "When can I go home?"
+        },
+        {
+          "say": "I'm not sure, the doctor will be able to tell you more about that. I'll go get them now. Thanks, Mr. Bennett."
+        }
+      ],
+      "pen": {
+        "history": "68 yo M with SOB x 2 weeks, getting worse, worst last 3 days. SOB walking from bedroom to kitchen, used to walk a few blocks. Can't lie flat, uses 3 pillows. Ankle swelling x 1 week. Dry cough at night. Ran out of furosemide 10 days ago. Denies chest pain and fever. PMH: heart attack w/ stent, weak heart, HTN, DM2, high cholesterol. PSH: stent, appendix removed. Meds: furosemide, carvedilol, lisinopril, spironolactone, aspirin, atorvastatin, metformin. Allergies: PCN. FH: father MI, mother stroke. SH: former smoker, 1-2 beers on weekends, retired bus driver.",
+        "exam": "HR 104, RR 24, BP 148/92, O2 sat 89%. Looks short of breath. Crackles at both lung bases. Ankles swollen.",
+        "diagnoses": [
+          {
+            "diagnosis": "Heart failure",
+            "findings": "SOB, orthopnea, ankle swelling, crackles, stopped water pill, history of weak heart."
+          },
+          {
+            "diagnosis": "Pneumonia",
+            "findings": "Cough, crackles, low O2."
+          }
+        ]
+      },
+      "expect": {
+        "greet-by-name": 1,
+        "introduce-first-year": 1,
+        "comfort-privacy": 0,
+        "cc-open-question": 1,
+        "additional-concerns": 0,
+        "note-issues": 0,
+        "prioritize": 0,
+        "open-story": 1,
+        "second-open": 0,
+        "summarize-clarify": 0,
+        "emotional-context": 0,
+        "personal-context": 0,
+        "respond-emotion": 0,
+        "timeline": 0,
+        "hpi-onset": 0,
+        "hpi-duration": 1,
+        "hpi-quality": 0,
+        "hpi-quantification": 1,
+        "hpi-related": 1,
+        "hpi-setting": 1,
+        "hpi-transforming": 0,
+        "closed-ddx": 1,
+        "summarize-hpi": 0,
+        "signpost": 1,
+        "transition-pe": 1,
+        "share-assessment": 1,
+        "share-plan": 1,
+        "elicit-preferences": 0,
+        "teach-back": 0,
+        "expectancies": 0,
+        "pmh-conditions": 1,
+        "pmh-dates": 0,
+        "psh-surgeries": 1,
+        "psh-dates": 0,
+        "meds-names": 1,
+        "meds-doses": 0,
+        "meds-otc": 0,
+        "allergy-drug": 1,
+        "allergy-food": 0,
+        "allergy-reaction": 0,
+        "fh-parents-siblings": 0,
+        "sh-alcohol": 1,
+        "sh-smoking": 1,
+        "sh-drugs": 0,
+        "sh-occupation": 1,
+        "sh-lives-with": 0,
+        "sh-meaning": 0,
+        "sh-sexual": 1,
+        "sh-travel": 0,
+        "ros-general": 1,
+        "ros-heent": 0,
+        "ros-pulmonary": 1,
+        "ros-cardiac": 1,
+        "ros-gi": 1,
+        "ros-gu": 1,
+        "ros-musculoskeletal": 0,
+        "ros-neuro": 0,
+        "ros-skin": 0,
+        "ros-endocrine": 0,
+        "ros-psychiatric": 0
+      },
+      "borderline": [
+        "timeline",
+        "share-plan",
+        "elicit-preferences",
+        "sh-travel"
+      ]
+    },
+    {
+      "id": "t05-average",
+      "summary": "Says 'medical student' without the year; patient raises only one concern and the student explicitly confirms nothing else; good OPQRST and teach-back, but no classic discriminating questions (chest pain, fever, calf, adherence), no surgical/family history, no signpost and no safety-netting.",
+      "turns": [
+        {
+          "say": "Hi, is it Mr. Bennett? Hi, I'm Sofia Alvarez, I'm a medical student."
+        },
+        {
+          "patient": "Hello there."
+        },
+        {
+          "say": "Is it okay if I sit here? And is now an okay time to ask you some questions?"
+        },
+        {
+          "patient": "Sure. Go ahead."
+        },
+        {
+          "say": "So what's going on today, what brought you in?"
+        },
+        {
+          "patient": "I just can't catch my breath. It's been getting worse for a couple of weeks."
+        },
+        {
+          "say": "Okay, and is there anything else you wanted to talk about today?"
+        },
+        {
+          "patient": "No. Just the breathing."
+        },
+        {
+          "say": "Okay, so just to check — the breathing's the main thing, and there's nothing else you want to make sure we get to today?"
+        },
+        {
+          "patient": "No, just that."
+        },
+        {
+          "say": "Okay. So tell me about your breathing."
+        },
+        {
+          "patient": "I get winded doing almost anything now. It just keeps getting worse."
+        },
+        {
+          "say": "How long has it been going on, and did it come on suddenly or gradually?"
+        },
+        {
+          "patient": "About two weeks. It came on gradually."
+        },
+        {
+          "say": "Has it been getting worse the whole time, or does it come and go?"
+        },
+        {
+          "patient": "It's got steadily worse. The last three days have been the worst."
+        },
+        {
+          "say": "What does it feel like, when you're short of breath?"
+        },
+        {
+          "patient": "Like I can't get a full breath in."
+        },
+        {
+          "say": "How far can you walk before you need to stop?"
+        },
+        {
+          "patient": "Two weeks ago I could walk a few blocks. Now I get winded walking from the bedroom to the kitchen, or going up the 12 stairs at home."
+        },
+        {
+          "say": "Is it worse at any particular time, like at night or when you're lying down?"
+        },
+        {
+          "patient": "I can't lie flat any more. I've been sleeping on three pillows, and last night I slept in my recliner. A couple of times this week I woke up gasping and had to sit on the edge of the bed."
+        },
+        {
+          "say": "Does anything make it better?"
+        },
+        {
+          "patient": "Sitting up helps."
+        },
+        {
+          "say": "Have you noticed any other symptoms along with it?"
+        },
+        {
+          "patient": "My ankles have been puffy for about a week. And I've got a dry tickly cough at night."
+        },
+        {
+          "say": "Is the cough bringing anything up?"
+        },
+        {
+          "patient": "Nothing coming up, and no blood."
+        },
+        {
+          "say": "Have you noticed your weight changing?"
+        },
+        {
+          "patient": "I've put on about 4 kilos — nine pounds — in the last two weeks, even though I'm not eating much."
+        },
+        {
+          "say": "How are you feeling about all of this?"
+        },
+        {
+          "patient": "I'm scared it's my heart again."
+        },
+        {
+          "say": "That must be really scary. I'm sorry you're going through this."
+        },
+        {
+          "patient": "Thanks."
+        },
+        {
+          "say": "So just to summarize, you've had about two weeks of breathing getting gradually worse, you can't lie flat, you've woken up at night gasping, your ankles are swollen and you've put on some weight. Is that right?"
+        },
+        {
+          "patient": "Yes."
+        },
+        {
+          "say": "Do you have any medical conditions, and when were you diagnosed?"
+        },
+        {
+          "patient": "I had a heart attack in 2019 — they put a stent in. Since then they've said my heart pumps weakly. I also have high blood pressure, type 2 diabetes and high cholesterol. The others for years now."
+        },
+        {
+          "say": "What medications do you take, and how much of each?"
+        },
+        {
+          "patient": "Furosemide 40 mg in the morning — the one I ran out of. Carvedilol 12.5 mg twice a day, lisinopril 10 mg once a day, spironolactone 25 mg, aspirin 81 mg, atorvastatin 80 mg at night, and metformin 1000 mg twice a day."
+        },
+        {
+          "say": "Any allergies to medications?"
+        },
+        {
+          "patient": "Penicillin."
+        },
+        {
+          "say": "What happened when you took it?"
+        },
+        {
+          "patient": "It gave me a rash all over as a kid."
+        },
+        {
+          "say": "Do you smoke? Drink alcohol? Use any drugs?"
+        },
+        {
+          "patient": "I smoked a pack a day for 30 years and quit after the heart attack in 2019. A beer or two on the weekend. Not more. No drugs, never."
+        },
+        {
+          "say": "Who do you live with?"
+        },
+        {
+          "patient": "With my wife, Carol. Our daughter lives ten minutes away."
+        },
+        {
+          "say": "Okay. I'd like to do a physical exam now, is that alright?"
+        },
+        {
+          "patient": "Yes."
+        },
+        {
+          "say": "I'm going to listen to your heart. Let me know if anything's uncomfortable."
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "So I think there's a good chance this is related to your heart. With your history, it may not be pumping strongly enough, so fluid is building up in your lungs, which makes it hard to breathe, and in your legs."
+        },
+        {
+          "patient": "That's what I was afraid of."
+        },
+        {
+          "say": "I know. The next step is that the doctor will come see you, and they'll probably order blood work and a chest x-ray. How does that sound?"
+        },
+        {
+          "patient": "Okay. Fine."
+        },
+        {
+          "say": "Can you tell me what's going to happen next, so I know I explained it okay?"
+        },
+        {
+          "patient": "The doctor will come, and they'll do blood work and an x-ray."
+        },
+        {
+          "say": "Perfect. Do you have any other questions?"
+        },
+        {
+          "patient": "No."
+        },
+        {
+          "say": "Great, thanks Mr. Bennett, I'll go find the doctor."
+        }
+      ],
+      "pen": {
+        "history": "68 year old male with 2 weeks of gradual onset, progressively worsening shortness of breath. Now short of breath walking from bedroom to kitchen or climbing 12 stairs. Orthopnea (3 pillows, slept in recliner) and waking up at night gasping. Ankle swelling for 1 week, dry cough at night with no sputum or blood, 4 kg weight gain. PMH: MI with stent 2019, weak heart pump, hypertension, type 2 diabetes, hypercholesterolemia. Meds: furosemide 40 mg (says he ran out), carvedilol 12.5 mg BID, lisinopril 10 mg, spironolactone 25 mg, aspirin 81 mg, atorvastatin 80 mg, metformin 1000 mg BID. Allergy: penicillin - rash. Social: quit smoking 2019 after 30 pack-years, 1-2 beers on weekends, no drugs, lives with wife.",
+        "exam": "Vitals: HR 104, RR 24, BP 148/92, SpO2 89% on RA. Sitting up, breathing fast. Heart: tachycardic, regular, extra sound at apex. Lungs: crackles at the bases bilaterally. Legs: swollen with pitting.",
+        "diagnoses": [
+          {
+            "diagnosis": "CHF exacerbation",
+            "findings": "History of MI and weak heart, orthopnea, PND, weight gain, ankle swelling, crackles, extra heart sound."
+          },
+          {
+            "diagnosis": "COPD exacerbation",
+            "findings": "30 pack-year smoking history, shortness of breath, cough."
+          }
+        ]
+      },
+      "expect": {
+        "greet-by-name": 1,
+        "introduce-first-year": 0,
+        "comfort-privacy": 1,
+        "cc-open-question": 1,
+        "additional-concerns": 1,
+        "note-issues": 0,
+        "prioritize": 1,
+        "open-story": 1,
+        "second-open": 0,
+        "summarize-clarify": 1,
+        "emotional-context": 1,
+        "personal-context": 0,
+        "respond-emotion": 1,
+        "timeline": 1,
+        "hpi-onset": 1,
+        "hpi-duration": 1,
+        "hpi-quality": 1,
+        "hpi-quantification": 1,
+        "hpi-related": 1,
+        "hpi-setting": 1,
+        "hpi-transforming": 1,
+        "closed-ddx": 0,
+        "summarize-hpi": 1,
+        "signpost": 0,
+        "transition-pe": 1,
+        "share-assessment": 1,
+        "share-plan": 1,
+        "elicit-preferences": 1,
+        "teach-back": 1,
+        "expectancies": 0,
+        "pmh-conditions": 1,
+        "pmh-dates": 1,
+        "psh-surgeries": 0,
+        "psh-dates": 0,
+        "meds-names": 1,
+        "meds-doses": 1,
+        "meds-otc": 0,
+        "allergy-drug": 1,
+        "allergy-food": 0,
+        "allergy-reaction": 1,
+        "fh-parents-siblings": 0,
+        "sh-alcohol": 1,
+        "sh-smoking": 1,
+        "sh-drugs": 1,
+        "sh-occupation": 0,
+        "sh-lives-with": 1,
+        "sh-meaning": 0,
+        "sh-sexual": 1,
+        "sh-travel": 0,
+        "ros-general": 1,
+        "ros-heent": 0,
+        "ros-pulmonary": 1,
+        "ros-cardiac": 0,
+        "ros-gi": 0,
+        "ros-gu": 0,
+        "ros-musculoskeletal": 0,
+        "ros-neuro": 0,
+        "ros-skin": 0,
+        "ros-endocrine": 0,
+        "ros-psychiatric": 0
+      },
+      "half": {
+        "introduce-first-year": true
+      },
+      "borderline": [
+        "note-issues",
+        "second-open",
+        "closed-ddx",
+        "ros-cardiac",
+        "sh-travel"
+      ]
+    },
+    {
+      "id": "t06-average",
+      "summary": "Echoes the patient, explores daily-life impact with empathy and covers social history well, but no agenda-setting, summarises without checking accuracy, starts the exam without asking permission and checks understanding only with 'Does that make sense?'.",
+      "turns": [
+        {
+          "say": "Hello Mr. Bennett, my name's Ethan Brooks and I'm a first-year medical student. I'm going to ask you some questions today."
+        },
+        {
+          "patient": "Okay. Hello."
+        },
+        {
+          "say": "So what brought you in today?"
+        },
+        {
+          "patient": "I just can't catch my breath. It's been getting worse for a couple of weeks."
+        },
+        {
+          "say": "Okay, tell me more about that."
+        },
+        {
+          "patient": "I get winded doing anything. Even getting dressed."
+        },
+        {
+          "say": "Even getting dressed?"
+        },
+        {
+          "patient": "Yes. And I can't lie down flat to sleep any more."
+        },
+        {
+          "say": "When did this start, and how has it changed since then?"
+        },
+        {
+          "patient": "About two weeks ago. It's got steadily worse. The last three days have been the worst."
+        },
+        {
+          "say": "You said you can't lie flat — how many pillows do you use?"
+        },
+        {
+          "patient": "I've been sleeping on three pillows, and last night I slept in my recliner."
+        },
+        {
+          "say": "Do you ever wake up in the night short of breath?"
+        },
+        {
+          "patient": "Yes, a couple of times this week I woke up gasping and had to sit on the edge of the bed for a few minutes."
+        },
+        {
+          "say": "How far can you walk?"
+        },
+        {
+          "patient": "Two weeks ago I could walk a few blocks. Now I get winded walking from the bedroom to the kitchen, or going up the 12 stairs at home."
+        },
+        {
+          "say": "Any swelling in your legs? Any cough?"
+        },
+        {
+          "patient": "My ankles have been puffy for about a week, worse by the evening. My shoes are tight. A dry tickly cough, mostly at night when I lie down. Nothing coming up."
+        },
+        {
+          "say": "Any chest pain?"
+        },
+        {
+          "patient": "No chest pain or pressure. Not like the heart attack."
+        },
+        {
+          "say": "Have you been taking all your medicines?"
+        },
+        {
+          "patient": "I ran out of my water pill about ten days ago and didn't get it refilled — I hate being stuck near a bathroom when I'm out."
+        },
+        {
+          "say": "Okay. How's this been affecting your daily life?"
+        },
+        {
+          "patient": "I can't do much. My wife's doing everything. I haven't been fishing in weeks."
+        },
+        {
+          "say": "That sounds really tough."
+        },
+        {
+          "patient": "It is."
+        },
+        {
+          "say": "Okay, so you've had two weeks of shortness of breath that's getting worse, you can't lie flat, you wake up at night, your ankles are swollen, and you ran out of your water pill. Now some questions about your past medical history. What medical conditions do you have?"
+        },
+        {
+          "patient": "I had a heart attack — they put a stent in. Since then they've said my heart pumps weakly. I also have high blood pressure, type 2 diabetes and high cholesterol."
+        },
+        {
+          "say": "Any surgeries? When were they?"
+        },
+        {
+          "patient": "The stent in 2019 through my wrist, and my appendix out when I was 20."
+        },
+        {
+          "say": "What medications do you take and how often? Anything over the counter?"
+        },
+        {
+          "patient": "Furosemide 40 mg in the morning — the one I ran out of. Carvedilol 12.5 mg twice a day, lisinopril 10 mg once a day, spironolactone 25 mg, aspirin 81 mg, atorvastatin 80 mg at night, and metformin 1000 mg twice a day. No over-the-counter stuff except some ibuprofen for my knee last week."
+        },
+        {
+          "say": "Any allergies to medications or food?"
+        },
+        {
+          "patient": "Penicillin. No food allergies."
+        },
+        {
+          "say": "Does anyone in your family have health problems — your parents, brothers or sisters?"
+        },
+        {
+          "patient": "My dad died of a heart attack at 62. My mom had a stroke and died at 80. I have one brother, he's 71 and has diabetes."
+        },
+        {
+          "say": "Do you smoke, drink or use drugs?"
+        },
+        {
+          "patient": "I smoked a pack a day for 30 years and quit after the heart attack in 2019. A beer or two on the weekend. Not more. No drugs, never."
+        },
+        {
+          "say": "Are you working? Who do you live with?"
+        },
+        {
+          "patient": "Retired. I drove city buses for 35 years. With my wife, Carol. Our daughter lives ten minutes away."
+        },
+        {
+          "say": "What do you like to do for fun? Any recent flights or long car trips?"
+        },
+        {
+          "patient": "My grandkids, and fishing at the lake with my brother. No trips. Haven't been further than the grocery store in a month."
+        },
+        {
+          "say": "Any weight changes? Nausea? Problems peeing? Dizziness?"
+        },
+        {
+          "patient": "I've put on about 4 kilos — nine pounds — in the last two weeks. My belly feels full and I've not had much appetite. I'm up two or three times a night to pass water. No dizziness."
+        },
+        {
+          "say": "Okay. Now I'm going to examine you."
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Take a deep breath in... and out."
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Alright. So I think your heart isn't pumping as well as it should, and fluid's backing up into your lungs and your legs. Stopping the water pill probably made it worse."
+        },
+        {
+          "patient": "Right."
+        },
+        {
+          "say": "The doctor will come in to see you, and they'll probably get a chest x-ray and some blood tests. Does that make sense?"
+        },
+        {
+          "patient": "Yes."
+        },
+        {
+          "say": "Is there anything about that you're worried about?"
+        },
+        {
+          "patient": "I really want to be home for my granddaughter's birthday on Saturday."
+        },
+        {
+          "say": "Okay, I'll let the doctor know so they can talk to you about it. I'll be back with the doctor in a few minutes — if you feel worse before then, let the nurse know right away."
+        },
+        {
+          "patient": "Okay. Thanks."
+        },
+        {
+          "say": "Any other questions for me?"
+        },
+        {
+          "patient": "No."
+        },
+        {
+          "say": "Okay, thank you, Mr. Bennett."
+        }
+      ],
+      "pen": {
+        "history": "68M c/o SOB x2 weeks, progressively worse. Orthopnea (3 pillows), PND, DOE (bedroom to kitchen). Bilateral ankle edema x1 wk, dry cough at night, 4 kg wt gain, decreased appetite, nocturia. Ran out of furosemide 10 days ago. No CP, no dizziness. PMH: MI with stent, weak heart, HTN, DM2, HLD. PSH: stent 2019, appendectomy age 20. Meds: furosemide 40 (not taking), carvedilol 12.5 BID, lisinopril 10, spironolactone 25, ASA 81, atorvastatin 80, metformin 1000 BID, ibuprofen recently. NKFA, PCN allergy. FH: dad MI at 62, mom stroke at 80, brother DM. SH: ex-smoker 30 pk-yr, 1-2 beers/weekend, no drugs, retired, lives with wife, no travel.",
+        "exam": "T 36.8, HR 104, RR 24, BP 148/92, SpO2 89% RA. Crackles bilateral lung bases. Regular rhythm, no murmurs. 3+ pitting edema both legs.",
+        "diagnoses": [
+          {
+            "diagnosis": "Heart failure exacerbation",
+            "findings": "Orthopnea, PND, edema, weight gain, crackles, ran out of furosemide, prior MI."
+          },
+          {
+            "diagnosis": "Pulmonary embolism",
+            "findings": "Tachycardia, hypoxia, shortness of breath."
+          },
+          {
+            "diagnosis": "Pneumonia",
+            "findings": "Cough, crackles."
+          }
+        ]
+      },
+      "expect": {
+        "greet-by-name": 1,
+        "introduce-first-year": 1,
+        "comfort-privacy": 0,
+        "cc-open-question": 1,
+        "additional-concerns": 0,
+        "note-issues": 0,
+        "prioritize": 0,
+        "open-story": 1,
+        "second-open": 1,
+        "summarize-clarify": 1,
+        "emotional-context": 0,
+        "personal-context": 1,
+        "respond-emotion": 1,
+        "timeline": 1,
+        "hpi-onset": 0,
+        "hpi-duration": 1,
+        "hpi-quality": 0,
+        "hpi-quantification": 1,
+        "hpi-related": 1,
+        "hpi-setting": 1,
+        "hpi-transforming": 0,
+        "closed-ddx": 1,
+        "summarize-hpi": 0,
+        "signpost": 1,
+        "transition-pe": 0,
+        "share-assessment": 1,
+        "share-plan": 1,
+        "elicit-preferences": 1,
+        "teach-back": 0,
+        "expectancies": 1,
+        "pmh-conditions": 1,
+        "pmh-dates": 0,
+        "psh-surgeries": 1,
+        "psh-dates": 1,
+        "meds-names": 1,
+        "meds-doses": 1,
+        "meds-otc": 1,
+        "allergy-drug": 1,
+        "allergy-food": 1,
+        "allergy-reaction": 0,
+        "fh-parents-siblings": 1,
+        "sh-alcohol": 1,
+        "sh-smoking": 1,
+        "sh-drugs": 1,
+        "sh-occupation": 1,
+        "sh-lives-with": 1,
+        "sh-meaning": 1,
+        "sh-sexual": 1,
+        "sh-travel": 1,
+        "ros-general": 1,
+        "ros-heent": 0,
+        "ros-pulmonary": 1,
+        "ros-cardiac": 1,
+        "ros-gi": 1,
+        "ros-gu": 1,
+        "ros-musculoskeletal": 0,
+        "ros-neuro": 1,
+        "ros-skin": 0,
+        "ros-endocrine": 0,
+        "ros-psychiatric": 0
+      },
+      "borderline": [
+        "transition-pe",
+        "teach-back"
+      ]
+    },
+    {
+      "id": "t07-average",
+      "summary": "Solid OPQRST HPI and thorough social history and ROS, but lets the second concern drop, ignores the patient's emotional cue, never summarises, asks only about heart disease in the family, and defers the plan and the patient's question about going home.",
+      "turns": [
+        {
+          "say": "Hi Mr. Bennett, I'm Hannah Kim, I'm a first year med student."
+        },
+        {
+          "patient": "Hello, Hannah."
+        },
+        {
+          "say": "Are you comfortable sitting like that? I'll just sit down here."
+        },
+        {
+          "patient": "I'm fine sitting up."
+        },
+        {
+          "say": "What brings you in today?"
+        },
+        {
+          "patient": "I just can't catch my breath. It's been getting worse for a couple of weeks."
+        },
+        {
+          "say": "Is there anything else going on that you wanted to mention?"
+        },
+        {
+          "patient": "My ankles have been puffy too."
+        },
+        {
+          "say": "Okay. Tell me about the shortness of breath."
+        },
+        {
+          "patient": "I get winded doing anything now. I'm worried it's my heart again."
+        },
+        {
+          "say": "When did it start? Did it come on suddenly or slowly, and has it changed since?"
+        },
+        {
+          "patient": "It came on gradually about two weeks ago and has got steadily worse. The last three days have been the worst."
+        },
+        {
+          "say": "What does it feel like?"
+        },
+        {
+          "patient": "Like I can't get a full breath in."
+        },
+        {
+          "say": "How far can you walk before you get short of breath?"
+        },
+        {
+          "patient": "Two weeks ago I could walk a few blocks. Now I get winded walking from the bedroom to the kitchen, or going up the 12 stairs at home."
+        },
+        {
+          "say": "Is it worse when you're lying down, or at night?"
+        },
+        {
+          "patient": "I can't lie flat any more. I've been sleeping on three pillows, and last night I slept in my recliner. A couple of times this week I woke up gasping."
+        },
+        {
+          "say": "What makes it better or worse?"
+        },
+        {
+          "patient": "Sitting up helps. Moving around makes it worse."
+        },
+        {
+          "say": "Any other symptoms with it, like cough or wheezing?"
+        },
+        {
+          "patient": "A dry tickly cough, mostly at night when I lie down. Nothing coming up. No wheezing."
+        },
+        {
+          "say": "Have you had any fevers? Any pain in your calves?"
+        },
+        {
+          "patient": "No fevers or chills. No, both legs are the same. No pain in my calves."
+        },
+        {
+          "say": "Any chest pain, or your heart racing?"
+        },
+        {
+          "patient": "No chest pain or pressure. No racing heart that I've noticed."
+        },
+        {
+          "say": "Okay. I'm going to ask a few more questions about your health in general. Any medical conditions?"
+        },
+        {
+          "patient": "I had a heart attack — they put a stent in. Since then they've said my heart pumps weakly. I also have high blood pressure, type 2 diabetes and high cholesterol."
+        },
+        {
+          "say": "When did you have the heart attack?"
+        },
+        {
+          "patient": "2019."
+        },
+        {
+          "say": "Any surgeries?"
+        },
+        {
+          "patient": "The stent, through my wrist, and my appendix out."
+        },
+        {
+          "say": "What medications are you on?"
+        },
+        {
+          "patient": "Furosemide — the one I ran out of. Carvedilol, lisinopril, spironolactone, aspirin, atorvastatin and metformin."
+        },
+        {
+          "say": "Any allergies?"
+        },
+        {
+          "patient": "Penicillin."
+        },
+        {
+          "say": "What happens when you take it?"
+        },
+        {
+          "patient": "It gave me a rash all over as a kid."
+        },
+        {
+          "say": "Any heart disease in your family?"
+        },
+        {
+          "patient": "My dad died of a heart attack at 62."
+        },
+        {
+          "say": "Do you smoke? Drink? Any recreational drugs?"
+        },
+        {
+          "patient": "I smoked a pack a day for 30 years and quit after the heart attack in 2019. A beer or two on the weekend. Not more. No drugs, never."
+        },
+        {
+          "say": "What do you do for work, and who do you live with?"
+        },
+        {
+          "patient": "Retired. I drove city buses for 35 years. With my wife, Carol. Our daughter lives ten minutes away."
+        },
+        {
+          "say": "Are you sexually active? Any recent travel?"
+        },
+        {
+          "patient": "Married forty-five years, just my wife. Not much going on lately with how tired I've been. No trips. Haven't been further than the grocery store in a month."
+        },
+        {
+          "say": "What do you like to do for fun?"
+        },
+        {
+          "patient": "My grandkids, and fishing at the lake with my brother."
+        },
+        {
+          "say": "Okay, quick review of systems. Have you been feeling tired? Any headaches? Any rashes? Joint pain? How's your mood?"
+        },
+        {
+          "patient": "I'm wiped out all the time. No headaches. No rashes. Just my knee last week. I'm a bit fed up, but not depressed."
+        },
+        {
+          "say": "Okay, thanks. Next I'd like to do a physical exam, is that okay?"
+        },
+        {
+          "patient": "Go ahead."
+        },
+        {
+          "say": "Can you lean forward for me? Okay, deep breaths."
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Okay. So I think the problem might be that your heart isn't pumping strongly enough, so fluid is building up in your lungs."
+        },
+        {
+          "patient": "What happens now?"
+        },
+        {
+          "say": "Um, I'm not really sure what the next steps are. The doctor will go over all of that with you."
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Any other questions?"
+        },
+        {
+          "patient": "When can I go home?"
+        },
+        {
+          "say": "I'm not sure, sorry. The doctor will be able to tell you. Thank you!"
+        }
+      ],
+      "pen": {
+        "history": "68M presents with SOB for 2 weeks, gradual onset and progressively worsening, worst over the past 3 days. Feels like he can't get a full breath. DOE walking from bedroom to kitchen or 12 stairs (baseline few blocks). Orthopnea - 3 pillows, slept in recliner; PND this week. Better sitting up, worse with exertion. Dry cough at night, ankle swelling, fatigue. Denies fever, calf pain, chest pain, palpitations, wheeze, headache, rash. PMH: MI 2019 with stent, weak heart, HTN, T2DM, high cholesterol. PSH: stent, appendectomy. Meds: furosemide, carvedilol, lisinopril, spironolactone, aspirin, atorvastatin, metformin. Allergy: PCN (rash). FH: father died of MI at 62. SH: former smoker 30 yrs, quit 2019, 1-2 beers/weekend, no drugs, retired bus driver, lives with wife, monogamous, no travel.",
+        "exam": "Vitals: HR 104, RR 24, BP 148/92, SpO2 89% RA. Patient sitting upright, mild respiratory distress. JVP elevated. S3 present at apex. Fine crackles at both bases. Bilateral pitting edema.",
+        "diagnoses": [
+          {
+            "diagnosis": "Congestive heart failure exacerbation",
+            "findings": "Orthopnea, PND, DOE, edema, prior MI with weak heart; JVP elevated, S3, crackles."
+          },
+          {
+            "diagnosis": "Pneumonia",
+            "findings": "Cough and crackles; no fever."
+          },
+          {
+            "diagnosis": "Pulmonary embolism",
+            "findings": "Tachycardia and hypoxia; no calf pain."
+          }
+        ]
+      },
+      "expect": {
+        "greet-by-name": 1,
+        "introduce-first-year": 1,
+        "comfort-privacy": 1,
+        "cc-open-question": 1,
+        "additional-concerns": 1,
+        "note-issues": 0,
+        "prioritize": 0,
+        "open-story": 1,
+        "second-open": 0,
+        "summarize-clarify": 0,
+        "emotional-context": 0,
+        "personal-context": 0,
+        "respond-emotion": 0,
+        "timeline": 1,
+        "hpi-onset": 1,
+        "hpi-duration": 1,
+        "hpi-quality": 1,
+        "hpi-quantification": 1,
+        "hpi-related": 1,
+        "hpi-setting": 1,
+        "hpi-transforming": 1,
+        "closed-ddx": 1,
+        "summarize-hpi": 0,
+        "signpost": 1,
+        "transition-pe": 1,
+        "share-assessment": 1,
+        "share-plan": 0,
+        "elicit-preferences": 0,
+        "teach-back": 0,
+        "expectancies": 0,
+        "pmh-conditions": 1,
+        "pmh-dates": 1,
+        "psh-surgeries": 1,
+        "psh-dates": 0,
+        "meds-names": 1,
+        "meds-doses": 0,
+        "meds-otc": 0,
+        "allergy-drug": 1,
+        "allergy-food": 0,
+        "allergy-reaction": 1,
+        "fh-parents-siblings": 0,
+        "sh-alcohol": 1,
+        "sh-smoking": 1,
+        "sh-drugs": 1,
+        "sh-occupation": 1,
+        "sh-lives-with": 1,
+        "sh-meaning": 1,
+        "sh-sexual": 1,
+        "sh-travel": 1,
+        "ros-general": 1,
+        "ros-heent": 1,
+        "ros-pulmonary": 1,
+        "ros-cardiac": 1,
+        "ros-gi": 0,
+        "ros-gu": 0,
+        "ros-musculoskeletal": 1,
+        "ros-neuro": 0,
+        "ros-skin": 1,
+        "ros-endocrine": 0,
+        "ros-psychiatric": 1
+      },
+      "borderline": [
+        "elicit-preferences"
+      ]
+    },
+    {
+      "id": "t08-weak",
+      "summary": "Rapid-fire one-word checklist questions; says only 'one of the students'; no comfort check, open story, emotional or personal context; starts the exam without asking and defers the impression entirely ('I'm just a student').",
+      "turns": [
+        {
+          "say": "Hi Mr. Bennett, I'm Tyler, one of the students. What's going on today?"
+        },
+        {
+          "patient": "I just can't catch my breath. It's been getting worse for a couple of weeks."
+        },
+        {
+          "say": "Okay. How long?"
+        },
+        {
+          "patient": "About two weeks."
+        },
+        {
+          "say": "Any chest pain?"
+        },
+        {
+          "patient": "No chest pain or pressure."
+        },
+        {
+          "say": "Fever?"
+        },
+        {
+          "patient": "No fevers or chills."
+        },
+        {
+          "say": "Cough?"
+        },
+        {
+          "patient": "A dry tickly cough, mostly at night when I lie down. Nothing coming up."
+        },
+        {
+          "say": "Okay. Medical problems?"
+        },
+        {
+          "patient": "I had a heart attack — they put a stent in. Since then they've said my heart pumps weakly. I also have high blood pressure, type 2 diabetes and high cholesterol."
+        },
+        {
+          "say": "Medications?"
+        },
+        {
+          "patient": "Furosemide — the one I ran out of. Carvedilol, lisinopril, spironolactone, aspirin, atorvastatin and metformin."
+        },
+        {
+          "say": "Okay. Allergies?"
+        },
+        {
+          "patient": "Penicillin."
+        },
+        {
+          "say": "Do you smoke?"
+        },
+        {
+          "patient": "I smoked a pack a day for 30 years and quit after the heart attack in 2019."
+        },
+        {
+          "say": "Alcohol?"
+        },
+        {
+          "patient": "A beer or two on the weekend."
+        },
+        {
+          "say": "Family history?"
+        },
+        {
+          "patient": "My dad had a heart attack."
+        },
+        {
+          "say": "Any swelling in your legs?"
+        },
+        {
+          "patient": "My ankles have been puffy for about a week, worse by the evening. My shoes are tight."
+        },
+        {
+          "say": "Can you lie flat?"
+        },
+        {
+          "patient": "I can't lie flat any more. I've been sleeping on three pillows, and last night I slept in my recliner."
+        },
+        {
+          "say": "Okay. I'm gonna listen to your lungs."
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "And your heart."
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Can you sit forward?"
+        },
+        {
+          "patient": "Alright."
+        },
+        {
+          "say": "Okay, I'm done. The doctor will be in soon to talk to you about everything."
+        },
+        {
+          "patient": "Do you know what's wrong?"
+        },
+        {
+          "say": "I'm just a student, so I can't really say. The doctor will explain. Thanks."
+        }
+      ],
+      "pen": {
+        "history": "Pt is a 68 yo M c/o SOB x 2 wks. No CP. No fever. Dry cough. Leg swelling. Can't lie flat, 3 pillows. Hx MI w/ stent, HTN, DM, high cholesterol. Meds: furosemide, carvedilol, lisinopril, spironolactone, ASA, atorvastatin, metformin. Allergic to PCN. Ex-smoker. Drinks on weekends. Dad had MI.",
+        "exam": "HR 104, RR 24, BP 148/92, SpO2 89%. Lungs: crackles. Heart: regular.",
+        "diagnoses": [
+          {
+            "diagnosis": "CHF",
+            "findings": "SOB, leg swelling, can't lie flat, crackles, hx MI."
+          },
+          {
+            "diagnosis": "COPD",
+            "findings": "Ex-smoker, SOB, cough."
+          }
+        ]
+      },
+      "expect": {
+        "greet-by-name": 1,
+        "introduce-first-year": 0,
+        "comfort-privacy": 0,
+        "cc-open-question": 1,
+        "additional-concerns": 0,
+        "note-issues": 0,
+        "prioritize": 0,
+        "open-story": 0,
+        "second-open": 0,
+        "summarize-clarify": 0,
+        "emotional-context": 0,
+        "personal-context": 0,
+        "respond-emotion": 0,
+        "timeline": 0,
+        "hpi-onset": 0,
+        "hpi-duration": 1,
+        "hpi-quality": 0,
+        "hpi-quantification": 0,
+        "hpi-related": 1,
+        "hpi-setting": 1,
+        "hpi-transforming": 0,
+        "closed-ddx": 1,
+        "summarize-hpi": 0,
+        "signpost": 0,
+        "transition-pe": 0,
+        "share-assessment": 0,
+        "share-plan": 0,
+        "elicit-preferences": 0,
+        "teach-back": 0,
+        "expectancies": 0,
+        "pmh-conditions": 1,
+        "pmh-dates": 0,
+        "psh-surgeries": 0,
+        "psh-dates": 0,
+        "meds-names": 1,
+        "meds-doses": 0,
+        "meds-otc": 0,
+        "allergy-drug": 1,
+        "allergy-food": 0,
+        "allergy-reaction": 0,
+        "fh-parents-siblings": 0,
+        "sh-alcohol": 1,
+        "sh-smoking": 1,
+        "sh-drugs": 0,
+        "sh-occupation": 0,
+        "sh-lives-with": 0,
+        "sh-meaning": 0,
+        "sh-sexual": 1,
+        "sh-travel": 0,
+        "ros-general": 1,
+        "ros-heent": 0,
+        "ros-pulmonary": 1,
+        "ros-cardiac": 1,
+        "ros-gi": 0,
+        "ros-gu": 0,
+        "ros-musculoskeletal": 0,
+        "ros-neuro": 0,
+        "ros-skin": 0,
+        "ros-endocrine": 0,
+        "ros-psychiatric": 0
+      },
+      "borderline": [
+        "transition-pe",
+        "share-plan",
+        "sh-travel"
+      ]
+    },
+    {
+      "id": "t09-weak",
+      "summary": "Greets without the patient's name and says 'medical student' without the year; opens with a closed question; jumps between topics, asks about heart problems instead of medical conditions in general, asks no associated symptoms, and shares a hedged, incorrect impression (infection) with a vague plan.",
+      "turns": [
+        {
+          "say": "Hi! How are you? I'm Megan, I'm a medical student."
+        },
+        {
+          "patient": "Not great. Hello."
+        },
+        {
+          "say": "Aw, sorry. So I see here you're short of breath?"
+        },
+        {
+          "patient": "Yes. I just can't catch my breath. It's been getting worse for a couple of weeks."
+        },
+        {
+          "say": "Oh no. Tell me about it."
+        },
+        {
+          "patient": "I get winded doing anything. Walking to the kitchen, even."
+        },
+        {
+          "say": "Is it there all the time, or just when you're walking around?"
+        },
+        {
+          "patient": "Mostly when I'm moving around."
+        },
+        {
+          "say": "Do you have any allergies?"
+        },
+        {
+          "patient": "Penicillin."
+        },
+        {
+          "say": "Okay. And do you take any medicines?"
+        },
+        {
+          "patient": "Furosemide — the one I ran out of. Carvedilol, lisinopril, spironolactone, aspirin, atorvastatin and metformin."
+        },
+        {
+          "say": "Wow, that's a lot. Have you had heart problems before?"
+        },
+        {
+          "patient": "I had a heart attack — they put a stent in. Since then they've said my heart pumps weakly."
+        },
+        {
+          "say": "Okay. Do you smoke?"
+        },
+        {
+          "patient": "I smoked a pack a day for 30 years and quit after the heart attack in 2019."
+        },
+        {
+          "say": "Good for you for quitting! Do you drink?"
+        },
+        {
+          "patient": "A beer or two on the weekend. Not more."
+        },
+        {
+          "say": "What do you do for work?"
+        },
+        {
+          "patient": "Retired. I drove city buses for 35 years."
+        },
+        {
+          "say": "Oh cool. Do you live alone?"
+        },
+        {
+          "patient": "No. With my wife, Carol. Our daughter lives ten minutes away."
+        },
+        {
+          "say": "Are you sleeping okay?"
+        },
+        {
+          "patient": "Not really. I can't lie flat any more. I've been sleeping on three pillows, and last night I slept in my recliner."
+        },
+        {
+          "say": "Okay. Is it okay if I examine you now?"
+        },
+        {
+          "patient": "Sure."
+        },
+        {
+          "say": "I'm going to listen to your lungs. Breathe in and out."
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Can you sit forward a bit?"
+        },
+        {
+          "patient": "Alright."
+        },
+        {
+          "say": "Okay. So I think it might be your lungs, like maybe an infection or something? But I'm not totally sure."
+        },
+        {
+          "patient": "An infection? I haven't had a fever."
+        },
+        {
+          "say": "Yeah, I'm not sure. They'll probably do a chest x-ray to look at your lungs, and the doctor will figure it out."
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Okay, thanks so much! Bye!"
+        }
+      ],
+      "pen": {
+        "history": "Patient is short of breath, worse with walking around. Can't lie flat, sleeps on 3 pillows. History of heart attack with stent and weak heart. Takes furosemide, carvedilol, lisinopril, spironolactone, aspirin, atorvastatin, metformin. Allergic to penicillin. Former smoker, drinks a beer or two on weekends. Retired bus driver, lives with wife and daughter nearby.",
+        "exam": "Patient looks short of breath. HR 104, O2 89%. Lungs: crackles at the bottom of both lungs.",
+        "diagnoses": [
+          {
+            "diagnosis": "Pneumonia",
+            "findings": "Short of breath, crackles in lungs, low oxygen."
+          },
+          {
+            "diagnosis": "Heart failure",
+            "findings": "History of weak heart, can't lie flat."
+          },
+          {
+            "diagnosis": "Heart attack",
+            "findings": "History of heart attack."
+          }
+        ]
+      },
+      "expect": {
+        "greet-by-name": 0,
+        "introduce-first-year": 0,
+        "comfort-privacy": 0,
+        "cc-open-question": 0,
+        "additional-concerns": 0,
+        "note-issues": 0,
+        "prioritize": 0,
+        "open-story": 1,
+        "second-open": 0,
+        "summarize-clarify": 0,
+        "emotional-context": 0,
+        "personal-context": 0,
+        "respond-emotion": 0,
+        "timeline": 0,
+        "hpi-onset": 0,
+        "hpi-duration": 0,
+        "hpi-quality": 0,
+        "hpi-quantification": 0,
+        "hpi-related": 0,
+        "hpi-setting": 1,
+        "hpi-transforming": 0,
+        "closed-ddx": 0,
+        "summarize-hpi": 0,
+        "signpost": 0,
+        "transition-pe": 1,
+        "share-assessment": 1,
+        "share-plan": 1,
+        "elicit-preferences": 0,
+        "teach-back": 0,
+        "expectancies": 0,
+        "pmh-conditions": 0,
+        "pmh-dates": 0,
+        "psh-surgeries": 0,
+        "psh-dates": 0,
+        "meds-names": 1,
+        "meds-doses": 0,
+        "meds-otc": 0,
+        "allergy-drug": 1,
+        "allergy-food": 0,
+        "allergy-reaction": 0,
+        "fh-parents-siblings": 0,
+        "sh-alcohol": 1,
+        "sh-smoking": 1,
+        "sh-drugs": 0,
+        "sh-occupation": 1,
+        "sh-lives-with": 1,
+        "sh-meaning": 0,
+        "sh-sexual": 1,
+        "sh-travel": 0,
+        "ros-general": 0,
+        "ros-heent": 0,
+        "ros-pulmonary": 0,
+        "ros-cardiac": 0,
+        "ros-gi": 0,
+        "ros-gu": 0,
+        "ros-musculoskeletal": 0,
+        "ros-neuro": 0,
+        "ros-skin": 0,
+        "ros-endocrine": 0,
+        "ros-psychiatric": 0
+      },
+      "half": {
+        "introduce-first-year": true
+      },
+      "borderline": [
+        "respond-emotion",
+        "share-assessment",
+        "pmh-conditions",
+        "sh-travel",
+        "ros-pulmonary"
+      ]
+    },
+    {
+      "id": "t10-weak",
+      "summary": "Announces 'a list of questions' and runs a mechanical full review of systems straight after the chief concern; almost no HPI, no medications or social history, starts the exam without permission and runs out of time before sharing anything.",
+      "turns": [
+        {
+          "say": "Hello, Mr. Bennett. I'm Kevin Patel, a first-year medical student."
+        },
+        {
+          "patient": "Hello."
+        },
+        {
+          "say": "What brings you in today?"
+        },
+        {
+          "patient": "I just can't catch my breath. It's been getting worse for a couple of weeks."
+        },
+        {
+          "say": "Okay. I'm going to go through a list of questions. Any fevers, chills, or weight changes?"
+        },
+        {
+          "patient": "No fevers or chills. I've put on about 4 kilos — nine pounds — in the last two weeks."
+        },
+        {
+          "say": "Any headaches, vision changes, or sore throat?"
+        },
+        {
+          "patient": "No, nothing like that."
+        },
+        {
+          "say": "Cough, wheezing?"
+        },
+        {
+          "patient": "A dry tickly cough, mostly at night when I lie down. No wheezing."
+        },
+        {
+          "say": "Chest pain, palpitations?"
+        },
+        {
+          "patient": "No chest pain or pressure. No racing heart that I've noticed."
+        },
+        {
+          "say": "Nausea, vomiting, diarrhea, constipation?"
+        },
+        {
+          "patient": "My belly feels full and a bit sore on the right side, and I've not had much appetite."
+        },
+        {
+          "say": "Any burning when you pee, or blood in your urine?"
+        },
+        {
+          "patient": "No burning or blood in the urine."
+        },
+        {
+          "say": "Joint pain, muscle aches?"
+        },
+        {
+          "patient": "Just my knee last week."
+        },
+        {
+          "say": "Numbness, tingling, weakness?"
+        },
+        {
+          "patient": "No weakness, numbness or trouble speaking."
+        },
+        {
+          "say": "Rashes?"
+        },
+        {
+          "patient": "No rashes."
+        },
+        {
+          "say": "Feeling too hot or too cold, or really thirsty?"
+        },
+        {
+          "patient": "No, nothing like that."
+        },
+        {
+          "say": "Depression, anxiety?"
+        },
+        {
+          "patient": "I'm a bit fed up, but not depressed."
+        },
+        {
+          "say": "Okay. Past medical history?"
+        },
+        {
+          "patient": "I had a heart attack — they put a stent in. Since then they've said my heart pumps weakly. I also have high blood pressure, type 2 diabetes and high cholesterol."
+        },
+        {
+          "say": "Okay. Any allergies?"
+        },
+        {
+          "patient": "Penicillin."
+        },
+        {
+          "say": "Okay. Um, how long has the breathing been bad?"
+        },
+        {
+          "patient": "About two weeks."
+        },
+        {
+          "say": "Okay. I'm going to examine you now."
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Breathe in. Breathe out."
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Okay, I think I'm out of time, sorry. Thanks, Mr. Bennett!"
+        }
+      ],
+      "pen": {
+        "history": "68M with SOB x 2 weeks. ROS: + 4 kg weight gain, + dry cough at night, + abdominal fullness/poor appetite, + R knee pain. Denies fever, chills, HA, vision changes, sore throat, wheeze, CP, palpitations, dysuria, hematuria, numbness, weakness, rash, heat/cold intolerance, polydipsia, depression. PMH: MI with stent, weak heart, HTN, DM2, hyperlipidemia. Allergies: PCN.",
+        "exam": "HR 104, RR 24, BP 148/92, SpO2 89% RA. Lungs: crackles bilaterally.",
+        "diagnoses": [
+          {
+            "diagnosis": "CHF exacerbation",
+            "findings": "Weight gain, cough, crackles, history of weak heart."
+          },
+          {
+            "diagnosis": "Pneumonia",
+            "findings": "Cough, crackles, low O2 sat."
+          }
+        ]
+      },
+      "expect": {
+        "greet-by-name": 1,
+        "introduce-first-year": 1,
+        "comfort-privacy": 0,
+        "cc-open-question": 1,
+        "additional-concerns": 0,
+        "note-issues": 0,
+        "prioritize": 0,
+        "open-story": 0,
+        "second-open": 0,
+        "summarize-clarify": 0,
+        "emotional-context": 0,
+        "personal-context": 0,
+        "respond-emotion": 0,
+        "timeline": 0,
+        "hpi-onset": 0,
+        "hpi-duration": 1,
+        "hpi-quality": 0,
+        "hpi-quantification": 0,
+        "hpi-related": 1,
+        "hpi-setting": 0,
+        "hpi-transforming": 0,
+        "closed-ddx": 0,
+        "summarize-hpi": 0,
+        "signpost": 1,
+        "transition-pe": 0,
+        "share-assessment": 0,
+        "share-plan": 0,
+        "elicit-preferences": 0,
+        "teach-back": 0,
+        "expectancies": 0,
+        "pmh-conditions": 1,
+        "pmh-dates": 0,
+        "psh-surgeries": 0,
+        "psh-dates": 0,
+        "meds-names": 0,
+        "meds-doses": 0,
+        "meds-otc": 0,
+        "allergy-drug": 1,
+        "allergy-food": 0,
+        "allergy-reaction": 0,
+        "fh-parents-siblings": 0,
+        "sh-alcohol": 0,
+        "sh-smoking": 0,
+        "sh-drugs": 0,
+        "sh-occupation": 0,
+        "sh-lives-with": 0,
+        "sh-meaning": 0,
+        "sh-sexual": 1,
+        "sh-travel": 0,
+        "ros-general": 1,
+        "ros-heent": 1,
+        "ros-pulmonary": 1,
+        "ros-cardiac": 1,
+        "ros-gi": 1,
+        "ros-gu": 1,
+        "ros-musculoskeletal": 1,
+        "ros-neuro": 1,
+        "ros-skin": 1,
+        "ros-endocrine": 1,
+        "ros-psychiatric": 1
+      },
+      "borderline": [
+        "hpi-related",
+        "closed-ddx",
+        "signpost",
+        "transition-pe",
+        "sh-travel"
+      ]
+    },
+    {
+      "id": "t11-tricky",
+      "summary": "Greets the patient by the wrong name (corrected by the patient) and introduces themself only at the very end; otherwise good agenda-setting, HPI, empathy and closing, but asks about family conditions and never the patient's own past medical or surgical history or allergies.",
+      "turns": [
+        {
+          "say": "Hi, Mr. Bentley? Good to meet you."
+        },
+        {
+          "patient": "It's Bennett, actually. Harold Bennett."
+        },
+        {
+          "say": "Oh, I'm so sorry — Mr. Bennett. Is it okay if I sit down and we chat for a bit? Are you comfortable like that?"
+        },
+        {
+          "patient": "I'm fine sitting up. Go ahead."
+        },
+        {
+          "say": "So what's been going on that brought you in today?"
+        },
+        {
+          "patient": "I just can't catch my breath. It's been getting worse for a couple of weeks."
+        },
+        {
+          "say": "Okay. Is there anything else you wanted to bring up today too?"
+        },
+        {
+          "patient": "I really want to be home for my granddaughter's birthday on Saturday."
+        },
+        {
+          "say": "Okay, that's important, we'll make sure to talk about that too. Let's start with the breathing, if that's alright?"
+        },
+        {
+          "patient": "Sure."
+        },
+        {
+          "say": "So tell me about the breathing."
+        },
+        {
+          "patient": "I get winded doing anything. It wears me out."
+        },
+        {
+          "say": "It wears you out?"
+        },
+        {
+          "patient": "I'm wiped out all the time."
+        },
+        {
+          "say": "When did it start, and how's it been since?"
+        },
+        {
+          "patient": "About two weeks ago, and it's got steadily worse. The last three days have been the worst."
+        },
+        {
+          "say": "What does it feel like when it happens?"
+        },
+        {
+          "patient": "Like I can't get a full breath in."
+        },
+        {
+          "say": "How far can you walk now?"
+        },
+        {
+          "patient": "Two weeks ago I could walk a few blocks. Now I get winded walking from the bedroom to the kitchen, or going up the 12 stairs at home."
+        },
+        {
+          "say": "What about lying down flat, or at night?"
+        },
+        {
+          "patient": "I can't lie flat any more. I've been sleeping on three pillows, and last night I slept in my recliner. A couple of times this week I woke up gasping."
+        },
+        {
+          "say": "Anything make it better or worse?"
+        },
+        {
+          "patient": "Sitting up helps. Moving around makes it worse."
+        },
+        {
+          "say": "Any swelling in your legs, or cough? Any chest pain or fever?"
+        },
+        {
+          "patient": "My ankles have been puffy for about a week. A dry tickly cough at night. No chest pain or pressure. No fevers or chills."
+        },
+        {
+          "say": "Have you been taking all your medications? What are you on?"
+        },
+        {
+          "patient": "I ran out of my water pill about ten days ago and didn't get it refilled. The others are carvedilol, lisinopril, spironolactone, aspirin, atorvastatin and metformin."
+        },
+        {
+          "say": "Okay. How are you feeling about all this?"
+        },
+        {
+          "patient": "I'm scared it's my heart again."
+        },
+        {
+          "say": "That sounds really scary. I'm sorry."
+        },
+        {
+          "patient": "Thanks."
+        },
+        {
+          "say": "So, two weeks of breathing getting worse, you can't lie flat, your ankles are swollen, and you ran out of your water pill. Is that right?"
+        },
+        {
+          "patient": "That's right."
+        },
+        {
+          "say": "Okay, now I'm going to ask some other questions. Does anything run in your family — are your parents alive? Any brothers or sisters?"
+        },
+        {
+          "patient": "My dad died of a heart attack at 62. My mom had a stroke and died at 80. I have one brother, he's 71 and has diabetes."
+        },
+        {
+          "say": "Does anyone else in the family have heart problems or diabetes?"
+        },
+        {
+          "patient": "Not that I know of."
+        },
+        {
+          "say": "Do you smoke or drink?"
+        },
+        {
+          "patient": "I smoked a pack a day for 30 years and quit after the heart attack in 2019. A beer or two on the weekend. Not more."
+        },
+        {
+          "say": "Who's at home with you?"
+        },
+        {
+          "patient": "My wife, Carol. Our daughter lives ten minutes away."
+        },
+        {
+          "say": "Okay, I'd like to examine you now — is that okay?"
+        },
+        {
+          "patient": "Go ahead."
+        },
+        {
+          "say": "Let me know if anything feels uncomfortable. Can you lean forward?"
+        },
+        {
+          "patient": "Okay."
+        },
+        {
+          "say": "Okay. So I think your heart is having trouble pumping right now, and fluid is backing up into your lungs and legs. Running out of the water pill probably made it worse."
+        },
+        {
+          "patient": "So it is my heart."
+        },
+        {
+          "say": "It looks that way. The doctor will come and see you next, and they'll likely do some blood tests and a chest x-ray. I know you're hoping to be home for Saturday — I'll make sure the doctor knows. What do you think about all that?"
+        },
+        {
+          "patient": "I just hope I can get home."
+        },
+        {
+          "say": "Can you tell me in your own words what happens next?"
+        },
+        {
+          "patient": "The doctor comes, and they do blood tests and an x-ray."
+        },
+        {
+          "say": "Perfect. Oh — I'm sorry, I should have said at the start, I'm Jordan Reyes, I'm a first-year medical student. If your breathing gets worse while you're waiting, press the call button. Any other questions?"
+        },
+        {
+          "patient": "No, thanks."
+        },
+        {
+          "say": "Thanks, Mr. Bennett."
+        }
+      ],
+      "pen": {
+        "history": "68 yo M with 2 weeks of progressively worsening shortness of breath, worst last 3 days, now with exertion walking bedroom to kitchen. Orthopnea (3 pillows, recliner), PND. Bilateral ankle swelling x1 week, dry cough at night, fatigue. Ran out of water pill (furosemide) 10 days ago. Denies chest pain, fever. Meds: furosemide (not taking), carvedilol, lisinopril, spironolactone, aspirin, atorvastatin, metformin. PMH: likely prior heart problems given meds and pt worried 'it's my heart again'. FH: father died of MI at 62, mother died of stroke at 80, brother 71 with diabetes. SH: quit smoking 2019 (30 yrs, 1 ppd), 1-2 beers on weekends, lives with wife.",
+        "exam": "HR 104, RR 24, BP 148/92, SpO2 89% RA. Breathing fast, sitting upright. Heart regular, tachycardic, possible S3. Lungs with crackles at both bases. Pitting edema in both lower legs.",
+        "diagnoses": [
+          {
+            "diagnosis": "Heart failure",
+            "findings": "Orthopnea, PND, ankle swelling, ran out of furosemide; crackles, possible S3, pitting edema."
+          },
+          {
+            "diagnosis": "Acute coronary syndrome",
+            "findings": "Father had MI at 62, on aspirin and statin; no chest pain."
+          },
+          {
+            "diagnosis": "Pneumonia",
+            "findings": "Cough and crackles, low oxygen; no fever."
+          }
+        ]
+      },
+      "expect": {
+        "greet-by-name": 0,
+        "introduce-first-year": 1,
+        "comfort-privacy": 1,
+        "cc-open-question": 1,
+        "additional-concerns": 1,
+        "note-issues": 1,
+        "prioritize": 1,
+        "open-story": 1,
+        "second-open": 1,
+        "summarize-clarify": 1,
+        "emotional-context": 1,
+        "personal-context": 0,
+        "respond-emotion": 1,
+        "timeline": 1,
+        "hpi-onset": 0,
+        "hpi-duration": 1,
+        "hpi-quality": 1,
+        "hpi-quantification": 1,
+        "hpi-related": 1,
+        "hpi-setting": 1,
+        "hpi-transforming": 1,
+        "closed-ddx": 1,
+        "summarize-hpi": 1,
+        "signpost": 1,
+        "transition-pe": 1,
+        "share-assessment": 1,
+        "share-plan": 1,
+        "elicit-preferences": 1,
+        "teach-back": 1,
+        "expectancies": 1,
+        "pmh-conditions": 0,
+        "pmh-dates": 0,
+        "psh-surgeries": 0,
+        "psh-dates": 0,
+        "meds-names": 1,
+        "meds-doses": 0,
+        "meds-otc": 0,
+        "allergy-drug": 0,
+        "allergy-food": 0,
+        "allergy-reaction": 0,
+        "fh-parents-siblings": 1,
+        "sh-alcohol": 1,
+        "sh-smoking": 1,
+        "sh-drugs": 0,
+        "sh-occupation": 0,
+        "sh-lives-with": 1,
+        "sh-meaning": 0,
+        "sh-sexual": 1,
+        "sh-travel": 0,
+        "ros-general": 1,
+        "ros-heent": 0,
+        "ros-pulmonary": 1,
+        "ros-cardiac": 1,
+        "ros-gi": 0,
+        "ros-gu": 0,
+        "ros-musculoskeletal": 0,
+        "ros-neuro": 0,
+        "ros-skin": 0,
+        "ros-endocrine": 0,
+        "ros-psychiatric": 0
+      },
+      "borderline": [
+        "greet-by-name",
+        "introduce-first-year",
+        "sh-travel"
+      ]
+    },
+    {
+      "id": "t12-tricky",
+      "summary": "Closed (yes/no) questions only from start to finish, which still covers most HPI elements; ignores the patient's fear; shares the impression in unexplained jargon even when asked what it means, and defers the plan and the patient's question about tests to 'my attending'.",
+      "turns": [
+        {
+          "say": "Hi Mr. Bennett, I'm Lauren Hughes, a first-year medical student."
+        },
+        {
+          "patient": "Hello."
+        },
+        {
+          "say": "Are you comfortable?"
+        },
+        {
+          "patient": "I'm alright sitting up."
+        },
+        {
+          "say": "Are you here because you're short of breath?"
+        },
+        {
+          "patient": "Yes. I just can't catch my breath. It's been getting worse for a couple of weeks."
+        },
+        {
+          "say": "Is that the only thing bothering you today?"
+        },
+        {
+          "patient": "Yes, just the breathing."
+        },
+        {
+          "say": "Did it start about two weeks ago?"
+        },
+        {
+          "patient": "Yes, about two weeks ago."
+        },
+        {
+          "say": "Did it come on suddenly?"
+        },
+        {
+          "patient": "No, it came on gradually."
+        },
+        {
+          "say": "Has it been getting worse?"
+        },
+        {
+          "patient": "It's got steadily worse. The last three days have been the worst."
+        },
+        {
+          "say": "Is it worse when you walk?"
+        },
+        {
+          "patient": "Yes. Now I get winded walking from the bedroom to the kitchen."
+        },
+        {
+          "say": "Is it worse when you lie down?"
+        },
+        {
+          "patient": "I can't lie flat any more."
+        },
+        {
+          "say": "Do you use more than one pillow?"
+        },
+        {
+          "patient": "I've been sleeping on three pillows, and last night I slept in my recliner."
+        },
+        {
+          "say": "Do you wake up at night short of breath?"
+        },
+        {
+          "patient": "Yes, a couple of times this week I woke up gasping and had to sit on the edge of the bed for a few minutes."
+        },
+        {
+          "say": "Does sitting up help?"
+        },
+        {
+          "patient": "Yes, sitting up helps."
+        },
+        {
+          "say": "Do you have any swelling in your legs?"
+        },
+        {
+          "patient": "My ankles have been puffy for about a week, worse by the evening. My shoes are tight."
+        },
+        {
+          "say": "Both legs? Any calf pain?"
+        },
+        {
+          "patient": "Both legs are the same. No pain in my calves."
+        },
+        {
+          "say": "Do you have a cough?"
+        },
+        {
+          "patient": "A dry tickly cough, mostly at night when I lie down. Nothing coming up."
+        },
+        {
+          "say": "Chest pain? Fever?"
+        },
+        {
+          "patient": "No chest pain or pressure. No fevers or chills."
+        },
+        {
+          "say": "Are you taking all your medications?"
+        },
+        {
+          "patient": "I ran out of my water pill about ten days ago and didn't get it refilled."
+        },
+        {
+          "say": "Are you worried about this?"
+        },
+        {
+          "patient": "I'm scared it's my heart again."
+        },
+        {
+          "say": "Okay. So you're short of breath, it's worse lying down, and your ankles are swollen, right?"
+        },
+        {
+          "patient": "Yes."
+        },
+        {
+          "say": "Do you have any medical problems?"
+        },
+        {
+          "patient": "I had a heart attack — they put a stent in. Since then they've said my heart pumps weakly. I also have high blood pressure, type 2 diabetes and high cholesterol."
+        },
+        {
+          "say": "Have you had any surgeries?"
+        },
+        {
+          "patient": "The stent, and my appendix out."
+        },
+        {
+          "say": "Do you take any other medications? Do you know the doses?"
+        },
+        {
+          "patient": "Furosemide 40 mg in the morning — the one I ran out of. Carvedilol 12.5 mg twice a day, lisinopril 10 mg once a day, spironolactone 25 mg, aspirin 81 mg, atorvastatin 80 mg at night, and metformin 1000 mg twice a day."
+        },
+        {
+          "say": "Any allergies?"
+        },
+        {
+          "patient": "Penicillin."
+        },
+        {
+          "say": "Does anyone in your family have heart disease?"
+        },
+        {
+          "patient": "My dad died of a heart attack at 62."
+        },
+        {
+          "say": "Do you smoke? Drink? Use drugs?"
+        },
+        {
+          "patient": "I smoked a pack a day for 30 years and quit after the heart attack in 2019. A beer or two on the weekend. No drugs, never."
+        },
+        {
+          "say": "Are you retired? Do you live with anyone?"
+        },
+        {
+          "patient": "Retired. I drove city buses for 35 years. With my wife, Carol."
+        },
+        {
+          "say": "Can I examine you now?"
+        },
+        {
+          "patient": "Sure."
+        },
+        {
+          "say": "Okay. So I think this is probably acute decompensated heart failure, likely HFrEF, from diuretic non-adherence, with pulmonary edema."
+        },
+        {
+          "patient": "I'm sorry — what does that mean?"
+        },
+        {
+          "say": "Basically it's an exacerbation of your CHF. My attending will come in and go over the plan with you."
+        },
+        {
+          "patient": "What tests will I need?"
+        },
+        {
+          "say": "I'm not sure, my attending will decide all of that. Any other questions?"
+        },
+        {
+          "patient": "No."
+        },
+        {
+          "say": "Okay. My attending will be in shortly. Thanks."
+        }
+      ],
+      "pen": {
+        "history": "68M w/ PMH CAD s/p MI + PCI, HFrEF, HTN, T2DM, HLD p/w 2 wk progressive DOE (now bedroom to kitchen), 3-pillow orthopnea, PND, bilateral LE edema x1 wk, dry nocturnal cough. Diuretic nonadherence x10 d. Denies CP, fever, calf pain. Meds: furosemide 40 qAM (not taking), carvedilol 12.5 BID, lisinopril 10 daily, spironolactone 25, ASA 81, atorvastatin 80 qHS, metformin 1000 BID. All: PCN. PSH: PCI, appendectomy. FH: father MI at 62. SH: former smoker 30 pk-yr (quit 2019), 1-2 beers/wk, no illicit drugs, retired, lives w/ wife.",
+        "exam": "VS: HR 104, RR 24, BP 148/92, T 36.8, SpO2 89% RA. Gen: mild resp distress, sitting upright. CV: tachy, regular, + S3. JVP elevated. Lungs: bibasilar crackles. Ext: 3+ pitting edema bilat LE.",
+        "diagnoses": [
+          {
+            "diagnosis": "ADHF (HFrEF) 2/2 diuretic nonadherence",
+            "findings": "Orthopnea, PND, LE edema, DOE, nonadherence; S3, elevated JVP, bibasilar crackles, hypoxia."
+          },
+          {
+            "diagnosis": "ACS/NSTEMI",
+            "findings": "CAD s/p MI, DM, HTN, HLD, former smoker; tachycardia. No CP."
+          },
+          {
+            "diagnosis": "PE",
+            "findings": "Tachycardia, hypoxia. Less likely: bilateral symmetric edema, no calf pain, gradual onset."
+          }
+        ]
+      },
+      "expect": {
+        "greet-by-name": 1,
+        "introduce-first-year": 1,
+        "comfort-privacy": 1,
+        "cc-open-question": 0,
+        "additional-concerns": 0,
+        "note-issues": 0,
+        "prioritize": 1,
+        "open-story": 0,
+        "second-open": 0,
+        "summarize-clarify": 1,
+        "emotional-context": 1,
+        "personal-context": 0,
+        "respond-emotion": 0,
+        "timeline": 1,
+        "hpi-onset": 1,
+        "hpi-duration": 1,
+        "hpi-quality": 0,
+        "hpi-quantification": 1,
+        "hpi-related": 1,
+        "hpi-setting": 1,
+        "hpi-transforming": 1,
+        "closed-ddx": 1,
+        "summarize-hpi": 1,
+        "signpost": 0,
+        "transition-pe": 1,
+        "share-assessment": 0,
+        "share-plan": 0,
+        "elicit-preferences": 0,
+        "teach-back": 0,
+        "expectancies": 0,
+        "pmh-conditions": 1,
+        "pmh-dates": 0,
+        "psh-surgeries": 1,
+        "psh-dates": 0,
+        "meds-names": 1,
+        "meds-doses": 1,
+        "meds-otc": 0,
+        "allergy-drug": 1,
+        "allergy-food": 0,
+        "allergy-reaction": 0,
+        "fh-parents-siblings": 0,
+        "sh-alcohol": 1,
+        "sh-smoking": 1,
+        "sh-drugs": 1,
+        "sh-occupation": 1,
+        "sh-lives-with": 1,
+        "sh-meaning": 0,
+        "sh-sexual": 1,
+        "sh-travel": 0,
+        "ros-general": 1,
+        "ros-heent": 0,
+        "ros-pulmonary": 1,
+        "ros-cardiac": 1,
+        "ros-gi": 0,
+        "ros-gu": 0,
+        "ros-musculoskeletal": 0,
+        "ros-neuro": 0,
+        "ros-skin": 0,
+        "ros-endocrine": 0,
+        "ros-psychiatric": 0
+      },
+      "half": {
+        "share-assessment": true
+      },
+      "borderline": [
+        "note-issues",
+        "prioritize",
+        "summarize-hpi",
+        "share-plan",
+        "elicit-preferences",
+        "sh-travel"
+      ]
+    }
+  ]
+}

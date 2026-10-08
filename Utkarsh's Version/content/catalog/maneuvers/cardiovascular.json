@@ -1,0 +1,437 @@
+{
+  "system": "cardiovascular",
+  "maneuvers": [
+    {
+      "requiresPositioning": [
+        "reclined_30"
+      ],
+      "sourceText": "",
+      "id": "jvp_inspection",
+      "fcmId": 33,
+      "label": "Jugular venous pressure (inspect at 30°)",
+      "system": "cardiovascular",
+      "technique": "inspect",
+      "allowedRegions": [
+        "neck_jvp_right"
+      ],
+      "normalFinding": {
+        "default": "JVP not seen above the clavicle; column height under 3 cm above the sternal angle (estimated RAP below 8 cmH2O)."
+      },
+      "demo": {
+        "steps": [
+          "Recline the patient to about 30° with the head turned slightly left.",
+          "Shine a penlight tangentially across the right side of the neck.",
+          "Find the top of the venous pulsation and measure its vertical height above the sternal angle."
+        ]
+      },
+      "penTerms": [
+        "jvp",
+        "jugular venous",
+        "jugular venous pressure",
+        "neck veins"
+      ]
+    },
+    {
+      "requiresPositioning": [
+        "reclined_30"
+      ],
+      "sourceText": "",
+      "id": "hepatojugular_reflux",
+      "fcmId": null,
+      "label": "Hepatojugular (abdominojugular) reflux",
+      "system": "cardiovascular",
+      "technique": "special",
+      "allowedRegions": [
+        "neck_jvp_right",
+        "abd_ruq"
+      ],
+      "normalFinding": {
+        "default": "Firm right upper quadrant pressure for 10 seconds: JVP rises briefly then falls back (negative hepatojugular reflux)."
+      },
+      "demo": {
+        "steps": [
+          "Keep the patient reclined at 30° and breathing normally.",
+          "Press firmly over the right upper quadrant for about 10 seconds.",
+          "Watch whether the jugular column rises and stays up."
+        ]
+      },
+      "penTerms": [
+        "hepatojugular",
+        "abdominojugular",
+        "hjr",
+        "ajr"
+      ]
+    },
+    {
+      "sourceText": "",
+      "id": "carotid_palpation",
+      "fcmId": 34,
+      "label": "Carotid pulse palpation (one side at a time)",
+      "system": "cardiovascular",
+      "technique": "palpate",
+      "allowedRegions": [
+        "carotid_right",
+        "carotid_left"
+      ],
+      "normalFinding": {
+        "default": "Carotid upstroke brisk with normal volume; symmetric bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Press gently below the angle of the jaw with your finger pads.",
+          "Assess one side, then the other — never both together."
+        ]
+      },
+      "penTerms": [
+        "carotid pulse",
+        "carotid upstroke"
+      ]
+    },
+    {
+      "sourceText": "",
+      "id": "carotid_auscultation",
+      "fcmId": 34,
+      "label": "Carotid auscultation for bruits",
+      "system": "cardiovascular",
+      "technique": "auscultate",
+      "allowedRegions": [
+        "carotid_right",
+        "carotid_left"
+      ],
+      "normalFinding": {
+        "default": "No carotid bruit."
+      },
+      "demo": {
+        "steps": [
+          "Place the stethoscope just lateral to the midline over the carotid.",
+          "Ask the patient to hold their breath briefly while you listen."
+        ]
+      },
+      "interaction": "place",
+      "tool": "stethoscope",
+      "penTerms": [
+        "carotid bruit",
+        "bruit"
+      ]
+    },
+    {
+      "requiresPositioning": [
+        "supine",
+        "reclined_30"
+      ],
+      "sourceText": "",
+      "id": "precordial_inspection",
+      "fcmId": 35,
+      "label": "Precordial inspection",
+      "system": "cardiovascular",
+      "technique": "inspect",
+      "allowedRegions": [
+        "precordium_wall"
+      ],
+      "normalFinding": {
+        "default": "Symmetric chest wall, no scars or deformity; no visible heaves; apical impulse not visible."
+      },
+      "demo": {
+        "steps": [
+          "Look across the chest for symmetry, scars and devices.",
+          "Look for any visible pulsation at the apex."
+        ]
+      }
+    },
+    {
+      "requiresPositioning": [
+        "supine"
+      ],
+      "sourceText": "",
+      "id": "precordial_palpation",
+      "fcmId": 36,
+      "label": "Precordial palpation for heaves and thrills",
+      "system": "cardiovascular",
+      "technique": "palpate",
+      "allowedRegions": [
+        "precordium_lsb",
+        "cardiac_aortic",
+        "cardiac_pulmonic"
+      ],
+      "normalFinding": {
+        "default": "No heave or thrill."
+      },
+      "demo": {
+        "steps": [
+          "With the patient supine, lay the flat of your fingers along the left sternal border.",
+          "Repeat at the base of the heart.",
+          "Feel for a sustained lift (heave) or a buzzing vibration (thrill)."
+        ]
+      },
+      "penTerms": [
+        "heave",
+        "heaves",
+        "thrill",
+        "thrills"
+      ]
+    },
+    {
+      "requiresPositioning": [
+        "supine",
+        "left_lateral_decubitus"
+      ],
+      "sourceText": "",
+      "id": "pmi_palpation",
+      "fcmId": 37,
+      "label": "Point of maximal impulse (apex beat)",
+      "system": "cardiovascular",
+      "technique": "palpate",
+      "allowedRegions": [
+        "cardiac_mitral"
+      ],
+      "normalFinding": {
+        "default": "PMI at the 5th left intercostal space, midclavicular line; small (about 2 cm), brief, not sustained."
+      },
+      "demo": {
+        "steps": [
+          "Look for the apical impulse, then feel with your finger pads.",
+          "If you cannot feel it, roll the patient onto their left side and try again.",
+          "Locate it by intercostal space and relation to the midclavicular line."
+        ]
+      },
+      "penTerms": [
+        "pmi",
+        "apex beat",
+        "apical impulse",
+        "point of maximal impulse",
+        "displaced apex"
+      ]
+    },
+    {
+      "requiresPositioning": [
+        "supine",
+        "reclined_30",
+        "left_lateral_decubitus",
+        "seated",
+        "seated_leaning_forward"
+      ],
+      "sourceText": "",
+      "id": "auscultate_heart_diaphragm",
+      "fcmId": 38,
+      "label": "Heart auscultation – diaphragm (all areas)",
+      "system": "cardiovascular",
+      "technique": "auscultate",
+      "allowedRegions": [
+        "cardiac_aortic",
+        "cardiac_pulmonic",
+        "cardiac_erbs",
+        "cardiac_tricuspid",
+        "cardiac_mitral"
+      ],
+      "normalFinding": {
+        "default": {
+          "text": "Regular rate and rhythm; normal S1 and S2; no murmurs, rubs or extra sounds.",
+          "audio": {
+            "generator": "heart",
+            "params": {
+              "intensity": 0.8,
+              "s2SplitMs": 0
+            }
+          }
+        },
+        "cardiac_aortic": {
+          "text": "Regular rhythm; S2 crisp and well heard; no murmur.",
+          "audio": {
+            "generator": "heart",
+            "params": {
+              "intensity": 0.8,
+              "s2SplitMs": 0
+            }
+          }
+        },
+        "cardiac_pulmonic": {
+          "text": "Regular rhythm; physiological splitting of S2 with inspiration; no murmur.",
+          "audio": {
+            "generator": "heart",
+            "params": {
+              "intensity": 0.8,
+              "s2SplitMs": 35
+            }
+          }
+        },
+        "cardiac_mitral": {
+          "text": "Regular rhythm; S1 normal; no murmur.",
+          "audio": {
+            "generator": "heart",
+            "params": {
+              "intensity": 0.8,
+              "s2SplitMs": 0
+            }
+          }
+        }
+      },
+      "demo": {
+        "steps": [
+          "Press the diaphragm just firmly enough to seal against the skin.",
+          "Listen at the aortic, pulmonic, Erb point, tricuspid and mitral areas in turn.",
+          "At each area time the sounds to the cycle and listen for murmurs in systole and diastole."
+        ]
+      },
+      "interaction": "place",
+      "tool": "stethoscope",
+      "toolMode": "diaphragm",
+      "penTerms": [
+        "murmur",
+        "s1",
+        "s2",
+        "heart sounds",
+        "systolic murmur",
+        "diastolic murmur",
+        "s3",
+        "s4",
+        "gallop"
+      ]
+    },
+    {
+      "requiresPositioning": [
+        "supine",
+        "left_lateral_decubitus"
+      ],
+      "sourceText": "",
+      "id": "auscultate_heart_bell",
+      "fcmId": 38,
+      "label": "Heart auscultation – bell at apex (gallops)",
+      "system": "cardiovascular",
+      "technique": "auscultate",
+      "allowedRegions": [
+        "cardiac_mitral",
+        "cardiac_tricuspid"
+      ],
+      "normalFinding": {
+        "default": {
+          "text": "No S3 or S4 with the bell.",
+          "audio": {
+            "generator": "heart",
+            "params": {
+              "intensity": 0.7,
+              "s2SplitMs": 0
+            }
+          }
+        }
+      },
+      "demo": {
+        "steps": [
+          "Switch to the bell and rest it lightly on the skin.",
+          "Listen over the apex (best with the patient rolled to the left) for low-pitched extra sounds."
+        ]
+      },
+      "interaction": "place",
+      "tool": "stethoscope",
+      "toolMode": "bell",
+      "penTerms": [
+        "s3",
+        "s4",
+        "gallop"
+      ]
+    },
+    {
+      "sourceText": "",
+      "id": "peripheral_pulses",
+      "fcmId": 39,
+      "label": "Peripheral pulses",
+      "system": "cardiovascular",
+      "technique": "palpate",
+      "allowedRegions": [
+        "arm_right",
+        "arm_left",
+        "groin_right",
+        "groin_left",
+        "knee_right",
+        "knee_left",
+        "foot_right",
+        "foot_left"
+      ],
+      "normalFinding": {
+        "default": "Pulse 2+ and symmetric.",
+        "arm_right": "Brachial pulse 2+.",
+        "arm_left": "Brachial pulse 2+.",
+        "groin_right": "Femoral pulse 2+, no bruit.",
+        "groin_left": "Femoral pulse 2+, no bruit.",
+        "knee_right": "Popliteal pulse 2+.",
+        "knee_left": "Popliteal pulse 2+.",
+        "foot_right": "Dorsalis pedis and posterior tibial pulses 2+.",
+        "foot_left": "Dorsalis pedis and posterior tibial pulses 2+."
+      },
+      "demo": {
+        "steps": [
+          "Feel each pulse with your finger pads and compare left with right.",
+          "Grade the strength (0 absent to 3+ bounding)."
+        ]
+      },
+      "penTerms": [
+        "pedal pulses",
+        "dorsalis pedis",
+        "posterior tibial",
+        "femoral pulse"
+      ]
+    },
+    {
+      "sourceText": "",
+      "id": "extremity_perfusion",
+      "fcmId": null,
+      "label": "Peripheral perfusion (warmth, colour, capillary refill)",
+      "system": "cardiovascular",
+      "technique": "palpate",
+      "allowedRegions": [
+        "hand_right",
+        "hand_left",
+        "foot_right",
+        "foot_left",
+        "knee_right",
+        "knee_left"
+      ],
+      "normalFinding": {
+        "default": "Warm, dry and pink; capillary refill under 2 seconds."
+      },
+      "demo": {
+        "steps": [
+          "Feel the temperature of the extremity with the back of your hand.",
+          "Press a nail bed for a few seconds, release, and time the colour return."
+        ]
+      },
+      "penTerms": [
+        "capillary refill",
+        "cool peripheries",
+        "warm peripheries"
+      ]
+    },
+    {
+      "sourceText": "",
+      "id": "edema_assessment",
+      "fcmId": 40,
+      "label": "Peripheral edema (inspect and press)",
+      "system": "cardiovascular",
+      "technique": "palpate",
+      "allowedRegions": [
+        "foot_right",
+        "foot_left",
+        "ankle_right",
+        "ankle_left",
+        "shin_right",
+        "shin_left",
+        "sacrum"
+      ],
+      "normalFinding": {
+        "default": "No edema; no pitting after firm pressure.",
+        "sacrum": "No sacral edema."
+      },
+      "demo": {
+        "steps": [
+          "Look at the feet, ankles and lower legs for swelling and compare sides.",
+          "Press firmly with your thumb for several seconds over a bony surface.",
+          "Check how far up any pitting extends; check the sacrum in a patient who has been lying down."
+        ]
+      },
+      "penTerms": [
+        "edema",
+        "oedema",
+        "pitting"
+      ]
+    }
+  ]
+}

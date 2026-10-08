@@ -1,0 +1,3434 @@
+{
+  "id": "s1-radiculopathy-01",
+  "title": "Low back and leg pain in a 44-year-old (clinic)",
+  "mode": "encounter",
+  "patient": {
+    "name": "Dana Whitfield",
+    "age": 44,
+    "sex": "female",
+    "pronouns": "she/her",
+    "chiefComplaint": "Low back pain for three weeks, now shooting down the left leg",
+    "setting": "Primary care / urgent care clinic, seated on the exam table",
+    "persona": {
+      "affect": "In pain and restless: shifts position often and sometimes stands to ease her leg; practical, direct and good-humoured despite it",
+      "speakingStyle": "Plain, matter-of-fact everyday words; fairly brief answers, a little clipped when the leg flares; no medical jargon",
+      "worries": "Losing work time and pay (she is already on light duties); afraid she has done something serious and will need an operation",
+      "background": "Warehouse supervisor whose job involves lifting; lives with her partner and their two teenagers; enjoys gardening and watching her kids' sports"
+    }
+  },
+  "doorSign": {
+    "task": "Ms. Whitfield, 44, presents with three weeks of low back pain that now shoots down her left leg. Take a focused history, perform a focused back and lower-limb neurological examination, then present your summary, differential diagnosis and initial plan.",
+    "timeLimitMinutes": 15
+  },
+  "doorInstructions": {
+    "reasonForVisit": "Low back pain going down the leg",
+    "task": "Take a focused history and perform a focused physical examination. Share your impressions with the patient before you leave. You will then write a post-encounter note.",
+    "prohibitedExams": [
+      {
+        "label": "Breast exam",
+        "regionIds": [
+          "breast_left",
+          "breast_right"
+        ]
+      },
+      {
+        "label": "Pelvic / genital exam",
+        "regionIds": [
+          "pelvic"
+        ]
+      }
+    ]
+  },
+  "timeLimits": {
+    "encounterMin": 15,
+    "penMin": 10
+  },
+  "vitals": {
+    "hr": 84,
+    "rr": 16,
+    "bpSystolic": 128,
+    "bpDiastolic": 80,
+    "tempC": 36.9,
+    "spo2": 99,
+    "spo2Context": "on room air"
+  },
+  "history": {
+    "openingStatement": "My lower back's been bad for a few weeks, and now I've got this pain shooting down my left leg. It's really getting me down.",
+    "facts": [
+      {
+        "id": "pain-onset",
+        "topic": "Onset of back and leg pain",
+        "answer": "My back started about three weeks ago — I woke up stiff and sore the morning after helping a friend move a sofa. The pain down my left leg started about ten days ago.",
+        "revealOnlyIfAsked": false,
+        "keywords": [
+          "start",
+          "began",
+          "how long",
+          "onset",
+          "when did",
+          "three weeks"
+        ],
+        "intents": {
+          "canonical": "When did the pain start?",
+          "paraphrases": [
+            "When did your back pain start?",
+            "How long have you had this back pain?",
+            "How long has this been going on?",
+            "When did you first notice the pain?",
+            "When did the leg pain begin?",
+            "How long have you had the pain in your leg?",
+            "Since when have you had this pain?",
+            "When did all this start?",
+            "Can you tell me more about your back pain?",
+            "Tell me about the pain.",
+            "How many weeks has your back been sore?",
+            "When did this problem first begin?",
+            "When did the leg pain start?"
+          ],
+          "keywords": [
+            "when did it start",
+            "when did this start",
+            "how long has this been going on",
+            "since when",
+            "onset of the pain",
+            "how long have you had"
+          ],
+          "patterns": [
+            "\\bhow long (have you had|has it been|has this been|have you been)\\b.*\\b(pain|back|leg|sore|hurting|aching)\\b",
+            "\\bwhen did (it|this|all this|the pain|your pain|the back pain|your back pain|the leg pain|your leg pain|the low back pain|your low back pain)( first)? (start|begin|come on)\\b",
+            "\\bwhen did\\b.*\\b(leg|back)\\b.*\\b(start|begin|come on)\\b",
+            "\\b(leg|back)\\b.*\\bwhen did (that|it|this) (start|begin|come on)\\b"
+          ],
+          "topics": [
+            "hpi.onset"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "onset-sudden",
+            "intents": {
+              "canonical": "Did it come on suddenly or gradually?",
+              "paraphrases": [
+                "Was the onset sudden or gradual?",
+                "Did the pain come on all of a sudden?",
+                "Did it start suddenly?",
+                "Did the back pain come on gradually?",
+                "Did you feel something go or snap?",
+                "Was there a sudden onset of pain?",
+                "Did the pain hit you suddenly while you were lifting?"
+              ],
+              "keywords": [
+                "suddenly or gradually",
+                "sudden or gradual",
+                "all of a sudden",
+                "came on suddenly",
+                "something snap",
+                "felt something go"
+              ],
+              "topics": [
+                "hpi.onset"
+              ]
+            },
+            "answer": "Not suddenly. I didn't feel anything snap while we were lifting — my back was just stiff and sore when I woke up the next morning. The leg pain crept in over a day or two, about ten days ago."
+          }
+        ]
+      },
+      {
+        "id": "pain-trigger",
+        "topic": "What brought it on",
+        "answer": "I spent a Saturday helping a friend move house. We carried a heavy sofa down a flight of stairs — I was at the bottom end, bent over and twisting round the corner. The next morning my back was sore.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "lift",
+          "lifting",
+          "sofa",
+          "brought it on",
+          "trigger",
+          "what were you doing"
+        ],
+        "intents": {
+          "canonical": "Did anything bring the pain on?",
+          "paraphrases": [
+            "What were you doing when the pain started?",
+            "Do you know what might have caused it?",
+            "Did you lift anything heavy before it started?",
+            "Did you strain your back doing something?",
+            "Was there anything that triggered the pain?",
+            "Had you been lifting anything heavy just before it started?",
+            "Did you twist or bend awkwardly before this started?",
+            "Did you hurt your back lifting something?",
+            "Can you think of anything that set it off?",
+            "Were you doing anything unusual the day before it started?",
+            "Have you hurt your back recently?",
+            "Did anything trigger it?",
+            "Did something happen just before it started?"
+          ],
+          "keywords": [
+            "heavy lifting",
+            "lift anything heavy",
+            "brought it on",
+            "bring it on",
+            "set it off",
+            "triggered",
+            "what were you doing",
+            "strain your back",
+            "lifting something"
+          ],
+          "patterns": [
+            "\\b(lift|lifting|lifted|carry|carrying|carried|move|moving|moved)\\b.*\\b(heavy|furniture|sofa|couch|boxes|something)\\b"
+          ],
+          "topics": [
+            "hpi.triggers"
+          ]
+        }
+      },
+      {
+        "id": "pain-location",
+        "topic": "Location and radiation",
+        "answer": "It's low down in my back, more on the left. And then it shoots from my left buttock down the back of my thigh and calf, right to the outside edge of my foot and my little toe.",
+        "revealOnlyIfAsked": false,
+        "keywords": [
+          "where",
+          "location",
+          "spread",
+          "radiate",
+          "shoot",
+          "down your leg",
+          "buttock"
+        ],
+        "intents": {
+          "canonical": "Where exactly is the pain?",
+          "paraphrases": [
+            "Can you show me where it hurts?",
+            "Where do you feel the pain?",
+            "Does the pain go anywhere else?",
+            "Does the pain spread down your leg?",
+            "Does it radiate anywhere?",
+            "Does the pain move into your buttock or leg?",
+            "Which part of your back hurts?",
+            "Is the pain on one side or in the middle?",
+            "Where does the leg pain go?",
+            "Does it shoot down your leg?",
+            "Can you point to where the pain is?",
+            "Is the pain only in your back, or does it travel?",
+            "Can you point to where it hurts the most?",
+            "Where is the pain worst?"
+          ],
+          "keywords": [
+            "where is the pain",
+            "where does it hurt",
+            "radiate",
+            "radiates",
+            "radiating",
+            "radiation",
+            "spread",
+            "shoot down",
+            "shooting down",
+            "travel down",
+            "go down your leg",
+            "goes down your leg",
+            "where exactly"
+          ],
+          "patterns": [
+            "\\b(spread|spreads|radiates|radiating|shoot|shoots|shooting|travel|travels|go|goes|move|moves)\\b.*\\b(leg|legs|buttock|thigh|calf|foot|anywhere)\\b",
+            "\\bwhere\\b.*\\b(pain|hurt|hurts|sore)\\b",
+            "\\b(point|show)\\b.*\\bwhere\\b"
+          ],
+          "topics": [
+            "hpi.location"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "location-below-knee",
+            "intents": {
+              "canonical": "Does the pain go below the knee?",
+              "paraphrases": [
+                "Does it go past your knee?",
+                "Does the leg pain reach your foot?",
+                "Does the pain go all the way down to your foot?",
+                "How far down your leg does the pain go?",
+                "Does it stop at the knee or go further?",
+                "Does the pain reach your toes?"
+              ],
+              "keywords": [
+                "below the knee",
+                "past your knee",
+                "past the knee",
+                "down to your foot",
+                "how far down",
+                "reach your foot",
+                "to your toes"
+              ],
+              "topics": [
+                "hpi.location"
+              ]
+            },
+            "answer": "Yes, right past the knee — down the back of my calf to the outside of my foot and my little toe."
+          },
+          {
+            "id": "location-leg-vs-back",
+            "intents": {
+              "canonical": "Which is worse, the back pain or the leg pain?",
+              "paraphrases": [
+                "Is the leg pain worse than the back pain?",
+                "What bothers you more, your back or your leg?",
+                "Is it mainly your back or mainly your leg?",
+                "Which hurts more, the leg or the back?",
+                "Is the back or the leg the bigger problem?",
+                "Do you have more pain in your back or in your leg?"
+              ],
+              "keywords": [
+                "leg or the back",
+                "back or the leg",
+                "back or your leg",
+                "leg or your back",
+                "worse than the back",
+                "worse than the leg",
+                "bothers you more",
+                "hurts more"
+              ],
+              "topics": [
+                "hpi.location",
+                "hpi.severity"
+              ]
+            },
+            "answer": "The leg, by far. The back is more of a dull ache now — it's the leg that's stopping me doing things."
+          }
+        ]
+      },
+      {
+        "id": "pain-character",
+        "topic": "Character of the pain",
+        "answer": "In my leg it's sharp, like an electric shock shooting down, with a burning feeling along the outside of my foot. The back is more of a deep, dull ache.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "describe",
+          "feel like",
+          "sharp",
+          "dull",
+          "burning",
+          "electric",
+          "character"
+        ],
+        "intents": {
+          "canonical": "What does the pain feel like?",
+          "paraphrases": [
+            "How would you describe the pain?",
+            "Is it a sharp pain or a dull ache?",
+            "What kind of pain is it?",
+            "Is the pain burning, stabbing or aching?",
+            "Can you describe the leg pain?",
+            "What is the quality of the pain?",
+            "Does it feel like an electric shock?",
+            "Is it a throbbing pain?",
+            "What words would you use to describe the pain?",
+            "Is the back pain an ache or a sharp pain?",
+            "How would you describe it?"
+          ],
+          "keywords": [
+            "describe the pain",
+            "feel like",
+            "sharp or dull",
+            "dull ache",
+            "sharp pain",
+            "burning",
+            "stabbing",
+            "electric shock",
+            "throbbing",
+            "kind of pain",
+            "quality of the pain"
+          ],
+          "topics": [
+            "hpi.character"
+          ]
+        }
+      },
+      {
+        "id": "pain-severity",
+        "topic": "Severity",
+        "answer": "The leg is about a 7 out of 10 most of the time, and worse when it shoots. The back is maybe a 4.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "scale",
+          "out of 10",
+          "how bad",
+          "severe",
+          "severity",
+          "rate"
+        ],
+        "intents": {
+          "canonical": "How bad is the pain on a scale of 0 to 10?",
+          "paraphrases": [
+            "How would you rate the pain out of 10?",
+            "How severe is the pain?",
+            "How bad is the pain?",
+            "On a scale of one to ten, how bad is it?",
+            "What number would you give the pain?",
+            "How bad does it get?",
+            "Rate your pain from 0 to 10.",
+            "How strong is the pain right now?",
+            "How intense is the leg pain?",
+            "Is it the worst pain you have ever had?"
+          ],
+          "keywords": [
+            "out of 10",
+            "out of ten",
+            "scale of",
+            "how bad is",
+            "how severe",
+            "rate the pain",
+            "rate your pain",
+            "pain score"
+          ],
+          "patterns": [
+            "\\b(0|zero|1|one) (to|and) (10|ten)\\b",
+            "\\bout of (10|ten)\\b"
+          ],
+          "topics": [
+            "hpi.severity"
+          ]
+        },
+        "emotion": "in_pain"
+      },
+      {
+        "id": "pain-timing",
+        "topic": "Timing and pattern",
+        "answer": "The back ache is there most of the day. The leg pain is there a lot of the time too, but it flares up in sharp bursts, especially when I've been sitting. I'm stiff for about ten minutes when I first get up in the morning, then it loosens off.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "constant",
+          "come and go",
+          "time of day",
+          "morning",
+          "all the time",
+          "stiff"
+        ],
+        "intents": {
+          "canonical": "Is the pain constant or does it come and go?",
+          "paraphrases": [
+            "Is it there all the time?",
+            "Does the pain come and go?",
+            "Is the pain worse at any particular time of day?",
+            "Is it worse in the morning or the evening?",
+            "Is your back stiff in the morning?",
+            "How long does the morning stiffness last?",
+            "Do you have the pain every day?",
+            "Is it continuous or does it come in episodes?",
+            "When during the day is the pain at its worst?",
+            "Does it flare up at certain times?",
+            "Is it constant?"
+          ],
+          "keywords": [
+            "come and go",
+            "comes and goes",
+            "all the time",
+            "constant",
+            "continuous",
+            "time of day",
+            "morning stiffness",
+            "stiff in the morning",
+            "every day",
+            "flare up"
+          ],
+          "topics": [
+            "hpi.timing"
+          ]
+        }
+      },
+      {
+        "id": "pain-course",
+        "topic": "Course over time",
+        "answer": "The back ache has eased a little since the first few days, but the leg has got worse over the last ten days, and the numbness in my foot is new this past week.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "better or worse",
+          "getting worse",
+          "changed",
+          "progress"
+        ],
+        "intents": {
+          "canonical": "Is the pain getting better, worse or staying the same?",
+          "paraphrases": [
+            "Has the pain been getting worse?",
+            "Is it improving at all?",
+            "How has the pain changed since it started?",
+            "Has it got better or worse over the last three weeks?",
+            "Is the leg pain getting worse?",
+            "Has anything changed since it first started?",
+            "Is it getting any better?",
+            "How has it progressed?",
+            "Is it worse now than when it began?"
+          ],
+          "keywords": [
+            "better or worse",
+            "getting worse",
+            "getting better",
+            "improving",
+            "progressed",
+            "changed since",
+            "staying the same"
+          ],
+          "topics": [
+            "hpi.course"
+          ]
+        }
+      },
+      {
+        "id": "aggravating",
+        "topic": "What makes it worse",
+        "answer": "Sitting is the worst — after about fifteen minutes in a chair or the car it's shooting down my leg. Bending forward is bad too, like putting my socks on or loading the dishwasher.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "worse",
+          "aggravat",
+          "sitting",
+          "bending",
+          "driving"
+        ],
+        "intents": {
+          "canonical": "What makes the pain worse?",
+          "paraphrases": [
+            "Is there anything that makes it worse?",
+            "Does sitting make the pain worse?",
+            "Does bending forward make it worse?",
+            "What aggravates the pain?",
+            "Does driving make it worse?",
+            "Are there any movements that set the pain off?",
+            "Which activities make the pain worse?",
+            "Is it worse when you sit for a long time?",
+            "Does anything make the leg pain flare up?",
+            "Does bending over hurt?",
+            "Anything make it worse?"
+          ],
+          "keywords": [
+            "makes it worse",
+            "make it worse",
+            "makes the pain worse",
+            "aggravates",
+            "aggravating",
+            "bending forward",
+            "bending over",
+            "driving",
+            "worse sitting",
+            "worse when sitting",
+            "worse when you sit",
+            "sitting down"
+          ],
+          "topics": [
+            "hpi.aggravating"
+          ],
+          "patterns": [
+            "\\bmakes? (it|the pain|your pain|the leg pain|your leg|your back|the back pain|things|everything)( any| even)? worse\\b",
+            "\\b(what|anything|which)\\b.*\\b(aggravates?|aggravating|worsens?|sets? (it|the pain) off)\\b"
+          ]
+        }
+      },
+      {
+        "id": "cough-sneeze",
+        "topic": "Coughing and sneezing",
+        "answer": "Coughing or sneezing sends a jolt right down my leg, so I brace myself for it. I haven't had a cough or a cold, though.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "cough",
+          "sneeze",
+          "strain"
+        ],
+        "intents": {
+          "canonical": "Does coughing or sneezing make the pain worse?",
+          "paraphrases": [
+            "Does it hurt more when you cough?",
+            "What happens to the pain when you sneeze?",
+            "Does sneezing send pain down your leg?",
+            "Is the pain worse when you cough or strain?",
+            "Do coughing and sneezing affect the pain?",
+            "Does laughing or coughing make your back hurt?",
+            "Does the pain shoot down your leg when you cough?",
+            "Does straining make the leg pain worse?",
+            "Does a cough or a sneeze jolt the pain down your leg?"
+          ],
+          "keywords": [
+            "cough or sneeze",
+            "coughing or sneezing",
+            "when you cough",
+            "when you sneeze",
+            "sneezing",
+            "sneeze",
+            "valsalva"
+          ],
+          "patterns": [
+            "\\b(cough|coughing|coughs|sneeze|sneezing|sneezes|strain|straining)\\b.*\\b(pain|hurt|hurts|worse|leg|back|jolt)\\b",
+            "\\b(pain|hurt|hurts|worse)\\b.*\\b(cough|coughing|sneeze|sneezing)\\b"
+          ],
+          "topics": [
+            "hpi.aggravating"
+          ]
+        }
+      },
+      {
+        "id": "relieving",
+        "topic": "What makes it better",
+        "answer": "Lying on my back with my knees bent up, or a pillow under them, eases it the most. Walking a short way actually helps a bit too — it's much better than sitting.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "better",
+          "relieve",
+          "ease",
+          "help",
+          "lying"
+        ],
+        "intents": {
+          "canonical": "What makes the pain better?",
+          "paraphrases": [
+            "Is there anything that eases the pain?",
+            "Does anything help the pain?",
+            "What relieves it?",
+            "Is there a position that makes it more comfortable?",
+            "Does lying down help?",
+            "Does going for a short walk ease the pain?",
+            "How do you get comfortable?",
+            "Does rest help the pain?",
+            "Have you found anything that makes it easier?",
+            "Does lying on your back ease the pain?",
+            "Is there anything that helps?",
+            "Anything make it better?",
+            "Does walking help?",
+            "Does walking help the pain?"
+          ],
+          "keywords": [
+            "makes it better",
+            "make it better",
+            "makes the pain better",
+            "eases",
+            "ease the pain",
+            "relieves",
+            "relieving",
+            "more comfortable",
+            "get comfortable",
+            "anything help"
+          ],
+          "topics": [
+            "hpi.relieving"
+          ],
+          "patterns": [
+            "\\bmakes? (it|the pain|your pain|the leg pain|your leg|your back|the back pain|things|everything)( any)? (better|easier)\\b",
+            "\\b(what|anything|which)\\b.*\\b(eases?|relieves?|helps?|soothes?)\\b.*\\b(it|pain|back|leg)\\b"
+          ]
+        }
+      },
+      {
+        "id": "analgesia",
+        "topic": "Pain relief tried",
+        "answer": "Ibuprofen — two 200 milligram tablets three times a day with food, for about two weeks. It takes the edge off a little, but not much. It hasn't upset my stomach or my asthma. I've tried a hot water bottle too, but nothing else.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "ibuprofen",
+          "painkiller",
+          "tried",
+          "taken anything",
+          "tablets for the pain"
+        ],
+        "intents": {
+          "canonical": "Have you taken anything for the pain?",
+          "paraphrases": [
+            "What have you tried for the pain?",
+            "Are you taking any painkillers?",
+            "Have you tried any pain relief?",
+            "Does the ibuprofen help?",
+            "Do you take any over-the-counter medicines?",
+            "Any over-the-counter medications?",
+            "How much ibuprofen are you taking?",
+            "Have you tried paracetamol or ibuprofen?",
+            "Have you used heat or ice?",
+            "Has any treatment helped so far?",
+            "What medicines have you tried for your back?",
+            "Have you tried anything to help with it?",
+            "Have you tried anything for it?"
+          ],
+          "keywords": [
+            "painkillers",
+            "pain relief",
+            "ibuprofen",
+            "taken anything for",
+            "tried anything for",
+            "anti inflammatories",
+            "heat or ice",
+            "hot water bottle",
+            "acetaminophen",
+            "over the counter"
+          ],
+          "topics": [
+            "hpi.relieving",
+            "meds.otc"
+          ]
+        }
+      },
+      {
+        "id": "paresthesia",
+        "topic": "Numbness and tingling",
+        "answer": "I get pins and needles and a numb patch along the outside edge of my left foot and into my little toe. It started about a week ago. Nowhere else.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "numb",
+          "tingling",
+          "pins and needles",
+          "sensation"
+        ],
+        "intents": {
+          "canonical": "Any numbness or tingling in your leg or foot?",
+          "paraphrases": [
+            "Have you had any numbness or tingling?",
+            "Any pins and needles?",
+            "Have you noticed any numbness anywhere?",
+            "Any tingling in your leg or foot?",
+            "Does your foot feel numb?",
+            "Any loss of feeling in your leg?",
+            "Have you had any strange sensations in your leg?",
+            "Where is the numbness?",
+            "Do you have any altered sensation?",
+            "Is any part of your foot numb?",
+            "Any numbness in your toes?",
+            "Any change in sensation in your leg or foot?",
+            "Do you have pins and needles anywhere?",
+            "Any numbness down the back of your leg or in your foot?",
+            "Does the back of your leg feel numb?",
+            "Any numbness in your leg?",
+            "Is your leg or foot numb anywhere?",
+            "Any pins and needles in your foot?"
+          ],
+          "keywords": [
+            "numbness",
+            "numb",
+            "tingling",
+            "pins and needles",
+            "loss of feeling",
+            "altered sensation",
+            "strange sensations",
+            "numbness down the back",
+            "numb down the back",
+            "numbness in your leg",
+            "numbness in your foot",
+            "numb foot"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.neuro"
+          ]
+        }
+      },
+      {
+        "id": "weakness",
+        "topic": "Weakness of the left foot",
+        "answer": "My left foot feels weaker when I push off. I notice it going up stairs, and I can't go up on tiptoe on that side like I can on the right. It hasn't given way and I haven't fallen.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "weak",
+          "weakness",
+          "strength",
+          "tiptoe",
+          "push off"
+        ],
+        "intents": {
+          "canonical": "Have you noticed any weakness in your leg?",
+          "paraphrases": [
+            "Any weakness in your legs?",
+            "Have you noticed any weakness?",
+            "Does your leg feel weak?",
+            "Can you stand on your tiptoes?",
+            "Is it harder to push off with your foot?",
+            "Any loss of strength in your leg or foot?",
+            "Do you have trouble climbing stairs?",
+            "Have you had any difficulty walking?",
+            "Is your foot weaker than before?",
+            "Any trouble walking on your toes?"
+          ],
+          "keywords": [
+            "weakness",
+            "weak",
+            "loss of strength",
+            "tiptoe",
+            "tip toe",
+            "on your toes",
+            "push off",
+            "trouble walking",
+            "difficulty walking"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.neuro"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "weakness-foot-drop",
+            "intents": {
+              "canonical": "Do you trip over your foot or catch your toes?",
+              "paraphrases": [
+                "Does your foot drag when you walk?",
+                "Does your foot slap on the ground?",
+                "Do you have trouble lifting your foot up?",
+                "Have you noticed a foot drop?",
+                "Do you catch your toes on the stairs or the curb?",
+                "Can you walk on your heels?",
+                "Is it hard to pull your foot up?"
+              ],
+              "keywords": [
+                "trip over",
+                "tripping",
+                "catch your toes",
+                "foot drop",
+                "foot drag",
+                "foot slap",
+                "lift your foot",
+                "walk on your heels"
+              ],
+              "patterns": [],
+              "topics": [
+                "hpi.associated"
+              ]
+            },
+            "answer": "No, I don't trip or catch my toes, and my foot doesn't slap — lifting my foot up is fine. It's pushing off on the ball of my foot that's weak."
+          }
+        ]
+      },
+      {
+        "id": "function",
+        "topic": "Effect on work and daily life",
+        "answer": "It's really affecting me. Work has put me on light duties — no lifting — and I can't sit through a shift at a desk either. Driving more than fifteen minutes is agony, and getting my socks and shoes on is a struggle. I can still look after myself, just slowly.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "daily life",
+          "affect",
+          "activities",
+          "cope",
+          "time off"
+        ],
+        "intents": {
+          "canonical": "How is the pain affecting your daily life?",
+          "paraphrases": [
+            "How has this affected your work?",
+            "What can't you do because of the pain?",
+            "Has the pain stopped you doing anything?",
+            "How are you managing day to day?",
+            "Have you had any time off work?",
+            "Can you still look after yourself?",
+            "Has it affected your ability to do your job?",
+            "How is this impacting your life?",
+            "Are you coping at home and at work?",
+            "Are you able to do your usual daily activities?"
+          ],
+          "keywords": [
+            "daily life",
+            "day to day",
+            "affecting your work",
+            "affected your work",
+            "time off work",
+            "impact",
+            "impacting",
+            "look after yourself",
+            "light duties",
+            "managing at home",
+            "daily activities"
+          ],
+          "topics": [
+            "hpi.severity",
+            "sh.function"
+          ]
+        },
+        "emotion": "frustrated"
+      },
+      {
+        "id": "prior-episode",
+        "topic": "Previous episodes",
+        "answer": "About five years ago I hurt my back lifting at work — similar low back pain, but milder, and it didn't go down my leg. It settled in about two weeks with ibuprofen and keeping moving. Nothing since, until now.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "before",
+          "previous",
+          "happened before",
+          "past episode"
+        ],
+        "intents": {
+          "canonical": "Has this ever happened before?",
+          "paraphrases": [
+            "Have you had an episode like this before?",
+            "Have you had trouble with your back in the past?",
+            "Any previous episodes of back pain?",
+            "Is this the first time your back has been like this?",
+            "Have you ever had pain down your leg before?",
+            "Have you had back problems in the past?",
+            "Did you have a similar episode years ago?",
+            "Any history of back trouble?",
+            "Has your back ever played up like this before?",
+            "Have you had this before?",
+            "Have you had back pain before?",
+            "Any back problems before?"
+          ],
+          "keywords": [
+            "happened before",
+            "like this before",
+            "previous episodes",
+            "first time",
+            "back problems in the past",
+            "back pain before",
+            "similar episode",
+            "history of back"
+          ],
+          "topics": [
+            "hpi.prior"
+          ]
+        }
+      },
+      {
+        "id": "prior-care",
+        "topic": "Care and tests so far",
+        "answer": "No, this is the first time I've seen anyone about it. I haven't had any X-rays or scans, and I haven't seen a physical therapist or a chiropractor.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "seen anyone",
+          "x-ray",
+          "scan",
+          "physical therapy",
+          "chiropractor"
+        ],
+        "intents": {
+          "canonical": "Have you seen anyone about this before today?",
+          "paraphrases": [
+            "Have you seen a doctor about this pain?",
+            "Have you had any X-rays or scans?",
+            "Have you had an MRI of your back?",
+            "Have you seen a physical therapist or a physio?",
+            "Have you tried a chiropractor?",
+            "Has anyone examined your back yet?",
+            "Have you been to the emergency room or urgent care about this?",
+            "Have you had any tests for this?",
+            "Have you seen a specialist about your back?"
+          ],
+          "keywords": [
+            "seen anyone",
+            "seen a doctor",
+            "physio",
+            "physiotherapy",
+            "physical therapy",
+            "physical therapist",
+            "chiropractor",
+            "x ray",
+            "x rays",
+            "mri",
+            "any tests"
+          ],
+          "patterns": [],
+          "topics": [
+            "hpi.prior"
+          ]
+        },
+        "followUps": []
+      },
+      {
+        "id": "pmh",
+        "topic": "Past medical history",
+        "answer": "Just mild asthma — I've had it since I was about fourteen. It's well controlled; I only need my inhaler maybe once a month, and I've never been in hospital with it. Otherwise I'm healthy.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "medical conditions",
+          "medical problems",
+          "health problems",
+          "past medical",
+          "asthma",
+          "conditions"
+        ],
+        "intents": {
+          "canonical": "Do you have any medical conditions?",
+          "paraphrases": [
+            "What medical problems do you have?",
+            "Do you have any other health problems?",
+            "Tell me about your past medical history.",
+            "Have you been diagnosed with any illnesses?",
+            "Any PMH?",
+            "Do you have asthma?",
+            "Do you have any long-term conditions?",
+            "Any chronic illnesses?",
+            "Are you otherwise fit and well?",
+            "Do you have high blood pressure or diabetes?",
+            "When were you diagnosed with asthma?",
+            "Any significant medical history?"
+          ],
+          "keywords": [
+            "medical history",
+            "medical conditions",
+            "asthma",
+            "chronic illness",
+            "long term conditions",
+            "been diagnosed with",
+            "fit and well"
+          ],
+          "topics": [
+            "pmh.conditions"
+          ]
+        }
+      },
+      {
+        "id": "psh",
+        "topic": "Past surgeries and hospital stays",
+        "answer": "No operations. I've had two children, both normal deliveries, and that's the only time I've been in hospital.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "surgery",
+          "surgeries",
+          "operation",
+          "procedure",
+          "hospital"
+        ],
+        "intents": {
+          "canonical": "Have you had any operations or procedures?",
+          "paraphrases": [
+            "Have you ever had surgery?",
+            "Any past surgeries?",
+            "Any previous operations?",
+            "Have you ever been operated on?",
+            "Any past surgical history?",
+            "Any PSH?",
+            "Have you ever had back surgery?",
+            "Have you ever been admitted to hospital?",
+            "Any hospital stays?",
+            "Have you had any procedures done?"
+          ],
+          "keywords": [
+            "surgical history",
+            "operations",
+            "operated on",
+            "surgery",
+            "procedures",
+            "admitted to hospital",
+            "hospital stays",
+            "in hospital"
+          ],
+          "topics": [
+            "psh.surgery",
+            "pmh.hospital"
+          ]
+        }
+      },
+      {
+        "id": "obgyn",
+        "topic": "Periods and pregnancy",
+        "answer": "My periods are regular — the last one finished about a week ago. There's no chance I'm pregnant; my partner had a vasectomy after our second.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "period",
+          "pregnant",
+          "menstrual",
+          "contraception"
+        ],
+        "intents": {
+          "canonical": "Is there any chance you could be pregnant?",
+          "paraphrases": [
+            "When was your last menstrual period?",
+            "When was your last period?",
+            "Are your periods regular?",
+            "Could you be pregnant?",
+            "Do you use any contraception?",
+            "Any changes to your periods?",
+            "Are you pregnant or breastfeeding?",
+            "What is your LMP?",
+            "Any chance of pregnancy?"
+          ],
+          "keywords": [
+            "pregnant",
+            "pregnancy",
+            "last period",
+            "menstrual period",
+            "your periods",
+            "contraception",
+            "lmp",
+            "breastfeeding"
+          ],
+          "topics": [
+            "pmh.obgyn"
+          ]
+        }
+      },
+      {
+        "id": "meds",
+        "topic": "Medications and doses",
+        "answer": "Just my blue inhaler — salbutamol, two puffs when I need it, maybe once a month — and the ibuprofen for my back, 400 milligrams three times a day. Nothing else regularly, and no supplements.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "medication",
+          "medicine",
+          "pills",
+          "taking",
+          "dose",
+          "inhaler"
+        ],
+        "intents": {
+          "canonical": "What medications do you take?",
+          "paraphrases": [
+            "Are you on any medications?",
+            "What medicines are you currently taking?",
+            "Do you take any regular medicines?",
+            "Any regular meds?",
+            "What pills do you take?",
+            "Do you take any prescription medicines?",
+            "What doses do you take?",
+            "Do you use an inhaler?",
+            "Can you list your current medications?",
+            "Are you taking anything regularly?",
+            "Do you take any vitamins or supplements?"
+          ],
+          "keywords": [
+            "what medications",
+            "what medicines",
+            "on any medications",
+            "medication list",
+            "regular meds",
+            "prescription medicines",
+            "currently taking",
+            "inhaler",
+            "supplements"
+          ],
+          "topics": [
+            "meds.current"
+          ]
+        }
+      },
+      {
+        "id": "allergies",
+        "topic": "Allergies",
+        "answer": "Penicillin — I came out in an itchy rash all over as a child. No food allergies.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "allerg",
+          "reaction"
+        ],
+        "intents": {
+          "canonical": "Do you have any allergies?",
+          "paraphrases": [
+            "Are you allergic to anything?",
+            "Any drug allergies?",
+            "Any allergies to medications?",
+            "Have you ever had a reaction to a medicine?",
+            "Any known allergies?",
+            "Are you allergic to penicillin?",
+            "Any food allergies?",
+            "NKDA?",
+            "Have you had a bad reaction to any antibiotics?",
+            "What happened when you took penicillin?"
+          ],
+          "keywords": [
+            "allergies",
+            "allergic",
+            "allergy",
+            "penicillin",
+            "reaction to",
+            "nkda"
+          ],
+          "patterns": [
+            "\\b(penicillin|allergy|allergic|allergies|antibiotics?)\\b.*\\brash\\b",
+            "\\brash\\b.*\\b(penicillin|allergy|allergic|antibiotics?|medicine|medication)\\b"
+          ],
+          "topics": [
+            "allergies"
+          ]
+        }
+      },
+      {
+        "id": "fh",
+        "topic": "Family history",
+        "answer": "My mom is 70 and has arthritis in her knees and hips. My dad is 72 and has high blood pressure. My younger brother is healthy. Nobody in the family has had cancer or back problems that I know of.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "family",
+          "father",
+          "mother",
+          "dad",
+          "mom",
+          "brother",
+          "sister",
+          "siblings",
+          "parents"
+        ],
+        "intents": {
+          "canonical": "Does anything run in your family?",
+          "paraphrases": [
+            "Tell me about your family history.",
+            "Are your parents alive and well?",
+            "Any illnesses that run in the family?",
+            "Any FHx?",
+            "Do you have any brothers or sisters?",
+            "Has anyone in your family had back problems?",
+            "Is there any cancer in your family?",
+            "Does anyone in your family have arthritis?",
+            "How is your parents' health?",
+            "Any family history of serious illness?",
+            "Has anyone in your family had cancer?",
+            "Any medical conditions in the family?"
+          ],
+          "keywords": [
+            "family history",
+            "run in the family",
+            "runs in the family",
+            "your parents",
+            "your father",
+            "your mother",
+            "relatives",
+            "brothers or sisters"
+          ],
+          "topics": [
+            "fh"
+          ]
+        }
+      },
+      {
+        "id": "smoking",
+        "topic": "Smoking",
+        "answer": "No, I've never smoked or vaped.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "smoke",
+          "cigarette",
+          "tobacco",
+          "vape"
+        ],
+        "intents": {
+          "canonical": "Do you smoke?",
+          "paraphrases": [
+            "Have you ever smoked?",
+            "Do you use tobacco?",
+            "Are you a smoker?",
+            "Any history of smoking?",
+            "Do you smoke cigarettes?",
+            "Have you ever been a smoker?",
+            "Do you vape?",
+            "What is your smoking history?",
+            "Any cigarettes?"
+          ],
+          "keywords": [
+            "smoker",
+            "smoking",
+            "smoked",
+            "cigarettes",
+            "tobacco",
+            "vaping"
+          ],
+          "topics": [
+            "sh.smoking"
+          ]
+        }
+      },
+      {
+        "id": "alcohol",
+        "topic": "Alcohol",
+        "answer": "A glass or two of wine at the weekend. That's it.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "alcohol",
+          "drink",
+          "beer",
+          "wine"
+        ],
+        "intents": {
+          "canonical": "Do you drink alcohol?",
+          "paraphrases": [
+            "How much alcohol do you drink?",
+            "Do you drink?",
+            "How many drinks a week do you have?",
+            "Any alcohol?",
+            "How much do you drink in a week?",
+            "Do you drink beer or wine?",
+            "How often do you have a drink?",
+            "How many units of alcohol a week?",
+            "Do you drink at all?"
+          ],
+          "keywords": [
+            "alcohol",
+            "drinks a week",
+            "units of alcohol",
+            "drink alcohol",
+            "have a drink"
+          ],
+          "topics": [
+            "sh.alcohol"
+          ]
+        }
+      },
+      {
+        "id": "drugs",
+        "topic": "Recreational drugs",
+        "answer": "No, never — nothing like that.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "drugs",
+          "recreational",
+          "marijuana",
+          "cannabis",
+          "cocaine"
+        ],
+        "intents": {
+          "canonical": "Do you use any recreational drugs?",
+          "paraphrases": [
+            "Any recreational drug use?",
+            "Have you ever used street drugs?",
+            "Do you use marijuana?",
+            "Do you smoke weed?",
+            "Any cannabis use?",
+            "Have you ever used cocaine?",
+            "Do you take any illegal drugs?",
+            "Any illicit drugs?",
+            "Do you use any non-prescribed drugs?"
+          ],
+          "keywords": [
+            "recreational drugs",
+            "street drugs",
+            "illicit",
+            "illegal drugs",
+            "cannabis",
+            "marijuana",
+            "cocaine",
+            "weed"
+          ],
+          "topics": [
+            "sh.drugs"
+          ]
+        }
+      },
+      {
+        "id": "occupation",
+        "topic": "Occupation",
+        "answer": "I'm a supervisor at a warehouse. I'm on my feet most of the day, and I still help with the lifting when we're short-staffed. For the last two weeks they've had me on light duties.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "work",
+          "job",
+          "occupation",
+          "do for a living"
+        ],
+        "intents": {
+          "canonical": "What do you do for work?",
+          "paraphrases": [
+            "What is your job?",
+            "Are you working at the moment?",
+            "What do you do for a living?",
+            "What is your occupation?",
+            "Do you work?",
+            "Does your job involve heavy lifting?",
+            "Is your work physical?",
+            "What does your job involve?",
+            "Do you have to lift things at work?"
+          ],
+          "keywords": [
+            "occupation",
+            "for work",
+            "for a living",
+            "your job",
+            "employed",
+            "job involve"
+          ],
+          "topics": [
+            "sh.occupation"
+          ]
+        }
+      },
+      {
+        "id": "home",
+        "topic": "Who she lives with",
+        "answer": "With my partner, Sam, and our two teenagers — they're 15 and 17.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "live with",
+          "home",
+          "partner",
+          "children",
+          "married"
+        ],
+        "intents": {
+          "canonical": "Who do you live with?",
+          "paraphrases": [
+            "Do you live alone?",
+            "Who is at home with you?",
+            "What is your living situation?",
+            "Are you married?",
+            "Do you have children?",
+            "Who lives with you?",
+            "Do you have a partner?",
+            "Is there anyone at home to help you?",
+            "Tell me about your home situation.",
+            "Do you have any kids?"
+          ],
+          "keywords": [
+            "live with",
+            "live alone",
+            "living situation",
+            "at home with you",
+            "lives with you",
+            "home situation",
+            "have children",
+            "any kids"
+          ],
+          "topics": [
+            "sh.living"
+          ]
+        }
+      },
+      {
+        "id": "meaning",
+        "topic": "What gives her joy",
+        "answer": "My kids — I never miss my daughter's soccer games. And I love gardening, though that's on hold right now.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "enjoy",
+          "joy",
+          "meaning",
+          "hobbies",
+          "fun",
+          "like to do"
+        ],
+        "intents": {
+          "canonical": "What do you enjoy doing?",
+          "paraphrases": [
+            "What are your hobbies?",
+            "What do you like to do for fun?",
+            "What matters most to you?",
+            "What brings you joy?",
+            "What do you do in your spare time?",
+            "What is important to you in life?",
+            "How do you like to spend your time?",
+            "Any hobbies or interests?",
+            "What keeps you going?"
+          ],
+          "keywords": [
+            "hobbies",
+            "for fun",
+            "spare time",
+            "free time",
+            "matters most to you",
+            "enjoy doing",
+            "interests",
+            "pastimes"
+          ],
+          "topics": [
+            "sh.meaning"
+          ]
+        }
+      },
+      {
+        "id": "ideas",
+        "topic": "Her ideas about the cause",
+        "answer": "I think I must have pulled something moving that sofa. What I don't understand is why it's in my leg and my foot.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "think is going on",
+          "think is causing",
+          "theory",
+          "ideas"
+        ],
+        "intents": {
+          "canonical": "What do you think is causing the pain?",
+          "paraphrases": [
+            "What do you think is going on?",
+            "Do you have any ideas about what is causing this?",
+            "Have you had any thoughts about what this might be?",
+            "What do you think has happened to your back?",
+            "Do you have your own theory about it?",
+            "What is your understanding of what is going on?",
+            "Why do you think your leg hurts?",
+            "Have you read anything about what this could be?"
+          ],
+          "keywords": [
+            "think is causing",
+            "think is going on",
+            "think it is",
+            "your theory",
+            "own theory",
+            "any ideas",
+            "thoughts about what"
+          ],
+          "topics": [
+            "ice.ideas"
+          ]
+        }
+      },
+      {
+        "id": "concerns",
+        "topic": "Her concerns",
+        "answer": "I'm scared I've done something serious and I'll end up needing an operation, like my neighbor did. And I can't afford to lose work — we need my pay with two teenagers at home.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "worried",
+          "concern",
+          "scared",
+          "afraid"
+        ],
+        "intents": {
+          "canonical": "Is there anything you are worried about?",
+          "paraphrases": [
+            "What are you most worried about?",
+            "Do you have any concerns?",
+            "Is anything in particular worrying you?",
+            "What is your biggest concern?",
+            "Is there anything you are scared of?",
+            "Are you worried about needing surgery?",
+            "Are you worried about your job?",
+            "What worries you most about this?",
+            "Does anything about this frighten you?"
+          ],
+          "keywords": [
+            "worried",
+            "worrying you",
+            "concerns",
+            "concerned",
+            "scared",
+            "frighten",
+            "biggest concern"
+          ],
+          "topics": [
+            "ice.concerns"
+          ]
+        },
+        "emotion": "worried"
+      },
+      {
+        "id": "expectations",
+        "topic": "Her expectations",
+        "answer": "I'd like something that works better for the pain, and to know whether I need a scan. Mostly I want to know when I can get back to full duties.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "hoping",
+          "expect",
+          "expectations"
+        ],
+        "intents": {
+          "canonical": "What are you hoping we can do for you today?",
+          "paraphrases": [
+            "What are you expecting from today's visit?",
+            "What would you like to get out of today?",
+            "What are your expectations?",
+            "Is there anything specific you were hoping for?",
+            "Were you hoping for a scan or an X-ray?",
+            "What would you like us to do?",
+            "What are you hoping for from this appointment?",
+            "What would be a good outcome for you today?"
+          ],
+          "keywords": [
+            "hoping",
+            "expecting from today",
+            "expectations",
+            "out of today",
+            "hoping for",
+            "like us to do"
+          ],
+          "topics": [
+            "ice.expectations"
+          ]
+        }
+      }
+    ],
+    "pertinentNegatives": [
+      {
+        "id": "neg-bladder-bowel",
+        "topic": "Bladder or bowel changes",
+        "answer": "No. My bladder and bowels are completely normal — no trouble passing water, no leaking, no accidents, and I can feel when I need to go.",
+        "keywords": [
+          "bladder",
+          "bowel",
+          "urine",
+          "incontinence",
+          "toilet"
+        ],
+        "intents": {
+          "canonical": "Have you had any problems controlling your bladder or bowels?",
+          "paraphrases": [
+            "Any changes in your bladder or bowel habits?",
+            "Any trouble passing urine?",
+            "Have you had any difficulty emptying your bladder?",
+            "Any incontinence?",
+            "Have you wet yourself or had any accidents?",
+            "Any loss of bowel control?",
+            "Can you feel when you need to go to the toilet?",
+            "Have you had any urinary retention?",
+            "Any leaking of urine or stool?",
+            "Are your waterworks and bowels normal?",
+            "Does your bladder wake you up at night?",
+            "Do you leak urine when you cough or sneeze?"
+          ],
+          "keywords": [
+            "bladder",
+            "bowels",
+            "bowel control",
+            "bladder control",
+            "incontinence",
+            "urinary retention",
+            "retention",
+            "emptying your bladder",
+            "passing urine"
+          ],
+          "patterns": [
+            "\\b(control|controlling|leak|leaking|lose|losing|loss|empty|emptying|trouble|difficulty)\\b.*\\b(bladder|bowels?|urine|urinate|urinating|stool|toilet)\\b"
+          ],
+          "topics": [
+            "ros.gu",
+            "ros.gi",
+            "hpi.associated"
+          ]
+        }
+      },
+      {
+        "id": "neg-saddle-numbness",
+        "topic": "Saddle numbness",
+        "answer": "No, nothing like that. The skin around my bottom and between my legs feels normal — it feels normal when I wipe.",
+        "keywords": [
+          "saddle",
+          "groin",
+          "between your legs",
+          "bottom"
+        ],
+        "intents": {
+          "canonical": "Have you had any numbness around your bottom or between your legs?",
+          "paraphrases": [
+            "Any numbness in the saddle area?",
+            "Any saddle anaesthesia?",
+            "Does it feel normal when you wipe after the toilet?",
+            "Any numbness in your groin or genitals?",
+            "Any numbness around your anus?",
+            "Does your bottom feel numb when you sit on the toilet?",
+            "Is there any numbness in the area you would sit on a saddle?",
+            "Any numbness around your back passage or private parts?",
+            "Any numbness in your buttocks or inner thighs?"
+          ],
+          "keywords": [
+            "saddle",
+            "saddle anaesthesia",
+            "saddle anesthesia",
+            "between your legs",
+            "around your bottom",
+            "when you wipe",
+            "groin",
+            "perineal",
+            "perineum",
+            "inner thighs"
+          ],
+          "topics": [
+            "ros.neuro",
+            "hpi.associated"
+          ]
+        }
+      },
+      {
+        "id": "neg-both-legs",
+        "topic": "Symptoms in the other leg / both legs",
+        "answer": "No, my right leg is completely fine — no pain, numbness or tingling, and it feels as strong as ever. It's only the left side, and neither leg has ever given way.",
+        "keywords": [
+          "both legs",
+          "other leg",
+          "right leg"
+        ],
+        "intents": {
+          "canonical": "Do you have any symptoms in your other leg?",
+          "paraphrases": [
+            "Is the pain in both legs?",
+            "Is your right leg affected at all?",
+            "Any pain or numbness in the right leg?",
+            "Does the pain ever go down both legs?",
+            "Is it just your left leg?",
+            "Is the other leg okay?",
+            "Have both of your legs been affected?",
+            "Do your legs ever give way under you?",
+            "Does your right foot feel normal?",
+            "Are both legs weak?"
+          ],
+          "keywords": [
+            "both legs",
+            "other leg",
+            "right leg",
+            "right foot",
+            "give way",
+            "given way",
+            "just your left",
+            "only your left",
+            "both sides"
+          ],
+          "topics": [
+            "hpi.location",
+            "ros.neuro"
+          ]
+        }
+      },
+      {
+        "id": "neg-fever-chills",
+        "topic": "Fever / chills / night sweats",
+        "answer": "No fevers, chills or night sweats.",
+        "keywords": [
+          "fever",
+          "chills",
+          "temperature",
+          "sweats"
+        ],
+        "intents": {
+          "canonical": "Have you noticed any fevers or chills?",
+          "paraphrases": [
+            "Have you had any fevers or chills?",
+            "Have you been running a temperature?",
+            "Any fevers, chills or night sweats?",
+            "Have you had chills or shivering?",
+            "Have you felt hot and feverish?",
+            "Any night sweats?",
+            "Have you woken up soaked in sweat?",
+            "Has your temperature been up?"
+          ],
+          "keywords": [
+            "fevers",
+            "feverish",
+            "rigors",
+            "shivers",
+            "running a temperature",
+            "hot and cold",
+            "night sweats",
+            "chills",
+            "fever"
+          ],
+          "topics": [
+            "ros.constitutional"
+          ]
+        }
+      },
+      {
+        "id": "neg-weight-loss",
+        "topic": "Weight loss",
+        "answer": "No, my weight's steady and my appetite is normal.",
+        "keywords": [
+          "weight",
+          "appetite"
+        ],
+        "intents": {
+          "canonical": "Have you lost any weight without trying?",
+          "paraphrases": [
+            "Any weight loss lately?",
+            "Has your weight gone down?",
+            "Have you been losing weight?",
+            "Any unintentional weight loss?",
+            "Have your clothes become looser?",
+            "How is your appetite?",
+            "Has your appetite changed?",
+            "Any change in your weight?"
+          ],
+          "keywords": [
+            "weight loss",
+            "lost weight",
+            "losing weight",
+            "unintentional",
+            "your weight",
+            "appetite",
+            "clothes looser"
+          ],
+          "topics": [
+            "ros.constitutional",
+            "ros.gi"
+          ]
+        }
+      },
+      {
+        "id": "neg-cancer-history",
+        "topic": "History of cancer",
+        "answer": "No, I've never had cancer or any lumps. My Pap smears have always been normal, and my mammogram last year was fine.",
+        "keywords": [
+          "cancer",
+          "tumour",
+          "malignancy"
+        ],
+        "intents": {
+          "canonical": "Have you ever had cancer?",
+          "paraphrases": [
+            "Any history of cancer?",
+            "Have you ever been treated for a tumour?",
+            "Have you ever had any kind of malignancy?",
+            "Have you had cancer in the past?",
+            "Have you ever been diagnosed with cancer?",
+            "Any lumps in your breasts or anywhere else?",
+            "Have you had any cancer screening?",
+            "Have you had a mammogram?"
+          ],
+          "keywords": [
+            "cancer",
+            "tumour",
+            "tumor",
+            "malignancy",
+            "mammogram",
+            "smear",
+            "lumps"
+          ],
+          "topics": [
+            "pmh.conditions"
+          ]
+        }
+      },
+      {
+        "id": "neg-night-rest-pain",
+        "topic": "Night pain / pain at rest",
+        "answer": "No. If I lie on my back with a pillow under my knees it settles and I can sleep. It only wakes me if I roll over awkwardly.",
+        "keywords": [
+          "night",
+          "wake",
+          "rest",
+          "sleep"
+        ],
+        "intents": {
+          "canonical": "Does the pain wake you up at night?",
+          "paraphrases": [
+            "Do you have pain at night?",
+            "Is the pain there even when you are resting?",
+            "Does the pain keep you awake?",
+            "Is the pain worse at night?",
+            "Do you get pain when you are lying still?",
+            "How are you sleeping?",
+            "Have you had any trouble sleeping because of the pain?",
+            "Is there pain at rest?",
+            "Does the pain ever wake you from sleep?"
+          ],
+          "keywords": [
+            "wake you",
+            "wakes you",
+            "keep you awake",
+            "night pain",
+            "at rest",
+            "lying still",
+            "sleeping",
+            "trouble sleeping"
+          ],
+          "topics": [
+            "hpi.timing",
+            "ros.psych"
+          ]
+        }
+      },
+      {
+        "id": "neg-trauma",
+        "topic": "Falls / trauma",
+        "answer": "No falls, accidents or knocks to my back — nothing like that. It just came on after moving that sofa.",
+        "keywords": [
+          "fall",
+          "accident",
+          "trauma",
+          "injury"
+        ],
+        "intents": {
+          "canonical": "Have you had any injury to your back, like a fall or an accident?",
+          "paraphrases": [
+            "Have you had any falls recently?",
+            "Any trauma to your back?",
+            "Were you in a car accident?",
+            "Did you fall onto your back?",
+            "Have you had any accidents?",
+            "Did anything hit your back?",
+            "Have you injured yourself recently?",
+            "Any recent injuries?"
+          ],
+          "keywords": [
+            "fall",
+            "falls",
+            "fallen",
+            "accident",
+            "accidents",
+            "trauma",
+            "injured",
+            "injury",
+            "car accident",
+            "knock"
+          ],
+          "topics": [
+            "hpi.triggers",
+            "ros.msk"
+          ]
+        }
+      },
+      {
+        "id": "neg-infection-immune",
+        "topic": "Recent infection / immune problems / spinal procedures",
+        "answer": "No — I haven't had any infections lately, no diabetes or immune problems that I know of, and nobody's put a needle in my back.",
+        "keywords": [
+          "infection",
+          "immune",
+          "injection"
+        ],
+        "intents": {
+          "canonical": "Have you had any recent infections?",
+          "paraphrases": [
+            "Do you have a weakened immune system?",
+            "Do you have HIV or anything that lowers your immunity?",
+            "Have you had a urine or skin infection recently?",
+            "Have you had any injections or procedures on your back?",
+            "Are you on any medicines that suppress your immune system?",
+            "Have you been unwell with an infection lately?",
+            "Any recent dental work or infections?"
+          ],
+          "keywords": [
+            "infection",
+            "infections",
+            "immune",
+            "immunity",
+            "immunosuppressed",
+            "hiv",
+            "epidural",
+            "injection in your back"
+          ],
+          "patterns": [],
+          "topics": [
+            "ros.constitutional",
+            "pmh.conditions"
+          ]
+        }
+      },
+      {
+        "id": "neg-rash",
+        "topic": "Rash on the back or leg",
+        "answer": "No, there's no rash, blisters or spots on my back or leg.",
+        "keywords": [
+          "rash",
+          "blisters",
+          "shingles"
+        ],
+        "intents": {
+          "canonical": "Have you noticed any rash on your back or leg?",
+          "paraphrases": [
+            "Any blisters on your skin?",
+            "Have you had shingles?",
+            "Any spots or a rash where the pain is?",
+            "Is there any redness or rash on your leg?",
+            "Any skin changes on your back?",
+            "Have you noticed any rash?"
+          ],
+          "keywords": [
+            "rash",
+            "rashes",
+            "blisters",
+            "shingles",
+            "spots",
+            "skin changes"
+          ],
+          "patterns": [],
+          "topics": [
+            "ros.skin"
+          ]
+        }
+      },
+      {
+        "id": "neg-abdo-urinary",
+        "topic": "Abdominal / flank pain and urinary symptoms",
+        "answer": "No stomach pain or pain in my side, and no burning or blood when I pass water.",
+        "keywords": [
+          "abdominal",
+          "stomach",
+          "flank",
+          "burning",
+          "blood in your urine"
+        ],
+        "intents": {
+          "canonical": "Have you had any abdominal pain?",
+          "paraphrases": [
+            "Have you had a stomach ache?",
+            "Have you had pain in your side or flank?",
+            "Does it burn when you pass urine?",
+            "Any blood in your urine?",
+            "Any kidney problems?",
+            "Does it hurt to pee?"
+          ],
+          "keywords": [
+            "abdominal pain",
+            "stomach pain",
+            "flank",
+            "flank pain",
+            "loin pain",
+            "burning",
+            "blood in your urine",
+            "kidney",
+            "kidneys",
+            "pain when you pee"
+          ],
+          "patterns": [],
+          "topics": [
+            "ros.gi",
+            "ros.gu"
+          ]
+        }
+      },
+      {
+        "id": "neg-injecting-drugs",
+        "topic": "Injecting drug use",
+        "answer": "No, never. I've never injected anything.",
+        "keywords": [
+          "inject",
+          "needles",
+          "intravenous"
+        ],
+        "intents": {
+          "canonical": "Have you ever injected drugs?",
+          "paraphrases": [
+            "Have you ever used IV drugs?",
+            "Any intravenous drug use?",
+            "Have you ever used needles to take drugs?",
+            "Have you ever shared needles?",
+            "Do you inject anything?",
+            "Any history of injecting drug use?",
+            "Have you ever injected heroin or other drugs?",
+            "Have you ever put drugs into a vein?"
+          ],
+          "keywords": [
+            "injected",
+            "injecting",
+            "inject",
+            "iv drugs",
+            "intravenous",
+            "needles",
+            "ivdu"
+          ],
+          "topics": [
+            "sh.drugs"
+          ]
+        }
+      },
+      {
+        "id": "neg-steroids",
+        "topic": "Steroid use",
+        "answer": "No. I've never needed steroid tablets for my asthma — I just use the blue inhaler now and then.",
+        "keywords": [
+          "steroid",
+          "prednisolone",
+          "prednisone"
+        ],
+        "intents": {
+          "canonical": "Have you ever been on steroids?",
+          "paraphrases": [
+            "Have you ever taken steroid tablets like prednisolone?",
+            "Any long-term steroid use?",
+            "Have you ever needed prednisolone for your asthma?",
+            "Have you needed steroids for your asthma?",
+            "Have you had courses of steroids?",
+            "Do you use a steroid inhaler?",
+            "Any prednisone?",
+            "Have you ever been on long-term steroids?"
+          ],
+          "keywords": [
+            "steroid",
+            "steroids",
+            "prednisolone",
+            "prednisone",
+            "corticosteroids",
+            "steroid tablets"
+          ],
+          "topics": [
+            "meds.current"
+          ]
+        }
+      },
+      {
+        "id": "neg-sexual-dysfunction",
+        "topic": "Change in sexual function",
+        "answer": "Things are fine in that department with my partner — nothing's changed, and no numbness or loss of feeling down there. My back just makes it a bit awkward.",
+        "keywords": [
+          "sexual",
+          "sex",
+          "intercourse"
+        ],
+        "intents": {
+          "canonical": "Have you noticed any change in sexual function?",
+          "paraphrases": [
+            "Any problems with sexual function?",
+            "Any loss of sensation during sex?",
+            "Are you sexually active?",
+            "Has anything changed in your sex life since the pain started?",
+            "Any sexual difficulties?",
+            "Can I ask about your sexual health?",
+            "Any numbness or reduced feeling during intercourse?",
+            "Has the pain affected your sex life?"
+          ],
+          "keywords": [
+            "sexual function",
+            "sex life",
+            "sexually active",
+            "sexual difficulties",
+            "intercourse",
+            "sexual health",
+            "during sex"
+          ],
+          "topics": [
+            "ros.gu",
+            "sh.sexual"
+          ]
+        }
+      },
+      {
+        "id": "neg-claudication",
+        "topic": "Leg pain brought on by walking",
+        "answer": "No — walking doesn't bring the leg pain on. If anything, a short walk eases it. It's sitting that's the worst.",
+        "keywords": [
+          "walking distance",
+          "claudication"
+        ],
+        "intents": {
+          "canonical": "Do you get leg pain that comes on with walking and eases when you stop or sit down?",
+          "paraphrases": [
+            "Do your legs hurt after walking a certain distance?",
+            "Do you have to stop and rest after walking a distance?",
+            "Does walking bring on pain in your calves?",
+            "Do you get calf pain when you walk?",
+            "Does the pain get worse the further you walk?",
+            "Do you have to sit down or bend forward to relieve leg pain when walking?",
+            "Is it easier to walk leaning on a shopping cart?",
+            "How far can you walk before the leg pain stops you?"
+          ],
+          "keywords": [
+            "claudication",
+            "walking distance",
+            "how far can you walk",
+            "calf pain when walking",
+            "further you walk",
+            "stop and rest",
+            "shopping cart",
+            "shopping trolley"
+          ],
+          "topics": [
+            "ros.cardiac",
+            "hpi.aggravating"
+          ]
+        }
+      },
+      {
+        "id": "neg-mood",
+        "topic": "Mood",
+        "answer": "I'm fed up and a bit stressed about work, but I wouldn't say I'm depressed. My mood's been okay.",
+        "keywords": [
+          "mood",
+          "depress",
+          "anxious",
+          "anxiety",
+          "stress"
+        ],
+        "intents": {
+          "canonical": "How has your mood been?",
+          "paraphrases": [
+            "Have you been feeling down or depressed?",
+            "Any low mood?",
+            "How are you coping emotionally?",
+            "Have you been feeling anxious or stressed?",
+            "How are your spirits?",
+            "Have you been feeling low lately?",
+            "Any anxiety or depression?",
+            "Is all this getting you down?"
+          ],
+          "keywords": [
+            "mood",
+            "depressed",
+            "depression",
+            "feeling down",
+            "feeling low",
+            "stressed",
+            "coping emotionally",
+            "getting you down"
+          ],
+          "topics": [
+            "ros.psych"
+          ]
+        },
+        "emotion": "frustrated"
+      }
+    ],
+    "unknownPolicy": {
+      "negativeReply": "No, nothing like that.",
+      "unknownReply": "Hmm, I'm not sure. I haven't noticed anything like that."
+    },
+    "conversation": [
+      {
+        "kind": "how_are_you",
+        "replies": [
+          "Not great, to be honest — I can't get comfortable with this leg.",
+          "Sore. It's hard to sit still with this pain.",
+          "Honestly, not great. This back and leg are really getting to me."
+        ],
+        "emotion": "in_pain"
+      },
+      {
+        "kind": "position_request",
+        "replies": [
+          "Okay — give me a second, I have to move slowly.",
+          "Alright, just let me ease myself round.",
+          "Okay. Slowly, though."
+        ]
+      }
+    ],
+    "emotionCues": [
+      {
+        "emotion": "worried",
+        "acknowledgement": "Thank you. I am worried about it, honestly — and about work."
+      },
+      {
+        "emotion": "in_pain",
+        "acknowledgement": "Thanks. It really is sore — I just can't get comfortable."
+      },
+      {
+        "emotion": "frustrated",
+        "acknowledgement": "Thanks for saying that. It's just so frustrating not being able to do my job properly."
+      }
+    ]
+  },
+  "abnormalFindings": {
+    "general_appearance": {
+      "default": "Well-appearing woman in obvious discomfort: sits tilted onto her right buttock, shifts position every minute or so and stands partway through to ease her leg. Alert and conversant; not otherwise unwell or distressed."
+    },
+    "back_inspection": {
+      "default": "Stands with her weight shifted onto the right leg. Spine straight with no scoliosis or lateral shift; the normal lumbar curve is slightly flattened, with prominent left lower paraspinal muscles (spasm). Shoulders and iliac crests level; no skin changes, scars or swelling."
+    },
+    "back_palpation": {
+      "spine_lumbar": {
+        "text": "Tender over the left paraspinal muscles at the lumbosacral junction (around L5–S1), with palpable muscle spasm. No midline spinous process tenderness and no step-off.",
+        "response": {
+          "say": "Ooh, that's sore — just there on the left.",
+          "wince": true
+        }
+      },
+      "sacrum": "No tenderness over the sacrum or either sacroiliac joint."
+    },
+    "back_rom": {
+      "spine_lumbar": {
+        "text": "Forward flexion limited: fingertips reach only mid-thigh before pain shoots down the left leg. Extension mildly painful in the low back. Side-bending and rotation slightly limited by low-back stiffness.",
+        "response": {
+          "say": "That's as far as I can go — it's shooting down my leg.",
+          "wince": true
+        }
+      },
+      "spine_thoracic": "Thoracic rotation full and painless with the pelvis held still.",
+      "spine_cervical": "Full painless neck flexion, extension, side-bending and rotation."
+    },
+    "straight_leg_raise": {
+      "hip_left": {
+        "text": "Positive at about 40°: raising the straightened left leg reproduces her sharp pain down the back of the thigh and calf, below the knee, to the outer foot. Lowering the leg slightly eases it; dorsiflexing the ankle at that point brings it back.",
+        "response": {
+          "say": "Ow — that's it, that's the pain right down my leg to my foot.",
+          "wince": true
+        }
+      },
+      "hip_right": {
+        "text": "Right leg raised to about 80° with only a hamstring stretch behind the knee; no back pain and no pain in either leg (crossed straight leg raise negative).",
+        "response": {
+          "say": "That's fine — just a stretch behind my knee."
+        }
+      },
+      "default": "Left straight leg raise positive at about 40°, reproducing pain below the knee to the outer foot, worse with ankle dorsiflexion. Right straight leg raise to about 80° without pain; crossed straight leg raise negative."
+    },
+    "strength_l4_s1_ankle": {
+      "ankle_left": "Left ankle plantarflexion 4/5: push-off against resistance is clearly weaker than on the right. Left dorsiflexion, great-toe extension and eversion 5/5.",
+      "foot_left": "Left ankle plantarflexion 4/5: push-off against resistance is clearly weaker than on the right. Left dorsiflexion, great-toe extension and eversion 5/5.",
+      "ankle_right": "Right ankle plantarflexion, dorsiflexion and great-toe extension 5/5.",
+      "foot_right": "Right ankle plantarflexion, dorsiflexion and great-toe extension 5/5.",
+      "neuro_motor_lower": "Ankles: left plantarflexion 4/5 (push-off clearly weaker than the right); left dorsiflexion, great-toe extension and eversion 5/5; right ankle 5/5 throughout."
+    },
+    "reflex_achilles": {
+      "achilles_left": {
+        "text": "Left Achilles reflex reduced (1+) compared with the right.",
+        "visual": {
+          "reflex": 1
+        }
+      },
+      "achilles_right": {
+        "text": "Right Achilles reflex normal (2+), brisker than the left.",
+        "visual": {
+          "reflex": 2
+        }
+      },
+      "neuro_reflexes": "Ankle (Achilles) reflexes: left 1+ (reduced), right 2+."
+    },
+    "sensation_light_touch": {
+      "neuro_sensory": "Light touch reduced over the outer (lateral) border of the left foot, the little toe and the outer sole and heel. Normal over the inner (medial) lower leg, the top of the foot and great toe, the rest of both legs and the arms."
+    },
+    "sensation_pin_prick": {
+      "neuro_sensory": "Pin prick feels dull over the outer (lateral) border of the left foot, the little toe and the outer sole and heel. Sharp and symmetric over the inner (medial) lower leg, the top of the foot and great toe, the rest of both legs and the arms."
+    },
+    "sensation_light_touch_swab": {
+      "foot_lateral_left": {
+        "text": "Feels the cotton swab along the outer edge of the left foot, but it is duller than on the right.",
+        "response": {
+          "say": "I can feel it, but it's duller than on the other side."
+        }
+      },
+      "foot_lateral_right": "Feels the cotton swab normally here — clearer than on the outer edge of the left foot."
+    },
+    "sensation_pinprick_pin": {
+      "foot_lateral_left": {
+        "text": "Feels the pin along the outer edge of the left foot, but it is less sharp — duller — than on the right.",
+        "response": {
+          "say": "It's not as sharp as the other side — more of a dull touch."
+        }
+      },
+      "foot_lateral_right": "Feels the pin as sharp here — sharper than on the outer edge of the left foot."
+    },
+    "gait": {
+      "default": "Mildly antalgic gait, spending less time on the left leg; normal base and arm swing. Heel walking normal on both sides. Cannot walk on the toes of the left foot — the left heel drops — while toe walking on the right is normal. Manages only 2 single-leg heel raises on the left versus 10 on the right. Tandem walking intact."
+    },
+    "rise_from_chair": {
+      "default": "Rises from the chair without using her arms, but slowly and guardedly because of back and left leg pain."
+    },
+    "lower_limb_standing_inspection": {
+      "default": "Stands with her weight shifted onto the right leg. Legs otherwise symmetric: no calf wasting, deformity, swelling or discoloration."
+    }
+  },
+  "visibleSigns": {
+    "breathing": "normal"
+  },
+  "expectedDifferential": [
+    {
+      "rank": 1,
+      "diagnosis": "Left S1 radiculopathy from an L5–S1 disc herniation",
+      "rationale": "Leg-dominant pain in an S1 distribution (left buttock, back of thigh and calf, lateral foot and little toe) beginning after a lifting and twisting strain; worse with sitting, bending, coughing and sneezing; better lying with knees bent. Positive left straight leg raise at about 40° (crossed SLR negative), reduced left ankle reflex, weak left plantarflexion (cannot toe-walk) and reduced sensation over the lateral foot. Knee reflexes, dorsiflexion and great-toe extension are normal, so L4 and L5 are spared. No red flags; the motor deficit is mild — conservative care with review in 1–2 weeks; MRI and spinal referral if weakness progresses or is ≤3/5, red flags appear, or symptoms persist beyond about 6 weeks."
+    },
+    {
+      "rank": 2,
+      "diagnosis": "Lumbar muscle strain (mechanical low back pain)",
+      "rationale": "Lifting onset and left paraspinal tenderness and spasm fit, but a strain does not explain dermatomal pain below the knee, sensory loss, a reduced ankle reflex or plantarflexion weakness."
+    },
+    {
+      "rank": 3,
+      "diagnosis": "Lumbar spinal stenosis (lateral recess or foraminal)",
+      "rationale": "Can compress a single root, but is typically seen in older patients, with leg symptoms brought on by walking and eased by sitting or bending forward; here sitting and flexion worsen the pain and walking helps."
+    },
+    {
+      "rank": 4,
+      "diagnosis": "Piriformis syndrome",
+      "rationale": "Buttock pain radiating down the leg and worse with sitting, but a reduced reflex, myotomal weakness, dermatomal sensory loss and a positive SLR point to a nerve root lesion."
+    },
+    {
+      "rank": 5,
+      "diagnosis": "Sacroiliac joint dysfunction",
+      "rationale": "Can cause buttock and posterior thigh pain, but there is no sacroiliac tenderness, FABER is negative and pain below the knee with neurological deficits is not explained."
+    },
+    {
+      "rank": 6,
+      "diagnosis": "Left L5 radiculopathy (L4–L5 disc) — considered; the pattern does not fit",
+      "rationale": "An L5 root lesion gives pain and numbness over the lateral leg, top of the foot and great toe, weak ankle dorsiflexion and great-toe extension (difficulty heel walking, sometimes a foot drop) with a preserved ankle reflex. Here dorsiflexion, great-toe extension and heel walking are normal, sensation is reduced on the lateral foot and sole, and the ankle reflex is reduced with weak plantarflexion — an S1 pattern."
+    },
+    {
+      "rank": 7,
+      "diagnosis": "Must not miss: cauda equina syndrome",
+      "rationale": "Considered and screened for: no urinary retention or incontinence, no bowel change, no saddle numbness, no sexual dysfunction, unilateral symptoms and no bilateral weakness. Safety-net: any of these developing needs same-day emergency assessment and urgent MRI."
+    },
+    {
+      "rank": 8,
+      "diagnosis": "Must not miss: spinal infection or malignancy",
+      "rationale": "No fever, weight loss, cancer history, night or rest pain, injecting drug use or steroid use, a clear mechanical precipitant and normal vitals make these unlikely."
+    }
+  ],
+  "markSheetIds": [
+    "communication-1b",
+    "encounter-1b"
+  ],
+  "itemsNotApplicable": [
+    {
+      "itemId": "sh-sexual",
+      "reason": "A full sexual history is not relevant to this mechanical back and leg pain presentation; new sexual dysfunction is screened as part of the cauda equina red flags."
+    },
+    {
+      "itemId": "sh-travel",
+      "reason": "Travel history is not relevant to this mechanical back and leg pain presentation."
+    }
+  ],
+  "synthetic": true,
+  "sourceNote": "Fully synthetic teaching case written by the team. Not based on any real patient.",
+  "peChecklist": [
+    {
+      "id": "fcm-01-hand-hygiene",
+      "fcmId": 1,
+      "section": "Clinical courtesy",
+      "label": "Cleans hands before first touching the patient",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "hygieneBeforeTouch": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-02-notes",
+      "fcmId": 2,
+      "section": "Clinical courtesy",
+      "label": "Note-taking does not interfere with rapport",
+      "weight": 1,
+      "scoring": "not_assessable",
+      "notAssessableReason": "Note-taking behaviour and eye contact are not visible in this interface.",
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-03-drape",
+      "fcmId": 3,
+      "section": "Clinical courtesy",
+      "label": "Keeps the patient draped, covering areas again after examining them",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "courtesy": "drape"
+          },
+          {
+            "happened": "drape:cover"
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-consent",
+      "section": "Clinical courtesy",
+      "label": "Asks permission before the first physical contact",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "before": [
+          "tag:asked_consent_exam",
+          "first:touch"
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-04-comfort",
+      "fcmId": 4,
+      "section": "Clinical courtesy",
+      "label": "Verbally checks the patient's comfort during the exam",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Credit if the student, during the physical exam, says something that shows attention to the patient's comfort or dignity: asks if they are comfortable, asks them to say if anything hurts or to stop if the leg pain flares, warns before touching, offers help repositioning.",
+      "mockKeywords": [
+        "comfortable",
+        "let me know if",
+        "tell me if",
+        "hurt",
+        "sore",
+        "cold",
+        "okay if i",
+        "let me know if it hurts",
+        "tell me if anything hurts",
+        "are you comfortable",
+        "stop me if"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-exit-hygiene",
+      "section": "Clinical courtesy",
+      "label": "Cleans hands again after the last contact, before leaving",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "all": [
+          {
+            "before": [
+              "last:touch",
+              "last:hand_hygiene"
+            ]
+          },
+          {
+            "happened": "room:exit"
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-closing",
+      "section": "Clinical courtesy",
+      "label": "Closes the encounter (thanks the patient / says goodbye)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "said": "closing"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-10-general",
+      "fcmId": 10,
+      "section": "General appearance",
+      "label": "Comments on general appearance",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "general_appearance"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "rf-cauda-equina",
+      "section": "Red-flag screen",
+      "label": "Asks about cauda equina red flags (bladder or bowel control, saddle numbness, both legs)",
+      "weight": 2,
+      "scoring": "match",
+      "guidance": "Credit when the student asks at least two distinct cauda equina screening questions: bladder emptying or control, bowel control, numbness in the saddle / genital / perianal area, new sexual dysfunction, or symptoms or weakness in both legs.",
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "saddle",
+          "saddle anaesthesia",
+          "saddle anesthesia",
+          "bladder control",
+          "bowel control",
+          "control your bladder",
+          "control your bowels",
+          "control of your bladder",
+          "control of your bowels",
+          "incontinence",
+          "urinary retention",
+          "when you wipe",
+          "sexual function"
+        ],
+        "patterns": [
+          "\\b(any|anything|have you|do you|did you|are you|is there|has there been|can you|ever)\\b.*\\b(bladder|bowels?|urine|urinate|urinating|incontinen\\w*|retention|accidents|wet yourself|soiled|toilet)\\b",
+          "\\b(any|anything|have you|do you|did you|are you|is there|has there been|can you|ever)\\b.*\\b(numb\\w*|tingl\\w*|feeling|sensation)\\b.*\\b(saddle|groin|genitals|rectum|bottom|buttocks|between your legs|inner thighs|perine\\w*|private)\\b",
+          "\\b(any|anything|have you|do you|did you|are you|is there|has there been|ever)\\b.*\\b(both legs|other leg|right leg|both sides)\\b"
+        ],
+        "exemplars": [
+          "Have you had any trouble controlling your bladder or bowels?",
+          "Any numbness around your bottom or between your legs?",
+          "Does it feel normal when you wipe?",
+          "Have you had any difficulty passing urine?",
+          "Is the pain going down both legs?",
+          "Have you noticed any change in sexual function?"
+        ],
+        "counterExemplars": [
+          "Do you drink alcohol?",
+          "Where exactly is the pain?",
+          "Any numbness in your foot?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 2,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "rf-serious-pathology",
+      "section": "Red-flag screen",
+      "label": "Asks about red flags for infection, cancer or fracture (fever, weight loss, cancer history, night pain, steroids, injecting drugs, trauma)",
+      "weight": 1,
+      "scoring": "match",
+      "guidance": "Credit when the student asks at least two distinct questions screening for serious spinal pathology: fever or chills, unintentional weight loss, past cancer, night or rest pain, long-term steroid use, injecting drug use or immunosuppression, or significant trauma.",
+      "match": {
+        "sources": [
+          "say"
+        ],
+        "keywords": [
+          "weight loss",
+          "lost weight",
+          "losing weight",
+          "history of cancer",
+          "had cancer",
+          "night sweats",
+          "steroids",
+          "steroid",
+          "injected drugs",
+          "injecting drugs",
+          "night pain",
+          "wake you up at night",
+          "fevers",
+          "fever",
+          "chills"
+        ],
+        "patterns": [
+          "\\b(any|anything|have you|do you|did you|are you|is there|has there been|ever)\\b.*\\b(fevers?|feverish|chills|night sweats|weight|cancer|tumou?r|lumps?|steroids?|prednisolone|prednisone|inject\\w*|needles|immun\\w*|wake you|wakes you|night pain|at rest|falls?|fallen|accident|trauma|injur\\w*)\\b"
+        ],
+        "exemplars": [
+          "Have you had any fevers or chills?",
+          "Have you lost any weight without trying?",
+          "Have you ever had cancer?",
+          "Does the pain wake you up at night?",
+          "Have you ever taken steroids?",
+          "Have you ever injected drugs?",
+          "Have you had any falls or accidents?"
+        ],
+        "counterExemplars": [
+          "How much do you weigh?",
+          "Do you smoke?",
+          "What do you do for work?"
+        ],
+        "topics": [],
+        "form": "any",
+        "polarity": "any",
+        "minMatches": 2,
+        "window": "any"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-88-back-inspection",
+      "fcmId": 88,
+      "section": "Back",
+      "label": "Inspects the back (posture, alignment, muscle spasm)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "back_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-89-back-palpation",
+      "fcmId": 89,
+      "section": "Back",
+      "label": "Palpates the lumbar spine and paraspinal muscles",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "back_palpation",
+        "regions": [
+          "spine_lumbar"
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-90-back-rom",
+      "fcmId": 90,
+      "section": "Back",
+      "label": "Assesses lumbar range of motion",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "back_rom",
+        "regions": [
+          "spine_lumbar"
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-91-slr-both",
+      "fcmId": 91,
+      "section": "Back",
+      "label": "Straight leg raise on each leg, including the unaffected side",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "straight_leg_raise",
+        "regions": [
+          "hip_left",
+          "hip_right"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-91-slr-supine",
+      "fcmId": 91,
+      "section": "Back",
+      "label": "Technique: straight leg raise with the patient lying flat",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "straight_leg_raise",
+          "position": "supine"
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-92-faber",
+      "fcmId": 92,
+      "section": "Back",
+      "label": "Screens the hip and sacroiliac joint on each side (FABER)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "faber_test",
+        "regions": [
+          "hip_left",
+          "hip_right"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-73-75-proximal-power",
+      "fcmId": 73,
+      "section": "Lower-limb neurological",
+      "label": "Tests proximal lower-limb power (hip flexion, knee extension or flexion)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": [
+          "strength_l2_4_hip_flexion",
+          "strength_l2_4_knee_extension",
+          "strength_l4_s2_knee_flexion"
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-76-ankle-power",
+      "fcmId": 76,
+      "section": "Lower-limb neurological",
+      "label": "Tests ankle plantarflexion and dorsiflexion power on both sides",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "performed": "strength_l4_s1_ankle",
+            "regions": [
+              "ankle_left",
+              "ankle_right"
+            ],
+            "partial": true
+          },
+          {
+            "performed": "strength_l4_s1_ankle",
+            "regions": [
+              "foot_left",
+              "foot_right"
+            ],
+            "partial": true
+          },
+          {
+            "performed": "strength_l4_s1_ankle",
+            "regions": [
+              "neuro_motor_lower"
+            ]
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-81-knee-reflexes",
+      "fcmId": 81,
+      "section": "Lower-limb neurological",
+      "label": "Tests both knee (patellar) reflexes",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "performed": "reflex_patellar",
+            "regions": [
+              "patellar_tendon_left",
+              "patellar_tendon_right"
+            ],
+            "partial": true
+          },
+          {
+            "performed": "reflex_patellar",
+            "regions": [
+              "neuro_reflexes"
+            ]
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-81-ankle-reflexes",
+      "fcmId": 81,
+      "section": "Lower-limb neurological",
+      "label": "Tests both ankle (Achilles) reflexes",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "performed": "reflex_achilles",
+            "regions": [
+              "achilles_left",
+              "achilles_right"
+            ],
+            "partial": true
+          },
+          {
+            "performed": "reflex_achilles",
+            "regions": [
+              "neuro_reflexes"
+            ]
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-81-ankle-reflex-position",
+      "fcmId": 81,
+      "section": "Lower-limb neurological",
+      "label": "Technique: ankle reflexes with the legs hanging free over the edge of the table",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "reflex_achilles",
+          "position": "sitting_dangling"
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-82-plantar-response",
+      "fcmId": 82,
+      "section": "Lower-limb neurological",
+      "label": "Checks plantar responses on both sides",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "performed": "babinski",
+            "regions": [
+              "foot_left",
+              "foot_right"
+            ],
+            "partial": true
+          },
+          {
+            "performed": "babinski",
+            "regions": [
+              "neuro_reflexes"
+            ]
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-77-78-sensation-screen",
+      "fcmId": 77,
+      "section": "Lower-limb neurological",
+      "label": "Tests lower-limb sensation over the medial leg and top of the foot on both sides",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "performed": [
+              "sensation_light_touch_swab",
+              "sensation_pinprick_pin"
+            ],
+            "regions": [
+              "leg_medial_left",
+              "leg_medial_right",
+              "foot_left",
+              "foot_right"
+            ],
+            "partial": true
+          },
+          {
+            "performed": [
+              "sensation_light_touch",
+              "sensation_pin_prick"
+            ],
+            "regions": [
+              "neuro_sensory"
+            ]
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "sensation-lateral-foot",
+      "section": "Lower-limb neurological",
+      "label": "Compares sensation over the lateral border of both feet",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "performed": [
+              "sensation_light_touch_swab",
+              "sensation_pinprick_pin"
+            ],
+            "regions": [
+              "foot_lateral_left",
+              "foot_lateral_right"
+            ]
+          },
+          {
+            "performed": [
+              "sensation_light_touch",
+              "sensation_pin_prick"
+            ],
+            "regions": [
+              "neuro_sensory"
+            ]
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-86-gait",
+      "fcmId": 86,
+      "section": "Lower-limb neurological",
+      "label": "Observes gait, including heel and toe walking",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "gait"
+      },
+      "sourceText": ""
+    }
+  ],
+  "penKey": {
+    "history": [
+      {
+        "id": "lbp-3wk-lifting",
+        "text": "Low back pain for 3 weeks, starting the day after carrying a heavy sofa",
+        "kind": "positive",
+        "keywords": [
+          "3 weeks",
+          "three weeks",
+          "3 week",
+          "three week",
+          "sofa",
+          "lifting",
+          "heavy lifting",
+          "lifting injury",
+          "moving furniture"
+        ],
+        "exemplars": [
+          "Three weeks of low back pain that began the day after moving a heavy sofa.",
+          "Low back pain for 3 weeks following a lifting strain."
+        ]
+      },
+      {
+        "id": "s1-radiation",
+        "text": "For 10 days, shooting pain from the left buttock down the back of the thigh and calf to the lateral foot and little toe (below the knee)",
+        "kind": "positive",
+        "keywords": [
+          "radiating",
+          "radiates",
+          "radiation",
+          "shooting",
+          "down the left leg",
+          "down her left leg",
+          "down the leg",
+          "below the knee",
+          "posterior thigh",
+          "back of the thigh",
+          "lateral foot",
+          "little toe",
+          "buttock",
+          "sciatica"
+        ],
+        "exemplars": [
+          "Pain radiating from the left buttock down the back of the leg to the lateral foot and little toe.",
+          "Shooting left leg pain below the knee for 10 days."
+        ]
+      },
+      {
+        "id": "leg-dominant-pain",
+        "text": "Leg pain worse than back pain; sharp, electric, 7/10",
+        "kind": "positive",
+        "keywords": [
+          "7/10",
+          "7 out of 10",
+          "leg pain worse",
+          "worse than back pain",
+          "worse than the back",
+          "leg worse than back",
+          "leg-dominant",
+          "leg dominant",
+          "electric shock",
+          "electric-shock"
+        ],
+        "exemplars": [
+          "Leg pain is worse than the back pain, rated 7/10.",
+          "Leg-dominant pain: 7/10 in the leg versus 4/10 in the back."
+        ]
+      },
+      {
+        "id": "mechanical-valsalva",
+        "text": "Worse with sitting, bending, coughing and sneezing; eased by lying with knees bent and short walks",
+        "kind": "positive",
+        "keywords": [
+          "sitting",
+          "bending",
+          "coughing",
+          "cough",
+          "sneezing",
+          "sneeze",
+          "valsalva",
+          "flexion"
+        ],
+        "exemplars": [
+          "Worse with sitting, bending forward, coughing and sneezing.",
+          "Pain aggravated by sitting and Valsalva, relieved by lying supine with knees flexed."
+        ]
+      },
+      {
+        "id": "lateral-foot-paresthesia",
+        "text": "Numbness and pins and needles along the lateral left foot and little toe",
+        "kind": "positive",
+        "keywords": [
+          "pins and needles",
+          "tingling",
+          "paresthesia",
+          "paraesthesia",
+          "paresthesias",
+          "paraesthesias",
+          "numb foot",
+          "foot numbness",
+          "numbness in the left foot",
+          "numbness of the left foot",
+          "numbness in her left foot",
+          "numbness in the lateral",
+          "numbness of the lateral",
+          "numbness over the lateral",
+          "numbness along the lateral",
+          "little toe"
+        ],
+        "exemplars": [
+          "Numbness and tingling along the outer edge of the left foot and little toe.",
+          "Paraesthesia of the lateral left foot."
+        ]
+      },
+      {
+        "id": "pushoff-weakness",
+        "text": "Left foot feels weak pushing off (stairs, standing on tiptoe)",
+        "kind": "positive",
+        "keywords": [
+          "push off",
+          "pushing off",
+          "tiptoe",
+          "tip toe",
+          "tiptoes",
+          "toe raise",
+          "foot weakness",
+          "weak foot",
+          "left foot weakness",
+          "weakness of the left foot",
+          "weak left foot",
+          "plantarflexion weakness"
+        ],
+        "exemplars": [
+          "Reports weakness pushing off with the left foot and difficulty standing on tiptoe.",
+          "Subjective left plantarflexion weakness on stairs."
+        ]
+      },
+      {
+        "id": "no-bladder-bowel",
+        "text": "No bladder or bowel dysfunction (no retention or incontinence)",
+        "kind": "negative",
+        "keywords": [
+          "no bladder",
+          "no bowel",
+          "denies bladder",
+          "denies bowel",
+          "no urinary retention",
+          "no incontinence"
+        ],
+        "terms": [
+          "bladder",
+          "bowel",
+          "bowels",
+          "urinary retention",
+          "retention",
+          "incontinence",
+          "urinary incontinence",
+          "fecal incontinence",
+          "faecal incontinence"
+        ],
+        "exemplars": [
+          "No bladder or bowel dysfunction.",
+          "Denies urinary retention or incontinence."
+        ]
+      },
+      {
+        "id": "no-saddle-anaesthesia",
+        "text": "No saddle numbness",
+        "kind": "negative",
+        "keywords": [
+          "no saddle",
+          "denies saddle"
+        ],
+        "terms": [
+          "saddle anaesthesia",
+          "saddle anesthesia",
+          "saddle numbness",
+          "saddle paraesthesia",
+          "saddle paresthesia",
+          "perineal numbness",
+          "saddle"
+        ],
+        "exemplars": [
+          "No saddle anaesthesia.",
+          "Denies numbness in the saddle area."
+        ]
+      },
+      {
+        "id": "no-bilateral-symptoms",
+        "text": "No symptoms in the right leg; no bilateral weakness",
+        "kind": "negative",
+        "keywords": [
+          "no right leg",
+          "denies right leg",
+          "no bilateral"
+        ],
+        "terms": [
+          "right leg",
+          "bilateral",
+          "both legs",
+          "bilateral weakness",
+          "bilateral symptoms"
+        ],
+        "exemplars": [
+          "No pain, numbness or weakness in the right leg.",
+          "No bilateral leg symptoms."
+        ]
+      },
+      {
+        "id": "no-fever-weight-loss",
+        "text": "No fever, night sweats or weight loss",
+        "kind": "negative",
+        "keywords": [
+          "no fever",
+          "denies fever",
+          "no weight loss",
+          "denies weight loss",
+          "no night sweats"
+        ],
+        "terms": [
+          "fever",
+          "fevers",
+          "chills",
+          "night sweats",
+          "weight loss",
+          "feverish"
+        ],
+        "exemplars": [
+          "No fevers, night sweats or weight loss.",
+          "Denies fever or unintentional weight loss."
+        ]
+      },
+      {
+        "id": "no-cancer-history",
+        "text": "No history of cancer",
+        "kind": "negative",
+        "keywords": [
+          "no history of cancer",
+          "no cancer",
+          "no prior cancer",
+          "no malignancy"
+        ],
+        "terms": [
+          "cancer",
+          "malignancy",
+          "tumour",
+          "tumor"
+        ],
+        "exemplars": [
+          "No history of cancer.",
+          "No personal history of malignancy."
+        ]
+      },
+      {
+        "id": "no-night-rest-pain",
+        "text": "No night pain or rest pain unrelated to position",
+        "kind": "negative",
+        "keywords": [
+          "no night pain",
+          "no rest pain",
+          "denies night pain"
+        ],
+        "terms": [
+          "night pain",
+          "rest pain",
+          "pain at night",
+          "pain at rest"
+        ],
+        "exemplars": [
+          "No night pain or pain at rest.",
+          "Pain does not wake her at night."
+        ]
+      }
+    ],
+    "exam": [
+      {
+        "id": "slr-left-positive",
+        "text": "Positive left straight leg raise at about 40°, reproducing pain below the knee; crossed SLR negative",
+        "maneuverIds": [
+          "straight_leg_raise"
+        ],
+        "keywords": [
+          "positive straight leg raise",
+          "positive SLR",
+          "SLR positive",
+          "straight leg raise positive",
+          "left SLR",
+          "SLR on the left",
+          "Lasegue",
+          "Bragard"
+        ],
+        "terms": [],
+        "exemplars": [
+          "Left straight leg raise positive at 40 degrees, reproducing pain below the knee.",
+          "Positive SLR on the left; crossed SLR negative."
+        ]
+      },
+      {
+        "id": "reduced-ankle-reflex",
+        "text": "Reduced left ankle (Achilles) reflex, 1+ compared with 2+ on the right",
+        "maneuverIds": [
+          "reflex_achilles"
+        ],
+        "keywords": [
+          "reduced ankle reflex",
+          "reduced ankle jerk",
+          "diminished ankle reflex",
+          "diminished ankle jerk",
+          "decreased ankle reflex",
+          "decreased ankle jerk",
+          "hypoactive ankle reflex",
+          "reduced achilles reflex",
+          "diminished achilles reflex",
+          "decreased achilles reflex",
+          "ankle reflex reduced",
+          "ankle jerk reduced",
+          "achilles reflex reduced",
+          "ankle reflex diminished",
+          "achilles reflex diminished",
+          "left ankle reflex 1+",
+          "left ankle jerk 1+",
+          "left achilles 1+",
+          "absent ankle reflex",
+          "absent ankle jerk",
+          "absent achilles reflex",
+          "ankle reflex absent",
+          "ankle jerk absent",
+          "achilles reflex absent",
+          "ankle hyporeflexia"
+        ],
+        "terms": [],
+        "exemplars": [
+          "Diminished left Achilles reflex.",
+          "Hyporeflexic left ankle jerk."
+        ]
+      },
+      {
+        "id": "plantarflexion-weakness",
+        "text": "Weak left ankle plantarflexion (4/5) and unable to toe-walk on the left; dorsiflexion and great-toe extension normal",
+        "maneuverIds": [
+          "strength_l4_s1_ankle",
+          "gait"
+        ],
+        "keywords": [
+          "weak plantarflexion",
+          "plantarflexion weakness",
+          "weakness of plantarflexion",
+          "plantarflexion 4/5",
+          "plantar flexion 4/5",
+          "reduced plantarflexion",
+          "weak left plantarflexion",
+          "unable to toe walk",
+          "cannot toe walk",
+          "unable to walk on toes",
+          "cannot walk on toes",
+          "weak push off"
+        ],
+        "exemplars": [
+          "Left ankle plantarflexion 4/5.",
+          "Unable to walk on the toes of the left foot."
+        ]
+      },
+      {
+        "id": "lateral-foot-sensory-loss",
+        "text": "Reduced light touch and pinprick over the lateral border of the left foot",
+        "maneuverIds": [
+          "sensation_light_touch_swab",
+          "sensation_pinprick_pin",
+          "sensation_light_touch",
+          "sensation_pin_prick"
+        ],
+        "keywords": [
+          "reduced sensation over the lateral",
+          "decreased sensation over the lateral",
+          "diminished sensation over the lateral",
+          "reduced sensation lateral",
+          "reduced light touch over the lateral",
+          "reduced light touch on the lateral",
+          "reduced pinprick over the lateral",
+          "numbness over the lateral",
+          "sensory loss over the lateral",
+          "hypoaesthesia over the lateral",
+          "hypoesthesia over the lateral",
+          "reduced sensation in the s1",
+          "decreased sensation in the s1",
+          "S1 dermatome",
+          "S1 distribution",
+          "S1 sensory loss"
+        ],
+        "exemplars": [
+          "Reduced light touch and pinprick over the lateral border of the left foot.",
+          "Numbness to pinprick along the outer edge of the left foot and little toe."
+        ]
+      },
+      {
+        "id": "paraspinal-tenderness-flexion",
+        "text": "Left lumbosacral paraspinal tenderness and spasm without midline tenderness; lumbar flexion limited by leg pain",
+        "maneuverIds": [
+          "back_palpation",
+          "back_rom",
+          "back_inspection"
+        ],
+        "keywords": [
+          "paraspinal tenderness",
+          "paraspinal spasm",
+          "tender paraspinals",
+          "tender left paraspinal",
+          "tender left paraspinals",
+          "left paraspinal",
+          "lumbar paraspinal",
+          "paraspinal muscle spasm",
+          "lumbar spasm",
+          "lumbar flexion limited",
+          "limited lumbar flexion",
+          "reduced lumbar flexion",
+          "restricted lumbar flexion",
+          "forward flexion limited",
+          "limited forward flexion",
+          "reduced lumbar range of motion",
+          "limited lumbar range of motion",
+          "reduced lumbar rom"
+        ],
+        "exemplars": [
+          "Tenderness over the left lumbar paraspinal muscles with no midline tenderness.",
+          "Lumbar flexion limited to mid-thigh by pain radiating into the left leg."
+        ]
+      },
+      {
+        "id": "l4-l5-spared",
+        "text": "Knee reflexes, dorsiflexion, great-toe extension and heel walking normal (L4/L5 spared)",
+        "maneuverIds": [
+          "reflex_patellar",
+          "strength_l4_s1_ankle",
+          "gait"
+        ],
+        "keywords": [
+          "knee reflexes 2+",
+          "patellar reflexes 2+",
+          "knee reflexes normal",
+          "patellar reflexes normal",
+          "dorsiflexion 5/5",
+          "great toe extension 5/5",
+          "EHL 5/5",
+          "heel walking normal",
+          "heel walking intact",
+          "able to heel walk"
+        ],
+        "terms": [],
+        "exemplars": [
+          "Patellar reflexes 2+ and symmetric; dorsiflexion and great-toe extension 5/5.",
+          "Heel walking normal."
+        ]
+      }
+    ],
+    "differential": [
+      {
+        "id": "s1-radiculopathy",
+        "diagnosis": "Left S1 nerve root compression (radiculopathy)",
+        "aliases": [
+          "S1 radiculopathy",
+          "S1 radiculitis",
+          "S1 radicular pain",
+          "S1 radicular syndrome",
+          "S1 nerve root compression",
+          "S1 nerve root impingement",
+          "S1 nerve root irritation",
+          "S1 root compression",
+          "S1 root impingement",
+          "S1 sciatica",
+          "L5-S1 disc herniation",
+          "L5/S1 disc herniation",
+          "L5-S1 herniated disc",
+          "L5/S1 herniated disc"
+        ],
+        "rank": 1,
+        "rationale": "Leg-dominant S1-distribution pain after a lifting strain, worse with sitting, flexion and Valsalva; positive left SLR, reduced left ankle reflex, weak plantarflexion and lateral-foot sensory loss, with L4 and L5 spared."
+      },
+      {
+        "id": "lumbar-strain",
+        "diagnosis": "Mechanical low back pain (muscle strain)",
+        "aliases": [
+          "lumbar muscle strain",
+          "lumbar strain",
+          "lumbar sprain",
+          "lumbosacral strain",
+          "muscle strain",
+          "back strain",
+          "muscular back pain",
+          "mechanical low back pain",
+          "mechanical back pain",
+          "non-specific low back pain",
+          "nonspecific low back pain"
+        ],
+        "rank": 2,
+        "rationale": "Lifting onset and paraspinal tenderness fit, but a strain does not explain radicular pain below the knee or the neurological deficits."
+      },
+      {
+        "id": "spinal-stenosis",
+        "diagnosis": "Spinal stenosis (lateral recess or foraminal)",
+        "aliases": [
+          "lumbar spinal stenosis",
+          "lumbar stenosis",
+          "spinal stenosis",
+          "lateral recess stenosis",
+          "foraminal stenosis",
+          "neuroforaminal stenosis",
+          "neurogenic claudication"
+        ],
+        "rank": 3,
+        "rationale": "Can compress a single root, but she is younger than typical (usually over 60), walking eases rather than provokes the leg pain, and sitting and flexion make it worse."
+      },
+      {
+        "id": "piriformis",
+        "diagnosis": "Piriformis syndrome",
+        "aliases": [
+          "piriformis",
+          "deep gluteal syndrome"
+        ],
+        "rank": 4,
+        "rationale": "Buttock pain down the leg, worse sitting, but objective root signs point to a radiculopathy."
+      },
+      {
+        "id": "si-joint",
+        "diagnosis": "Sacroiliac joint dysfunction",
+        "aliases": [
+          "sacroiliac joint pain",
+          "sacroiliac dysfunction",
+          "SI joint dysfunction",
+          "SI joint pain",
+          "SIJ dysfunction",
+          "SIJ pain",
+          "sacroiliac joint syndrome"
+        ],
+        "rank": 5,
+        "rationale": "Buttock and thigh pain, but no sacroiliac tenderness, FABER negative and neurological deficits present."
+      }
+    ]
+  },
+  "acceptableDiagnoses": [
+    {
+      "id": "ad-l5s1-disc-prolapse",
+      "diagnosis": "L5–S1 disc prolapse",
+      "synonyms": [
+        "L5/S1 disc prolapse",
+        "L5-S1 disc protrusion",
+        "L5/S1 disc protrusion",
+        "L5-S1 HNP",
+        "L5/S1 HNP",
+        "prolapsed L5-S1 disc",
+        "herniated L5-S1 disc"
+      ],
+      "satisfies": [
+        "s1-radiculopathy"
+      ]
+    }
+  ]
+}

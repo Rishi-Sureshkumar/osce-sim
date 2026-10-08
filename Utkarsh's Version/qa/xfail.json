@@ -1,0 +1,618 @@
+[
+ {
+  "id": "anchors:occlusion:female:seated:cva_left",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:cva_right",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:lung_post_ll",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:lung_post_lu",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:lung_post_rl",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:lung_post_ru",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:sacrum",
+  "owner": "M3",
+  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:spine_cervical",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:spine_lumbar",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:spine_thoracic",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:male:seated:cva_left",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:male:seated:cva_right",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:male:seated:sacrum",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back (CVA, sacrum) is behind the mattress from every rear view; fixed with the M3 table placement"
+ },
+ {
+  "id": "anchors:occlusion:male:seated:spine_lumbar",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "catalog-oracle:male:auscultate_heart_bell@cardiac_mitral",
+  "owner": "M3",
+  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [at the anatomical point (cardiac_mitral): (a) first hit is drape (roll-chest), not the patient; (c) no examine for auscultate_heart_bell@cardiac_mitral (got non]"
+ },
+ {
+  "id": "catalog-oracle:male:auscultate_heart_diaphragm@cardiac_mitral",
+  "owner": "M3",
+  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [at the anatomical point (cardiac_mitral): (a) first hit is drape (roll-chest), not the patient; (c) no examine for auscultate_heart_diaphragm@cardiac_mitral (go]"
+ },
+ {
+  "id": "catalog:female:auscultate_lungs@lung_ant_ll",
+  "owner": "M3",
+  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient]"
+ },
+ {
+  "id": "catalog:female:auscultate_lungs@lung_ant_rl",
+  "owner": "M3",
+  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient]"
+ },
+ {
+  "id": "catalog:female:back_inspection@sacrum",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
+ },
+ {
+  "id": "catalog:female:back_inspection@spine_lumbar",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:female:back_inspection@spine_thoracic",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:female:back_palpation@sacrum",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
+ },
+ {
+  "id": "catalog:female:back_palpation@spine_lumbar",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:female:back_palpation@spine_thoracic",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:female:back_rom@spine_lumbar",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:female:back_rom@spine_thoracic",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:female:chest_inspection@lung_ant_ll",
+  "owner": "M3",
+  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
+ },
+ {
+  "id": "catalog:female:chest_inspection@lung_ant_rl",
+  "owner": "M3",
+  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
+ },
+ {
+  "id": "catalog:female:chest_inspection@lung_post_ll",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:female:chest_inspection@lung_post_lu",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:female:chest_inspection@lung_post_rl",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:female:chest_inspection@lung_post_ru",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:female:chest_percussion@lung_ant_ll",
+  "owner": "M3",
+  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
+ },
+ {
+  "id": "catalog:female:chest_percussion@lung_ant_rl",
+  "owner": "M3",
+  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
+ },
+ {
+  "id": "catalog:female:cva_tenderness@cva_left",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:female:cva_tenderness@cva_right",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:female:edema_assessment@sacrum",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
+ },
+ {
+  "id": "catalog:male:auscultate_heart_bell@cardiac_mitral",
+  "owner": "M3",
+  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient]"
+ },
+ {
+  "id": "catalog:male:back_inspection@sacrum",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click resolved to spine_lumbar; (c) no examine for back_inspection@sacrum (got back_inspection@spine]"
+ },
+ {
+  "id": "catalog:male:back_inspection@spine_lumbar",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:male:back_palpation@sacrum",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click resolved to spine_lumbar; (c) no examine for back_palpation@sacrum (got back_palpation@spine_l]"
+ },
+ {
+  "id": "catalog:male:back_palpation@spine_lumbar",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:male:back_rom@spine_lumbar",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:male:cva_tenderness@cva_left",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back (CVA, sacrum) is behind the mattress from every rear view; fixed with the M3 table placement"
+ },
+ {
+  "id": "catalog:male:cva_tenderness@cva_right",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
+ },
+ {
+  "id": "catalog:male:edema_assessment@sacrum",
+  "owner": "M3",
+  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click resolved to spine_lumbar; (b) edema_assessment is not in the menu for this region]"
+ },
+ {
+  "id": "catalog:male:pmi_palpation@cardiac_mitral",
+  "owner": "M3",
+  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
+ },
+ {
+  "id": "intersections:female:left_lateral_decubitus:*:bed",
+  "owner": "M3",
+  "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
+ },
+ {
+  "id": "intersections:female:reclined_30:*:bed",
+  "owner": "M3",
+  "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
+ },
+ {
+  "id": "intersections:female:reclined_30:abdomen-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:reclined_30:chest-exposed:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:female:reclined_30:chest-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:reclined_30:covered:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:female:reclined_30:covered:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:reclined_30:legs-exposed:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:female:reclined_45:*:bed",
+  "owner": "M3",
+  "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
+ },
+ {
+  "id": "intersections:female:reclined_45:abdomen-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:reclined_45:chest-exposed:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:female:reclined_45:chest-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:reclined_45:covered:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:female:reclined_45:covered:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:reclined_45:legs-exposed:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:female:seated_leaning_forward:*:bed",
+  "owner": "M3",
+  "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
+ },
+ {
+  "id": "intersections:female:seated_leaning_forward:abdomen-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:seated_leaning_forward:chest-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:seated_leaning_forward:covered:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:female:seated_leaning_forward:covered:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:seated_leaning_forward:legs-exposed:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:female:seated:*:bed",
+  "owner": "M3",
+  "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
+ },
+ {
+  "id": "intersections:female:seated:abdomen-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:seated:chest-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:seated:covered:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:sitting_dangling:abdomen-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:sitting_dangling:chest-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:sitting_dangling:covered:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:female:sitting_dangling:covered:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:sitting_dangling:legs-exposed:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:female:supine:abdomen-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:supine:chest-exposed:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:female:supine:chest-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:supine:covered:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:female:supine:covered:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:female:supine:legs-exposed:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:male:left_lateral_decubitus:*:bed",
+  "owner": "M3",
+  "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
+ },
+ {
+  "id": "intersections:male:reclined_30:*:bed",
+  "owner": "M3",
+  "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
+ },
+ {
+  "id": "intersections:male:reclined_30:abdomen-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:reclined_30:chest-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:reclined_30:covered:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:male:reclined_30:covered:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:reclined_30:legs-exposed:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:male:reclined_45:*:bed",
+  "owner": "M3",
+  "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
+ },
+ {
+  "id": "intersections:male:reclined_45:abdomen-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:reclined_45:chest-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:reclined_45:covered:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:male:reclined_45:covered:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:reclined_45:legs-exposed:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:male:seated_leaning_forward:*:bed",
+  "owner": "M3",
+  "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
+ },
+ {
+  "id": "intersections:male:seated_leaning_forward:abdomen-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:seated_leaning_forward:chest-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:seated_leaning_forward:covered:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:seated:*:bed",
+  "owner": "M3",
+  "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
+ },
+ {
+  "id": "intersections:male:seated:abdomen-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:seated:chest-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:seated:covered:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:male:seated:covered:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:seated:legs-exposed:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:male:sitting_dangling:abdomen-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:sitting_dangling:chest-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:sitting_dangling:covered:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:male:sitting_dangling:covered:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:sitting_dangling:legs-exposed:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:male:supine:*:bed",
+  "owner": "M3",
+  "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
+ },
+ {
+  "id": "intersections:male:supine:abdomen-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:supine:chest-exposed:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:supine:covered:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "intersections:male:supine:covered:sheet",
+  "owner": "M3",
+  "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
+ },
+ {
+  "id": "intersections:male:supine:legs-exposed:gown",
+  "owner": "M3",
+  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
+ },
+ {
+  "id": "catalog:female:back_inspection@spine_cervical",
+  "owner": "M6",
+  "reason": "page UI covers the 3D view at the target (toasts/overlays over the canvas) [(a) the page covers the canvas here (div.mx-auto.flex); (b) the click never reached the patient; (b) the maneuver menu did not open]"
+ },
+ {
+  "id": "catalog:female:back_palpation@spine_cervical",
+  "owner": "M6",
+  "reason": "page UI covers the 3D view at the target (toasts/overlays over the canvas) [(a) the page covers the canvas here (div.mx-auto.flex); (b) the click never reached the patient; (b) the maneuver menu did not open]"
+ },
+ {
+  "id": "catalog:female:back_rom@spine_cervical",
+  "owner": "M6",
+  "reason": "page UI covers the 3D view at the target (toasts/overlays over the canvas) [(a) the page covers the canvas here (div.mx-auto.flex); (b) the click never reached the patient; (b) the maneuver menu did not open]"
+ },
+ {
+  "id": "catalog:female:weber_test@scalp",
+  "owner": "M6",
+  "reason": "the crown sits under the camera-shot selector at the top of the ear view (page UI over the canvas; M6 layout) [(a) first hit is hair (proxy:hair), not the patient]"
+ },
+ {
+  "id": "catalog:male:weber_test@scalp",
+  "owner": "M6",
+  "reason": "the crown sits under the camera-shot selector at the top of the ear view (page UI over the canvas; M6 layout) [(a) first hit is hair (proxy:hair), not the patient]"
+ },
+ {
+  "id": "catalog*:male:*@cardiac_mitral",
+  "owner": "M3",
+  "flaky": true,
+  "reason": "V-ROD: lying flat, the rolled chest gown edge (roll-chest) sometimes lies over the male apex and takes the click; passes or fails from run to run (sectioned drapes, M3)"
+ }
+]

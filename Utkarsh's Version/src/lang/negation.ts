@@ -1,0 +1,78 @@
+/**
+ * NegEx-lite (Phase 4 M1): is a term mentioned as absent in a sentence? Used when grading notes
+ * ("no chest pain", "denies fever", "JVP not raised") so a pertinent negative is only credited
+ * when the note negates it, and a positive finding isn't credited when the note denies it.
+ * Works on normalised text (src/lang/normalize.ts).
+ */
+import { hasPhrase } from "./normalize";
+
+/** cues before the term ("no …", "denies …") within WINDOW words */
+const PRE = ["no", "not", "denies", "denied", "deny", "without", "negative for", "absent", "free of", "never", "nor", "none", "rules out", "ruled out", "no evidence of", "no signs of", "no sign of", "neither"];
+/** cues after the term ("… absent", "… not raised") within WINDOW words */
+const POST = ["absent", "not present", "not raised", "not elevated", "not seen", "not heard", "not palpable", "not felt", "negative", "denied", "normal", "unremarkable", "none", "intact", "preserved", "symmetric", "symmetrical", "within normal limits"];
+/** post cues that describe a normal finding rather than deny one: they don't count as a negation cue on their own ("…, otherwise intact") */
+const NORMAL_POST = new Set(["normal", "unremarkable", "intact", "preserved", "symmetric", "symmetrical", "within normal limits"]);
+/** words that end the scope of a negation */
+const TERMINATE = ["but", "however", "although", "except", "apart from", "aside from", "though", "yet"];
+const WINDOW = 5;
+
+function indexOfPhrase(words: string[], phrase: string[]): number {
+  for (let i = 0; i + phrase.length <= words.length; i++) if (phrase.every((p, k) => words[i + k] === p)) return i;
+  return -1;
+}
+
+/** Is `term` (normalised) negated in `sentence` (normalised)? false when the term isn't there. */
+export function isNegated(sentence: string, term: string): boolean {
+  if (!hasPhrase(sentence, term)) return false;
+  const w = sentence.split(" ");
+  const t = term.split(" ");
+  const at = indexOfPhrase(w, t);
+  if (at < 0) return false;
+  const before = w.slice(Math.max(0, at - WINDOW), at);
+  const cut = Math.max(...TERMINATE.map((x) => before.lastIndexOf(x)));
+  const scope = (cut >= 0 ? before.slice(cut + 1) : before).join(" ");
+  if (PRE.some((cue) => hasPhrase(scope, cue))) return true;
+  const after = w.slice(at + t.length, at + t.length + WINDOW);
+  const stop = after.findIndex((x) => TERMINATE.includes(x) || x === "and");
+  const postScope = (stop >= 0 ? after.slice(0, stop) : after).join(" ");
+  return POST.some((cue) => postScope.startsWith(cue) || hasPhrase(postScope, cue));
+}
+
+/** "mentioned and affirmed" / "mentioned and negated" / "not mentioned" */
+export function polarityOf(sentence: string, term: string): "affirmed" | "negated" | "absent" {
+  if (!hasPhrase(sentence, term)) return "absent";
+  return isNegated(sentence, term) ? "negated" : "affirmed";
+}
+
+/** Does the sentence contain any negation cue at all? (for similarity matches, where there is no term to anchor on) */
+export function hasNegationCue(sentence: string): boolean {
+  return [...PRE, ...POST.filter((c) => !NORMAL_POST.has(c))].some((c) => hasPhrase(sentence, c));
+}
+
+const LIST_JOIN = new Set(["or", "and", "nor"]);
+/** words that state a finding is there ("S3 present", "reports calf pain"): such a segment never inherits a negation */
+const AFFIRM = ["present", "heard", "seen", "noted", "positive", "raised", "elevated", "displaced", "palpable", "reports", "reported", "has", "with", "endorses", "complains", "admits"];
+
+/**
+ * Negation with the raw sentence's punctuation: commas, semicolons and "but" end a negation's scope
+ * ("no murmurs, S3 present" affirms the S3; "JVP 10 cm, abdomen normal" doesn't deny the JVP), while
+ * short list items after a negated item inherit it ("denies fever, chills or cough").
+ */
+export function isNegatedInSentence(raw: string, term: string, normalize: (t: string) => string): boolean {
+  const segs = raw
+    .split(/[,;:]|\s+but\s+|\s+however\s+/i)
+    .map((x) => normalize(x))
+    .filter(Boolean);
+  const i = segs.findIndex((x) => hasPhrase(x, term));
+  if (i < 0) return isNegated(normalize(raw), term);
+  const seg = segs[i]!;
+  if (isNegated(seg, term)) return true;
+  const content = (x: string) => x.split(" ").filter((w) => !LIST_JOIN.has(w));
+  if (content(seg).length > 3 || hasNegationCue(seg) || AFFIRM.some((a) => hasPhrase(seg, a))) return false;
+  for (let k = i - 1; k >= 0; k--) {
+    const prev = segs[k]!;
+    if (PRE.some((cue) => hasPhrase(prev, cue))) return true;
+    if (content(prev).length > 3 || AFFIRM.some((a) => hasPhrase(prev, a))) break;
+  }
+  return false;
+}

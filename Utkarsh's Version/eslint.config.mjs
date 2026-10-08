@@ -18,7 +18,7 @@ const RAW_DIALOGS = [
 ];
 
 const config = [
-  { ignores: [".next/**", "node_modules/**", "source/**", "playwright-report/**", "test-results/**", ".data/**", "next-env.d.ts", "public/lang/**", ".cache/**", "qa/screens/**", ".claude/**", "Utkarsh's Version/**"] },
+  { ignores: [".next/**", "node_modules/**", "source/**", "playwright-report/**", "test-results/**", ".data/**", "next-env.d.ts", "public/lang/**", ".cache/**", "qa/screens/**", ".claude/**"] },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {

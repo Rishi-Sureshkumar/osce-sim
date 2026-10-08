@@ -1,0 +1,4 @@
+{
+  "note": "Optional recorded clips that override procedural sounds. Reference one from case data as audio: { \"clipId\": \"<id>\" }. Every clip needs a source and a license (CC0 / CC-BY or with written permission).",
+  "clips": []
+}

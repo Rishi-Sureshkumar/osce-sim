@@ -1,0 +1,52 @@
+{
+  "system": "skin",
+  "maneuvers": [
+    {
+      "id": "skin_inspection",
+      "fcmId": null,
+      "label": "Inspect the skin",
+      "system": "skin",
+      "technique": "inspect",
+      "allowedRegions": [
+        "skin",
+        "hand_right",
+        "hand_left",
+        "shin_right",
+        "shin_left"
+      ],
+      "normalFinding": {
+        "default": "Skin warm, dry and of normal colour without rashes, lesions, pallor, cyanosis or jaundice."
+      },
+      "demo": {
+        "steps": [
+          "Look over the exposed skin in good light, including the hands and lower legs.",
+          "Note colour, any rashes or lesions, and their distribution.",
+          "Feel the skin for temperature and moisture."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "skin_turgor",
+      "fcmId": null,
+      "label": "Assess skin turgor",
+      "system": "skin",
+      "technique": "palpate",
+      "allowedRegions": [
+        "skin",
+        "hand_right",
+        "hand_left"
+      ],
+      "normalFinding": {
+        "default": "Skin turgor normal; pinched skin returns promptly."
+      },
+      "demo": {
+        "steps": [
+          "Gently pinch a fold of skin, for example over the back of the hand or below the clavicle.",
+          "Release and watch how quickly it flattens."
+        ]
+      },
+      "sourceText": ""
+    }
+  ]
+}

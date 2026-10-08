@@ -1,0 +1,42 @@
+# Regression proof: bug10
+
+a stethoscope hold always recorded the first fitting exam, so abdominal bruits could never be recorded (bowel sounds won)
+
+test:      tests/regressions/bug10-hold-choice.test.ts
+command:   npx vitest run tests/regressions/bug10-hold-choice.test.ts
+old code:  f733e00 (git worktree)  → exit 1 (FAILS, as it must)
+new code:  f733e00 + working tree     → exit 0 (passes)
+result:    PROVEN
+date:      2026-10-07T23:40:54.725Z
+
+## Old code: why it fails
+```
+ ❯ tests/regressions/bug10-hold-choice.test.ts (3 tests | 3 failed) 11ms
+   × bug 10: stethoscope hold with several fitting exams > asks which exam instead of always taking the first 8ms
+   × bug 10: stethoscope hold with several fitting exams > uses the student's last choice on a region not yet listened to, and asks again where it was used 1ms
+   × bug 10: stethoscope hold with several fitting exams > a single fitting exam needs no question 1ms
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+ FAIL  tests/regressions/bug10-hold-choice.test.ts > bug 10: stethoscope hold with several fitting exams > asks which exam instead of always taking the first
+AssertionError: expected 'bowel_sounds' to deeply equal { ask: ArrayContaining{…} }
+- Expected: 
++ Received: 
+     15|     expect(r).toEqual({ ask: expect.arrayContaining(["bowel_sounds", "…
+ FAIL  tests/regressions/bug10-hold-choice.test.ts > bug 10: stethoscope hold with several fitting exams > uses the student's last choice on a region not yet listened to, and asks again where it was used
+AssertionError: expected 'bowel_sounds' to deeply equal { maneuverId: 'abd_bruits' }
+- Expected: 
++ Received: 
+     19|     expect(holdCandidate(maneuvers, "stethoscope", "diaphragm", "abd_l…
+     20|     expect(holdCandidate(maneuvers, "stethoscope", "diaphragm", "abd_r…
+ FAIL  tests/regressions/bug10-hold-choice.test.ts > bug 10: stethoscope hold with several fitting exams > a single fitting exam needs no question
+AssertionError: expected 'auscultate_heart_bell' to deeply equal { maneuverId: 'auscultate_heart_bell' }
+- Expected: 
++ Received: 
+     23|     expect(holdCandidate(maneuvers, "stethoscope", "bell", "cardiac_mi…
+```
+
+## New code
+```
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+```

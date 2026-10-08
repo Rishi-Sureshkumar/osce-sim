@@ -1,0 +1,219 @@
+{
+  "id": "screening-normal",
+  "title": "Full head-to-toe screening exam (healthy volunteer)",
+  "mode": "screening",
+  "patient": {
+    "name": "Jordan Lee",
+    "age": 28,
+    "sex": "female",
+    "pronouns": "she/her",
+    "chiefComplaint": "Routine screening examination",
+    "setting": "Clinical skills room, seated on the exam table",
+    "persona": {
+      "affect": "Relaxed and cooperative",
+      "speakingStyle": "Friendly, brief answers",
+      "worries": "None",
+      "background": "Graduate student volunteering as a standardized patient"
+    }
+  },
+  "doorSign": {
+    "task": "Ms. Lee is a healthy volunteer. Perform a complete screening physical examination following the FCM-1 framework, from clinical courtesy and vital signs through head-to-toe examination.",
+    "timeLimitMinutes": 30
+  },
+  "doorInstructions": {
+    "reasonForVisit": "Routine screening examination",
+    "task": "Perform a complete screening physical examination, head to toe.",
+    "prohibitedExams": [
+      {
+        "label": "Breast exam",
+        "regionIds": [
+          "breast_left",
+          "breast_right"
+        ]
+      },
+      {
+        "label": "Pelvic / genital exam",
+        "regionIds": [
+          "pelvic"
+        ]
+      }
+    ]
+  },
+  "timeLimits": {
+    "encounterMin": 30,
+    "penMin": 10
+  },
+  "vitals": {
+    "hr": 68,
+    "rr": 14,
+    "bpSystolic": 116,
+    "bpDiastolic": 74,
+    "tempC": 36.7,
+    "spo2": 99,
+    "spo2Context": "on room air"
+  },
+  "history": {
+    "openingStatement": "Hi! I’m here for the practice exam — I feel fine.",
+    "facts": [
+      {
+        "id": "health",
+        "topic": "General health",
+        "answer": "I’m healthy. No medical problems.",
+        "revealOnlyIfAsked": false,
+        "keywords": [
+          "medical",
+          "health",
+          "conditions",
+          "problems"
+        ],
+        "intents": {
+          "canonical": "Do you have any medical conditions?",
+          "paraphrases": [
+            "How is your general health?",
+            "Any medical problems?",
+            "Do you have any health issues?",
+            "Any past medical history?",
+            "Have you been diagnosed with any illnesses?",
+            "Are you generally healthy?",
+            "Any chronic conditions?",
+            "Do you see a doctor regularly for anything?",
+            "Any significant medical history?",
+            "Have you ever had any serious illnesses?"
+          ],
+          "keywords": [
+            "medical history",
+            "medical conditions",
+            "medical problems",
+            "health issues",
+            "general health",
+            "chronic conditions",
+            "illnesses"
+          ],
+          "topics": [
+            "pmh.conditions"
+          ]
+        }
+      },
+      {
+        "id": "meds",
+        "topic": "Medications",
+        "answer": "Just a daily multivitamin.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "medication",
+          "medicine",
+          "pills",
+          "taking"
+        ],
+        "intents": {
+          "canonical": "Do you take any medications?",
+          "paraphrases": [
+            "Are you on any medicines?",
+            "What medications are you taking?",
+            "Any regular meds?",
+            "Do you take any tablets or pills?",
+            "Do you take any vitamins or supplements?",
+            "Any over-the-counter medicines?",
+            "Are you on any prescriptions?",
+            "Do you take anything every day?",
+            "Any herbal remedies?"
+          ],
+          "keywords": [
+            "take any medications",
+            "on any medications",
+            "medicines",
+            "meds",
+            "tablets",
+            "vitamins",
+            "supplements",
+            "over the counter"
+          ],
+          "topics": [
+            "meds.current",
+            "meds.otc"
+          ]
+        }
+      },
+      {
+        "id": "allergies",
+        "topic": "Allergies",
+        "answer": "No allergies.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "allerg"
+        ],
+        "intents": {
+          "canonical": "Do you have any allergies?",
+          "paraphrases": [
+            "Are you allergic to anything?",
+            "Any drug allergies?",
+            "Any allergies to medications?",
+            "Any food allergies?",
+            "Have you ever had a reaction to a medicine?",
+            "Any known allergies?",
+            "Are you allergic to latex?",
+            "NKDA?"
+          ],
+          "keywords": [
+            "allergies",
+            "allergic",
+            "allergy",
+            "reaction to",
+            "latex",
+            "nkda"
+          ],
+          "topics": [
+            "allergies"
+          ]
+        }
+      }
+    ],
+    "pertinentNegatives": [
+      {
+        "id": "neg-any-symptoms",
+        "topic": "Any symptoms",
+        "answer": "No, I feel completely well.",
+        "keywords": [
+          "pain",
+          "symptom",
+          "problem",
+          "feel"
+        ],
+        "intents": {
+          "canonical": "Do you have any symptoms at the moment?",
+          "paraphrases": [
+            "Are you having any pain anywhere?",
+            "Any symptoms at all?",
+            "Do you feel unwell in any way?",
+            "Is anything bothering you today?",
+            "Any pain or discomfort?",
+            "Have you noticed anything unusual with your health lately?",
+            "Are you in any pain right now?"
+          ],
+          "keywords": [
+            "symptoms",
+            "any pain",
+            "in pain",
+            "unwell",
+            "bothering you",
+            "discomfort"
+          ],
+          "topics": [
+            "ros.constitutional"
+          ]
+        }
+      }
+    ],
+    "unknownPolicy": {
+      "negativeReply": "No, nothing like that.",
+      "unknownReply": "Not that I know of."
+    }
+  },
+  "abnormalFindings": {},
+  "expectedDifferential": [],
+  "markSheetIds": [
+    "exam-fcm1"
+  ],
+  "synthetic": true,
+  "sourceNote": "Synthetic all-normal standardized patient for screening-exam practice."
+}

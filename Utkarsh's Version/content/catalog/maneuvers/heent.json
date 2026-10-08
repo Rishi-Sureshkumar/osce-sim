@@ -1,0 +1,593 @@
+{
+  "system": "heent",
+  "maneuvers": [
+    {
+      "id": "ln_occipital_palpation",
+      "fcmId": 11,
+      "label": "Palpate occipital lymph nodes",
+      "system": "lymph",
+      "technique": "palpate",
+      "allowedRegions": [
+        "ln_occipital"
+      ],
+      "requiresPositioning": [
+        "seated"
+      ],
+      "normalFinding": {
+        "default": "No palpable or tender occipital lymphadenopathy bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Face the seated patient and use the pads of your index and middle fingers.",
+          "Move the skin in small gentle circles over the base of the skull at the back on both sides together.",
+          "Note any node's size, consistency, mobility and tenderness."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "ln_post_auricular_palpation",
+      "fcmId": 12,
+      "label": "Palpate posterior auricular lymph nodes",
+      "system": "lymph",
+      "technique": "palpate",
+      "allowedRegions": [
+        "ln_post_auricular"
+      ],
+      "requiresPositioning": [
+        "seated"
+      ],
+      "normalFinding": {
+        "default": "No palpable or tender posterior auricular lymphadenopathy bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Face the seated patient and use the pads of your index and middle fingers.",
+          "Move the skin in small gentle circles over the mastoid area behind each ear on both sides together.",
+          "Note any node's size, consistency, mobility and tenderness."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "ln_pre_auricular_palpation",
+      "fcmId": 13,
+      "label": "Palpate preauricular lymph nodes",
+      "system": "lymph",
+      "technique": "palpate",
+      "allowedRegions": [
+        "ln_pre_auricular"
+      ],
+      "requiresPositioning": [
+        "seated"
+      ],
+      "normalFinding": {
+        "default": "No palpable or tender preauricular lymphadenopathy bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Face the seated patient and use the pads of your index and middle fingers.",
+          "Move the skin in small gentle circles over the area just in front of each ear on both sides together.",
+          "Note any node's size, consistency, mobility and tenderness."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "ln_submandibular_palpation",
+      "fcmId": 14,
+      "label": "Palpate submandibular lymph nodes",
+      "system": "lymph",
+      "technique": "palpate",
+      "allowedRegions": [
+        "ln_submandibular"
+      ],
+      "requiresPositioning": [
+        "seated"
+      ],
+      "normalFinding": {
+        "default": "No palpable or tender submandibular lymphadenopathy bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Face the seated patient and use the pads of your index and middle fingers.",
+          "Move the skin in small gentle circles over the inner border of the jaw between angle and chin on both sides together.",
+          "Note any node's size, consistency, mobility and tenderness."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "ln_post_cervical_palpation",
+      "fcmId": 15,
+      "label": "Palpate posterior cervical lymph nodes",
+      "system": "lymph",
+      "technique": "palpate",
+      "allowedRegions": [
+        "ln_post_cervical"
+      ],
+      "requiresPositioning": [
+        "seated"
+      ],
+      "normalFinding": {
+        "default": "No palpable or tender posterior cervical lymphadenopathy bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Face the seated patient and use the pads of your index and middle fingers.",
+          "Move the skin in small gentle circles over the strip behind the sternocleidomastoid on both sides together.",
+          "Note any node's size, consistency, mobility and tenderness."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "ln_ant_cervical_palpation",
+      "fcmId": 16,
+      "label": "Palpate anterior cervical lymph nodes",
+      "system": "lymph",
+      "technique": "palpate",
+      "allowedRegions": [
+        "ln_ant_cervical"
+      ],
+      "requiresPositioning": [
+        "seated"
+      ],
+      "normalFinding": {
+        "default": "No palpable or tender anterior cervical lymphadenopathy bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Face the seated patient and use the pads of your index and middle fingers.",
+          "Move the skin in small gentle circles over the strip in front of the sternocleidomastoid on both sides together.",
+          "Note any node's size, consistency, mobility and tenderness."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "ln_submental_palpation",
+      "fcmId": 17,
+      "label": "Palpate submental lymph nodes",
+      "system": "lymph",
+      "technique": "palpate",
+      "allowedRegions": [
+        "ln_submental"
+      ],
+      "requiresPositioning": [
+        "seated"
+      ],
+      "normalFinding": {
+        "default": "No palpable or tender submental lymphadenopathy bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Face the seated patient and use the pads of your index and middle fingers.",
+          "Move the skin in small gentle circles over the midline just under the chin on both sides together.",
+          "Note any node's size, consistency, mobility and tenderness."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "ln_supraclavicular_palpation",
+      "fcmId": 18,
+      "label": "Palpate supraclavicular lymph nodes",
+      "system": "lymph",
+      "technique": "palpate",
+      "allowedRegions": [
+        "ln_supraclavicular"
+      ],
+      "requiresPositioning": [
+        "seated"
+      ],
+      "normalFinding": {
+        "default": "No palpable or tender supraclavicular lymphadenopathy bilaterally."
+      },
+      "demo": {
+        "steps": [
+          "Face the seated patient and use the pads of your index and middle fingers.",
+          "Move the skin in small gentle circles over the hollow above each clavicle on both sides together.",
+          "Note any node's size, consistency, mobility and tenderness."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "trachea_palpation",
+      "fcmId": 19,
+      "label": "Palpate trachea for position",
+      "system": "neck",
+      "technique": "palpate",
+      "allowedRegions": [
+        "neck_trachea"
+      ],
+      "requiresPositioning": [
+        "seated"
+      ],
+      "normalFinding": {
+        "default": "Trachea midline and mobile; thyroid and cricoid cartilages non-tender."
+      },
+      "demo": {
+        "steps": [
+          "Have the patient lift the chin slightly.",
+          "Feel the thyroid and cricoid cartilages in the midline.",
+          "Check the trachea sits centrally, with equal space on each side above the sternal notch."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "thyroid_palpation",
+      "fcmId": 20,
+      "label": "Palpate thyroid gland",
+      "system": "neck",
+      "technique": "palpate",
+      "allowedRegions": [
+        "neck_thyroid"
+      ],
+      "requiresPositioning": [
+        "seated"
+      ],
+      "normalFinding": {
+        "default": "Thyroid not enlarged, smooth, non-tender, no nodules; rises normally on swallowing."
+      },
+      "demo": {
+        "steps": [
+          "Stand behind the seated patient with the neck in a neutral position.",
+          "Find the cricoid cartilage, then the isthmus just beneath it.",
+          "Feel each lobe while the patient swallows a sip of water, gently shifting the trachea to each side in turn."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "eye_inspection",
+      "fcmId": 21,
+      "label": "Inspect eyes, lids and conjunctivae",
+      "system": "heent",
+      "technique": "inspect",
+      "allowedRegions": [
+        "eye_right",
+        "eye_left"
+      ],
+      "normalFinding": {
+        "default": "Lids normal, conjunctivae pink, sclerae white and anicteric, irises clear."
+      },
+      "demo": {
+        "steps": [
+          "Look at lids, sclerae, conjunctivae and irises of each eye.",
+          "Ask the patient to look up while you gently draw down the lower lid.",
+          "Ask the patient to look down while you gently lift the upper lid."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "visual_fields_confrontation",
+      "fcmId": 22,
+      "label": "Test visual fields by confrontation",
+      "system": "heent",
+      "technique": "special",
+      "allowedRegions": [
+        "eye_right",
+        "eye_left",
+        "neuro_cranial_nerves"
+      ],
+      "normalFinding": {
+        "default": "Visual fields full to confrontation in all four quadrants in each eye."
+      },
+      "demo": {
+        "steps": [
+          "Sit facing the patient at eye level and have them cover one eye.",
+          "Keeping their gaze on your face, briefly show a few fingers in each quadrant and ask how many.",
+          "Repeat for the other eye."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "pupils_light_reflex",
+      "fcmId": 23,
+      "label": "Check pupil size and light reflexes",
+      "system": "heent",
+      "technique": "special",
+      "allowedRegions": [
+        "eye_right",
+        "eye_left"
+      ],
+      "normalFinding": {
+        "default": {
+          "text": "Pupils equal, round, 3 mm, briskly reactive to light directly and consensually.",
+          "visual": {
+            "pupilConstriction": 0.6,
+            "pupilConsensual": 0.6
+          }
+        }
+      },
+      "demo": {
+        "steps": [
+          "Compare pupil size and shape in dim light.",
+          "Shine the penlight straight onto one pupil and watch both pupils constrict.",
+          "Repeat on the other side."
+        ]
+      },
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "penlight",
+      "toleranceCm": 0.6
+    },
+    {
+      "id": "swinging_flashlight",
+      "fcmId": null,
+      "label": "Swinging-light test",
+      "system": "heent",
+      "technique": "special",
+      "allowedRegions": [
+        "eye_right",
+        "eye_left"
+      ],
+      "normalFinding": {
+        "default": {
+          "text": "No relative afferent pupillary defect: each pupil stays constricted as the light swings across to it.",
+          "visual": {
+            "pupilConstriction": 0.6,
+            "pupilConsensual": 0.6
+          }
+        }
+      },
+      "demo": {
+        "steps": [
+          "In dim light, hold the penlight on one pupil for about two seconds.",
+          "Swing the light briskly across to the other pupil, then back again.",
+          "Watch whether each pupil stays small or widens as the light arrives."
+        ]
+      },
+      "sourceText": "",
+      "interaction": "drag_path",
+      "tool": "penlight",
+      "toleranceCm": 0.6
+    },
+    {
+      "id": "eom_accommodation",
+      "fcmId": 24,
+      "label": "Test extraocular movements and accommodation",
+      "system": "heent",
+      "technique": "special",
+      "allowedRegions": [
+        "eye_right",
+        "eye_left",
+        "neuro_cranial_nerves"
+      ],
+      "normalFinding": {
+        "default": "Extraocular movements full and conjugate without nystagmus or lid lag; convergence and accommodation intact."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to keep the head still and follow your finger with the eyes only.",
+          "Trace a wide H shape through the six directions of gaze.",
+          "Bring the target in toward the nose and watch for convergence and pupil constriction."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "ophthalmoscopy",
+      "fcmId": 25,
+      "label": "Fundoscopic exam with ophthalmoscope",
+      "system": "heent",
+      "technique": "special",
+      "allowedRegions": [
+        "eye_right",
+        "eye_left"
+      ],
+      "normalFinding": {
+        "default": "Red reflex present; optic disc sharp with normal cup, vessels and macula unremarkable."
+      },
+      "demo": {
+        "steps": [
+          "Dim the room and ask the patient to fix on a distant point.",
+          "Use your right hand and eye for their right eye, left for left.",
+          "Approach from the side, find the red reflex, then move in close to view the disc, vessels and macula."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "otoscopy",
+      "fcmId": 26,
+      "label": "Otoscopic exam of ear canal and drum",
+      "system": "heent",
+      "technique": "special",
+      "allowedRegions": [
+        "ear_right",
+        "ear_left"
+      ],
+      "normalFinding": {
+        "default": "Canals clear without erythema; tympanic membranes pearly grey and intact with normal landmarks and light reflex."
+      },
+      "demo": {
+        "steps": [
+          "Draw the outer ear upward and backward to straighten the canal.",
+          "Insert the speculum slowly, angled slightly forward and down.",
+          "Inspect canal, wax and drum landmarks, then repeat on the other ear."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "weber_test",
+      "fcmId": 27,
+      "label": "Weber tuning fork test",
+      "system": "heent",
+      "technique": "special",
+      "allowedRegions": [
+        "scalp"
+      ],
+      "normalFinding": {
+        "default": {
+          "text": "Sound heard equally in both ears; no lateralization.",
+          "audio": {
+            "generator": "tone",
+            "params": {
+              "freq": 512,
+              "pan": 0,
+              "decaySec": 8,
+              "airBoneRatio": 2
+            }
+          }
+        }
+      },
+      "demo": {
+        "steps": [
+          "Set a tuning fork vibrating.",
+          "Rest its base on the middle of the top of the head.",
+          "Ask whether the sound is louder on one side or the same in both ears."
+        ]
+      },
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "tuning_fork",
+      "toolMode": "512"
+    },
+    {
+      "id": "rinne_test",
+      "fcmId": 28,
+      "label": "Rinne tuning fork test",
+      "system": "heent",
+      "technique": "special",
+      "allowedRegions": [
+        "ear_right",
+        "ear_left"
+      ],
+      "normalFinding": {
+        "default": {
+          "text": "Air conduction greater than bone conduction bilaterally.",
+          "audio": {
+            "generator": "tone",
+            "params": {
+              "freq": 512,
+              "pan": 0,
+              "decaySec": 9,
+              "airBoneRatio": 2
+            }
+          }
+        }
+      },
+      "demo": {
+        "steps": [
+          "Set a tuning fork vibrating and place its base on the mastoid bone.",
+          "When the patient can no longer hear it, move the prongs next to the ear canal.",
+          "Ask whether the sound is audible again; repeat on the other side."
+        ]
+      },
+      "sourceText": "",
+      "interaction": "sequence",
+      "tool": "tuning_fork",
+      "toolMode": "512",
+      "steps": [
+        {
+          "id": "bone",
+          "label": "Base of the fork on the mastoid (bone conduction)",
+          "kind": "place",
+          "landmark": "mastoid",
+          "toleranceCm": 2
+        },
+        {
+          "id": "signal",
+          "label": "Patient says the sound has stopped",
+          "kind": "signal"
+        },
+        {
+          "id": "air",
+          "label": "Prongs beside the ear canal (air conduction)",
+          "kind": "place",
+          "landmark": "ear_canal"
+        }
+      ]
+    },
+    {
+      "id": "nares_inspection",
+      "fcmId": 29,
+      "label": "Inspect nasal passages",
+      "system": "heent",
+      "technique": "inspect",
+      "allowedRegions": [
+        "nose"
+      ],
+      "normalFinding": {
+        "default": "Nasal mucosa pink and moist, septum midline, no discharge, polyps or lesions."
+      },
+      "demo": {
+        "steps": [
+          "Face the patient and gently insert a short nasal speculum or tilt the nose tip up.",
+          "Look at the lower nasal passage, then have the patient tip the head back slightly.",
+          "Check mucosa colour, septum and any lesions on each side."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "mouth_throat_inspection",
+      "fcmId": 30,
+      "label": "Inspect mouth and throat",
+      "system": "heent",
+      "technique": "inspect",
+      "allowedRegions": [
+        "mouth"
+      ],
+      "normalFinding": {
+        "default": "Lips, mucosa and palate pink and moist; uvula midline; tonsils not enlarged; pharynx without erythema or exudate."
+      },
+      "demo": {
+        "steps": [
+          "Use a light to look at the lips, tongue, buccal mucosa, palate and parotid duct openings.",
+          "Press a tongue depressor on the back half of the tongue to view the pharynx and tonsils.",
+          "Ask the patient to say 'ah' to improve the view."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "floor_of_mouth_tongue",
+      "fcmId": 31,
+      "label": "Inspect tongue and floor of mouth",
+      "system": "heent",
+      "technique": "inspect",
+      "allowedRegions": [
+        "mouth"
+      ],
+      "normalFinding": {
+        "default": "Tongue moist and midline without lesions; floor of mouth without masses or lesions."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to stick out the tongue, then lift the tip to the roof of the mouth.",
+          "Look under the tongue at the floor of the mouth for lesions or swelling."
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "teeth_gums_inspection",
+      "fcmId": 32,
+      "label": "Inspect teeth and gums",
+      "system": "heent",
+      "technique": "inspect",
+      "allowedRegions": [
+        "mouth"
+      ],
+      "normalFinding": {
+        "default": "Dentition in good repair; gums pink without swelling, bleeding or recession."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to bite together.",
+          "Retract the lips and cheeks with a tongue depressor or gloved finger.",
+          "Look over the teeth and gum margins."
+        ]
+      },
+      "sourceText": ""
+    }
+  ]
+}

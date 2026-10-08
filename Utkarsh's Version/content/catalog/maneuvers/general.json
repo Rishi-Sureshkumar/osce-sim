@@ -1,0 +1,243 @@
+{
+  "system": "general",
+  "maneuvers": [
+    {
+      "sourceText": "",
+      "id": "pulse_radial",
+      "fcmId": 5,
+      "label": "Radial pulse (rate and rhythm)",
+      "system": "vitals",
+      "technique": "palpate",
+      "allowedRegions": [
+        "wrist_right",
+        "wrist_left"
+      ],
+      "normalFinding": {
+        "default": "Radial pulse {vitals.hr} beats/min, regular rhythm, normal volume."
+      },
+      "demo": {
+        "steps": [
+          "Place two finger pads over the radial artery at the wrist.",
+          "Count beats for at least 15 seconds and convert to a per-minute rate.",
+          "Note regularity and volume."
+        ]
+      },
+      "penTerms": [
+        "radial pulse",
+        "irregularly irregular",
+        "tachycardic",
+        "tachycardia"
+      ]
+    },
+    {
+      "sourceText": "",
+      "id": "respiratory_rate",
+      "fcmId": 6,
+      "label": "Respiratory rate (observed at rest)",
+      "system": "vitals",
+      "technique": "inspect",
+      "allowedRegions": [
+        "general"
+      ],
+      "normalFinding": {
+        "default": "Respiratory rate {vitals.rr} breaths/min, quiet and unlaboured."
+      },
+      "demo": {
+        "steps": [
+          "Watch the chest rise without telling the patient you are counting.",
+          "Count breaths for at least 15 seconds and convert to a per-minute rate."
+        ]
+      },
+      "penTerms": [
+        "respiratory rate",
+        "tachypnea",
+        "tachypnoea",
+        "tachypneic"
+      ]
+    },
+    {
+      "sourceText": "",
+      "id": "bp_cuff_placement",
+      "fcmId": 7,
+      "label": "BP: choose cuff size and place over brachial artery",
+      "system": "vitals",
+      "technique": "special",
+      "allowedRegions": [
+        "upper_arm_right",
+        "upper_arm_left",
+        "arm_right",
+        "arm_left"
+      ],
+      "normalFinding": {
+        "default": "Appropriately sized cuff applied snugly to the bare upper arm, bladder centred over the palpated brachial artery."
+      },
+      "demo": {
+        "steps": [
+          "Pick a cuff whose bladder suits the arm circumference.",
+          "Feel for the brachial pulse in the antecubital fossa.",
+          "Wrap the cuff snugly on bare skin with the bladder over the artery."
+        ]
+      }
+    },
+    {
+      "sourceText": "",
+      "id": "bp_arm_support",
+      "fcmId": 8,
+      "label": "BP: flex and support the arm",
+      "system": "vitals",
+      "technique": "special",
+      "allowedRegions": [
+        "upper_arm_right",
+        "upper_arm_left",
+        "arm_right",
+        "arm_left"
+      ],
+      "normalFinding": {
+        "default": "Arm slightly flexed and supported at heart level."
+      },
+      "demo": {
+        "steps": [
+          "Bend the elbow slightly.",
+          "Rest the arm on a surface or your own arm so the patient is relaxed."
+        ]
+      }
+    },
+    {
+      "requiresPositioning": [
+        "seated",
+        "supine"
+      ],
+      "sourceText": "",
+      "id": "blood_pressure",
+      "fcmId": 9,
+      "label": "BP: palpatory estimate, then auscultatory reading",
+      "system": "vitals",
+      "technique": "auscultate",
+      "allowedRegions": [
+        "upper_arm_right",
+        "upper_arm_left"
+      ],
+      "normalFinding": {
+        "default": {
+          "text": "Blood pressure {vitals.bpSystolic}/{vitals.bpDiastolic} mmHg.",
+          "audio": {
+            "generator": "korotkoff",
+            "params": {}
+          }
+        }
+      },
+      "demo": {
+        "steps": [
+          "Inflate while feeling the radial pulse; note where it disappears, then deflate fully and wait.",
+          "Place the stethoscope over the brachial artery.",
+          "Inflate 20–30 mmHg above the palpated value and deflate slowly (about 2–3 mmHg per second).",
+          "Record when tapping sounds start and when they stop."
+        ]
+      },
+      "interaction": "sequence",
+      "tool": "bp_cuff",
+      "penTerms": [
+        "blood pressure"
+      ],
+      "steps": [
+        {
+          "id": "wrap",
+          "label": "Wrap the cuff on the bare upper arm, lower edge 2–3 cm above the elbow crease",
+          "kind": "place",
+          "tool": "bp_cuff",
+          "toleranceCm": 3,
+          "logsManeuver": "bp_cuff_placement"
+        },
+        {
+          "id": "support",
+          "label": "Support the arm at heart level",
+          "kind": "control",
+          "control": "support_arm",
+          "logsManeuver": "bp_arm_support"
+        },
+        {
+          "id": "palpate",
+          "label": "Feel the brachial pulse in the elbow crease",
+          "kind": "place",
+          "tool": "hands",
+          "landmark": "brachial",
+          "toleranceCm": 2.5
+        },
+        {
+          "id": "listen",
+          "label": "Stethoscope over the brachial artery",
+          "kind": "place",
+          "tool": "stethoscope",
+          "landmark": "brachial",
+          "toleranceCm": 2.5
+        },
+        {
+          "id": "gauge",
+          "label": "Inflate, release slowly (2–3 mmHg per second) and record the reading",
+          "kind": "control",
+          "control": "bp_gauge"
+        }
+      ]
+    },
+    {
+      "sourceText": "",
+      "id": "oxygen_saturation",
+      "fcmId": null,
+      "label": "Pulse oximetry",
+      "system": "vitals",
+      "technique": "special",
+      "allowedRegions": [
+        "hand_right",
+        "hand_left"
+      ],
+      "normalFinding": {
+        "default": "SpO2 {vitals.spo2}% {vitals.spo2Context}."
+      },
+      "demo": {
+        "steps": [
+          "Clip the probe onto a fingertip.",
+          "Wait for a steady waveform before reading."
+        ]
+      }
+    },
+    {
+      "sourceText": "",
+      "id": "temperature",
+      "fcmId": null,
+      "label": "Temperature",
+      "system": "vitals",
+      "technique": "special",
+      "allowedRegions": [
+        "general"
+      ],
+      "normalFinding": {
+        "default": "Temperature {vitals.tempC} °C."
+      },
+      "demo": {
+        "steps": [
+          "Measure temperature with the available thermometer."
+        ]
+      }
+    },
+    {
+      "sourceText": "",
+      "id": "general_appearance",
+      "fcmId": 10,
+      "label": "General appearance",
+      "system": "general",
+      "technique": "inspect",
+      "allowedRegions": [
+        "general"
+      ],
+      "normalFinding": {
+        "default": "Well-appearing adult, comfortable at rest, alert and conversant, well groomed, no acute distress."
+      },
+      "demo": {
+        "steps": [
+          "Step back and observe the whole patient before touching them.",
+          "Note build, nutrition, grooming, comfort, mood and how they interact with the room."
+        ]
+      }
+    }
+  ]
+}
