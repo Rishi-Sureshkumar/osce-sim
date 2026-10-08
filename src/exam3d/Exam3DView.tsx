@@ -9,6 +9,7 @@ import { captionFor, toneEnvelope } from "@/audio/schedule";
 import type { ToolContact, ToolUse } from "@/input/adapters/tool";
 import { Drapes } from "@/scene/Drapes";
 import { HandWash } from "@/scene/HandWash";
+import { washHandsPosition } from "@/scene/room/sinkGeometry";
 import { FpsMeter, LoadingOverlay } from "@/scene/Loading";
 import { ExamRoom } from "@/scene/room/ExamRoom";
 import type { VariantId } from "@/scene/rig";
@@ -141,6 +142,8 @@ export default function Exam3DView(props: Exam3DViewProps) {
   const [sequence, setSequence] = useState<Sequence | null>(null);
   const [now, setNow] = useState(() => performance.now());
   const [washing, setWashing] = useState<number | null>(null);
+  /** where the hands are cleaned: at the sink (soap and water, over the basin) or with the sanitiser */
+  const [washKind, setWashKind] = useState<"sink" | "sanitiser">("sanitiser");
   const [bedHud, setBedHud] = useState(false);
   const [tableHover, setTableHover] = useState<TableItem | null>(null);
   const [opening, setOpening] = useState(false);
@@ -244,9 +247,10 @@ export default function Exam3DView(props: Exam3DViewProps) {
     if (!inside) void enter();
     else if (!busy) props.onLeaveRequest();
   };
-  const wash = () => {
+  const wash = (kind: "sink" | "sanitiser") => {
     if (!inside || busy || props.disabled) return;
     goTo("sink");
+    setWashKind(kind);
     setWashing(performance.now());
   };
   // the wash completes after WASH_MS (or Skip, practice only)
@@ -525,7 +529,8 @@ export default function Exam3DView(props: Exam3DViewProps) {
             angle={angle.current}
             door={door.current}
             onDoor={onDoor}
-            onSink={inside ? wash : undefined}
+            onSink={inside ? () => wash("sink") : undefined}
+            sinkRunning={washing !== null && washKind === "sink"}
             onToolTable={inside && !busy ? () => goTo("tool_table") : undefined}
             onStool={
               inside && !busy
@@ -536,7 +541,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
                 : undefined
             }
             onHeadControl={inside && !busy && !props.disabled ? () => setBedHud(true) : undefined}
-            sanitiser={inside ? { progress: 0, clean: state.handsClean, start: wash, cancel: () => undefined, disabled: props.disabled } : undefined}
+            sanitiser={inside ? { progress: 0, clean: state.handsClean, start: () => wash("sanitiser"), cancel: () => undefined, disabled: props.disabled } : undefined}
             toolTable={{ hovered: tableHover, inHand: itemInHand(props.tool), interactive: shot.current === "tool_table" && !busy, onHover: setTableHover, onPick: pickTool }}
           />
           <Suspense fallback={null}>
@@ -565,7 +570,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
             <Drapes pose={pose} drape={state.drape} onDrape={inside && !props.disabled ? props.onDrape : undefined} />
           </Suspense>
           {tool && <ToolCursor tool={tool} at={cursor} toolMode={mode} swingAt={swingAt} vibrating={!!props.tool.struckAt && forkElapsed < 12} />}
-          {washing !== null && <HandWash startedAt={washing} durationMs={washMs} />}
+          {washing !== null && <HandWash startedAt={washing} durationMs={washMs} at={washKind === "sink" ? washHandsPosition() : undefined} />}
           <FpsMeter />
           <ShotCamera goal={goal} freeLook={SHOTS[shot.current].freeLook} enabled={!hold} />
           {props.qa && <TestHook pose={pose} shot={shot.current} />}

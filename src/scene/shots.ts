@@ -9,6 +9,7 @@
 import type { RegionGroup } from "@/domain/schemas";
 import { anchorWorldNormals, anchorWorldPoints, skinLandmark, type Pose, type Vec3 } from "@/exam3d/regionAnchors";
 import { DISPENSER_POS } from "./room/Dispenser";
+import { SINK } from "./room/sinkGeometry";
 import { TOOL_TABLE_POS, TOOL_TABLE_TOP } from "./room/ToolTable";
 import { ROOM } from "./room/ExamRoom";
 
@@ -59,7 +60,8 @@ export const SHOTS: Record<ShotId, Shot> = {
     id: "sink",
     label: "Sink",
     parent: "overview",
-    framing: { kind: "fixed", position: [DISPENSER_POS[0] + 1.1, 1.5, DISPENSER_POS[2] + 0.45], target: [DISPENSER_POS[0], 1.05, DISPENSER_POS[2] + 0.3] },
+    // the basin (washing under the tap) and the sanitiser beside it
+    framing: { kind: "fixed", position: [SINK.x + 0.8, 1.6, (SINK.z + DISPENSER_POS[2]) / 2 + 0.6], target: [SINK.x - 0.05, 1.0, (SINK.z + DISPENSER_POS[2]) / 2] },
     fov: 45,
     freeLook: look(10),
     transitions: ROOM_SHOTS,

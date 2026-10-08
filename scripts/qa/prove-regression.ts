@@ -32,6 +32,12 @@ export const PROOFS: Record<string, Proof> = {
     commit: "be1700b",
     description: "Achilles reflex result card on the left ankle could not be closed (no ✕, Esc or outside click)",
   },
+  bug3: {
+    kind: "e2e",
+    tests: ["e2e/regressions/bug3-sink.spec.ts"],
+    support: ["e2e/qa/fixtures.ts", "e2e/qa/openers.ts"],
+    description: "the sink had no basin, soap or towels, and washing showed the hands in front of the camera instead of over a basin",
+  },
   bug10: {
     kind: "vitest",
     tests: ["tests/regressions/bug10-hold-choice.test.ts"],

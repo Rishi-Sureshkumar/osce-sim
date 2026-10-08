@@ -1,7 +1,9 @@
 "use client";
 /**
- * First-person hand hygiene: two hands lather and rub in front of the camera with growing foam,
- * for `durationMs`. Purely visual; the hygiene Action is logged by the caller when it ends.
+ * Hand hygiene: two hands lather and rub with growing foam for `durationMs` — in front of the camera
+ * (sanitiser rub), or at a world position (`at`: over the sink basin, washing under the tap).
+ * Purely visual; the hygiene Action is logged by the caller when it ends. The rig is named
+ * "hand-wash" for the QA hooks.
  */
 import { useFrame, useThree } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
@@ -46,7 +48,7 @@ function Hand({ side }: { side: 1 | -1 }) {
   );
 }
 
-export function HandWash({ startedAt, durationMs }: { startedAt: number; durationMs: number }) {
+export function HandWash({ startedAt, durationMs, at }: { startedAt: number; durationMs: number; at?: [number, number, number] }) {
   const { camera } = useThree();
   const rig = useRef<Group>(null);
   const left = useRef<Group>(null);
@@ -63,12 +65,20 @@ export function HandWash({ startedAt, durationMs }: { startedAt: number; duratio
     const t = (performance.now() - startedAt) / durationMs;
     const g = rig.current;
     if (!g) return;
-    // stay in front of the camera, slightly below eye level
-    g.position.copy(camera.position);
-    g.quaternion.copy(camera.quaternion);
-    g.translateZ(-0.5);
-    g.translateY(-0.17);
-    g.scale.setScalar(0.72);
+    if (at) {
+      // over the basin, seen as in the first-person rub, fingers tipped down toward the drain
+      g.position.set(at[0], at[1], at[2]);
+      g.quaternion.copy(camera.quaternion);
+      g.rotateX(-0.35);
+      g.scale.setScalar(1);
+    } else {
+      // stay in front of the camera, slightly below eye level
+      g.position.copy(camera.position);
+      g.quaternion.copy(camera.quaternion);
+      g.translateZ(-0.5);
+      g.translateY(-0.17);
+      g.scale.setScalar(0.72);
+    }
     const k = performance.now() / 1000;
     const rub = Math.sin(k * 9) * 0.035;
     const twist = Math.sin(k * 4.5) * 0.35;
@@ -93,7 +103,7 @@ export function HandWash({ startedAt, durationMs }: { startedAt: number; duratio
   });
 
   return (
-    <group ref={rig}>
+    <group ref={rig} name="hand-wash">
       <pointLight position={[0, 0.2, 0.2]} intensity={0.6} distance={1.2} />
       <group ref={left}>
         <Hand side={-1} />

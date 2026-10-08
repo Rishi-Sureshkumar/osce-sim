@@ -9,11 +9,12 @@
  * +Z; the examiner works from the patient's right (−X).
  */
 import { useFrame, type ThreeEvent } from "@react-three/fiber";
-import { useRef } from "react";
-import { DoubleSide, type Group } from "three";
+import { useMemo, useRef } from "react";
+import { DoubleSide, ExtrudeGeometry, LatheGeometry, Path, Shape, Vector2, type Group } from "three";
 import { TABLE } from "../rig";
 import { TABLE_PARTS } from "./tableGeometry";
 import { Dispenser } from "./Dispenser";
+import { FAUCET, SINK, basinCenter, basinProfile } from "./sinkGeometry";
 import { ToolTable, type ToolTableProps } from "./ToolTable";
 
 const noRay = () => null;
@@ -54,6 +55,8 @@ export interface ExamRoomProps extends RoomHandlers {
   /** door placard text lines (patient name, age, reason for visit…) */
   placard?: string[];
   toolTable?: ToolTableProps;
+  /** water runs while the student washes at the sink */
+  sinkRunning?: boolean;
 }
 
 /** onClick + pointer cursor for a clickable prop (no-op when the handler is absent). */
@@ -74,7 +77,7 @@ export function clickable(handler?: () => void) {
   };
 }
 
-export function ExamRoom({ angle, door, sanitiser, placard, toolTable, onDoor, onSink, onToolTable, onStool, onHeadControl }: ExamRoomProps) {
+export function ExamRoom({ angle, door, sanitiser, placard, toolTable, sinkRunning, onDoor, onSink, onToolTable, onStool, onHeadControl }: ExamRoomProps) {
   const { halfX, backZ, doorZ, height } = ROOM;
   const wall = "#eef2f4";
   return (
@@ -111,7 +114,7 @@ export function ExamRoom({ angle, door, sanitiser, placard, toolTable, onDoor, o
       <DoorWall door={door} placard={placard} onDoor={onDoor} />
       <Corridor />
       <group name="sink" {...clickable(onSink)}>
-        <Sink />
+        <Sink running={sinkRunning} />
       </group>
       {sanitiser && (
         <Dispenser progress={sanitiser.progress} clean={sanitiser.clean} onStart={() => !sanitiser.disabled && sanitiser.start()} onCancel={sanitiser.cancel} />
@@ -127,7 +130,7 @@ export function ExamRoom({ angle, door, sanitiser, placard, toolTable, onDoor, o
       <WallComputer />
       <Curtain />
       {/* wastebasket by the sink */}
-      <Cyl p={[-2.12, 0.2, 0.85]} r={0.15} h={0.4} c="#64748b" rough={0.6} />
+      <Cyl p={[SINK.x, 0.2, SINK.z + 0.55]} r={0.15} h={0.4} c="#64748b" rough={0.6} />
       {/* skirting */}
       <Box p={[0, 0.05, backZ + 0.01]} s={[halfX * 2, 0.1, 0.02]} c="#94a3b8" shadow={false} />
     </group>
@@ -189,22 +192,66 @@ function Corridor() {
   );
 }
 
-function Sink() {
-  const x = -ROOM.halfX + 0.28;
+/**
+ * Clinic sink (Phase 4 M2 bug 3): vanity, counter with a real bowl (≥ 10 cm deep, named
+ * "sink-basin"), gooseneck faucet with running water while washing, soap pump, mirror and towel
+ * dispenser. The counter and bowl take clicks (the whole group is the "wash at the sink" target).
+ */
+function Sink({ running }: { running?: boolean }) {
+  const { counter, basin, cabinetTop } = SINK;
+  const [bx, by, bz] = basinCenter();
+  const counterGeo = useMemo(() => {
+    const shape = new Shape();
+    shape.moveTo(-counter.width / 2, -counter.depth / 2);
+    shape.lineTo(counter.width / 2, -counter.depth / 2);
+    shape.lineTo(counter.width / 2, counter.depth / 2);
+    shape.lineTo(-counter.width / 2, counter.depth / 2);
+    shape.closePath();
+    const hole = new Path();
+    hole.absarc(basin.offsetX, 0, basin.rimRadius, 0, Math.PI * 2, true);
+    shape.holes.push(hole);
+    return new ExtrudeGeometry(shape, { depth: counter.thickness, bevelEnabled: false, curveSegments: 40 });
+  }, [counter, basin]);
+  const bowlGeo = useMemo(() => new LatheGeometry(basinProfile().map(([r, y]) => new Vector2(r, y)), 40), []);
+  const { base, height, tip } = FAUCET;
+  const armLen = tip[0] - base[0];
   return (
-    <group position={[x, 0, 0.3]}>
-      <Box p={[0, 0.42, 0]} s={[0.55, 0.84, 0.6]} c="#cbd5e1" r={0.5} />
-      <Box p={[0, 0.86, 0]} s={[0.58, 0.04, 0.64]} c="#f1f5f9" r={0.2} />
-      <mesh position={[0.02, 0.87, 0]} rotation={[-Math.PI / 2, 0, 0]} raycast={noRay}>
-        <circleGeometry args={[0.2, 24]} />
-        <meshStandardMaterial color="#94a3b8" roughness={0.2} metalness={0.6} />
+    <group>
+      {/* vanity cabinet (stops below the bowl) */}
+      <Box p={[SINK.x, cabinetTop / 2, SINK.z]} s={[0.55, cabinetTop, 0.6]} c="#cbd5e1" r={0.5} />
+      {/* counter with the bowl cut out */}
+      <mesh geometry={counterGeo} position={[SINK.x, counter.top - counter.thickness, SINK.z]} rotation={[-Math.PI / 2, 0, 0]} castShadow receiveShadow>
+        <meshStandardMaterial color="#f1f5f9" roughness={0.25} />
       </mesh>
-      {/* tap */}
-      <Cyl p={[-0.22, 1.0, 0]} r={0.015} h={0.26} c="#e2e8f0" metal={0.9} rough={0.2} />
-      <Cyl p={[-0.13, 1.12, 0]} r={0.012} h={0.2} c="#e2e8f0" rot={[0, 0, Math.PI / 2]} metal={0.9} rough={0.2} />
-      {/* mirror and paper towels */}
-      <Box p={[-0.26, 1.55, 0]} s={[0.02, 0.6, 0.45]} c="#dbeafe" r={0.05} m={0.4} shadow={false} />
-      <Box p={[-0.24, 1.35, 0.42]} s={[0.1, 0.32, 0.26]} c="#f8fafc" r={0.4} />
+      <mesh geometry={bowlGeo} position={[bx, by, bz]} name="sink-basin" receiveShadow>
+        <meshStandardMaterial color="#f8fafc" roughness={0.15} side={DoubleSide} />
+      </mesh>
+      {/* drain */}
+      <mesh position={[bx, by - basin.depth + 0.002, bz]} rotation={[-Math.PI / 2, 0, 0]} raycast={noRay}>
+        <circleGeometry args={[0.025, 20]} />
+        <meshStandardMaterial color="#64748b" roughness={0.3} metalness={0.8} />
+      </mesh>
+      {/* gooseneck faucet and lever */}
+      <Cyl p={[base[0], base[1] + height / 2, base[2]]} r={0.016} h={height} c="#cbd5e1" metal={0.45} rough={0.3} />
+      <Cyl p={[base[0] + armLen / 2, base[1] + height, base[2]]} r={0.013} h={armLen} c="#e2e8f0" rot={[0, 0, Math.PI / 2]} metal={0.9} rough={0.2} />
+      <Cyl p={[tip[0], (base[1] + height + tip[1]) / 2, tip[2]]} r={0.012} h={base[1] + height - tip[1]} c="#cbd5e1" metal={0.45} rough={0.3} />
+      <Box p={[base[0] + 0.02, base[1] + 0.12, base[2] + 0.06]} s={[0.02, 0.02, 0.1]} c="#cbd5e1" m={0.45} r={0.3} />
+      {running && (
+        <mesh position={[tip[0], (tip[1] + by - basin.depth) / 2, tip[2]]} raycast={noRay}>
+          <cylinderGeometry args={[0.006, 0.009, tip[1] - (by - basin.depth), 10]} />
+          <meshStandardMaterial color="#bae6fd" transparent opacity={0.65} roughness={0.05} />
+        </mesh>
+      )}
+      {/* soap pump on the counter */}
+      <Cyl p={[SINK.x - 0.17, counter.top + 0.07, SINK.z - 0.23]} r={0.035} h={0.14} c="#f0fdfa" rough={0.3} />
+      <Cyl p={[SINK.x - 0.17, counter.top + 0.16, SINK.z - 0.23]} r={0.01} h={0.04} c="#14b8a6" rough={0.4} />
+      <Box p={[SINK.x - 0.15, counter.top + 0.18, SINK.z - 0.23]} s={[0.05, 0.012, 0.016]} c="#14b8a6" r={0.4} />
+      {/* mirror and paper towel dispenser */}
+      <Box p={[SINK.x - 0.26, 1.58, SINK.z]} s={[0.02, 0.6, 0.45]} c="#dbeafe" r={0.05} m={0.4} shadow={false} />
+      <group name="towel-dispenser">
+        <Box p={[SINK.x - 0.24, 1.35, SINK.z + 0.42]} s={[0.1, 0.32, 0.26]} c="#f8fafc" r={0.4} />
+        <Box p={[SINK.x - 0.18, 1.2, SINK.z + 0.42]} s={[0.012, 0.06, 0.18]} c="#ffffff" r={0.9} shadow={false} />
+      </group>
     </group>
   );
 }

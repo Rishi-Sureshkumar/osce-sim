@@ -1,0 +1,26 @@
+# Regression proof: bug3
+
+the sink had no basin, soap or towels, and washing showed the hands in front of the camera instead of over a basin
+
+test:      e2e/regressions/bug3-sink.spec.ts
+command:   npx playwright test e2e/regressions/bug3-sink.spec.ts --reporter=line
+old code:  ae170bb (git worktree)  → exit 1 (FAILS, as it must)
+new code:  ae170bb + working tree     → exit 0 (passes)
+result:    PROVEN
+date:      2026-10-08T00:21:03.488Z
+
+## Old code: why it fails
+```
+    Error: a sink basin exists
+    expect(received).not.toBeNull()
+    Received: null
+    > 27 |   expect(basin, "a sink basin exists").not.toBeNull();
+      28 |   expect(basin!.max[1] - basin!.min[1], "basin depth (m)").toBeGreaterThanOrEqual(0.08);
+      29 |   for (const prop of ["towel-dispenser", "sanitiser-dispenser"]) expect(await box(page, prop), prop).not.toBeNull();
+  1 failed
+```
+
+## New code
+```
+  1 passed (45.9s)
+```
