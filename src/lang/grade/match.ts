@@ -11,7 +11,7 @@ import type { Action, MarkSheetItem, MatchSource, MatchSpec } from "@/domain/sch
 import { orderLog } from "@/engine/order";
 import type { AiItemJudgement } from "@/engine/scoring";
 import { hasPhrase, type Normalizer } from "../normalize";
-import { hasNegationCue, isNegated } from "../negation";
+import { hasNegationCue, isNegatedInSentence } from "../negation";
 import { questionType } from "../question";
 import { cosine } from "../embed/vectors";
 import { THRESHOLDS } from "../thresholds";
@@ -64,11 +64,10 @@ export function candidatesFrom(log: readonly Action[], normalize: Normalizer): C
     else if (a.type === "submit_pen") {
       push(a, "pen_history", a.payload.history);
       push(a, "pen_exam", a.payload.exam);
-      // each piece separately, so every quote stays a verbatim substring of the note
-      for (const d of a.payload.diagnoses) {
-        push(a, "pen_diagnoses", d.diagnosis);
-        if (d.support) push(a, "pen_diagnoses", d.support);
-      }
+      // each diagnosis separately (verbatim quotes); its "supporting findings" text is not a diagnosis
+      // ("COPD; heart failure less likely" must not earn the heart-failure item) and is read only by
+      // the justification item
+      for (const d of a.payload.diagnoses) push(a, "pen_diagnoses", d.diagnosis);
     }
   }
   return out;
@@ -99,9 +98,13 @@ export function specFor(item: MarkSheetItem): MatchSpec {
   };
 }
 
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const fillNames = (s: string, name: string) => {
   const parts = name.split(/\s+/);
-  return s.replace(/\{patient\.name\}/g, name).replace(/\{patient\.firstName\}/g, parts[0] ?? name).replace(/\{patient\.lastName\}/g, parts.at(-1) ?? name);
+  return s
+    .replace(/\{patient\.name\}/g, () => name)
+    .replace(/\{patient\.firstName\}/g, () => parts[0] ?? name)
+    .replace(/\{patient\.lastName\}/g, () => parts.at(-1) ?? name);
 };
 
 function inWindow(c: Candidate, spec: MatchSpec, ctx: GradeContext): boolean {
@@ -134,7 +137,8 @@ export function gradeItem(item: MarkSheetItem, all: readonly Candidate[], ctx: G
   const keywords = spec.keywords.map((k) => ctx.normalize(fillNames(k, ctx.patient.name))).filter(Boolean);
   const patterns = spec.patterns.flatMap((p) => {
     try {
-      return [new RegExp(fillNames(p, ctx.patient.name), "i")];
+      // the name is data, not a pattern ("O'Brien (Jr.)" must not break or widen the regex)
+      return [new RegExp(fillNames(p, escapeRe(ctx.patient.name)), "i")];
     } catch {
       return [];
     }
@@ -146,11 +150,18 @@ export function gradeItem(item: MarkSheetItem, all: readonly Candidate[], ctx: G
   const hits: Hit[] = [];
   let bestReview: Hit | null = null;
   for (const c of cands) {
-    const kw = keywords.find((k) => hasPhrase(c.norm, k));
+    // polarity per keyword, with the sentence's punctuation as negation scope; any keyword with the
+    // right polarity counts (a negated item accepts a keyword that carries its own cue: "denies chest pain")
+    const negated = (k: string) => isNegatedInSentence(c.sentence, k, ctx.normalize);
+    const present = keywords.filter((k) => hasPhrase(c.norm, k));
+    const kw =
+      spec.polarity === "negated"
+        ? present.find((k) => hasNegationCue(k) || negated(k))
+        : spec.polarity === "affirmed"
+          ? present.find((k) => !negated(k))
+          : present[0];
+    if (present.length && !kw) continue;
     const pt = patterns.find((p) => p.test(c.sentence) || p.test(c.norm));
-    // a negated item: the term must be negated in the sentence, unless the keyword carries its own cue ("denies chest pain")
-    if (spec.polarity === "negated" && kw && !hasNegationCue(kw) && !isNegated(c.norm, kw)) continue;
-    if (spec.polarity === "affirmed" && kw && isNegated(c.norm, kw)) continue;
     if (kw || pt) {
       hits.push({ c, score: 1, via: kw ? "keyword" : "pattern", detail: kw ? `“${kw}”` : `/${pt!.source}/` });
       continue;

@@ -87,3 +87,9 @@ describe("normaliser: contractions typed without an apostrophe", () => {
     );
   });
 });
+
+describe("normaliser: percent", () => {
+  it('"30%" becomes "30 percent" (and never matches "30 minutes")', () => {
+    expect(basicNormalize("EF 30%")).toBe("ef 30 percent");
+  });
+});

@@ -18,7 +18,7 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
   const { id } = await params;
   let view;
   try {
-    view = await getResultsView(id);
+    view = await getResultsView(id, "coach");
   } catch (e) {
     if (e instanceof HttpError && e.status === 404) notFound();
     throw e;
@@ -41,6 +41,11 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
           <p className="text-sm text-slate-500">
             <span data-testid="coach-mode">{modeLabel(session.mode)}</span> · {session.status} · started {new Date(session.startedAt).toLocaleString()} · {session.patientTurns} patient turns ·{" "}
             {actions.filter((a) => a.type === "hint").length} hints used · {runs.length} grading run(s)
+            {run?.embeddings === false && (
+              <span className="ml-1 text-amber-700" title="The server's sentence-embedding model was unavailable: language items were matched by keywords and patterns only">
+                · graded without embeddings
+              </span>
+            )}
           </p>
         </div>
         {session.status !== "active" && <RegradeButton sessionId={id} label={run ? "Re-run grading" : "Grade now"} />}

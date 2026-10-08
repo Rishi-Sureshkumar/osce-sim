@@ -17,7 +17,7 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
   const { id } = await params;
   let view;
   try {
-    view = await getResultsView(id);
+    view = await getResultsView(id, "student");
   } catch (e) {
     if (e instanceof HttpError && e.status === 404) notFound();
     throw e;

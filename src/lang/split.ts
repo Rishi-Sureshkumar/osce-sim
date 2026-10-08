@@ -53,3 +53,10 @@ export function splitClauses(raw: string, normalize: (t: string) => string = bas
   // greetings and introductions glued to a question stay separate clauses already; cap the count
   return out.slice(0, MAX_CLAUSES);
 }
+
+/** The clauses of `raw` that come from sentences ending in "?" ("Allergies?" asks even without a question word). */
+export function questionClauses(raw: string, normalize: (t: string) => string = basicNormalize): Set<string> {
+  const out = new Set<string>();
+  for (const s of splitSentences(raw)) if (/\?\s*$/.test(s)) for (const c of splitClauses(s, normalize)) out.add(c);
+  return out;
+}

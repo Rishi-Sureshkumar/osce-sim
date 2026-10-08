@@ -14,7 +14,7 @@ and workstream ownership.
    was already chosen, for display; the log keeps the original. Nothing invents a finding, vital or fact.
 2. **Finding resolution is deterministic** (`src/engine/resolveFinding.ts`):
    `case.abnormalFindings[m][region] ?? case.abnormalFindings[m].default ?? catalog[m].normalFinding[region] ?? catalog[m].normalFinding.default`,
-   then `{vitals.*}` placeholders are filled from the case. If AI wording fails, show the raw text.
+   then `{vitals.*}` placeholders are filled from the case. Findings show this resolved text (optional in-browser rewording is display-only).
 3. **Every input becomes the same `Action`** (`src/domain/schemas.ts`). Clicks, chat, toolbar,
    voice and VR all go through `src/input/adapters/*` → `POST /api/sessions/[id]/actions`
    (or `/chat` for speech). The session log is append-only. UI, scoring and the coach timeline

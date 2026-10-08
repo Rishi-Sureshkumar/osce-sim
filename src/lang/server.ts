@@ -17,7 +17,7 @@ import type { ClauseMatch } from "./matcher";
 import { NORMALIZER_VERSION } from "./normalize";
 import type { ReplyResult } from "./patient";
 import { splitClauses } from "./split";
-import { understandTurn } from "./understand";
+import { askedTopics, understandTurn, type AskedTopics } from "./understand";
 
 export interface GeneratedVectors {
   model: string;
@@ -52,10 +52,14 @@ export function prepare(kase: Case): Prepared {
   const bank = buildBank(kase, { synonyms: lang.synonyms, conversation: lang.conversation, history: lang.history });
   const vectors = new Map([...readGenerated("banks.json"), ...readGenerated(`${kase.id}.json`)]);
   const missing = [...new Set(bank.targets.flatMap((t) => t.phrases))].filter((p) => !vectors.has(p));
+  // never rejects; if embedding fails, the bank is forgotten so the next turn tries again
   const ready = missing.length
-    ? embedTexts(missing).then((vs) => {
-        vs?.forEach((v, i) => vectors.set(missing[i]!, v));
-      })
+    ? embedTexts(missing)
+        .then((vs) => {
+          if (vs) vs.forEach((v, i) => vectors.set(missing[i]!, v));
+          else prepared.delete(kase.id);
+        })
+        .catch(() => void prepared.delete(kase.id))
     : Promise.resolve();
   const p = { bank, vectors, ready };
   prepared.set(kase.id, p);
@@ -87,6 +91,20 @@ export async function understand(kase: Case, log: readonly Action[], raw: string
 
   const r = understandTurn(kase, p.bank, log, raw, { phrase: (ph) => p.vectors.get(ph), clause: clauseVec }, { studentName: opts.studentName ?? null, embedding });
   return { ...r, embedding };
+}
+
+/**
+ * For grading: the topics each student `say` asked about, recomputed from its text with the
+ * server's own vectors (browser vectors and the matches stored at chat time are never used).
+ */
+export async function gradingTopics(kase: Case, log: readonly Action[]): Promise<{ topics: Map<string, AskedTopics>; embeddings: boolean }> {
+  const p = prepare(kase);
+  await p.ready;
+  const clauses = [...new Set(log.flatMap((a) => (a.type === "say" ? splitClauses(a.payload.text, p.bank.normalize) : [])))];
+  const vecs = p.vectors.size && clauses.length ? await embedTexts(clauses) : null;
+  const byClause = new Map(vecs ? clauses.map((c, i) => [c, vecs[i]!] as const) : []);
+  const vectors = vecs ? { phrase: (ph: string) => p.vectors.get(ph), clause: (c: string) => byClause.get(c) } : null;
+  return { topics: askedTopics(p.bank, log, vectors), embeddings: !!vecs };
 }
 
 /** For the dev chat tester and tests: the bank of a case. */

@@ -76,7 +76,7 @@ describe("note items respect polarity", () => {
     gradeMatchItems({
       kase,
       sheets: [penSheet],
-      log: makeLog([{ type: "submit_pen", source: "text", payload: { history, exam, diagnoses: [] } }]),
+      log: makeLog([examine("jvp_inspection", "neck_jvp_right"), { type: "submit_pen", source: "text", payload: { history, exam, diagnoses: [] } }]),
       check: null,
       normalize: makeNormalizer(c.lang.synonyms),
       embed: () => null,
@@ -91,5 +91,60 @@ describe("note items respect polarity", () => {
     const negId = penSheet.items.find((i) => i.id.includes("no-chest-pain"))!.id;
     expect(score(gradeNote("", "Has chest pain."), negId)).toBe(0);
     expect(score(gradeNote("", "Denies chest pain."), negId)).toBe(1);
+  });
+});
+
+import { buildBank } from "@/lang/bank";
+import { askedTopics } from "@/lang/understand";
+describe("history coverage is recomputed from the student's words (M1 review)", () => {
+  const kase = c.caseById.get("hf-decompensated-01")!;
+  const enc = c.markSheetById.get("communication-1b")!;
+  const bank = buildBank(kase, c.lang);
+  const spoofed = { clauses: [{ text: "do you have any pets", target: "fact:dyspnea-onset", kind: "fact" as const, score: 0.95, via: "embedding" as const }], topics: ["hpi.onset", "hpi.duration"], embedding: "client" as const };
+  const run = (text: string) => {
+    const l = makeLog([say(text), { type: "patient_say", source: "system", payload: { text: "It came on gradually.", match: spoofed } }]);
+    return gradeMatchItems({ kase, sheets: [enc], log: l, check: null, normalize: makeNormalizer(c.lang.synonyms), embed: () => null, topicsBySay: askedTopics(bank, l, null) });
+  };
+  it("a match stored at chat time (possibly from browser vectors) earns nothing", () => {
+    const j = run("Do you have any pets?");
+    for (const id of ["hpi-onset", "hpi-duration", "timeline"]) expect(j.find((x) => x.itemId === id)?.score ?? 0, id).toBe(0);
+  });
+  it("terse questions count: 'Allergies?' asks about allergies", () => {
+    const l = makeLog([say("Allergies?")]);
+    const t = askedTopics(bank, l, null);
+    expect([...t.values()].flatMap((v) => v.topics).length).toBeGreaterThan(0);
+  });
+});
+
+describe("note grading edge cases (M1 review)", () => {
+  const kase = c.caseById.get("hf-decompensated-01")!;
+  const penSheet = sheetsForCase(kase, c.markSheetById).find((s) => s.items.some((i) => i.id.startsWith("pen-ex-")))!;
+  const performed = [examine("auscultate_heart_bell", "cardiac_mitral"), examine("jvp_inspection", "neck_jvp_right"), examine("peripheral_edema", "shin_right"), examine("auscultate_lungs", "lung_post_rl")];
+  const grade = (pen: { history?: string; exam?: string; diagnoses?: { diagnosis: string; support?: string }[] }, extra = performed) =>
+    gradeMatchItems({
+      kase,
+      sheets: [penSheet],
+      log: makeLog([...extra, { type: "submit_pen", source: "text", payload: { history: pen.history ?? "", exam: pen.exam ?? "", diagnoses: (pen.diagnoses ?? []).map((d) => ({ diagnosis: d.diagnosis, support: d.support ?? "" })) } }]),
+      check: null,
+      normalize: makeNormalizer(c.lang.synonyms),
+      embed: () => null,
+    });
+  const id = (frag: string) => penSheet.items.find((i) => i.id.includes(frag))!.id;
+  const score = (js: ReturnType<typeof grade>, frag: string) => js.find((j) => j.itemId === id(frag))?.score;
+  it("a comma ends a negation's scope", () => {
+    expect(score(grade({ exam: "No murmurs, S3 present." }), "pen-ex-s3")).toBe(1);
+    expect(score(grade({ exam: "JVP 10 cm, abdomen normal." }), "pen-ex-jvp")).toBe(1);
+    expect(score(grade({ history: "Denies fever, reports calf pain." }), "no-calf")).toBe(0);
+  });
+  it("short list items after a negated item stay negated", () => {
+    expect(score(grade({ history: "Denies fever, chills or chest pain." }), "no-chest-pain")).toBe(1);
+  });
+  it("an exam finding in the note earns nothing if that exam wasn't performed, however the note is punctuated", () => {
+    expect(score(grade({ exam: "General: tired. s3 gallop at apex." }, []), "pen-ex-s3")).toBe(0);
+    expect(score(grade({ exam: "S3 gallop at apex! JVP raised" }, []), "pen-ex-jvp")).toBe(0);
+  });
+  it("another diagnosis's supporting text doesn't earn the heart-failure item", () => {
+    const j = grade({ diagnoses: [{ diagnosis: "COPD exacerbation", support: "wheeze; heart failure less likely as no edema" }] });
+    expect(j.find((x) => x.itemId.startsWith("pen-dx-adhf"))?.score ?? 0).toBe(0);
   });
 });

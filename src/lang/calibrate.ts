@@ -13,7 +13,7 @@ import type { MatchJudgement } from "./grade/match";
 import { candidatesFrom, specFor } from "./grade/match";
 import type { Normalizer } from "./normalize";
 import { splitClauses } from "./split";
-import { understandTurn } from "./understand";
+import { askedTopics, understandTurn, type TurnVectors } from "./understand";
 
 export interface LabelledTranscript {
   id: string;
@@ -50,7 +50,7 @@ const TURN_MS = 20_000;
 /** 0 / 0.5 / 1 bands, so half credit is compared as half credit */
 const band = (x: number) => (x >= 0.75 ? 1 : x >= 0.25 ? 0.5 : 0);
 
-export async function transcriptLog(kase: Case, lang: BankSources, tr: LabelledTranscript, embed: (texts: string[]) => Promise<Float32Array[] | null>): Promise<Action[]> {
+export async function transcriptLog(kase: Case, lang: BankSources, tr: LabelledTranscript, embed: (texts: string[]) => Promise<Float32Array[] | null>): Promise<{ log: Action[]; topics: ReturnType<typeof askedTopics> }> {
   const bank = buildBank(kase, lang);
   const says = tr.turns.flatMap((t) => ("say" in t ? [t.say] : []));
   const phrases = [...new Set(bank.targets.flatMap((t) => t.phrases))];
@@ -58,7 +58,7 @@ export async function transcriptLog(kase: Case, lang: BankSources, tr: LabelledT
   const vecs = await embed([...phrases, ...clauses]);
   const pv = new Map(vecs ? phrases.map((p, i) => [p, vecs[i]!] as const) : []);
   const cv = new Map(vecs ? clauses.map((c, i) => [c, vecs[phrases.length + i]!] as const) : []);
-  const vectors = vecs ? { phrase: (p: string) => pv.get(p), clause: (c: string) => cv.get(c) } : null;
+  const vectors: TurnVectors | null = vecs ? { phrase: (p: string) => pv.get(p), clause: (c: string) => cv.get(c) } : null;
 
   const log: Action[] = [];
   let t = 0;
@@ -82,7 +82,8 @@ export async function transcriptLog(kase: Case, lang: BankSources, tr: LabelledT
     t += TURN_MS;
     push({ type: "submit_pen", source: "text", payload: { history: tr.pen.history ?? "", exam: tr.pen.exam ?? "", diagnoses: (tr.pen.diagnoses ?? []).map((d) => ({ diagnosis: d.diagnosis, support: d.support ?? "" })) } } as Omit<Action, "id" | "sessionId" | "t">);
   }
-  return log;
+  // graded like the server: topics recomputed from the student's own words
+  return { log, topics: askedTopics(bank, log, vectors) };
 }
 
 export async function calibrate(args: {
@@ -97,11 +98,11 @@ export async function calibrate(args: {
   const matchItems = args.sheets.flatMap((s) => s.items.filter((i) => i.scoring === "match"));
   const exemplarTexts = [...new Set(matchItems.flatMap((it) => { const s = specFor(it); return [...s.exemplars, ...s.counterExemplars, ...s.penalties.flatMap((p) => p.exemplars)]; }))];
   for (const tr of args.transcripts) {
-    const log = await transcriptLog(args.kase, args.lang, tr, args.embed);
+    const { log, topics } = await transcriptLog(args.kase, args.lang, tr, args.embed);
     const texts = [...new Set([...candidatesFrom(log, args.normalize).map((c) => c.sentence), ...exemplarTexts])];
     const vecs = await args.embed(texts);
     const byText = new Map(vecs ? texts.map((x, i) => [x, vecs[i]!] as const) : []);
-    const judged = new Map<string, MatchJudgement>(gradeMatchItems({ kase: args.kase, sheets: args.sheets, log, check: null, normalize: args.normalize, embed: (x) => byText.get(x) ?? null }).map((j) => [j.itemId, j]));
+    const judged = new Map<string, MatchJudgement>(gradeMatchItems({ kase: args.kase, sheets: args.sheets, log, check: null, normalize: args.normalize, embed: (x) => byText.get(x) ?? null, topicsBySay: topics }).map((j) => [j.itemId, j]));
     for (const [itemId, label] of Object.entries(tr.expect)) {
       const j = judged.get(itemId);
       if (!j) continue;

@@ -6,7 +6,7 @@ import { penCheck, type PenCheckResult } from "@/engine/penCheck";
 import { getRepo } from "./db";
 import { missedKeyFindings } from "@/engine/sheets";
 import { penFor, sheetsForCase } from "./grading";
-import { getCaseOr404, getSessionOr404 } from "./session";
+import { getCaseOr404, getSessionOr404, redactForStudent, visibleToStudent } from "./session";
 
 export interface SheetView {
   sheet: MarkSheet;
@@ -32,11 +32,17 @@ export interface ResultsView {
   catalog: ReturnType<typeof getPublicCatalog>;
 }
 
-export async function getResultsView(sessionId: string): Promise<ResultsView> {
+/**
+ * Results for a session. `audience: "student"` gets the log the student may see (the same redaction
+ * as the station: no matcher data ever, no hidden anchors or withheld findings while active);
+ * coaches get the full log.
+ */
+export async function getResultsView(sessionId: string, audience: "student" | "coach"): Promise<ResultsView> {
   const repo = await getRepo();
   const session = await getSessionOr404(sessionId);
   const kase = getCaseOr404(session.caseId);
-  const [actions, runs, overrides] = await Promise.all([repo.listActions(sessionId), repo.listGradingRuns(sessionId), repo.listOverrides(sessionId)]);
+  const [log, runs, overrides] = await Promise.all([repo.listActions(sessionId), repo.listGradingRuns(sessionId), repo.listOverrides(sessionId)]);
+  const actions = audience === "coach" ? log : log.filter((a) => visibleToStudent(a, session)).map((a) => redactForStudent(a, kase, session));
   const run = runs.at(-1) ?? null;
   const sheets = sheetsForCase(kase).map((sheet) => {
     const scores = applyOverrides(

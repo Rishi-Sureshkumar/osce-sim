@@ -3,6 +3,7 @@
  * only if it keeps every number, side, negation and content word of the original and isn't much
  * longer. The log always keeps the original text; this only decides what is displayed.
  */
+import { isNegated } from "../negation";
 import { basicNormalize } from "../normalize";
 
 const NEGATIONS = ["no", "not", "never", "none", "nothing", "without", "denies", "deny", "cannot", "neither", "nor"];
@@ -31,6 +32,8 @@ export function faithful(original: string, rewording: string): GuardResult {
   if ((negs(a) > 0) !== (negs(b) > 0)) return { ok: false, reason: "negation changed" };
   // most content words must survive (rewording may change function words and order)
   const content = [...new Set(a.split(" ").filter((w) => w.length > 2 && !STOP.has(w)))];
+  // and none may change polarity ("no chest pain… ankles swelling" → "chest pain… ankles not swelling")
+  for (const w of content) if (!NEGATIONS.includes(w) && b.split(" ").includes(w) && isNegated(a, w) !== isNegated(b, w)) return { ok: false, reason: `negation of "${w}" changed` };
   const kept = content.filter((w) => b.split(" ").some((x) => x === w || x.startsWith(w.slice(0, 5))));
   if (content.length && kept.length / content.length < 0.6) return { ok: false, reason: "content words dropped" };
   // and it may not add many new content words (no new facts)

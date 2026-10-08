@@ -1297,6 +1297,8 @@ export const GradingRun = z.object({
   mocked: z.boolean().optional(),
   /** Phase 4: "deterministic"; legacy runs were graded by a model */
   grader: z.enum(["deterministic", "ai_legacy"]).optional(),
+  /** Phase 4: whether the server's sentence embeddings were available (else keywords and patterns only) */
+  embeddings: z.boolean().optional(),
 });
 export type GradingRun = z.infer<typeof GradingRun>;
 

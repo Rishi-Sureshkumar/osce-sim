@@ -1,7 +1,7 @@
 /**
  * Deterministic grading of every `match` item of a session (Phase 4 M1): replaces the model grader.
  *  - generic items: src/lang/grade/match.ts (keywords / patterns / exemplar similarity / topics)
- *  - note exam items: the quoted claim must not be one the note cross-check flagged as unperformed
+ *  - note exam items: credit only if the key point's maneuvers were performed (and the quote doesn't overlap a flagged claim)
  *  - diagnosis justification: every listed diagnosis needs supporting findings drawn from the case's
  *    key (terms of the history and exam points the student documented)
  */
@@ -19,6 +19,11 @@ export interface GradeArgs {
   check: PenCheckResult | null;
   normalize: Normalizer;
   embed: GradeContext["embed"];
+  /**
+   * History topics each student `say` asked about, recomputed on the server from the say's text
+   * (src/lang/understand.ts askedTopics). Never read from what was stored at chat time.
+   */
+  topicsBySay?: GradeContext["topicsBySay"];
 }
 
 function touchTimes(log: readonly Action[]): { first: number | null; last: number | null } {
@@ -26,20 +31,6 @@ function touchTimes(log: readonly Action[]): { first: number | null; last: numbe
   return { first: ts.length ? Math.min(...ts) : null, last: ts.length ? Math.max(...ts) : null };
 }
 
-/** history topics each student `say` was understood to cover (the patient_say that answered it), with the clauses that asked */
-function topicsBySay(log: readonly Action[]): GradeContext["topicsBySay"] {
-  const out: GradeContext["topicsBySay"] = new Map();
-  let lastSay: string | null = null;
-  for (const a of orderLog(log)) {
-    if (a.type === "say") lastSay = a.id;
-    else if (a.type === "patient_say" && lastSay && a.payload.match) {
-      const prev = out.get(lastSay) ?? { topics: [], clauses: [] };
-      const asked = a.payload.match.clauses.filter((c) => c.kind !== "conversation" && c.kind !== "unknown" && c.text !== "(volunteered)").map((c) => c.text);
-      out.set(lastSay, { topics: [...prev.topics, ...a.payload.match.topics], clauses: [...prev.clauses, ...asked] });
-    }
-  }
-  return out;
-}
 
 function justification(args: GradeArgs): MatchJudgement {
   const pen = args.log.findLast((a): a is Extract<Action, { type: "submit_pen" }> => a.type === "submit_pen");
@@ -71,7 +62,7 @@ export function gradeMatchItems(args: GradeArgs): MatchJudgement[] {
     normalize: args.normalize,
     embed: args.embed,
     patient: { name: args.kase.patient.name },
-    topicsBySay: topicsBySay(args.log),
+    topicsBySay: args.topicsBySay ?? new Map(),
     firstTouchT: touch.first,
     lastTouchT: touch.last,
     ...encounterSpan(args.log),
@@ -87,8 +78,16 @@ export function gradeMatchItems(args: GradeArgs): MatchJudgement[] {
         continue;
       }
       const j = gradeItem(item, cands, ctx);
-      // a note exam finding counts only if the exam was performed (penCheck linked it)
-      if (item.id.startsWith("pen-ex-") && j.score > 0 && j.evidence.some((e) => flagged.has(args.normalize(e.quote)))) {
+      // a note exam finding counts only if the exam that elicits it was performed: the key point's
+      // maneuvers must be in the log
+      const key = item.id.startsWith("pen-ex-") ? args.kase.penKey?.exam.find((e) => `pen-ex-${e.id}` === item.id) : undefined;
+      const unperformed = key?.maneuverIds.length ? !args.log.some((a) => a.type === "examine" && key.maneuverIds.includes(a.payload.maneuverId)) : false;
+      const overlapsFlagged = j.evidence.some((e) => {
+        const q = args.normalize(e.quote);
+        return [...flagged].some((f) => f && q && (f.includes(q) || q.includes(f)));
+      });
+      // (the flagged-claim overlap is only a fallback for key points without maneuvers)
+      if (item.id.startsWith("pen-ex-") && j.score > 0 && (key?.maneuverIds.length ? unperformed : overlapsFlagged)) {
         out.push({ itemId: item.id, score: 0, rationale: `The note reports this finding, but the exam that elicits it wasn't performed (“${j.evidence[0]!.quote}”).`, evidence: j.evidence });
         continue;
       }

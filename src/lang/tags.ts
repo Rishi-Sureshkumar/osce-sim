@@ -25,13 +25,13 @@ const EXAMPLES: Partial<Record<CourtesyTag, string[]>> = {
   shared_impression: ["From what you've told me and what I found, I think your heart isn't pumping as well as it should.", "My impression is that this could be your heart failure getting worse.", "I think the swelling and breathlessness are probably from fluid building up."],
 };
 
-let exampleVecs: Promise<{ tag: CourtesyTag; v: Float32Array }[] | null> | null = null;
-function examples() {
-  exampleVecs ??= (async () => {
-    const list = Object.entries(EXAMPLES).flatMap(([tag, xs]) => xs!.map((x) => ({ tag: tag as CourtesyTag, x })));
-    const vs = await embedTexts(list.map((l) => l.x));
-    return vs ? list.map((l, i) => ({ tag: l.tag, v: vs[i]! })) : null;
-  })();
+let exampleVecs: { tag: CourtesyTag; v: Float32Array }[] | null = null;
+/** Example-phrase vectors, embedded once; a failure is not cached (the next call tries again). */
+async function examples() {
+  if (exampleVecs) return exampleVecs;
+  const list = Object.entries(EXAMPLES).flatMap(([tag, xs]) => xs!.map((x) => ({ tag: tag as CourtesyTag, x })));
+  const vs = await embedTexts(list.map((l) => l.x));
+  if (vs) exampleVecs = list.map((l, i) => ({ tag: l.tag, v: vs[i]! }));
   return exampleVecs;
 }
 

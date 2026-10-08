@@ -46,3 +46,31 @@ export function polarityOf(sentence: string, term: string): "affirmed" | "negate
 export function hasNegationCue(sentence: string): boolean {
   return [...PRE, ...POST.filter((c) => c !== "normal" && c !== "unremarkable")].some((c) => hasPhrase(sentence, c));
 }
+
+const LIST_JOIN = new Set(["or", "and", "nor"]);
+/** words that state a finding is there ("S3 present", "reports calf pain"): such a segment never inherits a negation */
+const AFFIRM = ["present", "heard", "seen", "noted", "positive", "raised", "elevated", "displaced", "palpable", "reports", "reported", "has", "with", "endorses", "complains", "admits"];
+
+/**
+ * Negation with the raw sentence's punctuation: commas, semicolons and "but" end a negation's scope
+ * ("no murmurs, S3 present" affirms the S3; "JVP 10 cm, abdomen normal" doesn't deny the JVP), while
+ * short list items after a negated item inherit it ("denies fever, chills or cough").
+ */
+export function isNegatedInSentence(raw: string, term: string, normalize: (t: string) => string): boolean {
+  const segs = raw
+    .split(/[,;:]|\s+but\s+|\s+however\s+/i)
+    .map((x) => normalize(x))
+    .filter(Boolean);
+  const i = segs.findIndex((x) => hasPhrase(x, term));
+  if (i < 0) return isNegated(normalize(raw), term);
+  const seg = segs[i]!;
+  if (isNegated(seg, term)) return true;
+  const content = (x: string) => x.split(" ").filter((w) => !LIST_JOIN.has(w));
+  if (content(seg).length > 3 || hasNegationCue(seg) || AFFIRM.some((a) => hasPhrase(seg, a))) return false;
+  for (let k = i - 1; k >= 0; k--) {
+    const prev = segs[k]!;
+    if (PRE.some((cue) => hasPhrase(prev, cue))) return true;
+    if (content(prev).length > 3 || AFFIRM.some((a) => hasPhrase(prev, a))) break;
+  }
+  return false;
+}

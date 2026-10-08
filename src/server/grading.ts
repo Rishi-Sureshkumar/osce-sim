@@ -9,6 +9,7 @@ import { embedTexts } from "@/lang/embed/node";
 import { gradeMatchItems } from "@/lang/grade";
 import { candidatesFrom, specFor } from "@/lang/grade/match";
 import { makeNormalizer } from "@/lang/normalize";
+import { gradingTopics } from "@/lang/server";
 import { getRepo } from "./db";
 import { HttpError } from "./errors";
 import { newId } from "./ids";
@@ -61,7 +62,8 @@ async function doGrade(sessionId: string, trigger: GradingRun["trigger"]): Promi
   const list = [...texts];
   const vecs = await embedTexts(list);
   const byText = new Map(vecs ? list.map((t, i) => [t, vecs[i]!] as const) : []);
-  const judgements = gradeMatchItems({ kase, sheets: gradedSheets, log, check: pen ? check : null, normalize, embed: (t) => byText.get(t) ?? null });
+  const asked = await gradingTopics(kase, log);
+  const judgements = gradeMatchItems({ kase, sheets: gradedSheets, log, check: pen ? check : null, normalize, embed: (t) => byText.get(t) ?? null, topicsBySay: asked.topics });
   const aiScores = sheets.flatMap((s) => scoreAiItems(s, judgements, log, mode));
 
   // keep mark-sheet item order
@@ -79,6 +81,7 @@ async function doGrade(sessionId: string, trigger: GradingRun["trigger"]): Promi
     ...deterministicFeedback({ sheets, scores, pen: pen ? check : null }),
     scores,
     grader: "deterministic",
+    embeddings: !!vecs && asked.embeddings,
   };
   await repo.saveGradingRun(run);
   const fresh = await getSessionOr404(sessionId);

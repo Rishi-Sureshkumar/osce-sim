@@ -44,17 +44,23 @@ function extractor(): Promise<Extractor | null> {
   return loading;
 }
 
-/** Embeds texts (L2-normalised, 384-d). null if the model is unavailable. */
+/** Embeds texts (L2-normalised, 384-d). null if the model is unavailable or inference fails (callers use keywords). */
 export async function embedTexts(texts: string[], batch = 32): Promise<Float32Array[] | null> {
   const ex = await extractor();
   if (!ex) return null;
-  const out: Float32Array[] = [];
-  for (let i = 0; i < texts.length; i += batch) {
-    const chunk = texts.slice(i, i + batch);
-    const res = await ex(chunk, { pooling: "mean", normalize: true });
-    for (let k = 0; k < chunk.length; k++) out.push(l2normalize(res.data.subarray(k * EMBED_DIMS, (k + 1) * EMBED_DIMS)));
+  if (!texts.length) return [];
+  try {
+    const out: Float32Array[] = [];
+    for (let i = 0; i < texts.length; i += batch) {
+      const chunk = texts.slice(i, i + batch);
+      const res = await ex(chunk, { pooling: "mean", normalize: true });
+      for (let k = 0; k < chunk.length; k++) out.push(l2normalize(res.data.subarray(k * EMBED_DIMS, (k + 1) * EMBED_DIMS)));
+    }
+    return out;
+  } catch (e) {
+    console.warn("[lang] embedding failed; using keywords only for this request:", (e as Error).message);
+    return null;
   }
-  return out;
 }
 
 export async function embedOne(text: string): Promise<Float32Array | null> {

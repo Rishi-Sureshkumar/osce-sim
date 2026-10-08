@@ -70,7 +70,7 @@ export interface ReplyResult {
 
 const KIND: Record<Target["kind"], UtteranceMatch["clauses"][number]["kind"]> = { fact: "fact", negative: "negative", follow_up: "follow_up", conversation: "conversation", bank: "bank" };
 
-export function patientReply(kase: PatientCase, bank: MatchBank, state: DialogueState, clauses: ClauseMatch[], opts: { studentName?: string | null; embedding?: UtteranceMatch["embedding"] } = {}): ReplyResult {
+export function patientReply(kase: PatientCase, bank: MatchBank, state: DialogueState, clauses: ClauseMatch[], opts: { studentName?: string | null; embedding?: UtteranceMatch["embedding"]; questionClauses?: ReadonlySet<string> } = {}): ReplyResult {
   const parts: string[] = [];
   const answered: string[] = [];
   /** targets the student actually asked about (history coverage counts these, not volunteered facts) */
@@ -91,7 +91,7 @@ export function patientReply(kase: PatientCase, bank: MatchBank, state: Dialogue
       continue;
     }
     answered.push(t.id);
-    if (asks(c.text)) asked.push(t.id);
+    if (asks(c.text) || opts.questionClauses?.has(c.text)) asked.push(t.id);
     seen.add(t.id);
     const r = t.reply;
     if (r.type === "text") say(r.text);

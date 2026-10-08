@@ -2976,6 +2976,11 @@
         "exemplars": [
           "Denies chest pain or pressure.",
           "No chest pain."
+        ],
+        "terms": [
+          "chest pain",
+          "chest pressure",
+          "chest tightness"
         ]
       },
       {
@@ -2991,6 +2996,12 @@
         "exemplars": [
           "Denies fevers or chills.",
           "No fever."
+        ],
+        "terms": [
+          "fever",
+          "fevers",
+          "chills",
+          "febrile"
         ]
       },
       {
@@ -3006,6 +3017,11 @@
         "exemplars": [
           "No calf pain or one-sided leg swelling.",
           "Denies calf tenderness."
+        ],
+        "terms": [
+          "calf pain",
+          "calf swelling",
+          "calf tenderness"
         ]
       }
     ],

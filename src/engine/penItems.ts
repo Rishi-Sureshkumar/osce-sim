@@ -29,7 +29,7 @@ function penMatch(sources: MatchSpec["sources"], keywords: string[], exemplars: 
   return { sources, keywords: [...new Set(keywords.filter(Boolean))], patterns: [], exemplars, counterExemplars: [], topics: [], form: "any", polarity, minMatches: 1, window: "any", penalties: [] };
 }
 
-/** Graded specially (src/lang/grade/pen.ts): each listed diagnosis needs supporting findings. */
+/** Graded specially (justification() in src/lang/grade/index.ts): each listed diagnosis needs supporting findings. */
 export const PEN_JUSTIFICATION_ITEM = "pen-justification";
 
 export function penSheet(kase: Case, threshold: number | undefined): MarkSheet | null {

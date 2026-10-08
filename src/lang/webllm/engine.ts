@@ -37,6 +37,8 @@ export async function loadWebLLM(onProgress?: (fraction: number, text: string) =
   return {
     modelId: WEBLLM_MODEL.id,
     async complete(system, user, opts) {
+      // a timed-out rewording must stop generating, or later requests queue behind it
+      opts?.signal?.addEventListener("abort", () => engine.interruptGenerate(), { once: true });
       const res = await engine.chat.completions.create({
         messages: [
           { role: "system", content: system },

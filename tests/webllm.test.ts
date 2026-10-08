@@ -14,6 +14,8 @@ describe("WebLLM faithfulness guard", () => {
     expect(faithful("My left ankle has been swollen for 2 weeks.", "My left ankle has been swollen for 3 weeks.").reason).toMatch(/number/);
     expect(faithful("My left ankle has been swollen for 2 weeks.", "My right ankle has been swollen for 2 weeks.").reason).toMatch(/side/);
     expect(faithful("I don't have chest pain.", "I have chest pain.").reason).toBe("negation changed");
+    // the "no" may not move to another symptom
+    expect(faithful("No chest pain or pressure. My ankles have been swelling for a week.", "I have chest pain and pressure. My ankles have not been swelling this week.").ok).toBe(false);
   });
   it("rejects invented content and empty or bloated output", () => {
     expect(faithful(LINE, "").ok).toBe(false);

@@ -23,7 +23,7 @@ export async function middleware(req: NextRequest) {
 
   const role = await verifyToken(req.cookies.get(AUTH_COOKIE)?.value, cfg.secret!);
   if (!role) return deny(401, "Please enter the access code.");
-  const coachOnly = pathname.startsWith("/coach") || pathname.startsWith("/api/coach");
+  const coachOnly = pathname.startsWith("/coach") || pathname.startsWith("/api/coach") || pathname.startsWith("/dev");
   if (coachOnly && role !== "coach") return deny(403, "Coach access required.");
   return NextResponse.next();
 }

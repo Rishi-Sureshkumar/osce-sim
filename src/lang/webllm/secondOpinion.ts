@@ -19,8 +19,17 @@ export async function secondOpinion(engine: ChatEngine | null, item: { label: st
   if (!engine || !lines.length) return { verdict: "unsure", quote: null, note: "No second opinion available." };
   const user = `ITEM: ${item.label}${item.guidance ? ` — ${item.guidance}` : ""}\nSTUDENT LINES:\n${lines.map((l, i) => `${i + 1}. ${l}`).join("\n")}`;
   let handle: ReturnType<typeof setTimeout> | undefined;
+  const ctrl = new AbortController();
   try {
-    const out = await Promise.race([engine.complete(SYSTEM, user, { maxTokens: 80 }), new Promise<never>((_, r) => (handle = setTimeout(() => r(new Error("timeout")), timeoutMs)))]);
+    const out = await Promise.race([
+      engine.complete(SYSTEM, user, { maxTokens: 80, signal: ctrl.signal }),
+      new Promise<never>((_, r) => {
+        handle = setTimeout(() => {
+          ctrl.abort();
+          r(new Error("timeout"));
+        }, timeoutMs);
+      }),
+    ]);
     const m = out.match(/^\s*(CREDIT\s+(\d+)|NO CREDIT|UNSURE)\b\s*[|:-]?\s*(.*)$/im);
     if (!m) return { verdict: "unsure", quote: null, note: "The model's answer couldn't be read." };
     if (m[2]) {

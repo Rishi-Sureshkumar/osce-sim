@@ -4,7 +4,7 @@
  * synonym table (content/lang/synonyms.json, longest phrase first, whole words only).
  * Bump NORMALIZER_VERSION whenever the output can change: precomputed vectors embed normalised text.
  */
-export const NORMALIZER_VERSION = 2;
+export const NORMALIZER_VERSION = 3;
 
 export interface SynonymEntry {
   to: string;
@@ -65,6 +65,7 @@ export function basicNormalize(text: string): string {
     .replace(/[–—]/g, "-");
   for (const [re, to] of CONTRACTIONS) t = t.replace(re, to);
   t = t.replace(/(\d+)\s*-\s*(\d+)/g, "$1 to $2"); // "2-3 weeks"
+  t = t.replace(/%/g, " percent "); // "EF 30%" must not match "30 minutes"
   t = t.replace(/[^a-z0-9\s/]/g, " ").replace(/\//g, " / ");
   t = t.replace(NUMBER_RE, (w) => String(NUMBER_WORDS[w]));
   return t.replace(/\s+/g, " ").trim();

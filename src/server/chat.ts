@@ -48,7 +48,8 @@ export async function startChatTurn(sessionId: string, text: string, source: "te
   const kase = getCaseOr404(session.caseId);
   // Courtesy tags: regex first, then similarity to example phrasings (evidence = the student's own sentence).
   let tags = regexTags(clean);
-  if (!tags.length) tags = await courtesyFallbackTags(clean);
+  // the similarity fallback is best-effort: a failure must never lose the student's message
+  if (!tags.length) tags = await courtesyFallbackTags(clean).catch(() => []);
   const studentAction = await appendStudentAction(sessionId, { type: "say", source, payload: { text: clean } }, { tags });
   const implied: Action[] = [];
   const asked = tags.find((t) => t.tag === "requested_position" && t.position);
