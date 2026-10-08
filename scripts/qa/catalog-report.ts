@@ -7,7 +7,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import type { XfailEntry } from "./lib/xfail";
+import { classify, type XfailEntry } from "./lib/xfail";
 
 const ROOT = process.cwd();
 const DIR = path.join(ROOT, "test-results/catalog");
@@ -53,7 +53,15 @@ function main() {
     for (const r of list.slice(0, 12)) console.log(`   ${r.id} — ${r.detail}`);
     if (list.length > 12) console.log(`   … ${list.length - 12} more`);
   }
-  fs.writeFileSync(path.join(ROOT, "qa/catalog.json"), JSON.stringify({ generated: "npm run test:catalog → npm run qa:catalog-report", results: rows.sort((a, b) => a.id.localeCompare(b.id)) }, null, 1));
+  // a filtered run (CATALOG_FILTER) updates its own checks and keeps the rest of the last full run
+  const file = path.join(ROOT, "qa/catalog.json");
+  const merged = new Map<string, Row>((fs.existsSync(file) ? (JSON.parse(fs.readFileSync(file, "utf8")) as { results: Row[] }).results : []).map((r) => [r.id, r]));
+  for (const r of rows) merged.set(r.id, r);
+  // statuses against the current qa/xfail.json (a kept row may predate an entry, or its removal)
+  const reclassified = classify([...merged.values()].map((r) => ({ id: r.id, pass: r.status === "PASS" || r.status === "XPASS", detail: r.detail }))).results.map(({ xfail: _x, pass: _p, ...r }) => r as Row);
+  merged.clear();
+  for (const r of reclassified) merged.set(r.id, r);
+  fs.writeFileSync(file, JSON.stringify({ generated: "npm run test:catalog → npm run qa:catalog-report", results: [...merged.values()].sort((a, b) => a.id.localeCompare(b.id)) }, null, 1));
 
   if (process.argv.includes("--xfail")) {
     const file = path.join(ROOT, "qa/xfail.json");
