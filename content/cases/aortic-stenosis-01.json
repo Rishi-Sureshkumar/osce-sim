@@ -1,0 +1,3424 @@
+{
+  "id": "aortic-stenosis-01",
+  "title": "Breathless on exertion and a near-faint in a 74-year-old (clinic)",
+  "mode": "encounter",
+  "patient": {
+    "name": "Gordon Ashby",
+    "age": 74,
+    "sex": "male",
+    "pronouns": "he/him",
+    "chiefComplaint": "Breathlessness on exertion and a near-faint last week",
+    "setting": "Outpatient clinic, seated in a chair",
+    "persona": {
+      "affect": "Stoic and matter-of-fact; plays his symptoms down and puts everything down to age; softens and becomes quietly worried when talking about his wife",
+      "speakingStyle": "Short, plain answers; doesn’t elaborate unless asked; says things like ‘it’s nothing really’; no medical jargon",
+      "worries": "Only came because his wife insisted after last week’s funny turn; does not want an operation or a hospital stay, because he cares for his wife, who has mild dementia and can’t be left alone for long",
+      "background": "Retired carpenter, married fifty years; still makes furniture in his workshop for the grandchildren; used to walk the family dog every morning"
+    }
+  },
+  "doorSign": {
+    "task": "Mr. Ashby, 74, presents with breathlessness on exertion and a near-faint last week. Take a focused history, perform a focused cardiovascular and respiratory examination, then present your summary, differential diagnosis and initial plan.",
+    "timeLimitMinutes": 15
+  },
+  "doorInstructions": {
+    "reasonForVisit": "Breathlessness on exertion and a near-faint",
+    "task": "Take a focused history and perform a focused physical examination. Share your impressions with the patient before you leave. You will then write a post-encounter note.",
+    "prohibitedExams": [
+      {
+        "label": "Breast exam",
+        "regionIds": [
+          "breast_left",
+          "breast_right"
+        ]
+      },
+      {
+        "label": "Pelvic / genital exam",
+        "regionIds": [
+          "pelvic"
+        ]
+      }
+    ]
+  },
+  "timeLimits": {
+    "encounterMin": 15,
+    "penMin": 10
+  },
+  "vitals": {
+    "hr": 72,
+    "rr": 16,
+    "bpSystolic": 124,
+    "bpDiastolic": 88,
+    "tempC": 36.7,
+    "spo2": 97,
+    "spo2Context": "on room air"
+  },
+  "history": {
+    "openingStatement": "My wife made me come, really. I get a bit puffed on the stairs these days, and last week I had a funny turn. I’m sure it’s just my age.",
+    "facts": [
+      {
+        "id": "dyspnea-onset",
+        "topic": "Onset and course of breathlessness",
+        "answer": "It’s crept up on me over the last six months or so. Slowly getting worse, I suppose.",
+        "revealOnlyIfAsked": false,
+        "keywords": [
+          "start",
+          "began",
+          "how long",
+          "onset",
+          "course",
+          "worse",
+          "when did"
+        ],
+        "intents": {
+          "canonical": "When did the shortness of breath start?",
+          "paraphrases": [
+            "When did you first notice getting short of breath?",
+            "How long have you been short of breath?",
+            "How long has the breathlessness been going on?",
+            "When did your breathing problems begin?",
+            "Since when have you been getting out of breath?",
+            "When did you start getting puffed?",
+            "Has the breathlessness been getting worse?",
+            "Is your breathing getting better, worse or staying the same?",
+            "How has your breathing changed over the last few months?",
+            "Has the shortness of breath been getting worse over time?",
+            "Have you been getting more short of breath recently?",
+            "Have you been short of breath lately?",
+            "What has the time course of the breathlessness been?",
+            "Tell me more about the breathlessness."
+          ],
+          "keywords": [
+            "onset",
+            "when did it start",
+            "when did this start",
+            "how long has this been going on",
+            "time course",
+            "since when"
+          ],
+          "patterns": [
+            "\\bhow long (have you been|has it been|have you had|has this been)\\b.*\\b(short of breath|shortness of breath|breathless|breathlessness|breathing|winded|out of breath|puffed)\\b",
+            "\\bwhen did\\b.*\\b(start|begin|began|first notice)\\b.*\\b(short of breath|shortness of breath|breathless|breathlessness|breathing|winded|out of breath|puffed)\\b",
+            "\\bwhen did\\b.*\\b(short of breath|shortness of breath|breathless|breathlessness|breathing|winded|out of breath|puffed)\\b.*\\b(start|begin|began)\\b"
+          ],
+          "topics": [
+            "hpi.onset",
+            "hpi.course"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "onset-gradual",
+            "intents": {
+              "canonical": "Did it come on suddenly or gradually?",
+              "paraphrases": [
+                "Was the onset sudden or gradual?",
+                "Did the breathlessness come on all of a sudden?",
+                "Did your breathing get bad suddenly or slowly?",
+                "Did the shortness of breath start abruptly?",
+                "Did the breathlessness come on gradually?",
+                "Was the start of the breathlessness sudden?"
+              ],
+              "keywords": [
+                "suddenly or gradually",
+                "sudden or gradual",
+                "all of a sudden",
+                "abruptly",
+                "came on suddenly"
+              ],
+              "topics": [
+                "hpi.onset"
+              ]
+            },
+            "answer": "Gradually. I couldn’t put a date on when it started."
+          }
+        ]
+      },
+      {
+        "id": "dyspnea-exertion",
+        "topic": "Exertional limit",
+        "answer": "These days it’s one flight of stairs, or about a hundred metres on the flat, and then I have to stop and get my breath back. A year ago I was walking the dog two kilometres every morning. It’s a nuisance, if I’m honest.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "walk",
+          "stairs",
+          "how far",
+          "exert",
+          "activity",
+          "exercise",
+          "distance"
+        ],
+        "intents": {
+          "canonical": "How much can you do before you get short of breath?",
+          "paraphrases": [
+            "Do you get short of breath when you exert yourself?",
+            "Does walking make you breathless?",
+            "Do you get winded with activity?",
+            "What is your exercise tolerance like?",
+            "Are you short of breath on exertion?",
+            "Do you get short of breath when you exercise?",
+            "Any shortness of breath on exertion?",
+            "Has your breathing limited what you can do day to day?",
+            "Does physical activity make your breathing worse?",
+            "What brings the breathlessness on?",
+            "What makes the breathlessness worse?",
+            "Compared with a year ago, how much can you do now?",
+            "Tell me more about getting puffed on the stairs."
+          ],
+          "keywords": [
+            "exertion",
+            "exercise tolerance",
+            "exert yourself",
+            "physical activity",
+            "short of breath on exertion"
+          ],
+          "topics": [
+            "hpi.severity",
+            "hpi.aggravating"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "exertion-distance",
+            "intents": {
+              "canonical": "How far can you walk before you get short of breath?",
+              "paraphrases": [
+                "How far can you walk?",
+                "How far can you walk on the flat?",
+                "What distance can you walk before you have to stop?",
+                "How far could you walk a year ago?",
+                "How far can you walk without getting breathless?",
+                "Can you walk a block without stopping?",
+                "How many metres can you manage before stopping?"
+              ],
+              "keywords": [
+                "how far can you walk",
+                "how many blocks",
+                "walking distance",
+                "how far could you walk",
+                "on the flat"
+              ],
+              "patterns": [
+                "\\bhow far\\b.*\\bwalk(ing)?\\b",
+                "\\bhow many (blocks|metres|meters|yards)\\b"
+              ],
+              "topics": [
+                "hpi.severity"
+              ]
+            },
+            "answer": "About a hundred metres on the flat, then I have to stop. A year ago I’d do two kilometres with the dog without a second thought."
+          },
+          {
+            "id": "exertion-stairs",
+            "intents": {
+              "canonical": "Can you manage stairs?",
+              "paraphrases": [
+                "How many stairs can you climb?",
+                "Do you get breathless climbing stairs?",
+                "How many flights of stairs can you manage?",
+                "Can you get up the stairs at home?",
+                "Are stairs a problem for you?",
+                "Do you get short of breath going upstairs?",
+                "Any trouble climbing stairs?"
+              ],
+              "keywords": [
+                "flights of stairs",
+                "flight of stairs",
+                "upstairs",
+                "climb stairs",
+                "climbing stairs",
+                "the stairs"
+              ],
+              "patterns": [
+                "\\b(climb|climbing|manage|get up|go up|going up)\\b.*\\b(stairs|steps|flights?)\\b"
+              ],
+              "topics": [
+                "hpi.severity"
+              ]
+            },
+            "answer": "One flight, and then I have to stand at the top for a minute to get my breath back."
+          },
+          {
+            "id": "exertion-rest",
+            "intents": {
+              "canonical": "Are you short of breath at rest?",
+              "paraphrases": [
+                "Do you get breathless when you are sitting still?",
+                "Are you breathless right now?",
+                "Is your breathing alright when you are resting?",
+                "Do you ever get short of breath just sitting down?",
+                "Do you get breathless even when resting?",
+                "Are you short of breath sitting here now?"
+              ],
+              "keywords": [
+                "breathless right now",
+                "short of breath at rest",
+                "breathlessness at rest"
+              ],
+              "patterns": [
+                "\\b(short of breath|shortness of breath|breathless|breathlessness|breathing|winded|out of breath|puffed|breathe)\\b.*\\b(at rest|resting|sitting still|sitting down|sitting here|right now)\\b"
+              ],
+              "topics": [
+                "hpi.severity"
+              ]
+            },
+            "answer": "No, sitting here I’m fine. It’s only when I’m on the go."
+          },
+          {
+            "id": "exertion-relief",
+            "intents": {
+              "canonical": "Does anything make the breathlessness better?",
+              "paraphrases": [
+                "What makes your breathing better?",
+                "Does resting help your breathing?",
+                "What do you do when you get out of breath?",
+                "How long does it take to get your breath back?",
+                "Does the breathlessness settle when you stop?",
+                "Does anything help the shortness of breath?"
+              ],
+              "keywords": [
+                "breath back",
+                "breathing better",
+                "help your breathing",
+                "help the shortness of breath"
+              ],
+              "patterns": [
+                "\\b(what|anything)\\b.*\\b(make|makes|help|helps|relieve|relieves|ease|eases)\\b.*\\b(short of breath|shortness of breath|breathless|breathlessness|breathing|winded|out of breath|puffed)\\b",
+                "\\b(short of breath|shortness of breath|breathless|breathlessness|breathing|winded|out of breath|puffed)\\b.*\\b(settle|settles|ease|eases|go away|goes away)\\b"
+              ],
+              "topics": [
+                "hpi.relieving"
+              ]
+            },
+            "answer": "Stopping for a minute or two. Then I can get going again."
+          }
+        ],
+        "emotion": "frustrated"
+      },
+      {
+        "id": "chest-tightness",
+        "topic": "Exertional chest discomfort",
+        "answer": "Now you mention it, when I walk up a hill I get a tight, heavy feeling across the middle of my chest. If I stop and stand still for a few minutes it goes off. I didn’t think it was worth bothering anyone about.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "chest",
+          "tight",
+          "pain",
+          "pressure",
+          "angina"
+        ],
+        "intents": {
+          "canonical": "Do you get any chest pain?",
+          "paraphrases": [
+            "Any chest pain?",
+            "Have you had any chest pain or tightness?",
+            "Any pain or pressure in your chest?",
+            "Does your chest ever feel tight?",
+            "Do you get chest pain when you walk or exert yourself?",
+            "Any discomfort in your chest when you exercise?",
+            "Have you had any angina?",
+            "Do you ever get a heavy feeling in your chest?",
+            "Any chest discomfort?",
+            "Do you get chest pain going up hills?",
+            "What brings on the chest pain?",
+            "Have you had any chest symptoms?"
+          ],
+          "keywords": [
+            "chest pain",
+            "chest tightness",
+            "chest pressure",
+            "chest discomfort",
+            "pain in your chest",
+            "angina",
+            "heavy feeling in your chest"
+          ],
+          "patterns": [
+            "\\bchest\\b.*\\b(pain|pains|tight|tightness|pressure|discomfort|heavy|heaviness|ache|squeez\\w*)\\b"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.cardiac"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "chest-character",
+            "intents": {
+              "canonical": "What does the chest discomfort feel like?",
+              "paraphrases": [
+                "What does it feel like?",
+                "Can you describe the chest pain?",
+                "Is the chest pain sharp or dull?",
+                "What kind of pain is it in your chest?",
+                "Is it a tightness or a pain?",
+                "How would you describe the feeling in your chest?",
+                "Is it like a pressure or a squeezing?",
+                "Is the chest pain burning or stabbing?"
+              ],
+              "keywords": [
+                "describe the pain",
+                "describe the chest pain",
+                "sharp or dull",
+                "what kind of pain",
+                "squeezing",
+                "stabbing",
+                "burning"
+              ],
+              "topics": [
+                "hpi.character"
+              ]
+            },
+            "answer": "Tight and heavy, like a band across my chest. It’s not sharp."
+          },
+          {
+            "id": "chest-location",
+            "intents": {
+              "canonical": "Where is the chest pain, and does it spread anywhere?",
+              "paraphrases": [
+                "Where is the pain?",
+                "Can you point to where you feel it?",
+                "Does the pain go anywhere else?",
+                "Does it go anywhere?",
+                "Does it spread to your arm, neck or jaw?",
+                "Does the chest pain radiate?",
+                "Is it on one side or in the middle?",
+                "Does it go through to your back?"
+              ],
+              "keywords": [
+                "radiate",
+                "radiates",
+                "spread",
+                "go anywhere",
+                "point to",
+                "your arm",
+                "your jaw"
+              ],
+              "topics": [
+                "hpi.location"
+              ]
+            },
+            "answer": "Right across the middle, behind the breastbone. It doesn’t go anywhere else."
+          },
+          {
+            "id": "chest-relief",
+            "intents": {
+              "canonical": "What makes the chest tightness go away?",
+              "paraphrases": [
+                "Does it go away when you stop and rest?",
+                "Does resting help the chest pain?",
+                "How long does the chest tightness last?",
+                "How long does it last?",
+                "What do you do when you get the chest pain?",
+                "Does anything make the chest pain better?",
+                "Do you take anything for the chest pain?",
+                "Does it settle if you stop and stand still?"
+              ],
+              "keywords": [
+                "go away",
+                "settle",
+                "make it better",
+                "relieve",
+                "how long does it last",
+                "stop and rest"
+              ],
+              "patterns": [
+                "\\b(rest|resting|stop|stopping|stand still)\\b.*\\b(help|helps|better|go away|goes away|settle|ease|relieve)\\b"
+              ],
+              "topics": [
+                "hpi.relieving",
+                "hpi.timing"
+              ]
+            },
+            "answer": "Stopping. If I stand still for two or three minutes it goes off. I don’t take anything for it."
+          },
+          {
+            "id": "chest-onset",
+            "intents": {
+              "canonical": "When did the chest tightness start?",
+              "paraphrases": [
+                "How long have you had the chest pain?",
+                "When did you first notice the tightness in your chest?",
+                "How long has the chest discomfort been going on?",
+                "When did the chest pain begin?",
+                "How often do you get the chest tightness?",
+                "How many times has the chest pain happened?"
+              ],
+              "keywords": [
+                "how often do you get the chest",
+                "when did the chest"
+              ],
+              "patterns": [
+                "\\b(when|how long|how often)\\b.*\\bchest\\b",
+                "\\bchest\\b.*\\b(start|begin|began|how often)\\b"
+              ],
+              "topics": [
+                "hpi.onset",
+                "hpi.timing"
+              ]
+            },
+            "answer": "The last two or three months. I get it most times I walk up the hill to the shops."
+          },
+          {
+            "id": "chest-severity",
+            "intents": {
+              "canonical": "How bad is the chest pain out of ten?",
+              "paraphrases": [
+                "On a scale of 1 to 10, how bad is the chest pain?",
+                "How severe is the chest tightness?",
+                "How bad is the pain?",
+                "How bad does it get?",
+                "How strong is the chest discomfort?",
+                "Rate the chest pain out of 10.",
+                "Is the chest pain mild or severe?",
+                "How much does the chest tightness bother you?"
+              ],
+              "keywords": [
+                "out of 10",
+                "scale of 1 to 10",
+                "how severe",
+                "how bad"
+              ],
+              "topics": [
+                "hpi.severity"
+              ]
+            },
+            "answer": "Three or four out of ten. It’s more uncomfortable than painful."
+          },
+          {
+            "id": "chest-associated",
+            "intents": {
+              "canonical": "Do you get anything else with the chest tightness?",
+              "paraphrases": [
+                "Any sweating or nausea with the chest pain?",
+                "Do you feel sick when you get the chest pain?",
+                "Do you get sweaty with the chest tightness?",
+                "Does the chest pain come with breathlessness?",
+                "Any other symptoms when the chest pain comes on?",
+                "Do you feel clammy when the tightness comes on?"
+              ],
+              "keywords": [
+                "with the chest pain",
+                "with the chest tightness",
+                "when you get the chest pain"
+              ],
+              "patterns": [
+                "\\b(sweat\\w*|sick|nause\\w*|clammy|short of breath|anything else|other symptoms)\\b.*\\bchest\\b",
+                "\\bchest\\b.*\\b(sweat\\w*|sick|nause\\w*|clammy)\\b"
+              ],
+              "topics": [
+                "hpi.associated"
+              ]
+            },
+            "answer": "I’m puffed by then anyway, but I don’t get sweaty or sick with it."
+          }
+        ]
+      },
+      {
+        "id": "presyncope",
+        "topic": "Near-faint on exertion",
+        "answer": "Last week I was carrying the shopping up the stairs and I came over all light-headed. Everything went grey round the edges and I thought I was going to go down. I sat on the step and it passed in a minute or so. I didn’t actually pass out.",
+        "revealOnlyIfAsked": false,
+        "keywords": [
+          "dizzy",
+          "light-headed",
+          "faint",
+          "funny turn",
+          "blackout"
+        ],
+        "intents": {
+          "canonical": "Can you tell me about the funny turn you had?",
+          "paraphrases": [
+            "What happened last week?",
+            "What do you mean by a funny turn?",
+            "Tell me about the episode last week.",
+            "Why did your wife want you to come in?",
+            "Why did your wife make you come?",
+            "What made your wife insist you see a doctor?",
+            "Have you had any dizziness?",
+            "Have you felt light-headed?",
+            "Have you felt faint at all?",
+            "Have you fainted?",
+            "Have you had any fainting episodes?",
+            "Have you ever felt like you were going to pass out?",
+            "Any dizzy spells?",
+            "Any blackouts?",
+            "Have you nearly fainted?",
+            "Have you had any episodes of nearly passing out?"
+          ],
+          "keywords": [
+            "funny turn",
+            "dizzy",
+            "dizziness",
+            "lightheaded",
+            "lightheadedness",
+            "dizzy spells",
+            "fainting episodes",
+            "felt faint",
+            "feel faint",
+            "nearly fainting",
+            "nearly fainted"
+          ],
+          "patterns": [
+            "\\b(dizzy|dizziness|lightheaded|lightheadedness|funny turn|turn last week|happened last week|felt faint|feel faint|feeling faint|nearly faint\\w*|almost faint\\w*)\\b"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.cardiac",
+            "ros.neuro"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "presyncope-activity",
+            "intents": {
+              "canonical": "What were you doing when it happened?",
+              "paraphrases": [
+                "What were you doing at the time of the funny turn?",
+                "Were you exerting yourself when you felt faint?",
+                "Did it happen while you were walking or climbing?",
+                "Did the dizziness come on during exercise?",
+                "Were you sitting down or active when it happened?",
+                "What brought on the dizzy spell?",
+                "Did it happen when you were exerting yourself?",
+                "Was it brought on by exertion?"
+              ],
+              "keywords": [
+                "what were you doing",
+                "brought on the dizzy",
+                "during exercise"
+              ],
+              "patterns": [
+                "\\bwhat were you doing\\b(?!.*\\bchest\\b)",
+                "\\b(dizzy|dizziness|faint|funny turn|lightheaded)\\b.*\\b(exert\\w*|exercise|walking|climbing|active|activity)\\b"
+              ],
+              "topics": [
+                "hpi.triggers",
+                "hpi.timing"
+              ]
+            },
+            "answer": "Carrying two bags of shopping up the stairs at home. I was puffing a bit already."
+          },
+          {
+            "id": "presyncope-duration",
+            "intents": {
+              "canonical": "How long did the funny turn last?",
+              "paraphrases": [
+                "How long did it last?",
+                "How long did the dizziness last?",
+                "How long were you feeling faint for?",
+                "How quickly did you recover?",
+                "How long did it take to pass?",
+                "Did it pass quickly?"
+              ],
+              "keywords": [
+                "how long did it last",
+                "how quickly did you recover",
+                "take to pass"
+              ],
+              "topics": [
+                "hpi.timing"
+              ]
+            },
+            "answer": "A minute, maybe less. Once I sat down it cleared."
+          },
+          {
+            "id": "presyncope-warning",
+            "intents": {
+              "canonical": "Did you have any warning before it happened?",
+              "paraphrases": [
+                "How did you feel just before the funny turn?",
+                "What did it feel like?",
+                "Did your vision go dark or grey?",
+                "Did everything go dark?",
+                "Any warning signs beforehand?",
+                "Did you feel sick or sweaty before it?",
+                "What did you notice first?",
+                "Did the room spin?"
+              ],
+              "keywords": [
+                "warning",
+                "beforehand",
+                "just before",
+                "go dark",
+                "go grey",
+                "room spin",
+                "sweaty"
+              ],
+              "topics": [
+                "hpi.character",
+                "hpi.associated"
+              ]
+            },
+            "answer": "My head went light and things went grey round the edges. The room wasn’t spinning, and I wasn’t sick or sweaty. My heart wasn’t racing or anything."
+          },
+          {
+            "id": "presyncope-recovery",
+            "intents": {
+              "canonical": "How did you feel afterwards?",
+              "paraphrases": [
+                "Were you back to normal straight after?",
+                "How were you after the funny turn?",
+                "Did you feel alright once it passed?",
+                "How long did it take you to feel normal again?",
+                "Were you able to carry on afterwards?",
+                "What did you do after it passed?"
+              ],
+              "keywords": [
+                "afterwards",
+                "back to normal",
+                "once it passed",
+                "carry on"
+              ],
+              "topics": [
+                "hpi.course"
+              ]
+            },
+            "answer": "Back to normal in a couple of minutes, just a bit shaken. I sat a while, then took the bags up one at a time."
+          },
+          {
+            "id": "presyncope-before",
+            "intents": {
+              "canonical": "Has this happened before?",
+              "paraphrases": [
+                "Have you ever had a funny turn like that before?",
+                "Is this the first time you have felt faint?",
+                "Have you had any dizzy spells before?",
+                "Any similar episodes in the past?",
+                "Has it happened more than once?",
+                "Have you had any turns like that before?"
+              ],
+              "keywords": [
+                "happened before",
+                "first time",
+                "similar episodes",
+                "more than once",
+                "like that before"
+              ],
+              "topics": [
+                "hpi.prior"
+              ]
+            },
+            "answer": "Never that bad. Once or twice I’ve felt a bit woozy at the top of the hill, but I put it down to my age."
+          },
+          {
+            "id": "presyncope-posture",
+            "intents": {
+              "canonical": "Do you get dizzy when you stand up quickly?",
+              "paraphrases": [
+                "Do you feel light-headed when you get up from a chair?",
+                "Any dizziness on standing?",
+                "Do you get dizzy getting out of bed?",
+                "Does standing up suddenly make you feel faint?",
+                "Do you get light-headed when you change position?",
+                "Have you felt dizzy when you sit up or stand?"
+              ],
+              "keywords": [
+                "stand up",
+                "standing up",
+                "on standing",
+                "out of bed",
+                "change position",
+                "get up from"
+              ],
+              "topics": [
+                "hpi.aggravating"
+              ]
+            },
+            "answer": "No, getting up out of a chair is fine. It’s when I’m working hard, like on the stairs."
+          },
+          {
+            "id": "presyncope-witness",
+            "intents": {
+              "canonical": "Did anyone see what happened?",
+              "paraphrases": [
+                "Was anyone with you at the time?",
+                "Did anybody witness the funny turn?",
+                "Were you on your own when it happened?",
+                "Was your wife there when it happened?",
+                "Did someone see it happen?"
+              ],
+              "keywords": [
+                "anyone see",
+                "anybody see",
+                "witness",
+                "witnessed",
+                "on your own",
+                "anyone with you"
+              ],
+              "topics": [
+                "hpi.associated"
+              ]
+            },
+            "answer": "No, I was on my own. Margaret was in the front room."
+          }
+        ]
+      },
+      {
+        "id": "murmur-history",
+        "topic": "What doctors have said about his heart",
+        "answer": "Years ago, eight or ten maybe, a GP listening to my chest said I had a heart murmur. He said to keep an eye on it, but I never went back about it, and nobody’s done any heart tests.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "murmur",
+          "heart",
+          "echo",
+          "scan",
+          "cardiologist"
+        ],
+        "intents": {
+          "canonical": "Has a doctor ever said anything about your heart?",
+          "paraphrases": [
+            "Have you ever been told you have a heart murmur?",
+            "Has anyone ever heard a murmur in your heart?",
+            "Have you ever had any problems with your heart?",
+            "Have you ever been told you have a heart problem?",
+            "Have you had any heart tests?",
+            "Have you ever had an echo?",
+            "Have you had a scan of your heart?",
+            "Have you ever seen a heart specialist?",
+            "Have you had an ECG before?",
+            "Any history of heart valve problems?",
+            "Has your doctor ever listened to your heart and found anything?"
+          ],
+          "keywords": [
+            "murmur",
+            "heart murmur",
+            "heart problems",
+            "heart problem",
+            "heart tests",
+            "echo",
+            "heart scan",
+            "heart specialist",
+            "cardiologist",
+            "heart valve",
+            "valve problems",
+            "ecg"
+          ],
+          "topics": [
+            "pmh.conditions"
+          ]
+        }
+      },
+      {
+        "id": "pmh",
+        "topic": "Past medical history",
+        "answer": "High blood pressure, for about fifteen years, and high cholesterol. Nothing else. No diabetes, and I’ve never had a heart attack or a stroke.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "medical conditions",
+          "medical problems",
+          "health problems",
+          "past medical",
+          "blood pressure",
+          "cholesterol",
+          "diabetes",
+          "conditions"
+        ],
+        "intents": {
+          "canonical": "Do you have any medical conditions?",
+          "paraphrases": [
+            "What medical problems do you have?",
+            "Tell me about your past medical history.",
+            "Have you been diagnosed with any illnesses?",
+            "Do you have any long-term conditions?",
+            "Any chronic illnesses?",
+            "Do you have high blood pressure?",
+            "Do you have high cholesterol?",
+            "Are you diabetic?",
+            "Have you ever had a heart attack or a stroke?",
+            "What do you see your doctor for?",
+            "Any significant medical history?",
+            "Are you otherwise fit and well?"
+          ],
+          "keywords": [
+            "medical history",
+            "medical conditions",
+            "diabetic",
+            "high blood pressure",
+            "high cholesterol",
+            "chronic illness",
+            "long-term conditions",
+            "been diagnosed with"
+          ],
+          "topics": [
+            "pmh.conditions"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "pmh-dates",
+            "intents": {
+              "canonical": "When were you diagnosed with high blood pressure?",
+              "paraphrases": [
+                "How long have you had high blood pressure?",
+                "When was the cholesterol diagnosed?",
+                "How long have you been on treatment for your blood pressure?",
+                "When were those conditions diagnosed?",
+                "How long have you had high cholesterol?",
+                "What year were you diagnosed?"
+              ],
+              "keywords": [
+                "when were you diagnosed",
+                "when was it diagnosed",
+                "what year were you diagnosed",
+                "how long have you had high"
+              ],
+              "topics": [
+                "pmh.conditions"
+              ]
+            },
+            "answer": "The blood pressure about fifteen years ago, and the cholesterol a couple of years after that."
+          }
+        ]
+      },
+      {
+        "id": "psh",
+        "topic": "Past surgeries and hospital stays",
+        "answer": "Just a hernia repair about fifteen years ago. Apart from that I’ve never been in hospital.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "surgery",
+          "surgeries",
+          "operation",
+          "procedure",
+          "hospital",
+          "hernia"
+        ],
+        "intents": {
+          "canonical": "Have you had any operations or procedures?",
+          "paraphrases": [
+            "Have you ever had surgery?",
+            "Any past surgeries?",
+            "Any previous operations?",
+            "Have you ever been operated on?",
+            "Any past surgical history?",
+            "Have you ever been in hospital?",
+            "Have you been admitted to hospital before?",
+            "Any hospital stays?",
+            "Have you had any procedures done?"
+          ],
+          "keywords": [
+            "surgical history",
+            "surgery",
+            "surgeries",
+            "operations",
+            "operated on",
+            "procedures",
+            "in hospital",
+            "admitted to hospital",
+            "hernia"
+          ],
+          "topics": [
+            "psh.surgery",
+            "pmh.hospital"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "psh-when",
+            "intents": {
+              "canonical": "When was the hernia operation?",
+              "paraphrases": [
+                "When did you have the surgery?",
+                "How long ago was that operation?",
+                "What year was the hernia repair?",
+                "How old were you when you had the operation?",
+                "When was that surgery done?"
+              ],
+              "keywords": [
+                "when was the surgery",
+                "when was the operation",
+                "when did you have the surgery",
+                "when did you have the operation",
+                "hernia repair"
+              ],
+              "topics": [
+                "psh.surgery"
+              ]
+            },
+            "answer": "About fifteen years ago, when I was nearly sixty. No trouble with it since."
+          }
+        ]
+      },
+      {
+        "id": "meds",
+        "topic": "Medications and doses",
+        "answer": "Amlodipine 5 milligrams in the morning for the blood pressure, and atorvastatin 40 milligrams at night for the cholesterol. That’s all. Nothing for my chest, and nothing from the chemist.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "medication",
+          "medicine",
+          "pills",
+          "tablets",
+          "taking",
+          "dose"
+        ],
+        "intents": {
+          "canonical": "What medications do you take?",
+          "paraphrases": [
+            "Are you on any medications?",
+            "What medicines are you currently taking?",
+            "Can you tell me all the tablets you take and the doses?",
+            "Any regular meds?",
+            "What pills do you take?",
+            "Do you take any prescription medicines?",
+            "What doses do you take?",
+            "Do you take anything regularly?",
+            "Can you list your current medications?",
+            "What do you take for your blood pressure?",
+            "What do you take for your cholesterol?",
+            "Are you on a statin?",
+            "Are you on any blood pressure tablets?",
+            "Are you on any heart medicines?"
+          ],
+          "keywords": [
+            "what medications",
+            "what medicines",
+            "on any medications",
+            "medication list",
+            "regular meds",
+            "prescription medicines",
+            "currently taking",
+            "what tablets",
+            "amlodipine",
+            "atorvastatin",
+            "statin"
+          ],
+          "topics": [
+            "meds.current"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "meds-adherence",
+            "intents": {
+              "canonical": "Do you take your medications every day?",
+              "paraphrases": [
+                "Have you been taking your tablets as prescribed?",
+                "Do you take them regularly?",
+                "Do you ever miss doses?",
+                "Any missed doses?",
+                "Do you ever forget to take your pills?",
+                "How are you getting on with taking your medicines?",
+                "Have you stopped any of your medications?"
+              ],
+              "keywords": [
+                "missed doses",
+                "miss doses",
+                "as prescribed",
+                "forget to take",
+                "every day",
+                "compliant"
+              ],
+              "topics": [
+                "meds.adherence"
+              ]
+            },
+            "answer": "Every day, like clockwork. I sort out Margaret’s tablets and mine every Sunday."
+          },
+          {
+            "id": "meds-otc",
+            "intents": {
+              "canonical": "Do you take any over-the-counter medicines?",
+              "paraphrases": [
+                "Any over-the-counter medications?",
+                "Do you take anything you buy without a prescription?",
+                "Any herbal remedies or supplements?",
+                "Do you take any vitamins or supplements?",
+                "Do you take any painkillers like ibuprofen?",
+                "Do you take aspirin?",
+                "Anything from the pharmacy that is not prescribed?"
+              ],
+              "keywords": [
+                "otc",
+                "without a prescription",
+                "herbal",
+                "supplements",
+                "vitamins",
+                "painkillers",
+                "aspirin"
+              ],
+              "topics": [
+                "meds.otc"
+              ]
+            },
+            "answer": "No, nothing from the chemist. Not even an aspirin."
+          }
+        ]
+      },
+      {
+        "id": "allergies",
+        "topic": "Allergies",
+        "answer": "No allergies that I know of.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "allerg",
+          "reaction"
+        ],
+        "intents": {
+          "canonical": "Do you have any allergies?",
+          "paraphrases": [
+            "Are you allergic to anything?",
+            "Any drug allergies?",
+            "Any allergies to medications?",
+            "Have you ever had a reaction to a medicine?",
+            "Any known allergies?",
+            "Any food allergies?",
+            "NKDA?",
+            "Are you allergic to penicillin?",
+            "Any allergies to antibiotics?"
+          ],
+          "keywords": [
+            "allergies",
+            "allergic",
+            "allergy",
+            "reaction to",
+            "nkda",
+            "penicillin"
+          ],
+          "topics": [
+            "allergies"
+          ]
+        }
+      },
+      {
+        "id": "fh",
+        "topic": "Family history",
+        "answer": "My dad died of a heart attack at 70. Mum lived to 86, old age really. I’ve a younger sister who’s well. Nobody in the family died young or suddenly that I know of.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "family",
+          "father",
+          "mother",
+          "dad",
+          "mum",
+          "sister",
+          "brother",
+          "parents"
+        ],
+        "intents": {
+          "canonical": "Does anything run in your family?",
+          "paraphrases": [
+            "Tell me about your family history.",
+            "Any family history of heart disease?",
+            "Has anyone in your family had heart problems?",
+            "What did your father die of?",
+            "Are your parents still alive?",
+            "How old were your parents when they died?",
+            "Any illnesses that run in the family?",
+            "Do you have any brothers or sisters?",
+            "Is there any history of heart attacks or strokes in your family?",
+            "Has anyone in your family died suddenly or young?",
+            "Any FHx?"
+          ],
+          "keywords": [
+            "family history",
+            "run in the family",
+            "runs in the family",
+            "your parents",
+            "your father",
+            "your mother",
+            "relatives",
+            "died suddenly",
+            "sudden death"
+          ],
+          "topics": [
+            "fh"
+          ]
+        }
+      },
+      {
+        "id": "smoking",
+        "topic": "Smoking",
+        "answer": "I smoked a pack a day for about thirty years, but I gave up twenty years ago.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "smoke",
+          "cigarette",
+          "tobacco",
+          "vape"
+        ],
+        "intents": {
+          "canonical": "Do you smoke?",
+          "paraphrases": [
+            "Have you ever smoked?",
+            "Smoke?",
+            "Do you use tobacco?",
+            "Are you a smoker?",
+            "Any history of smoking?",
+            "Do you smoke cigarettes?",
+            "Have you ever been a smoker?",
+            "Do you vape?",
+            "What is your smoking history?",
+            "Have you ever used tobacco products?"
+          ],
+          "keywords": [
+            "smoker",
+            "smoking",
+            "smoked",
+            "cigarettes",
+            "tobacco",
+            "vaping"
+          ],
+          "topics": [
+            "sh.smoking"
+          ]
+        },
+        "followUps": [
+          {
+            "id": "smoking-amount",
+            "intents": {
+              "canonical": "How much did you smoke?",
+              "paraphrases": [
+                "How many cigarettes a day did you smoke?",
+                "How many packs a day?",
+                "How many pack-years?",
+                "How long did you smoke for?",
+                "How many years did you smoke?",
+                "How heavily did you smoke?"
+              ],
+              "keywords": [
+                "how much did you smoke",
+                "packs a day",
+                "pack-years",
+                "pack years",
+                "how many cigarettes",
+                "how long did you smoke"
+              ],
+              "patterns": [
+                "\\bhow (much|many cigarettes|many packs|heavily) did you smoke\\b",
+                "\\bpacks? (a|per) day\\b",
+                "\\bpack[- ]years?\\b"
+              ],
+              "topics": [
+                "sh.smoking"
+              ]
+            },
+            "answer": "A pack a day, for about thirty years."
+          },
+          {
+            "id": "smoking-quit",
+            "intents": {
+              "canonical": "When did you quit smoking?",
+              "paraphrases": [
+                "When did you stop smoking?",
+                "Do you still smoke?",
+                "Are you still smoking?",
+                "How long ago did you give up cigarettes?",
+                "When did you give up smoking?",
+                "Are you an ex-smoker?"
+              ],
+              "keywords": [
+                "quit smoking",
+                "stop smoking",
+                "stopped smoking",
+                "give up smoking",
+                "gave up smoking",
+                "still smoke",
+                "still smoking",
+                "ex-smoker"
+              ],
+              "patterns": [
+                "\\b(quit|stop|stopped|give up|gave up)\\b.*\\b(smoke|smoking|cigarettes)\\b"
+              ],
+              "topics": [
+                "sh.smoking"
+              ]
+            },
+            "answer": "Twenty years ago. Haven’t touched one since."
+          }
+        ]
+      },
+      {
+        "id": "alcohol",
+        "topic": "Alcohol",
+        "answer": "A beer or two a week, that’s all.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "alcohol",
+          "drink",
+          "beer",
+          "wine"
+        ],
+        "intents": {
+          "canonical": "Do you drink alcohol?",
+          "paraphrases": [
+            "How much alcohol do you drink?",
+            "Do you drink?",
+            "How many drinks a week do you have?",
+            "Any alcohol?",
+            "How much do you drink in a week?",
+            "Do you drink beer or wine?",
+            "How often do you have a drink?",
+            "How many units of alcohol a week?",
+            "Do you drink at all?"
+          ],
+          "keywords": [
+            "alcohol",
+            "drinks a week",
+            "units of alcohol",
+            "booze",
+            "drink alcohol",
+            "have a drink"
+          ],
+          "topics": [
+            "sh.alcohol"
+          ]
+        }
+      },
+      {
+        "id": "drugs",
+        "topic": "Recreational drugs",
+        "answer": "No, never.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "drugs",
+          "recreational",
+          "marijuana",
+          "cannabis",
+          "cocaine"
+        ],
+        "intents": {
+          "canonical": "Do you use any recreational drugs?",
+          "paraphrases": [
+            "Any recreational drug use?",
+            "Have you ever used street drugs?",
+            "Do you use marijuana?",
+            "Do you smoke weed?",
+            "Any cannabis use?",
+            "Have you ever used cocaine?",
+            "Do you take any illegal drugs?",
+            "Any illicit drugs?",
+            "Have you ever injected drugs?",
+            "Do you use any non-prescribed drugs?"
+          ],
+          "keywords": [
+            "recreational drugs",
+            "street drugs",
+            "illicit",
+            "illegal drugs",
+            "cannabis",
+            "marijuana",
+            "cocaine",
+            "weed"
+          ],
+          "topics": [
+            "sh.drugs"
+          ]
+        }
+      },
+      {
+        "id": "occupation",
+        "topic": "Occupation",
+        "answer": "Retired now. I was a carpenter for over forty years.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "work",
+          "job",
+          "occupation",
+          "retired",
+          "do for a living"
+        ],
+        "intents": {
+          "canonical": "What do you do for work?",
+          "paraphrases": [
+            "What is your job?",
+            "Are you working at the moment?",
+            "What do you do for a living?",
+            "Are you retired?",
+            "What did you used to do for work?",
+            "What is your occupation?",
+            "Do you work?",
+            "What was your job before you retired?",
+            "Are you still working?"
+          ],
+          "keywords": [
+            "occupation",
+            "for work",
+            "for a living",
+            "your job",
+            "retired",
+            "still working",
+            "employed"
+          ],
+          "topics": [
+            "sh.occupation"
+          ]
+        }
+      },
+      {
+        "id": "home",
+        "topic": "Who he lives with",
+        "answer": "With my wife, Margaret. We’ve been married fifty years. She’s got some memory trouble now, mild dementia they said, so I do most things for her. Our son lives a couple of hours away.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "live with",
+          "home",
+          "wife",
+          "married",
+          "carer"
+        ],
+        "intents": {
+          "canonical": "Who do you live with?",
+          "paraphrases": [
+            "Do you live alone?",
+            "Who is at home with you?",
+            "What is your living situation?",
+            "Are you married?",
+            "Do you have family nearby?",
+            "Who lives with you?",
+            "Do you have any support at home?",
+            "Is there anyone at home to help you?",
+            "Tell me about your home situation.",
+            "How are things at home?",
+            "Does your wife have any health problems?",
+            "How is your wife keeping?",
+            "Do you look after anyone at home?",
+            "Are you a carer for anyone?"
+          ],
+          "keywords": [
+            "live with",
+            "live alone",
+            "living situation",
+            "at home with you",
+            "lives with you",
+            "support at home",
+            "home situation",
+            "look after anyone",
+            "caregiver for"
+          ],
+          "topics": [
+            "sh.living"
+          ]
+        }
+      },
+      {
+        "id": "activity",
+        "topic": "Exercise and day-to-day activity",
+        "answer": "I used to walk our dog a couple of kilometres every morning. Now I just take him to the end of the road and back, and the neighbour’s lad does the long walks. I still potter about in my workshop.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "exercise",
+          "active",
+          "dog",
+          "pets",
+          "walks"
+        ],
+        "intents": {
+          "canonical": "Do you do any exercise?",
+          "paraphrases": [
+            "How active are you?",
+            "Do you exercise regularly?",
+            "What do you do to keep fit?",
+            "How do you spend your days?",
+            "What is a typical day like for you?",
+            "Do you have any pets?",
+            "Do you have a dog?",
+            "Are you still able to do your usual activities?",
+            "Do you get out for walks?"
+          ],
+          "keywords": [
+            "any exercise",
+            "exercise regularly",
+            "keep fit",
+            "how active",
+            "any pets",
+            "a dog",
+            "your dog",
+            "typical day",
+            "usual activities"
+          ],
+          "topics": [
+            "sh.exercise",
+            "sh.function"
+          ]
+        }
+      },
+      {
+        "id": "meaning",
+        "topic": "What matters to him",
+        "answer": "Margaret, first and foremost. And my workshop. I still make bits of furniture for the grandchildren.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "enjoy",
+          "joy",
+          "meaning",
+          "hobbies",
+          "fun",
+          "like to do"
+        ],
+        "intents": {
+          "canonical": "What do you enjoy doing?",
+          "paraphrases": [
+            "What are your hobbies?",
+            "What do you like to do for fun?",
+            "What matters most to you?",
+            "What brings you joy?",
+            "What do you do in your spare time?",
+            "What is important to you in life?",
+            "Any hobbies or interests?",
+            "What keeps you going?"
+          ],
+          "keywords": [
+            "hobbies",
+            "for fun",
+            "spare time",
+            "free time",
+            "matters most to you",
+            "enjoy doing",
+            "interests",
+            "pastimes"
+          ],
+          "topics": [
+            "sh.meaning"
+          ]
+        }
+      },
+      {
+        "id": "diet",
+        "topic": "Diet",
+        "answer": "Plain cooking, meat and two veg mostly. I do the cooking now. I don’t put much salt on things.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "diet",
+          "food",
+          "eat",
+          "salt"
+        ],
+        "intents": {
+          "canonical": "What is your diet like?",
+          "paraphrases": [
+            "What do you normally eat?",
+            "Do you eat a healthy diet?",
+            "Tell me about your diet.",
+            "How much salt do you have?",
+            "Do you eat much fatty food?",
+            "Who does the cooking at home?",
+            "What did you eat yesterday?",
+            "What sort of food do you eat?"
+          ],
+          "keywords": [
+            "your diet",
+            "healthy diet",
+            "salt",
+            "fatty food",
+            "the cooking",
+            "normally eat"
+          ],
+          "topics": [
+            "sh.diet"
+          ]
+        }
+      },
+      {
+        "id": "sexual",
+        "topic": "Sexual history",
+        "answer": "Just my wife, fifty years now. Nothing to tell, really.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "sexual",
+          "partner",
+          "sex"
+        ],
+        "intents": {
+          "canonical": "Are you sexually active?",
+          "paraphrases": [
+            "Can I ask about your sexual history?",
+            "Do you have a sexual partner?",
+            "How many sexual partners have you had?",
+            "Any problems with sexual function?",
+            "Have you had any difficulties in your sex life?",
+            "Are you in a sexual relationship?",
+            "Have you had any new sexual partners?",
+            "Can I ask some questions about your sex life?"
+          ],
+          "keywords": [
+            "sexually active",
+            "sexual history",
+            "sex life",
+            "sexual partners",
+            "sexual function",
+            "intimacy"
+          ],
+          "topics": [
+            "sh.sexual"
+          ]
+        }
+      },
+      {
+        "id": "fatigue",
+        "topic": "Tiredness",
+        "answer": "Not tired as such. I just run out of puff when I do things.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "tired",
+          "fatigue",
+          "energy",
+          "exhausted"
+        ],
+        "intents": {
+          "canonical": "Have you been feeling tired?",
+          "paraphrases": [
+            "How is your energy?",
+            "How are your energy levels?",
+            "Have you noticed any fatigue?",
+            "Have you been more tired than usual?",
+            "Do you feel exhausted all the time?",
+            "Have you been feeling run down lately?",
+            "Are you lacking energy these days?",
+            "Do you get tired easily?",
+            "Have you been feeling worn out?"
+          ],
+          "keywords": [
+            "tiredness",
+            "energy levels",
+            "run down",
+            "tired",
+            "lacking energy",
+            "drained"
+          ],
+          "topics": [
+            "hpi.associated",
+            "ros.constitutional"
+          ]
+        }
+      },
+      {
+        "id": "ideas",
+        "topic": "What he thinks is going on",
+        "answer": "I reckon it’s just old age catching up with me. Margaret’s convinced it’s my heart.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "think is going on",
+          "causing",
+          "put it down to"
+        ],
+        "intents": {
+          "canonical": "What do you think is going on?",
+          "paraphrases": [
+            "What do you think is causing this?",
+            "Do you have any ideas about what is causing it?",
+            "What do you put it down to?",
+            "Have you had any thoughts about what this might be?",
+            "What does your wife think it is?",
+            "Do you have any theories about what is wrong?",
+            "What do you think might be behind all this?",
+            "Have you wondered what it could be?"
+          ],
+          "keywords": [
+            "think is going on",
+            "think is causing",
+            "put it down to",
+            "any ideas",
+            "any theories",
+            "what this might be"
+          ],
+          "topics": [
+            "ice.ideas"
+          ]
+        }
+      },
+      {
+        "id": "concerns",
+        "topic": "Patient concerns and expectations",
+        "answer": "To be honest, I don’t want an operation or to end up in hospital. I look after Margaret, and she can’t be left on her own for long. I suppose I’d just like to know it’s nothing serious.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "worried",
+          "concern",
+          "scared",
+          "expect",
+          "hoping"
+        ],
+        "intents": {
+          "canonical": "Is there anything you are worried about?",
+          "paraphrases": [
+            "What are you most worried about?",
+            "Do you have any concerns?",
+            "What are you hoping we can do for you today?",
+            "What are you expecting from today?",
+            "Is anything in particular worrying you?",
+            "What is your biggest concern?",
+            "What would you like to get out of today's visit?",
+            "Is there anything you are scared of?",
+            "How would you feel about going into hospital?",
+            "How would you feel if you needed an operation?",
+            "Who would look after your wife if you had to go into hospital?",
+            "What are your expectations?"
+          ],
+          "keywords": [
+            "worried",
+            "worrying you",
+            "concerns",
+            "concerned",
+            "scared",
+            "expectations",
+            "hoping",
+            "expecting from today"
+          ],
+          "topics": [
+            "ice.concerns",
+            "ice.expectations"
+          ]
+        },
+        "emotion": "worried"
+      }
+    ],
+    "pertinentNegatives": [
+      {
+        "id": "neg-chest-pain-at-rest",
+        "topic": "Chest pain at rest",
+        "answer": "No, never when I’m sitting still or in bed. Only when I’m pushing myself.",
+        "keywords": [
+          "at rest",
+          "resting",
+          "night"
+        ],
+        "intents": {
+          "canonical": "Do you ever get the chest pain at rest?",
+          "paraphrases": [
+            "Do you get chest pain when you are resting?",
+            "Does the chest tightness ever come on when you are sitting still?",
+            "Any chest pain at night or in bed?",
+            "Has the chest pain ever woken you up?",
+            "Do you get chest pain when you are not doing anything?",
+            "Any chest pain at rest?",
+            "Has the chest discomfort ever come on without exertion?",
+            "Has the tightness ever come on while you were resting?",
+            "Does the pain ever come on when you are resting?",
+            "Do you ever get it at rest?"
+          ],
+          "keywords": [
+            "chest pain at rest",
+            "at rest",
+            "when you are resting",
+            "sitting still",
+            "in bed",
+            "without exertion",
+            "woken you up"
+          ],
+          "patterns": [
+            "\\b(chest|tightness|pain|discomfort)\\b.*\\b(at rest|resting|sitting still|in bed|at night|wake you|woken you|woke you|without exertion|not doing anything)\\b"
+          ],
+          "topics": [
+            "ros.cardiac",
+            "hpi.timing"
+          ]
+        }
+      },
+      {
+        "id": "neg-palpitations",
+        "topic": "Palpitations",
+        "answer": "No, I’ve never noticed my heart racing or skipping. Not even before that funny turn.",
+        "keywords": [
+          "palpitation",
+          "racing",
+          "skipping",
+          "flutter"
+        ],
+        "intents": {
+          "canonical": "Have you had any palpitations?",
+          "paraphrases": [
+            "Any palpitations?",
+            "Have you noticed your heart racing?",
+            "Was your heart racing?",
+            "Does your heart ever pound or flutter?",
+            "Any irregular heartbeat?",
+            "Do you feel your heart skipping beats?",
+            "Did you feel your heart racing before the funny turn?",
+            "Have you been aware of your heartbeat?",
+            "Any fluttering in your chest?",
+            "Was your heart beating fast when you felt faint?"
+          ],
+          "keywords": [
+            "palpitations",
+            "heart racing",
+            "racing heart",
+            "skipping beats",
+            "irregular heartbeat",
+            "flutter",
+            "fluttering",
+            "pounding",
+            "beating fast"
+          ],
+          "topics": [
+            "ros.cardiac"
+          ]
+        }
+      },
+      {
+        "id": "neg-orthopnea-pnd",
+        "topic": "Breathlessness lying flat or at night",
+        "answer": "No, I sleep on one pillow, flat as you like, and I’ve never woken up short of breath.",
+        "keywords": [
+          "lie flat",
+          "pillows",
+          "night",
+          "wake"
+        ],
+        "intents": {
+          "canonical": "Do you get short of breath when you lie flat?",
+          "paraphrases": [
+            "Can you lie flat?",
+            "How many pillows do you sleep on?",
+            "Do you need to sleep propped up?",
+            "Is your breathing worse lying down?",
+            "Do you have to sit up to sleep?",
+            "Do you wake up at night short of breath?",
+            "Do you ever wake up gasping for air?",
+            "Any orthopnoea or PND?",
+            "Has breathlessness ever woken you from sleep?"
+          ],
+          "keywords": [
+            "lie flat",
+            "lying flat",
+            "lay flat",
+            "pillows",
+            "propped up",
+            "short of breath lying flat",
+            "waking up at night short of breath",
+            "wake up gasping",
+            "gasping for air",
+            "sit up to sleep"
+          ],
+          "patterns": [
+            "\\b(lie|lying|lay|laying) (down )?flat\\b",
+            "\\b(wake|waking|woke|woken)\\b.*\\b(short of breath|gasping|choking|catch your breath)\\b"
+          ],
+          "topics": [
+            "ros.cardiac",
+            "ros.respiratory"
+          ]
+        }
+      },
+      {
+        "id": "neg-ankle-swelling",
+        "topic": "Ankle swelling",
+        "answer": "No, my ankles are fine. No swelling.",
+        "keywords": [
+          "swelling",
+          "swollen",
+          "ankle",
+          "legs",
+          "feet"
+        ],
+        "intents": {
+          "canonical": "Have you noticed any swelling in your legs or ankles?",
+          "paraphrases": [
+            "Any ankle swelling?",
+            "Are your feet swollen?",
+            "Have your legs been puffy?",
+            "Any leg swelling?",
+            "Have you had any oedema in your legs?",
+            "Any pedal edema?",
+            "Have your shoes been feeling tight?",
+            "Are your ankles swollen?",
+            "Any fluid build-up in your legs?",
+            "Do your legs swell up?"
+          ],
+          "keywords": [
+            "ankle swelling",
+            "leg swelling",
+            "foot swelling",
+            "swollen ankles",
+            "fluid build-up",
+            "shoes"
+          ],
+          "topics": [
+            "ros.cardiac"
+          ]
+        }
+      },
+      {
+        "id": "neg-cough",
+        "topic": "Cough",
+        "answer": "No cough, and nothing coming up.",
+        "keywords": [
+          "cough",
+          "phlegm",
+          "sputum"
+        ],
+        "intents": {
+          "canonical": "Do you have a cough?",
+          "paraphrases": [
+            "Any cough?",
+            "Have you been coughing?",
+            "Have you had a cough lately?",
+            "Are you coughing anything up?",
+            "Are you bringing up any phlegm?",
+            "Any coughing recently?",
+            "Have you been bothered by a cough?"
+          ],
+          "keywords": [
+            "a cough",
+            "coughing",
+            "phlegm",
+            "coughing anything up"
+          ],
+          "topics": [
+            "ros.respiratory"
+          ]
+        }
+      },
+      {
+        "id": "neg-fever",
+        "topic": "Fever / chills",
+        "answer": "No fevers or chills, and no colds lately.",
+        "keywords": [
+          "fever",
+          "chills",
+          "temperature",
+          "sweats"
+        ],
+        "intents": {
+          "canonical": "Have you had any fevers or chills?",
+          "paraphrases": [
+            "Any fever?",
+            "Have you had a temperature?",
+            "Any chills or shivers?",
+            "Have you been feeling hot and cold?",
+            "Have you been running a temperature?",
+            "Have you felt feverish?",
+            "Have you had a cold or flu recently?",
+            "Any recent infections?"
+          ],
+          "keywords": [
+            "fevers",
+            "feverish",
+            "shaking chills",
+            "shivers",
+            "running a temperature",
+            "hot and cold",
+            "recent infections"
+          ],
+          "topics": [
+            "ros.constitutional"
+          ]
+        }
+      },
+      {
+        "id": "neg-loss-of-consciousness",
+        "topic": "Loss of consciousness / injury",
+        "answer": "No, I didn’t go out completely, and I didn’t fall or hurt myself. I got myself sat down on the step before it got that far.",
+        "keywords": [
+          "consciousness",
+          "fall",
+          "hurt",
+          "injury",
+          "hit your head"
+        ],
+        "intents": {
+          "canonical": "Did you lose consciousness?",
+          "paraphrases": [
+            "Did you lose consciousness at any point?",
+            "Any loss of consciousness?",
+            "Were you unconscious at all?",
+            "Were you knocked out?",
+            "Did you collapse?",
+            "Did you fall or hurt yourself?",
+            "Did you hit your head?",
+            "Did you injure yourself?",
+            "Did you end up on the floor?",
+            "Did you black out completely?",
+            "Did you pass out?"
+          ],
+          "keywords": [
+            "lose consciousness",
+            "lost consciousness",
+            "loss of consciousness",
+            "unconscious",
+            "knocked out",
+            "hit your head",
+            "hurt yourself",
+            "injure yourself",
+            "collapse",
+            "collapsed",
+            "on the floor",
+            "completely"
+          ],
+          "topics": [
+            "ros.cardiac",
+            "ros.neuro"
+          ]
+        }
+      },
+      {
+        "id": "neg-seizure-features",
+        "topic": "Seizure features",
+        "answer": "No. I didn’t bite my tongue or wet myself, I wasn’t shaking, and my head was clear straight away. No muddle afterwards.",
+        "keywords": [
+          "tongue",
+          "wet",
+          "shaking",
+          "seizure",
+          "fit",
+          "confused"
+        ],
+        "intents": {
+          "canonical": "Did you bite your tongue or wet yourself?",
+          "paraphrases": [
+            "Did you bite your tongue?",
+            "Did you wet yourself during the episode?",
+            "Were you incontinent during the funny turn?",
+            "Did you have any shaking or jerking?",
+            "Did your arms or legs jerk?",
+            "Were you confused afterwards?",
+            "Did you feel drowsy or muddled afterwards?",
+            "Any signs of a seizure?",
+            "Have you ever had a fit or seizure?"
+          ],
+          "keywords": [
+            "bite your tongue",
+            "bit your tongue",
+            "tongue biting",
+            "wet yourself",
+            "incontinent",
+            "jerking",
+            "jerk",
+            "seizure",
+            "seizures",
+            "a fit",
+            "confused afterwards",
+            "muddled",
+            "drowsy"
+          ],
+          "topics": [
+            "ros.neuro"
+          ]
+        }
+      },
+      {
+        "id": "neg-focal-neuro",
+        "topic": "Weakness, numbness or speech problems",
+        "answer": "No weakness or numbness anywhere, and no trouble with my speech. Not then and not since.",
+        "keywords": [
+          "weakness",
+          "numb",
+          "tingling",
+          "speech"
+        ],
+        "intents": {
+          "canonical": "Have you had any weakness, numbness or trouble speaking?",
+          "paraphrases": [
+            "Any weakness in your arms or legs?",
+            "Any numbness or tingling?",
+            "Any problems with your speech?",
+            "Have you had any stroke symptoms?",
+            "Any weakness in your face, arms or legs?",
+            "Any slurred speech?",
+            "Any neurological symptoms?",
+            "Have you had any trouble getting your words out?",
+            "Has your face drooped on one side?"
+          ],
+          "keywords": [
+            "weakness",
+            "numbness",
+            "tingling",
+            "trouble speaking",
+            "slurred speech",
+            "stroke symptoms",
+            "neurological",
+            "your speech",
+            "face drooped"
+          ],
+          "topics": [
+            "ros.neuro"
+          ]
+        }
+      },
+      {
+        "id": "neg-calf-pain",
+        "topic": "Calf pain / one-sided leg swelling",
+        "answer": "No, no pain in my calves, and both legs look the same.",
+        "keywords": [
+          "calf",
+          "one leg",
+          "one side",
+          "clot"
+        ],
+        "intents": {
+          "canonical": "Any pain or swelling in your calves?",
+          "paraphrases": [
+            "Any pain in your calves?",
+            "Is one leg more swollen than the other?",
+            "Is one calf bigger than the other?",
+            "Any tenderness in your calves?",
+            "Do you get pain in your calves when you walk?",
+            "Does one leg look bigger than the other?",
+            "Is the swelling only in one leg?"
+          ],
+          "keywords": [
+            "calf pain",
+            "calves",
+            "calf tenderness",
+            "more swollen than the other",
+            "only in one leg",
+            "unilateral",
+            "bigger than the other",
+            "calf pain when walking"
+          ],
+          "topics": [
+            "ros.cardiac",
+            "ros.heme"
+          ]
+        }
+      },
+      {
+        "id": "neg-weight-loss",
+        "topic": "Weight change",
+        "answer": "No, my weight’s about the same as always.",
+        "keywords": [
+          "weight",
+          "kilos",
+          "pounds"
+        ],
+        "intents": {
+          "canonical": "Have you lost any weight recently?",
+          "paraphrases": [
+            "Any weight loss?",
+            "Any change in your weight?",
+            "Has your weight changed?",
+            "Have you gained or lost any weight?",
+            "Have your clothes become looser?",
+            "Any unintentional weight loss?",
+            "Have you put on any weight?",
+            "Have you weighed yourself recently?"
+          ],
+          "keywords": [
+            "weight loss",
+            "lost weight",
+            "lost any weight",
+            "weight change",
+            "your weight",
+            "put on weight",
+            "gained weight"
+          ],
+          "topics": [
+            "ros.constitutional"
+          ]
+        }
+      },
+      {
+        "id": "neg-rheumatic-fever",
+        "topic": "Rheumatic fever",
+        "answer": "Not that I know of. I was a healthy enough lad.",
+        "keywords": [
+          "rheumatic",
+          "childhood"
+        ],
+        "intents": {
+          "canonical": "Did you ever have rheumatic fever?",
+          "paraphrases": [
+            "Any history of rheumatic fever?",
+            "Did you have rheumatic fever as a child?",
+            "Were you ever ill with rheumatic fever?",
+            "Any serious illnesses as a child?",
+            "Did you have scarlet fever or rheumatic fever growing up?",
+            "Were you a healthy child?"
+          ],
+          "keywords": [
+            "rheumatic fever",
+            "rheumatic",
+            "scarlet fever",
+            "as a child",
+            "childhood illnesses",
+            "growing up"
+          ],
+          "topics": [
+            "pmh.conditions"
+          ]
+        }
+      }
+    ],
+    "unknownPolicy": {
+      "negativeReply": "No, nothing like that.",
+      "unknownReply": "Can’t say I’ve noticed anything like that."
+    },
+    "conversation": [
+      {
+        "kind": "how_are_you",
+        "replies": [
+          "Oh, not too bad. Can’t complain.",
+          "Fine, really. It’s the wife who worries."
+        ]
+      }
+    ],
+    "emotionCues": [
+      {
+        "emotion": "worried",
+        "acknowledgement": "Thank you. I don’t like making a fuss, but I do worry about who’d look after Margaret."
+      },
+      {
+        "emotion": "frustrated",
+        "acknowledgement": "Thanks. It’s just frustrating. I’ve always been the one who gets things done."
+      }
+    ]
+  },
+  "abnormalFindings": {
+    "general_appearance": {
+      "default": "Older man sitting comfortably in the chair, talking in full sentences without breathlessness; alert and oriented; no pallor or cyanosis; no acute distress."
+    },
+    "pulse_radial": {
+      "default": "Radial pulse {vitals.hr} beats/min, regular rhythm, low volume."
+    },
+    "peripheral_pulses": {
+      "arm_right": "Brachial pulse low volume and slow-rising (1+).",
+      "arm_left": "Brachial pulse low volume and slow-rising (1+)."
+    },
+    "carotid_palpation": {
+      "carotid_right": "Carotid pulse small in volume and slow to rise, with a late, poorly defined peak (slow-rising, low-volume upstroke).",
+      "carotid_left": "Carotid pulse small in volume and slow to rise, with a late, poorly defined peak; the same as the right side."
+    },
+    "carotid_auscultation": {
+      "carotid_right": {
+        "text": "Harsh systolic murmur heard over the carotid: the same murmur as at the right upper sternal border, transmitted up the neck and a little softer. No separate bruit.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.5,
+            "s2SplitMs": 0,
+            "s2Intensity": 0.25,
+            "murmur": {
+              "phase": "systolic",
+              "shape": "crescendo_decrescendo",
+              "grade": 2,
+              "pitch": "medium"
+            }
+          }
+        }
+      },
+      "carotid_left": {
+        "text": "Harsh systolic murmur heard over the carotid: the same murmur as at the right upper sternal border, transmitted up the neck and a little softer. No separate bruit.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.5,
+            "s2SplitMs": 0,
+            "s2Intensity": 0.25,
+            "murmur": {
+              "phase": "systolic",
+              "shape": "crescendo_decrescendo",
+              "grade": 2,
+              "pitch": "medium"
+            }
+          }
+        }
+      }
+    },
+    "pmi_palpation": {
+      "cardiac_mitral": "Apex beat in the 5th left intercostal space at the midclavicular line, not displaced, but forceful and sustained (heaving), lasting through most of systole; about 2–3 cm across."
+    },
+    "auscultate_heart_diaphragm": {
+      "cardiac_aortic": {
+        "text": "Harsh, medium-pitched grade 3/6 crescendo–decrescendo (ejection) systolic murmur, loudest here at the right upper sternal border and peaking late in systole; it starts after S1 and ends before S2. S2 is soft and single. Regular rhythm.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.8,
+            "s2SplitMs": 0,
+            "s2Intensity": 0.3,
+            "murmur": {
+              "phase": "systolic",
+              "shape": "crescendo_decrescendo",
+              "grade": 3,
+              "pitch": "medium"
+            }
+          }
+        }
+      },
+      "cardiac_pulmonic": {
+        "text": "The same harsh ejection systolic murmur, slightly softer here (grade 2/6). S2 single: no splitting heard. Regular rhythm.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.8,
+            "s2SplitMs": 0,
+            "s2Intensity": 0.45,
+            "murmur": {
+              "phase": "systolic",
+              "shape": "crescendo_decrescendo",
+              "grade": 2,
+              "pitch": "medium"
+            }
+          }
+        }
+      },
+      "cardiac_erbs": {
+        "text": "Ejection systolic murmur (grade 2/6), the same harsh murmur as at the right upper sternal border. S2 soft and single. No early diastolic murmur.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.8,
+            "s2SplitMs": 0,
+            "s2Intensity": 0.35,
+            "murmur": {
+              "phase": "systolic",
+              "shape": "crescendo_decrescendo",
+              "grade": 2,
+              "pitch": "medium"
+            }
+          }
+        }
+      },
+      "cardiac_tricuspid": {
+        "text": "Softer ejection systolic murmur (grade 2/6) at the lower left sternal border; S1 normal, S2 soft and single.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.75,
+            "s2SplitMs": 0,
+            "s2Intensity": 0.35,
+            "murmur": {
+              "phase": "systolic",
+              "shape": "crescendo_decrescendo",
+              "grade": 2,
+              "pitch": "medium"
+            }
+          }
+        }
+      },
+      "cardiac_mitral": {
+        "text": "Ejection systolic murmur still heard at the apex, softer (grade 2/6) and higher-pitched here; it ends before S2 and does not radiate to the axilla. S1 normal, S2 soft.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.75,
+            "s2SplitMs": 0,
+            "s2Intensity": 0.3,
+            "murmur": {
+              "phase": "systolic",
+              "shape": "crescendo_decrescendo",
+              "grade": 2,
+              "pitch": "high"
+            }
+          }
+        }
+      },
+      "default": {
+        "text": "Ejection systolic murmur (grade 2/6), the same harsh murmur as at the right upper sternal border. S2 soft and single.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.75,
+            "s2SplitMs": 0,
+            "s2Intensity": 0.35,
+            "murmur": {
+              "phase": "systolic",
+              "shape": "crescendo_decrescendo",
+              "grade": 2,
+              "pitch": "medium"
+            }
+          }
+        }
+      }
+    },
+    "auscultate_heart_bell": {
+      "cardiac_mitral": {
+        "text": "Soft low-pitched S4 just before S1 at the apex; no S3. The ejection systolic murmur is fainter with the bell.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.7,
+            "s2SplitMs": 0,
+            "s2Intensity": 0.35,
+            "s4": 0.4,
+            "murmur": {
+              "phase": "systolic",
+              "shape": "crescendo_decrescendo",
+              "grade": 2,
+              "pitch": "high"
+            }
+          }
+        },
+        "byPosition": {
+          "left_lateral_decubitus": {
+            "text": "With the patient rolled onto the left side, a low-pitched S4 is clearer just before S1 at the apex; no S3. The ejection systolic murmur is fainter with the bell.",
+            "audio": {
+              "generator": "heart",
+              "params": {
+                "intensity": 0.75,
+                "s2SplitMs": 0,
+                "s2Intensity": 0.35,
+                "s4": 0.65,
+                "murmur": {
+                  "phase": "systolic",
+                  "shape": "crescendo_decrescendo",
+                  "grade": 2,
+                  "pitch": "high"
+                }
+              }
+            }
+          }
+        }
+      },
+      "cardiac_tricuspid": {
+        "text": "No S3 or S4 here. The ejection systolic murmur is faint with the bell.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.65,
+            "s2SplitMs": 0,
+            "s2Intensity": 0.4,
+            "murmur": {
+              "phase": "systolic",
+              "shape": "crescendo_decrescendo",
+              "grade": 2,
+              "pitch": "medium"
+            }
+          }
+        }
+      },
+      "default": {
+        "text": "No S3 here. The ejection systolic murmur is faint with the bell.",
+        "audio": {
+          "generator": "heart",
+          "params": {
+            "intensity": 0.65,
+            "s2SplitMs": 0,
+            "s2Intensity": 0.4,
+            "murmur": {
+              "phase": "systolic",
+              "shape": "crescendo_decrescendo",
+              "grade": 2,
+              "pitch": "medium"
+            }
+          }
+        }
+      }
+    }
+  },
+  "visibleSigns": {
+    "breathing": "normal"
+  },
+  "expectedDifferential": [
+    {
+      "rank": 1,
+      "diagnosis": "Severe symptomatic aortic stenosis (calcific / degenerative)",
+      "rationale": "The classic exertional triad (breathlessness, angina, presyncope) in a 74-year-old told of a murmur years ago. Harsh, late-peaking crescendo–decrescendo systolic murmur loudest at the right upper sternal border and radiating to both carotids, soft single S2, slow-rising low-volume carotid pulse, sustained non-displaced apex and a relatively narrow pulse pressure. Symptoms mean urgent echocardiography and cardiology referral; advise avoiding strenuous exertion meanwhile."
+    },
+    {
+      "rank": 2,
+      "diagnosis": "Coronary artery disease with stable angina",
+      "rationale": "Exertional chest tightness relieved by rest plus age, male sex, hypertension, high cholesterol, 30 pack-years and a father with MI. Commonly coexists with aortic stenosis (angiography is usually done before valve intervention), but it does not explain the murmur, soft S2 or carotid pulse."
+    },
+    {
+      "rank": 3,
+      "diagnosis": "Hypertrophic obstructive cardiomyopathy",
+      "rationale": "Same exertional symptoms and an ejection systolic murmur, but its murmur is usually loudest at the left sternal border, does not radiate to the carotids, and the carotid upstroke is brisk (sometimes bifid); no family history of sudden death."
+    },
+    {
+      "rank": 4,
+      "diagnosis": "Arrhythmia (e.g. complete heart block or ventricular tachycardia) causing presyncope",
+      "rationale": "Exertional presyncope warrants an ECG and ambulatory monitoring. Regular pulse at 72 and no palpitations make it less likely, but calcific valve disease can involve the conduction system."
+    },
+    {
+      "rank": 5,
+      "diagnosis": "Heart failure",
+      "rationale": "Exertional breathlessness, but no orthopnea, PND, edema, raised JVP or crackles. Can follow untreated severe aortic stenosis."
+    },
+    {
+      "rank": 6,
+      "diagnosis": "Aortic sclerosis",
+      "rationale": "Common cause of an ejection murmur in older adults, but it does not cause symptoms, the S2 is preserved and the carotid pulse is normal, unlike here."
+    }
+  ],
+  "markSheetIds": [
+    "communication-1b",
+    "encounter-1b"
+  ],
+  "itemsNotApplicable": [
+    {
+      "itemId": "sh-sexual",
+      "reason": "Sexual history is not relevant to this exertional cardiac presentation."
+    },
+    {
+      "itemId": "allergy-reaction",
+      "reason": "The patient has no known allergies, so there is no reaction to ask about."
+    }
+  ],
+  "synthetic": true,
+  "sourceNote": "Fully synthetic teaching case written by the team. Not based on any real patient.",
+  "peChecklist": [
+    {
+      "id": "fcm-01-hand-hygiene",
+      "fcmId": 1,
+      "section": "Clinical courtesy",
+      "label": "Cleans hands before first touching the patient",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "hygieneBeforeTouch": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-02-notes",
+      "fcmId": 2,
+      "section": "Clinical courtesy",
+      "label": "Note-taking does not interfere with rapport",
+      "weight": 1,
+      "scoring": "not_assessable",
+      "notAssessableReason": "Note-taking behaviour and eye contact are not visible in this interface.",
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-03-drape",
+      "fcmId": 3,
+      "section": "Clinical courtesy",
+      "label": "Keeps the patient draped, covering areas again after examining them",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "courtesy": "drape"
+          },
+          {
+            "happened": "drape:cover"
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-consent",
+      "section": "Clinical courtesy",
+      "label": "Asks permission before the first physical contact",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "before": [
+          "tag:asked_consent_exam",
+          "first:touch"
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-04-comfort",
+      "fcmId": 4,
+      "section": "Clinical courtesy",
+      "label": "Verbally checks the patient's comfort during the exam",
+      "weight": 1,
+      "scoring": "ai",
+      "guidance": "Credit if the student, during the physical exam, says something that shows attention to the patient's comfort or dignity: asks if they are comfortable, warns before touching/cold stethoscope, asks them to say if anything hurts, offers help repositioning.",
+      "mockKeywords": [
+        "comfortable",
+        "let me know if",
+        "hurt",
+        "cold",
+        "okay if i"
+      ],
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-exit-hygiene",
+      "section": "Clinical courtesy",
+      "label": "Cleans hands again after the last contact, before leaving",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "all": [
+          {
+            "before": [
+              "last:touch",
+              "last:hand_hygiene"
+            ]
+          },
+          {
+            "happened": "room:exit"
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "courtesy-closing",
+      "section": "Clinical courtesy",
+      "label": "Closes the encounter (thanks the patient / says goodbye)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "said": "closing"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-05-pulse",
+      "fcmId": 5,
+      "section": "Vital signs",
+      "label": "Radial pulse rate and rhythm",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "pulse_radial"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-06-resp-rate",
+      "fcmId": 6,
+      "section": "Vital signs",
+      "label": "Respiratory rate at rest",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "respiratory_rate"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-07-bp-cuff",
+      "fcmId": 7,
+      "section": "Vital signs",
+      "label": "BP: correct cuff, placed over the brachial artery",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "bp_cuff_placement"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-08-bp-arm",
+      "fcmId": 8,
+      "section": "Vital signs",
+      "label": "BP: arm flexed and supported",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "bp_arm_support"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-09-bp",
+      "fcmId": 9,
+      "section": "Vital signs",
+      "label": "BP measured after cuff placement (palpatory then auscultatory)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "all": [
+          {
+            "performed": "blood_pressure"
+          },
+          {
+            "before": [
+              "maneuver:bp_cuff_placement",
+              "maneuver:blood_pressure"
+            ]
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-10-general",
+      "fcmId": 10,
+      "section": "General appearance",
+      "label": "Comments on general appearance",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "general_appearance"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-33-jvp",
+      "fcmId": 33,
+      "section": "Cardiovascular",
+      "label": "Inspects the jugular venous pressure",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "jvp_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-33-jvp-position",
+      "fcmId": 33,
+      "section": "Cardiovascular",
+      "label": "Technique: JVP assessed with patient reclined to ~30°",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "jvp_inspection",
+          "position": "reclined_30"
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-34-carotid-palpation",
+      "fcmId": 34,
+      "section": "Cardiovascular",
+      "label": "Palpates both carotids, one side at a time, for upstroke and volume",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "carotid_palpation",
+        "regions": [
+          "carotid_right",
+          "carotid_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-34-carotid-bruit",
+      "fcmId": 34,
+      "section": "Cardiovascular",
+      "label": "Listens over both carotids (bruit or a murmur radiating to the neck)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "carotid_auscultation",
+        "regions": [
+          "carotid_right",
+          "carotid_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-35-precordium-inspect",
+      "fcmId": 35,
+      "section": "Cardiovascular",
+      "label": "Inspects the precordium",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "precordial_inspection"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-36-heaves-thrills",
+      "fcmId": 36,
+      "section": "Cardiovascular",
+      "label": "Palpates for heaves and thrills (sternal border and base)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "precordial_palpation",
+        "regions": [
+          "precordium_lsb",
+          "cardiac_aortic",
+          "cardiac_pulmonic"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-37-pmi",
+      "fcmId": 37,
+      "section": "Cardiovascular",
+      "label": "Locates the point of maximal impulse",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "pmi_palpation"
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-37-pmi-position",
+      "fcmId": 37,
+      "section": "Cardiovascular",
+      "label": "Technique: PMI with patient supine or left lateral",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "pmi_palpation",
+          "position": [
+            "supine",
+            "left_lateral_decubitus"
+          ]
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-38-heart-diaphragm",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Auscultates all five areas with the diaphragm",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "auscultate_heart_diaphragm",
+        "regions": [
+          "cardiac_aortic",
+          "cardiac_pulmonic",
+          "cardiac_erbs",
+          "cardiac_tricuspid",
+          "cardiac_mitral"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-38-aortic-technique",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Technique: diaphragm placed accurately at the right upper sternal border and held ≥ 3 s",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "technique": {
+          "maneuver": "auscultate_heart_diaphragm",
+          "tool": "stethoscope",
+          "toolMode": "diaphragm",
+          "regions": [
+            "cardiac_aortic"
+          ],
+          "maxPlacementError": 1.5,
+          "minDurationMs": 3000
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-38-heart-bell",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Listens at the apex with the bell for extra heart sounds",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "auscultate_heart_bell",
+        "regions": [
+          "cardiac_mitral"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-39-pedal-pulses",
+      "fcmId": 39,
+      "section": "Cardiovascular",
+      "label": "Palpates pedal pulses bilaterally",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "peripheral_pulses",
+        "regions": [
+          "foot_right",
+          "foot_left"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-40-edema",
+      "fcmId": 40,
+      "section": "Cardiovascular",
+      "label": "Assesses lower-limb edema bilaterally",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "performed": "edema_assessment",
+            "regions": [
+              "shin_right",
+              "shin_left"
+            ],
+            "partial": false
+          },
+          {
+            "performed": "edema_assessment",
+            "regions": [
+              "ankle_right",
+              "ankle_left"
+            ],
+            "partial": false
+          },
+          {
+            "performed": "edema_assessment",
+            "regions": [
+              "foot_right",
+              "foot_left"
+            ],
+            "partial": false
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-42-lung-ausc",
+      "fcmId": 42,
+      "section": "Pulmonary",
+      "label": "Auscultates front, sides and back, comparing sides",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performed": "auscultate_lungs",
+        "regions": [
+          "lung_ant_ru",
+          "lung_ant_lu",
+          "lung_ant_rl",
+          "lung_ant_ll",
+          "lung_lat_r",
+          "lung_lat_l",
+          "lung_post_ru",
+          "lung_post_lu",
+          "lung_post_rl",
+          "lung_post_ll"
+        ],
+        "partial": true
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "fcm-42-lung-technique",
+      "fcmId": 42,
+      "section": "Pulmonary",
+      "label": "Technique: listens at both bases accurately for ≥ 3 s each",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "technique": {
+          "maneuver": "auscultate_lungs",
+          "tool": "stethoscope",
+          "regions": [
+            "lung_post_rl",
+            "lung_post_ll"
+          ],
+          "maxPlacementError": 1.5,
+          "minDurationMs": 3000,
+          "partial": true
+        }
+      },
+      "sourceText": ""
+    }
+  ],
+  "penKey": {
+    "history": [
+      {
+        "id": "exertional-dyspnea",
+        "text": "Six months of progressive exertional breathlessness, now after one flight of stairs or ~100 m (walked 2 km a year ago)",
+        "kind": "positive",
+        "keywords": [
+          "exertional dyspnea",
+          "exertional dyspnoea",
+          "dyspnea on exertion",
+          "dyspnoea on exertion",
+          "DOE",
+          "SOBOE",
+          "short of breath on exertion",
+          "shortness of breath on exertion",
+          "breathless on exertion",
+          "breathlessness on exertion",
+          "exertional breathlessness",
+          "one flight of stairs"
+        ],
+        "terms": [
+          "exertional dyspnea",
+          "short of breath on exertion",
+          "one flight of stairs",
+          "100 metres"
+        ],
+        "exemplars": [
+          "Six months of progressive shortness of breath on exertion.",
+          "Now breathless after one flight of stairs or about 100 metres on the flat."
+        ]
+      },
+      {
+        "id": "exertional-angina",
+        "text": "Exertional central chest tightness on hills, relieved by rest within minutes (angina)",
+        "kind": "positive",
+        "keywords": [
+          "angina",
+          "exertional chest pain",
+          "exertional chest tightness",
+          "chest tightness on exertion",
+          "chest pain on exertion",
+          "exertional chest discomfort",
+          "chest tightness",
+          "chest heaviness",
+          "relieved by rest"
+        ],
+        "terms": [
+          "angina",
+          "chest tightness",
+          "tight heavy feeling"
+        ],
+        "exemplars": [
+          "Exertional chest tightness relieved by rest.",
+          "Central chest heaviness when walking uphill that settles within minutes of resting."
+        ]
+      },
+      {
+        "id": "exertional-presyncope",
+        "text": "Exertional presyncope last week (light-headed, vision greying while carrying shopping upstairs), recovered within a minute",
+        "kind": "positive",
+        "keywords": [
+          "presyncope",
+          "pre-syncope",
+          "near syncope",
+          "near-syncope",
+          "near-faint",
+          "near faint",
+          "nearly fainted",
+          "nearly passed out",
+          "nearly blacked out",
+          "lightheaded",
+          "light-headed",
+          "lightheadedness",
+          "dizzy spell",
+          "dizziness"
+        ],
+        "terms": [
+          "presyncope",
+          "lightheaded",
+          "nearly fainted",
+          "funny turn"
+        ],
+        "exemplars": [
+          "Near-syncope on exertion last week while carrying shopping up the stairs.",
+          "Episode of light-headedness with greying of vision climbing stairs, resolved on sitting."
+        ]
+      },
+      {
+        "id": "known-murmur",
+        "text": "Told of a heart murmur about ten years ago; never investigated",
+        "kind": "positive",
+        "keywords": [
+          "murmur"
+        ],
+        "terms": [
+          "murmur",
+          "heart murmur"
+        ],
+        "exemplars": [
+          "Told he had a heart murmur about ten years ago, never followed up.",
+          "Known murmur, never investigated with an echo."
+        ]
+      },
+      {
+        "id": "cv-risk-factors",
+        "text": "Hypertension, high cholesterol, ex-smoker (30 pack-years, quit 20 years ago), father died of MI at 70",
+        "kind": "positive",
+        "keywords": [
+          "hypertension",
+          "HTN",
+          "high blood pressure",
+          "hyperlipidemia",
+          "hyperlipidaemia",
+          "high cholesterol",
+          "dyslipidemia",
+          "ex-smoker",
+          "former smoker",
+          "pack-years",
+          "pack years"
+        ],
+        "terms": [
+          "high blood pressure",
+          "high cholesterol",
+          "pack years"
+        ],
+        "exemplars": [
+          "PMH hypertension and hyperlipidaemia; ex-smoker with 30 pack-years.",
+          "Father died of a heart attack at 70."
+        ]
+      },
+      {
+        "id": "no-loc",
+        "text": "No loss of consciousness, injury or seizure features",
+        "kind": "negative",
+        "keywords": [
+          "no loss of consciousness",
+          "no LOC",
+          "did not lose consciousness",
+          "denies LOC",
+          "denies loss of consciousness",
+          "did not pass out",
+          "no syncope"
+        ],
+        "terms": [
+          "loss of consciousness",
+          "LOC",
+          "syncope",
+          "passed out",
+          "tongue biting",
+          "incontinence"
+        ],
+        "exemplars": [
+          "No loss of consciousness and no injury.",
+          "Did not pass out; no tongue biting, incontinence or post-event confusion."
+        ]
+      },
+      {
+        "id": "no-palpitations",
+        "text": "No palpitations, including before the episode",
+        "kind": "negative",
+        "keywords": [
+          "no palpitations",
+          "denies palpitations"
+        ],
+        "terms": [
+          "palpitations",
+          "racing heart",
+          "heart racing",
+          "irregular heartbeat"
+        ],
+        "exemplars": [
+          "Denies palpitations.",
+          "No palpitations before the episode."
+        ]
+      },
+      {
+        "id": "no-hf-symptoms",
+        "text": "No orthopnea, PND or ankle swelling",
+        "kind": "negative",
+        "keywords": [
+          "no orthopnea",
+          "no orthopnoea",
+          "no PND",
+          "no ankle swelling",
+          "no edema",
+          "no oedema",
+          "no leg swelling"
+        ],
+        "terms": [
+          "orthopnea",
+          "orthopnoea",
+          "PND",
+          "paroxysmal nocturnal dyspnea",
+          "ankle swelling",
+          "leg swelling",
+          "edema",
+          "oedema"
+        ],
+        "exemplars": [
+          "Denies orthopnea, PND and ankle swelling.",
+          "No orthopnoea or leg swelling."
+        ]
+      },
+      {
+        "id": "no-focal-neuro",
+        "text": "No focal neurological symptoms (weakness, numbness, speech disturbance)",
+        "kind": "negative",
+        "keywords": [
+          "no focal",
+          "no weakness",
+          "no numbness",
+          "no speech"
+        ],
+        "terms": [
+          "focal neurological",
+          "weakness",
+          "numbness",
+          "slurred speech",
+          "speech disturbance"
+        ],
+        "exemplars": [
+          "No focal neurological symptoms.",
+          "Denies weakness, numbness or speech problems."
+        ]
+      }
+    ],
+    "exam": [
+      {
+        "id": "ejection-murmur",
+        "text": "Harsh grade 3/6 crescendo–decrescendo (ejection) systolic murmur, loudest at the right upper sternal border, late-peaking",
+        "maneuverIds": [
+          "auscultate_heart_diaphragm"
+        ],
+        "keywords": [
+          "ejection systolic murmur",
+          "systolic ejection murmur",
+          "crescendo-decrescendo",
+          "crescendo decrescendo",
+          "ESM",
+          "SEM",
+          "systolic murmur",
+          "harsh murmur",
+          "mid-systolic murmur",
+          "late-peaking"
+        ],
+        "exemplars": [
+          "Grade 3/6 harsh crescendo-decrescendo systolic murmur at the right upper sternal border.",
+          "Ejection systolic murmur loudest in the aortic area."
+        ]
+      },
+      {
+        "id": "carotid-radiation",
+        "text": "Murmur radiates to both carotids",
+        "maneuverIds": [
+          "carotid_auscultation"
+        ],
+        "keywords": [
+          "radiates to the carotids",
+          "radiates to carotids",
+          "radiating to the carotids",
+          "radiating to carotids",
+          "radiation to the carotids",
+          "radiation to carotids",
+          "radiates to both carotids",
+          "radiating to both carotids",
+          "radiates to the neck",
+          "radiating to the neck",
+          "transmitted to the carotids",
+          "heard over the carotids",
+          "carotid radiation"
+        ],
+        "exemplars": [
+          "The murmur radiates to both carotid arteries.",
+          "Systolic murmur transmitted to the carotids bilaterally."
+        ]
+      },
+      {
+        "id": "soft-s2",
+        "text": "Soft, single second heart sound",
+        "maneuverIds": [
+          "auscultate_heart_diaphragm"
+        ],
+        "keywords": [
+          "soft S2",
+          "single S2",
+          "diminished S2",
+          "quiet S2",
+          "soft A2",
+          "absent A2",
+          "diminished A2",
+          "faint S2",
+          "reduced S2"
+        ],
+        "exemplars": [
+          "Soft single S2.",
+          "Second heart sound quiet with no audible aortic component."
+        ]
+      },
+      {
+        "id": "slow-rising-pulse",
+        "text": "Slow-rising, low-volume carotid pulse (pulsus parvus et tardus)",
+        "maneuverIds": [
+          "carotid_palpation",
+          "peripheral_pulses"
+        ],
+        "keywords": [
+          "slow-rising",
+          "slow rising",
+          "slow upstroke",
+          "delayed upstroke",
+          "slow carotid upstroke",
+          "parvus et tardus",
+          "pulsus parvus",
+          "pulsus tardus",
+          "weak carotid",
+          "diminished carotid",
+          "anacrotic",
+          "plateau pulse"
+        ],
+        "exemplars": [
+          "Slow-rising, low-volume carotid pulse bilaterally.",
+          "Carotid upstroke delayed and weak (pulsus parvus et tardus)."
+        ]
+      },
+      {
+        "id": "sustained-apex",
+        "text": "Apex beat not displaced but sustained / heaving",
+        "maneuverIds": [
+          "pmi_palpation"
+        ],
+        "keywords": [
+          "sustained apex",
+          "heaving apex",
+          "sustained apical impulse",
+          "heaving apical impulse",
+          "sustained PMI",
+          "sustained impulse",
+          "heaving impulse",
+          "pressure-loaded apex",
+          "pressure loaded apex",
+          "LV heave",
+          "left ventricular heave"
+        ],
+        "exemplars": [
+          "Apex beat non-displaced but heaving.",
+          "Sustained, pressure-loaded PMI at the midclavicular line."
+        ]
+      },
+      {
+        "id": "lungs-clear",
+        "text": "Lungs clear to auscultation",
+        "maneuverIds": [
+          "auscultate_lungs"
+        ],
+        "keywords": [
+          "lungs clear",
+          "clear lungs",
+          "clear to auscultation",
+          "chest clear",
+          "lung fields clear",
+          "vesicular breath sounds"
+        ],
+        "exemplars": [
+          "Lungs clear to auscultation bilaterally.",
+          "Vesicular breath sounds throughout."
+        ]
+      }
+    ],
+    "differential": [
+      {
+        "id": "aortic-stenosis",
+        "diagnosis": "Severe aortic stenosis",
+        "aliases": [
+          "aortic stenosis",
+          "severe AS",
+          "symptomatic AS",
+          "calcific AS",
+          "symptomatic aortic stenosis",
+          "calcific aortic stenosis",
+          "aortic valve stenosis",
+          "degenerative aortic stenosis"
+        ],
+        "rank": 1,
+        "rationale": "Exertional breathlessness, angina and presyncope in a 74-year-old with a murmur noted years ago; harsh late-peaking ejection systolic murmur at the right upper sternal border radiating to both carotids, soft single S2, slow-rising low-volume carotid pulse and a sustained, non-displaced apex."
+      },
+      {
+        "id": "cad",
+        "diagnosis": "Coronary artery disease (stable angina)",
+        "aliases": [
+          "coronary artery disease",
+          "CAD",
+          "stable angina",
+          "angina",
+          "ischemic heart disease",
+          "ischaemic heart disease",
+          "IHD",
+          "chronic coronary syndrome"
+        ],
+        "rank": 2,
+        "rationale": "Exertional chest tightness relieved by rest with several risk factors (age, male, hypertension, high cholesterol, ex-smoker, father's MI); often coexists with aortic stenosis but does not explain the murmur or the carotid pulse."
+      },
+      {
+        "id": "hocm",
+        "diagnosis": "Hypertrophic obstructive cardiomyopathy",
+        "aliases": [
+          "HOCM",
+          "hypertrophic cardiomyopathy",
+          "HCM",
+          "obstructive hypertrophic cardiomyopathy"
+        ],
+        "rank": 3,
+        "rationale": "Also causes exertional breathlessness, angina, presyncope and an ejection murmur, but the murmur is usually loudest at the left sternal border without carotid radiation, the carotid upstroke is brisk, and there is no family history of sudden death."
+      },
+      {
+        "id": "arrhythmia",
+        "diagnosis": "Arrhythmia (e.g. heart block or ventricular tachycardia)",
+        "aliases": [
+          "arrhythmia",
+          "heart block",
+          "complete heart block",
+          "AV block",
+          "atrioventricular block",
+          "bradyarrhythmia",
+          "ventricular tachycardia",
+          "VT",
+          "sick sinus syndrome",
+          "tachyarrhythmia"
+        ],
+        "rank": 4,
+        "rationale": "Exertional presyncope needs an ECG and rhythm monitoring; less likely with a regular pulse of 72 and no palpitations, but calcific valve disease can extend into the conduction system."
+      },
+      {
+        "id": "heart-failure",
+        "diagnosis": "Heart failure",
+        "aliases": [
+          "heart failure",
+          "HFpEF",
+          "HFrEF",
+          "CHF",
+          "congestive heart failure",
+          "left ventricular dysfunction",
+          "LV dysfunction",
+          "diastolic dysfunction"
+        ],
+        "rank": 5,
+        "rationale": "Exertional breathlessness, but no orthopnea, PND, edema, raised JVP or crackles; it may develop as a consequence of untreated severe aortic stenosis."
+      }
+    ]
+  },
+  "acceptableDiagnoses": [
+    {
+      "id": "ad-aortic-valve-stenosis",
+      "diagnosis": "Aortic valve stenosis",
+      "synonyms": [
+        "aortic stenosis",
+        "severe aortic stenosis",
+        "symptomatic aortic stenosis",
+        "critical aortic stenosis",
+        "calcific aortic stenosis",
+        "degenerative aortic stenosis",
+        "senile calcific aortic stenosis",
+        "calcific aortic valve disease",
+        "valvular aortic stenosis",
+        "severe AS",
+        "symptomatic AS",
+        "calcific AS",
+        "severe aortic valve stenosis"
+      ],
+      "satisfies": [
+        "aortic-stenosis"
+      ]
+    },
+    {
+      "id": "ad-stable-angina",
+      "diagnosis": "Stable angina",
+      "synonyms": [
+        "exertional angina",
+        "angina pectoris",
+        "chronic stable angina",
+        "chronic coronary syndrome",
+        "myocardial ischemia",
+        "myocardial ischaemia"
+      ],
+      "satisfies": [
+        "cad"
+      ]
+    },
+    {
+      "id": "ad-hcm",
+      "diagnosis": "Hypertrophic cardiomyopathy",
+      "synonyms": [
+        "HCM",
+        "HOCM",
+        "hypertrophic obstructive cardiomyopathy",
+        "asymmetric septal hypertrophy"
+      ],
+      "satisfies": [
+        "hocm"
+      ]
+    },
+    {
+      "id": "ad-heart-block",
+      "diagnosis": "High-grade atrioventricular block",
+      "synonyms": [
+        "complete heart block",
+        "third-degree heart block",
+        "third degree AV block",
+        "high-grade AV block",
+        "Mobitz II",
+        "Mobitz type II",
+        "Stokes-Adams attack"
+      ],
+      "satisfies": [
+        "arrhythmia"
+      ]
+    }
+  ]
+}
