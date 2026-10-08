@@ -74,6 +74,18 @@ export const PROOFS: Record<string, Proof> = {
     tests: ["tests/regressions/bug10-hold-choice.test.ts"],
     description: "a stethoscope hold always recorded the first fitting exam, so abdominal bruits could never be recorded (bowel sounds won)",
   },
+  "begin-race": {
+    kind: "e2e",
+    tests: ["e2e/regressions/begin-race.spec.ts"],
+    support: ["e2e/qa/fixtures.ts", "e2e/qa/openers.ts"],
+    commit: "7ef0418",
+    description: "a station reloaded right after opening read the log before the first load's begin landed; its own begin was refused and the door stayed shut",
+  },
+  "m2-review": {
+    kind: "vitest",
+    tests: ["tests/m2-review.test.ts"],
+    description: "M2 review findings: the Achilles close-up camera inside the table when the legs lie on it; a hands clonus test that never moved the foot; a wobble hiding the swinging-light test; touching the upper arm with the hands logging a cuff placement",
+  },
 };
 
 const ROOT = process.cwd();

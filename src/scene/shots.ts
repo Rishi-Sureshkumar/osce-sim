@@ -13,6 +13,7 @@ import { DISPENSER_POS } from "./room/Dispenser";
 import { SINK } from "./room/sinkGeometry";
 import { TOOL_TABLE_POS, TOOL_TABLE_TOP } from "./room/ToolTable";
 import { ROOM } from "./room/ExamRoom";
+import { insideBox, tableAngle, tableBoxes } from "./room/tableGeometry";
 
 export type FocusShotId = Exclude<RegionGroup, "whole" | "neuro">;
 export type ShotId = "corridor" | "overview" | "sink" | "tool_table" | "seated" | FocusShotId | "face" | "ear_left" | "ear_right" | "ankle_left" | "ankle_right" | "arms_left" | "elbow_left" | "elbow_right" | "chest_left" | "chest_right" | "neck_back" | "legs_left";
@@ -35,6 +36,9 @@ type Framing =
       forwardAxis?: Vec3;
       /** move the camera this far toward the feet along the body axis (look slightly up, under the chin) */
       down?: number;
+      /** raise the camera until neither it nor its line of sight is inside the table (a limb view along a
+       *  bone's axis points under the table when the limb lies on it) */
+      clearTable?: boolean;
     };
 
 export interface Shot {
@@ -271,7 +275,7 @@ export const SHOTS: Record<ShotId, Shot> = {
     id: "ankle_left",
     label: "Left ankle (back)",
     parent: "feet",
-    framing: { kind: "patient", on: [{ anchor: "achilles_left" }], normalFrom: { anchor: "achilles_left" }, forwardBone: "lowerleg02_L", forwardAxis: [0.8, 0, -0.6], distance: 0.45 },
+    framing: { kind: "patient", on: [{ anchor: "achilles_left" }], normalFrom: { anchor: "achilles_left" }, forwardBone: "lowerleg02_L", forwardAxis: [0.8, 0, -0.6], distance: 0.45, clearTable: true },
     fov: 40,
     freeLook: look(30, 0.7, 1.3),
     transitions: ROOM_SHOTS,
@@ -280,7 +284,7 @@ export const SHOTS: Record<ShotId, Shot> = {
     id: "ankle_right",
     label: "Right ankle (back)",
     parent: "feet",
-    framing: { kind: "patient", on: [{ anchor: "achilles_right" }], normalFrom: { anchor: "achilles_right" }, forwardBone: "lowerleg02_R", forwardAxis: [-0.8, 0, -0.6], distance: 0.45 },
+    framing: { kind: "patient", on: [{ anchor: "achilles_right" }], normalFrom: { anchor: "achilles_right" }, forwardBone: "lowerleg02_R", forwardAxis: [-0.8, 0, -0.6], distance: 0.45, clearTable: true },
     fov: 40,
     freeLook: look(30, 0.7, 1.3),
     transitions: ROOM_SHOTS,
@@ -322,10 +326,29 @@ export function shotCamera(id: ShotId, pose: Pose): { position: Vec3; target: Ve
   // (the face always has room in front of it, even leaning forward)
   if (n[1] < -0.3 && !f.forwardBone) n = norm([n[0], 0.6, n[2] - 0.4]);
   let position = add(target, n, f.distance);
+  if (f.clearTable) {
+    const boxes = tableBoxes(tableAngle(pose.position, pose.bedAngle));
+    for (let k = 0; k < 8 && blockedByTable(position, target, boxes); k++) {
+      n = norm(add(n, [0, 0.3, 0]));
+      position = add(target, n, f.distance);
+    }
+  }
   if (f.down) position = add(position, norm(dirToWorld([0, 1, 0], "neck01", pose)), -f.down);
   if (f.lift) position = add(position, [0, 1, 0], f.lift);
   if (f.side) position = add(position, [-1, 0, 0], f.side); // lean toward the examiner's side (patient's right)
   return { position, target, fov: shot.fov };
+}
+/** the camera, or its line of sight short of the last 3 cm (the target may rest on the mattress), inside a table box */
+function blockedByTable(from: Vec3, to: Vec3, boxes: ReturnType<typeof tableBoxes>): boolean {
+  const len = Math.hypot(to[0] - from[0], to[1] - from[1], to[2] - from[2]);
+  const steps = 40;
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    if (t * len > len - 0.03) break;
+    const p = [from[0] + (to[0] - from[0]) * t, from[1] + (to[1] - from[1]) * t, from[2] + (to[2] - from[2]) * t];
+    if (boxes.some((b) => insideBox(p, b))) return true;
+  }
+  return false;
 }
 function scaleV(a: Vec3, k: number): Vec3 {
   return [a[0] * k, a[1] * k, a[2] * k];
@@ -335,15 +358,17 @@ function scaleV(a: Vec3, k: number): Vec3 {
 const REGION_SHOT: Record<string, ShotId> = {
   ear_left: "ear_left",
   ear_right: "ear_right",
-  // behind the head: the frontal head & neck shot can't see them; the posterolateral ear view can
-  ln_post_auricular: "ear_right",
+  // two-sided groups need a view that sees both sides: behind the head (the frontal head & neck shot
+  // can't see them; one ear view sees only its own side), and the face for the pre-auricular nodes
+  ln_post_auricular: "neck_back",
   ln_occipital: "neck_back",
   ln_post_cervical: "neck_back",
-  ln_pre_auricular: "ear_left",
-  // the back of the limb: the Achilles from beside the ankle; the triceps from behind (sitting at the table's end)
+  ln_pre_auricular: "face",
+  // the back of the limb: the Achilles from beside the ankle; the triceps tendon from behind the elbow
+  // (from the back view it is on the arm's outline, and seated the backrest is in the way)
   achilles_left: "ankle_left",
   achilles_right: "ankle_right",
-  triceps_tendon_left: "chest_back",
+  triceps_tendon_left: "elbow_left",
   shoulder_left: "arms_left",
   arm_left: "arms_left",
   elbow_left: "elbow_left",
@@ -354,8 +379,9 @@ const REGION_SHOT: Record<string, ShotId> = {
   lung_lat_r: "chest_right",
   upper_arm_left: "arms_left",
   biceps_tendon_left: "arms_left",
-  triceps_tendon_right: "chest_back",
-  scalp: "ear_right",
+  triceps_tendon_right: "elbow_right",
+  // the vertex (Weber): from behind and above
+  scalp: "neck_back",
   eye_left: "face",
   eye_right: "face",
   nose: "face",
@@ -371,12 +397,16 @@ export function focusShotFor(group: RegionGroup, regionId?: string): ShotId | nu
 
 /** positions in which the patient lies back on the table (the back is out of reach) */
 const BACK_ON_TABLE: readonly Position[] = ["supine", "reclined_30", "reclined_45"];
+/** positions in which the legs lie along the table (the back of the ankle rests on it) */
+const LEGS_ON_TABLE: readonly Position[] = ["supine", "reclined_30", "reclined_45", "seated", "seated_leaning_forward"];
 
 /** A hint when a shot shows a part the patient is lying on (it can't be examined in this position). */
 export function shotHint(id: ShotId, position: Position): string | null {
   if ((id === "chest_back" || id === "neck_back") && BACK_ON_TABLE.includes(position))
     return "The back is against the table. Ask the patient to sit up or lean forward to examine it.";
   if (id === "ear_left" && position === "left_lateral_decubitus") return "The left ear is against the table. Ask the patient to sit up or turn to examine it.";
+  if ((id === "ankle_left" || id === "ankle_right") && LEGS_ON_TABLE.includes(position))
+    return "The back of the ankle rests on the table. Sit the patient with the legs dangling to examine it.";
   return null;
 }
 

@@ -26,6 +26,8 @@ import { buildCatalogPlan, type CatalogEntry } from "./qa/catalogPlan";
 import { expect, test, waitSettled } from "./qa/fixtures";
 
 const PLAN = buildCatalogPlan({ filter: process.env.CATALOG_FILTER });
+// each (model, position) group starts its own station, so groups can run side by side (CATALOG_WORKERS)
+test.describe.configure({ mode: "parallel" });
 const GROUPS = new Map<string, CatalogEntry[]>();
 for (const e of PLAN) {
   const k = `${e.variant}-${e.position}`;

@@ -171,7 +171,9 @@ const SINGLE: Def[] = [
   { regionId: "cardiac_pulmonic", landmark: "sternal_notch", between: { to: "xiphoid", t: 0.27 }, offsetCm: [2.5, 0, 0], facing: "front", toleranceCm: 2, label: "2nd intercostal space, left sternal border" },
   { regionId: "cardiac_erbs", landmark: "sternal_notch", between: { to: "xiphoid", t: 0.45 }, offsetCm: [2.5, 0, 0], facing: "front", toleranceCm: 2, label: "3rd intercostal space, left sternal border" },
   { regionId: "cardiac_tricuspid", landmark: "sternal_notch", between: { to: "xiphoid", t: 0.8 }, offsetCm: [2, 0, 0], facing: "front", toleranceCm: 2, label: "4th–5th intercostal space, left lower sternal border" },
-  { regionId: "cardiac_mitral", landmark: "sternal_notch", between: { to: "xiphoid", t: 0.95 }, offsetCm: [9, 0, 0], facing: "front", toleranceCm: 2.5, label: "5th intercostal space, midclavicular line (apex)" },
+  // on the female model, 1 cm from the anatomical apex (which lies under the breast fold, hidden from the
+  // front views): close enough that a click on the true apex wins over the breast, still in view
+  { regionId: "cardiac_mitral", landmark: "sternal_notch", between: { to: "xiphoid", t: 0.95 }, offsetCm: [9, 0, 0], offsetCmBy: { female: [10.1, -0.2, -0.6] }, facing: "front", toleranceCm: 2.5, label: "5th intercostal space, midclavicular line (apex)" },
   { regionId: "precordium_lsb", landmark: "sternal_notch", between: { to: "xiphoid", t: 0.65 }, offsetCm: [1.5, 0, 0], facing: "front", toleranceCm: 3 },
   { regionId: "precordium_wall", landmark: "sternal_notch", offsetCm: [4, -10, 0], facing: "front", toleranceCm: 6 },
   // neck
@@ -187,7 +189,9 @@ const SINGLE: Def[] = [
   { regionId: "ln_occipital", landmark: "occiput", offsetCm: [3, -2, 0], facing: "back", bilateral: true, toleranceCm: 2.5 },
   { regionId: "ln_post_auricular", landmark: "mastoid_l", offsetCm: [0, 0, 0], facing: "any", bilateral: true, toleranceCm: 2 },
   { regionId: "ln_pre_auricular", landmark: "ear_canal_l", offsetCm: [-0.5, 0, 2], facing: "left", bilateral: true, toleranceCm: 2 },
-  { regionId: "ln_submandibular", landmark: "jaw_angle_l", offsetCm: [-1.5, -1, 2.5], facing: "any", bilateral: true, toleranceCm: 2.5 },
+  // under the body of the mandible; on the male model the jaw overhangs the angle, so the target sits
+  // further forward along it (still the submandibular triangle)
+  { regionId: "ln_submandibular", landmark: "jaw_angle_l", offsetCm: [-1.5, -1, 2.5], offsetCmBy: { male: [-1, -2.5, 4.5] }, facing: "any", bilateral: true, toleranceCm: 2.5 },
   { regionId: "ln_submental", landmark: "chin", offsetCm: [0, -1.5, -1], facing: "any", toleranceCm: 2 },
   { regionId: "ln_ant_cervical", landmark: "sternal_notch", offsetCm: [4, 6, -0.5], facing: "any", bilateral: true, toleranceCm: 3 },
   { regionId: "ln_post_cervical", landmark: "c7", offsetCm: [5.5, 4, 3], facing: "left", bilateral: true, toleranceCm: 3 },

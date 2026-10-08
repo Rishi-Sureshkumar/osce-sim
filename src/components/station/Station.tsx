@@ -282,20 +282,23 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
 
   // ---- 1B flow: "You may begin", warnings, deadlines
   /** the server applies any passed deadline and returns the log (the flow may have moved on without this page) */
-  const resync = async () => {
+  const resync = async (): Promise<Action[]> => {
     const res = await fetch(`/api/sessions/${session.id}/tick`, { method: "POST" });
     const body = await res.json();
     if (!res.ok) throw new Error(body.error ?? "Could not reach the server");
     setActions(body.actions as Action[]);
+    return body.actions as Action[];
   };
   const begin = () =>
     run(async () => {
       try {
         await post({ type: "timer", source: mode === "practice" ? "system" : "click", payload: { event: "begin" } });
-      } catch {
+      } catch (e) {
         // already begun: a page reloaded straight after opening reads the log before the first load's
         // "begin" lands, so the server refuses this one; pick up its log instead of waiting forever
-        return resync();
+        const log = await resync();
+        if (log.some((a) => a.type === "timer" && a.payload.event === "begin")) return;
+        throw e;
       }
       setBegunBanner(true);
       setTimeout(() => setBegunBanner(false), 4000);

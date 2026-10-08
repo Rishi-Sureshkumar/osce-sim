@@ -61,7 +61,7 @@
       "fcmId": 7,
       "label": "BP: choose cuff size and place over brachial artery",
       "system": "vitals",
-      "technique": "palpate",
+      "technique": "special",
       "allowedRegions": [
         "upper_arm_right",
         "upper_arm_left",

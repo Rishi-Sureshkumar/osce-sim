@@ -2939,28 +2939,28 @@
   },
   {
    "id": "anchors:occlusion:male:seated:ln_post_auricular",
-   "status": "XFAIL",
-   "detail": "from the ear_right shot the ray first meets skin (face) 12.7 cm from the anchor (tolerance 2)"
+   "status": "PASS",
+   "detail": "from the neck_back shot the ray first meets skin (face) 2.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_post_auricular#1",
    "status": "PASS",
-   "detail": "from the ear_right shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the neck_back shot the ray first meets skin (face) 2.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_pre_auricular",
    "status": "PASS",
-   "detail": "from the ear_left shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the face shot the ray first meets skin (face) 0.4 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_pre_auricular#1",
-   "status": "XFAIL",
-   "detail": "from the ear_left shot the ray first meets skin (face) 15.1 cm from the anchor (tolerance 2)"
+   "status": "PASS",
+   "detail": "from the face shot the ray first meets skin (face) 0.4 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_submandibular",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets skin (face) 3.3 cm from the anchor (tolerance 2.5)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_submandibular#1",
@@ -3034,8 +3034,8 @@
   },
   {
    "id": "anchors:occlusion:male:seated:scalp",
-   "status": "XFAIL",
-   "detail": "from the ear_right shot the ray first meets skin (scalp) 4.3 cm from the anchor (tolerance 4)"
+   "status": "PASS",
+   "detail": "from the neck_back shot the ray first meets skin (scalp) 0.1 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:spine_cervical",
@@ -3840,12 +3840,12 @@
   {
    "id": "anchors:occlusion:male:sitting_dangling:triceps_tendon_right",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the elbow_right shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:sitting_dangling:triceps_tendon_left",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the elbow_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:sitting_dangling:patellar_tendon_right",
@@ -4585,7 +4585,7 @@
   {
    "id": "anchors:skin:female:supine:cardiac_mitral",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:supine:precordium_lsb",
@@ -5240,7 +5240,7 @@
   {
    "id": "anchors:oracle:female:supine:cardiac_mitral",
    "status": "PASS",
-   "detail": "1.9 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
+   "detail": "1.1 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
   },
   {
    "id": "anchors:occlusion:female:supine:abd_ruq",
@@ -5395,7 +5395,7 @@
   {
    "id": "anchors:skin:female:reclined_30:cardiac_mitral",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:reclined_30:precordium_lsb",
@@ -6050,7 +6050,7 @@
   {
    "id": "anchors:oracle:female:reclined_30:cardiac_mitral",
    "status": "PASS",
-   "detail": "1.9 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
+   "detail": "1.0 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
   },
   {
    "id": "anchors:occlusion:female:reclined_30:abd_ruq",
@@ -6085,7 +6085,7 @@
   {
    "id": "anchors:skin:female:reclined_45:cardiac_mitral",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:reclined_45:precordium_lsb",
@@ -6740,7 +6740,7 @@
   {
    "id": "anchors:oracle:female:reclined_45:cardiac_mitral",
    "status": "PASS",
-   "detail": "1.9 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
+   "detail": "1.0 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
   },
   {
    "id": "anchors:skin:female:seated:cardiac_aortic",
@@ -6765,7 +6765,7 @@
   {
    "id": "anchors:skin:female:seated:cardiac_mitral",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:seated:precordium_lsb",
@@ -7420,7 +7420,7 @@
   {
    "id": "anchors:oracle:female:seated:cardiac_mitral",
    "status": "PASS",
-   "detail": "1.9 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
+   "detail": "1.0 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
   },
   {
    "id": "anchors:occlusion:female:seated:cva_right",
@@ -7499,23 +7499,23 @@
   },
   {
    "id": "anchors:occlusion:female:seated:ln_post_auricular",
-   "status": "XFAIL",
-   "detail": "from the ear_right shot the ray first meets skin (face) 11.8 cm from the anchor (tolerance 2)"
+   "status": "PASS",
+   "detail": "from the neck_back shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_post_auricular#1",
    "status": "PASS",
-   "detail": "from the ear_right shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the neck_back shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_pre_auricular",
    "status": "PASS",
-   "detail": "from the ear_left shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the face shot the ray first meets skin (face) 0.1 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_pre_auricular#1",
-   "status": "XFAIL",
-   "detail": "from the ear_left shot the ray first meets skin (face) 14.2 cm from the anchor (tolerance 2)"
+   "status": "PASS",
+   "detail": "from the face shot the ray first meets skin (face) 0.1 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_submandibular",
@@ -7594,8 +7594,8 @@
   },
   {
    "id": "anchors:occlusion:female:seated:scalp",
-   "status": "XFAIL",
-   "detail": "from the ear_right shot the ray first meets skin (scalp) 4.1 cm from the anchor (tolerance 4)"
+   "status": "PASS",
+   "detail": "from the neck_back shot the ray first meets skin (scalp) 1.7 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:spine_cervical",
@@ -7740,7 +7740,7 @@
   {
    "id": "anchors:skin:female:sitting_dangling:cardiac_mitral",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:sitting_dangling:precordium_lsb",
@@ -8395,17 +8395,17 @@
   {
    "id": "anchors:oracle:female:sitting_dangling:cardiac_mitral",
    "status": "PASS",
-   "detail": "1.9 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
+   "detail": "1.0 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
   },
   {
    "id": "anchors:occlusion:female:sitting_dangling:triceps_tendon_right",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the elbow_right shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:sitting_dangling:triceps_tendon_left",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the elbow_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:sitting_dangling:patellar_tendon_right",
@@ -8450,7 +8450,7 @@
   {
    "id": "anchors:skin:female:left_lateral_decubitus:cardiac_mitral",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:left_lateral_decubitus:precordium_lsb",
@@ -9105,7 +9105,7 @@
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:cardiac_mitral",
    "status": "PASS",
-   "detail": "1.9 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
+   "detail": "1.1 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
   },
   {
    "id": "anchors:occlusion:female:left_lateral_decubitus:sacrum",
@@ -13499,40 +13499,40 @@
    "variant": "male",
    "position": "seated",
    "regionId": "ln_post_auricular",
-   "shot": "ear_right",
+   "shot": "neck_back",
    "first": "skin",
    "part": "face",
-   "offCm": 12.67
+   "offCm": 1.97
   },
   {
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
    "regionId": "ln_post_auricular",
-   "shot": "ear_right",
+   "shot": "neck_back",
    "first": "skin",
    "part": "face",
-   "offCm": 0
+   "offCm": 1.97
   },
   {
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
    "regionId": "ln_pre_auricular",
-   "shot": "ear_left",
+   "shot": "face",
    "first": "skin",
    "part": "face",
-   "offCm": 0
+   "offCm": 0.45
   },
   {
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
    "regionId": "ln_pre_auricular",
-   "shot": "ear_left",
+   "shot": "face",
    "first": "skin",
    "part": "face",
-   "offCm": 15.06
+   "offCm": 0.45
   },
   {
    "check": "occlusion",
@@ -13542,7 +13542,7 @@
    "shot": "head_neck",
    "first": "skin",
    "part": "face",
-   "offCm": 3.28
+   "offCm": 0.02
   },
   {
    "check": "occlusion",
@@ -13552,7 +13552,7 @@
    "shot": "head_neck",
    "first": "skin",
    "part": "face",
-   "offCm": 0.03
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -13689,10 +13689,10 @@
    "variant": "male",
    "position": "seated",
    "regionId": "scalp",
-   "shot": "ear_right",
+   "shot": "neck_back",
    "first": "skin",
    "part": "scalp",
-   "offCm": 4.3
+   "offCm": 0.07
   },
   {
    "check": "occlusion",
@@ -14924,7 +14924,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "regionId": "triceps_tendon_right",
-   "shot": "chest_back",
+   "shot": "elbow_right",
    "first": "skin",
    "part": "upper_arm_r",
    "offCm": 0.01
@@ -14934,10 +14934,10 @@
    "variant": "male",
    "position": "sitting_dangling",
    "regionId": "triceps_tendon_left",
-   "shot": "chest_back",
+   "shot": "elbow_left",
    "first": "skin",
    "part": "upper_arm_l",
-   "offCm": 0.02
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -16027,7 +16027,7 @@
    "variant": "female",
    "position": "supine",
    "regionId": "cardiac_mitral",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -16976,7 +16976,7 @@
    "variant": "female",
    "position": "supine",
    "rule": "cardiac_mitral",
-   "cm": 1.94,
+   "cm": 1.07,
    "max": 2.5
   },
   {
@@ -17077,7 +17077,7 @@
    "shot": "chest_front",
    "first": "skin",
    "part": "torso",
-   "offCm": 0.02
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -17272,7 +17272,7 @@
    "variant": "female",
    "position": "reclined_30",
    "regionId": "cardiac_mitral",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -18221,7 +18221,7 @@
    "variant": "female",
    "position": "reclined_30",
    "rule": "cardiac_mitral",
-   "cm": 1.94,
+   "cm": 1.03,
    "max": 2.5
   },
   {
@@ -18277,7 +18277,7 @@
    "variant": "female",
    "position": "reclined_45",
    "regionId": "cardiac_mitral",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -19226,7 +19226,7 @@
    "variant": "female",
    "position": "reclined_45",
    "rule": "cardiac_mitral",
-   "cm": 1.94,
+   "cm": 1.01,
    "max": 2.5
   },
   {
@@ -19262,7 +19262,7 @@
    "variant": "female",
    "position": "seated",
    "regionId": "cardiac_mitral",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -20211,7 +20211,7 @@
    "variant": "female",
    "position": "seated",
    "rule": "cardiac_mitral",
-   "cm": 1.95,
+   "cm": 0.98,
    "max": 2.5
   },
   {
@@ -20369,17 +20369,17 @@
    "variant": "female",
    "position": "seated",
    "regionId": "ln_post_auricular",
-   "shot": "ear_right",
+   "shot": "neck_back",
    "first": "skin",
    "part": "face",
-   "offCm": 11.83
+   "offCm": 0
   },
   {
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
    "regionId": "ln_post_auricular",
-   "shot": "ear_right",
+   "shot": "neck_back",
    "first": "skin",
    "part": "face",
    "offCm": 0
@@ -20389,20 +20389,20 @@
    "variant": "female",
    "position": "seated",
    "regionId": "ln_pre_auricular",
-   "shot": "ear_left",
+   "shot": "face",
    "first": "skin",
    "part": "face",
-   "offCm": 0
+   "offCm": 0.13
   },
   {
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
    "regionId": "ln_pre_auricular",
-   "shot": "ear_left",
+   "shot": "face",
    "first": "skin",
    "part": "face",
-   "offCm": 14.2
+   "offCm": 0.13
   },
   {
    "check": "occlusion",
@@ -20559,10 +20559,10 @@
    "variant": "female",
    "position": "seated",
    "regionId": "scalp",
-   "shot": "ear_right",
+   "shot": "neck_back",
    "first": "skin",
    "part": "scalp",
-   "offCm": 4.07
+   "offCm": 1.66
   },
   {
    "check": "occlusion",
@@ -20837,7 +20837,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "regionId": "cardiac_mitral",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -21786,7 +21786,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "rule": "cardiac_mitral",
-   "cm": 1.95,
+   "cm": 0.97,
    "max": 2.5
   },
   {
@@ -21794,7 +21794,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "regionId": "triceps_tendon_right",
-   "shot": "chest_back",
+   "shot": "elbow_right",
    "first": "skin",
    "part": "upper_arm_r",
    "offCm": 0
@@ -21804,7 +21804,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "regionId": "triceps_tendon_left",
-   "shot": "chest_back",
+   "shot": "elbow_left",
    "first": "skin",
    "part": "upper_arm_l",
    "offCm": 0
@@ -21882,7 +21882,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "regionId": "cardiac_mitral",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -22831,7 +22831,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "rule": "cardiac_mitral",
-   "cm": 1.94,
+   "cm": 1.07,
    "max": 2.5
   },
   {

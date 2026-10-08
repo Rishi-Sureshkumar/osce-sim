@@ -1,20 +1,5 @@
 [
  {
-  "id": "anchors:occlusion:*:seated:ln_post_auricular",
-  "owner": "M3",
-  "reason": "V-BACKREST / V-EARBACK: seated, the head sits inside the raised backrest, so these targets behind or beside the head are hidden from their shots (hair no longer blocks: clicks pass through it) (M3 table placement)"
- },
- {
-  "id": "anchors:occlusion:*:seated:ln_pre_auricular#1",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:*:seated:scalp",
-  "owner": "M3",
-  "reason": "V-BACKREST / V-EARBACK: seated, the head sits inside the raised backrest, so these targets behind or beside the head are hidden from their shots (hair no longer blocks: clicks pass through it) (M3 table placement)"
- },
- {
   "id": "anchors:occlusion:female:seated:cva_left",
   "owner": "M3",
   "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
@@ -73,11 +58,6 @@
   "id": "anchors:occlusion:male:seated:cva_right",
   "owner": "M3",
   "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
- },
- {
-  "id": "anchors:occlusion:male:seated:ln_submandibular",
-  "owner": "M3",
-  "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
  },
  {
   "id": "anchors:occlusion:male:seated:sacrum",
@@ -210,26 +190,6 @@
   "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
  },
  {
-  "id": "catalog:female:rise_from_chair@hip_left",
-  "owner": "M3",
-  "reason": "V-ARMS: seated, the hand resting on the thigh lies over the far hip, so a click there resolves to the wrist; the resting-arm pose is reworked with the new models (M3)"
- },
- {
-  "id": "catalog:male:ankle_foot_inspection@ankle_right",
-  "owner": "M3",
-  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
- },
- {
-  "id": "catalog:male:ankle_foot_palpation@ankle_right",
-  "owner": "M3",
-  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
- },
- {
-  "id": "catalog:male:ankle_foot_rom@ankle_right",
-  "owner": "M3",
-  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
- },
- {
   "id": "catalog:male:auscultate_heart_bell@cardiac_mitral",
   "owner": "M3",
   "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient]"
@@ -265,16 +225,6 @@
   "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
  },
  {
-  "id": "catalog:male:chest_inspection@lung_lat_l",
-  "owner": "M3",
-  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
- },
- {
-  "id": "catalog:male:chest_percussion@lung_lat_l",
-  "owner": "M3",
-  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
- },
- {
   "id": "catalog:male:cva_tenderness@cva_left",
   "owner": "M3",
   "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back (CVA, sacrum) is behind the mattress from every rear view; fixed with the M3 table placement"
@@ -285,29 +235,14 @@
   "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient]"
  },
  {
-  "id": "catalog:male:edema_assessment@ankle_right",
-  "owner": "M3",
-  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
- },
- {
   "id": "catalog:male:edema_assessment@sacrum",
   "owner": "M3",
   "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click resolved to spine_lumbar; (b) edema_assessment is not in the menu for this region]"
  },
  {
-  "id": "catalog:male:lower_limb_standing_inspection@ankle_right",
-  "owner": "M3",
-  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
- },
- {
   "id": "catalog:male:pmi_palpation@cardiac_mitral",
   "owner": "M3",
   "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
- },
- {
-  "id": "catalog:male:strength_l4_s1_ankle@ankle_right",
-  "owner": "M3",
-  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
  },
  {
   "id": "intersections:female:left_lateral_decubitus:*:bed",

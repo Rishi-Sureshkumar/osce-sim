@@ -180,6 +180,9 @@ export default function Exam3DView(props: Exam3DViewProps) {
   const bpManeuver = maneuverById.get("blood_pressure");
   const bpSteps = useMemo(() => bpManeuver?.steps ?? [], [bpManeuver]);
   const korotkoff = useRef<KorotkoffParams | null>(null);
+  /** the pressures under the cuff for this case and arm (the gauge's reference, the palpable pulse) */
+  const [bpRef, setBpRef] = useState<{ systolic: number; diastolic: number } | null>(null);
+  const bpArm = useRef<string | null>(null);
   const lastBeat = useRef(0);
   const [pulseFelt, setPulseFelt] = useState(true);
   const { tool } = props.tool;
@@ -524,8 +527,24 @@ export default function Exam3DView(props: Exam3DViewProps) {
     }
     setBp({ regionId: d.regionId, done: ["wrap"] });
     korotkoff.current = null;
+    setBpRef(null);
+    void loadKorotkoff(d.regionId);
     if (wrap.logsManeuver) await props.onToolExamine({ regionId: d.regionId, maneuverId: wrap.logsManeuver, tool: "bp_cuff", placementError: d.error, distanceCm: d.distanceCm, toleranceCm: d.toleranceCm, step: "wrap" });
     setCaption("Cuff on. Support the arm, feel the brachial pulse in the elbow crease, then listen there with the stethoscope.");
+  };
+
+  /** The pressures under the cuff on this arm: from the case (a case may give each arm its own, or an auscultatory gap), else the door vitals. */
+  const loadKorotkoff = async (regionId: string) => {
+    bpArm.current = regionId;
+    const res = await fetch(`/api/sessions/${props.sessionId}/listen`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ maneuverId: "blood_pressure", regionId }) }).catch(() => null);
+    const { audio } = res?.ok ? ((await res.json()) as { audio: AudioSpec | null }) : { audio: null };
+    const p = audio && "generator" in audio && audio.generator === "korotkoff" ? audio.params : null;
+    const sys = p?.systolic ?? props.bp?.systolic;
+    const dia = p?.diastolic ?? props.bp?.diastolic;
+    // the cuff moved to the other arm while this arm's pressures were on their way
+    if (!sys || !dia || bpArm.current !== regionId) return;
+    korotkoff.current = { systolic: sys, diastolic: dia, muffleMmHg: p?.muffleMmHg ?? 6, intensity: p?.intensity ?? 0.7, ...(p?.auscultatoryGap ? { auscultatoryGap: p.auscultatoryGap } : {}) };
+    setBpRef({ systolic: sys, diastolic: dia });
   };
 
   /** A BP step done (support the arm, feel the pulse, listen): logged when the catalog says so. */
@@ -537,13 +556,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
     if (id === "palpate") setCaption("Brachial pulse found. Inflate until it disappears to estimate the systolic pressure.");
     if (id === "listen") {
       setCaption("Listening over the brachial artery. Inflate 20–30 mmHg above where the pulse disappeared, then release slowly.");
-      // the sounds for this case (pressures from the case vitals; a case may add an auscultatory gap)
-      const res = await fetch(`/api/sessions/${props.sessionId}/listen`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ maneuverId: "blood_pressure", regionId: bp.regionId }) }).catch(() => null);
-      const { audio } = res?.ok ? ((await res.json()) as { audio: AudioSpec | null }) : { audio: null };
-      const p = audio && "generator" in audio && audio.generator === "korotkoff" ? audio.params : null;
-      const sys = p?.systolic ?? props.bp?.systolic;
-      const dia = p?.diastolic ?? props.bp?.diastolic;
-      if (sys && dia) korotkoff.current = { systolic: sys, diastolic: dia, muffleMmHg: p?.muffleMmHg ?? 6, intensity: p?.intensity ?? 0.7, ...(p?.auscultatoryGap ? { auscultatoryGap: p.auscultatoryGap } : {}) };
+      if (!korotkoff.current) await loadKorotkoff(bp.regionId);
     }
   };
 
@@ -554,7 +567,8 @@ export default function Exam3DView(props: Exam3DViewProps) {
       const felt = pulsePalpable(mmHg, sys);
       if (felt !== pulseFelt) setPulseFelt(felt);
     }
-    if (!bp?.done.includes("listen") || !korotkoff.current) return;
+    // the sounds need the stethoscope on the artery: none once it is put down
+    if (tool !== "stethoscope" || !bp?.done.includes("listen") || !korotkoff.current) return;
     const now = performance.now();
     if (now - lastBeat.current < 60_000 / Math.max(30, hr)) return;
     lastBeat.current = now;
@@ -904,7 +918,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
               onRecord={(r) => void recordBp(r)}
               onClose={() => setBp(null)}
               timeScale={QA.enabled && QA.fast ? 8 : 1}
-              {...(props.bp ? { reference: props.bp } : {})}
+              {...((bpRef ?? props.bp) ? { reference: bpRef ?? props.bp } : {})}
             />
           </div>
         </div>

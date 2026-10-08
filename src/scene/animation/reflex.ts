@@ -60,13 +60,17 @@ export function jerkDuration(j: Pick<Jerk, "grade" | "clonusBeats">): number {
 /** X-axis rotation (radians) added to the jerking bone `ageSec` after the strike. */
 export function jerkDelta(j: Jerk, ageSec: number): number {
   if (ageSec < 0 || ageSec >= jerkDuration(j)) return 0;
-  const amp = reflexAmplitudeDeg(j.grade) * DEG * (j.muted ? 0.25 : 1);
-  if (amp === 0) return 0;
+  const k = DEG * (j.muted ? 0.25 : 1);
+  const beats = clonusBeats(j);
+  // the jerk scales with the reflex grade; clonus beats at a brisk reflex's amplitude whatever the
+  // grade passed (a clonus test with the hands has no tendon tap: grade 0, beats only)
+  const jerkAmp = reflexAmplitudeDeg(j.grade) * k;
+  const clonusAmp = beats > 0 ? reflexAmplitudeDeg(4) * k : 0;
+  if (jerkAmp === 0 && clonusAmp === 0) return 0;
   // a quick movement (peak at JERK_RISE) that settles back
   const jerk = ageSec < JERK_SECONDS ? Math.sin(Math.min(1, ageSec / (2 * JERK_RISE)) * Math.PI) * Math.exp(-Math.max(0, ageSec - 2 * JERK_RISE) * 6) : 0;
   // clonus: rhythmic beats after the jerk, decaying
-  const beats = clonusBeats(j);
   const tc = ageSec - 2 * JERK_RISE;
   const clonus = beats > 0 && tc > 0 && tc < beats / CLONUS_HZ ? 0.55 * Math.max(0, Math.sin(2 * Math.PI * CLONUS_HZ * tc)) * Math.exp((-tc * CLONUS_HZ) / (beats + 1)) : 0;
-  return j.sign * amp * Math.max(jerk, clonus);
+  return j.sign * Math.max(jerkAmp * jerk, clonusAmp * clonus);
 }

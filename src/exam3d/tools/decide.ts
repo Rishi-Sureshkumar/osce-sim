@@ -108,7 +108,8 @@ export function penlightSweeper(a: { mode?: ToolMode; maneuvers: readonly M[]; t
     const on = d && d.outcome === "finding" ? d.regionId : null;
     const out: SweepEvent[] = [];
     if (d && on && on !== inside) {
-      entries.push(on);
+      // leaving an eye and coming back into it before the other is not a swing
+      if (entries.at(-1) !== on) entries.push(on);
       const key = `${d.maneuverId}@${on}`;
       if (!logged.has(key)) {
         logged.add(key);
