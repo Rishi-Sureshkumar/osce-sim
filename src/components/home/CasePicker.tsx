@@ -7,6 +7,7 @@ export function CasePicker({ cases }: { cases: PublicCase[] }) {
   const router = useRouter();
   const [name, setName] = useState("");
   const [mode, setMode] = useState<"practice" | "exam">("practice");
+  const [findings, setFindings] = useState<"show" | "hide">("show");
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,7 +18,7 @@ export function CasePicker({ cases }: { cases: PublicCase[] }) {
       const res = await fetch("/api/sessions", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ caseId, studentLabel: name, mode }),
+        body: JSON.stringify({ caseId, studentLabel: name, mode, findingsDisplay: findings }),
       });
       const body = await res.json();
       if (!res.ok) throw new Error(body.error ?? "Could not start the session");
@@ -51,6 +52,25 @@ export function CasePicker({ cases }: { cases: PublicCase[] }) {
           ).map(([value, label, help]) => (
             <label key={value} className={`flex cursor-pointer gap-2 rounded-lg border p-3 ${mode === value ? "border-cyan-700 bg-cyan-50" : "border-slate-200 bg-white"}`}>
               <input type="radio" name="mode" value={value} checked={mode === value} onChange={() => setMode(value)} className="mt-1" />
+              <span>
+                <span className="font-medium">{label}</span>
+                <span className="block text-xs text-slate-600">{help}</span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset className="text-sm">
+        <legend className="font-medium">Findings</legend>
+        <div className="mt-1 grid gap-2 sm:grid-cols-2">
+          {(
+            [
+              ["show", "Show findings", "Each exam tells you what you found."],
+              ["hide", "Hide findings (interpret)", "You hear and see what the exam produces (sounds, movements, pupils) and write what you notice. Text-only findings are still shown."],
+            ] as const
+          ).map(([value, label, help]) => (
+            <label key={value} className={`flex cursor-pointer gap-2 rounded-lg border p-3 ${findings === value ? "border-cyan-700 bg-cyan-50" : "border-slate-200 bg-white"}`}>
+              <input type="radio" name="findings" value={value} checked={findings === value} onChange={() => setFindings(value)} className="mt-1" />
               <span>
                 <span className="font-medium">{label}</span>
                 <span className="block text-xs text-slate-600">{help}</span>

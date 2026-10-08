@@ -28,6 +28,7 @@ import { EncounterBar } from "./EncounterBar";
 import { DescribeDialog } from "./DescribeDialog";
 import { SANITISE_HOLD_MS, useHold } from "./useHold";
 import { FindingsPanel } from "./FindingsPanel";
+import { MistakeAlerts } from "./MistakeAlerts";
 import { ManeuverMenu } from "./ManeuverMenu";
 import { PerformOverlay } from "./PerformOverlay";
 import { ExamineMenu } from "@/exam3d/ExamineMenu";
@@ -74,6 +75,8 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
   const labels = useMemo(() => labelsFrom(catalog), [catalog]);
   const ended = session.status !== "active" || actions.some((a) => a.type === "submit_ddx" || a.type === "submit_pen" || a.type === "session_end");
   const mode = sessionMode(session);
+  // hide-findings mode (fixed at session start): exams with a sound or visual show what was done; the student interprets
+  const hideFindings = session.settings?.findingsDisplay === "hide";
   const flow = kase.flow ?? null;
   // 1B flow: corridor → encounter → PEN, from the log (deadlines are applied by the server)
   const flowState = flow ? encounterState(actions, mode, flow, Date.now() - Date.parse(session.startedAt)) : null;
@@ -509,6 +512,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
                 onToolContact={onToolContact}
                 onLandmarksHint={mode === "practice" ? (where) => void run(async () => appendAll((await postAction(session.id, { type: "hint", source: "click", payload: { kind: "hint", text: `Showed landmarks: ${where}` } })).appended)) : undefined}
                 mode={mode}
+                revealCaptions={!hideFindings}
                 canEnter={!ended && !timeUp && !left && !entering && (!flow || phase === "encounter")}
                 onEnter={onEnter}
                 onWash={onWash}
@@ -565,7 +569,19 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
         </div>
 
         <div className="grid min-h-0 grid-rows-[1.4fr_1fr] gap-3">
-          <FindingsPanel actions={actions} labels={labels} />
+          <div className="flex min-h-0 flex-col gap-2">
+            <MistakeAlerts actions={actions} />
+            <FindingsPanel
+              actions={actions}
+              labels={labels}
+              hide={hideFindings}
+              onInterpret={
+                locked
+                  ? undefined
+                  : (exam, text) => run(async () => post({ type: "interpretation", source: "text", payload: { examActionId: exam.id, regionId: exam.payload.regionId, maneuverId: exam.payload.maneuverId, text } }))
+              }
+            />
+          </div>
           <ActionLog actions={actions} labels={labels} />
         </div>
       </div>

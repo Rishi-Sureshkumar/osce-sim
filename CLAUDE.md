@@ -133,6 +133,12 @@ into sheets at grading time, so a new case needs no code. Give maneuvers `penTer
 their findings) so `src/engine/penCheck.ts` can flag note claims about exams that were never performed.
 Item ids must be unique across all of a case's sheets (`npm run validate` checks).
 
+**Add a mistake rule** — add to `content/mistakes.json` (or a case's `mistakes`): `id`, `label`, `message` (≤ 140 chars,
+shown to the student), `severity` (`info|minor|major|critical`), optional `modes`, `appliesTo`, and a `trigger`
+(`on {type ("touch" = any touching exam) | ref | maneuver | region | tool | toolMode | position}`, plus `when` / `unless`
+in the mark-sheet rule language). `src/engine/mistakes.ts` fires it once per session as a system `mistake` action,
+alerted in practice (chime + "!") and logged silently in exam. Run `npm run validate`; no code change needed.
+
 **Courtesy tags** — what the student says is tagged server-side in `src/server/tags.ts` (regex
 first; `src/lang/tags.ts` falls back to similarity with example phrasings). Add a phrasing there with a
 test in `tests/tags.test.ts`. Tags are never accepted from the browser. Positioning tags must only

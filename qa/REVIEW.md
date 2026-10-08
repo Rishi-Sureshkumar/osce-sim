@@ -48,7 +48,7 @@ reviewed again (`-- --scaffold` adds the rows). High defects must have an owner 
 | V-OVERFLOW | low | ui | M6 | open | Left column overflows: chat options cut off below the fold (3 shots) |
 | V-PLACEHOLDER | low | ui | M6 | open | Chat input says "Station finished" before the encounter starts (2 shots) |
 | V-TOASTSTACK | low | ui | M6 | open | Hygiene nudge toast stays over the canvas while a modal is open (1 shots) |
-| V-JUSTIFY | high | grading | M4 | open | Results credit "Diagnoses are justified by findings the student elicited — orthopnea, raised JVP" when neither was elicited (JVP not examined; the note's claim is flagged as unperformed in the same feedback); "the student" in third person on a student page (found at the M2 gate) |
+| V-JUSTIFY | high | grading | M4 | fixed | Fixed in M4: the justification counts only history points raised in the conversation and exam points whose maneuvers were performed; the label no longer says "the student" (tests/m4-hide-mistakes.test.ts). Was: results credit "Diagnoses are justified by findings the student elicited — orthopnea, raised JVP" when neither was elicited (JVP not examined; the note's claim is flagged as unperformed in the same feedback); "the student" in third person on a student page (found at the M2 gate) |
 | V-HINTTEXT | low | ui | M6 | open | The canvas hint line ("Click the patient to move closer…") has no backdrop: unreadable over dark table rails; also shown in the tool-table view with no patient (found at the M2 gate) |
 | V-BADGES | low | ui | M6 | open | Coach transcript: "typed" badge runs into the text; "Matched" badge on 0-point items that say no words matched (found at the M2 gate) |
 

@@ -7,6 +7,7 @@ import { SecondOpinion } from "@/components/coach/SecondOpinion";
 import { RegradeButton } from "@/components/coach/RegradeButton";
 import { DomainCard, StationVerdict } from "@/components/results/DomainCard";
 import { PenReview } from "@/components/results/PenReview";
+import { MistakesSection, RecognitionSection } from "@/components/results/HideModeSections";
 import { FeedbackSummary } from "@/components/results/FeedbackSummary";
 import { FeedbackForm } from "@/components/common/FeedbackForm";
 import { HttpError } from "@/server/errors";
@@ -109,6 +110,8 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
 
         <section aria-labelledby="tl-h" className="space-y-2 lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:overflow-y-auto">
           {view.penReview && <PenReview pen={view.penReview.pen} check={view.penReview.check} actionsById={actionsById} timelineHref={(aid) => `#a-${aid}`} />}
+          {session.settings?.findingsDisplay === "hide" && <RecognitionSection actions={actions} labels={labels} timelineHref={(aid) => `#a-${aid}`} />}
+          <MistakesSection actions={actions} timelineHref={(aid) => `#a-${aid}`} />
           <h2 id="tl-h" className="font-semibold">
             Transcript &amp; timeline
           </h2>

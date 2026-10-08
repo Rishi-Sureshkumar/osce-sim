@@ -80,7 +80,7 @@ export function penSheet(kase: Case, threshold: number | undefined): MarkSheet |
     {
       id: PEN_JUSTIFICATION_ITEM,
       section: "PEN: differential",
-      label: "Diagnoses are justified by findings the student elicited",
+      label: "Diagnoses are justified by findings elicited in the encounter",
       weight: 2,
       scoring: "match",
       guidance:

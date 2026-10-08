@@ -57,6 +57,8 @@ export interface Exam3DViewProps {
   /** exam actions locked (outside the room, time up, ended) */
   disabled?: boolean;
   mode: "practice" | "exam";
+  /** false in hide-findings mode: sound captions don't name the finding */
+  revealCaptions?: boolean;
   /** the corridor door can be opened (e.g. after "You may begin") */
   canEnter: boolean;
   onEnter: () => Promise<void>;
@@ -346,7 +348,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
     }).catch(() => null);
     const { audio } = res?.ok ? ((await res.json()) as { audio: AudioSpec | null }) : { audio: null };
     if (holdRef.current?.startedAt !== h.startedAt) return; // released already
-    setCaption(audio ? (h.outcome === "finding" ? captionFor(audio) : "Faint, distant sounds") : "No sound here");
+    setCaption(audio ? (h.outcome === "finding" ? (props.revealCaptions === false ? "Listening…" : captionFor(audio)) : "Faint, distant sounds") : "No sound here");
     if (audio) {
       playing.current = await audioEngine.loop(audio, { hr, rr, attenuation: sound.attenuation, lowpassHz: sound.lowpassHz });
       if (holdRef.current?.startedAt !== h.startedAt) playing.current.stop();
@@ -638,7 +640,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
       return;
     }
     void audioEngine.tone(spec, elapsed, { pan: usePan ? spec.params.pan : 0 }).then((p) => (playing.current = p));
-    setCaption(usePan ? captionFor(spec) : `Tuning fork ${spec.params.freq} Hz`);
+    setCaption(usePan && props.revealCaptions !== false ? captionFor(spec) : `Tuning fork ${spec.params.freq} Hz`);
   };
 
   const rinne = sequence ? maneuverById.get(sequence.maneuverId) : undefined;

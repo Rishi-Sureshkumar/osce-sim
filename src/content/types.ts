@@ -1,4 +1,4 @@
-import type { Case, ConversationReply, ExamManeuver, Intent, MarkSheet, Region } from "@/domain/schemas";
+import type { Case, ConversationReply, ExamManeuver, Intent, MarkSheet, MistakeRule, Region } from "@/domain/schemas";
 
 /** content/lang: the deterministic language layer's shared data (Phase 4 M1). */
 export interface LangContent {
@@ -19,6 +19,8 @@ export interface ContentIndex {
   markSheets: MarkSheet[];
   markSheetById: Map<string, MarkSheet>;
   lang: LangContent;
+  /** content/mistakes.json: the shared mistake-alert rules (a case may add its own) */
+  mistakes: MistakeRule[];
 }
 
 /** The slice of the catalog the browser needs (no case data). */

@@ -8,6 +8,7 @@ import { FeedbackSummary } from "@/components/results/FeedbackSummary";
 import { GradeTrigger } from "@/components/results/GradeTrigger";
 import { DomainCard, StationVerdict } from "@/components/results/DomainCard";
 import { PenReview } from "@/components/results/PenReview";
+import { MistakesSection, RecognitionSection } from "@/components/results/HideModeSections";
 import { HttpError } from "@/server/errors";
 import { getResultsView } from "@/server/results";
 
@@ -65,6 +66,8 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
             <DomainCard key={d.domain} domain={d} sheets={sheets} actionsById={actionsById} labels={labels} timelineHref={href} />
           ))}
           {view.penReview && <PenReview pen={view.penReview.pen} check={view.penReview.check} actionsById={actionsById} timelineHref={href} />}
+          {session.settings?.findingsDisplay === "hide" && <RecognitionSection actions={actions} labels={labels} timelineHref={href} />}
+          <MistakesSection actions={actions} timelineHref={href} />
           <FeedbackForm sessionId={id} page="results" />
         </>
       )}

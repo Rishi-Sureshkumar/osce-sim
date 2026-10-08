@@ -42,6 +42,12 @@ export function validateContentGraph(c: ContentIndex): string[] {
     }
   }
 
+  const globalMistakeIds = new Set<string>();
+  for (const mr of c.mistakes ?? []) {
+    if (globalMistakeIds.has(mr.id)) errors.push(`content/mistakes.json: duplicate id "${mr.id}"`);
+    globalMistakeIds.add(mr.id);
+    errors.push(...mistakeRuleErrors(`content/mistakes.json ${mr.id}`, mr, c));
+  }
   for (const cs of c.cases) {
     for (const [maneuverId, byRegion] of Object.entries(cs.abnormalFindings)) {
       const m = c.maneuverById.get(maneuverId);
@@ -134,6 +140,7 @@ export function validateContentGraph(c: ContentIndex): string[] {
       for (const sat of ad.satisfies) if (!ddxIds.has(sat)) errors.push(`case ${cs.id}: acceptable diagnosis "${ad.id}" satisfies unknown penKey differential "${sat}"`);
     }
     for (const mr of cs.mistakes) errors.push(...mistakeRuleErrors(`case ${cs.id} mistake ${mr.id}`, mr, c));
+    for (const mr of cs.mistakes) if (globalMistakeIds.has(mr.id)) errors.push(`case ${cs.id} mistake ${mr.id}: id already used in content/mistakes.json`);
     const caseItems = new Set(cs.markSheetIds.flatMap((id) => c.markSheets.find((m) => m.id === id)?.items.map((i) => i.id) ?? []));
     for (const na of cs.itemsNotApplicable) if (!caseItems.has(na.itemId)) errors.push(`case ${cs.id}: itemsNotApplicable "${na.itemId}" is not an item of the case's mark sheets`);
   }

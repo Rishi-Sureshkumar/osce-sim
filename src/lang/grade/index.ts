@@ -3,7 +3,7 @@
  *  - generic items: src/lang/grade/match.ts (keywords / patterns / exemplar similarity / topics)
  *  - note exam items: credit only if the key point's maneuvers were performed (and the quote doesn't overlap a flagged claim)
  *  - diagnosis justification: every listed diagnosis needs supporting findings drawn from the case's
- *    key (terms of the history and exam points the student documented)
+ *    key, counting only the history points raised in the conversation and the exam points performed
  */
 import { orderLog } from "@/engine/order";
 import type { Action, Case, MarkSheet } from "@/domain/schemas";
@@ -32,16 +32,31 @@ function touchTimes(log: readonly Action[]): { first: number | null; last: numbe
 }
 
 
+/**
+ * Key-point terms the student actually elicited: a history point counts once its terms or keywords
+ * came up in the conversation, an exam point once one of its maneuvers was performed (V-JUSTIFY: a
+ * diagnosis "supported by raised JVP" earns nothing when the neck veins were never examined).
+ */
+function elicitedTerms(args: GradeArgs): string[] {
+  const norm = (t: string) => args.normalize(t);
+  const termsOf = (k: { terms: string[]; keywords: string[] }) => [...k.terms, ...k.keywords].map(norm).filter((t) => t.length > 1);
+  const talk = args.log.flatMap((a) => (a.type === "say" || a.type === "patient_say" ? [norm(a.payload.text)] : []));
+  const performed = new Set(args.log.flatMap((a) => (a.type === "examine" ? [a.payload.maneuverId] : [])));
+  const history = (args.kase.penKey?.history ?? []).filter((k) => termsOf(k).some((t) => talk.some((s) => hasPhrase(s, t))));
+  const exam = (args.kase.penKey?.exam ?? []).filter((k) => (k.maneuverIds.length ? k.maneuverIds.some((m) => performed.has(m)) : false));
+  return [...history, ...exam].flatMap(termsOf);
+}
+
 function justification(args: GradeArgs): MatchJudgement {
   const pen = args.log.findLast((a): a is Extract<Action, { type: "submit_pen" }> => a.type === "submit_pen");
   if (!pen || !pen.payload.diagnoses.length) return { itemId: PEN_JUSTIFICATION_ITEM, score: 0, rationale: "No diagnoses in the note.", evidence: [] };
-  const terms = [...(args.kase.penKey?.history ?? []), ...(args.kase.penKey?.exam ?? [])].flatMap((k) => [...k.terms, ...k.keywords]).map((t) => args.normalize(t)).filter((t) => t.length > 1);
+  const terms = elicitedTerms(args);
   const listed = pen.payload.diagnoses.filter((d) => d.diagnosis.trim());
   const supported = listed.filter((d) => d.support && terms.some((t) => hasPhrase(args.normalize(d.support!), t)));
   const evidence = supported.map((d) => ({ actionId: pen.id, quote: d.support! }));
-  if (supported.length === listed.length) return { itemId: PEN_JUSTIFICATION_ITEM, score: 1, rationale: `Every listed diagnosis cites findings from the case (${supported.length}/${listed.length}).`, evidence };
-  if (supported.length > 0) return { itemId: PEN_JUSTIFICATION_ITEM, score: 0.5, rationale: `${supported.length} of ${listed.length} diagnoses cite findings from the case; the others have thin or no support.`, evidence };
-  return { itemId: PEN_JUSTIFICATION_ITEM, score: 0, rationale: "No listed diagnosis cites a history or exam finding from the case.", evidence: [] };
+  if (supported.length === listed.length) return { itemId: PEN_JUSTIFICATION_ITEM, score: 1, rationale: `Every listed diagnosis cites findings elicited in the encounter (${supported.length}/${listed.length}).`, evidence };
+  if (supported.length > 0) return { itemId: PEN_JUSTIFICATION_ITEM, score: 0.5, rationale: `${supported.length} of ${listed.length} diagnoses cite findings elicited in the encounter; the others have thin support or cite findings that were never elicited.`, evidence };
+  return { itemId: PEN_JUSTIFICATION_ITEM, score: 0, rationale: "No listed diagnosis cites a history or exam finding that was elicited in the encounter.", evidence: [] };
 }
 
 /** Enter → exit of the room (falls back to the first and last spoken or exam action). */

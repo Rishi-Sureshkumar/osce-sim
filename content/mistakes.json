@@ -1,0 +1,56 @@
+{
+  "mistakes": [
+    {
+      "id": "exam_before_introduction",
+      "label": "Examined before introducing self",
+      "message": "Introduce yourself (name and role) before you examine the patient.",
+      "severity": "minor",
+      "trigger": { "on": { "type": "touch" }, "unless": { "said": "introduced_name" } },
+      "once": true,
+      "anchor": "chat"
+    },
+    {
+      "id": "exam_without_consent",
+      "label": "Examined without asking permission",
+      "message": "Ask the patient's permission before you examine them.",
+      "severity": "minor",
+      "trigger": { "on": { "type": "touch" }, "unless": { "said": "asked_consent_exam" } },
+      "once": true,
+      "anchor": "chat"
+    },
+    {
+      "id": "excluded_exam_attempted",
+      "label": "Attempted an excluded exam",
+      "message": "The door instructions exclude that exam. Describe it to the examiner instead if it matters.",
+      "severity": "major",
+      "trigger": { "on": { "type": "prohibited_attempt" } },
+      "once": true,
+      "anchor": "door"
+    },
+    {
+      "id": "reflex_legs_not_hanging",
+      "label": "Knee or ankle jerk with the legs not hanging",
+      "message": "Knee and ankle jerks are easiest to see with the legs hanging over the edge of the table.",
+      "severity": "info",
+      "trigger": {
+        "on": {
+          "type": "examine",
+          "maneuver": ["reflex_patellar", "reflex_achilles"],
+          "position": ["supine", "reclined_30", "reclined_45", "seated", "seated_leaning_forward", "left_lateral_decubitus"]
+        }
+      },
+      "once": true,
+      "anchor": "exam_view"
+    },
+    {
+      "id": "left_without_closing",
+      "label": "Left without closing the encounter",
+      "message": "You left without closing: summarise, invite questions and say goodbye.",
+      "severity": "info",
+      "modes": ["practice", "exam"],
+      "trigger": { "on": { "ref": "room:exit" }, "unless": { "said": "closing" } },
+      "once": true,
+      "anchor": "door"
+    }
+  ]
+}

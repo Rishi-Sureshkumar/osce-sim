@@ -101,7 +101,8 @@ test("bug 9: a blood pressure is taken on the upper arm and the case's BP is rec
   await page.getByTestId("bp-record").click();
   await waitSettled(page);
 
-  log = await qaLog(api, sessionId);
+  // the reading is posted after the click: wait for it in the log
+  await expect.poll(async () => (log = await qaLog(api, sessionId)).some((a) => a.type === "examine" && a.payload.maneuverId === "blood_pressure"), { timeout: 10_000 }).toBe(true);
   const examined = (id: string) => log.filter((a) => a.type === "examine" && a.payload.maneuverId === id && a.payload.regionId === "upper_arm_right");
   expect(examined("bp_cuff_placement")).toHaveLength(1);
   expect(examined("bp_arm_support")).toHaveLength(1);

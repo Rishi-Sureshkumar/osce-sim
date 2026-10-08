@@ -1,12 +1,13 @@
 import "server-only";
 import { MIN_LISTEN_MS } from "@/exam3d/tools/toolLogic";
 import { flowLimits, getContent, toPublicCase } from "@/content/load";
-import { PenDraft, PenPayload, sessionMode, type Action, type ActionInput, type Case, type PublicCase, type Session, type SessionMode, type TagHit } from "@/domain/schemas";
+import { PenDraft, PenPayload, SessionSettings, sessionMode, type Action, type ActionInput, type Case, type ExamManeuver, type Position, type PublicCase, type Session, type SessionMode, type TagHit } from "@/domain/schemas";
 import { DEADLINE_GRACE_MS, allowedInPhase, dueTimerEvents, encounterState, type EncounterPhase, type FlowLimits } from "@/engine/encounter";
 import { timeIsUp } from "@/engine/practice";
 import { ActionInput as ActionInputSchema } from "@/domain/schemas";
 import { InvalidExamError, isTouch, resolveFinding } from "@/engine/resolveFinding";
 import { DRAPE_ZONE_OF, patientState } from "@/engine/patientState";
+import { alertsOn, detectMistakes } from "@/engine/mistakes";
 import { getRepo } from "./db";
 import { HttpError } from "./errors";
 import { newId } from "./ids";
@@ -17,8 +18,9 @@ export function getCaseOr404(caseId: string): Case {
   return c;
 }
 
-export async function createSession(caseId: string, studentLabel: string, mode: SessionMode = "exam"): Promise<Session> {
+export async function createSession(caseId: string, studentLabel: string, mode: SessionMode = "exam", settingsIn: Partial<SessionSettings> = {}): Promise<Session> {
   getCaseOr404(caseId);
+  const settings = SessionSettings.parse(settingsIn);
   const repo = await getRepo();
   const session: Session = {
     id: newId("ses"),
@@ -30,9 +32,10 @@ export async function createSession(caseId: string, studentLabel: string, mode: 
     endedAt: null,
     patientTurns: 0,
     gradingRuns: 0,
+    settings,
   };
   await repo.createSession(session);
-  await repo.appendAction({ id: newId("act"), sessionId: session.id, t: 0, type: "session_start", source: "system", payload: { caseId } });
+  await repo.appendAction({ id: newId("act"), sessionId: session.id, t: 0, type: "session_start", source: "system", payload: { caseId, settings } });
   return session;
 }
 
@@ -67,10 +70,22 @@ export async function appendStudentActions(sessionId: string, raw: unknown, serv
   return { action: all[before.length]!, appended: all.filter((a) => visibleToStudent(a, session)) };
 }
 
+/** The session's settings (fixed at start; older sessions have none: findings shown, default alerts). */
+export function settingsOf(session: Session): SessionSettings {
+  return SessionSettings.parse(session.settings ?? {});
+}
+
+/** What was done, without the finding: shown in hide-findings mode ("Heart auscultation – bell at apex — Mitral area, left lateral decubitus"). */
+export function doneTextFor(maneuver: ExamManeuver, regionLabel: string, position: Position): string {
+  return `${maneuver.label} — ${regionLabel}, ${position.replace(/_/g, " ")}`;
+}
+
 /**
  * What the student may see (the matcher's `match` on say / patient_say is never sent), and while the station is active:
  * - placement distances and tolerances (the hidden anchors) are stripped from tool exams and contacts;
- * - cases with findingsVisibility "end" keep finding text from the student until the station ends.
+ * - cases with findingsVisibility "end" keep finding text from the student until the station ends;
+ * - in hide-findings mode an exam with a sound or visual shows only what was done (the student
+ *   interprets the stimulus); a text-only ("reported") finding is still shown.
  */
 export function redactForStudent(a: Action, kase: Case, session: Session): Action {
   // how the matcher understood an utterance (fact ids, topics, scores) is for coaches only, always
@@ -83,12 +98,18 @@ export function redactForStudent(a: Action, kase: Case, session: Session): Actio
   if (a.type !== "examine") return a;
   const { placementError: _e, distanceCm: _d, toleranceCm: _t, ...payload } = a.payload;
   const hide = a.result && kase.findingsVisibility === "end";
-  return { ...a, payload, ...(hide && a.result ? { result: { ...a.result, findingText: "", wording: undefined, hidden: true } } : {}) };
+  if (hide && a.result) return { ...a, payload, result: { ...a.result, findingText: "", wording: undefined, hidden: true } };
+  if (a.result && !a.result.reported && settingsOf(session).findingsDisplay === "hide") {
+    return { ...a, payload, result: { ...a.result, findingText: a.result.doneText ?? "", wording: undefined } };
+  }
+  return { ...a, payload };
 }
 
-/** Tool contacts are logged for scoring and coaches only; the student's log never lists them while active. */
+/** Tool contacts, and mistakes not alerted at the time (exam mode), are for scoring and coaches; the student's log never lists them while active. */
 export function visibleToStudent(a: Action, session: Session): boolean {
-  return session.status !== "active" || a.type !== "tool_contact";
+  if (session.status !== "active") return true;
+  if (a.type === "mistake") return a.payload.alerted;
+  return a.type !== "tool_contact";
 }
 
 const AFTER_TIME_UP = new Set(["submit_ddx", "timer", "hint", "note"]);
@@ -147,12 +168,14 @@ async function appendOne(sessionId: string, raw: unknown, implied: Action[], aft
       throw e;
     }
     // the finding is shown as resolved (case/catalog text): no model rewords it (Phase 4 M1)
+    const regionLabel = getContent().regionById.get(input.payload.regionId)?.label ?? input.payload.regionId;
     action = {
       ...(await stamp()),
       type: "examine",
       source: input.source,
       payload: { ...input.payload, touch: isTouch(maneuver) },
-      result: { ...resolved },
+      // doneText: what was done, for hide-findings mode; reported: a text-only finding (no sound or visual to interpret)
+      result: { ...resolved, doneText: doneTextFor(maneuver, regionLabel, state.position), ...(!resolved.audio && !resolved.visual ? { reported: true } : {}) },
     };
     // practice mode: nudge (and log) touching the patient without clean hands, once
     if (sessionMode(session) === "practice" && isTouch(maneuver) && !state.handsClean && state.uncleanTouches === 0) {
@@ -172,7 +195,27 @@ async function appendOne(sessionId: string, raw: unknown, implied: Action[], aft
   }
   await (await getRepo()).appendAction(action);
   for (const a of after) await (await getRepo()).appendAction(a);
+  after.push(...(await recordMistakes(session, kase, action)));
   return action;
+}
+
+/** Mistake rules (content/mistakes.json + the case's own) fired by `action`: each is logged as a system `mistake`. */
+async function recordMistakes(session: Session, kase: Case, action: Action): Promise<Action[]> {
+  const repo = await getRepo();
+  const log = await repo.listActions(session.id);
+  const mode = sessionMode(session);
+  const rules = [...getContent().mistakes, ...kase.mistakes];
+  if (!rules.length) return [];
+  const regionSections = Object.fromEntries(getContent().regions.filter((r) => r.drapeSections?.length).map((r) => [r.id, r.drapeSections!]));
+  const hits = detectMistakes(rules, log, action, { mode, sex: kase.patient.sex, caseMode: kase.mode, rules: { regionSections } });
+  const alerted = alertsOn(settingsOf(session), mode);
+  const out: Action[] = [];
+  for (const h of hits) {
+    const m: Action = { id: newId("act"), sessionId: session.id, t: action.t, type: "mistake", source: "system", payload: { ruleId: h.rule.id, severity: h.rule.severity, message: h.rule.message, causeActionId: h.causeActionId, alerted } };
+    await repo.appendAction(m);
+    out.push(m);
+  }
+  return out;
 }
 
 /**

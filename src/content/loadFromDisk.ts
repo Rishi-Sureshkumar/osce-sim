@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { z } from "zod";
-import { Case, ConversationBankFile, HistoryBankFile, ManeuversFile, MarkSheet, RegionsFile, SynonymsFile, TopicsFile } from "@/domain/schemas";
+import { Case, ConversationBankFile, HistoryBankFile, ManeuversFile, MarkSheet, MistakesFile, RegionsFile, SynonymsFile, TopicsFile } from "@/domain/schemas";
 import type { ContentIndex } from "./types";
 import { validateContentGraph } from "./validate";
 
@@ -49,6 +49,7 @@ export function loadContentFromDisk(root = CONTENT_DIR): ContentIndex {
     markSheets,
     markSheetById: new Map(markSheets.map((m) => [m.id, m])),
     lang,
+    mistakes: optional("mistakes.json", MistakesFile, { mistakes: [] }).mistakes,
   };
   const errors = validateContentGraph(index);
   if (errors.length) throw new Error(`Content cross-reference errors:\n- ${errors.join("\n- ")}`);

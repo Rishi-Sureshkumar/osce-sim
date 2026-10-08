@@ -117,6 +117,28 @@ class AudioEngine {
     });
   }
 
+  /** A soft two-note chime for a mistake alert (quiet; respects mute and volume). */
+  ding() {
+    const ctx = this.ensure();
+    if (!ctx || !this.master || this.muted) return;
+    const t0 = ctx.currentTime + 0.02;
+    [
+      [880, 0],
+      [660, 0.16],
+    ].forEach(([f, dt]) => {
+      const osc = ctx.createOscillator();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(f!, t0 + dt!);
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.0001, t0 + dt!);
+      g.gain.exponentialRampToValueAtTime(0.15, t0 + dt! + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + dt! + 0.35);
+      osc.connect(g).connect(this.master!);
+      osc.start(t0 + dt!);
+      osc.stop(t0 + dt! + 0.4);
+    });
+  }
+
   /**
    * One Korotkoff tap right now (live cuff deflation: the caller decides, from the pure model in
    * korotkoff.ts, when a beat is audible and how loud). Goes through the master volume/mute.
