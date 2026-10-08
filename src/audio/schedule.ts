@@ -18,6 +18,8 @@ export interface HeartEvent {
   freq: number;
   /** murmur envelope shape */
   shape?: "holosystolic" | "crescendo_decrescendo" | "decrescendo" | "plateau";
+  /** crescendo–decrescendo: where the murmur peaks, as a fraction of its length */
+  peak?: number;
 }
 
 /** Systole is ~1/3 of the cycle at normal rates, shortening less than diastole as HR rises. */
@@ -32,16 +34,18 @@ const murmurFreq = { low: 120, medium: 220, high: 380 } as const;
 export function heartSchedule(p: HeartParams, hr: number, seconds: number): HeartEvent[] {
   const { period, systole, diastole } = cycleTiming(hr);
   const g = p.intensity ?? 0.8;
+  // a soft S2 (aortic stenosis) is quieter relative to S1
+  const s2g = g * (p.s2Intensity ?? 1);
   const out: HeartEvent[] = [];
   for (let start = 0; start < seconds - 1e-9; start += period) {
     if (p.s4) out.push({ kind: "S4", t: start - 0.09 < 0 ? start : start - 0.09, dur: 0.05, gain: g * p.s4 * 0.6, freq: 45 });
     out.push({ kind: "S1", t: start, dur: 0.07, gain: g, freq: 70 });
     const s2 = start + systole;
     if ((p.s2SplitMs ?? 0) > 0) {
-      out.push({ kind: "A2", t: s2, dur: 0.05, gain: g * 0.85, freq: 95 });
+      out.push({ kind: "A2", t: s2, dur: 0.05, gain: s2g * 0.85, freq: 95 });
       out.push({ kind: "P2", t: s2 + p.s2SplitMs! / 1000, dur: 0.045, gain: g * 0.6, freq: 100 });
     } else {
-      out.push({ kind: "S2", t: s2, dur: 0.055, gain: g * 0.85, freq: 95 });
+      out.push({ kind: "S2", t: s2, dur: 0.055, gain: s2g * 0.85, freq: 95 });
     }
     // S3: early diastole, ~120–160 ms after S2 (never later than mid-diastole)
     if (p.s3) out.push({ kind: "S3", t: s2 + Math.min(0.15, diastole * 0.4), dur: 0.06, gain: g * p.s3 * 0.7, freq: 40 });
@@ -49,7 +53,8 @@ export function heartSchedule(p: HeartParams, hr: number, seconds: number): Hear
       const m = p.murmur;
       const gain = g * (0.12 + 0.11 * m.grade); // grade 1 ≈ soft … 6 ≈ loud
       const freq = murmurFreq[m.pitch ?? "medium"];
-      if (m.phase === "systolic") out.push({ kind: "murmur", t: start + 0.06, dur: systole - 0.08, gain, freq, shape: m.shape });
+      const peak = m.shape === "crescendo_decrescendo" && m.peak !== undefined ? { peak: m.peak } : {};
+      if (m.phase === "systolic") out.push({ kind: "murmur", t: start + 0.06, dur: systole - 0.08, gain, freq, shape: m.shape, ...peak });
       else out.push({ kind: "murmur", t: s2 + 0.05, dur: Math.max(0.1, diastole * 0.55), gain, freq, shape: m.shape });
     }
   }
@@ -122,7 +127,7 @@ export function captionFor(spec: AudioSpec): string {
   if ("clipId" in spec) return "Recorded sound";
   if (spec.generator === "heart") {
     const p = spec.params;
-    const parts = [(p.s2SplitMs ?? 0) > 0 ? "S1, split S2" : "S1, S2"];
+    const parts = [(p.s2SplitMs ?? 0) > 0 ? "S1, split S2" : (p.s2Intensity ?? 1) < 0.4 ? "S1, soft S2" : "S1, S2"];
     if (p.s3) parts.push(`S3 (${p.s3 >= 0.6 ? "loud" : "soft"})`);
     if (p.s4) parts.push(`S4 (${p.s4 >= 0.6 ? "loud" : "soft"})`);
     if (p.murmur) parts.push(`${p.murmur.phase} murmur grade ${p.murmur.grade}/6`);

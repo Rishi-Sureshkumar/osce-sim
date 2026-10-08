@@ -35,6 +35,15 @@ describe("heart schedule", () => {
     const p2 = ev.find((e) => e.kind === "P2")!;
     expect(p2.t - a2.t).toBeCloseTo(0.04, 5);
   });
+  it("aortic stenosis: a soft S2 is quieter than a normal one, and the ejection murmur can peak late", () => {
+    const as = { murmur: { phase: "systolic" as const, shape: "crescendo_decrescendo" as const, grade: 3, pitch: "medium" as const, peak: 0.7 }, intensity: 0.8, s2SplitMs: 0, s2Intensity: 0.3 };
+    const ev = heartSchedule(as, 72, 1);
+    const normal = heartSchedule({ intensity: 0.8, s2SplitMs: 0 }, 72, 1);
+    expect(ev.find((e) => e.kind === "S2")!.gain).toBeCloseTo(normal.find((e) => e.kind === "S2")!.gain * 0.3, 5);
+    expect(ev.find((e) => e.kind === "murmur")!.peak).toBe(0.7);
+    expect(heartSchedule({ ...as, murmur: { ...as.murmur, peak: undefined } }, 72, 1).find((e) => e.kind === "murmur")!.peak).toBeUndefined();
+    expect(captionFor({ generator: "heart", params: as })).toBe("Heart sounds: S1, soft S2, systolic murmur grade 3/6");
+  });
 });
 
 describe("breath schedule", () => {

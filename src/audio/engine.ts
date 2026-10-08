@@ -278,7 +278,7 @@ function heartEvent(ctx: OfflineAudioContext, noise: AudioBuffer, e: HeartEvent)
     const peak = e.gain * 0.5;
     g.gain.setValueAtTime(0, e.t);
     if (e.shape === "crescendo_decrescendo") {
-      g.gain.linearRampToValueAtTime(peak, e.t + e.dur / 2);
+      g.gain.linearRampToValueAtTime(peak, e.t + e.dur * (e.peak ?? 0.5));
       g.gain.linearRampToValueAtTime(0, e.t + e.dur);
     } else if (e.shape === "decrescendo") {
       g.gain.linearRampToValueAtTime(peak, e.t + 0.02);

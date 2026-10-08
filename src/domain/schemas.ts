@@ -111,6 +111,8 @@ export const MurmurSpec = z.object({
   /** Levine grade 1–6; sets loudness. */
   grade: z.number().int().min(1).max(6),
   pitch: z.enum(["low", "medium", "high"]).default("medium"),
+  /** Phase 4: where a crescendo–decrescendo murmur peaks, as a fraction of its length (0.5 = mid-systole; later = more severe aortic stenosis) */
+  peak: z.number().min(0.2).max(0.9).optional(),
 });
 
 export const AudioSpec = z.union([
