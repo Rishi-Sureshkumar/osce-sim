@@ -23,12 +23,13 @@ export interface ClientEmbedding {
   clauses: ClientClauseVector[];
 }
 
-/** The student's name, from the evidence of their latest "introduced_name" tag ("my name is Sam Patel" → "Sam"). */
-function studentNameFrom(log: readonly Action[]): string | null {
+/** The student's name, from the evidence of their latest "introduced_name" tag ("my name is Sam Patel" → "Sam"; "…, I'm Sam" → "Sam"). */
+export function studentNameFrom(log: readonly Action[]): string | null {
   for (let i = log.length - 1; i >= 0; i--) {
     const a = log[i]!;
     if (a.type !== "say") continue;
-    const ev = a.payload.tags?.find((t) => t.tag === "introduced_name")?.evidence;
+    // "I'm" / "I am" is not part of the name ("I'm Sam" would otherwise read as first + last name)
+    const ev = a.payload.tags?.find((t) => t.tag === "introduced_name")?.evidence?.replace(/\bI(?:'m| am)\b/gi, " ");
     const m = ev?.match(/([A-Z][a-z'-]+)(?:\s+[A-Z][a-z'-]+)?\s*$/);
     if (m) return m[1]!;
   }

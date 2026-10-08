@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { needsFallback, regexTags } from "@/server/tags";
+import type { Action } from "@/domain/schemas";
 
 const tags = (t: string) => regexTags(t).map((h) => h.tag).sort();
 
@@ -50,5 +51,14 @@ describe("tag integrity", () => {
   it("the browser cannot send tags: they are stripped from action input", () => {
     const parsed = ActionInput.parse({ type: "say", source: "text", payload: { text: "hi", tags: [{ tag: "closing", evidence: "hi", via: "regex" }] } });
     expect(parsed.type === "say" && "tags" in parsed.payload).toBe(false);
+  });
+});
+
+describe("the patient greets the student by the name they gave", () => {
+  const sayTagged = (text: string): Action => ({ id: "s", sessionId: "s1", t: 0, type: "say", source: "text", payload: { text, tags: regexTags(text) } });
+  it("takes the first name, never \"I'm\"", async () => {
+    const { studentNameFrom } = await import("@/server/chat");
+    expect(studentNameFrom([sayTagged("Hello Mr Bennett, I'm Sam, a medical student.")])).toBe("Sam");
+    expect(studentNameFrom([sayTagged("Hello Mr. Bennett, my name is Sam Patel and I'm a medical student.")])).toBe("Sam");
   });
 });
