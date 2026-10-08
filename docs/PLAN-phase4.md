@@ -474,7 +474,7 @@ M6  UI polish
 | S | Schema changes | done |
 | M0 | QA harness | done: catalog 946 checks (627 pass, 319 xfail owned by M2/M3/M6), anchors 1493 pass / 307 xfail, intersections 71 pass / 139 xfail, 163 screenshots reviewed (qa/REVIEW.md: 12 high defects open, owned by M2/M3) |
 | M1 | No external LLM | done: chat fixtures HF 100% / screening 96%; grading calibration 94.0% agreement, 5.9% needs_review; no-network tests; in-browser embeddings e2e |
-| M2 | Bug fixes 1–10 | done: all ten with proofs in qa/regressions (plus begin-race and the M2 review findings); no M2 xfail left; catalog 950 checks (911 pass, 39 xfail owned by M3/M6, 0 fail); anchors 1810 pass / 14 xfail (M3); 207 screenshots reviewed (qa/REVIEW.md, no open M2 defect); unit 330/330, e2e 13/13. The full `npm run qa` re-run was skipped: hackathon scope (see below) |
+| M2 | Bug fixes 1–10 | done: nine fixed with proofs in qa/regressions (plus begin-race and the M2 review findings); bug 6 (legs through the drapes) belongs to M3 and stays open; no M2 xfail left; catalog 950 checks (911 pass, 39 xfail owned by M3/M6, 0 fail); anchors 1810 pass / 14 xfail (M3); 207 screenshots reviewed (qa/REVIEW.md, no open M2 defect); unit 330/330, e2e 13/13. The full `npm run qa` re-run was skipped: hackathon scope (see below) |
 | M3 | Models, drapes, room | deferred (hackathon scope) |
 | M4 | Hide findings and mistake alerts | planned |
 | M5 | Three new cases | planned |
