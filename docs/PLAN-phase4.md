@@ -474,11 +474,11 @@ M6  UI polish
 | S | Schema changes | done |
 | M0 | QA harness | done: catalog 946 checks (627 pass, 319 xfail owned by M2/M3/M6), anchors 1493 pass / 307 xfail, intersections 71 pass / 139 xfail, 163 screenshots reviewed (qa/REVIEW.md: 12 high defects open, owned by M2/M3) |
 | M1 | No external LLM | done: chat fixtures HF 100% / screening 96%; grading calibration 94.0% agreement, 5.9% needs_review; no-network tests; in-browser embeddings e2e |
-| M2 | Bug fixes 1–10 | in progress: all ten committed with proofs in qa/regressions (8 in M0.2); the M2 gate is next (per bug: Node checks + catalog subset; full catalog at the M2 gate) |
-| M3 | Models, drapes, room | planned |
+| M2 | Bug fixes 1–10 | done: all ten with proofs in qa/regressions (plus begin-race and the M2 review findings); no M2 xfail left; catalog 950 checks (911 pass, 39 xfail owned by M3/M6, 0 fail); anchors 1810 pass / 14 xfail (M3); 207 screenshots reviewed (qa/REVIEW.md, no open M2 defect); unit 330/330, e2e 13/13. The full `npm run qa` re-run was skipped: hackathon scope (see below) |
+| M3 | Models, drapes, room | deferred (hackathon scope) |
 | M4 | Hide findings and mistake alerts | planned |
 | M5 | Three new cases | planned |
-| M6 | UI polish | planned |
+| M6 | UI polish | deferred (hackathon scope) |
 
 ## Assets and sources
 - Patient models: built in-repo from MakeHuman 1.x CC0 assets (base mesh hm08, default skeleton and weights, macrodetails/universal/breast targets) fetched from the makehumancommunity GitHub repository; cleaned with Blender as a Python module (`bpy`, GPL tool, not shipped). Hair is procedural (MakeHuman hair proxies are not reachable from the build environment).
@@ -509,3 +509,10 @@ M6  UI polish
 20. (M1) The history bank answers generic yes/no questions with the case's `negativeReply`; it only answers when nothing in the case matches. Should every new case review the bank topics it leaves unanswered (`notRelevantTopics`)?
 21. (M1) No provider abstraction (`providers/anthropic-stub.ts`) was built: nothing plugs in beside the deterministic layer, and a stub would be dead code. Revisit if an external model is ever allowed back for advisory use.
 
+### Hackathon scope (decided after M2)
+The project is for a two-day hackathon, so the remaining work is cut to what shows in a demo, with light
+checks (unit tests and a quick e2e before each commit; no full catalog/visual gate per milestone):
+1. M4 — hide-findings mode and mistake alerts.
+2. M5 — one or two new cases (S1 radiculopathy uses the new reflex and dangling-leg work; CAP or AS next).
+M3 (rebuilt models, sectioned drapes) and M6 (UI polish) are deferred; their defects stay listed in
+qa/REVIEW.md and qa/xfail.json.

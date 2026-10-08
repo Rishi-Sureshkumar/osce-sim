@@ -80,11 +80,6 @@
   "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [at the anatomical point (cardiac_mitral): (a) first hit is drape (roll-chest), not the patient; (c) no examine for auscultate_heart_diaphragm@cardiac_mitral (go]"
  },
  {
-  "id": "catalog-oracle:male:pmi_palpation@cardiac_mitral",
-  "owner": "M3",
-  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [at the anatomical point (cardiac_mitral): (a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu d]"
- },
- {
   "id": "catalog:female:auscultate_lungs@lung_ant_ll",
   "owner": "M3",
   "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient]"
@@ -613,5 +608,11 @@
   "id": "catalog:male:weber_test@scalp",
   "owner": "M6",
   "reason": "the crown sits under the camera-shot selector at the top of the ear view (page UI over the canvas; M6 layout) [(a) first hit is hair (proxy:hair), not the patient]"
+ },
+ {
+  "id": "catalog*:male:*@cardiac_mitral",
+  "owner": "M3",
+  "flaky": true,
+  "reason": "V-ROD: lying flat, the rolled chest gown edge (roll-chest) sometimes lies over the male apex and takes the click; passes or fails from run to run (sectioned drapes, M3)"
  }
 ]

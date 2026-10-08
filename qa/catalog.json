@@ -1083,8 +1083,8 @@
   },
   {
    "id": "catalog-oracle:male:pmi_palpation@cardiac_mitral",
-   "detail": "at the anatomical point (cardiac_mitral): (a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (cardiac_mitral): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:precordial_palpation@cardiac_aortic",
@@ -1158,8 +1158,8 @@
   },
   {
    "id": "catalog-oracle:male:reflex_triceps@triceps_tendon_left",
-   "detail": "at the anatomical point (triceps_tendon_left): (a) first hit is prop, not the patient; (b) the placement never reached the patient; (c) no examine for reflex_triceps@triceps_tendon_left (got none)",
-   "status": "FAIL"
+   "detail": "at the anatomical point (triceps_tendon_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:reflex_triceps@triceps_tendon_right",
@@ -3193,8 +3193,8 @@
   },
   {
    "id": "catalog:male:auscultate_heart_diaphragm@cardiac_mitral",
-   "detail": "",
-   "status": "XPASS"
+   "detail": "(a) first hit is drape (roll-chest), not the patient",
+   "status": "XFAIL"
   },
   {
    "id": "catalog:male:auscultate_heart_diaphragm@cardiac_pulmonic",
@@ -4233,8 +4233,8 @@
   },
   {
    "id": "catalog:male:reflex_triceps@triceps_tendon_left",
-   "detail": "(a) first hit is prop, not the patient; (b) the placement never reached the patient; (c) no examine for reflex_triceps@triceps_tendon_left (got none)",
-   "status": "FAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:reflex_triceps@triceps_tendon_right",

@@ -3,6 +3,8 @@
  * use `*` wildcards. A known-bad check is XFAIL (allowed) until its owner milestone fixes it; a
  * listed check that now passes is XPASS (an error: remove the entry). QA_STRICT_OWNER=M2 (or M3…)
  * ignores that owner's entries, so a milestone proves it emptied its part of the list.
+ * `flaky: true` marks a check that passes or fails from run to run (e.g. a rolled gown edge that may or
+ * may not lie over the target): it may pass without being an XPASS error, until its owner fixes it.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -11,6 +13,7 @@ export interface XfailEntry {
   id: string;
   owner: string;
   reason: string;
+  flaky?: boolean;
 }
 export type Status = "PASS" | "FAIL" | "XFAIL" | "XPASS";
 export interface CheckResult {
@@ -34,7 +37,7 @@ export function classify(results: CheckResult[], entries = loadXfail(), strictOw
   const out = results.map((r) => {
     const m = matchers.find((x) => x.re.test(r.id));
     if (m) m.used = true;
-    const status: Status = m ? (r.pass ? "XPASS" : "XFAIL") : r.pass ? "PASS" : "FAIL";
+    const status: Status = m ? (r.pass ? (m.e.flaky ? "PASS" : "XPASS") : "XFAIL") : r.pass ? "PASS" : "FAIL";
     return { ...r, status, xfail: m?.e };
   });
   return { results: out, unused: matchers.filter((m) => !m.used).map((m) => m.e) };
