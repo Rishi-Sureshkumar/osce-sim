@@ -39,7 +39,7 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
             {session.studentLabel} — {kase.title}
           </h1>
           <p className="text-sm text-slate-500">
-            <span data-testid="coach-mode">{modeLabel(session.mode)}</span> · {session.status} · started {new Date(session.startedAt).toLocaleString()} · {session.patientTurns} patient turns ·{" "}
+            <span data-testid="coach-mode">{modeLabel(session.mode)}</span> · {session.status} · started <span data-volatile>{new Date(session.startedAt).toLocaleString()}</span> · {session.patientTurns} patient turns ·{" "}
             {actions.filter((a) => a.type === "hint").length} hints used · {runs.length} grading run(s)
             {run?.embeddings === false && (
               <span className="ml-1 text-amber-700" title="The server's sentence-embedding model was unavailable: language items were matched by keywords and patterns only">
@@ -95,7 +95,7 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
               <ul className="mt-2 divide-y divide-slate-100 text-sm" data-testid="override-history">
                 {overrides.map((o) => (
                   <li key={o.id} className="py-1.5">
-                    <span className="text-slate-500">{new Date(o.createdAt).toLocaleString()}</span> — <span className="font-medium">{o.coach}</span> changed{" "}
+                    <span className="text-slate-500" data-volatile>{new Date(o.createdAt).toLocaleString()}</span> — <span className="font-medium">{o.coach}</span> changed{" "}
                     <code className="text-xs">
                       {o.markSheetId}/{o.itemId}
                     </code>{" "}

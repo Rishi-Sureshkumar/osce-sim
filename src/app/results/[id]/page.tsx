@@ -34,7 +34,7 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
           <p className="text-xs font-semibold tracking-wide text-cyan-700 uppercase">Results</p>
           <h1 className="text-xl font-semibold">{kase.title}</h1>
           <p className="text-sm text-slate-500">
-            {session.studentLabel} · started {new Date(session.startedAt).toLocaleString()} ·{" "}
+            {session.studentLabel} · started <span data-volatile>{new Date(session.startedAt).toLocaleString()}</span> ·{" "}
             <span className={`rounded px-1.5 py-0.5 text-xs font-semibold ${session.mode === "practice" ? "bg-emerald-100 text-emerald-900" : "bg-slate-800 text-white"}`} data-testid="mode-badge">
               {modeLabel(session.mode)}
             </span>

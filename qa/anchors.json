@@ -13772,7 +13772,7 @@
    "shot": "elbow_right",
    "first": "skin",
    "part": "upper_arm_r",
-   "offCm": 0.01
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -13782,7 +13782,7 @@
    "shot": "elbow_left",
    "first": "skin",
    "part": "upper_arm_l",
-   "offCm": 0.01
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -14927,7 +14927,7 @@
    "shot": "elbow_right",
    "first": "skin",
    "part": "upper_arm_r",
-   "offCm": 0.01
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -14937,7 +14937,7 @@
    "shot": "elbow_left",
    "first": "skin",
    "part": "upper_arm_l",
-   "offCm": 0.01
+   "offCm": 0
   },
   {
    "check": "occlusion",

@@ -8,7 +8,7 @@
  */
 import type { Position, RegionGroup } from "@/domain/schemas";
 import { anchorWorldNormals, anchorWorldPoints, skinLandmark, type Pose, type Vec3 } from "@/exam3d/regionAnchors";
-import { dirToWorld } from "./rig";
+import { TABLE, dirToWorld } from "./rig";
 import { DISPENSER_POS } from "./room/Dispenser";
 import { SINK } from "./room/sinkGeometry";
 import { TOOL_TABLE_POS, TOOL_TABLE_TOP } from "./room/ToolTable";
@@ -19,8 +19,8 @@ export type FocusShotId = Exclude<RegionGroup, "whole" | "neuro">;
 export type ShotId = "corridor" | "overview" | "sink" | "tool_table" | "seated" | FocusShotId | "face" | "ear_left" | "ear_right" | "ankle_left" | "ankle_right" | "arms_left" | "elbow_left" | "elbow_right" | "chest_left" | "chest_right" | "neck_back" | "legs_left" | "head_top";
 
 type Framing =
-  /** fixed camera in the room */
-  | { kind: "fixed"; position: Vec3; target: Vec3 }
+  /** fixed camera in the room; `follow`: moves with the patient along the table (sitting at its foot end) */
+  | { kind: "fixed"; position: Vec3; target: Vec3; follow?: boolean }
   /** framed on the patient: target = mean of landmark/anchor points, camera along their outward normal */
   | {
       kind: "patient";
@@ -98,7 +98,7 @@ export const SHOTS: Record<ShotId, Shot> = {
     id: "seated",
     label: "Seated",
     parent: "overview",
-    framing: { kind: "fixed", position: [-1.05, 1.12, 0.65], target: [0, 1.0, -0.35] },
+    framing: { kind: "fixed", position: [-1.05, 1.12, 0.65], target: [0, 1.0, -0.35], follow: true },
     fov: 45,
     freeLook: look(30, 0.85, 1.2),
     transitions: ROOM_SHOTS,
@@ -150,7 +150,7 @@ export const SHOTS: Record<ShotId, Shot> = {
     label: "Left ear",
     parent: "head_neck",
     // from the side and a little behind, on the head's own axes, so the ear and the mastoid behind it fill the view
-    framing: { kind: "patient", on: [{ landmark: "ear_canal_l" }, { landmark: "mastoid_l" }], normalFrom: { landmark: "ear_canal_l" }, forwardBone: "head", forwardAxis: [0.98, 0, -0.2], distance: 0.34 },
+    framing: { kind: "patient", on: [{ landmark: "ear_canal_l" }, { landmark: "mastoid_l" }], normalFrom: { landmark: "ear_canal_l" }, forwardBone: "head", forwardAxis: [0.98, 0, -0.2], distance: 0.34, clearTable: true },
     fov: 35,
     freeLook: look(30, 0.7, 1.3),
     transitions: ROOM_SHOTS,
@@ -160,7 +160,7 @@ export const SHOTS: Record<ShotId, Shot> = {
     label: "Right ear",
     parent: "head_neck",
     // from the side and a little behind, on the head's own axes, so the ear and the mastoid behind it fill the view
-    framing: { kind: "patient", on: [{ landmark: "ear_canal_r" }, { landmark: "mastoid_r" }], normalFrom: { landmark: "ear_canal_r" }, forwardBone: "head", forwardAxis: [-0.98, 0, -0.2], distance: 0.34 },
+    framing: { kind: "patient", on: [{ landmark: "ear_canal_r" }, { landmark: "mastoid_r" }], normalFrom: { landmark: "ear_canal_r" }, forwardBone: "head", forwardAxis: [-0.98, 0, -0.2], distance: 0.34, clearTable: true },
     fov: 35,
     freeLook: look(30, 0.7, 1.3),
     transitions: ROOM_SHOTS,
@@ -241,7 +241,8 @@ export const SHOTS: Record<ShotId, Shot> = {
     transitions: ROOM_SHOTS,
   },
   // the back of each elbow (the olecranon), from above, behind and outside it: seated with the hands in
-  // the lap, the olecranon faces back and the front views see only the upper arm
+  // the lap, the olecranon faces back and the front views see only the upper arm (while the seated patient
+  // sits into the backrest, V-BACKREST, the backrest edge crowds this view; a view along the arm is worse)
   elbow_left: {
     id: "elbow_left",
     label: "Left elbow (back)",
@@ -328,7 +329,13 @@ function pointOf(ref: { landmark?: string; anchor?: string }, pose: Pose): { poi
 export function shotCamera(id: ShotId, pose: Pose): { position: Vec3; target: Vec3; fov: number } {
   const shot = SHOTS[id];
   const f = shot.framing;
-  if (f.kind === "fixed") return { position: f.position, target: f.target, fov: shot.fov };
+  if (f.kind === "fixed") {
+    if (!f.follow) return { position: f.position, target: f.target, fov: shot.fov };
+    // how far the patient's pelvis has moved along the table from where it lies (the hinge)
+    const root = pose.world.get("root");
+    const dz = root ? root.elements[14]! - TABLE.hingeZ : 0;
+    return { position: [f.position[0], f.position[1], f.position[2] + dz], target: [f.target[0], f.target[1], f.target[2] + dz], fov: shot.fov };
+  }
   const pts = f.on.map((r) => pointOf(r, pose).point);
   const target: Vec3 = [0, 1, 2].map((k) => pts.reduce((s, p) => s + p[k]!, 0) / pts.length) as Vec3;
   let n = f.forwardBone ? norm(dirToWorld(f.forwardAxis ?? [0, 0, 1], f.forwardBone, pose)) : pointOf(f.normalFrom, pose).normal;
@@ -415,6 +422,8 @@ const LEGS_ON_TABLE: readonly Position[] = ["supine", "reclined_30", "reclined_4
 export function shotHint(id: ShotId, position: Position): string | null {
   if ((id === "chest_back" || id === "neck_back") && BACK_ON_TABLE.includes(position))
     return "The back is against the table. Ask the patient to sit up or lean forward to examine it.";
+  // sitting back against the raised head of the table: the student asks the patient to lean forward
+  if (id === "chest_back" && position === "seated") return "The back rests on the raised head of the table. Ask the patient to lean forward to examine it.";
   if (id === "ear_left" && position === "left_lateral_decubitus") return "The left ear is against the table. Ask the patient to sit up or turn to examine it.";
   if ((id === "ankle_left" || id === "ankle_right") && LEGS_ON_TABLE.includes(position))
     return "The back of the ankle rests on the table. Sit the patient with the legs dangling to examine it.";

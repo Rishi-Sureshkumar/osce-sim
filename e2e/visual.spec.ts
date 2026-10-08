@@ -64,7 +64,10 @@ async function shoot(page: Page, rel: string, meta: Omit<ManifestEntry, "file" |
   fs.mkdirSync(path.dirname(abs), { recursive: true });
   // let the last frame land (no animation runs in freeze mode, but the canvas paints asynchronously)
   await page.waitForTimeout(250);
-  await page.screenshot({ path: abs, animations: "disabled", caret: "hide" });
+  // clocks, dates and the action log's times differ on every run: masked, so an unchanged screen keeps its sha
+  // (and its review) from run to run
+  const mask = [page.locator('[aria-label="Time elapsed"], [aria-label="Time remaining"], [data-testid="action-log"], [data-volatile], [data-testid="pen-saved"]')];
+  await page.screenshot({ path: abs, animations: "disabled", caret: "hide", mask, maskColor: "#e2e8f0" });
   recordShot({ file, sha256: crypto.createHash("sha256").update(fs.readFileSync(abs)).digest("hex"), viewport, ...meta });
 }
 

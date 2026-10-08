@@ -45,8 +45,8 @@ export default async function CoachHome() {
                 </td>
                 <td className="px-3 py-2">{r.caseTitle}</td>
                 <td className="px-3 py-2">{modeLabel(r.session.mode)}</td>
-                <td className="px-3 py-2 whitespace-nowrap">{new Date(r.session.startedAt).toLocaleString()}</td>
-                <td className="px-3 py-2 font-mono">{r.session.endedAt ? mmss(Date.parse(r.session.endedAt) - Date.parse(r.session.startedAt)) : "—"}</td>
+                <td className="px-3 py-2 whitespace-nowrap" data-volatile>{new Date(r.session.startedAt).toLocaleString()}</td>
+                <td className="px-3 py-2 font-mono" data-volatile>{r.session.endedAt ? mmss(Date.parse(r.session.endedAt) - Date.parse(r.session.startedAt)) : "—"}</td>
                 <td className="px-3 py-2">{r.session.status}</td>
                 <td className="px-3 py-2 font-mono">{r.points === null ? "—" : `${r.points}/${r.maxPoints}`}</td>
                 <td className="px-3 py-2">

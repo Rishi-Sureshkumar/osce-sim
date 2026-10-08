@@ -13,7 +13,7 @@ export function Timeline({ actions, labels, highlight }: { actions: Action[]; la
         return (
           <li key={a.id} id={`a-${a.id}`} className={`scroll-mt-24 px-3 py-2 text-sm target:bg-amber-50 ${highlight?.has(a.id) ? "bg-amber-50" : ""}`}>
             <div className="flex gap-3">
-              <span className="w-12 shrink-0 font-mono text-xs text-slate-400">{mmss(a.t)}</span>
+              <span className="w-12 shrink-0 font-mono text-xs text-slate-400" data-volatile>{mmss(a.t)}</span>
               <span className="w-20 shrink-0 text-xs font-semibold text-slate-500 uppercase">
                 {d.who === "patient" ? "Patient" : a.type === "examine" ? "Exam" : a.type === "courtesy" ? "Action" : d.who === "system" ? "" : "Student"}
                 {a.type === "say" && (

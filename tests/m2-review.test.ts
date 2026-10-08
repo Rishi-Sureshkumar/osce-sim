@@ -1,6 +1,7 @@
 /**
  * Findings of the M2 adversarial review (Phase 4 M2 gate), each with the case that failed before:
- *  - the Achilles close-up put the camera under the foot mattress whenever the legs lie on the table;
+ *  - the Achilles close-up put the camera under the foot mattress whenever the legs lie on the table
+ *    (and at 45° the ear views looked at the inside of the backrest: V-EARBACK);
  *  - a clonus test with the hands (no tendon tap: grade 0) never moved the foot;
  *  - leaving an eye and coming back into it hid the swinging-light test;
  *  - bp_cuff_placement had become a hands exam: touching the upper arm logged a cuff placement.
@@ -23,18 +24,19 @@ import { insideBox, tableAngle, tableBoxes } from "@/scene/room/tableGeometry";
 const { maneuvers, maneuverById } = loadContentFromDisk();
 const POSITIONS: Position[] = ["supine", "reclined_30", "reclined_45", "seated", "seated_leaning_forward", "sitting_dangling", "left_lateral_decubitus"];
 
-describe("the Achilles (and back-of-neck, top-of-head) close-ups stay out of the table", () => {
+describe("the Achilles (and back-of-neck, top-of-head, ear) close-ups stay out of the table", () => {
   for (const variant of ["male", "female"] as const)
-    it(`${variant}: in every position the camera is outside the table, and its line of sight clears it (bar the back of the neck lying on it)`, () => {
+    it(`${variant}: in every position the camera is outside the table, and its line of sight clears it (bar a part lying on it)`, () => {
       for (const position of POSITIONS) {
         const pose = poseFor(position, POSITION_ANGLE[position], variant);
         const boxes = tableBoxes(tableAngle(position, POSITION_ANGLE[position]));
-        for (const shot of ["ankle_left", "ankle_right", "neck_back", "head_top"] as const) {
+        for (const shot of ["ankle_left", "ankle_right", "neck_back", "head_top", "ear_left", "ear_right"] as const) {
           const { position: cam, target } = shotCamera(shot, pose);
           expect(boxes.some((b) => insideBox(cam, b)), `${shot} ${position}: camera inside the table`).toBe(false);
-          // the back of the neck against the raised backrest can't be seen past it from anywhere (a hint says so);
-          // the ankles can always be seen from above, so they are held to the full check
-          if (shot === "neck_back" && shotHint(shot, position)) continue;
+          // a part lying on the table (the back of the neck on the raised backrest, the left ear lying on the
+          // left side: a hint says so) can't be seen past it from anywhere; the ankles can always be seen from
+          // above, so they are held to the full check
+          if (!shot.startsWith("ankle") && shotHint(shot, position)) continue;
           const len = distance(cam, target);
           for (let i = 0; i <= 40; i++) {
             const t = i / 40;
