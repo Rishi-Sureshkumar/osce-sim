@@ -19,7 +19,7 @@ export const TOOL_HELP: Record<Tool, string> = {
   stethoscope: "Move over the body, then press and hold to listen. Hold still for 3 s.",
   tuning_fork: "Strike the fork, then place it on the body.",
   reflex_hammer: "Click a tendon to tap it.",
-  penlight: "Click an eye to shine the light.",
+  penlight: "Shine the light onto a pupil. Drag it from eye to eye and back for the swinging-light test.",
   bp_cuff: "Click an upper arm to place the cuff.",
   hands: "Click a region to palpate or percuss.",
   cotton_swab: "Touch the skin lightly to test light-touch sensation.",

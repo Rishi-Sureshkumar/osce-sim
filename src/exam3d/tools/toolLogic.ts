@@ -22,7 +22,7 @@ export function regionsForTool(maneuvers: readonly M[], tool: Tool): string[] {
  * match (e.g. bell over the lungs) the tool-only matches are returned so the attempt is still
  * logged with the wrong setting, and technique rules can mark it down.
  */
-export function candidatesFor(maneuvers: readonly M[], tool: Tool, mode: ToolMode | undefined, regionId: string): M[] {
+export function candidatesFor<T extends M>(maneuvers: readonly T[], tool: Tool, mode: ToolMode | undefined, regionId: string): T[] {
   const onRegion = maneuvers.filter((m) => toolFor(m) === tool && m.allowedRegions.includes(regionId));
   const exact = onRegion.filter((m) => !m.toolMode || m.toolMode === mode);
   return exact.length ? exact : onRegion;

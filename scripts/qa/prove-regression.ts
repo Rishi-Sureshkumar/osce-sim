@@ -32,6 +32,11 @@ export const PROOFS: Record<string, Proof> = {
     commit: "be1700b",
     description: "Achilles reflex result card on the left ankle could not be closed (no ✕, Esc or outside click)",
   },
+  bug1: {
+    kind: "vitest",
+    tests: ["tests/regressions/bug1-penlight.test.ts"],
+    description: "the penlight hit area was far too large: the eye target sat on the lids 1.4–1.9 cm from the pupil with a 1.5 cm tolerance, and only one eye could be lit per click (no sweep, no swinging-light test)",
+  },
   bug3: {
     kind: "e2e",
     tests: ["e2e/regressions/bug3-sink.spec.ts"],

@@ -15,7 +15,7 @@ export function getPublicCatalog(): PublicCatalog {
   const c = getContent();
   return {
     regions: c.regions,
-    maneuvers: c.maneuvers.map(({ id, fcmId, label, system, technique, allowedRegions, demo, interaction, tool, toolMode, steps }) => ({
+    maneuvers: c.maneuvers.map(({ id, fcmId, label, system, technique, allowedRegions, demo, interaction, tool, toolMode, steps, toleranceCm }) => ({
       id,
       fcmId,
       label,
@@ -27,6 +27,7 @@ export function getPublicCatalog(): PublicCatalog {
       ...(tool ? { tool } : {}),
       ...(toolMode ? { toolMode } : {}),
       ...(steps ? { steps } : {}),
+      ...(toleranceCm ? { toleranceCm } : {}),
     })),
   };
 }

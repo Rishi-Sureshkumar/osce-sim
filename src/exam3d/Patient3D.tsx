@@ -25,7 +25,7 @@ export interface Patient3DProps {
   /** eye exam: hold the head still */
   steadyHead?: boolean;
   quality: "high" | "low";
-  pupilScale: number;
+  pupilScale: number | { left: number; right: number };
   angle: { current: number };
   jerk?: { bone: string; amount: number; at: number } | null;
   /** regions a click can resolve to (examinable + prohibited, or the tool's regions) */

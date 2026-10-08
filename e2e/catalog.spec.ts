@@ -230,11 +230,11 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
   // where the student clicks: the anchor (or each sequence landmark)
   const targets: { x: number; y: number }[] = [];
   if (e.route !== "panel" && e.route !== "panel-tool") {
-    const steps = e.steps?.length ? e.steps : [{ id: "", landmark: undefined as string | undefined }];
+    const steps = e.sweep ? e.sweep.map((r) => ({ id: "", landmark: undefined as string | undefined, regionId: r })) : e.steps?.length ? e.steps.map((st) => ({ ...st, regionId: e.regionId })) : [{ id: "", landmark: undefined as string | undefined, regionId: e.regionId }];
     for (const st of steps) {
       const lm = st.landmark;
       const useOracle = at && (!at.step || at.step === st.id);
-      const p = useOracle ? await page.evaluate((w) => window.__osce3d!.projectPoint(w), at!.world) : await page.evaluate(([r, l]) => window.__osce3d!.project(r!, l ?? undefined), [e.regionId, lm ?? null] as const);
+      const p = useOracle ? await page.evaluate((w) => window.__osce3d!.projectPoint(w), at!.world) : await page.evaluate(([r, l]) => window.__osce3d!.project(r!, l ?? undefined), [st.regionId, lm ?? null] as const);
       if (!p) {
         fails.push(`no anchor${lm ? ` for landmark ${lm}` : ""} to click`);
         return fails;
@@ -289,7 +289,15 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
     // from an earlier entry is cleared first so the "which exam?" question appears
     if (e.hold && (await page.getByTestId("listening-for").isVisible())) await page.getByTestId("listening-for").getByRole("button", { name: "Change exam" }).click();
     const pointerBefore = await page.evaluate(() => window.__osce3d!.lastPointer()?.at ?? 0);
-    for (const t of targets) {
+    if (e.sweep) {
+      // one press dragged through the targets (the camera holds still while the beam is dragged)
+      await page.mouse.move(targets[0]!.x, targets[0]!.y);
+      await page.mouse.down();
+      for (const t of targets.slice(1)) await page.mouse.move(t.x, t.y, { steps: 16 });
+      await page.mouse.up();
+      await page.waitForTimeout(300);
+    }
+    for (const t of e.sweep ? [] : targets) {
       await page.mouse.move(t.x, t.y);
       await page.mouse.down();
       if (e.hold) await page.waitForTimeout(HOLD_MS);
@@ -310,7 +318,7 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
     const lp = await page.evaluate(() => window.__osce3d!.lastPointer());
     const d = lp?.decision as { regionId?: string; outcome?: string; distanceCm?: number; none?: boolean } | undefined;
     if (lp && lp.at === pointerBefore) fails.push("(b) the placement never reached the patient");
-    else if (!e.hold) {
+    else if (!e.hold && !e.sweep) {
       if (!d || d.none) fails.push("(b) the placement resolved to no region");
       else if (d.regionId !== e.regionId || d.outcome !== "finding") fails.push(`(b) placement → ${d.regionId} ${d.outcome} (${d.distanceCm?.toFixed(1)} cm)`);
     }
@@ -334,7 +342,7 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
 
 /** A tool placement at 2× the tolerance must not record that exam. */
 async function runNegative(page: Page, api: APIRequestContext, sessionId: string, e: CatalogEntry): Promise<string[]> {
-  if (e.route !== "tool" || e.steps?.length || !e.toleranceCm) return [];
+  if (e.route !== "tool" || e.steps?.length || e.sweep || !e.toleranceCm) return [];
   await closeAll(page);
   const pts = await page.evaluate(([r, cm]) => window.__osce3d!.skinPointNear(r!, cm!, 8), [e.regionId, e.toleranceCm * 2] as const);
   const p = pts.find((q) => q.page.x > 0 && q.page.y > 0);
@@ -388,7 +396,8 @@ for (const [group, entries] of GROUPS) {
         await closeAll(page).catch(() => undefined);
       }
       results.push({ id: e.id, pass: fails.length === 0, detail: fails.join("; ") });
-      const o = e.route === "tool" || e.route === "menu" ? oracleRuleFor(e, ruleIds) : null;
+      // a sweep's anatomical points are each eye's own entry
+      const o = (e.route === "tool" || e.route === "menu") && !e.sweep ? oracleRuleFor(e, ruleIds) : null;
       if (o) {
         let ofails: string[];
         try {
@@ -401,7 +410,7 @@ for (const [group, entries] of GROUPS) {
         results.push({ id: e.id.replace(/^catalog:/, "catalog-oracle:"), pass: ofails.length === 0, detail: `at the anatomical point (${o.rule}${o.step ? `, ${o.step} step` : ""}): ${ofails.join("; ")}` });
       }
       if (process.env.CATALOG_VERBOSE) console.log(`[${i + 1}/${ordered.length}] ${fails.length ? "✗" : "✓"} ${e.id} ${Date.now() - t0} ms${fails.length ? ` — ${fails.join("; ")}` : ""}`);
-      if (e.route === "tool") {
+      if (e.route === "tool" && !e.sweep) {
         let neg: string[];
         try {
           neg = await runNegative(page, api, sessionId, e);

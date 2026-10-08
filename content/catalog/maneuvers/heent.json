@@ -300,20 +300,53 @@
         "default": {
           "text": "Pupils equal, round, 3 mm, briskly reactive to light directly and consensually.",
           "visual": {
-            "pupilConstriction": 0.6
+            "pupilConstriction": 0.6,
+            "pupilConsensual": 0.6
           }
         }
       },
       "demo": {
         "steps": [
           "Compare pupil size and shape in dim light.",
-          "Shine a penlight into one eye and watch both pupils constrict.",
+          "Shine the penlight straight onto one pupil and watch both pupils constrict.",
           "Repeat on the other side."
         ]
       },
       "sourceText": "",
       "interaction": "place",
-      "tool": "penlight"
+      "tool": "penlight",
+      "toleranceCm": 0.6
+    },
+    {
+      "id": "swinging_flashlight",
+      "fcmId": null,
+      "label": "Swinging-light test",
+      "system": "heent",
+      "technique": "special",
+      "allowedRegions": [
+        "eye_right",
+        "eye_left"
+      ],
+      "normalFinding": {
+        "default": {
+          "text": "No relative afferent pupillary defect: each pupil stays constricted as the light swings across to it.",
+          "visual": {
+            "pupilConstriction": 0.6,
+            "pupilConsensual": 0.6
+          }
+        }
+      },
+      "demo": {
+        "steps": [
+          "In dim light, hold the penlight on one pupil for about two seconds.",
+          "Swing the light briskly across to the other pupil, then back again.",
+          "Watch whether each pupil stays small or widens as the light arrives."
+        ]
+      },
+      "sourceText": "",
+      "interaction": "drag_path",
+      "tool": "penlight",
+      "toleranceCm": 0.6
     },
     {
       "id": "eom_accommodation",

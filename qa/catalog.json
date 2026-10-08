@@ -683,8 +683,8 @@
   },
   {
    "id": "catalog-oracle:female:cn_ii_acuity@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) the click resolved to face; (b) cn_ii_acuity is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:cn_iii_iv_vi_eom@eye_left",
@@ -693,8 +693,8 @@
   },
   {
    "id": "catalog-oracle:female:cn_iii_iv_vi_eom@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) the click resolved to face; (b) cn_iii_iv_vi_eom is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:eom_accommodation@eye_left",
@@ -703,8 +703,8 @@
   },
   {
    "id": "catalog-oracle:female:eom_accommodation@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) the click resolved to face; (b) eom_accommodation is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:eye_inspection@eye_left",
@@ -713,8 +713,8 @@
   },
   {
    "id": "catalog-oracle:female:eye_inspection@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) the click resolved to face; (b) eye_inspection is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:hepatojugular_reflux@abd_ruq",
@@ -743,8 +743,8 @@
   },
   {
    "id": "catalog-oracle:female:ophthalmoscopy@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) the click resolved to face; (b) ophthalmoscopy is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:pmi_palpation@cardiac_mitral",
@@ -773,13 +773,13 @@
   },
   {
    "id": "catalog-oracle:female:pupils_light_reflex@eye_left",
-   "detail": "at the anatomical point (eye_left): (b) placement → eye_left nothing (4.3 cm); (c) no examine for pupils_light_reflex@eye_left (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:pupils_light_reflex@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) placement → eye_right nothing (4.4 cm); (c) no examine for pupils_light_reflex@eye_right (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:reflex_achilles@ankle_left",
@@ -863,8 +863,8 @@
   },
   {
    "id": "catalog-oracle:female:visual_fields_confrontation@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) the click resolved to face; (b) visual_fields_confrontation is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:wrist_hand_inspection@wrist_left",
@@ -1058,8 +1058,8 @@
   },
   {
    "id": "catalog-oracle:male:cn_ii_acuity@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) the click resolved to face; (b) cn_ii_acuity is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:cn_iii_iv_vi_eom@eye_left",
@@ -1068,8 +1068,8 @@
   },
   {
    "id": "catalog-oracle:male:cn_iii_iv_vi_eom@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) the click resolved to face; (b) cn_iii_iv_vi_eom is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:eom_accommodation@eye_left",
@@ -1078,8 +1078,8 @@
   },
   {
    "id": "catalog-oracle:male:eom_accommodation@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) the click resolved to face; (b) eom_accommodation is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:eye_inspection@eye_left",
@@ -1088,8 +1088,8 @@
   },
   {
    "id": "catalog-oracle:male:eye_inspection@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) the click resolved to face; (b) eye_inspection is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:hepatojugular_reflux@abd_ruq",
@@ -1118,8 +1118,8 @@
   },
   {
    "id": "catalog-oracle:male:ophthalmoscopy@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) the click resolved to face; (b) ophthalmoscopy is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:pmi_palpation@cardiac_mitral",
@@ -1148,13 +1148,13 @@
   },
   {
    "id": "catalog-oracle:male:pupils_light_reflex@eye_left",
-   "detail": "at the anatomical point (eye_left): (b) placement → eye_left nothing (4.0 cm); (c) no examine for pupils_light_reflex@eye_left (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:pupils_light_reflex@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) placement → eye_right nothing (3.9 cm); (c) no examine for pupils_light_reflex@eye_right (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:reflex_achilles@ankle_left",
@@ -1238,8 +1238,8 @@
   },
   {
    "id": "catalog-oracle:male:visual_fields_confrontation@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) the click resolved to face; (b) visual_fields_confrontation is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (eye_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:wrist_hand_inspection@wrist_left",
@@ -2858,6 +2858,11 @@
   },
   {
    "id": "catalog:female:strength_l4_s2_knee_flexion@neuro_motor_lower",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:swinging_flashlight@eye_right",
    "detail": "",
    "status": "PASS"
   },
@@ -4588,6 +4593,11 @@
   },
   {
    "id": "catalog:male:strength_l4_s2_knee_flexion@neuro_motor_lower",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:swinging_flashlight@eye_right",
    "detail": "",
    "status": "PASS"
   },

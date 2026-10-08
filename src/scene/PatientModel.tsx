@@ -23,8 +23,8 @@ export interface PatientModelProps {
   jvpCm: number;
   /** regionId → edema grade 1–4 (drawn as swelling) */
   edema: Record<string, number>;
-  /** 1 = rest; < 1 constricted (penlight) */
-  pupilScale: number;
+  /** 1 = rest; < 1 constricted (penlight). Per eye: light in one eye constricts it (direct) and the other (consensual). */
+  pupilScale: number | { left: number; right: number };
   /** the patient is talking: turn the head toward the camera */
   speaking: boolean;
   /** eye exam: the head stays still and the eyes look ahead at a far point (no sway, no turn) */
@@ -144,6 +144,7 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
   // ---- per-frame pose: base rotations + breathing, blink, head turn
   const blink = useRef({ next: 2 + Math.random() * 3, t: -1 });
   const look = useRef({ yaw: 0, pitch: 0 });
+  const pupils = useRef({ left: 1, right: 1 });
   const drapeAlpha = useRef<Record<string, number>>({ gown_chest: 1, gown_abdomen: 1, gown_back: 1 });
   const root = useRef<Object3D>(null);
 
@@ -191,9 +192,16 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
       jerk: p.jerk ? { bone: p.jerk.bone, amount: p.jerk.amount, ageSec: performance.now() / 1000 - p.jerk.at } : null,
     });
 
+    // pupils ease toward their targets: constrict quickly (~0.15 s), widen slowly (~0.6 s)
+    const pupilGoal = typeof p.pupilScale === "number" ? { left: p.pupilScale, right: p.pupilScale } : p.pupilScale;
+    for (const side of ["left", "right"] as const) {
+      const cur = pupils.current[side];
+      const tau = pupilGoal[side] < cur ? 0.15 : 0.6;
+      pupils.current[side] = cur + (pupilGoal[side] - cur) * (1 - Math.exp(-dt / tau));
+    }
     for (const [name, bone] of bones) {
       if (name.startsWith("pupil_")) {
-        bone.scale.setScalar(p.pupilScale);
+        bone.scale.setScalar(name.endsWith("L") ? pupils.current.left : pupils.current.right);
         continue;
       }
       bone.quaternion.copy(rot[name] ? rotationOf(rot[name]) : tmpQ.identity());

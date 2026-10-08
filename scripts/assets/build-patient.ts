@@ -199,6 +199,14 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
   const dominant = (srcVi: number) => top4(srcVi, "root")[0]![0];
   // skin weights of the snapped vertex: anchors and landmarks are skinned exactly like the surface (bug 5)
   const weightsOf = (srcVi: number) => top4(srcVi, "root");
+  // pupil centre on each eye's forward axis, just in front of the iris (the pupil discs below)
+  const pupilCentre = (side: "L" | "R") => {
+    const eh = headOf(`eye.${side}`);
+    const fwd = norm(sub(tailOf(`eye.${side}`), eh));
+    const ev = built.eyes!.pos.filter((p) => Math.sign(p[0]) === (side === "L" ? 1 : -1));
+    const r = ev.reduce((m, p) => Math.max(m, dot(sub(p, eh), fwd)), 0);
+    return { centre: add(eh, scale(fwd, r + 0.0004)), fwd };
+  };
   // front-most skin near (x, y), from front-facing vertices: for dimple landmarks (the navel)
   const frontZ = (x: number, y: number) => {
     let z = -Infinity;
@@ -216,6 +224,11 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
     return ring.reduce((a, b) => a + b, 0) / ring.length - p[2];
   };
   const findLandmark = (def: (typeof LANDMARK_DEFS)[number]): { point: V3; normal: V3; bone: string; weights: [string, number][] } => {
+    if (def.pupil) {
+      const side = def.id.endsWith("_r") ? "R" : "L";
+      const { centre, fwd } = pupilCentre(side);
+      return { point: centre, normal: fwd, bone: `eye.${side}`, weights: [[`eye.${side}`, 1]] };
+    }
     const ref = def.ref.kind === "mid" ? scale(add(headOf(def.ref.bone), headOf(def.ref.other)), 0.5) : def.ref.end === "tail" ? tailOf(def.ref.bone) : headOf(def.ref.bone);
     let best = -1;
     let bestScore = -Infinity;
@@ -266,6 +279,13 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
       const lmId = s === -1 ? mirrorId(def.landmark) : def.landmark;
       const lm = landmarks[lmId];
       if (!lm) throw new Error(`anchor ${def.regionId}: landmark ${lmId} missing`);
+      if (def.onLandmark) {
+        pts.push(lm.point);
+        nrm.push(lm.normal);
+        bones.push(lm.bone);
+        weights.push(lm.weights);
+        continue;
+      }
       let from = lm.point;
       if (def.between) {
         const toId = s === -1 ? mirrorId(def.between.to) : def.between.to;
@@ -379,13 +399,7 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
   const pupilMesh: Built = { pos: [], uv: [], src: [], idx: [] };
   const pupilBone: string[] = [];
   for (const side of ["L", "R"] as const) {
-    const eh = headOf(`eye.${side}`);
-    const et = tailOf(`eye.${side}`);
-    const fwd = norm(sub(et, eh));
-    // radius of the eyeball from its vertices
-    const ev = eyes.pos.filter((p) => Math.sign(p[0]) === (side === "L" ? 1 : -1));
-    const r = ev.reduce((m, p) => Math.max(m, dot(sub(p, eh), fwd)), 0);
-    const centre = add(eh, scale(fwd, r + 0.0004));
+    const { centre, fwd } = pupilCentre(side);
     pupilBones[`pupil.${side}`] = { head: centre, parent: `eye.${side}` };
     const right = norm(cross(fwd, [0, 1, 0]));
     const up = cross(right, fwd);

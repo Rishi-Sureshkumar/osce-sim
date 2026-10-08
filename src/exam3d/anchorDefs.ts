@@ -26,6 +26,8 @@ export interface LandmarkDef {
    * front skin this many metres around it (e.g. the navel); `pick` is then ignored
    */
   dimple?: number;
+  /** instead: the centre of this side's rendered pupil, carried by the eye bone (not on the skin) */
+  pupil?: boolean;
   /** label for the practice-mode "Show landmarks" hint (own words) */
   label?: string;
 }
@@ -41,6 +43,8 @@ export interface AnchorDef {
    * scale with the body)
    */
   between?: { to: string; t: number };
+  /** use the landmark point itself, not projected onto the skin (the pupils) */
+  onLandmark?: boolean;
   /** per body model: replaces offsetCm (calibrated with `npm run qa:calibrate-anchors`) */
   offsetCmBy?: Partial<Record<"male" | "female", [number, number, number]>>;
   facing: Facing;
@@ -63,7 +67,8 @@ const L_LANDMARKS: LandmarkDef[] = [
   { id: "asis_l", ref: { kind: "joint", bone: "root" }, box: [[0.11, 0.035], [0.06, 0.05], [0.1, 0.1]], pick: [0.2, 0, 1], label: "Anterior superior iliac spine" },
   { id: "ear_canal_l", ref: { kind: "joint", bone: "head" }, box: [[0.07, 0.04], [0.04, 0.025], [0, 0.03]], pick: [1, 0, 0], label: "Ear" },
   { id: "mastoid_l", ref: { kind: "joint", bone: "head" }, box: [[0.055, 0.025], [0.01, 0.02], [-0.03, 0.025]], pick: [0.5, -0.2, -1], label: "Mastoid process" },
-  { id: "eye_l", ref: { kind: "joint", bone: "eye.L", end: "tail" }, box: [[0, 0.015], [0.006, 0.01], [0, 0.03]], pick: [0, 0, 1], label: "Eye" },
+  // the pupil itself (the penlight must land on it; the skin around the eye is the lids)
+  { id: "eye_l", ref: { kind: "joint", bone: "eye.L", end: "tail" }, pick: [0, 0, 1], pupil: true, label: "Eye" },
   { id: "jaw_angle_l", ref: { kind: "joint", bone: "jaw" }, box: [[0.05, 0.025], [-0.04, 0.025], [-0.02, 0.035]], pick: [1, -0.3, 0], label: "Angle of the jaw" },
   { id: "shoulder_l", ref: { kind: "joint", bone: "upperarm01.L" }, box: [[0, 0.06], [0, 0.06], [0, 0.06]], pick: [1, 1, 0], label: "Shoulder" },
   { id: "antecubital_l", ref: { kind: "joint", bone: "lowerarm01.L" }, box: [[0, 0.04], [0, 0.04], [0, 0.05]], pick: [0, 0, 1], label: "Antecubital fossa" },
@@ -111,7 +116,7 @@ type Def = Omit<AnchorDef, "mirror">;
 const LEFT: Def[] = [
   // neck and head (sided)
   { regionId: "carotid_left", landmark: "sternal_notch", offsetCm: [3.5, 7.5, 0], facing: "any", toleranceCm: 2, label: "Carotid pulse" },
-  { regionId: "eye_left", landmark: "eye_l", offsetCm: [0, 0, 0], facing: "front", toleranceCm: 1.5 },
+  { regionId: "eye_left", landmark: "eye_l", offsetCm: [0, 0, 0], onLandmark: true, facing: "front", toleranceCm: 1.5 },
   { regionId: "ear_left", landmark: "ear_canal_l", offsetCm: [0, 0, 0], facing: "any", toleranceCm: 1.5 },
   // chest
   { regionId: "lung_ant_lu", landmark: "sternal_notch", offsetCm: [7, -6, 0], facing: "front", toleranceCm: 4, label: "2nd intercostal space, midclavicular line" },

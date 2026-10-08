@@ -84,11 +84,16 @@ export function ToolCursor({ tool, at, toolMode, swingAt, vibrating }: { tool: T
               <cylinderGeometry args={[0.006, 0.006, 0.12, 10]} />
               <meshStandardMaterial color="#1d4ed8" roughness={0.4} />
             </mesh>
-            <mesh position={[0, -0.1, 0]} raycast={() => null}>
-              <coneGeometry args={[0.03, 0.09, 16, 1, true]} />
-              <meshBasicMaterial color="#fef9c3" transparent opacity={0.35} depthWrite={false} />
+            {/* a narrow beam: the spot where it lands is about the size of an iris */}
+            <mesh position={[0, -0.09, 0]} raycast={() => null}>
+              <coneGeometry args={[0.005, 0.06, 16, 1, true]} />
+              <meshBasicMaterial color="#fef9c3" transparent opacity={0.3} depthWrite={false} />
             </mesh>
-            <pointLight position={[0, -0.08, 0]} intensity={0.4} distance={0.25} color="#fff7d6" />
+            <mesh position={[0, -0.119, 0]} rotation={[-Math.PI / 2, 0, 0]} raycast={() => null}>
+              <circleGeometry args={[0.005, 20]} />
+              <meshBasicMaterial color="#fffbe6" transparent opacity={0.55} depthWrite={false} />
+            </mesh>
+            <pointLight position={[0, -0.1, 0]} intensity={0.25} distance={0.08} color="#fff7d6" />
           </group>
         )}
         {(tool === "hands" || tool === "bp_cuff") && (

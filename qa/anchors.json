@@ -185,7 +185,7 @@
   {
    "id": "anchors:skin:male:supine:eye_left",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:supine:ear_left",
@@ -355,7 +355,7 @@
   {
    "id": "anchors:skin:male:supine:eye_right",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:supine:ear_right",
@@ -524,8 +524,8 @@
   },
   {
    "id": "anchors:oracle:male:supine:eye_left",
-   "status": "XFAIL",
-   "detail": "1.4 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:male:supine:upper_arm_left",
@@ -584,8 +584,8 @@
   },
   {
    "id": "anchors:oracle:male:supine:eye_right",
-   "status": "XFAIL",
-   "detail": "1.4 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:male:supine:upper_arm_right",
@@ -995,7 +995,7 @@
   {
    "id": "anchors:skin:male:reclined_30:eye_left",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:reclined_30:ear_left",
@@ -1165,7 +1165,7 @@
   {
    "id": "anchors:skin:male:reclined_30:eye_right",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:reclined_30:ear_right",
@@ -1334,8 +1334,8 @@
   },
   {
    "id": "anchors:oracle:male:reclined_30:eye_left",
-   "status": "XFAIL",
-   "detail": "1.4 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:male:reclined_30:upper_arm_left",
@@ -1394,8 +1394,8 @@
   },
   {
    "id": "anchors:oracle:male:reclined_30:eye_right",
-   "status": "XFAIL",
-   "detail": "1.4 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:male:reclined_30:upper_arm_right",
@@ -1685,7 +1685,7 @@
   {
    "id": "anchors:skin:male:reclined_45:eye_left",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:reclined_45:ear_left",
@@ -1855,7 +1855,7 @@
   {
    "id": "anchors:skin:male:reclined_45:eye_right",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:reclined_45:ear_right",
@@ -2024,8 +2024,8 @@
   },
   {
    "id": "anchors:oracle:male:reclined_45:eye_left",
-   "status": "XFAIL",
-   "detail": "1.4 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:male:reclined_45:upper_arm_left",
@@ -2084,8 +2084,8 @@
   },
   {
    "id": "anchors:oracle:male:reclined_45:eye_right",
-   "status": "XFAIL",
-   "detail": "1.4 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:male:reclined_45:upper_arm_right",
@@ -2365,7 +2365,7 @@
   {
    "id": "anchors:skin:male:seated:eye_left",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:seated:ear_left",
@@ -2535,7 +2535,7 @@
   {
    "id": "anchors:skin:male:seated:eye_right",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:seated:ear_right",
@@ -2704,8 +2704,8 @@
   },
   {
    "id": "anchors:oracle:male:seated:eye_left",
-   "status": "XFAIL",
-   "detail": "1.4 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:male:seated:upper_arm_left",
@@ -2764,8 +2764,8 @@
   },
   {
    "id": "anchors:oracle:male:seated:eye_right",
-   "status": "XFAIL",
-   "detail": "1.4 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:male:seated:upper_arm_right",
@@ -3005,12 +3005,12 @@
   {
    "id": "anchors:occlusion:male:seated:eye_right",
    "status": "PASS",
-   "detail": "from the face shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 1.5)"
+   "detail": "from the face shot the ray first meets pupils (eye_r) 0.0 cm from the anchor (tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:eye_left",
    "status": "PASS",
-   "detail": "from the face shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 1.5)"
+   "detail": "from the face shot the ray first meets pupils (eye_l) 0.0 cm from the anchor (tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ear_right",
@@ -3310,7 +3310,7 @@
   {
    "id": "anchors:skin:male:sitting_dangling:eye_left",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:sitting_dangling:ear_left",
@@ -3480,7 +3480,7 @@
   {
    "id": "anchors:skin:male:sitting_dangling:eye_right",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:sitting_dangling:ear_right",
@@ -3649,8 +3649,8 @@
   },
   {
    "id": "anchors:oracle:male:sitting_dangling:eye_left",
-   "status": "XFAIL",
-   "detail": "1.4 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:male:sitting_dangling:upper_arm_left",
@@ -3709,8 +3709,8 @@
   },
   {
    "id": "anchors:oracle:male:sitting_dangling:eye_right",
-   "status": "XFAIL",
-   "detail": "1.4 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:male:sitting_dangling:upper_arm_right",
@@ -3990,7 +3990,7 @@
   {
    "id": "anchors:skin:male:left_lateral_decubitus:eye_left",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:left_lateral_decubitus:ear_left",
@@ -4160,7 +4160,7 @@
   {
    "id": "anchors:skin:male:left_lateral_decubitus:eye_right",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:left_lateral_decubitus:ear_right",
@@ -4329,8 +4329,8 @@
   },
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:eye_left",
-   "status": "XFAIL",
-   "detail": "1.4 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:upper_arm_left",
@@ -4389,8 +4389,8 @@
   },
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:eye_right",
-   "status": "XFAIL",
-   "detail": "1.4 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:upper_arm_right",
@@ -4685,7 +4685,7 @@
   {
    "id": "anchors:skin:female:supine:eye_left",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:supine:ear_left",
@@ -4855,7 +4855,7 @@
   {
    "id": "anchors:skin:female:supine:eye_right",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:supine:ear_right",
@@ -5024,8 +5024,8 @@
   },
   {
    "id": "anchors:oracle:female:supine:eye_left",
-   "status": "XFAIL",
-   "detail": "1.9 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:female:supine:upper_arm_left",
@@ -5084,8 +5084,8 @@
   },
   {
    "id": "anchors:oracle:female:supine:eye_right",
-   "status": "XFAIL",
-   "detail": "1.9 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:female:supine:upper_arm_right",
@@ -5495,7 +5495,7 @@
   {
    "id": "anchors:skin:female:reclined_30:eye_left",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:reclined_30:ear_left",
@@ -5665,7 +5665,7 @@
   {
    "id": "anchors:skin:female:reclined_30:eye_right",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:reclined_30:ear_right",
@@ -5834,8 +5834,8 @@
   },
   {
    "id": "anchors:oracle:female:reclined_30:eye_left",
-   "status": "XFAIL",
-   "detail": "1.9 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:female:reclined_30:upper_arm_left",
@@ -5894,8 +5894,8 @@
   },
   {
    "id": "anchors:oracle:female:reclined_30:eye_right",
-   "status": "XFAIL",
-   "detail": "1.9 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:female:reclined_30:upper_arm_right",
@@ -6185,7 +6185,7 @@
   {
    "id": "anchors:skin:female:reclined_45:eye_left",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:reclined_45:ear_left",
@@ -6355,7 +6355,7 @@
   {
    "id": "anchors:skin:female:reclined_45:eye_right",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:reclined_45:ear_right",
@@ -6524,8 +6524,8 @@
   },
   {
    "id": "anchors:oracle:female:reclined_45:eye_left",
-   "status": "XFAIL",
-   "detail": "1.9 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:female:reclined_45:upper_arm_left",
@@ -6584,8 +6584,8 @@
   },
   {
    "id": "anchors:oracle:female:reclined_45:eye_right",
-   "status": "XFAIL",
-   "detail": "1.9 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:female:reclined_45:upper_arm_right",
@@ -6865,7 +6865,7 @@
   {
    "id": "anchors:skin:female:seated:eye_left",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:seated:ear_left",
@@ -7035,7 +7035,7 @@
   {
    "id": "anchors:skin:female:seated:eye_right",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:seated:ear_right",
@@ -7204,8 +7204,8 @@
   },
   {
    "id": "anchors:oracle:female:seated:eye_left",
-   "status": "XFAIL",
-   "detail": "1.9 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:female:seated:upper_arm_left",
@@ -7264,8 +7264,8 @@
   },
   {
    "id": "anchors:oracle:female:seated:eye_right",
-   "status": "XFAIL",
-   "detail": "1.9 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:female:seated:upper_arm_right",
@@ -7505,12 +7505,12 @@
   {
    "id": "anchors:occlusion:female:seated:eye_right",
    "status": "PASS",
-   "detail": "from the face shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 1.5)"
+   "detail": "from the face shot the ray first meets pupils (eye_r) 0.0 cm from the anchor (tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:eye_left",
    "status": "PASS",
-   "detail": "from the face shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 1.5)"
+   "detail": "from the face shot the ray first meets pupils (eye_l) 0.0 cm from the anchor (tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ear_right",
@@ -7810,7 +7810,7 @@
   {
    "id": "anchors:skin:female:sitting_dangling:eye_left",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:sitting_dangling:ear_left",
@@ -7980,7 +7980,7 @@
   {
    "id": "anchors:skin:female:sitting_dangling:eye_right",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:sitting_dangling:ear_right",
@@ -8149,8 +8149,8 @@
   },
   {
    "id": "anchors:oracle:female:sitting_dangling:eye_left",
-   "status": "XFAIL",
-   "detail": "1.9 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:female:sitting_dangling:upper_arm_left",
@@ -8209,8 +8209,8 @@
   },
   {
    "id": "anchors:oracle:female:sitting_dangling:eye_right",
-   "status": "XFAIL",
-   "detail": "1.9 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:female:sitting_dangling:upper_arm_right",
@@ -8490,7 +8490,7 @@
   {
    "id": "anchors:skin:female:left_lateral_decubitus:eye_left",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:left_lateral_decubitus:ear_left",
@@ -8660,7 +8660,7 @@
   {
    "id": "anchors:skin:female:left_lateral_decubitus:eye_right",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:left_lateral_decubitus:ear_right",
@@ -8829,8 +8829,8 @@
   },
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:eye_left",
-   "status": "XFAIL",
-   "detail": "1.9 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:upper_arm_left",
@@ -8889,8 +8889,8 @@
   },
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:eye_right",
-   "status": "XFAIL",
-   "detail": "1.9 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
   },
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:upper_arm_right",
@@ -9738,7 +9738,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "eye_left",
-   "cm": 1.42,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -9834,7 +9834,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "eye_right",
-   "cm": 1.42,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -10983,7 +10983,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "eye_left",
-   "cm": 1.42,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -11079,7 +11079,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "eye_right",
-   "cm": 1.42,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -11988,7 +11988,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "eye_left",
-   "cm": 1.42,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -12084,7 +12084,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "eye_right",
-   "cm": 1.42,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -12973,7 +12973,7 @@
    "variant": "male",
    "position": "seated",
    "rule": "eye_left",
-   "cm": 1.42,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -13069,7 +13069,7 @@
    "variant": "male",
    "position": "seated",
    "rule": "eye_right",
-   "cm": 1.42,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -13510,8 +13510,8 @@
    "position": "seated",
    "regionId": "eye_right",
    "shot": "face",
-   "first": "skin",
-   "part": "face",
+   "first": "pupils",
+   "part": "eye_r",
    "offCm": 0
   },
   {
@@ -13520,8 +13520,8 @@
    "position": "seated",
    "regionId": "eye_left",
    "shot": "face",
-   "first": "skin",
-   "part": "face",
+   "first": "pupils",
+   "part": "eye_l",
    "offCm": 0
   },
   {
@@ -14488,7 +14488,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "eye_left",
-   "cm": 1.42,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -14584,7 +14584,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "eye_right",
-   "cm": 1.42,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -15473,7 +15473,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "eye_left",
-   "cm": 1.42,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -15569,7 +15569,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "eye_right",
-   "cm": 1.42,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -16488,7 +16488,7 @@
    "variant": "female",
    "position": "supine",
    "rule": "eye_left",
-   "cm": 1.9,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -16584,7 +16584,7 @@
    "variant": "female",
    "position": "supine",
    "rule": "eye_right",
-   "cm": 1.9,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -17733,7 +17733,7 @@
    "variant": "female",
    "position": "reclined_30",
    "rule": "eye_left",
-   "cm": 1.9,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -17829,7 +17829,7 @@
    "variant": "female",
    "position": "reclined_30",
    "rule": "eye_right",
-   "cm": 1.9,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -18738,7 +18738,7 @@
    "variant": "female",
    "position": "reclined_45",
    "rule": "eye_left",
-   "cm": 1.9,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -18834,7 +18834,7 @@
    "variant": "female",
    "position": "reclined_45",
    "rule": "eye_right",
-   "cm": 1.9,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -19723,7 +19723,7 @@
    "variant": "female",
    "position": "seated",
    "rule": "eye_left",
-   "cm": 1.9,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -19819,7 +19819,7 @@
    "variant": "female",
    "position": "seated",
    "rule": "eye_right",
-   "cm": 1.9,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -20260,9 +20260,9 @@
    "position": "seated",
    "regionId": "eye_right",
    "shot": "face",
-   "first": "skin",
-   "part": "face",
-   "offCm": 0.01
+   "first": "pupils",
+   "part": "eye_r",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -20270,9 +20270,9 @@
    "position": "seated",
    "regionId": "eye_left",
    "shot": "face",
-   "first": "skin",
-   "part": "face",
-   "offCm": 0.01
+   "first": "pupils",
+   "part": "eye_l",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -21238,7 +21238,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "rule": "eye_left",
-   "cm": 1.9,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -21334,7 +21334,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "rule": "eye_right",
-   "cm": 1.9,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -22223,7 +22223,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "rule": "eye_left",
-   "cm": 1.9,
+   "cm": 0.05,
    "max": 0.6
   },
   {
@@ -22319,7 +22319,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "rule": "eye_right",
-   "cm": 1.9,
+   "cm": 0.05,
    "max": 0.6
   },
   {

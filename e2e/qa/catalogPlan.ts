@@ -34,6 +34,8 @@ export interface CatalogEntry {
   steps?: { id: string; landmark?: string }[];
   /** stethoscope: hold ≥ 3 s */
   hold: boolean;
+  /** a drag path (the swinging-light test): one press dragged through these regions' targets in order */
+  sweep?: string[];
   /** the finding text the server must record (catalog/case resolution), when the route records one */
   expectedFinding: string | null;
   toleranceCm: number | null;
@@ -78,7 +80,9 @@ export function buildCatalogPlan(opts: { variants?: VariantId[]; filter?: string
     if (!kase) throw new Error(`catalog plan: case ${CASE_FOR_VARIANT[variant]} not found`);
     const prohibited = new Set((kase.doorInstructions?.prohibitedExams ?? []).flatMap((p) => p.regionIds));
     for (const m of c.maneuvers) {
-      for (const regionId of m.allowedRegions) {
+      // a drag path is one sweep through its regions and back (A → B → A), recorded on A
+      const regionIds = m.interaction === "drag_path" ? m.allowedRegions.slice(0, 1) : m.allowedRegions;
+      for (const regionId of regionIds) {
         const r = region.get(regionId);
         if (!r || r.hidden) continue;
         const tool = toolFor(m);
@@ -103,8 +107,10 @@ export function buildCatalogPlan(opts: { variants?: VariantId[]; filter?: string
           ...(route === "tool" || route === "panel-tool" ? { tool: tool!, ...(m.toolMode ? { toolMode: m.toolMode } : {}) } : {}),
           ...(m.interaction === "sequence" && m.steps ? { steps: m.steps.map((s) => ({ id: s.id, ...(s.landmark ? { landmark: s.landmark } : {}) })) } : {}),
           hold: route === "tool" && tool === "stethoscope",
+          ...(m.interaction === "drag_path" && m.allowedRegions.length > 1 ? { sweep: [regionId, m.allowedRegions[1]!, regionId] } : {}),
           expectedFinding: finding,
-          toleranceCm: ANCHOR_BY_REGION.get(regionId)?.toleranceCm ?? null,
+          // the exam's own tolerance (penlight: the iris), else the anchor's
+          toleranceCm: m.toleranceCm ?? ANCHOR_BY_REGION.get(regionId)?.toleranceCm ?? null,
         });
       }
     }

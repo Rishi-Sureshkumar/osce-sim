@@ -1,7 +1,7 @@
 /**
  * Resolves a pointer ray's hits on the patient to a BodyHit (pure; extracted from Patient3D).
- * Hits on the gown measure from the skin underneath; a region is assigned only within reach of
- * its tolerance boundary.
+ * Hits on the gown measure from the skin underneath; hits on an eye measure at the eye (the penlight
+ * and eye exams aim at the pupil); a region is assigned only within reach of its tolerance boundary.
  */
 import { snapToAnchor, type Pose, type Vec3 } from "./regionAnchors";
 
@@ -23,13 +23,14 @@ export interface RawHit {
 /** A body hit is only resolved to a region when it lands this close to the region's tolerance boundary. */
 export const REACH_CM = 9;
 
-const isPatient = (k: string | undefined) => k === "body" || (!!k && k.startsWith("gown:"));
+const isPatient = (k: string | undefined) => k === "body" || k === "eye" || (!!k && k.startsWith("gown:"));
 
 export function resolveHit(hits: readonly RawHit[], pickableRegionIds: readonly string[], pose: Pose, reachCm = REACH_CM): BodyHit | null {
   const first = hits.find((h) => isPatient(h.kind));
   if (!first) return null;
+  // on the gown, measure from the skin under it; on an eye, at the eye (behind it is the socket)
   const skin = hits.find((h) => h.kind === "body");
-  const measure: Vec3 = skin ? skin.point : first.point;
+  const measure: Vec3 = first.kind === "eye" ? first.point : skin ? skin.point : first.point;
   const snap = snapToAnchor(measure, pickableRegionIds, pose);
   const regionId = snap && snap.distanceCm - snap.toleranceCm <= reachCm ? snap.regionId : null;
   return { point: measure, normal: first.normal, kind: String(first.kind), regionId };

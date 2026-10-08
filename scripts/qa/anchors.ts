@@ -132,13 +132,14 @@ async function main() {
       const pose = poseFor(position, angle, variant);
       const sp = await skinnedPatient(pose);
       const skin = sp.byName("skin")!;
-      // ---- skin
+      // ---- skin (the eye targets are the pupils: measured against the eye surface)
+      const eyeSurface = ["eyes", "pupils"].map((n) => sp.byName(n)).filter((m): m is NonNullable<typeof m> => !!m);
       for (const a of anchorsFor(variant)) {
+        const surfaces = /^eye_/.test(a.regionId) ? [skin, ...eyeSurface] : [skin];
         anchorWorldPoints(a.regionId, pose).forEach((w, i) => {
-          const h = skin.bvh.closestPointToPoint(new Vector3(...w));
-          const cm = (h?.distance ?? 1) * 100;
+          const cm = Math.min(...surfaces.map((m) => m.bvh.closestPointToPoint(new Vector3(...w))?.distance ?? 1)) * 100;
           const id = `anchors:skin:${variant}:${position}:${a.regionId}${a.points.length > 1 ? `#${i}` : ""}`;
-          results.push({ id, pass: cm <= ANCHOR_SKIN_CM, detail: `${cm.toFixed(2)} cm from the skin (max ${ANCHOR_SKIN_CM})` });
+          results.push({ id, pass: cm <= ANCHOR_SKIN_CM, detail: `${cm.toFixed(2)} cm from the ${surfaces.length > 1 ? "eye or skin" : "skin"} (max ${ANCHOR_SKIN_CM})` });
           rows.push({ check: "skin", variant, position, regionId: a.regionId, cm: +cm.toFixed(2) });
         });
       }

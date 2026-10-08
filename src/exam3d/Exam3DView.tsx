@@ -24,7 +24,7 @@ import { TestHook } from "./TestHook";
 import { Dialog } from "@/components/ui/Overlay";
 import { MIN_LISTEN_MS, regionsForTool, sequenceProgress } from "./tools/toolLogic";
 import { backgroundKind, contactOutcome, contactSound, recordsFinding } from "./tools/contact";
-import { decidePlacement, holdCandidate, holdKey, type RememberedHold } from "./tools/decide";
+import { decidePlacement, holdCandidate, holdKey, penlightSweeper, type PenlightSweep, type RememberedHold, type SweepEvent } from "./tools/decide";
 import { JERK_BONE } from "@/scene/animation/reflex";
 import { QA, configureQa, qaDelay, recordDecision } from "./qa";
 import { ToolHud, itemInHand, pickFromTable, toolModeOf, type ToolState } from "./tools/ToolTray";
@@ -136,7 +136,12 @@ export default function Exam3DView(props: Exam3DViewProps) {
   const [hover, setHover] = useState<BodyHit | null>(null);
   const [hold, setHold] = useState<Hold | null>(null);
   const [caption, setCaption] = useState<string | null>(null);
-  const [pupilScale, setPupilScale] = useState(1);
+  const [pupilScale, setPupilScale] = useState({ left: 1, right: 1 });
+  // penlight: the sweep of the current press, and each eye's light response (from its examine result)
+  const sweep = useRef<{ next: PenlightSweep; lit: boolean } | null>(null);
+  const [sweeping, setSweeping] = useState(false);
+  const eyeLight = useRef<Record<string, { direct: number; consensual: number }>>({});
+  const relaxPupils = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [jerk, setJerk] = useState<{ bone: string; amount: number; at: number } | null>(null);
   const [swingAt, setSwingAt] = useState<number | null>(null);
   const [sequence, setSequence] = useState<Sequence | null>(null);
@@ -390,7 +395,13 @@ export default function Exam3DView(props: Exam3DViewProps) {
     if (!tool || props.disabled || busy) return;
     const c = contact(hit.point);
     if (!c) return;
-    if (tool === "stethoscope") {
+    if (tool === "penlight") {
+      // a press may sweep the beam over both eyes (and back: the swinging-light test)
+      sweep.current = { next: penlightSweeper({ mode, maneuvers: props.maneuvers, toolRegions, pose }), lit: false };
+      setSweeping(true);
+      pending.current = { hit };
+      sweepTo(hit.point);
+    } else if (tool === "stethoscope") {
       const h = holdAt(hit, c);
       if (h) void startListening(h);
     } else {
@@ -399,6 +410,11 @@ export default function Exam3DView(props: Exam3DViewProps) {
   };
 
   const onToolMove = (hit: BodyHit) => {
+    if (sweep.current) {
+      pending.current = { hit };
+      sweepTo(hit.point);
+      return;
+    }
     const h = holdRef.current;
     if (!h || !tool) return;
     const c = contact(hit.point);
@@ -412,6 +428,17 @@ export default function Exam3DView(props: Exam3DViewProps) {
   };
 
   const onToolUp = () => {
+    const s = sweep.current;
+    if (s) {
+      sweep.current = null;
+      setSweeping(false);
+      relaxPupils.current = setTimeout(() => shine(null), 1200);
+      const p = pending.current;
+      pending.current = null;
+      // the beam never landed on a pupil: log where it was, as a single placement
+      if (!s.lit && p) void instantTool(p.hit.point);
+      return;
+    }
     const ask = pendingAsk.current;
     pendingAsk.current = null;
     if (holdRef.current) {
@@ -458,10 +485,39 @@ export default function Exam3DView(props: Exam3DViewProps) {
       playTone(toneSpec, m.interaction !== "sequence");
     }
     if (tool === "reflex_hammer" && JERK_BONE[s.regionId]) setJerk({ bone: JERK_BONE[s.regionId]!, amount: result?.visual?.reflex ?? 2, at: performance.now() / 1000 });
-    if (tool === "penlight") {
-      setPupilScale(1 - 0.6 * (result?.visual?.pupilConstriction ?? 0.6));
-      setTimeout(() => setPupilScale(1), 1500);
+  };
+
+  // ------------------------------------------------------------------ penlight
+  /** Light in one eye constricts it (direct) and the other (consensual); none: both widen. */
+  const shine = (eye: string | null) => {
+    if (relaxPupils.current) clearTimeout(relaxPupils.current);
+    relaxPupils.current = null;
+    if (!eye) return setPupilScale({ left: 1, right: 1 });
+    const r = eyeLight.current[eye] ?? { direct: 0.6, consensual: 0.6 };
+    const lit = 1 - 0.6 * r.direct;
+    const other = 1 - 0.6 * r.consensual;
+    setPupilScale(eye === "eye_left" ? { left: lit, right: other } : { left: other, right: lit });
+  };
+  const recordSweep = async (e: SweepEvent) => {
+    if (!tool) return;
+    recordDecision({ ...e.decision });
+    const d = e.decision;
+    void props.onToolContact({ tool, toolMode: mode, maneuverId: e.maneuverId, nearestRegionId: e.regionId, distanceCm: d.distanceCm, toleranceCm: d.toleranceCm, durationMs: 0, outcome: d.outcome });
+    const action = await props.onToolExamine({ regionId: e.regionId, maneuverId: e.maneuverId, tool, toolMode: mode, placementError: d.error, distanceCm: d.distanceCm, toleranceCm: d.toleranceCm });
+    if (!action || action.type !== "examine" || e.maneuverId !== "pupils_light_reflex") return;
+    const v = action.result?.visual;
+    const direct = v?.pupilConstriction ?? 0.6;
+    eyeLight.current[e.regionId] = { direct, consensual: v?.pupilConsensual ?? direct };
+    if (sweep.current?.next.on() === e.regionId) shine(e.regionId);
+  };
+  const sweepTo = (point: Vec3) => {
+    const s = sweep.current;
+    if (!s) return;
+    for (const e of s.next(point)) {
+      s.lit = true;
+      void recordSweep(e);
     }
+    shine(s.next.on());
   };
 
   const playTone = (spec: Extract<AudioSpec, { generator: "tone" }>, usePan: boolean) => {
@@ -573,7 +629,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
           {tool && <ToolCursor tool={tool} at={cursor} toolMode={mode} swingAt={swingAt} vibrating={!!props.tool.struckAt && forkElapsed < 12} />}
           {washing !== null && <HandWash startedAt={washing} durationMs={washMs} at={washKind === "sink" ? washHandsPosition() : undefined} />}
           <FpsMeter />
-          <ShotCamera goal={goal} freeLook={SHOTS[shot.current].freeLook} enabled={!hold} />
+          <ShotCamera goal={goal} freeLook={SHOTS[shot.current].freeLook} enabled={!hold && !sweeping} />
           {props.qa && <TestHook pose={pose} shot={shot.current} />}
           {landmarksAt !== null && <LandmarkHints shot={shot.current} pose={pose} shownAt={landmarksAt} />}
         </Canvas>
