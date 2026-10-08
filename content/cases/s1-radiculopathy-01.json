@@ -689,7 +689,12 @@
             "Is any part of your foot numb?",
             "Any numbness in your toes?",
             "Any change in sensation in your leg or foot?",
-            "Do you have pins and needles anywhere?"
+            "Do you have pins and needles anywhere?",
+            "Any numbness down the back of your leg or in your foot?",
+            "Does the back of your leg feel numb?",
+            "Any numbness in your leg?",
+            "Is your leg or foot numb anywhere?",
+            "Any pins and needles in your foot?"
           ],
           "keywords": [
             "numbness",
@@ -698,7 +703,12 @@
             "pins and needles",
             "loss of feeling",
             "altered sensation",
-            "strange sensations"
+            "strange sensations",
+            "numbness down the back",
+            "numb down the back",
+            "numbness in your leg",
+            "numbness in your foot",
+            "numb foot"
           ],
           "topics": [
             "hpi.associated",
@@ -747,7 +757,39 @@
             "hpi.associated",
             "ros.neuro"
           ]
-        }
+        },
+        "followUps": [
+          {
+            "id": "weakness-foot-drop",
+            "intents": {
+              "canonical": "Do you trip over your foot or catch your toes?",
+              "paraphrases": [
+                "Does your foot drag when you walk?",
+                "Does your foot slap on the ground?",
+                "Do you have trouble lifting your foot up?",
+                "Have you noticed a foot drop?",
+                "Do you catch your toes on the stairs or the curb?",
+                "Can you walk on your heels?",
+                "Is it hard to pull your foot up?"
+              ],
+              "keywords": [
+                "trip over",
+                "tripping",
+                "catch your toes",
+                "foot drop",
+                "foot drag",
+                "foot slap",
+                "lift your foot",
+                "walk on your heels"
+              ],
+              "patterns": [],
+              "topics": [
+                "hpi.associated"
+              ]
+            },
+            "answer": "No, I don't trip or catch my toes, and my foot doesn't slap — lifting my foot up is fine. It's pushing off on the ball of my foot that's weak."
+          }
+        ]
       },
       {
         "id": "function",
@@ -819,7 +861,8 @@
             "Any history of back trouble?",
             "Has your back ever played up like this before?",
             "Have you had this before?",
-            "Have you had back pain before?"
+            "Have you had back pain before?",
+            "Any back problems before?"
           ],
           "keywords": [
             "happened before",
@@ -835,6 +878,51 @@
             "hpi.prior"
           ]
         }
+      },
+      {
+        "id": "prior-care",
+        "topic": "Care and tests so far",
+        "answer": "No, this is the first time I've seen anyone about it. I haven't had any X-rays or scans, and I haven't seen a physical therapist or a chiropractor.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "seen anyone",
+          "x-ray",
+          "scan",
+          "physical therapy",
+          "chiropractor"
+        ],
+        "intents": {
+          "canonical": "Have you seen anyone about this before today?",
+          "paraphrases": [
+            "Have you seen a doctor about this pain?",
+            "Have you had any X-rays or scans?",
+            "Have you had an MRI of your back?",
+            "Have you seen a physical therapist or a physio?",
+            "Have you tried a chiropractor?",
+            "Has anyone examined your back yet?",
+            "Have you been to the emergency room or urgent care about this?",
+            "Have you had any tests for this?",
+            "Have you seen a specialist about your back?"
+          ],
+          "keywords": [
+            "seen anyone",
+            "seen a doctor",
+            "physio",
+            "physiotherapy",
+            "physical therapy",
+            "physical therapist",
+            "chiropractor",
+            "x ray",
+            "x rays",
+            "mri",
+            "any tests"
+          ],
+          "patterns": [],
+          "topics": [
+            "hpi.prior"
+          ]
+        },
+        "followUps": []
       },
       {
         "id": "pmh",
@@ -1047,7 +1135,7 @@
       {
         "id": "fh",
         "topic": "Family history",
-        "answer": "My mum is 70 and has arthritis in her knees and hips. My dad is 72 and has high blood pressure. My younger brother is healthy. Nobody in the family has had cancer or back problems that I know of.",
+        "answer": "My mom is 70 and has arthritis in her knees and hips. My dad is 72 and has high blood pressure. My younger brother is healthy. Nobody in the family has had cancer or back problems that I know of.",
         "revealOnlyIfAsked": true,
         "keywords": [
           "family",
@@ -1363,7 +1451,7 @@
       {
         "id": "concerns",
         "topic": "Her concerns",
-        "answer": "I'm scared I've done something serious and I'll end up needing an operation, like my neighbour did. And I can't afford to lose work — we need my pay with two teenagers at home.",
+        "answer": "I'm scared I've done something serious and I'll end up needing an operation, like my neighbor did. And I can't afford to lose work — we need my pay with two teenagers at home.",
         "revealOnlyIfAsked": true,
         "keywords": [
           "worried",
@@ -1504,7 +1592,7 @@
             "Any numbness around your anus?",
             "Does your bottom feel numb when you sit on the toilet?",
             "Is there any numbness in the area you would sit on a saddle?",
-            "Is the area between your legs numb at all?",
+            "Any numbness around your back passage or private parts?",
             "Any numbness in your buttocks or inner thighs?"
           ],
           "keywords": [
@@ -1545,7 +1633,7 @@
             "Is the other leg okay?",
             "Have both of your legs been affected?",
             "Do your legs ever give way under you?",
-            "Any tingling in the right foot?",
+            "Does your right foot feel normal?",
             "Are both legs weak?"
           ],
           "keywords": [
@@ -1641,7 +1729,7 @@
       {
         "id": "neg-cancer-history",
         "topic": "History of cancer",
-        "answer": "No, I've never had cancer or any lumps. My smear tests have always been normal, and my mammogram last year was fine.",
+        "answer": "No, I've never had cancer or any lumps. My Pap smears have always been normal, and my mammogram last year was fine.",
         "keywords": [
           "cancer",
           "tumour",
@@ -1749,6 +1837,116 @@
           "topics": [
             "hpi.triggers",
             "ros.msk"
+          ]
+        }
+      },
+      {
+        "id": "neg-infection-immune",
+        "topic": "Recent infection / immune problems / spinal procedures",
+        "answer": "No — I haven't had any infections lately, no diabetes or immune problems that I know of, and nobody's put a needle in my back.",
+        "keywords": [
+          "infection",
+          "immune",
+          "injection"
+        ],
+        "intents": {
+          "canonical": "Have you had any recent infections?",
+          "paraphrases": [
+            "Do you have a weakened immune system?",
+            "Do you have HIV or anything that lowers your immunity?",
+            "Have you had a urine or skin infection recently?",
+            "Have you had any injections or procedures on your back?",
+            "Are you on any medicines that suppress your immune system?",
+            "Have you been unwell with an infection lately?",
+            "Any recent dental work or infections?"
+          ],
+          "keywords": [
+            "infection",
+            "infections",
+            "immune",
+            "immunity",
+            "immunosuppressed",
+            "hiv",
+            "epidural",
+            "injection in your back"
+          ],
+          "patterns": [],
+          "topics": [
+            "ros.constitutional",
+            "pmh.conditions"
+          ]
+        }
+      },
+      {
+        "id": "neg-rash",
+        "topic": "Rash on the back or leg",
+        "answer": "No, there's no rash, blisters or spots on my back or leg.",
+        "keywords": [
+          "rash",
+          "blisters",
+          "shingles"
+        ],
+        "intents": {
+          "canonical": "Have you noticed any rash on your back or leg?",
+          "paraphrases": [
+            "Any blisters on your skin?",
+            "Have you had shingles?",
+            "Any spots or a rash where the pain is?",
+            "Is there any redness or rash on your leg?",
+            "Any skin changes on your back?",
+            "Have you noticed any rash?"
+          ],
+          "keywords": [
+            "rash",
+            "rashes",
+            "blisters",
+            "shingles",
+            "spots",
+            "skin changes"
+          ],
+          "patterns": [],
+          "topics": [
+            "ros.skin"
+          ]
+        }
+      },
+      {
+        "id": "neg-abdo-urinary",
+        "topic": "Abdominal / flank pain and urinary symptoms",
+        "answer": "No stomach pain or pain in my side, and no burning or blood when I pass water.",
+        "keywords": [
+          "abdominal",
+          "stomach",
+          "flank",
+          "burning",
+          "blood in your urine"
+        ],
+        "intents": {
+          "canonical": "Have you had any abdominal pain?",
+          "paraphrases": [
+            "Have you had a stomach ache?",
+            "Have you had pain in your side or flank?",
+            "Does it burn when you pass urine?",
+            "Any blood in your urine?",
+            "Any kidney problems?",
+            "Does it hurt to pee?"
+          ],
+          "keywords": [
+            "abdominal pain",
+            "stomach pain",
+            "flank",
+            "flank pain",
+            "loin pain",
+            "burning",
+            "blood in your urine",
+            "kidney",
+            "kidneys",
+            "pain when you pee"
+          ],
+          "patterns": [],
+          "topics": [
+            "ros.gi",
+            "ros.gu"
           ]
         }
       },
@@ -1973,7 +2171,7 @@
   },
   "abnormalFindings": {
     "general_appearance": {
-      "default": "Well-looking woman in obvious discomfort: sits tilted onto her right buttock, shifts position every minute or so and stands partway through to ease her leg. Alert and conversant; not otherwise unwell or distressed."
+      "default": "Well-appearing woman in obvious discomfort: sits tilted onto her right buttock, shifts position every minute or so and stands partway through to ease her leg. Alert and conversant; not otherwise unwell or distressed."
     },
     "back_inspection": {
       "default": "Stands with her weight shifted onto the right leg. Spine straight with no scoliosis or lateral shift; the normal lumbar curve is slightly flattened, with prominent left lower paraspinal muscles (spasm). Shoulders and iliac crests level; no skin changes, scars or swelling."
@@ -2020,7 +2218,7 @@
       "foot_left": "Left ankle plantarflexion 4/5: push-off against resistance is clearly weaker than on the right. Left dorsiflexion, great-toe extension and eversion 5/5.",
       "ankle_right": "Right ankle plantarflexion, dorsiflexion and great-toe extension 5/5.",
       "foot_right": "Right ankle plantarflexion, dorsiflexion and great-toe extension 5/5.",
-      "neuro_motor_lower": "Lower limbs 5/5 throughout (hip flexion, knee extension and flexion, ankle dorsiflexion, great-toe extension) except left ankle plantarflexion 4/5."
+      "neuro_motor_lower": "Ankles: left plantarflexion 4/5 (push-off clearly weaker than the right); left dorsiflexion, great-toe extension and eversion 5/5; right ankle 5/5 throughout."
     },
     "reflex_achilles": {
       "achilles_left": {
@@ -2035,7 +2233,7 @@
           "reflex": 2
         }
       },
-      "neuro_reflexes": "Ankle reflexes: left 1+ (reduced), right 2+. Biceps, triceps, brachioradialis and patellar reflexes 2+ and symmetric; plantar responses flexor."
+      "neuro_reflexes": "Ankle (Achilles) reflexes: left 1+ (reduced), right 2+."
     },
     "sensation_light_touch": {
       "neuro_sensory": "Light touch reduced over the outer (lateral) border of the left foot, the little toe and the outer sole and heel. Normal over the inner (medial) lower leg, the top of the foot and great toe, the rest of both legs and the arms."
@@ -2066,6 +2264,9 @@
     },
     "rise_from_chair": {
       "default": "Rises from the chair without using her arms, but slowly and guardedly because of back and left leg pain."
+    },
+    "lower_limb_standing_inspection": {
+      "default": "Stands with her weight shifted onto the right leg. Legs otherwise symmetric: no calf wasting, deformity, swelling or discoloration."
     }
   },
   "visibleSigns": {
@@ -2075,7 +2276,7 @@
     {
       "rank": 1,
       "diagnosis": "Left S1 radiculopathy from an L5–S1 disc herniation",
-      "rationale": "Leg-dominant pain in an S1 distribution (left buttock, back of thigh and calf, lateral foot and little toe) beginning after a lifting and twisting strain; worse with sitting, bending, coughing and sneezing; better lying with knees bent. Positive left straight leg raise at about 40° (crossed SLR negative), reduced left ankle reflex, weak left plantarflexion (cannot toe-walk) and reduced sensation over the lateral foot. Knee reflexes, dorsiflexion and great-toe extension are normal, so L4 and L5 are spared. No red flags: conservative care (analgesia, staying active, review), with imaging if red flags appear, weakness progresses or symptoms persist beyond about 6 weeks."
+      "rationale": "Leg-dominant pain in an S1 distribution (left buttock, back of thigh and calf, lateral foot and little toe) beginning after a lifting and twisting strain; worse with sitting, bending, coughing and sneezing; better lying with knees bent. Positive left straight leg raise at about 40° (crossed SLR negative), reduced left ankle reflex, weak left plantarflexion (cannot toe-walk) and reduced sensation over the lateral foot. Knee reflexes, dorsiflexion and great-toe extension are normal, so L4 and L5 are spared. No red flags; the motor deficit is mild — conservative care with review in 1–2 weeks; MRI and spinal referral if weakness progresses or is ≤3/5, red flags appear, or symptoms persist beyond about 6 weeks."
     },
     {
       "rank": 2,
@@ -2099,11 +2300,16 @@
     },
     {
       "rank": 6,
+      "diagnosis": "Left L5 radiculopathy (L4–L5 disc) — considered; the pattern does not fit",
+      "rationale": "An L5 root lesion gives pain and numbness over the lateral leg, top of the foot and great toe, weak ankle dorsiflexion and great-toe extension (difficulty heel walking, sometimes a foot drop) with a preserved ankle reflex. Here dorsiflexion, great-toe extension and heel walking are normal, sensation is reduced on the lateral foot and sole, and the ankle reflex is reduced with weak plantarflexion — an S1 pattern."
+    },
+    {
+      "rank": 7,
       "diagnosis": "Must not miss: cauda equina syndrome",
       "rationale": "Considered and screened for: no urinary retention or incontinence, no bowel change, no saddle numbness, no sexual dysfunction, unilateral symptoms and no bilateral weakness. Safety-net: any of these developing needs same-day emergency assessment and urgent MRI."
     },
     {
-      "rank": 7,
+      "rank": 8,
       "diagnosis": "Must not miss: spinal infection or malignancy",
       "rationale": "No fever, weight loss, cancer history, night or rest pain, injecting drug use or steroid use, a clear mechanical precipitant and normal vitals make these unlikely."
     }
@@ -2195,7 +2401,11 @@
         "hurt",
         "sore",
         "cold",
-        "okay if i"
+        "okay if i",
+        "let me know if it hurts",
+        "tell me if anything hurts",
+        "are you comfortable",
+        "stop me if"
       ],
       "sourceText": ""
     },
@@ -2247,7 +2457,7 @@
       "id": "rf-cauda-equina",
       "section": "Red-flag screen",
       "label": "Asks about cauda equina red flags (bladder or bowel control, saddle numbness, both legs)",
-      "weight": 1,
+      "weight": 2,
       "scoring": "match",
       "guidance": "Credit when the student asks at least two distinct cauda equina screening questions: bladder emptying or control, bowel control, numbness in the saddle / genital / perianal area, new sexual dysfunction, or symptoms or weakness in both legs.",
       "match": {
@@ -2628,15 +2838,27 @@
       "weight": 1,
       "scoring": "auto",
       "rule": {
-        "performed": [
-          "sensation_light_touch_swab",
-          "sensation_pinprick_pin"
-        ],
-        "regions": [
-          "foot_lateral_left",
-          "foot_lateral_right"
-        ],
-        "partial": false
+        "any": [
+          {
+            "performed": [
+              "sensation_light_touch_swab",
+              "sensation_pinprick_pin"
+            ],
+            "regions": [
+              "foot_lateral_left",
+              "foot_lateral_right"
+            ]
+          },
+          {
+            "performed": [
+              "sensation_light_touch",
+              "sensation_pin_prick"
+            ],
+            "regions": [
+              "neuro_sensory"
+            ]
+          }
+        ]
       },
       "sourceText": ""
     },
@@ -2710,12 +2932,15 @@
           "leg pain worse",
           "worse than back pain",
           "worse than the back",
-          "electric",
-          "sharp"
+          "leg worse than back",
+          "leg-dominant",
+          "leg dominant",
+          "electric shock",
+          "electric-shock"
         ],
         "exemplars": [
           "Leg pain is worse than the back pain, rated 7/10.",
-          "Sharp, electric-shock leg pain 7/10 with a dull back ache 4/10."
+          "Leg-dominant pain: 7/10 in the leg versus 4/10 in the back."
         ]
       },
       {
@@ -2941,10 +3166,7 @@
           "Lasegue",
           "Bragard"
         ],
-        "terms": [
-          "straight leg raise",
-          "SLR"
-        ],
+        "terms": [],
         "exemplars": [
           "Left straight leg raise positive at 40 degrees, reproducing pain below the knee.",
           "Positive SLR on the left; crossed SLR negative."
@@ -2961,19 +3183,32 @@
           "reduced ankle jerk",
           "diminished ankle reflex",
           "diminished ankle jerk",
-          "hyporeflexia"
+          "decreased ankle reflex",
+          "decreased ankle jerk",
+          "hypoactive ankle reflex",
+          "reduced achilles reflex",
+          "diminished achilles reflex",
+          "decreased achilles reflex",
+          "ankle reflex reduced",
+          "ankle jerk reduced",
+          "achilles reflex reduced",
+          "ankle reflex diminished",
+          "achilles reflex diminished",
+          "left ankle reflex 1+",
+          "left ankle jerk 1+",
+          "left achilles 1+",
+          "absent ankle reflex",
+          "absent ankle jerk",
+          "absent achilles reflex",
+          "ankle reflex absent",
+          "ankle jerk absent",
+          "achilles reflex absent",
+          "ankle hyporeflexia"
         ],
-        "terms": [
-          "ankle reflex",
-          "ankle reflexes",
-          "ankle jerk",
-          "ankle jerks",
-          "achilles reflex",
-          "achilles reflexes"
-        ],
+        "terms": [],
         "exemplars": [
-          "Left ankle reflex reduced at 1+ compared with 2+ on the right.",
-          "Diminished left Achilles reflex."
+          "Diminished left Achilles reflex.",
+          "Hyporeflexic left ankle jerk."
         ]
       },
       {
@@ -3012,26 +3247,26 @@
           "sensation_pin_prick"
         ],
         "keywords": [
-          "reduced sensation",
-          "decreased sensation",
-          "diminished sensation",
-          "sensation reduced",
-          "sensation decreased",
-          "sensation diminished",
-          "sensory loss",
-          "hypoaesthesia",
-          "hypoesthesia",
-          "reduced light touch",
-          "light touch reduced",
-          "reduced pinprick",
-          "pinprick reduced",
-          "reduced pin prick",
+          "reduced sensation over the lateral",
+          "decreased sensation over the lateral",
+          "diminished sensation over the lateral",
+          "reduced sensation lateral",
+          "reduced light touch over the lateral",
+          "reduced light touch on the lateral",
+          "reduced pinprick over the lateral",
+          "numbness over the lateral",
+          "sensory loss over the lateral",
+          "hypoaesthesia over the lateral",
+          "hypoesthesia over the lateral",
+          "reduced sensation in the s1",
+          "decreased sensation in the s1",
           "S1 dermatome",
-          "S1 distribution"
+          "S1 distribution",
+          "S1 sensory loss"
         ],
         "exemplars": [
           "Reduced light touch and pinprick over the lateral border of the left foot.",
-          "Decreased sensation in the left S1 dermatome."
+          "Numbness to pinprick along the outer edge of the left foot and little toe."
         ]
       },
       {
@@ -3045,44 +3280,83 @@
         "keywords": [
           "paraspinal tenderness",
           "paraspinal spasm",
-          "muscle spasm",
           "tender paraspinals",
-          "limited flexion",
-          "flexion limited",
-          "reduced flexion",
-          "restricted flexion",
-          "reduced range of motion",
-          "decreased range of motion"
+          "tender left paraspinal",
+          "tender left paraspinals",
+          "left paraspinal",
+          "lumbar paraspinal",
+          "paraspinal muscle spasm",
+          "lumbar spasm",
+          "lumbar flexion limited",
+          "limited lumbar flexion",
+          "reduced lumbar flexion",
+          "restricted lumbar flexion",
+          "forward flexion limited",
+          "limited forward flexion",
+          "reduced lumbar range of motion",
+          "limited lumbar range of motion",
+          "reduced lumbar rom"
         ],
         "exemplars": [
           "Tenderness over the left lumbar paraspinal muscles with no midline tenderness.",
           "Lumbar flexion limited to mid-thigh by pain radiating into the left leg."
+        ]
+      },
+      {
+        "id": "l4-l5-spared",
+        "text": "Knee reflexes, dorsiflexion, great-toe extension and heel walking normal (L4/L5 spared)",
+        "maneuverIds": [
+          "reflex_patellar",
+          "strength_l4_s1_ankle",
+          "gait"
+        ],
+        "keywords": [
+          "knee reflexes 2+",
+          "patellar reflexes 2+",
+          "knee reflexes normal",
+          "patellar reflexes normal",
+          "dorsiflexion 5/5",
+          "great toe extension 5/5",
+          "EHL 5/5",
+          "heel walking normal",
+          "heel walking intact",
+          "able to heel walk"
+        ],
+        "terms": [],
+        "exemplars": [
+          "Patellar reflexes 2+ and symmetric; dorsiflexion and great-toe extension 5/5.",
+          "Heel walking normal."
         ]
       }
     ],
     "differential": [
       {
         "id": "s1-radiculopathy",
-        "diagnosis": "Left S1 radiculopathy from an L5–S1 disc herniation",
+        "diagnosis": "Left S1 nerve root compression (radiculopathy)",
         "aliases": [
           "S1 radiculopathy",
-          "left S1 radiculopathy",
+          "S1 radiculitis",
+          "S1 radicular pain",
+          "S1 radicular syndrome",
           "S1 nerve root compression",
+          "S1 nerve root impingement",
+          "S1 nerve root irritation",
+          "S1 root compression",
+          "S1 root impingement",
+          "S1 sciatica",
           "L5-S1 disc herniation",
           "L5/S1 disc herniation",
-          "lumbar disc herniation",
-          "disc herniation",
-          "disk herniation",
-          "herniated disc",
-          "herniated disk"
+          "L5-S1 herniated disc",
+          "L5/S1 herniated disc"
         ],
         "rank": 1,
         "rationale": "Leg-dominant S1-distribution pain after a lifting strain, worse with sitting, flexion and Valsalva; positive left SLR, reduced left ankle reflex, weak plantarflexion and lateral-foot sensory loss, with L4 and L5 spared."
       },
       {
         "id": "lumbar-strain",
-        "diagnosis": "Lumbar muscle strain",
+        "diagnosis": "Mechanical low back pain (muscle strain)",
         "aliases": [
+          "lumbar muscle strain",
           "lumbar strain",
           "lumbar sprain",
           "lumbosacral strain",
@@ -3099,8 +3373,10 @@
       },
       {
         "id": "spinal-stenosis",
-        "diagnosis": "Lumbar spinal stenosis",
+        "diagnosis": "Spinal stenosis (lateral recess or foraminal)",
         "aliases": [
+          "lumbar spinal stenosis",
+          "lumbar stenosis",
           "spinal stenosis",
           "lateral recess stenosis",
           "foraminal stenosis",
@@ -3108,7 +3384,7 @@
           "neurogenic claudication"
         ],
         "rank": 3,
-        "rationale": "Can compress a single root, but she is young, walking eases rather than provokes the leg pain, and sitting and flexion make it worse."
+        "rationale": "Can compress a single root, but she is younger than typical (usually over 60), walking eases rather than provokes the leg pain, and sitting and flexion make it worse."
       },
       {
         "id": "piriformis",
@@ -3127,7 +3403,10 @@
           "sacroiliac joint pain",
           "sacroiliac dysfunction",
           "SI joint dysfunction",
-          "SI joint pain"
+          "SI joint pain",
+          "SIJ dysfunction",
+          "SIJ pain",
+          "sacroiliac joint syndrome"
         ],
         "rank": 5,
         "rationale": "Buttock and thigh pain, but no sacroiliac tenderness, FABER negative and neurological deficits present."
@@ -3136,41 +3415,16 @@
   },
   "acceptableDiagnoses": [
     {
-      "id": "ad-lumbar-disc-herniation",
-      "diagnosis": "Lumbar disc herniation",
+      "id": "ad-l5s1-disc-prolapse",
+      "diagnosis": "L5–S1 disc prolapse",
       "synonyms": [
-        "L5-S1 disc prolapse",
         "L5/S1 disc prolapse",
-        "lumbar disc prolapse",
-        "disc prolapse",
-        "disk prolapse",
-        "prolapsed disc",
-        "prolapsed intervertebral disc",
-        "herniated lumbar disc",
-        "herniated nucleus pulposus",
-        "HNP",
-        "slipped disc",
-        "slipped disk",
-        "disc protrusion"
-      ],
-      "satisfies": [
-        "s1-radiculopathy"
-      ]
-    },
-    {
-      "id": "ad-sciatica",
-      "diagnosis": "Sciatica",
-      "synonyms": [
-        "left sciatica",
-        "left-sided sciatica",
-        "sciatic pain",
-        "lumbar radiculopathy",
-        "lumbosacral radiculopathy",
-        "S1 nerve root impingement",
-        "S1 root compression",
-        "nerve root compression",
-        "nerve root impingement",
-        "radicular pain"
+        "L5-S1 disc protrusion",
+        "L5/S1 disc protrusion",
+        "L5-S1 HNP",
+        "L5/S1 HNP",
+        "prolapsed L5-S1 disc",
+        "herniated L5-S1 disc"
       ],
       "satisfies": [
         "s1-radiculopathy"
