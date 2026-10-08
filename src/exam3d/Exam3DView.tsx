@@ -295,7 +295,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
   };
 
   // ------------------------------------------------------------------ tools
-  const snap = (point: Vec3) => snapToAnchor(point, toolRegions, pose);
+  const snap = (point: Vec3) => snapToAnchor(point, toolRegions, pose, { tool: true });
 
   /** Where a placement lands relative to the hidden anchors (nothing about them is shown). */
   const contact = (point: Vec3) => {

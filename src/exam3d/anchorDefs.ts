@@ -21,6 +21,11 @@ export interface LandmarkDef {
   box?: [[number, number], [number, number], [number, number]];
   /** pick the vertex furthest along this direction */
   pick: [number, number, number];
+  /**
+   * instead: pick the deepest dimple on the front surface — the vertex sunk furthest below the
+   * front skin this many metres around it (e.g. the navel); `pick` is then ignored
+   */
+  dimple?: number;
   /** label for the practice-mode "Show landmarks" hint (own words) */
   label?: string;
 }
@@ -30,6 +35,14 @@ export interface AnchorDef {
   landmark: string;
   /** cm: [toward patient's left, toward head, toward front] */
   offsetCm: [number, number, number];
+  /**
+   * measure from a point between two landmarks instead: `landmark` + t × (`to` − `landmark`), then
+   * the offset (e.g. intercostal spaces as fractions of the sternal notch → xiphoid length, which
+   * scale with the body)
+   */
+  between?: { to: string; t: number };
+  /** per body model: replaces offsetCm (calibrated with `npm run qa:calibrate-anchors`) */
+  offsetCmBy?: Partial<Record<"male" | "female", [number, number, number]>>;
   facing: Facing;
   /** two points: the landmark side and its mirror (unsided regions such as lymph node groups) */
   bilateral?: boolean;
@@ -69,7 +82,8 @@ const L_LANDMARKS: LandmarkDef[] = [
 const MID_LANDMARKS: LandmarkDef[] = [
   { id: "sternal_notch", ref: { kind: "joint", bone: "clavicle.L" }, box: [[-0.0266, 0.008], [-0.01, 0.025], [0, 0.08]], pick: [0, 0, 1], label: "Sternal notch" },
   { id: "xiphoid", ref: { kind: "joint", bone: "clavicle.L" }, box: [[-0.0266, 0.008], [-0.17, 0.015], [0, 0.25]], pick: [0, 0, 1], label: "Xiphoid" },
-  { id: "umbilicus", ref: { kind: "joint", bone: "root" }, box: [[0, 0.008], [0.06, 0.04], [0.2, 0.035]], pick: [0, 0, -1], label: "Umbilicus" },
+  // the navel: the deepest dimple on the front midline between the hips and the lower ribs
+  { id: "umbilicus", ref: { kind: "joint", bone: "root" }, box: [[0, 0.008], [0.12, 0.07], [0.18, 0.09]], pick: [0, 0, 1], dimple: 0.02, label: "Umbilicus" },
   { id: "c7", ref: { kind: "joint", bone: "neck01" }, box: [[0, 0.008], [-0.01, 0.03], [0, 0.2]], pick: [0, 0, -1], label: "C7 spinous process" },
   { id: "sacrum_pt", ref: { kind: "joint", bone: "root" }, box: [[0, 0.01], [-0.04, 0.05], [0.0, 0.08]], pick: [0, 0, -1], label: "Sacrum" },
   { id: "vertex", ref: { kind: "joint", bone: "head", end: "tail" }, box: [[0, 0.012], [0, 0.12], [0, 0.12]], pick: [0, 1, 0], label: "Vertex" },
@@ -112,12 +126,16 @@ const LEFT: Def[] = [
   { regionId: "abd_llq", landmark: "umbilicus", offsetCm: [7, -6, 0], facing: "front", toleranceCm: 4 },
   { regionId: "groin_left", landmark: "asis_l", offsetCm: [-5, -7, 0], facing: "front", toleranceCm: 3, label: "Femoral pulse" },
   // limbs
-  { regionId: "shoulder_left", landmark: "shoulder_l", offsetCm: [0, 0, 0], facing: "any", toleranceCm: 5 },
+  // the front of the shoulder: the top-lateral point is on the body's outline from most cameras
+  { regionId: "shoulder_left", landmark: "shoulder_l", offsetCm: [0, -1, 3], facing: "front", toleranceCm: 5 },
   { regionId: "arm_left", landmark: "antecubital_l", offsetCm: [0, 0, 0], facing: "any", toleranceCm: 3.5, label: "Antecubital fossa (brachial pulse)" },
   { regionId: "elbow_left", landmark: "olecranon_l", offsetCm: [0, 0, 0], facing: "any", toleranceCm: 3.5 },
-  { regionId: "wrist_left", landmark: "radial_l", offsetCm: [0, 0, 0], facing: "any", toleranceCm: 2.5, label: "Radial pulse" },
+  // radial pulse ~2 cm above the wrist crease, thumb side (the radial landmark is on the thumb base)
+  { regionId: "wrist_left", landmark: "radial_l", offsetCm: [0, 0, 0], offsetCmBy: { male: [-4.4, 2, -3.6], female: [-0.7, 1.8, -3.7] }, facing: "any", toleranceCm: 2.5, label: "Radial pulse" },
   { regionId: "hand_left", landmark: "knuckle_l", offsetCm: [0, 0, 0], facing: "any", toleranceCm: 4 },
-  { regionId: "hip_left", landmark: "hip_l", offsetCm: [0, 0, 0], facing: "any", toleranceCm: 6 },
+  // the greater trochanter; on the female model it is on the body's outline from the legs shot, so
+  // the target sits a little above it (still within the tolerance of the trochanter)
+  { regionId: "hip_left", landmark: "hip_l", offsetCm: [0, 0, 0], offsetCmBy: { female: [0, 4, 1] }, facing: "any", toleranceCm: 6 },
   { regionId: "knee_left", landmark: "patella_l", offsetCm: [0, 0, 0], facing: "any", toleranceCm: 4.5 },
   { regionId: "shin_left", landmark: "shin_l", offsetCm: [0, -6, 0], facing: "front", toleranceCm: 6, label: "Lower shin (pitting edema)" },
   { regionId: "calf_left", landmark: "calf_l", offsetCm: [0, 0, 0], facing: "back", toleranceCm: 6 },
@@ -126,7 +144,7 @@ const LEFT: Def[] = [
   { regionId: "toe_great_left", landmark: "toe_l", offsetCm: [0, 0, 0], facing: "any", toleranceCm: 2 },
   // Phase 4 (schema commit): rough placements, recalibrated against the anatomy oracle in M2
   { regionId: "upper_arm_left", landmark: "antecubital_l", offsetCm: [1, 10, 0], facing: "any", toleranceCm: 3, label: "Upper arm, 2–3 cm above the antecubital fossa (cuff)" },
-  { regionId: "biceps_tendon_left", landmark: "antecubital_l", offsetCm: [0, 0, 0], facing: "front", toleranceCm: 2, label: "Biceps tendon in the antecubital fossa" },
+  { regionId: "biceps_tendon_left", landmark: "antecubital_l", offsetCm: [0, 0, 0], offsetCmBy: { male: [0.6, -1.6, 0.8], female: [-1, 0.3, -1] }, facing: "front", toleranceCm: 2, label: "Biceps tendon in the antecubital fossa" },
   { regionId: "triceps_tendon_left", landmark: "olecranon_l", offsetCm: [0, 2.5, 0], facing: "back", toleranceCm: 2, label: "Triceps tendon just above the olecranon" },
   { regionId: "brachioradialis_left", landmark: "radial_l", offsetCm: [0, 4, 0], facing: "any", toleranceCm: 2, label: "Distal radius, 3–5 cm above the wrist" },
   { regionId: "patellar_tendon_left", landmark: "patella_l", offsetCm: [0, -4, 0], facing: "front", toleranceCm: 2, label: "Patellar tendon below the kneecap" },
@@ -138,12 +156,12 @@ const LEFT: Def[] = [
 
 const SINGLE: Def[] = [
   // precordium (the apex is on the patient's left)
-  { regionId: "cardiac_aortic", landmark: "sternal_notch", offsetCm: [-2.5, -5.5, 0], facing: "front", toleranceCm: 2, label: "2nd intercostal space, right sternal border" },
-  { regionId: "cardiac_pulmonic", landmark: "sternal_notch", offsetCm: [2.5, -5.5, 0], facing: "front", toleranceCm: 2, label: "2nd intercostal space, left sternal border" },
-  { regionId: "cardiac_erbs", landmark: "sternal_notch", offsetCm: [2.5, -8.5, 0], facing: "front", toleranceCm: 2, label: "3rd intercostal space, left sternal border" },
-  { regionId: "cardiac_tricuspid", landmark: "sternal_notch", offsetCm: [1.5, -13, 0], facing: "front", toleranceCm: 2, label: "4th–5th intercostal space, left lower sternal border" },
-  { regionId: "cardiac_mitral", landmark: "nipple_l", offsetCm: [-1, -4.5, 0], facing: "front", toleranceCm: 2.5, label: "5th intercostal space, midclavicular line (apex)" },
-  { regionId: "precordium_lsb", landmark: "sternal_notch", offsetCm: [1.5, -11, 0], facing: "front", toleranceCm: 3 },
+  { regionId: "cardiac_aortic", landmark: "sternal_notch", between: { to: "xiphoid", t: 0.27 }, offsetCm: [-2.5, 0, 0], facing: "front", toleranceCm: 2, label: "2nd intercostal space, right sternal border" },
+  { regionId: "cardiac_pulmonic", landmark: "sternal_notch", between: { to: "xiphoid", t: 0.27 }, offsetCm: [2.5, 0, 0], facing: "front", toleranceCm: 2, label: "2nd intercostal space, left sternal border" },
+  { regionId: "cardiac_erbs", landmark: "sternal_notch", between: { to: "xiphoid", t: 0.45 }, offsetCm: [2.5, 0, 0], facing: "front", toleranceCm: 2, label: "3rd intercostal space, left sternal border" },
+  { regionId: "cardiac_tricuspid", landmark: "sternal_notch", between: { to: "xiphoid", t: 0.8 }, offsetCm: [2, 0, 0], facing: "front", toleranceCm: 2, label: "4th–5th intercostal space, left lower sternal border" },
+  { regionId: "cardiac_mitral", landmark: "sternal_notch", between: { to: "xiphoid", t: 0.95 }, offsetCm: [9, 0, 0], facing: "front", toleranceCm: 2.5, label: "5th intercostal space, midclavicular line (apex)" },
+  { regionId: "precordium_lsb", landmark: "sternal_notch", between: { to: "xiphoid", t: 0.65 }, offsetCm: [1.5, 0, 0], facing: "front", toleranceCm: 3 },
   { regionId: "precordium_wall", landmark: "sternal_notch", offsetCm: [4, -10, 0], facing: "front", toleranceCm: 6 },
   // neck
   { regionId: "neck_trachea", landmark: "sternal_notch", offsetCm: [0, 2.5, 0], facing: "front", toleranceCm: 2, label: "Trachea above the sternal notch" },

@@ -26,7 +26,7 @@ export function loadXfail(): XfailEntry[] {
   return JSON.parse(fs.readFileSync(FILE, "utf8")) as XfailEntry[];
 }
 
-const toRegex = (glob: string) => new RegExp(`^${glob.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, ".*")}$`);
+export const toRegex = (glob: string) => new RegExp(`^${glob.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, ".*")}$`);
 
 export function classify(results: CheckResult[], entries = loadXfail(), strictOwner = process.env.QA_STRICT_OWNER) {
   const active = entries.filter((e) => !strictOwner || e.owner !== strictOwner);

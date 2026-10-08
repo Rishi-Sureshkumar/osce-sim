@@ -258,8 +258,8 @@
   },
   {
    "id": "catalog-neg:female:weber_test@scalp",
-   "detail": "(neg) 2× the tolerance away still recorded the exam",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog-neg:male:abd_bruits@abd_epigastric",
@@ -518,88 +518,88 @@
   },
   {
    "id": "catalog-neg:male:weber_test@scalp",
-   "detail": "(neg) 2× the tolerance away still recorded the exam",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_bruits@abd_llq",
-   "detail": "at the anatomical point (abd_llq): (c) no examine for abd_bruits@abd_llq (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_bruits@abd_luq",
-   "detail": "at the anatomical point (abd_luq): (c) no examine for abd_bruits@abd_luq (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_bruits@abd_rlq",
-   "detail": "at the anatomical point (abd_rlq): (c) no examine for abd_bruits@abd_rlq (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_bruits@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (c) no examine for abd_bruits@abd_ruq (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_deep_palpation@abd_llq",
-   "detail": "at the anatomical point (abd_llq): (b) the click resolved to abd_luq; (c) no examine for abd_deep_palpation@abd_llq (got abd_deep_palpation@abd_luq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_deep_palpation@abd_luq",
-   "detail": "at the anatomical point (abd_luq): (b) the click resolved to lung_ant_ll; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_deep_palpation@abd_rlq",
-   "detail": "at the anatomical point (abd_rlq): (b) the click resolved to abd_ruq; (c) no examine for abd_deep_palpation@abd_rlq (got abd_deep_palpation@abd_ruq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_deep_palpation@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (b) the click resolved to lung_ant_rl; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_inspection@abd_llq",
-   "detail": "at the anatomical point (abd_llq): (b) the click resolved to abd_luq; (c) no examine for abd_inspection@abd_llq (got abd_inspection@abd_luq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_inspection@abd_luq",
-   "detail": "at the anatomical point (abd_luq): (b) the click resolved to lung_ant_ll; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_inspection@abd_rlq",
-   "detail": "at the anatomical point (abd_rlq): (b) the click resolved to abd_ruq; (c) no examine for abd_inspection@abd_rlq (got abd_inspection@abd_ruq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_inspection@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (b) the click resolved to lung_ant_rl; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_light_palpation@abd_llq",
-   "detail": "at the anatomical point (abd_llq): (b) the click resolved to abd_luq; (c) no examine for abd_light_palpation@abd_llq (got abd_light_palpation@abd_luq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_light_palpation@abd_luq",
-   "detail": "at the anatomical point (abd_luq): (b) the click resolved to lung_ant_ll; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_light_palpation@abd_rlq",
-   "detail": "at the anatomical point (abd_rlq): (b) the click resolved to abd_ruq; (c) no examine for abd_light_palpation@abd_rlq (got abd_light_palpation@abd_ruq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:abd_light_palpation@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (b) the click resolved to lung_ant_rl; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:auscultate_heart_bell@cardiac_mitral",
@@ -638,42 +638,42 @@
   },
   {
    "id": "catalog-oracle:female:blood_pressure@arm_left",
-   "detail": "at the anatomical point (upper_arm_left): (b) placement → arm_left nothing (22.3 cm); (c) no examine for blood_pressure@arm_left (got none)",
+   "detail": "at the anatomical point (upper_arm_left): (b) placement → arm_left nothing (17.5 cm); (c) no examine for blood_pressure@arm_left (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:female:blood_pressure@arm_right",
-   "detail": "at the anatomical point (upper_arm_right): (b) placement → arm_right nothing (10.5 cm); (c) no examine for blood_pressure@arm_right (got none)",
+   "detail": "at the anatomical point (upper_arm_right): (b) placement → arm_right nothing (7.4 cm); (c) no examine for blood_pressure@arm_right (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:female:bowel_sounds@abd_llq",
-   "detail": "at the anatomical point (abd_llq): (c) no examine for bowel_sounds@abd_llq (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:bowel_sounds@abd_luq",
-   "detail": "at the anatomical point (abd_luq): (c) no examine for bowel_sounds@abd_luq (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:bowel_sounds@abd_rlq",
-   "detail": "at the anatomical point (abd_rlq): (c) no examine for bowel_sounds@abd_rlq (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:bowel_sounds@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (c) no examine for bowel_sounds@abd_ruq (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:bp_cuff_placement@arm_left",
-   "detail": "at the anatomical point (upper_arm_left): (b) placement → arm_left nothing (22.4 cm); (c) no examine for bp_cuff_placement@arm_left (got none)",
+   "detail": "at the anatomical point (upper_arm_left): (b) placement → arm_left nothing (17.7 cm); (c) no examine for bp_cuff_placement@arm_left (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:female:bp_cuff_placement@arm_right",
-   "detail": "at the anatomical point (upper_arm_right): (b) placement → arm_right nothing (10.5 cm); (c) no examine for bp_cuff_placement@arm_right (got none)",
+   "detail": "at the anatomical point (upper_arm_right): (b) placement → arm_right nothing (7.4 cm); (c) no examine for bp_cuff_placement@arm_right (got none)",
    "status": "XFAIL"
   },
   {
@@ -718,23 +718,23 @@
   },
   {
    "id": "catalog-oracle:female:hepatojugular_reflux@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (b) the click resolved to lung_ant_rl; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:liver_palpation@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (b) the click resolved to lung_ant_rl; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:mcburney_point@abd_rlq",
-   "detail": "at the anatomical point (abd_rlq): (b) the click resolved to abd_ruq; (b) mcburney_point is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:murphys_sign@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (b) the click resolved to lung_ant_rl; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:ophthalmoscopy@eye_left",
@@ -748,8 +748,8 @@
   },
   {
    "id": "catalog-oracle:female:pmi_palpation@cardiac_mitral",
-   "detail": "at the anatomical point (cardiac_mitral): (b) the click resolved to breast_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (cardiac_mitral): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:precordial_palpation@cardiac_aortic",
@@ -763,13 +763,13 @@
   },
   {
    "id": "catalog-oracle:female:pulse_radial@wrist_left",
-   "detail": "at the anatomical point (wrist_left): (b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:pulse_radial@wrist_right",
-   "detail": "at the anatomical point (wrist_right): (b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:pupils_light_reflex@eye_left",
@@ -778,7 +778,7 @@
   },
   {
    "id": "catalog-oracle:female:pupils_light_reflex@eye_right",
-   "detail": "at the anatomical point (eye_right): (b) placement → eye_right nothing (4.3 cm); (c) no examine for pupils_light_reflex@eye_right (got none)",
+   "detail": "at the anatomical point (eye_right): (b) placement → eye_right nothing (4.4 cm); (c) no examine for pupils_light_reflex@eye_right (got none)",
    "status": "XFAIL"
   },
   {
@@ -793,23 +793,23 @@
   },
   {
    "id": "catalog-oracle:female:reflex_biceps@elbow_left",
-   "detail": "at the anatomical point (biceps_tendon_left): (a) first hit is drape (fold-chest), not the patient; (b) placement → elbow_left nothing (19.1 cm); (c) no examine for reflex_biceps@elbow_left (got none)",
+   "detail": "at the anatomical point (biceps_tendon_left): (a) first hit is drape (fold-chest), not the patient; (b) placement → elbow_left nothing (7.9 cm); (c) no examine for reflex_biceps@elbow_left (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:female:reflex_biceps@elbow_right",
-   "detail": "at the anatomical point (biceps_tendon_right): (b) placement → elbow_right nothing (9.3 cm); (c) no examine for reflex_biceps@elbow_right (got none)",
+   "detail": "at the anatomical point (biceps_tendon_right): (b) placement → elbow_right nothing (7.9 cm); (c) no examine for reflex_biceps@elbow_right (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:female:reflex_brachioradialis@wrist_left",
-   "detail": "at the anatomical point (brachioradialis_left): (b) placement → wrist_left nothing (11.3 cm); (c) no examine for reflex_brachioradialis@wrist_left (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (brachioradialis_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:reflex_brachioradialis@wrist_right",
-   "detail": "at the anatomical point (brachioradialis_right): (b) placement → wrist_right nothing (11.3 cm); (c) no examine for reflex_brachioradialis@wrist_right (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (brachioradialis_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:reflex_patellar@knee_left",
@@ -823,12 +823,12 @@
   },
   {
    "id": "catalog-oracle:female:reflex_triceps@elbow_left",
-   "detail": "at the anatomical point (triceps_tendon_left): (b) placement → elbow_left nothing (24.0 cm); (c) no examine for reflex_triceps@elbow_left (got none)",
+   "detail": "at the anatomical point (triceps_tendon_left): (b) placement → wrist_left nothing (16.7 cm); (c) no examine for reflex_triceps@elbow_left (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:female:reflex_triceps@elbow_right",
-   "detail": "at the anatomical point (triceps_tendon_right): (b) placement → elbow_right nothing (7.5 cm); (c) no examine for reflex_triceps@elbow_right (got none)",
+   "detail": "at the anatomical point (triceps_tendon_right): (b) placement → elbow_right near (3.5 cm); (c) no examine for reflex_triceps@elbow_right (got none)",
    "status": "XFAIL"
   },
   {
@@ -843,18 +843,18 @@
   },
   {
    "id": "catalog-oracle:female:spleen_palpation@abd_luq",
-   "detail": "at the anatomical point (abd_luq): (b) the click resolved to lung_ant_ll; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:strength_c6_8_wrist_extension@wrist_left",
-   "detail": "at the anatomical point (wrist_left): (b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:strength_c6_8_wrist_extension@wrist_right",
-   "detail": "at the anatomical point (wrist_right): (b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:visual_fields_confrontation@eye_left",
@@ -868,117 +868,117 @@
   },
   {
    "id": "catalog-oracle:female:wrist_hand_inspection@wrist_left",
-   "detail": "at the anatomical point (wrist_left): (b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:wrist_hand_inspection@wrist_right",
-   "detail": "at the anatomical point (wrist_right): (b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:wrist_hand_palpation@wrist_left",
-   "detail": "at the anatomical point (wrist_left): (b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:wrist_hand_palpation@wrist_right",
-   "detail": "at the anatomical point (wrist_right): (b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:wrist_hand_rom@wrist_left",
-   "detail": "at the anatomical point (wrist_left): (b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:wrist_hand_rom@wrist_right",
-   "detail": "at the anatomical point (wrist_right): (b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_bruits@abd_llq",
-   "detail": "at the anatomical point (abd_llq): (c) no examine for abd_bruits@abd_llq (got abd_bruits@abd_luq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_bruits@abd_luq",
-   "detail": "at the anatomical point (abd_luq): (c) no examine for abd_bruits@abd_luq (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_bruits@abd_rlq",
-   "detail": "at the anatomical point (abd_rlq): (c) no examine for abd_bruits@abd_rlq (got abd_bruits@abd_ruq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_bruits@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (c) no examine for abd_bruits@abd_ruq (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_deep_palpation@abd_llq",
-   "detail": "at the anatomical point (abd_llq): (b) the click resolved to abd_luq; (c) no examine for abd_deep_palpation@abd_llq (got abd_deep_palpation@abd_luq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_deep_palpation@abd_luq",
-   "detail": "at the anatomical point (abd_luq): (b) the click resolved to lung_ant_ll; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_deep_palpation@abd_rlq",
-   "detail": "at the anatomical point (abd_rlq): (b) the click resolved to abd_ruq; (c) no examine for abd_deep_palpation@abd_rlq (got abd_deep_palpation@abd_ruq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_deep_palpation@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (b) the click resolved to lung_ant_rl; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_inspection@abd_llq",
-   "detail": "at the anatomical point (abd_llq): (b) the click resolved to abd_luq; (c) no examine for abd_inspection@abd_llq (got abd_inspection@abd_luq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_inspection@abd_luq",
-   "detail": "at the anatomical point (abd_luq): (b) the click resolved to lung_ant_ll; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_inspection@abd_rlq",
-   "detail": "at the anatomical point (abd_rlq): (b) the click resolved to abd_ruq; (c) no examine for abd_inspection@abd_rlq (got abd_inspection@abd_ruq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_inspection@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (b) the click resolved to lung_ant_rl; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_light_palpation@abd_llq",
-   "detail": "at the anatomical point (abd_llq): (b) the click resolved to abd_luq; (c) no examine for abd_light_palpation@abd_llq (got abd_light_palpation@abd_luq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_light_palpation@abd_luq",
-   "detail": "at the anatomical point (abd_luq): (b) the click resolved to lung_ant_ll; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_light_palpation@abd_rlq",
-   "detail": "at the anatomical point (abd_rlq): (b) the click resolved to abd_ruq; (c) no examine for abd_light_palpation@abd_rlq (got abd_light_palpation@abd_ruq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:abd_light_palpation@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (b) the click resolved to lung_ant_rl; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:auscultate_heart_bell@cardiac_mitral",
-   "detail": "at the anatomical point (cardiac_mitral): (a) first hit is drape (roll-chest), not the patient; (c) no examine for auscultate_heart_bell@cardiac_mitral (got none)",
+   "detail": "at the anatomical point (cardiac_mitral): (a) first hit is drape (roll-chest), not the patient",
    "status": "XFAIL"
   },
   {
@@ -993,12 +993,12 @@
   },
   {
    "id": "catalog-oracle:male:auscultate_heart_diaphragm@cardiac_erbs",
-   "detail": "at the anatomical point (cardiac_erbs): (c) no examine for auscultate_heart_diaphragm@cardiac_erbs (got auscultate_heart_diaphragm@cardiac_pulmonic)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (cardiac_erbs): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:auscultate_heart_diaphragm@cardiac_mitral",
-   "detail": "at the anatomical point (cardiac_mitral): (a) first hit is drape (roll-chest), not the patient; (c) no examine for auscultate_heart_diaphragm@cardiac_mitral (got none)",
+   "detail": "at the anatomical point (cardiac_mitral): (a) first hit is drape (roll-chest), not the patient",
    "status": "XFAIL"
   },
   {
@@ -1013,42 +1013,42 @@
   },
   {
    "id": "catalog-oracle:male:blood_pressure@arm_left",
-   "detail": "at the anatomical point (upper_arm_left): (b) placement → arm_left nothing (16.9 cm); (c) no examine for blood_pressure@arm_left (got none)",
+   "detail": "at the anatomical point (upper_arm_left): (b) placement → arm_left nothing (15.2 cm); (c) no examine for blood_pressure@arm_left (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:male:blood_pressure@arm_right",
-   "detail": "at the anatomical point (upper_arm_right): (b) placement → arm_right nothing (7.8 cm); (c) no examine for blood_pressure@arm_right (got none)",
+   "detail": "at the anatomical point (upper_arm_right): (b) placement → arm_right near (6.1 cm); (c) no examine for blood_pressure@arm_right (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:male:bowel_sounds@abd_llq",
-   "detail": "at the anatomical point (abd_llq): (c) no examine for bowel_sounds@abd_llq (got bowel_sounds@abd_luq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_llq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:bowel_sounds@abd_luq",
-   "detail": "at the anatomical point (abd_luq): (c) no examine for bowel_sounds@abd_luq (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:bowel_sounds@abd_rlq",
-   "detail": "at the anatomical point (abd_rlq): (c) no examine for bowel_sounds@abd_rlq (got bowel_sounds@abd_ruq)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:bowel_sounds@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (c) no examine for bowel_sounds@abd_ruq (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:bp_cuff_placement@arm_left",
-   "detail": "at the anatomical point (upper_arm_left): (b) placement → arm_left nothing (16.9 cm); (c) no examine for bp_cuff_placement@arm_left (got none)",
+   "detail": "at the anatomical point (upper_arm_left): (b) placement → arm_left nothing (15.2 cm); (c) no examine for bp_cuff_placement@arm_left (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:male:bp_cuff_placement@arm_right",
-   "detail": "at the anatomical point (upper_arm_right): (b) placement → arm_right nothing (7.8 cm); (c) no examine for bp_cuff_placement@arm_right (got none)",
+   "detail": "at the anatomical point (upper_arm_right): (b) placement → arm_right near (6.1 cm); (c) no examine for bp_cuff_placement@arm_right (got none)",
    "status": "XFAIL"
   },
   {
@@ -1093,23 +1093,23 @@
   },
   {
    "id": "catalog-oracle:male:hepatojugular_reflux@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (b) the click resolved to lung_ant_rl; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:liver_palpation@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (b) the click resolved to lung_ant_rl; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:mcburney_point@abd_rlq",
-   "detail": "at the anatomical point (abd_rlq): (b) the click resolved to abd_ruq; (b) mcburney_point is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_rlq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:murphys_sign@abd_ruq",
-   "detail": "at the anatomical point (abd_ruq): (b) the click resolved to lung_ant_rl; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:ophthalmoscopy@eye_left",
@@ -1138,23 +1138,23 @@
   },
   {
    "id": "catalog-oracle:male:pulse_radial@wrist_left",
-   "detail": "at the anatomical point (wrist_left): (b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:pulse_radial@wrist_right",
-   "detail": "at the anatomical point (wrist_right): (b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:pupils_light_reflex@eye_left",
-   "detail": "at the anatomical point (eye_left): ",
-   "status": "PASS"
+   "detail": "at the anatomical point (eye_left): (b) placement → eye_left nothing (4.0 cm); (c) no examine for pupils_light_reflex@eye_left (got none)",
+   "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:male:pupils_light_reflex@eye_right",
-   "detail": "at the anatomical point (eye_right): ",
-   "status": "PASS"
+   "detail": "at the anatomical point (eye_right): (b) placement → eye_right nothing (3.9 cm); (c) no examine for pupils_light_reflex@eye_right (got none)",
+   "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:male:reflex_achilles@ankle_left",
@@ -1168,23 +1168,23 @@
   },
   {
    "id": "catalog-oracle:male:reflex_biceps@elbow_left",
-   "detail": "at the anatomical point (biceps_tendon_left): (b) placement → elbow_left nothing (10.4 cm); (c) no examine for reflex_biceps@elbow_left (got none)",
+   "detail": "at the anatomical point (biceps_tendon_left): (b) placement → elbow_left nothing (8.5 cm); (c) no examine for reflex_biceps@elbow_left (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:male:reflex_biceps@elbow_right",
-   "detail": "at the anatomical point (biceps_tendon_right): (b) placement → elbow_right nothing (10.2 cm); (c) no examine for reflex_biceps@elbow_right (got none)",
+   "detail": "at the anatomical point (biceps_tendon_right): (b) placement → elbow_right nothing (8.2 cm); (c) no examine for reflex_biceps@elbow_right (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:male:reflex_brachioradialis@wrist_left",
-   "detail": "at the anatomical point (brachioradialis_left): (b) placement → wrist_left nothing (13.4 cm); (c) no examine for reflex_brachioradialis@wrist_left (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (brachioradialis_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:reflex_brachioradialis@wrist_right",
-   "detail": "at the anatomical point (brachioradialis_right): (b) placement → wrist_right nothing (13.5 cm); (c) no examine for reflex_brachioradialis@wrist_right (got none)",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (brachioradialis_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:reflex_patellar@knee_left",
@@ -1198,18 +1198,18 @@
   },
   {
    "id": "catalog-oracle:male:reflex_triceps@elbow_left",
-   "detail": "at the anatomical point (triceps_tendon_left): (b) placement → elbow_left nothing (23.4 cm); (c) no examine for reflex_triceps@elbow_left (got none)",
+   "detail": "at the anatomical point (triceps_tendon_left): (a) first hit is drape (fold-chest), not the patient; (b) placement → wrist_left nothing (17.3 cm); (c) no examine for reflex_triceps@elbow_left (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:male:reflex_triceps@elbow_right",
-   "detail": "at the anatomical point (triceps_tendon_right): (b) placement → elbow_right nothing (8.1 cm); (c) no examine for reflex_triceps@elbow_right (got none)",
+   "detail": "at the anatomical point (triceps_tendon_right): (a) first hit is bed (exam-table), not the patient; (b) the placement never reached the patient; (c) no examine for reflex_triceps@elbow_right (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:male:rinne_test@ear_left",
-   "detail": "at the anatomical point (ear_left#mastoid, bone step): (a) first hit is hair (proxy:hair), not the patient",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (ear_left#mastoid, bone step): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:rinne_test@ear_right",
@@ -1218,18 +1218,18 @@
   },
   {
    "id": "catalog-oracle:male:spleen_palpation@abd_luq",
-   "detail": "at the anatomical point (abd_luq): (b) the click resolved to lung_ant_ll; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (abd_luq): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:strength_c6_8_wrist_extension@wrist_left",
-   "detail": "at the anatomical point (wrist_left): (b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:strength_c6_8_wrist_extension@wrist_right",
-   "detail": "at the anatomical point (wrist_right): (b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:visual_fields_confrontation@eye_left",
@@ -1243,33 +1243,33 @@
   },
   {
    "id": "catalog-oracle:male:wrist_hand_inspection@wrist_left",
-   "detail": "at the anatomical point (wrist_left): (b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:wrist_hand_inspection@wrist_right",
-   "detail": "at the anatomical point (wrist_right): (b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:wrist_hand_palpation@wrist_left",
-   "detail": "at the anatomical point (wrist_left): (b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:wrist_hand_palpation@wrist_right",
-   "detail": "at the anatomical point (wrist_right): (b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:wrist_hand_rom@wrist_left",
-   "detail": "at the anatomical point (wrist_left): (b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:wrist_hand_rom@wrist_right",
-   "detail": "at the anatomical point (wrist_right): (b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (wrist_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:abd_bruits@abd_epigastric",
@@ -1538,12 +1538,12 @@
   },
   {
    "id": "catalog:female:back_inspection@sacrum",
-   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click resolved to spine_lumbar; (c) no examine for back_inspection@sacrum (got back_inspection@spine_lumbar)",
    "status": "XFAIL"
   },
   {
    "id": "catalog:female:back_inspection@spine_cervical",
-   "detail": "(a) the page covers the canvas here (div.mx-auto.flex); (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "detail": "(a) the page covers the canvas here (div.flex.flex-wrap); (b) the click never reached the patient; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
@@ -1558,12 +1558,12 @@
   },
   {
    "id": "catalog:female:back_palpation@sacrum",
-   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click resolved to spine_lumbar; (c) no examine for back_palpation@sacrum (got back_palpation@spine_lumbar)",
    "status": "XFAIL"
   },
   {
    "id": "catalog:female:back_palpation@spine_cervical",
-   "detail": "(a) the page covers the canvas here (div.mx-auto.flex); (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "detail": "(a) the page covers the canvas here (div.flex.flex-wrap); (b) the click never reached the patient; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
@@ -1578,7 +1578,7 @@
   },
   {
    "id": "catalog:female:back_rom@spine_cervical",
-   "detail": "(a) the page covers the canvas here (div.mx-auto.flex); (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "detail": "(a) the page covers the canvas here (div.flex.flex-wrap); (b) the click never reached the patient; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
@@ -1593,7 +1593,7 @@
   },
   {
    "id": "catalog:female:blood_pressure@arm_left",
-   "detail": "(a) first hit is drape (roll-chest), not the patient",
+   "detail": "(a) first hit is drape (fold-chest), not the patient",
    "status": "XFAIL"
   },
   {
@@ -1628,7 +1628,7 @@
   },
   {
    "id": "catalog:female:bp_arm_support@arm_left",
-   "detail": "(a) first hit is drape (fold-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "detail": "(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
@@ -1743,8 +1743,8 @@
   },
   {
    "id": "catalog:female:chest_percussion@lung_lat_r",
-   "detail": "",
-   "status": "PASS"
+   "detail": "(b) the click never reached the patient; (b) the maneuver menu did not open",
+   "status": "XFAIL"
   },
   {
    "id": "catalog:female:chest_percussion@lung_post_ll",
@@ -1858,8 +1858,8 @@
   },
   {
    "id": "catalog:female:cn_xi_shrug@shoulder_left",
-   "detail": "(b) the click resolved to lung_ant_lu; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:cn_xi_shrug@shoulder_right",
@@ -1908,7 +1908,7 @@
   },
   {
    "id": "catalog:female:edema_assessment@sacrum",
-   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click resolved to spine_lumbar; (b) edema_assessment is not in the menu for this region",
    "status": "XFAIL"
   },
   {
@@ -1928,8 +1928,8 @@
   },
   {
    "id": "catalog:female:elbow_inspection@elbow_right",
-   "detail": "(b) the click resolved to lung_lat_r; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:elbow_palpation@elbow_left",
@@ -1938,8 +1938,8 @@
   },
   {
    "id": "catalog:female:elbow_palpation@elbow_right",
-   "detail": "(b) the click resolved to lung_lat_r; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:elbow_rom@elbow_left",
@@ -1948,8 +1948,8 @@
   },
   {
    "id": "catalog:female:elbow_rom@elbow_right",
-   "detail": "(b) the click resolved to lung_lat_r; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:eom_accommodation@eye_left",
@@ -1978,13 +1978,13 @@
   },
   {
    "id": "catalog:female:extremity_perfusion@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:extremity_perfusion@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:extremity_perfusion@knee_left",
@@ -2018,7 +2018,7 @@
   },
   {
    "id": "catalog:female:faber_test@sacrum",
-   "detail": "(b) the click resolved to wrist_right; (b) the maneuver menu did not open",
+   "detail": "(b) the click resolved to hand_right; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
@@ -2173,28 +2173,28 @@
   },
   {
    "id": "catalog:female:ln_occipital_palpation@ln_occipital",
-   "detail": "(a) first hit is hair (proxy:hair), not the patient; (b) the click resolved to scalp; (b) ln_occipital_palpation is not in the menu for this region",
+   "detail": "(b) the click resolved to mouth; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
    "id": "catalog:female:ln_post_auricular_palpation@ln_post_auricular",
-   "detail": "(a) first hit is hair (proxy:hair), not the patient; (b) the click resolved to scalp; (b) ln_post_auricular_palpation is not in the menu for this region",
+   "detail": "(b) the click resolved to mouth; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
    "id": "catalog:female:ln_post_cervical_palpation@ln_post_cervical",
-   "detail": "(b) the click resolved to eye_left; (b) ln_post_cervical_palpation is not in the menu for this region",
+   "detail": "(b) the click resolved to carotid_left; (b) ln_post_cervical_palpation is not in the menu for this region",
    "status": "XFAIL"
   },
   {
    "id": "catalog:female:ln_pre_auricular_palpation@ln_pre_auricular",
-   "detail": "(b) the click resolved to eye_left; (b) ln_pre_auricular_palpation is not in the menu for this region",
+   "detail": "(a) the ear (ear_l) is in front",
    "status": "XFAIL"
   },
   {
    "id": "catalog:female:ln_submandibular_palpation@ln_submandibular",
-   "detail": "",
-   "status": "PASS"
+   "detail": "(a) first hit is prop, not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "status": "XFAIL"
   },
   {
    "id": "catalog:female:ln_submental_palpation@ln_submental",
@@ -2313,13 +2313,13 @@
   },
   {
    "id": "catalog:female:oxygen_saturation@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:oxygen_saturation@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:peripheral_pulses@arm_left",
@@ -2383,8 +2383,8 @@
   },
   {
    "id": "catalog:female:precordial_palpation@precordium_lsb",
-   "detail": "(b) the click resolved to precordium_wall; (b) precordial_palpation is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:prohibited@breast_left",
@@ -2398,18 +2398,18 @@
   },
   {
    "id": "catalog:female:prohibited@pelvic",
-   "detail": "(a) first hit is drape (roll-abdomen), not the patient; (b) the click never reached the patient; (c) no prohibited_attempt logged",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:pulse_radial@wrist_left",
-   "detail": "(b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:pulse_radial@wrist_right",
-   "detail": "(b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:pupils_light_reflex@eye_left",
@@ -2438,12 +2438,12 @@
   },
   {
    "id": "catalog:female:reflex_biceps@elbow_left",
-   "detail": "(b) placement → elbow_left nothing (24.9 cm); (c) no examine for reflex_biceps@elbow_left (got none)",
+   "detail": "(b) placement → wrist_left nothing (19.0 cm); (c) no examine for reflex_biceps@elbow_left (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog:female:reflex_biceps@elbow_right",
-   "detail": "(b) placement → elbow_right nothing (9.0 cm); (c) no examine for reflex_biceps@elbow_right (got none)",
+   "detail": "(b) placement → elbow_right near (4.4 cm); (c) no examine for reflex_biceps@elbow_right (got none)",
    "status": "XFAIL"
   },
   {
@@ -2458,13 +2458,13 @@
   },
   {
    "id": "catalog:female:reflex_brachioradialis@wrist_left",
-   "detail": "(b) placement → knee_left nothing (18.2 cm); (c) no examine for reflex_brachioradialis@wrist_left (got none)",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:reflex_brachioradialis@wrist_right",
-   "detail": "(b) placement → knee_right nothing (18.2 cm); (c) no examine for reflex_brachioradialis@wrist_right (got none)",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:reflex_patellar@knee_left",
@@ -2483,12 +2483,12 @@
   },
   {
    "id": "catalog:female:reflex_triceps@elbow_left",
-   "detail": "(b) placement → elbow_left nothing (24.9 cm); (c) no examine for reflex_triceps@elbow_left (got none)",
+   "detail": "(b) placement → wrist_left nothing (19.0 cm); (c) no examine for reflex_triceps@elbow_left (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog:female:reflex_triceps@elbow_right",
-   "detail": "(b) placement → elbow_right nothing (9.0 cm); (c) no examine for reflex_triceps@elbow_right (got none)",
+   "detail": "(b) placement → elbow_right near (4.4 cm); (c) no examine for reflex_triceps@elbow_right (got none)",
    "status": "XFAIL"
   },
   {
@@ -2513,8 +2513,8 @@
   },
   {
    "id": "catalog:female:rise_from_chair@hip_left",
-   "detail": "",
-   "status": "PASS"
+   "detail": "(b) the click resolved to wrist_left; (b) the maneuver menu did not open",
+   "status": "XFAIL"
   },
   {
    "id": "catalog:female:rise_from_chair@hip_right",
@@ -2573,8 +2573,8 @@
   },
   {
    "id": "catalog:female:shoulder_empty_can@shoulder_left",
-   "detail": "(b) the click resolved to lung_ant_lu; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:shoulder_empty_can@shoulder_right",
@@ -2583,8 +2583,8 @@
   },
   {
    "id": "catalog:female:shoulder_hawkins@shoulder_left",
-   "detail": "(b) the click resolved to lung_ant_lu; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:shoulder_hawkins@shoulder_right",
@@ -2593,8 +2593,8 @@
   },
   {
    "id": "catalog:female:shoulder_infraspinatus@shoulder_left",
-   "detail": "(b) the click resolved to lung_ant_lu; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:shoulder_infraspinatus@shoulder_right",
@@ -2603,8 +2603,8 @@
   },
   {
    "id": "catalog:female:shoulder_inspection@shoulder_left",
-   "detail": "(b) the click resolved to lung_ant_lu; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:shoulder_inspection@shoulder_right",
@@ -2613,8 +2613,8 @@
   },
   {
    "id": "catalog:female:shoulder_neer@shoulder_left",
-   "detail": "(b) the click resolved to lung_ant_lu; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:shoulder_neer@shoulder_right",
@@ -2623,8 +2623,8 @@
   },
   {
    "id": "catalog:female:shoulder_palpation@shoulder_left",
-   "detail": "(b) the click resolved to lung_ant_lu; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:shoulder_palpation@shoulder_right",
@@ -2633,8 +2633,8 @@
   },
   {
    "id": "catalog:female:shoulder_rom@shoulder_left",
-   "detail": "(b) the click resolved to lung_ant_lu; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:shoulder_rom@shoulder_right",
@@ -2643,13 +2643,13 @@
   },
   {
    "id": "catalog:female:skin_inspection@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:skin_inspection@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:skin_inspection@shin_left",
@@ -2668,13 +2668,13 @@
   },
   {
    "id": "catalog:female:skin_turgor@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:skin_turgor@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:skin_turgor@skin",
@@ -2688,8 +2688,8 @@
   },
   {
    "id": "catalog:female:straight_leg_raise@hip_left",
-   "detail": "(b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:straight_leg_raise@hip_right",
@@ -2698,8 +2698,8 @@
   },
   {
    "id": "catalog:female:straight_leg_raise@spine_lumbar",
-   "detail": "",
-   "status": "PASS"
+   "detail": "(b) the click resolved to wrist_right; (b) the maneuver menu did not open",
+   "status": "XFAIL"
   },
   {
    "id": "catalog:female:strength_c5_6_elbow_flexion@elbow_left",
@@ -2708,8 +2708,8 @@
   },
   {
    "id": "catalog:female:strength_c5_6_elbow_flexion@elbow_right",
-   "detail": "(b) the click resolved to lung_lat_r; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:strength_c5_6_elbow_flexion@neuro_motor_upper",
@@ -2723,8 +2723,8 @@
   },
   {
    "id": "catalog:female:strength_c5_7_elbow_extension@elbow_right",
-   "detail": "(b) the click resolved to lung_lat_r; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:strength_c5_7_elbow_extension@neuro_motor_upper",
@@ -2738,8 +2738,8 @@
   },
   {
    "id": "catalog:female:strength_c5_shoulder_abduction@shoulder_left",
-   "detail": "(b) the click resolved to lung_ant_lu; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:strength_c5_shoulder_abduction@shoulder_right",
@@ -2753,23 +2753,23 @@
   },
   {
    "id": "catalog:female:strength_c6_8_wrist_extension@wrist_left",
-   "detail": "(b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:strength_c6_8_wrist_extension@wrist_right",
-   "detail": "(b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:strength_c7_t1_grip@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:strength_c7_t1_grip@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:strength_c7_t1_grip@neuro_motor_upper",
@@ -2778,13 +2778,13 @@
   },
   {
    "id": "catalog:female:strength_c8_t1_finger_abduction@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:strength_c8_t1_finger_abduction@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:strength_c8_t1_finger_abduction@neuro_motor_upper",
@@ -2938,68 +2938,68 @@
   },
   {
    "id": "catalog:female:weber_test@scalp",
-   "detail": "(a) first hit is hair (proxy:hair), not the patient",
+   "detail": "(a) the page covers the canvas here (div[data-testid=breadcrumb].absolute.top-2); (b) the placement never reached the patient; (c) no examine for weber_test@scalp (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog:female:wrist_hand_inspection@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:wrist_hand_inspection@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:wrist_hand_inspection@wrist_left",
-   "detail": "(b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:wrist_hand_inspection@wrist_right",
-   "detail": "(b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:wrist_hand_palpation@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:wrist_hand_palpation@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:wrist_hand_palpation@wrist_left",
-   "detail": "(b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:wrist_hand_palpation@wrist_right",
-   "detail": "(b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:wrist_hand_rom@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:wrist_hand_rom@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:wrist_hand_rom@wrist_left",
-   "detail": "(b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:wrist_hand_rom@wrist_right",
-   "detail": "(b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:abd_bruits@abd_epigastric",
@@ -3223,7 +3223,7 @@
   },
   {
    "id": "catalog:male:auscultate_lungs@lung_lat_l",
-   "detail": "(a) first hit is drape (roll-chest), not the patient; (c) no examine for auscultate_lungs@lung_lat_l (got none)",
+   "detail": "(a) first hit is drape (roll-chest), not the patient; (c) no examine for auscultate_lungs@lung_lat_l (got auscultate_heart_diaphragm@cardiac_mitral)",
    "status": "XFAIL"
   },
   {
@@ -3448,8 +3448,8 @@
   },
   {
    "id": "catalog:male:chest_percussion@lung_ant_ll",
-   "detail": "(b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:chest_percussion@lung_ant_lu",
@@ -3608,7 +3608,7 @@
   },
   {
    "id": "catalog:male:cva_tenderness@cva_left",
-   "detail": "(b) the click resolved to lung_post_ll; (b) cva_tenderness is not in the menu for this region",
+   "detail": "(a) first hit is bed (exam-table), not the patient",
    "status": "XFAIL"
   },
   {
@@ -3653,32 +3653,32 @@
   },
   {
    "id": "catalog:male:elbow_inspection@elbow_left",
-   "detail": "(b) the click resolved to precordium_wall; (b) the maneuver menu did not open",
+   "detail": "(b) the click resolved to breast_left; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
    "id": "catalog:male:elbow_inspection@elbow_right",
-   "detail": "(b) the click resolved to lung_lat_r; (b) the maneuver menu did not open",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
    "id": "catalog:male:elbow_palpation@elbow_left",
-   "detail": "(b) the click resolved to precordium_wall; (b) the maneuver menu did not open",
+   "detail": "(b) the click resolved to breast_left; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
    "id": "catalog:male:elbow_palpation@elbow_right",
-   "detail": "(b) the click resolved to lung_lat_r; (b) the maneuver menu did not open",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
    "id": "catalog:male:elbow_rom@elbow_left",
-   "detail": "(b) the click resolved to precordium_wall; (b) the maneuver menu did not open",
+   "detail": "(b) the click resolved to breast_left; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
    "id": "catalog:male:elbow_rom@elbow_right",
-   "detail": "(b) the click resolved to lung_lat_r; (b) the maneuver menu did not open",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
@@ -3708,13 +3708,13 @@
   },
   {
    "id": "catalog:male:extremity_perfusion@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:extremity_perfusion@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:extremity_perfusion@knee_left",
@@ -3748,8 +3748,8 @@
   },
   {
    "id": "catalog:male:faber_test@sacrum",
-   "detail": "(b) the click resolved to wrist_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:finger_nose_finger@neuro_cerebellar",
@@ -3903,22 +3903,22 @@
   },
   {
    "id": "catalog:male:ln_occipital_palpation@ln_occipital",
-   "detail": "(a) first hit is hair (proxy:hair), not the patient; (b) the click resolved to scalp; (b) ln_occipital_palpation is not in the menu for this region",
+   "detail": "(b) the click resolved to mouth; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
    "id": "catalog:male:ln_post_auricular_palpation@ln_post_auricular",
-   "detail": "(a) first hit is hair (proxy:hair), not the patient; (b) the click resolved to scalp; (b) ln_post_auricular_palpation is not in the menu for this region",
+   "detail": "(b) the click resolved to mouth; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
    "id": "catalog:male:ln_post_cervical_palpation@ln_post_cervical",
-   "detail": "(b) the click resolved to eye_left; (b) ln_post_cervical_palpation is not in the menu for this region",
+   "detail": "(b) the click resolved to carotid_left; (b) ln_post_cervical_palpation is not in the menu for this region",
    "status": "XFAIL"
   },
   {
    "id": "catalog:male:ln_pre_auricular_palpation@ln_pre_auricular",
-   "detail": "(a) first hit is hair (proxy:hair), not the patient",
+   "detail": "(a) the ear (ear_l) is in front",
    "status": "XFAIL"
   },
   {
@@ -4003,8 +4003,8 @@
   },
   {
    "id": "catalog:male:nares_inspection@nose",
-   "detail": "",
-   "status": "PASS"
+   "detail": "(c) no describe_exam logged",
+   "status": "XFAIL"
   },
   {
    "id": "catalog:male:nuchal_rigidity@neuro_meningeal",
@@ -4043,13 +4043,13 @@
   },
   {
    "id": "catalog:male:oxygen_saturation@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:oxygen_saturation@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:peripheral_pulses@arm_left",
@@ -4128,18 +4128,18 @@
   },
   {
    "id": "catalog:male:prohibited@pelvic",
-   "detail": "(a) first hit is drape (roll-abdomen), not the patient; (b) the click never reached the patient; (c) no prohibited_attempt logged",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:pulse_radial@wrist_left",
-   "detail": "(b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:pulse_radial@wrist_right",
-   "detail": "(b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:pupils_light_reflex@eye_left",
@@ -4168,12 +4168,12 @@
   },
   {
    "id": "catalog:male:reflex_biceps@elbow_left",
-   "detail": "(b) placement → elbow_left nothing (24.1 cm); (c) no examine for reflex_biceps@elbow_left (got none)",
+   "detail": "(b) placement → wrist_left nothing (18.7 cm); (c) no examine for reflex_biceps@elbow_left (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog:male:reflex_biceps@elbow_right",
-   "detail": "(b) placement → elbow_right nothing (8.5 cm); (c) no examine for reflex_biceps@elbow_right (got none)",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the placement never reached the patient; (c) no examine for reflex_biceps@elbow_right (got none)",
    "status": "XFAIL"
   },
   {
@@ -4188,13 +4188,13 @@
   },
   {
    "id": "catalog:male:reflex_brachioradialis@wrist_left",
-   "detail": "(b) placement → knee_left nothing (17.9 cm); (c) no examine for reflex_brachioradialis@wrist_left (got none)",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:reflex_brachioradialis@wrist_right",
-   "detail": "(b) placement → knee_right nothing (17.8 cm); (c) no examine for reflex_brachioradialis@wrist_right (got none)",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:reflex_patellar@knee_left",
@@ -4213,12 +4213,12 @@
   },
   {
    "id": "catalog:male:reflex_triceps@elbow_left",
-   "detail": "(b) placement → elbow_left nothing (24.1 cm); (c) no examine for reflex_triceps@elbow_left (got none)",
+   "detail": "(b) placement → wrist_left nothing (18.7 cm); (c) no examine for reflex_triceps@elbow_left (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog:male:reflex_triceps@elbow_right",
-   "detail": "(b) placement → elbow_right nothing (8.5 cm); (c) no examine for reflex_triceps@elbow_right (got none)",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the placement never reached the patient; (c) no examine for reflex_triceps@elbow_right (got none)",
    "status": "XFAIL"
   },
   {
@@ -4373,13 +4373,13 @@
   },
   {
    "id": "catalog:male:skin_inspection@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:skin_inspection@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:skin_inspection@shin_left",
@@ -4398,13 +4398,13 @@
   },
   {
    "id": "catalog:male:skin_turgor@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:skin_turgor@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:skin_turgor@skin",
@@ -4433,12 +4433,12 @@
   },
   {
    "id": "catalog:male:strength_c5_6_elbow_flexion@elbow_left",
-   "detail": "(b) the click resolved to precordium_wall; (b) the maneuver menu did not open",
+   "detail": "(b) the click resolved to breast_left; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
    "id": "catalog:male:strength_c5_6_elbow_flexion@elbow_right",
-   "detail": "(b) the click resolved to lung_lat_r; (b) the maneuver menu did not open",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
@@ -4448,12 +4448,12 @@
   },
   {
    "id": "catalog:male:strength_c5_7_elbow_extension@elbow_left",
-   "detail": "(b) the click resolved to precordium_wall; (b) the maneuver menu did not open",
+   "detail": "(b) the click resolved to breast_left; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
    "id": "catalog:male:strength_c5_7_elbow_extension@elbow_right",
-   "detail": "(b) the click resolved to lung_lat_r; (b) the maneuver menu did not open",
+   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
@@ -4483,23 +4483,23 @@
   },
   {
    "id": "catalog:male:strength_c6_8_wrist_extension@wrist_left",
-   "detail": "(b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:strength_c6_8_wrist_extension@wrist_right",
-   "detail": "(b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:strength_c7_t1_grip@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:strength_c7_t1_grip@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:strength_c7_t1_grip@neuro_motor_upper",
@@ -4508,13 +4508,13 @@
   },
   {
    "id": "catalog:male:strength_c8_t1_finger_abduction@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:strength_c8_t1_finger_abduction@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:strength_c8_t1_finger_abduction@neuro_motor_upper",
@@ -4668,68 +4668,68 @@
   },
   {
    "id": "catalog:male:weber_test@scalp",
-   "detail": "(a) first hit is hair (proxy:hair), not the patient",
+   "detail": "(b) placement → scalp nothing (13.3 cm); (c) no examine for weber_test@scalp (got none)",
    "status": "XFAIL"
   },
   {
    "id": "catalog:male:wrist_hand_inspection@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:wrist_hand_inspection@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:wrist_hand_inspection@wrist_left",
-   "detail": "(b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:wrist_hand_inspection@wrist_right",
-   "detail": "(b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:wrist_hand_palpation@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:wrist_hand_palpation@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:wrist_hand_palpation@wrist_left",
-   "detail": "(b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:wrist_hand_palpation@wrist_right",
-   "detail": "(b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:wrist_hand_rom@hand_left",
-   "detail": "(b) the click resolved to knee_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:wrist_hand_rom@hand_right",
-   "detail": "(b) the click resolved to knee_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:wrist_hand_rom@wrist_left",
-   "detail": "(b) the click resolved to hip_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:wrist_hand_rom@wrist_right",
-   "detail": "(b) the click resolved to hip_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   }
  ]
 }

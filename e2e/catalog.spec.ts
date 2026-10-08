@@ -71,6 +71,8 @@ async function oraclePoints(e: CatalogEntry): Promise<Map<string, Vec3>> {
 }
 
 const norm = (s: string) => s.replace(/\s+/g, " ").trim();
+/** a stethoscope hold: the 3 s listen plus a margin for a slow software-rendered page under load */
+const HOLD_MS = 4_000;
 /** what the tool HUD says is in hand (ToolTray's TOOL_LABELS; that module is a client component) */
 const TOOL_LABELS: Record<Tool, string> = {
   stethoscope: "Stethoscope",
@@ -290,7 +292,7 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
     for (const t of targets) {
       await page.mouse.move(t.x, t.y);
       await page.mouse.down();
-      if (e.hold) await page.waitForTimeout(3_300);
+      if (e.hold) await page.waitForTimeout(HOLD_MS);
       await page.mouse.up();
       const chooser = page.locator('[data-dialog="tool-chooser"]');
       if (await chooser.isVisible({ timeout: 600 }).catch(() => false)) {
@@ -299,7 +301,7 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
         if (e.hold) {
           await page.mouse.move(t.x, t.y);
           await page.mouse.down();
-          await page.waitForTimeout(3_300);
+          await page.waitForTimeout(HOLD_MS);
           await page.mouse.up();
         }
       }
@@ -340,15 +342,22 @@ async function runNegative(page: Page, api: APIRequestContext, sessionId: string
   const before = (await newestExamine(api, sessionId, 0)).count;
   await page.mouse.move(p.page.x, p.page.y);
   await page.mouse.down();
-  if (e.hold) await page.waitForTimeout(3_300);
+  if (e.hold) await page.waitForTimeout(HOLD_MS);
   await page.mouse.up();
   const chooser = page.locator('[data-dialog="tool-chooser"]');
   if (await chooser.isVisible({ timeout: 500 }).catch(() => false)) {
-    await chooser.locator(`[data-maneuver="${e.maneuverId}"]`).click();
+    // the placement landed on another region's exams (e.g. bowel sounds / bruits): not this exam
+    const opt = chooser.locator(`[data-maneuver="${e.maneuverId}"]`);
+    if (!(await opt.count())) {
+      await page.keyboard.press("Escape");
+      await closeAll(page);
+      return [];
+    }
+    await opt.click();
     if (e.hold) {
       await page.mouse.move(p.page.x, p.page.y);
       await page.mouse.down();
-      await page.waitForTimeout(3_300);
+      await page.waitForTimeout(HOLD_MS);
       await page.mouse.up();
     }
   }

@@ -70,6 +70,12 @@ const cross = (a: V3, b: V3): V3 => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[
 const round = (x: number, d = 4) => Math.round(x * 10 ** d) / 10 ** d;
 /** GLB/runtime bone name: three's loader strips "." from node names, so ".L" becomes "_L". */
 const safe = (b: string) => b.replace(/\./g, "_");
+/** top-4 skin weights for the generated file (bone names made safe, weights rounded and renormalised) */
+const skinWeights = (w: [string, number][]): [string, number][] => {
+  const r = w.map(([b, x]) => [safe(b), round(x, 4)] as [string, number]).filter(([, x]) => x > 0);
+  const sum = r.reduce((n, [, x]) => n + x, 0) || 1;
+  return r.map(([b, x]) => [b, round(x / sum, 4)]);
+};
 
 async function main() {
   await ensureSources(VARIANTS.flatMap((v) => v.targets.map((t) => t.name)));
@@ -80,8 +86,9 @@ async function main() {
 // Bones have identity rest rotation: local translation = head - parent.head.
 
 export interface RigBone { name: string; parent: string | null; head: [number, number, number] }
-export interface SkinPoint { point: [number, number, number]; normal: [number, number, number]; bone: string }
-export interface GeneratedAnchor { regionId: string; points: [number, number, number][]; normals: [number, number, number][]; bones: string[] }
+/** weights: the skin vertex's bone weights (top 4), so the point is skinned like the surface. */
+export interface SkinPoint { point: [number, number, number]; normal: [number, number, number]; bone: string; weights: [string, number][] }
+export interface GeneratedAnchor { regionId: string; points: [number, number, number][]; normals: [number, number, number][]; bones: string[]; weights: [string, number][][] }
 export interface PatientVariant { glb: string; stats: { triangles: number; bones: number; glbBytes: number }; rig: RigBone[]; landmarks: Record<string, SkinPoint>; anchors: GeneratedAnchor[] }
 
 export const PATIENT_VARIANTS: Record<"male" | "female", PatientVariant> = ${JSON.stringify(results)};
@@ -190,7 +197,25 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
 
   // ---- landmarks and anchors on the skin (bind pose)
   const dominant = (srcVi: number) => top4(srcVi, "root")[0]![0];
-  const findLandmark = (def: (typeof LANDMARK_DEFS)[number]): { point: V3; normal: V3; bone: string } => {
+  // skin weights of the snapped vertex: anchors and landmarks are skinned exactly like the surface (bug 5)
+  const weightsOf = (srcVi: number) => top4(srcVi, "root");
+  // front-most skin near (x, y), from front-facing vertices: for dimple landmarks (the navel)
+  const frontZ = (x: number, y: number) => {
+    let z = -Infinity;
+    for (let i = 0; i < skin.pos.length; i++) {
+      const q = skin.pos[i]!;
+      if (normals[i]![2] < 0.3 || Math.abs(q[0] - x) > 0.006 || Math.abs(q[1] - y) > 0.006) continue;
+      if (q[2] > z) z = q[2];
+    }
+    return z;
+  };
+  /** how far a front-surface vertex sits below the front skin `r` metres around it */
+  const dimpleDepth = (p: V3, r: number) => {
+    if (frontZ(p[0], p[1]) > p[2] + 0.002) return -Infinity; // not on the front surface
+    const ring = [frontZ(p[0] + r, p[1]), frontZ(p[0] - r, p[1]), frontZ(p[0], p[1] + r), frontZ(p[0], p[1] - r)];
+    return ring.reduce((a, b) => a + b, 0) / ring.length - p[2];
+  };
+  const findLandmark = (def: (typeof LANDMARK_DEFS)[number]): { point: V3; normal: V3; bone: string; weights: [string, number][] } => {
     const ref = def.ref.kind === "mid" ? scale(add(headOf(def.ref.bone), headOf(def.ref.other)), 0.5) : def.ref.end === "tail" ? tailOf(def.ref.bone) : headOf(def.ref.bone);
     let best = -1;
     let bestScore = -Infinity;
@@ -201,16 +226,16 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
         const [bx, by, bz] = def.box;
         if (Math.abs(d[0] - bx[0]) > bx[1] || Math.abs(d[1] - by[0]) > by[1] || Math.abs(d[2] - bz[0]) > bz[1]) continue;
       }
-      const sc = dot(p, def.pick);
+      const sc = def.dimple ? dimpleDepth(p, def.dimple) : dot(p, def.pick);
       if (sc > bestScore) {
         bestScore = sc;
         best = i;
       }
     }
     if (best < 0) throw new Error(`landmark ${def.id}: no vertex in box`);
-    return { point: skin.pos[best]!, normal: normals[best]!, bone: dominant(skin.src[best]!) };
+    return { point: skin.pos[best]!, normal: normals[best]!, bone: dominant(skin.src[best]!), weights: weightsOf(skin.src[best]!) };
   };
-  const landmarks: Record<string, { point: V3; normal: V3; bone: string }> = {};
+  const landmarks: Record<string, { point: V3; normal: V3; bone: string; weights: [string, number][] }> = {};
   for (const def of LANDMARK_DEFS) landmarks[def.id] = findLandmark(def);
 
   const FACING: Record<Facing, V3 | null> = { front: [0, 0, 1], back: [0, 0, -1], left: [1, 0, 0], right: [-1, 0, 0], up: [0, 1, 0], down: [0, -1, 0], any: null };
@@ -228,27 +253,37 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
       }
     }
     if (best < 0) throw new Error("projection failed");
-    return { point: skin.pos[best]!, normal: normals[best]!, bone: dominant(skin.src[best]!), offBy: bestD };
+    return { point: skin.pos[best]!, normal: normals[best]!, bone: dominant(skin.src[best]!), weights: weightsOf(skin.src[best]!), offBy: bestD };
   };
-  const anchors: { regionId: string; points: V3[]; normals: V3[]; bones: string[] }[] = [];
+  const anchors: { regionId: string; points: V3[]; normals: V3[]; bones: string[]; weights: [string, number][][] }[] = [];
   for (const def of ANCHOR_DEFS) {
     const sides = def.bilateral ? [1, -1] : [def.mirror ? -1 : 1];
     const pts: V3[] = [];
     const nrm: V3[] = [];
     const bones: string[] = [];
+    const weights: [string, number][][] = [];
     for (const s of sides) {
       const lmId = s === -1 ? mirrorId(def.landmark) : def.landmark;
       const lm = landmarks[lmId];
       if (!lm) throw new Error(`anchor ${def.regionId}: landmark ${lmId} missing`);
-      const off: V3 = [def.offsetCm[0] * 0.01 * s, def.offsetCm[1] * 0.01, def.offsetCm[2] * 0.01];
+      let from = lm.point;
+      if (def.between) {
+        const toId = s === -1 ? mirrorId(def.between.to) : def.between.to;
+        const to = landmarks[toId];
+        if (!to) throw new Error(`anchor ${def.regionId}: landmark ${toId} missing`);
+        from = add(from, scale(sub(to.point, from), def.between.t));
+      }
+      const cm = def.offsetCmBy?.[id as "male" | "female"] ?? def.offsetCm;
+      const off: V3 = [cm[0] * 0.01 * s, cm[1] * 0.01, cm[2] * 0.01];
       const facing: Facing = s === -1 ? mirrorFacing(def.facing) : def.facing;
-      const r = projectToSkin(add(lm.point, off), facing, def.bones ? (b) => def.bones!.some((x) => b.startsWith(x)) : undefined);
+      const r = projectToSkin(add(from, off), facing, def.bones ? (b) => def.bones!.some((x) => b.startsWith(x)) : undefined);
       if (r.offBy > 0.06) console.warn(`anchor ${def.regionId} side ${s}: projected ${(r.offBy * 100).toFixed(1)} cm from its target`);
       pts.push(r.point);
       nrm.push(r.normal);
       bones.push(r.bone);
+      weights.push(r.weights);
     }
-    anchors.push({ regionId: def.regionId, points: pts, normals: nrm, bones });
+    anchors.push({ regionId: def.regionId, points: pts, normals: nrm, bones, weights });
   }
 
   // ---- gown panels (offset shell over the torso)
@@ -476,8 +511,8 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
     glb: "/models/" + path.basename(OUT_GLB),
     stats: { triangles: tris, bones: allBones.length, glbBytes: fs.statSync(OUT_GLB).size },
     rig: allBones.map((b) => ({ name: safe(b), parent: parentName(b) ? safe(parentName(b)!) : null, head: worldHead(b).map((x) => round(x)) })),
-    landmarks: Object.fromEntries(Object.entries(landmarks).map(([k, v]) => [k, { point: v.point.map((x) => round(x)), normal: v.normal.map((x) => round(x, 3)), bone: safe(v.bone) }])),
-    anchors: anchors.map((a) => ({ regionId: a.regionId, points: a.points.map((p) => p.map((x) => round(x))), normals: a.normals.map((p) => p.map((x) => round(x, 3))), bones: a.bones.map(safe) })),
+    landmarks: Object.fromEntries(Object.entries(landmarks).map(([k, v]) => [k, { point: v.point.map((x) => round(x)), normal: v.normal.map((x) => round(x, 3)), bone: safe(v.bone), weights: skinWeights(v.weights) }])),
+    anchors: anchors.map((a) => ({ regionId: a.regionId, points: a.points.map((p) => p.map((x) => round(x))), normals: a.normals.map((p) => p.map((x) => round(x, 3))), bones: a.bones.map(safe), weights: a.weights.map(skinWeights) })),
   };
 }
 

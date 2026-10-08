@@ -256,7 +256,7 @@ function Sink({ running }: { running?: boolean }) {
   );
 }
 
-function ExamTable({ angle, onHeadControl }: { angle: { current: number }; onHeadControl?: () => void }) {
+export function ExamTable({ angle, onHeadControl }: { angle: { current: number }; onHeadControl?: () => void }) {
   const top = TABLE.topY;
   const { headLen, footLen, mattress, cabinet, step } = TABLE_PARTS;
   const head = useRef<Group>(null);

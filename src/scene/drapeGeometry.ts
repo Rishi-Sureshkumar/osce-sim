@@ -30,8 +30,9 @@ export function frameBetween(a: Vec3, b: Vec3, up: Vec3): CylinderFrame {
 
 /** The leg sheet's cylinder frame for a pose (the sheet is hidden in left lateral decubitus). */
 export function legSheetFrame(pose: Pose): CylinderFrame {
-  const hip = anchorWorldPoints("hip_right", pose)[0]!;
-  const hipL = anchorWorldPoints("hip_left", pose)[0]!;
+  // the greater trochanters (the hip exam targets sit a little in front of them)
+  const hip = skinLandmark("hip_r", pose).point;
+  const hipL = skinLandmark("hip_l", pose).point;
   const ankle = anchorWorldPoints("ankle_right", pose)[0]!;
   const ankleL = anchorWorldPoints("ankle_left", pose)[0]!;
   // the sheet's axis runs down the middle of the legs, ~20 cm below the top of the arc
@@ -39,6 +40,17 @@ export function legSheetFrame(pose: Pose): CylinderFrame {
   const bottom: Vec3 = [(ankle[0] + ankleL[0]) / 2, Math.max(ankle[1], ankleL[1]) - 0.16, (ankle[2] + ankleL[2]) / 2 + 0.12];
   return frameBetween(top, bottom, [0, 1, 0]);
 }
+
+const groinMid = (pose: Pose): Vec3 => {
+  const r = anchorWorldPoints("groin_right", pose)[0]!;
+  const l = anchorWorldPoints("groin_left", pose)[0]!;
+  return [(r[0] + l[0]) / 2, (r[1] + l[1]) / 2, (r[2] + l[2]) / 2];
+};
+/** `p` moved `m` metres down the body (toward the feet). */
+const below = (p: Vec3, pose: Pose, m: number): Vec3 => {
+  const d = new Vector3(0, -1, 0).transformDirection(pose.world.get("root")!);
+  return [p[0] + d.x * m, p[1] + d.y * m, p[2] + d.z * m];
+};
 
 /** Where the gown's fold tabs / rolled edges sit for the chest and abdomen. */
 export function gownRollFrames(pose: Pose): Record<"chest" | "abdomen", { pos: Vec3; q: Quaternion }> {
@@ -51,7 +63,8 @@ export function gownRollFrames(pose: Pose): Record<"chest" | "abdomen", { pos: V
   const at = (p: Vec3, n: Vec3, out: number): Vec3 => [p[0] + n[0] * out, p[1] + n[1] * out, p[2] + n[2] * out];
   return {
     chest: { pos: at(xiph.point, xiph.normal, 0.035), q },
-    abdomen: { pos: at(umb.point, umb.normal, 0.03).map((v, i) => v + [0, 0, 0.1][i]!) as Vec3, q },
+    // rolled down to the top of the thighs, clear of the groin (femoral pulses)
+    abdomen: { pos: at(below(groinMid(pose), pose, 0.06), umb.normal, 0.03), q },
   };
 }
 

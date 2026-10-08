@@ -8,5 +8,6 @@ export default defineConfig({
   testIgnore: [],
   timeout: 60 * 60_000,
   workers: Number(process.env.CATALOG_WORKERS ?? 1),
-  use: { ...base.use, viewport: { width: 1280, height: 800 } },
+  // a stuck click fails its entry instead of hanging the whole group until the test timeout
+  use: { ...base.use, viewport: { width: 1280, height: 800 }, actionTimeout: 15_000 },
 });

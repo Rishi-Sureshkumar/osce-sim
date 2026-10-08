@@ -21,6 +21,8 @@
     "postinstall": "patch-package && tsx scripts/lang/vendor.ts --soft",
     "qa:prove-regression": "tsx scripts/qa/prove-regression.ts",
     "test:anchors": "tsx scripts/qa/anchors.ts",
+    "qa:calibrate-anchors": "tsx scripts/qa/calibrate-anchors.ts",
+    "qa:prune-xfail": "tsx scripts/qa/prune-xfail.ts",
     "test:intersections": "tsx scripts/qa/intersections.ts",
     "test:catalog": "playwright test -c playwright.catalog.config.ts",
     "test:visual": "playwright test -c playwright.visual.config.ts",

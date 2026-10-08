@@ -52,7 +52,7 @@ describe("hidden-anchor tolerance bands", () => {
   it("a placement near the apex resolves to the apex, not the broader breast zone around it", () => {
     const pose = poseFor("reclined_30", 30);
     const apex = anchorWorldPoints("cardiac_mitral", pose)[0]!;
-    const s = snapToAnchor([apex[0], apex[1] + 0.012, apex[2]], ["cardiac_mitral", "breast_left"], pose)!;
+    const s = snapToAnchor([apex[0], apex[1] + 0.012, apex[2]], ["cardiac_mitral", "breast_left"], pose, { tool: true })!;
     expect(s.regionId).toBe("cardiac_mitral");
   });
 });

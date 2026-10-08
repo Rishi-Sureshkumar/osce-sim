@@ -36,6 +36,9 @@ const DEG = Math.PI / 180;
  */
 export function poseRotations(position: Position, bedAngleDeg: number): BoneRotations {
   const a = bedAngleDeg * DEG;
+  // 0 lying or reclined to 45°, 1 sitting up (≥ 80°)
+  const t = Math.min(1, Math.max(0, (bedAngleDeg - 45) / 35));
+  const lap = t * t * (3 - 2 * t);
   const r: BoneRotations = {
     // trunk flexion relative to the lying body (raises the torso off the table)
     spine05: [a * 0.55, 0, 0],
@@ -43,11 +46,13 @@ export function poseRotations(position: Position, bedAngleDeg: number): BoneRota
     spine03: [a * 0.15, 0, 0],
     // keep the face looking forward-ish: a pillow when flat, upright when seated
     neck01: [position === "supine" || a < 20 ? 12 * DEG : -a * 0.08, 0, 0],
-    // arms by the sides, elbows slightly bent
-    "upperarm01_L": [6 * DEG, 0, -38 * DEG],
-    "upperarm01_R": [6 * DEG, 0, 38 * DEG],
-    "lowerarm01_L": [18 * DEG, 0, 0],
-    "lowerarm01_R": [18 * DEG, 0, 0],
+    // arms by the sides; as the trunk comes up the forearms come to rest on the thighs (seated,
+    // hands by the hips are hidden behind the thighs). For a hanging limb −X is flexion; +Y on the
+    // right upper arm (−Y on the left) turns it inward so the forearm lies across the thigh.
+    "upperarm01_L": [6 * (1 - lap) * DEG, -40 * lap * DEG, -38 * DEG],
+    "upperarm01_R": [6 * (1 - lap) * DEG, 40 * lap * DEG, 38 * DEG],
+    "lowerarm01_L": [(18 - 63 * lap) * DEG, 0, 0],
+    "lowerarm01_R": [(18 - 63 * lap) * DEG, 0, 0],
     // legs together
     "upperleg01_L": [0, 0, -3.5 * DEG],
     "upperleg01_R": [0, 0, 3.5 * DEG],
@@ -55,6 +60,9 @@ export function poseRotations(position: Position, bedAngleDeg: number): BoneRota
   if (position === "seated_leaning_forward") {
     r.spine03 = [a * 0.15 + 18 * DEG, 0, 0];
     r.spine02 = [10 * DEG, 0, 0];
+    // leaning in, the upper arms come forward so the forearms clear the belly
+    r["upperarm01_L"] = [-15 * DEG, -35 * DEG, -38 * DEG];
+    r["upperarm01_R"] = [-15 * DEG, 35 * DEG, 38 * DEG];
   }
   if (position === "left_lateral_decubitus") {
     // knees and hips bent, uppermost arm in front of the body
@@ -143,6 +151,40 @@ export function toWorld(point: Vec3, bone: string, pose: Pose): Vec3 {
 export function dirToWorld(dir: Vec3, bone: string, pose: Pose): Vec3 {
   const m = pose.world.get(bone) ?? pose.world.get("root")!;
   const v = new Vector3(...dir).transformDirection(m);
+  return [v.x, v.y, v.z];
+}
+
+/** Bone weights of a skin vertex: [bone, weight] pairs (up to 4, summing to ~1). */
+export type SkinWeights = readonly (readonly [string, number])[];
+
+/**
+ * A bind-pose skin point carried exactly like a skin vertex (Phase 4 M2 bug 5): the linear blend
+ * of its bones, Σ wᵢ · Mᵢ · (p − headᵢ), as the GPU skins the visible surface. Without weights it
+ * rides `bone` rigidly (the old behaviour).
+ */
+export function skinToWorld(point: Vec3, weights: SkinWeights | undefined, bone: string, pose: Pose): Vec3 {
+  if (!weights?.length) return toWorld(point, bone, pose);
+  let x = 0;
+  let y = 0;
+  let z = 0;
+  let total = 0;
+  for (const [b, w] of weights) {
+    const p = toWorld(point, b, pose);
+    x += p[0] * w;
+    y += p[1] * w;
+    z += p[2] * w;
+    total += w;
+  }
+  return total > 0 ? [x / total, y / total, z / total] : toWorld(point, bone, pose);
+}
+
+/** A bind-pose direction blended the same way as `skinToWorld` (renormalised). */
+export function skinDirToWorld(dir: Vec3, weights: SkinWeights | undefined, bone: string, pose: Pose): Vec3 {
+  if (!weights?.length) return dirToWorld(dir, bone, pose);
+  const v = new Vector3();
+  for (const [b, w] of weights) v.addScaledVector(new Vector3(...dirToWorld(dir, b, pose)), w);
+  if (v.lengthSq() < 1e-12) return dirToWorld(dir, bone, pose);
+  v.normalize();
   return [v.x, v.y, v.z];
 }
 

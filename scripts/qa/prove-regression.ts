@@ -43,6 +43,11 @@ export const PROOFS: Record<string, Proof> = {
     tests: ["tests/regressions/bug4-shots.test.ts"],
     description: "no front view of the face; the head & neck shot looked down on the scalp so the chin hid the neck; the head swayed and turned during the eye exam",
   },
+  bug5: {
+    kind: "vitest",
+    tests: ["tests/regressions/bug5-skinned-anchors.test.ts"],
+    description: "exam landmarks drifted between views: each anchor rode one bone rigidly while the skin blends several, so near joints the targets floated off the skin and slid along it from pose to pose",
+  },
   bug10: {
     kind: "vitest",
     tests: ["tests/regressions/bug10-hold-choice.test.ts"],

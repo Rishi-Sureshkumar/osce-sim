@@ -26,7 +26,7 @@ export interface PlacementDecision {
 }
 
 export function decidePlacement(a: { point: Vec3; tool: Tool; mode?: ToolMode; maneuvers: readonly M[]; toolRegions: readonly string[]; pose: Pose }): PlacementDecision | null {
-  const s = snapToAnchor(a.point, a.toolRegions, a.pose);
+  const s = snapToAnchor(a.point, a.toolRegions, a.pose, { tool: true });
   if (!s) return null;
   const cands = candidatesFor(a.maneuvers as M[], a.tool, a.mode, s.regionId);
   if (!cands.length) return null;

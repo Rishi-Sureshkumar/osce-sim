@@ -13,7 +13,7 @@ import path from "node:path";
 import { DoubleSide, Ray, Vector3 } from "three";
 import type { Position } from "@/domain/schemas";
 import { POSITION_ANGLE } from "@/engine/patientState";
-import { anchorsFor, anchorWorldPoints, landmarkWorld, poseFor, type Vec3 } from "@/exam3d/regionAnchors";
+import { anchorsFor, anchorWorldNormals, anchorWorldPoints, landmarkWorld, poseFor, type Vec3 } from "@/exam3d/regionAnchors";
 import { PART_NAMES } from "@/scene/patientRig.generated";
 import { shotCamera } from "@/scene/shots";
 import type { Pose, VariantId } from "@/scene/rig";
@@ -23,8 +23,8 @@ import { examinedAnchors } from "../../e2e/qa/catalogPlan";
 import { skinnedPatient, type SkinnedPatient } from "./lib/patientMesh";
 import { classify, report, type CheckResult } from "./lib/xfail";
 
-/** M0: anchors may sit up to 1 cm off the deformed skin (rigid single-bone anchors); M2 tightens to 3 mm. */
-const ANCHOR_SKIN_CM = Number(process.env.ANCHOR_SKIN_CM ?? 1.0);
+/** Anchors are skinned like skin vertices (M2 bug 5), so they must sit within 3 mm of the deformed skin. */
+const ANCHOR_SKIN_CM = Number(process.env.ANCHOR_SKIN_CM ?? 0.3);
 export const POSITIONS: Position[] = ["supine", "reclined_30", "reclined_45", "seated", "sitting_dangling", "left_lateral_decubitus"];
 const VARIANTS: VariantId[] = ["male", "female"];
 
@@ -167,12 +167,19 @@ async function main() {
         if (!e.positions.includes(position) || !e.shot) continue;
         const cam = shotCamera(e.shot, pose).position;
         const tol = anchorsFor(variant).find((a) => a.regionId === e.regionId)!.toleranceCm;
+        const normals = anchorWorldNormals(e.regionId, pose);
         for (const [i, w] of anchorWorldPoints(e.regionId, pose).entries()) {
-          const h = firstHit(sp, cam, w, angle);
-          const offCm = h ? dist(h.point, w) * 100 : Infinity;
-          const isEye = /^eye_/.test(e.regionId);
-          const surfaceOk = !!h && (h.what === "skin" || (isEye && (h.what === "eyes" || h.what === "pupils")) || (e.regionId === "mouth" && h.what === "mouth"));
-          const pass = surfaceOk && offCm <= tol && partsOk(e.regionId, h?.part ?? null);
+          // a ray at the anchor itself, and one aimed 3 mm under the skin: an anchor on a silhouette
+          // (the lateral hip seen from above) is clickable if either reaches the right skin
+          const n = normals[i] ?? [0, 0, 0];
+          const tries = [w, [w[0] - n[0] * 0.003, w[1] - n[1] * 0.003, w[2] - n[2] * 0.003] as Vec3].map((aim) => {
+            const h = firstHit(sp, cam, aim, angle);
+            const offCm = h ? dist(h.point, w) * 100 : Infinity;
+            const isEye = /^eye_/.test(e.regionId);
+            const surfaceOk = !!h && (h.what === "skin" || (isEye && (h.what === "eyes" || h.what === "pupils")) || (e.regionId === "mouth" && h.what === "mouth"));
+            return { h, offCm, pass: surfaceOk && offCm <= tol && partsOk(e.regionId, h?.part ?? null) };
+          });
+          const { h, offCm, pass } = tries.find((t) => t.pass) ?? tries[0]!;
           const id = `anchors:occlusion:${variant}:${position}:${e.regionId}${i ? `#${i}` : ""}`;
           results.push({ id, pass, detail: h ? `from the ${e.shot} shot the ray first meets ${h.what}${h.part ? ` (${h.part})` : ""} ${offCm.toFixed(1)} cm from the anchor (tolerance ${tol})` : "the ray meets nothing" });
           rows.push({ check: "occlusion", variant, position, regionId: e.regionId, shot: e.shot, first: h?.what ?? null, part: h?.part ?? null, offCm: +offCm.toFixed(2) });
