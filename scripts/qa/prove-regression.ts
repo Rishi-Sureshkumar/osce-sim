@@ -32,6 +32,11 @@ export const PROOFS: Record<string, Proof> = {
     commit: "be1700b",
     description: "Achilles reflex result card on the left ankle could not be closed (no ✕, Esc or outside click)",
   },
+  bug10: {
+    kind: "vitest",
+    tests: ["tests/regressions/bug10-hold-choice.test.ts"],
+    description: "a stethoscope hold always recorded the first fitting exam, so abdominal bruits could never be recorded (bowel sounds won)",
+  },
 };
 
 const ROOT = process.cwd();

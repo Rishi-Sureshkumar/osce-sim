@@ -118,9 +118,8 @@ describe("tool placement decision (src/exam3d/tools/decide.ts)", () => {
       if (d.regionId === "cardiac_mitral") expect(d.outcome).toBe("near");
     }
   });
-  it("Phase 3 behaviour: a stethoscope hold records the first candidate", () => {
-    const first = holdCandidate(c.maneuvers, "stethoscope", "diaphragm", "abd_ruq");
-    expect(first).not.toBeNull();
+  it("a stethoscope hold with one fitting exam records it (several: see tests/regressions/bug10)", () => {
+    expect(holdCandidate(c.maneuvers, "stethoscope", "diaphragm", "cardiac_aortic")).toEqual({ maneuverId: "auscultate_heart_diaphragm" });
   });
 });
 

@@ -85,7 +85,20 @@ const MENU: { label: string; tool: Tool | null; item?: TableItem }[] = [
  * What's in hand and its controls (bell/diaphragm, strike the fork, put it down), plus a
  * keyboard-operable "Tools…" menu as the non-visual route to the tool table.
  */
-export function ToolHud({ state, onChange, disabled, onOpenTable }: { state: ToolState; onChange: (s: ToolState) => void; disabled?: boolean; onOpenTable?: () => void }) {
+export function ToolHud({
+  state,
+  onChange,
+  disabled,
+  onOpenTable,
+  listeningFor,
+}: {
+  state: ToolState;
+  onChange: (s: ToolState) => void;
+  disabled?: boolean;
+  onOpenTable?: () => void;
+  /** the exam a stethoscope hold records when several fit the same spot (the student's last pick) */
+  listeningFor?: { label: string; onChange: () => void } | null;
+}) {
   const [open, setOpen] = useState(false);
   const opener = useRef<HTMLButtonElement>(null);
   return (
@@ -100,6 +113,14 @@ export function ToolHud({ state, onChange, disabled, onOpenTable }: { state: Too
               {m === "diaphragm" ? "Diaphragm" : "Bell"}
             </button>
           ))}
+        </span>
+      )}
+      {state.tool === "stethoscope" && listeningFor && (
+        <span className="flex items-center gap-1 rounded bg-cyan-50 px-2 py-1 text-cyan-900" data-testid="listening-for">
+          Listening for: <b>{listeningFor.label}</b>
+          <button type="button" onClick={listeningFor.onChange} className="ml-1 underline">
+            Change exam
+          </button>
         </span>
       )}
       {state.tool === "tuning_fork" && (

@@ -23,7 +23,7 @@ import { TestHook } from "./TestHook";
 import { Dialog } from "@/components/ui/Overlay";
 import { MIN_LISTEN_MS, regionsForTool, sequenceProgress } from "./tools/toolLogic";
 import { backgroundKind, contactOutcome, contactSound, recordsFinding } from "./tools/contact";
-import { decidePlacement, holdCandidate } from "./tools/decide";
+import { decidePlacement, holdCandidate, holdKey, type RememberedHold } from "./tools/decide";
 import { JERK_BONE } from "@/scene/animation/reflex";
 import { QA, configureQa, qaDelay, recordDecision } from "./qa";
 import { ToolHud, itemInHand, pickFromTable, toolModeOf, type ToolState } from "./tools/ToolTray";
@@ -333,6 +333,9 @@ export default function Exam3DView(props: Exam3DViewProps) {
   recordRef.current = (h) => {
     if (!tool || holdRef.current?.startedAt !== h.startedAt) return;
     recorded.current = h.startedAt;
+    // the picked exam is used on other regions; here, the next hold asks again
+    const pick = rememberedHold.current.get(holdKey(props.maneuvers, tool, mode, h.regionId));
+    if (pick?.maneuverId === h.maneuverId) pick.done.push(h.regionId);
     void props.onToolExamine({ regionId: h.regionId, maneuverId: h.maneuverId, tool, toolMode: mode, placementError: h.error, distanceCm: h.distanceCm, toleranceCm: h.toleranceCm, durationMs: MIN_LISTEN_MS });
   };
   useEffect(() => {
@@ -353,10 +356,28 @@ export default function Exam3DView(props: Exam3DViewProps) {
     if (h.outcome === "finding" && recorded.current !== h.startedAt && !recordsFinding(h.outcome, durationMs, "stethoscope")) setCaption("Listen a little longer to be sure.");
   };
 
+  // several stethoscope exams on one spot (bowel sounds / bruits): ask once, then remember the pick
+  const rememberedHold = useRef(new Map<string, RememberedHold>());
+  const pendingAsk = useRef<{ regionId: string; ids: string[]; key: string } | null>(null);
+  const [listeningFor, setListeningFor] = useState<string | null>(null);
+  const askWhichHold = (a: { regionId: string; ids: string[]; key: string }) =>
+    void props.onToolAmbiguous(a.regionId, a.ids).then((picked) => {
+      if (!picked) return;
+      rememberedHold.current.set(a.key, { maneuverId: picked, done: [] });
+      setListeningFor(maneuverById.get(picked)?.label ?? picked);
+      setCaption(`Now hold the stethoscope in place to listen (${maneuverById.get(picked)?.label ?? picked}).`);
+    });
   const holdAt = (hit: BodyHit, c: NonNullable<ReturnType<typeof contact>>): Hold | null => {
     if (!tool) return null;
-    const maneuverId = holdCandidate(props.maneuvers, tool, mode, c.regionId);
-    recordDecision({ regionId: c.regionId, maneuverId, distanceCm: c.distanceCm, toleranceCm: c.toleranceCm, outcome: c.outcome, hold: true });
+    const key = holdKey(props.maneuvers, tool, mode, c.regionId);
+    const choice = holdCandidate(props.maneuvers, tool, mode, c.regionId, rememberedHold.current.get(key));
+    const maneuverId = choice && "maneuverId" in choice ? choice.maneuverId : null;
+    recordDecision({ regionId: c.regionId, maneuverId, distanceCm: c.distanceCm, toleranceCm: c.toleranceCm, outcome: c.outcome, hold: true, ...(choice && "ask" in choice ? { ask: choice.ask } : {}) });
+    if (choice && "ask" in choice) {
+      // asked on release (a dialog opened mid-press would take the same press as an outside click)
+      pendingAsk.current = { regionId: c.regionId, ids: choice.ask, key };
+      return null;
+    }
     if (!maneuverId) return null;
     return { regionId: c.regionId, maneuverId, error: c.error, distanceCm: c.distanceCm, toleranceCm: c.toleranceCm, outcome: c.outcome, point: hit.point, startedAt: performance.now() };
   };
@@ -387,8 +408,14 @@ export default function Exam3DView(props: Exam3DViewProps) {
   };
 
   const onToolUp = () => {
+    const ask = pendingAsk.current;
+    pendingAsk.current = null;
     if (holdRef.current) {
       endListening();
+      return;
+    }
+    if (ask) {
+      askWhichHold(ask);
       return;
     }
     const p = pending.current;
@@ -643,7 +670,26 @@ export default function Exam3DView(props: Exam3DViewProps) {
         )}
       </div>
 
-      {inside && <ToolHud state={props.tool} onChange={props.onToolChange} disabled={props.disabled} onOpenTable={() => goTo("tool_table")} />}
+      {inside && (
+        <ToolHud
+          state={props.tool}
+          onChange={props.onToolChange}
+          disabled={props.disabled}
+          onOpenTable={() => goTo("tool_table")}
+          listeningFor={
+            listeningFor
+              ? {
+                  label: listeningFor,
+                  onChange: () => {
+                    rememberedHold.current.clear();
+                    setListeningFor(null);
+                    setCaption("Hold the stethoscope where several exams fit to choose again.");
+                  },
+                }
+              : null
+          }
+        />
+      )}
 
       {progress && rinne && sequence && (
         <div className="rounded-md border border-amber-200 bg-amber-50 p-2 text-xs" data-testid="sequence">

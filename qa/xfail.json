@@ -955,31 +955,6 @@
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (wrist_right): (b) the click resolved to hip_right; (b) the maneuver menu did not open]"
  },
  {
-  "id": "catalog:female:abd_bruits@abd_epigastric",
-  "owner": "M2",
-  "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for abd_bruits@abd_epigastric (got bowel_sounds@abd_epigastric)]"
- },
- {
-  "id": "catalog:female:abd_bruits@abd_llq",
-  "owner": "M2",
-  "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for abd_bruits@abd_llq (got bowel_sounds@abd_llq)]"
- },
- {
-  "id": "catalog:female:abd_bruits@abd_luq",
-  "owner": "M2",
-  "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for abd_bruits@abd_luq (got bowel_sounds@abd_luq)]"
- },
- {
-  "id": "catalog:female:abd_bruits@abd_rlq",
-  "owner": "M2",
-  "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for abd_bruits@abd_rlq (got bowel_sounds@abd_rlq)]"
- },
- {
-  "id": "catalog:female:abd_bruits@abd_ruq",
-  "owner": "M2",
-  "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for abd_bruits@abd_ruq (got bowel_sounds@abd_ruq)]"
- },
- {
   "id": "catalog:female:ankle_foot_inspection@ankle_left",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click never reached the patient; (b) the maneuver menu did not open]"
@@ -1373,31 +1348,6 @@
   "id": "catalog:female:wrist_hand_rom@wrist_right",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to hip_right; (b) the maneuver menu did not open]"
- },
- {
-  "id": "catalog:male:abd_bruits@abd_epigastric",
-  "owner": "M2",
-  "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for abd_bruits@abd_epigastric (got bowel_sounds@abd_epigastric)]"
- },
- {
-  "id": "catalog:male:abd_bruits@abd_llq",
-  "owner": "M2",
-  "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for abd_bruits@abd_llq (got bowel_sounds@abd_llq)]"
- },
- {
-  "id": "catalog:male:abd_bruits@abd_luq",
-  "owner": "M2",
-  "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for abd_bruits@abd_luq (got bowel_sounds@abd_luq)]"
- },
- {
-  "id": "catalog:male:abd_bruits@abd_rlq",
-  "owner": "M2",
-  "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for abd_bruits@abd_rlq (got bowel_sounds@abd_rlq)]"
- },
- {
-  "id": "catalog:male:abd_bruits@abd_ruq",
-  "owner": "M2",
-  "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for abd_bruits@abd_ruq (got bowel_sounds@abd_ruq)]"
  },
  {
   "id": "catalog:male:carotid_auscultation@carotid_left",

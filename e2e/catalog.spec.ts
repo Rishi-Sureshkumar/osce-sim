@@ -283,7 +283,9 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
     await btn.click();
     await expect(page.locator('[data-testid="perform-finding"] .font-medium')).toBeVisible({ timeout: 8_000 }).catch(() => fails.push("(d) no finding in the perform card"));
   } else {
-    // tool: click (or hold ≥ 3 s with the stethoscope) on each target
+    // tool: click (or hold ≥ 3 s with the stethoscope) on each target; a remembered stethoscope pick
+    // from an earlier entry is cleared first so the "which exam?" question appears
+    if (e.hold && (await page.getByTestId("listening-for").isVisible())) await page.getByTestId("listening-for").getByRole("button", { name: "Change exam" }).click();
     const pointerBefore = await page.evaluate(() => window.__osce3d!.lastPointer()?.at ?? 0);
     for (const t of targets) {
       await page.mouse.move(t.x, t.y);
@@ -291,7 +293,16 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
       if (e.hold) await page.waitForTimeout(3_300);
       await page.mouse.up();
       const chooser = page.locator('[data-dialog="tool-chooser"]');
-      if (await chooser.isVisible({ timeout: 600 }).catch(() => false)) await chooser.locator(`[data-maneuver="${e.maneuverId}"]`).click();
+      if (await chooser.isVisible({ timeout: 600 }).catch(() => false)) {
+        await chooser.locator(`[data-maneuver="${e.maneuverId}"]`).click();
+        // a stethoscope hold asks first (several exams fit); then hold again to listen
+        if (e.hold) {
+          await page.mouse.move(t.x, t.y);
+          await page.mouse.down();
+          await page.waitForTimeout(3_300);
+          await page.mouse.up();
+        }
+      }
       await page.waitForTimeout(150);
     }
     const lp = await page.evaluate(() => window.__osce3d!.lastPointer());
@@ -332,7 +343,15 @@ async function runNegative(page: Page, api: APIRequestContext, sessionId: string
   if (e.hold) await page.waitForTimeout(3_300);
   await page.mouse.up();
   const chooser = page.locator('[data-dialog="tool-chooser"]');
-  if (await chooser.isVisible({ timeout: 500 }).catch(() => false)) await chooser.locator(`[data-maneuver="${e.maneuverId}"]`).click();
+  if (await chooser.isVisible({ timeout: 500 }).catch(() => false)) {
+    await chooser.locator(`[data-maneuver="${e.maneuverId}"]`).click();
+    if (e.hold) {
+      await page.mouse.move(p.page.x, p.page.y);
+      await page.mouse.down();
+      await page.waitForTimeout(3_300);
+      await page.mouse.up();
+    }
+  }
   await page.waitForTimeout(200);
   const { fresh } = await newestExamine(api, sessionId, before);
   await closeAll(page);
@@ -341,7 +360,8 @@ async function runNegative(page: Page, api: APIRequestContext, sessionId: string
 
 for (const [group, entries] of GROUPS) {
   test(`catalog ${group} (${entries.length})`, async ({ page, baseURL }) => {
-    test.setTimeout(Math.max(120_000, entries.length * 20_000));
+    // a stethoscope hold may need a pick and a second hold (bug 10): budget more for those
+    test.setTimeout(Math.max(120_000, entries.reduce((ms, e) => ms + (e.hold ? 40_000 : 20_000), 0)));
     const api = await coachApi(baseURL!);
     const sessionId = await startStation(page, entries[0]!.caseId);
     await setPosition(page, POSITION_LABELS[entries[0]!.position]);
