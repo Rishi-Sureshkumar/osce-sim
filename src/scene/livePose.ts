@@ -22,6 +22,8 @@ export interface LiveInput {
   /** eased head turn toward the speaker (radians) */
   look: { yaw: number; pitch: number };
   jerk?: { bone: string; amount: number; ageSec: number } | null;
+  /** hold the head still (eye exam): no idle sway, no turn toward the speaker */
+  steady?: boolean;
 }
 
 export function liveRotations(i: LiveInput): BoneRotations {
@@ -39,8 +41,8 @@ export function liveRotations(i: LiveInput): BoneRotations {
     add("clavicle_L", 0, 0, breath * 1.5 * DEG);
     add("clavicle_R", 0, 0, -breath * 1.5 * DEG);
   }
-  // idle sway
-  add("neck02", Math.sin(i.t * 0.31) * 0.6 * DEG, Math.sin(i.t * 0.23) * 1.2 * DEG);
+  // idle sway (not while the head is held still for the eye exam)
+  if (!i.steady) add("neck02", Math.sin(i.t * 0.31) * 0.6 * DEG, Math.sin(i.t * 0.23) * 1.2 * DEG);
   // blink
   if (i.blink > 0) {
     add("orbicularis03_L", i.blink * 26 * DEG);
@@ -49,8 +51,10 @@ export function liveRotations(i: LiveInput): BoneRotations {
     add("orbicularis04_R", -i.blink * 6 * DEG);
   }
   // head turn toward the student while the patient speaks
-  add("neck03", i.look.pitch * 0.5, i.look.yaw * 0.5);
-  add("head", i.look.pitch * 0.5, i.look.yaw * 0.5);
+  if (!i.steady) {
+    add("neck03", i.look.pitch * 0.5, i.look.yaw * 0.5);
+    add("head", i.look.pitch * 0.5, i.look.yaw * 0.5);
+  }
   if (i.jerk) add(i.jerk.bone, jerkDelta(i.jerk.amount, i.jerk.ageSec));
   return rot;
 }

@@ -5,16 +5,6 @@
   "reason": "bug 5 / shots: seated, the hands and wrists are hidden behind the thighs in the hands shot; the far hip and the left-lateral back are out of view of their shots"
  },
  {
-  "id": "anchors:occlusion:*:seated:carotid_left",
-  "owner": "M2",
-  "reason": "bug 4: the head & neck shot looks down from above, so the chin/face hides the neck (carotids, thyroid, cervical nodes)"
- },
- {
-  "id": "anchors:occlusion:*:seated:carotid_right",
-  "owner": "M2",
-  "reason": "bug 4: the head & neck shot looks down from above, so the chin/face hides the neck (carotids, thyroid, cervical nodes)"
- },
- {
   "id": "anchors:occlusion:*:seated:elbow_left",
   "owner": "M2",
   "reason": "bug 5 / shots: seated, the hands and wrists are hidden behind the thighs in the hands shot; the far hip and the left-lateral back are out of view of their shots"
@@ -50,21 +40,6 @@
   "reason": "bug 2: hair covers these anchors; decide whether hair blocks or a click passes through to the scalp (hair proxy)"
  },
  {
-  "id": "anchors:occlusion:*:seated:ln_post_cervical",
-  "owner": "M2",
-  "reason": "bug 4: the head & neck shot looks down from above, so the chin/face hides the neck (carotids, thyroid, cervical nodes)"
- },
- {
-  "id": "anchors:occlusion:*:seated:ln_submandibular",
-  "owner": "M2",
-  "reason": "bug 4: the head & neck shot looks down from above, so the chin/face hides the neck (carotids, thyroid, cervical nodes)"
- },
- {
-  "id": "anchors:occlusion:*:seated:ln_submental",
-  "owner": "M2",
-  "reason": "bug 4: the head & neck shot looks down from above, so the chin/face hides the neck (carotids, thyroid, cervical nodes)"
- },
- {
   "id": "anchors:occlusion:*:seated:lung_lat_l",
   "owner": "M2",
   "reason": "bug 5 / shots: seated, the hands and wrists are hidden behind the thighs in the hands shot; the far hip and the left-lateral back are out of view of their shots"
@@ -85,34 +60,14 @@
   "reason": "bug 5 / shots: seated, the hands and wrists are hidden behind the thighs in the hands shot; the far hip and the left-lateral back are out of view of their shots"
  },
  {
-  "id": "anchors:occlusion:female:seated:ln_pre_auricular",
-  "owner": "M2",
-  "reason": "bug 4: the head & neck shot looks down from above, so the chin/face hides the neck (carotids, thyroid, cervical nodes)"
- },
- {
   "id": "anchors:occlusion:male:seated:hip_left",
   "owner": "M2",
   "reason": "bug 5 / shots: seated, the hands and wrists are hidden behind the thighs in the hands shot; the far hip and the left-lateral back are out of view of their shots"
  },
  {
-  "id": "anchors:occlusion:male:seated:ln_ant_cervical",
-  "owner": "M2",
-  "reason": "bug 4: the head & neck shot looks down from above, so the chin/face hides the neck (carotids, thyroid, cervical nodes)"
- },
- {
-  "id": "anchors:occlusion:male:seated:ln_post_cervical#1",
-  "owner": "M2",
-  "reason": "bug 4: the head & neck shot looks down from above, so the chin/face hides the neck (carotids, thyroid, cervical nodes)"
- },
- {
   "id": "anchors:occlusion:male:seated:ln_pre_auricular",
   "owner": "M2",
   "reason": "bug 2: hair covers these anchors; decide whether hair blocks or a click passes through to the scalp (hair proxy)"
- },
- {
-  "id": "anchors:occlusion:male:seated:neck_thyroid",
-  "owner": "M2",
-  "reason": "bug 4: the head & neck shot looks down from above, so the chin/face hides the neck (carotids, thyroid, cervical nodes)"
  },
  {
   "id": "anchors:occlusion:male:seated:sacrum",
@@ -522,22 +477,22 @@
  {
   "id": "catalog-oracle:female:cn_ii_acuity@eye_right",
   "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (eye_right): (b) the click resolved to face; (b) cn_ii_acuity is not in the menu for this region]"
+  "reason": "bug 1: the eye anchor sits 1.4–1.9 cm off the pupil, so a click on the pupil in the frontal face shot resolves to the face [at the anatomical point (eye_right): (b) the click resolved to face; (b) cn_ii_acuity is not in the menu for this region]"
  },
  {
   "id": "catalog-oracle:female:cn_iii_iv_vi_eom@eye_right",
   "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (eye_right): (b) the click resolved to face; (b) cn_iii_iv_vi_eom is not in the menu for this region]"
+  "reason": "bug 1: the eye anchor sits 1.4–1.9 cm off the pupil, so a click on the pupil in the frontal face shot resolves to the face [at the anatomical point (eye_right): (b) the click resolved to face; (b) cn_iii_iv_vi_eom is not in the menu for this region]"
  },
  {
   "id": "catalog-oracle:female:eom_accommodation@eye_right",
   "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (eye_right): (b) the click resolved to face; (b) eom_accommodation is not in the menu for this region]"
+  "reason": "bug 1: the eye anchor sits 1.4–1.9 cm off the pupil, so a click on the pupil in the frontal face shot resolves to the face [at the anatomical point (eye_right): (b) the click resolved to face; (b) eom_accommodation is not in the menu for this region]"
  },
  {
   "id": "catalog-oracle:female:eye_inspection@eye_right",
   "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (eye_right): (b) the click resolved to face; (b) eye_inspection is not in the menu for this region]"
+  "reason": "bug 1: the eye anchor sits 1.4–1.9 cm off the pupil, so a click on the pupil in the frontal face shot resolves to the face [at the anatomical point (eye_right): (b) the click resolved to face; (b) eye_inspection is not in the menu for this region]"
  },
  {
   "id": "catalog-oracle:female:hepatojugular_reflux@abd_ruq",
@@ -562,7 +517,7 @@
  {
   "id": "catalog-oracle:female:ophthalmoscopy@eye_right",
   "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (eye_right): (b) the click resolved to face; (b) ophthalmoscopy is not in the menu for this region]"
+  "reason": "bug 1: the eye anchor sits 1.4–1.9 cm off the pupil, so a click on the pupil in the frontal face shot resolves to the face [at the anatomical point (eye_right): (b) the click resolved to face; (b) ophthalmoscopy is not in the menu for this region]"
  },
  {
   "id": "catalog-oracle:female:pmi_palpation@cardiac_mitral",
@@ -657,7 +612,7 @@
  {
   "id": "catalog-oracle:female:visual_fields_confrontation@eye_right",
   "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (eye_right): (b) the click resolved to face; (b) visual_fields_confrontation is not in the menu for this region]"
+  "reason": "bug 1: the eye anchor sits 1.4–1.9 cm off the pupil, so a click on the pupil in the frontal face shot resolves to the face [at the anatomical point (eye_right): (b) the click resolved to face; (b) visual_fields_confrontation is not in the menu for this region]"
  },
  {
   "id": "catalog-oracle:female:wrist_hand_inspection@wrist_left",
@@ -815,6 +770,26 @@
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (upper_arm_right): (b) placement → arm_right nothing (7.8 cm); (c) no examine for bp_cuff_placement@arm_right (got none)]"
  },
  {
+  "id": "catalog-oracle:male:cn_ii_acuity@eye_right",
+  "owner": "M2",
+  "reason": "bug 1: the eye anchor sits 1.4–1.9 cm off the pupil, so a click on the pupil in the frontal face shot resolves to the face [at the anatomical point (eye_right): (b) the click resolved to face; (b) cn_ii_acuity is not in the menu for this region]"
+ },
+ {
+  "id": "catalog-oracle:male:cn_iii_iv_vi_eom@eye_right",
+  "owner": "M2",
+  "reason": "bug 1: the eye anchor sits 1.4–1.9 cm off the pupil, so a click on the pupil in the frontal face shot resolves to the face [at the anatomical point (eye_right): (b) the click resolved to face; (b) cn_iii_iv_vi_eom is not in the menu for this region]"
+ },
+ {
+  "id": "catalog-oracle:male:eom_accommodation@eye_right",
+  "owner": "M2",
+  "reason": "bug 1: the eye anchor sits 1.4–1.9 cm off the pupil, so a click on the pupil in the frontal face shot resolves to the face [at the anatomical point (eye_right): (b) the click resolved to face; (b) eom_accommodation is not in the menu for this region]"
+ },
+ {
+  "id": "catalog-oracle:male:eye_inspection@eye_right",
+  "owner": "M2",
+  "reason": "bug 1: the eye anchor sits 1.4–1.9 cm off the pupil, so a click on the pupil in the frontal face shot resolves to the face [at the anatomical point (eye_right): (b) the click resolved to face; (b) eye_inspection is not in the menu for this region]"
+ },
+ {
   "id": "catalog-oracle:male:hepatojugular_reflux@abd_ruq",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (abd_ruq): (b) the click resolved to lung_ant_rl; (b) the maneuver menu did not open]"
@@ -835,6 +810,11 @@
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (abd_ruq): (b) the click resolved to lung_ant_rl; (b) the maneuver menu did not open]"
  },
  {
+  "id": "catalog-oracle:male:ophthalmoscopy@eye_right",
+  "owner": "M2",
+  "reason": "bug 1: the eye anchor sits 1.4–1.9 cm off the pupil, so a click on the pupil in the frontal face shot resolves to the face [at the anatomical point (eye_right): (b) the click resolved to face; (b) ophthalmoscopy is not in the menu for this region]"
+ },
+ {
   "id": "catalog-oracle:male:pulse_radial@wrist_left",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (wrist_left): (b) the click resolved to hip_left; (b) the maneuver menu did not open]"
@@ -843,16 +823,6 @@
   "id": "catalog-oracle:male:pulse_radial@wrist_right",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (wrist_right): (b) the click resolved to hip_right; (b) the maneuver menu did not open]"
- },
- {
-  "id": "catalog-oracle:male:pupils_light_reflex@eye_left",
-  "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (eye_left): (b) placement → eye_left near (1.7 cm); (c) no examine for pupils_light_reflex@eye_left (got none)]"
- },
- {
-  "id": "catalog-oracle:male:pupils_light_reflex@eye_right",
-  "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (eye_right): (b) placement → eye_right near (1.8 cm); (c) no examine for pupils_light_reflex@eye_right (got none)]"
  },
  {
   "id": "catalog-oracle:male:reflex_achilles@ankle_left",
@@ -925,6 +895,11 @@
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (wrist_right): (b) the click resolved to hip_right; (b) the maneuver menu did not open]"
  },
  {
+  "id": "catalog-oracle:male:visual_fields_confrontation@eye_right",
+  "owner": "M2",
+  "reason": "bug 1: the eye anchor sits 1.4–1.9 cm off the pupil, so a click on the pupil in the frontal face shot resolves to the face [at the anatomical point (eye_right): (b) the click resolved to face; (b) visual_fields_confrontation is not in the menu for this region]"
+ },
+ {
   "id": "catalog-oracle:male:wrist_hand_inspection@wrist_left",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (wrist_left): (b) the click resolved to hip_left; (b) the maneuver menu did not open]"
@@ -973,26 +948,6 @@
   "id": "catalog:female:auscultate_lungs@lung_lat_l",
   "owner": "M2",
   "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for auscultate_lungs@lung_lat_l (got none)]"
- },
- {
-  "id": "catalog:female:carotid_auscultation@carotid_left",
-  "owner": "M2",
-  "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for carotid_auscultation@carotid_left (got none)]"
- },
- {
-  "id": "catalog:female:carotid_auscultation@carotid_right",
-  "owner": "M2",
-  "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for carotid_auscultation@carotid_right (got none)]"
- },
- {
-  "id": "catalog:female:carotid_palpation@carotid_left",
-  "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to nose; (b) the maneuver menu did not open]"
- },
- {
-  "id": "catalog:female:carotid_palpation@carotid_right",
-  "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to face; (b) carotid_palpation is not in the menu for this region]"
  },
  {
   "id": "catalog:female:chest_inspection@lung_lat_l",
@@ -1083,16 +1038,6 @@
   "id": "catalog:female:ln_pre_auricular_palpation@ln_pre_auricular",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to eye_left; (b) ln_pre_auricular_palpation is not in the menu for this region]"
- },
- {
-  "id": "catalog:female:ln_submandibular_palpation@ln_submandibular",
-  "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to nose; (b) the maneuver menu did not open]"
- },
- {
-  "id": "catalog:female:ln_submental_palpation@ln_submental",
-  "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to mouth; (b) the maneuver menu did not open]"
  },
  {
   "id": "catalog:female:lower_limb_standing_inspection@ankle_left",
@@ -1350,34 +1295,9 @@
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to hip_right; (b) the maneuver menu did not open]"
  },
  {
-  "id": "catalog:male:carotid_auscultation@carotid_left",
-  "owner": "M2",
-  "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for carotid_auscultation@carotid_left (got none)]"
- },
- {
-  "id": "catalog:male:carotid_auscultation@carotid_right",
-  "owner": "M2",
-  "reason": "the exam is not recorded from the 3D view (bug 5/7/9 depending on the tool) [(c) no examine for carotid_auscultation@carotid_right (got none)]"
- },
- {
-  "id": "catalog:male:carotid_palpation@carotid_left",
-  "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to nose; (b) the maneuver menu did not open]"
- },
- {
-  "id": "catalog:male:carotid_palpation@carotid_right",
-  "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to face; (b) carotid_palpation is not in the menu for this region]"
- },
- {
   "id": "catalog:male:chest_percussion@lung_ant_ll",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click never reached the patient; (b) the maneuver menu did not open]"
- },
- {
-  "id": "catalog:male:cn_i_smell@nose",
-  "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to mouth; (c) no describe_exam logged]"
  },
  {
   "id": "catalog:male:cva_tenderness@cva_left",
@@ -1430,11 +1350,6 @@
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to wrist_right; (b) the maneuver menu did not open]"
  },
  {
-  "id": "catalog:male:ln_ant_cervical_palpation@ln_ant_cervical",
-  "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to mouth; (b) the maneuver menu did not open]"
- },
- {
   "id": "catalog:male:ln_occipital_palpation@ln_occipital",
   "owner": "M2",
   "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [(a) first hit is hair (proxy:hair), not the patient; (b) the click resolved to scalp; (b) ln_occipital_palpation is not in the menu for this region]"
@@ -1453,16 +1368,6 @@
   "id": "catalog:male:ln_pre_auricular_palpation@ln_pre_auricular",
   "owner": "M2",
   "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [(a) first hit is hair (proxy:hair), not the patient]"
- },
- {
-  "id": "catalog:male:ln_submandibular_palpation@ln_submandibular",
-  "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to eye_left; (b) ln_submandibular_palpation is not in the menu for this region]"
- },
- {
-  "id": "catalog:male:nares_inspection@nose",
-  "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to mouth; (c) no describe_exam logged]"
  },
  {
   "id": "catalog:male:oxygen_saturation@hand_left",
@@ -1595,11 +1500,6 @@
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to knee_right; (b) the maneuver menu did not open]"
  },
  {
-  "id": "catalog:male:thyroid_palpation@neck_thyroid",
-  "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to face; (b) thyroid_palpation is not in the menu for this region]"
- },
- {
   "id": "catalog:male:weber_test@scalp",
   "owner": "M2",
   "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [(a) first hit is hair (proxy:hair), not the patient]"
@@ -1675,6 +1575,16 @@
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
  },
  {
+  "id": "anchors:occlusion:*:seated:carotid_left",
+  "owner": "M3",
+  "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
+ },
+ {
+  "id": "anchors:occlusion:*:seated:carotid_right",
+  "owner": "M3",
+  "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
+ },
+ {
   "id": "anchors:occlusion:*:seated:ear_left",
   "owner": "M3",
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
@@ -1695,9 +1605,19 @@
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
  },
  {
+  "id": "anchors:occlusion:*:seated:ln_post_cervical",
+  "owner": "M3",
+  "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
+ },
+ {
   "id": "anchors:occlusion:*:seated:ln_pre_auricular#1",
   "owner": "M3",
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
+ },
+ {
+  "id": "anchors:occlusion:*:seated:ln_submandibular",
+  "owner": "M3",
+  "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
  },
  {
   "id": "anchors:occlusion:*:seated:ln_submandibular#1",
@@ -1745,6 +1665,11 @@
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
  },
  {
+  "id": "anchors:occlusion:female:seated:ln_pre_auricular",
+  "owner": "M3",
+  "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
+ },
+ {
   "id": "anchors:occlusion:female:seated:neck_thyroid",
   "owner": "M3",
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
@@ -1755,6 +1680,16 @@
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
  },
  {
+  "id": "anchors:occlusion:male:seated:ln_ant_cervical",
+  "owner": "M3",
+  "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
+ },
+ {
+  "id": "anchors:occlusion:male:seated:ln_post_cervical#1",
+  "owner": "M3",
+  "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
+ },
+ {
   "id": "anchors:occlusion:male:seated:lung_ant_lu",
   "owner": "M3",
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
@@ -1763,6 +1698,11 @@
   "id": "anchors:occlusion:male:seated:lung_ant_ru",
   "owner": "M3",
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
+ },
+ {
+  "id": "anchors:occlusion:male:seated:neck_thyroid",
+  "owner": "M3",
+  "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
  },
  {
   "id": "anchors:occlusion:male:supine:ankle_right",

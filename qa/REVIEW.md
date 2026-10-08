@@ -10,7 +10,7 @@ reviewed again (`-- --scaffold` adds the rows). High defects must have an owner 
 |---|---|---|---|---|---|
 | V-FEEDBACK | high | grading | M1 | fixed | Feedback "Missed:" lines pasted grader guidance (cut at "e.g."); first-third window missed early greetings in short sessions — fixed in M1 (labels only; first 3 turns count as the opening) (6 shots) |
 | V-HANDS | high | shot | M2 | open | Hands shot frames the thighs/table; the hands are hidden (bug 4) (8 shots) |
-| V-NECK | high | shot | M2 | open | head_neck shot looks down on the scalp or from the head end: neck hidden by the chin, no front view of the face (bug 4) (8 shots) |
+| V-NECK | high | shot | M2 | fixed | head_neck shot looks down on the scalp or from the head end: neck hidden by the chin, no front view of the face (bug 4) — fixed in M2 bug 4 (head_neck framed from the front along the head's forward axis; new frontal face shot 40 cm, fov 35; head steady for the eye exam) (8 shots) |
 | V-SINK | high | room | M2 | fixed | Sink has no basin, soap or towel (bug 3) — fixed in M2 bug 3 (basin ≥ 10 cm, faucet, soap, towels; washing over the basin) (4 shots) |
 | V-ARMS | high | pose | M3 | open | Supine arms hover above the table instead of resting (2 shots) |
 | V-BACKREST | high | room | M3 | open | Seated: patient sits 11-15 cm inside the backrest; the back shot shows only the backrest (M3 intersections xfail) (2 shots) |

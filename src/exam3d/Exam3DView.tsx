@@ -549,6 +549,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
               pose={pose}
               variant={props.variant}
               speaking={!!props.speaking}
+              steadyHead={shot.current === "face" || props.tool.tool === "penlight"}
               quality={quality}
               drape={state.drape}
               rr={rr}

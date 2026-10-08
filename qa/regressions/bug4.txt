@@ -1,0 +1,60 @@
+# Regression proof: bug4
+
+no front view of the face; the head & neck shot looked down on the scalp so the chin hid the neck; the head swayed and turned during the eye exam
+
+test:      tests/regressions/bug4-shots.test.ts
+command:   npx vitest run tests/regressions/bug4-shots.test.ts
+old code:  a58bbbd (git worktree)  → exit 1 (FAILS, as it must)
+new code:  a58bbbd + working tree     → exit 0 (passes)
+result:    PROVEN
+date:      2026-10-08T00:28:01.686Z
+
+## Old code: why it fails
+```
+ ❯ tests/regressions/bug4-shots.test.ts (22 tests | 22 failed) 23ms
+   × bug 4: face and neck camera shots > male supine: a face shot ~40 cm in front of the eyes, looking at the face 6ms
+   × bug 4: face and neck camera shots > male supine: the head & neck shot faces the neck and doesn't look down from above the head 2ms
+   × bug 4: face and neck camera shots > male reclined_30: a face shot ~40 cm in front of the eyes, looking at the face 0ms
+   × bug 4: face and neck camera shots > male reclined_30: the head & neck shot faces the neck and doesn't look down from above the head 1ms
+   × bug 4: face and neck camera shots > male reclined_45: a face shot ~40 cm in front of the eyes, looking at the face 1ms
+   × bug 4: face and neck camera shots > male reclined_45: the head & neck shot faces the neck and doesn't look down from above the head 1ms
+   × bug 4: face and neck camera shots > male seated: a face shot ~40 cm in front of the eyes, looking at the face 0ms
+   × bug 4: face and neck camera shots > male seated: the head & neck shot faces the neck and doesn't look down from above the head 0ms
+   × bug 4: face and neck camera shots > male seated_leaning_forward: a face shot ~40 cm in front of the eyes, looking at the face 0ms
+   × bug 4: face and neck camera shots > male seated_leaning_forward: the head & neck shot faces the neck and doesn't look down from above the head 1ms
+   × bug 4: face and neck camera shots > female supine: a face shot ~40 cm in front of the eyes, looking at the face 0ms
+   × bug 4: face and neck camera shots > female supine: the head & neck shot faces the neck and doesn't look down from above the head 0ms
+   × bug 4: face and neck camera shots > female reclined_30: a face shot ~40 cm in front of the eyes, looking at the face 0ms
+   × bug 4: face and neck camera shots > female reclined_30: the head & neck shot faces the neck and doesn't look down from above the head 0ms
+   × bug 4: face and neck camera shots > female reclined_45: a face shot ~40 cm in front of the eyes, looking at the face 0ms
+   × bug 4: face and neck camera shots > female reclined_45: the head & neck shot faces the neck and doesn't look down from above the head 1ms
+   × bug 4: face and neck camera shots > female seated: a face shot ~40 cm in front of the eyes, looking at the face 0ms
+   × bug 4: face and neck camera shots > female seated: the head & neck shot faces the neck and doesn't look down from above the head 0ms
+   × bug 4: face and neck camera shots > female seated_leaning_forward: a face shot ~40 cm in front of the eyes, looking at the face 0ms
+   × bug 4: face and neck camera shots > female seated_leaning_forward: the head & neck shot faces the neck and doesn't look down from above the head 0ms
+   × bug 4: face and neck camera shots > eyes, nose, mouth and face regions open the face shot 3ms
+   × bug 4: the head stays still during the eye exam > no idle sway and no head turn when the head is held steady 3ms
+ Test Files  1 failed (1)
+      Tests  22 failed (22)
+ FAIL  tests/regressions/bug4-shots.test.ts > bug 4: face and neck camera shots > male supine: a face shot ~40 cm in front of the eyes, looking at the face
+ FAIL  tests/regressions/bug4-shots.test.ts > bug 4: face and neck camera shots > male reclined_30: a face shot ~40 cm in front of the eyes, looking at the face
+ FAIL  tests/regressions/bug4-shots.test.ts > bug 4: face and neck camera shots > male reclined_45: a face shot ~40 cm in front of the eyes, looking at the face
+ FAIL  tests/regressions/bug4-shots.test.ts > bug 4: face and neck camera shots > male seated: a face shot ~40 cm in front of the eyes, looking at the face
+ FAIL  tests/regressions/bug4-shots.test.ts > bug 4: face and neck camera shots > male seated_leaning_forward: a face shot ~40 cm in front of the eyes, looking at the face
+ FAIL  tests/regressions/bug4-shots.test.ts > bug 4: face and neck camera shots > female supine: a face shot ~40 cm in front of the eyes, looking at the face
+ FAIL  tests/regressions/bug4-shots.test.ts > bug 4: face and neck camera shots > female reclined_30: a face shot ~40 cm in front of the eyes, looking at the face
+ FAIL  tests/regressions/bug4-shots.test.ts > bug 4: face and neck camera shots > female reclined_45: a face shot ~40 cm in front of the eyes, looking at the face
+ FAIL  tests/regressions/bug4-shots.test.ts > bug 4: face and neck camera shots > female seated: a face shot ~40 cm in front of the eyes, looking at the face
+ FAIL  tests/regressions/bug4-shots.test.ts > bug 4: face and neck camera shots > female seated_leaning_forward: a face shot ~40 cm in front of the eyes, looking at the face
+TypeError: Cannot read properties of undefined (reading 'framing')
+ FAIL  tests/regressions/bug4-shots.test.ts > bug 4: face and neck camera shots > male supine: the head & neck shot faces the neck and doesn't look down from above the head
+AssertionError: camera height along the body axis: expected 0.677975522145537 to be less than or equal to 0.05
+     42|         expect(deg(dot(off, faceFwd)), "angle between the camera and t…
+     44|         expect(dot(off, bodyUp), "camera height along the body axis").…
+```
+
+## New code
+```
+ Test Files  1 passed (1)
+      Tests  22 passed (22)
+```

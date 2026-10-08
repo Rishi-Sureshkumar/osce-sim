@@ -8,19 +8,32 @@
  */
 import type { RegionGroup } from "@/domain/schemas";
 import { anchorWorldNormals, anchorWorldPoints, skinLandmark, type Pose, type Vec3 } from "@/exam3d/regionAnchors";
+import { dirToWorld } from "./rig";
 import { DISPENSER_POS } from "./room/Dispenser";
 import { SINK } from "./room/sinkGeometry";
 import { TOOL_TABLE_POS, TOOL_TABLE_TOP } from "./room/ToolTable";
 import { ROOM } from "./room/ExamRoom";
 
 export type FocusShotId = Exclude<RegionGroup, "whole" | "neuro">;
-export type ShotId = "corridor" | "overview" | "sink" | "tool_table" | "seated" | FocusShotId | "ear_left" | "ear_right";
+export type ShotId = "corridor" | "overview" | "sink" | "tool_table" | "seated" | FocusShotId | "face" | "ear_left" | "ear_right";
 
 type Framing =
   /** fixed camera in the room */
   | { kind: "fixed"; position: Vec3; target: Vec3 }
   /** framed on the patient: target = mean of landmark/anchor points, camera along their outward normal */
-  | { kind: "patient"; on: { landmark?: string; anchor?: string }[]; normalFrom: { landmark?: string; anchor?: string }; distance: number; lift?: number; side?: number; normalBlendUp?: number };
+  | {
+      kind: "patient";
+      on: { landmark?: string; anchor?: string }[];
+      normalFrom: { landmark?: string; anchor?: string };
+      distance: number;
+      lift?: number;
+      side?: number;
+      normalBlendUp?: number;
+      /** look along this bone's forward axis instead of a skin normal (the face: the head's +Z) */
+      forwardBone?: string;
+      /** move the camera this far toward the feet along the body axis (look slightly up, under the chin) */
+      down?: number;
+    };
 
 export interface Shot {
   id: ShotId;
@@ -34,7 +47,7 @@ export interface Shot {
 }
 
 const FOCUS: FocusShotId[] = ["head_neck", "chest_front", "chest_back", "abdomen", "arms", "hands", "legs", "feet"];
-const ROOM_SHOTS: ShotId[] = ["overview", "sink", "tool_table", "seated", ...FOCUS, "ear_left", "ear_right"];
+const ROOM_SHOTS: ShotId[] = ["overview", "sink", "tool_table", "seated", ...FOCUS, "face", "ear_left", "ear_right"];
 const look = (yawDeg: number, zoomMin = 0.8, zoomMax = 1.25) => ({ yawDeg, zoomMin, zoomMax });
 
 export const SHOTS: Record<ShotId, Shot> = {
@@ -88,9 +101,20 @@ export const SHOTS: Record<ShotId, Shot> = {
     id: "head_neck",
     label: "Head & neck",
     parent: "overview",
-    framing: { kind: "patient", on: [{ landmark: "vertex" }, { landmark: "sternal_notch" }], normalFrom: { landmark: "sternal_notch" }, distance: 0.62, lift: 0.12, side: 0.12 },
+    // in front of the neck and a little below it, so the chin doesn't hide the JVP, carotids and thyroid (bug 4)
+    framing: { kind: "patient", on: [{ landmark: "chin" }, { landmark: "sternal_notch" }], normalFrom: { landmark: "chin" }, forwardBone: "head", distance: 0.55, down: 0.08, side: 0.08 },
     fov: 40,
-    freeLook: look(35, 0.7, 1.3),
+    freeLook: look(30, 0.7, 1.3),
+    transitions: ROOM_SHOTS,
+  },
+  face: {
+    id: "face",
+    label: "Face",
+    parent: "head_neck",
+    // straight in front of the eyes (eyes, pupils, nose, mouth) — bug 4
+    framing: { kind: "patient", on: [{ landmark: "eye_l" }, { landmark: "eye_r" }], normalFrom: { landmark: "nose_tip" }, forwardBone: "head", distance: 0.4 },
+    fov: 35,
+    freeLook: look(15, 0.8, 1.2),
     transitions: ROOM_SHOTS,
   },
   ear_left: {
@@ -196,11 +220,13 @@ export function shotCamera(id: ShotId, pose: Pose): { position: Vec3; target: Ve
   if (f.kind === "fixed") return { position: f.position, target: f.target, fov: shot.fov };
   const pts = f.on.map((r) => pointOf(r, pose).point);
   const target: Vec3 = [0, 1, 2].map((k) => pts.reduce((s, p) => s + p[k]!, 0) / pts.length) as Vec3;
-  let n = pointOf(f.normalFrom, pose).normal;
+  let n = f.forwardBone ? norm(dirToWorld([0, 0, 1], f.forwardBone, pose)) : pointOf(f.normalFrom, pose).normal;
   if (f.normalBlendUp) n = norm(add(scaleV(n, 1 - f.normalBlendUp), [0, f.normalBlendUp, 0]));
   // never put the camera under the table: a surface facing down (the back of a lying patient) is viewed from above
-  if (n[1] < -0.3) n = norm([n[0], 0.6, n[2] - 0.4]);
+  // (the face always has room in front of it, even leaning forward)
+  if (n[1] < -0.3 && !f.forwardBone) n = norm([n[0], 0.6, n[2] - 0.4]);
   let position = add(target, n, f.distance);
+  if (f.down) position = add(position, norm(dirToWorld([0, 1, 0], "neck01", pose)), -f.down);
   if (f.lift) position = add(position, [0, 1, 0], f.lift);
   if (f.side) position = add(position, [-1, 0, 0], f.side); // lean toward the examiner's side (patient's right)
   return { position, target, fov: shot.fov };
@@ -209,8 +235,8 @@ function scaleV(a: Vec3, k: number): Vec3 {
   return [a[0] * k, a[1] * k, a[2] * k];
 }
 
-/** Regions with a closer shot of their own (the ears need a side view for the mastoid). */
-const REGION_SHOT: Record<string, ShotId> = { ear_left: "ear_left", ear_right: "ear_right" };
+/** Regions with a closer shot of their own (the ears need a side view for the mastoid; the eyes and face a front view). */
+const REGION_SHOT: Record<string, ShotId> = { ear_left: "ear_left", ear_right: "ear_right", eye_left: "face", eye_right: "face", nose: "face", mouth: "face", face: "face" };
 
 /** The focus shot for a region group (whole-patient and neuro panels stay on the current shot). */
 export function focusShotFor(group: RegionGroup, regionId?: string): ShotId | null {

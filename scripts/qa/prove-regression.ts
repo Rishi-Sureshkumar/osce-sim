@@ -38,6 +38,11 @@ export const PROOFS: Record<string, Proof> = {
     support: ["e2e/qa/fixtures.ts", "e2e/qa/openers.ts"],
     description: "the sink had no basin, soap or towels, and washing showed the hands in front of the camera instead of over a basin",
   },
+  bug4: {
+    kind: "vitest",
+    tests: ["tests/regressions/bug4-shots.test.ts"],
+    description: "no front view of the face; the head & neck shot looked down on the scalp so the chin hid the neck; the head swayed and turned during the eye exam",
+  },
   bug10: {
     kind: "vitest",
     tests: ["tests/regressions/bug10-hold-choice.test.ts"],

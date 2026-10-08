@@ -4,6 +4,8 @@
  *   --xfail   also add qa/xfail.json entries for the current FAILs, with an owner by cause
  *             (review them: a FAIL whose cause isn't recognised gets owner "TRIAGE" and must be
  *             looked at before it is accepted).
+ *   --prune   also remove the exact-id qa/xfail.json entries for this run's XPASS checks (wildcard
+ *             entries are left for a human to narrow).
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -63,12 +65,18 @@ function main() {
   for (const r of reclassified) merged.set(r.id, r);
   fs.writeFileSync(file, JSON.stringify({ generated: "npm run test:catalog → npm run qa:catalog-report", results: [...merged.values()].sort((a, b) => a.id.localeCompare(b.id)) }, null, 1));
 
-  if (process.argv.includes("--xfail")) {
+  if (process.argv.includes("--xfail") || process.argv.includes("--prune")) {
     const file = path.join(ROOT, "qa/xfail.json");
-    const list = JSON.parse(fs.readFileSync(file, "utf8")) as XfailEntry[];
+    let list = JSON.parse(fs.readFileSync(file, "utf8")) as XfailEntry[];
+    if (process.argv.includes("--prune")) {
+      const passing = new Set(by("XPASS").map((r) => r.id));
+      const before = list.length;
+      list = list.filter((e) => !passing.has(e.id));
+      console.log(`\nremoved ${before - list.length} xfail entries that now pass`);
+    }
     const have = new Set(list.map((e) => e.id));
     let added = 0;
-    for (const r of by("FAIL")) {
+    for (const r of process.argv.includes("--xfail") ? by("FAIL") : []) {
       if (have.has(r.id)) continue;
       const c = CAUSES.find((x) => x.re.test(r.detail ?? ""));
       list.push({ id: r.id, owner: c?.owner ?? "TRIAGE", reason: `${c?.reason ?? "unrecognised failure — triage"} [${(r.detail ?? "").slice(0, 160)}]` });

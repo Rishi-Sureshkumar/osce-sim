@@ -27,6 +27,8 @@ export interface PatientModelProps {
   pupilScale: number;
   /** the patient is talking: turn the head toward the camera */
   speaking: boolean;
+  /** eye exam: the head stays still and the eyes look ahead at a far point (no sway, no turn) */
+  steadyHead?: boolean;
   quality: "high" | "low";
   /** animated head-section angle (degrees), shared with the table so posture follows it smoothly */
   angle?: { current: number };
@@ -163,7 +165,7 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
     // head turns toward the student while the patient speaks
     const neck = bones.get("neck03");
     const target = { yaw: 0, pitch: 0 };
-    if (p.speaking && !frozen && neck?.parent) {
+    if (p.speaking && !p.steadyHead && !frozen && neck?.parent) {
       tmpM.copy(neck.parent.matrixWorld).invert();
       tmpV.copy(camera.position).applyMatrix4(tmpM).sub(neck.position);
       target.yaw = Math.max(-55 * DEG, Math.min(55 * DEG, Math.atan2(tmpV.x, tmpV.z)));
@@ -185,6 +187,7 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
       laboured: p.laboured,
       blink: blinkK,
       look: lk,
+      steady: !!p.steadyHead,
       jerk: p.jerk ? { bone: p.jerk.bone, amount: p.jerk.amount, ageSec: performance.now() / 1000 - p.jerk.at } : null,
     });
 

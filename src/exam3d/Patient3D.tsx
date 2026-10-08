@@ -22,6 +22,8 @@ export interface Patient3DProps {
   jvpCm: number;
   edema: Record<string, number>;
   speaking: boolean;
+  /** eye exam: hold the head still */
+  steadyHead?: boolean;
   quality: "high" | "low";
   pupilScale: number;
   angle: { current: number };
@@ -92,6 +94,7 @@ export function Patient3D(p: Patient3DProps) {
         edema={p.edema}
         pupilScale={p.pupilScale}
         speaking={p.speaking}
+        steadyHead={p.steadyHead}
         quality={p.quality}
       />
     </group>
