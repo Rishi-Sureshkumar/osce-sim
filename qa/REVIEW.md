@@ -1,6 +1,10 @@
 # Visual review (qa/REVIEW.md)
 
 Every screenshot in `qa/screens/manifest.json` (207 PNGs from `npm run test:visual`; re-reviewed at the M2 gate, with clocks, dates and log times masked) was opened and reviewed by the main agent.
+Determinism (M2 close, with masking): a second tour (run B, stopped after 140 shots) matched run A pixel for pixel on all 140
+(`.cache/lab/pixdiff.mjs`, 0 changed pixels); the PNG bytes can still differ, so compare runs with the pixel diff, not the sha.
+Run A against the earlier reviewed run: 201 identical; 6 differed only in masked dates, durations and log times (coach list,
+coach detail, actions menu) — no new defects.
 Rows carry the sha256 prefix of the reviewed PNG; `npm run qa:review-check` fails on a new or changed screenshot until it is
 reviewed again (`-- --scaffold` adds the rows). High defects must have an owner milestone; `QA_STRICT_OWNER=<M>` fails that owner's open highs.
 
