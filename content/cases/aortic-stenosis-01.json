@@ -46,7 +46,7 @@
   "vitals": {
     "hr": 72,
     "rr": 16,
-    "bpSystolic": 124,
+    "bpSystolic": 114,
     "bpDiastolic": 88,
     "tempC": 36.7,
     "spo2": 97,
@@ -84,6 +84,11 @@
             "Has the shortness of breath been getting worse over time?",
             "Have you been getting more short of breath recently?",
             "Have you been short of breath lately?",
+            "Have you been short of breath?",
+            "Have you been breathless?",
+            "Any shortness of breath?",
+            "Any breathlessness?",
+            "How is your breathing?",
             "What has the time course of the breathlessness been?",
             "Tell me more about the breathlessness."
           ],
@@ -332,7 +337,7 @@
             "heavy feeling in your chest"
           ],
           "patterns": [
-            "\\bchest\\b.*\\b(pain|pains|tight|tightness|pressure|discomfort|heavy|heaviness|ache|squeez\\w*)\\b"
+            "^(?!.*\\b(at rest|resting|in bed|at night|sitting still|faint\\w*|funny turn)\\b).*\\bchest\\b.*\\b(pain|pains|tight|tightness|pressure|discomfort|heavy|heaviness|ache|squeez\\w*)\\b"
           ],
           "topics": [
             "hpi.associated",
@@ -509,6 +514,34 @@
               ]
             },
             "answer": "I’m puffed by then anyway, but I don’t get sweaty or sick with it."
+          },
+          {
+            "id": "chest-progression",
+            "intents": {
+              "canonical": "Is the chest tightness getting worse?",
+              "paraphrases": [
+                "Are you getting the chest pain with less effort now?",
+                "Has the chest tightness changed recently?",
+                "Is the chest pain coming on more often lately?",
+                "Has the chest pain been getting more severe?",
+                "Does it come on with less exertion than before?",
+                "Is the tightness any different from when it started?"
+              ],
+              "keywords": [
+                "less effort",
+                "less exertion",
+                "more often lately",
+                "getting worse",
+                "changed recently"
+              ],
+              "patterns": [
+                "\\bchest\\b.*\\b(worse|more often|less effort|less exertion|changed|different)\\b"
+              ],
+              "topics": [
+                "hpi.course"
+              ]
+            },
+            "answer": "No, about the same. Only on the hill, and it always goes when I stop."
           }
         ]
       },
@@ -539,7 +572,7 @@
             "Have you fainted?",
             "Have you had any fainting episodes?",
             "Have you ever felt like you were going to pass out?",
-            "Any dizzy spells?",
+            "Have you had any dizzy spells?",
             "Any blackouts?",
             "Have you nearly fainted?",
             "Have you had any episodes of nearly passing out?"
@@ -632,7 +665,9 @@
                 "Any warning signs beforehand?",
                 "Did you feel sick or sweaty before it?",
                 "What did you notice first?",
-                "Did the room spin?"
+                "Did the room spin?",
+                "Did you have any chest pain with the funny turn?",
+                "Did you get chest pain when you nearly fainted?"
               ],
               "keywords": [
                 "warning",
@@ -648,7 +683,7 @@
                 "hpi.associated"
               ]
             },
-            "answer": "My head went light and things went grey round the edges. The room wasn’t spinning, and I wasn’t sick or sweaty. My heart wasn’t racing or anything."
+            "answer": "My head went light and things went grey round the edges. The room wasn’t spinning, and I wasn’t sick or sweaty. My heart wasn’t racing or anything. No pain in my chest that time either."
           },
           {
             "id": "presyncope-recovery",
@@ -755,7 +790,7 @@
       {
         "id": "murmur-history",
         "topic": "What doctors have said about his heart",
-        "answer": "Years ago, eight or ten maybe, a GP listening to my chest said I had a heart murmur. He said to keep an eye on it, but I never went back about it, and nobody’s done any heart tests.",
+        "answer": "Years ago, eight or ten maybe, a GP listening to my chest said I had a heart murmur. He said to keep an eye on it, but I never went back about it, and nobody’s ever sent me for a scan of my heart.",
         "revealOnlyIfAsked": true,
         "keywords": [
           "murmur",
@@ -959,6 +994,7 @@
             "What medicines are you currently taking?",
             "Can you tell me all the tablets you take and the doses?",
             "Any regular meds?",
+            "Are you on any regular medication at the moment?",
             "What pills do you take?",
             "Do you take any prescription medicines?",
             "What doses do you take?",
@@ -1042,6 +1078,30 @@
               ]
             },
             "answer": "No, nothing from the chemist. Not even an aspirin."
+          },
+          {
+            "id": "meds-side-effects",
+            "intents": {
+              "canonical": "Do you get any side effects from your medications?",
+              "paraphrases": [
+                "Any side effects from your tablets?",
+                "Have you had any side effects?",
+                "Do your tablets give you any problems?",
+                "Any problems with the amlodipine?",
+                "Do you get on alright with your medicines?",
+                "Does the statin give you any muscle aches?"
+              ],
+              "keywords": [
+                "side effects",
+                "side effect",
+                "problems with the amlodipine",
+                "get on alright with"
+              ],
+              "topics": [
+                "meds.current"
+              ]
+            },
+            "answer": "No, they don’t give me any bother. No swollen ankles or anything."
           }
         ]
       },
@@ -1343,7 +1403,39 @@
           "topics": [
             "sh.occupation"
           ]
-        }
+        },
+        "followUps": [
+          {
+            "id": "occupation-exposure",
+            "intents": {
+              "canonical": "Were you exposed to anything harmful at work?",
+              "paraphrases": [
+                "Any exposure to dust or chemicals at work?",
+                "Did you work with asbestos?",
+                "Were you exposed to a lot of sawdust?",
+                "Did you breathe in much dust at work?",
+                "Any occupational exposures?",
+                "Did you wear a mask at work?",
+                "Did you work with any chemicals or fumes?"
+              ],
+              "keywords": [
+                "exposed",
+                "exposure",
+                "exposures",
+                "dust",
+                "sawdust",
+                "asbestos",
+                "chemicals",
+                "fumes",
+                "a mask"
+              ],
+              "topics": [
+                "sh.occupation"
+              ]
+            },
+            "answer": "Sawdust, plenty of it, and varnish fumes. We never bothered with masks back then. I don’t think I worked with asbestos, and my chest’s never given me bother."
+          }
+        ]
       },
       {
         "id": "home",
@@ -1366,8 +1458,6 @@
             "Are you married?",
             "Do you have family nearby?",
             "Who lives with you?",
-            "Do you have any support at home?",
-            "Is there anyone at home to help you?",
             "Tell me about your home situation.",
             "How are things at home?",
             "Does your wife have any health problems?",
@@ -1381,7 +1471,6 @@
             "living situation",
             "at home with you",
             "lives with you",
-            "support at home",
             "home situation",
             "look after anyone",
             "caregiver for"
@@ -1390,6 +1479,48 @@
             "sh.living"
           ]
         }
+      },
+      {
+        "id": "carer",
+        "topic": "Caring for his wife",
+        "answer": "We manage. It’s mostly me. Our son comes when he can, and the neighbour’s sitting with her this morning. It wears me down sometimes, but she’s my wife.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "coping",
+          "help",
+          "caring",
+          "looking after"
+        ],
+        "intents": {
+          "canonical": "How are you coping with looking after your wife?",
+          "paraphrases": [
+            "Do you get any help looking after Margaret?",
+            "Is it stressful caring for your wife?",
+            "Who helps you look after her?",
+            "Who is looking after your wife today?",
+            "Does looking after her get on top of you?",
+            "How do you manage at home with your wife’s dementia?",
+            "Do you have any support at home?",
+            "Is there anyone to help you with your wife?",
+            "Do you ever get a break from caring for her?",
+            "Are you stressed looking after your wife?"
+          ],
+          "keywords": [
+            "coping",
+            "looking after your wife",
+            "caring for your wife",
+            "looking after her",
+            "help looking after",
+            "get a break",
+            "on top of you",
+            "support at home"
+          ],
+          "topics": [
+            "sh.living",
+            "ros.psych"
+          ]
+        },
+        "emotion": "worried"
       },
       {
         "id": "activity",
@@ -1429,6 +1560,43 @@
           ],
           "topics": [
             "sh.exercise",
+            "sh.function"
+          ]
+        }
+      },
+      {
+        "id": "driving",
+        "topic": "Driving",
+        "answer": "Yes, I still drive. I take Margaret to the shops and her appointments, and I drove us here today. I’ve never come over funny at the wheel.",
+        "revealOnlyIfAsked": true,
+        "keywords": [
+          "drive",
+          "driving",
+          "car",
+          "licence"
+        ],
+        "intents": {
+          "canonical": "Do you drive?",
+          "paraphrases": [
+            "Are you still driving?",
+            "Do you have a driving licence?",
+            "Did you drive here today?",
+            "Do you drive a car?",
+            "How did you get here today?",
+            "Do you still drive your car?",
+            "Have you ever felt faint while driving?",
+            "Has anything like that happened at the wheel?",
+            "Who does the driving at home?"
+          ],
+          "keywords": [
+            "drive",
+            "driving",
+            "behind the wheel",
+            "at the wheel",
+            "driving licence",
+            "driving license"
+          ],
+          "topics": [
             "sh.function"
           ]
         }
@@ -1476,7 +1644,7 @@
       {
         "id": "diet",
         "topic": "Diet",
-        "answer": "Plain cooking, meat and two veg mostly. I do the cooking now. I don’t put much salt on things.",
+        "answer": "Plain cooking, meat and two veg mostly. I do the cooking now. I don’t put much salt on things. A few cups of tea a day, hardly any coffee.",
         "revealOnlyIfAsked": true,
         "keywords": [
           "diet",
@@ -1494,7 +1662,11 @@
             "Do you eat much fatty food?",
             "Who does the cooking at home?",
             "What did you eat yesterday?",
-            "What sort of food do you eat?"
+            "What sort of food do you eat?",
+            "Do you drink much tea or coffee?",
+            "How much coffee do you drink?",
+            "Do you drink coffee?",
+            "How many cups of tea a day?"
           ],
           "keywords": [
             "your diet",
@@ -1681,11 +1853,14 @@
             "Any chest pain at night or in bed?",
             "Has the chest pain ever woken you up?",
             "Do you get chest pain when you are not doing anything?",
-            "Any chest pain at rest?",
             "Has the chest discomfort ever come on without exertion?",
             "Has the tightness ever come on while you were resting?",
+            "Any chest pain at rest?",
             "Does the pain ever come on when you are resting?",
-            "Do you ever get it at rest?"
+            "Do you ever get it at rest?",
+            "Are you in any pain right now?",
+            "Do you have any pain now?",
+            "Are you in pain at the moment?"
           ],
           "keywords": [
             "chest pain at rest",
@@ -2131,7 +2306,7 @@
     ],
     "unknownPolicy": {
       "negativeReply": "No, nothing like that.",
-      "unknownReply": "Can’t say I’ve noticed anything like that."
+      "unknownReply": "Hmm, I’m not sure. I haven’t noticed anything like that."
     },
     "conversation": [
       {
@@ -2155,14 +2330,20 @@
   },
   "abnormalFindings": {
     "general_appearance": {
-      "default": "Older man sitting comfortably in the chair, talking in full sentences without breathlessness; alert and oriented; no pallor or cyanosis; no acute distress."
+      "default": "Older man sitting comfortably, talking in full sentences without breathlessness; alert and oriented; no pallor or cyanosis; no acute distress."
     },
     "pulse_radial": {
       "default": "Radial pulse {vitals.hr} beats/min, regular rhythm, low volume."
     },
     "peripheral_pulses": {
       "arm_right": "Brachial pulse low volume and slow-rising (1+).",
-      "arm_left": "Brachial pulse low volume and slow-rising (1+)."
+      "arm_left": "Brachial pulse low volume and slow-rising (1+).",
+      "groin_right": "Femoral pulse palpable but low volume (1+), symmetric; no bruit.",
+      "groin_left": "Femoral pulse palpable but low volume (1+), symmetric; no bruit.",
+      "knee_right": "Popliteal pulse low volume (1+).",
+      "knee_left": "Popliteal pulse low volume (1+).",
+      "foot_right": "Dorsalis pedis and posterior tibial pulses palpable but low volume (1+), symmetric.",
+      "foot_left": "Dorsalis pedis and posterior tibial pulses palpable but low volume (1+), symmetric."
     },
     "carotid_palpation": {
       "carotid_right": "Carotid pulse small in volume and slow to rise, with a late, poorly defined peak (slow-rising, low-volume upstroke).",
@@ -2181,7 +2362,8 @@
               "phase": "systolic",
               "shape": "crescendo_decrescendo",
               "grade": 2,
-              "pitch": "medium"
+              "pitch": "medium",
+              "peak": 0.7
             }
           }
         }
@@ -2198,11 +2380,15 @@
               "phase": "systolic",
               "shape": "crescendo_decrescendo",
               "grade": 2,
-              "pitch": "medium"
+              "pitch": "medium",
+              "peak": 0.7
             }
           }
         }
       }
+    },
+    "precordial_palpation": {
+      "cardiac_aortic": "No thrill at the right upper sternal border."
     },
     "pmi_palpation": {
       "cardiac_mitral": "Apex beat in the 5th left intercostal space at the midclavicular line, not displaced, but forceful and sustained (heaving), lasting through most of systole; about 2–3 cm across."
@@ -2220,7 +2406,8 @@
               "phase": "systolic",
               "shape": "crescendo_decrescendo",
               "grade": 3,
-              "pitch": "medium"
+              "pitch": "medium",
+              "peak": 0.7
             }
           }
         }
@@ -2237,7 +2424,8 @@
               "phase": "systolic",
               "shape": "crescendo_decrescendo",
               "grade": 2,
-              "pitch": "medium"
+              "pitch": "medium",
+              "peak": 0.65
             }
           }
         }
@@ -2254,7 +2442,8 @@
               "phase": "systolic",
               "shape": "crescendo_decrescendo",
               "grade": 2,
-              "pitch": "medium"
+              "pitch": "medium",
+              "peak": 0.65
             }
           }
         }
@@ -2271,7 +2460,8 @@
               "phase": "systolic",
               "shape": "crescendo_decrescendo",
               "grade": 2,
-              "pitch": "medium"
+              "pitch": "medium",
+              "peak": 0.65
             }
           }
         }
@@ -2288,7 +2478,8 @@
               "phase": "systolic",
               "shape": "crescendo_decrescendo",
               "grade": 2,
-              "pitch": "high"
+              "pitch": "high",
+              "peak": 0.65
             }
           }
         }
@@ -2305,7 +2496,8 @@
               "phase": "systolic",
               "shape": "crescendo_decrescendo",
               "grade": 2,
-              "pitch": "medium"
+              "pitch": "medium",
+              "peak": 0.65
             }
           }
         }
@@ -2324,8 +2516,9 @@
             "murmur": {
               "phase": "systolic",
               "shape": "crescendo_decrescendo",
-              "grade": 2,
-              "pitch": "high"
+              "grade": 1,
+              "pitch": "high",
+              "peak": 0.65
             }
           }
         },
@@ -2338,12 +2531,13 @@
                 "intensity": 0.75,
                 "s2SplitMs": 0,
                 "s2Intensity": 0.35,
-                "s4": 0.65,
+                "s4": 0.55,
                 "murmur": {
                   "phase": "systolic",
                   "shape": "crescendo_decrescendo",
-                  "grade": 2,
-                  "pitch": "high"
+                  "grade": 1,
+                  "pitch": "high",
+                  "peak": 0.65
                 }
               }
             }
@@ -2362,7 +2556,8 @@
               "phase": "systolic",
               "shape": "crescendo_decrescendo",
               "grade": 2,
-              "pitch": "medium"
+              "pitch": "medium",
+              "peak": 0.65
             }
           }
         }
@@ -2379,7 +2574,8 @@
               "phase": "systolic",
               "shape": "crescendo_decrescendo",
               "grade": 2,
-              "pitch": "medium"
+              "pitch": "medium",
+              "peak": 0.65
             }
           }
         }
@@ -2393,22 +2589,22 @@
     {
       "rank": 1,
       "diagnosis": "Severe symptomatic aortic stenosis (calcific / degenerative)",
-      "rationale": "The classic exertional triad (breathlessness, angina, presyncope) in a 74-year-old told of a murmur years ago. Harsh, late-peaking crescendo–decrescendo systolic murmur loudest at the right upper sternal border and radiating to both carotids, soft single S2, slow-rising low-volume carotid pulse, sustained non-displaced apex and a relatively narrow pulse pressure. Symptoms mean urgent echocardiography and cardiology referral; advise avoiding strenuous exertion meanwhile."
+      "rationale": "The classic exertional triad (breathlessness, angina, presyncope) in a 74-year-old told of a murmur years ago. Harsh, late-peaking crescendo–decrescendo systolic murmur loudest at the right upper sternal border and radiating to both carotids, soft single S2, slow-rising low-volume carotid pulse, sustained non-displaced apex and a narrow pulse pressure (114/88). Symptoms mean urgent echocardiography and cardiology referral (valve replacement is the treatment for symptomatic severe stenosis). Meanwhile: avoid strenuous exertion; advise him not to drive until he has been assessed, since he had exertional presyncope and drives his wife; and review the amlodipine, because vasodilators can drop the blood pressure across a fixed outflow obstruction and worsen presyncope."
     },
     {
       "rank": 2,
       "diagnosis": "Coronary artery disease with stable angina",
-      "rationale": "Exertional chest tightness relieved by rest plus age, male sex, hypertension, high cholesterol, 30 pack-years and a father with MI. Commonly coexists with aortic stenosis (angiography is usually done before valve intervention), but it does not explain the murmur, soft S2 or carotid pulse."
+      "rationale": "Exertional chest tightness relieved by rest plus age, male sex, hypertension, high cholesterol and 30 pack-years. Commonly coexists with aortic stenosis (angiography is usually done before valve intervention), but it does not explain the murmur, soft S2 or carotid pulse."
     },
     {
       "rank": 3,
-      "diagnosis": "Hypertrophic obstructive cardiomyopathy",
-      "rationale": "Same exertional symptoms and an ejection systolic murmur, but its murmur is usually loudest at the left sternal border, does not radiate to the carotids, and the carotid upstroke is brisk (sometimes bifid); no family history of sudden death."
+      "diagnosis": "Arrhythmia (e.g. complete heart block or ventricular tachycardia) causing presyncope",
+      "rationale": "Exertional presyncope warrants an ECG and ambulatory monitoring. Regular pulse at 72 and no palpitations make it less likely, but calcific valve disease can involve the conduction system."
     },
     {
       "rank": 4,
-      "diagnosis": "Arrhythmia (e.g. complete heart block or ventricular tachycardia) causing presyncope",
-      "rationale": "Exertional presyncope warrants an ECG and ambulatory monitoring. Regular pulse at 72 and no palpitations make it less likely, but calcific valve disease can involve the conduction system."
+      "diagnosis": "Hypertrophic obstructive cardiomyopathy",
+      "rationale": "Same exertional symptoms and an ejection systolic murmur, but its murmur is usually loudest at the left sternal border, does not radiate to the carotids, and the carotid upstroke is brisk (sometimes bifid); no family history of sudden death."
     },
     {
       "rank": 5,
@@ -2803,6 +2999,51 @@
       "sourceText": ""
     },
     {
+      "id": "fcm-38-bell-lld",
+      "fcmId": 38,
+      "section": "Cardiovascular",
+      "label": "Technique: bell at apex with patient in left lateral decubitus",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "performedIn": {
+          "maneuver": "auscultate_heart_bell",
+          "position": "left_lateral_decubitus"
+        }
+      },
+      "sourceText": ""
+    },
+    {
+      "id": "as-sit-forward",
+      "section": "Cardiovascular",
+      "label": "Listens at the left sternal border with the patient sitting forward (aortic regurgitation)",
+      "weight": 1,
+      "scoring": "auto",
+      "rule": {
+        "any": [
+          {
+            "placedWithin": {
+              "maneuver": "auscultate_heart_diaphragm",
+              "regions": [
+                "cardiac_erbs"
+              ],
+              "position": "seated_leaning_forward"
+            }
+          },
+          {
+            "placedWithin": {
+              "maneuver": "auscultate_heart_diaphragm",
+              "regions": [
+                "cardiac_tricuspid"
+              ],
+              "position": "seated_leaning_forward"
+            }
+          }
+        ]
+      },
+      "sourceText": ""
+    },
+    {
       "id": "fcm-39-pedal-pulses",
       "fcmId": 39,
       "section": "Cardiovascular",
@@ -3009,7 +3250,7 @@
       },
       {
         "id": "cv-risk-factors",
-        "text": "Hypertension, high cholesterol, ex-smoker (30 pack-years, quit 20 years ago), father died of MI at 70",
+        "text": "Hypertension, high cholesterol, ex-smoker (30 pack-years, quit 20 years ago)",
         "kind": "positive",
         "keywords": [
           "hypertension",
@@ -3031,7 +3272,26 @@
         ],
         "exemplars": [
           "PMH hypertension and hyperlipidaemia; ex-smoker with 30 pack-years.",
-          "Father died of a heart attack at 70."
+          "Former smoker, quit 20 years ago; treated for high blood pressure and cholesterol."
+        ]
+      },
+      {
+        "id": "carer",
+        "text": "Sole carer for wife with mild dementia; wants to avoid an operation or admission",
+        "kind": "positive",
+        "keywords": [
+          "carer",
+          "caregiver",
+          "cares for his wife",
+          "dementia"
+        ],
+        "terms": [
+          "caregiver",
+          "dementia"
+        ],
+        "exemplars": [
+          "Sole carer for his wife, who has mild dementia.",
+          "Wants to avoid surgery or admission because he looks after his wife."
         ]
       },
       {
@@ -3173,7 +3433,9 @@
           "radiating to the neck",
           "transmitted to the carotids",
           "heard over the carotids",
-          "carotid radiation"
+          "carotid radiation",
+          "transmitted up the neck",
+          "transmitted to the neck"
         ],
         "exemplars": [
           "The murmur radiates to both carotid arteries.",
@@ -3195,7 +3457,12 @@
           "absent A2",
           "diminished A2",
           "faint S2",
-          "reduced S2"
+          "reduced S2",
+          "S2 soft",
+          "S2 is soft",
+          "S2 single",
+          "soft and single",
+          "single second heart sound"
         ],
         "exemplars": [
           "Soft single S2.",
@@ -3221,7 +3488,11 @@
           "weak carotid",
           "diminished carotid",
           "anacrotic",
-          "plateau pulse"
+          "plateau pulse",
+          "slow to rise",
+          "small in volume",
+          "low volume",
+          "low-volume"
         ],
         "exemplars": [
           "Slow-rising, low-volume carotid pulse bilaterally.",
@@ -3245,7 +3516,10 @@
           "pressure-loaded apex",
           "pressure loaded apex",
           "LV heave",
-          "left ventricular heave"
+          "left ventricular heave",
+          "heaving",
+          "forceful and sustained",
+          "sustained"
         ],
         "exemplars": [
           "Apex beat non-displaced but heaving.",
@@ -3264,11 +3538,35 @@
           "clear to auscultation",
           "chest clear",
           "lung fields clear",
-          "vesicular breath sounds"
+          "vesicular breath sounds",
+          "no crackles",
+          "no rales",
+          "clear bilaterally"
         ],
         "exemplars": [
           "Lungs clear to auscultation bilaterally.",
           "Vesicular breath sounds throughout."
+        ]
+      },
+      {
+        "id": "no-hf-signs",
+        "text": "JVP not raised; no peripheral edema",
+        "maneuverIds": [
+          "jvp_inspection",
+          "edema_assessment"
+        ],
+        "keywords": [
+          "JVP not raised",
+          "JVP not elevated",
+          "normal JVP",
+          "no edema",
+          "no oedema",
+          "no pedal edema",
+          "no peripheral edema"
+        ],
+        "exemplars": [
+          "JVP not raised and no peripheral edema.",
+          "No pedal oedema; JVP normal."
         ]
       }
     ],
@@ -3287,7 +3585,7 @@
           "degenerative aortic stenosis"
         ],
         "rank": 1,
-        "rationale": "Exertional breathlessness, angina and presyncope in a 74-year-old with a murmur noted years ago; harsh late-peaking ejection systolic murmur at the right upper sternal border radiating to both carotids, soft single S2, slow-rising low-volume carotid pulse and a sustained, non-displaced apex."
+        "rationale": "Exertional breathlessness, angina and presyncope in a 74-year-old with a murmur noted years ago; harsh late-peaking ejection systolic murmur at the right upper sternal border radiating to both carotids, soft single S2, slow-rising low-volume carotid pulse, sustained non-displaced apex and a narrow pulse pressure. Advise no driving until assessed, and review the amlodipine (a vasodilator)."
       },
       {
         "id": "cad",
@@ -3303,19 +3601,7 @@
           "chronic coronary syndrome"
         ],
         "rank": 2,
-        "rationale": "Exertional chest tightness relieved by rest with several risk factors (age, male, hypertension, high cholesterol, ex-smoker, father's MI); often coexists with aortic stenosis but does not explain the murmur or the carotid pulse."
-      },
-      {
-        "id": "hocm",
-        "diagnosis": "Hypertrophic obstructive cardiomyopathy",
-        "aliases": [
-          "HOCM",
-          "hypertrophic cardiomyopathy",
-          "HCM",
-          "obstructive hypertrophic cardiomyopathy"
-        ],
-        "rank": 3,
-        "rationale": "Also causes exertional breathlessness, angina, presyncope and an ejection murmur, but the murmur is usually loudest at the left sternal border without carotid radiation, the carotid upstroke is brisk, and there is no family history of sudden death."
+        "rationale": "Exertional chest tightness relieved by rest with several risk factors (age, male, hypertension, high cholesterol, ex-smoker); often coexists with aortic stenosis but does not explain the murmur or the carotid pulse."
       },
       {
         "id": "arrhythmia",
@@ -3332,8 +3618,20 @@
           "sick sinus syndrome",
           "tachyarrhythmia"
         ],
-        "rank": 4,
+        "rank": 3,
         "rationale": "Exertional presyncope needs an ECG and rhythm monitoring; less likely with a regular pulse of 72 and no palpitations, but calcific valve disease can extend into the conduction system."
+      },
+      {
+        "id": "hocm",
+        "diagnosis": "Hypertrophic obstructive cardiomyopathy",
+        "aliases": [
+          "HOCM",
+          "hypertrophic cardiomyopathy",
+          "HCM",
+          "obstructive hypertrophic cardiomyopathy"
+        ],
+        "rank": 4,
+        "rationale": "Also causes exertional breathlessness, angina, presyncope and an ejection murmur, but the murmur is usually loudest at the left sternal border without carotid radiation, the carotid upstroke is brisk, and there is no family history of sudden death."
       },
       {
         "id": "heart-failure",
@@ -3365,12 +3663,14 @@
         "calcific aortic stenosis",
         "degenerative aortic stenosis",
         "senile calcific aortic stenosis",
-        "calcific aortic valve disease",
         "valvular aortic stenosis",
         "severe AS",
         "symptomatic AS",
         "calcific AS",
-        "severe aortic valve stenosis"
+        "severe aortic valve stenosis",
+        "stenosis of the aortic valve",
+        "aortic valve stenosis",
+        "critical AS"
       ],
       "satisfies": [
         "aortic-stenosis"
@@ -3383,9 +3683,7 @@
         "exertional angina",
         "angina pectoris",
         "chronic stable angina",
-        "chronic coronary syndrome",
-        "myocardial ischemia",
-        "myocardial ischaemia"
+        "chronic coronary syndrome"
       ],
       "satisfies": [
         "cad"

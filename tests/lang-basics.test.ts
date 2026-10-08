@@ -51,6 +51,12 @@ describe("negation", () => {
     expect(polarityOf("crackles at both bases", "crackles")).toBe("affirmed");
     expect(polarityOf("crackles at both bases", "wheeze")).toBe("absent");
   });
+  it("a finding described as normal, intact or symmetric is not credited as abnormal", () => {
+    expect(isNegated("sensation intact", "sensation")).toBe(true);
+    expect(isNegated("ankle reflexes symmetric", "ankle reflexes")).toBe(true);
+    expect(isNegated("straight leg raise within normal limits", "straight leg raise")).toBe(true);
+    expect(isNegated("reduced sensation over the lateral foot", "reduced sensation")).toBe(false);
+  });
 });
 
 describe("questionType", () => {

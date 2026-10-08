@@ -9,7 +9,9 @@ import { hasPhrase } from "./normalize";
 /** cues before the term ("no …", "denies …") within WINDOW words */
 const PRE = ["no", "not", "denies", "denied", "deny", "without", "negative for", "absent", "free of", "never", "nor", "none", "rules out", "ruled out", "no evidence of", "no signs of", "no sign of", "neither"];
 /** cues after the term ("… absent", "… not raised") within WINDOW words */
-const POST = ["absent", "not present", "not raised", "not elevated", "not seen", "not heard", "not palpable", "not felt", "negative", "denied", "normal", "unremarkable", "none"];
+const POST = ["absent", "not present", "not raised", "not elevated", "not seen", "not heard", "not palpable", "not felt", "negative", "denied", "normal", "unremarkable", "none", "intact", "preserved", "symmetric", "symmetrical", "within normal limits"];
+/** post cues that describe a normal finding rather than deny one: they don't count as a negation cue on their own ("…, otherwise intact") */
+const NORMAL_POST = new Set(["normal", "unremarkable", "intact", "preserved", "symmetric", "symmetrical", "within normal limits"]);
 /** words that end the scope of a negation */
 const TERMINATE = ["but", "however", "although", "except", "apart from", "aside from", "though", "yet"];
 const WINDOW = 5;
@@ -44,7 +46,7 @@ export function polarityOf(sentence: string, term: string): "affirmed" | "negate
 
 /** Does the sentence contain any negation cue at all? (for similarity matches, where there is no term to anchor on) */
 export function hasNegationCue(sentence: string): boolean {
-  return [...PRE, ...POST.filter((c) => c !== "normal" && c !== "unremarkable")].some((c) => hasPhrase(sentence, c));
+  return [...PRE, ...POST.filter((c) => !NORMAL_POST.has(c))].some((c) => hasPhrase(sentence, c));
 }
 
 const LIST_JOIN = new Set(["or", "and", "nor"]);
