@@ -38,8 +38,9 @@ const DEG = Math.PI / 180;
  */
 export function poseRotations(position: Position, bedAngleDeg: number): BoneRotations {
   const a = bedAngleDeg * DEG;
-  // 0 lying or reclined to 45°, 1 sitting up (≥ 80°)
-  const t = Math.min(1, Math.max(0, (bedAngleDeg - 45) / 35));
+  // 0 lying flat, 1 sitting up (≥ 80°): reclined, the forearms already rest partly on the thighs
+  // (hanging by the sides of a reclined trunk, the hands slid under the thighs out of sight — V-HANDS)
+  const t = Math.min(1, Math.max(0, (bedAngleDeg - 10) / 70));
   const lap = t * t * (3 - 2 * t);
   const r: BoneRotations = {
     // trunk flexion relative to the lying body (raises the torso off the table)

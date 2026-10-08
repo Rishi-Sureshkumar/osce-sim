@@ -355,11 +355,6 @@
   "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
  },
  {
-  "id": "intersections:female:reclined_45:abdomen-exposed:gown",
-  "owner": "M3",
-  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
- },
- {
   "id": "intersections:female:reclined_45:abdomen-exposed:sheet",
   "owner": "M3",
   "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
@@ -510,11 +505,6 @@
   "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
  },
  {
-  "id": "intersections:male:reclined_30:chest-exposed:gown",
-  "owner": "M3",
-  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
- },
- {
   "id": "intersections:male:reclined_30:chest-exposed:sheet",
   "owner": "M3",
   "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
@@ -540,19 +530,9 @@
   "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
  },
  {
-  "id": "intersections:male:reclined_45:abdomen-exposed:gown",
-  "owner": "M3",
-  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
- },
- {
   "id": "intersections:male:reclined_45:abdomen-exposed:sheet",
   "owner": "M3",
   "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
- },
- {
-  "id": "intersections:male:reclined_45:chest-exposed:gown",
-  "owner": "M3",
-  "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
  },
  {
   "id": "intersections:male:reclined_45:chest-exposed:sheet",
