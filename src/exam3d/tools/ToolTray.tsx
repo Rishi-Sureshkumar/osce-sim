@@ -55,8 +55,12 @@ export function pickFromTable(state: ToolState, item: TableItem): ToolState {
       return { ...state, tool: "penlight" };
     case "bp_cuff":
       return { ...state, tool: "bp_cuff" };
+    case "swabs":
+      return { ...state, tool: "cotton_swab" };
+    case "pin":
+      return { ...state, tool: "pin" };
     default:
-      return state; // otoscope and swabs are shown for realism; their exams are menu-driven
+      return state; // the otoscope is shown for realism; its exams are menu-driven
   }
 }
 
@@ -67,6 +71,8 @@ export function itemInHand(s: ToolState): TableItem | null {
   if (s.tool === "reflex_hammer") return "reflex_hammer";
   if (s.tool === "penlight") return "penlight";
   if (s.tool === "bp_cuff") return "bp_cuff";
+  if (s.tool === "cotton_swab") return "swabs";
+  if (s.tool === "pin") return "pin";
   return null;
 }
 
@@ -78,6 +84,8 @@ const MENU: { label: string; tool: Tool | null; item?: TableItem }[] = [
   { label: "Reflex hammer", tool: "reflex_hammer", item: "reflex_hammer" },
   { label: "Penlight", tool: "penlight", item: "penlight" },
   { label: "BP cuff", tool: "bp_cuff", item: "bp_cuff" },
+  { label: "Cotton swab (light touch)", tool: "cotton_swab", item: "swabs" },
+  { label: "Neurotip (pinprick)", tool: "pin", item: "pin" },
   { label: "Hands (palpate / percuss)", tool: "hands" },
 ];
 

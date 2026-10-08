@@ -570,12 +570,12 @@
   {
    "id": "anchors:oracle:male:supine:foot_lateral_left",
    "status": "PASS",
-   "detail": "3.7 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+   "detail": "2.6 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
   },
   {
    "id": "anchors:oracle:male:supine:leg_medial_left",
    "status": "PASS",
-   "detail": "4.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+   "detail": "3.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
   },
   {
    "id": "anchors:oracle:male:supine:ear_right#mastoid",
@@ -630,12 +630,12 @@
   {
    "id": "anchors:oracle:male:supine:foot_lateral_right",
    "status": "PASS",
-   "detail": "3.7 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+   "detail": "2.6 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
   },
   {
    "id": "anchors:oracle:male:supine:leg_medial_right",
    "status": "PASS",
-   "detail": "4.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+   "detail": "3.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
   },
   {
    "id": "anchors:oracle:male:supine:abd_ruq",
@@ -801,6 +801,26 @@
    "id": "anchors:occlusion:male:supine:hip_left",
    "status": "PASS",
    "detail": "from the legs_left shot the ray first meets skin (thigh_l) 0.1 cm from the anchor (tolerance 6)"
+  },
+  {
+   "id": "anchors:occlusion:male:supine:leg_medial_right",
+   "status": "PASS",
+   "detail": "from the legs shot the ray first meets skin (leg_r) 0.0 cm from the anchor (tolerance 4)"
+  },
+  {
+   "id": "anchors:occlusion:male:supine:leg_medial_left",
+   "status": "PASS",
+   "detail": "from the legs shot the ray first meets skin (leg_l) 0.0 cm from the anchor (tolerance 4)"
+  },
+  {
+   "id": "anchors:occlusion:male:supine:foot_lateral_right",
+   "status": "PASS",
+   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (tolerance 3)"
+  },
+  {
+   "id": "anchors:occlusion:male:supine:foot_lateral_left",
+   "status": "PASS",
+   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:supine:toe_great_right",
@@ -1380,12 +1400,12 @@
   {
    "id": "anchors:oracle:male:reclined_30:foot_lateral_left",
    "status": "PASS",
-   "detail": "3.7 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+   "detail": "2.6 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
   },
   {
    "id": "anchors:oracle:male:reclined_30:leg_medial_left",
    "status": "PASS",
-   "detail": "4.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+   "detail": "3.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
   },
   {
    "id": "anchors:oracle:male:reclined_30:ear_right#mastoid",
@@ -1440,12 +1460,12 @@
   {
    "id": "anchors:oracle:male:reclined_30:foot_lateral_right",
    "status": "PASS",
-   "detail": "3.7 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+   "detail": "2.6 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
   },
   {
    "id": "anchors:oracle:male:reclined_30:leg_medial_right",
    "status": "PASS",
-   "detail": "4.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+   "detail": "3.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
   },
   {
    "id": "anchors:oracle:male:reclined_30:abd_ruq",
@@ -2070,12 +2090,12 @@
   {
    "id": "anchors:oracle:male:reclined_45:foot_lateral_left",
    "status": "PASS",
-   "detail": "3.7 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+   "detail": "2.6 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
   },
   {
    "id": "anchors:oracle:male:reclined_45:leg_medial_left",
    "status": "PASS",
-   "detail": "4.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+   "detail": "3.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
   },
   {
    "id": "anchors:oracle:male:reclined_45:ear_right#mastoid",
@@ -2130,12 +2150,12 @@
   {
    "id": "anchors:oracle:male:reclined_45:foot_lateral_right",
    "status": "PASS",
-   "detail": "3.7 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+   "detail": "2.6 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
   },
   {
    "id": "anchors:oracle:male:reclined_45:leg_medial_right",
    "status": "PASS",
-   "detail": "4.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+   "detail": "3.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
   },
   {
    "id": "anchors:oracle:male:reclined_45:abd_ruq",
@@ -2750,12 +2770,12 @@
   {
    "id": "anchors:oracle:male:seated:foot_lateral_left",
    "status": "PASS",
-   "detail": "3.7 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+   "detail": "2.6 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
   },
   {
    "id": "anchors:oracle:male:seated:leg_medial_left",
    "status": "PASS",
-   "detail": "4.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+   "detail": "3.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
   },
   {
    "id": "anchors:oracle:male:seated:ear_right#mastoid",
@@ -2810,12 +2830,12 @@
   {
    "id": "anchors:oracle:male:seated:foot_lateral_right",
    "status": "PASS",
-   "detail": "3.7 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+   "detail": "2.6 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
   },
   {
    "id": "anchors:oracle:male:seated:leg_medial_right",
    "status": "PASS",
-   "detail": "4.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+   "detail": "3.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
   },
   {
    "id": "anchors:oracle:male:seated:abd_ruq",
@@ -3725,12 +3745,12 @@
   {
    "id": "anchors:oracle:male:sitting_dangling:foot_lateral_left",
    "status": "PASS",
-   "detail": "3.7 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+   "detail": "2.6 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
   },
   {
    "id": "anchors:oracle:male:sitting_dangling:leg_medial_left",
    "status": "PASS",
-   "detail": "4.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+   "detail": "3.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
   },
   {
    "id": "anchors:oracle:male:sitting_dangling:ear_right#mastoid",
@@ -3785,12 +3805,12 @@
   {
    "id": "anchors:oracle:male:sitting_dangling:foot_lateral_right",
    "status": "PASS",
-   "detail": "3.7 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+   "detail": "2.6 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
   },
   {
    "id": "anchors:oracle:male:sitting_dangling:leg_medial_right",
    "status": "PASS",
-   "detail": "4.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+   "detail": "3.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
   },
   {
    "id": "anchors:oracle:male:sitting_dangling:abd_ruq",
@@ -4435,12 +4455,12 @@
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:foot_lateral_left",
    "status": "PASS",
-   "detail": "3.7 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+   "detail": "2.6 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
   },
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:leg_medial_left",
    "status": "PASS",
-   "detail": "4.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+   "detail": "3.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
   },
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:ear_right#mastoid",
@@ -4495,12 +4515,12 @@
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:foot_lateral_right",
    "status": "PASS",
-   "detail": "3.7 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+   "detail": "2.6 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
   },
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:leg_medial_right",
    "status": "PASS",
-   "detail": "4.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+   "detail": "3.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
   },
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:abd_ruq",
@@ -5361,6 +5381,26 @@
    "id": "anchors:occlusion:female:supine:hip_left",
    "status": "PASS",
    "detail": "from the legs_left shot the ray first meets skin (thigh_l) 0.0 cm from the anchor (tolerance 6)"
+  },
+  {
+   "id": "anchors:occlusion:female:supine:leg_medial_right",
+   "status": "PASS",
+   "detail": "from the legs shot the ray first meets skin (leg_r) 0.0 cm from the anchor (tolerance 4)"
+  },
+  {
+   "id": "anchors:occlusion:female:supine:leg_medial_left",
+   "status": "PASS",
+   "detail": "from the legs shot the ray first meets skin (leg_l) 0.0 cm from the anchor (tolerance 4)"
+  },
+  {
+   "id": "anchors:occlusion:female:supine:foot_lateral_right",
+   "status": "PASS",
+   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (tolerance 3)"
+  },
+  {
+   "id": "anchors:occlusion:female:supine:foot_lateral_left",
+   "status": "PASS",
+   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:supine:toe_great_right",
@@ -9930,7 +9970,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "foot_lateral_left",
-   "cm": 3.67,
+   "cm": 2.58,
    "max": 4
   },
   {
@@ -9938,7 +9978,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "leg_medial_left",
-   "cm": 4.71,
+   "cm": 3.66,
    "max": 5
   },
   {
@@ -10026,7 +10066,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "foot_lateral_right",
-   "cm": 3.67,
+   "cm": 2.58,
    "max": 4
   },
   {
@@ -10034,7 +10074,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "leg_medial_right",
-   "cm": 4.71,
+   "cm": 3.66,
    "max": 5
   },
   {
@@ -10348,6 +10388,46 @@
    "first": "skin",
    "part": "thigh_l",
    "offCm": 0.09
+  },
+  {
+   "check": "occlusion",
+   "variant": "male",
+   "position": "supine",
+   "regionId": "leg_medial_right",
+   "shot": "legs",
+   "first": "skin",
+   "part": "leg_r",
+   "offCm": 0
+  },
+  {
+   "check": "occlusion",
+   "variant": "male",
+   "position": "supine",
+   "regionId": "leg_medial_left",
+   "shot": "legs",
+   "first": "skin",
+   "part": "leg_l",
+   "offCm": 0
+  },
+  {
+   "check": "occlusion",
+   "variant": "male",
+   "position": "supine",
+   "regionId": "foot_lateral_right",
+   "shot": "feet",
+   "first": "skin",
+   "part": "foot_r",
+   "offCm": 0.01
+  },
+  {
+   "check": "occlusion",
+   "variant": "male",
+   "position": "supine",
+   "regionId": "foot_lateral_left",
+   "shot": "feet",
+   "first": "skin",
+   "part": "foot_l",
+   "offCm": 0.03
   },
   {
    "check": "occlusion",
@@ -11175,7 +11255,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "foot_lateral_left",
-   "cm": 3.67,
+   "cm": 2.58,
    "max": 4
   },
   {
@@ -11183,7 +11263,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "leg_medial_left",
-   "cm": 4.71,
+   "cm": 3.66,
    "max": 5
   },
   {
@@ -11271,7 +11351,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "foot_lateral_right",
-   "cm": 3.67,
+   "cm": 2.58,
    "max": 4
   },
   {
@@ -11279,7 +11359,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "leg_medial_right",
-   "cm": 4.71,
+   "cm": 3.66,
    "max": 5
   },
   {
@@ -12180,7 +12260,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "foot_lateral_left",
-   "cm": 3.67,
+   "cm": 2.58,
    "max": 4
   },
   {
@@ -12188,7 +12268,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "leg_medial_left",
-   "cm": 4.71,
+   "cm": 3.66,
    "max": 5
   },
   {
@@ -12276,7 +12356,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "foot_lateral_right",
-   "cm": 3.67,
+   "cm": 2.58,
    "max": 4
   },
   {
@@ -12284,7 +12364,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "leg_medial_right",
-   "cm": 4.71,
+   "cm": 3.66,
    "max": 5
   },
   {
@@ -13165,7 +13245,7 @@
    "variant": "male",
    "position": "seated",
    "rule": "foot_lateral_left",
-   "cm": 3.67,
+   "cm": 2.58,
    "max": 4
   },
   {
@@ -13173,7 +13253,7 @@
    "variant": "male",
    "position": "seated",
    "rule": "leg_medial_left",
-   "cm": 4.71,
+   "cm": 3.66,
    "max": 5
   },
   {
@@ -13261,7 +13341,7 @@
    "variant": "male",
    "position": "seated",
    "rule": "foot_lateral_right",
-   "cm": 3.67,
+   "cm": 2.58,
    "max": 4
   },
   {
@@ -13269,7 +13349,7 @@
    "variant": "male",
    "position": "seated",
    "rule": "leg_medial_right",
-   "cm": 4.71,
+   "cm": 3.66,
    "max": 5
   },
   {
@@ -13772,7 +13852,7 @@
    "shot": "elbow_right",
    "first": "skin",
    "part": "upper_arm_r",
-   "offCm": 0
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -13782,7 +13862,7 @@
    "shot": "elbow_left",
    "first": "skin",
    "part": "upper_arm_l",
-   "offCm": 0
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -14740,7 +14820,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "foot_lateral_left",
-   "cm": 3.67,
+   "cm": 2.58,
    "max": 4
   },
   {
@@ -14748,7 +14828,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "leg_medial_left",
-   "cm": 4.71,
+   "cm": 3.66,
    "max": 5
   },
   {
@@ -14836,7 +14916,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "foot_lateral_right",
-   "cm": 3.67,
+   "cm": 2.58,
    "max": 4
   },
   {
@@ -14844,7 +14924,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "leg_medial_right",
-   "cm": 4.71,
+   "cm": 3.66,
    "max": 5
   },
   {
@@ -14927,7 +15007,7 @@
    "shot": "elbow_right",
    "first": "skin",
    "part": "upper_arm_r",
-   "offCm": 0
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -14937,7 +15017,7 @@
    "shot": "elbow_left",
    "first": "skin",
    "part": "upper_arm_l",
-   "offCm": 0
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -15785,7 +15865,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "foot_lateral_left",
-   "cm": 3.67,
+   "cm": 2.58,
    "max": 4
   },
   {
@@ -15793,7 +15873,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "leg_medial_left",
-   "cm": 4.71,
+   "cm": 3.66,
    "max": 5
   },
   {
@@ -15881,7 +15961,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "foot_lateral_right",
-   "cm": 3.67,
+   "cm": 2.58,
    "max": 4
   },
   {
@@ -15889,7 +15969,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "leg_medial_right",
-   "cm": 4.71,
+   "cm": 3.66,
    "max": 5
   },
   {
@@ -17218,6 +17298,46 @@
    "first": "skin",
    "part": "thigh_l",
    "offCm": 0.01
+  },
+  {
+   "check": "occlusion",
+   "variant": "female",
+   "position": "supine",
+   "regionId": "leg_medial_right",
+   "shot": "legs",
+   "first": "skin",
+   "part": "leg_r",
+   "offCm": 0.01
+  },
+  {
+   "check": "occlusion",
+   "variant": "female",
+   "position": "supine",
+   "regionId": "leg_medial_left",
+   "shot": "legs",
+   "first": "skin",
+   "part": "leg_l",
+   "offCm": 0.01
+  },
+  {
+   "check": "occlusion",
+   "variant": "female",
+   "position": "supine",
+   "regionId": "foot_lateral_right",
+   "shot": "feet",
+   "first": "skin",
+   "part": "foot_r",
+   "offCm": 0
+  },
+  {
+   "check": "occlusion",
+   "variant": "female",
+   "position": "supine",
+   "regionId": "foot_lateral_left",
+   "shot": "feet",
+   "first": "skin",
+   "part": "foot_l",
+   "offCm": 0
   },
   {
    "check": "occlusion",

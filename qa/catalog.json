@@ -237,6 +237,66 @@
    "status": "PASS"
   },
   {
+   "id": "catalog-neg:female:sensation_light_touch_swab@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_light_touch_swab@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_light_touch_swab@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_light_touch_swab@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_light_touch_swab@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_light_touch_swab@leg_medial_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_pinprick_pin@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_pinprick_pin@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_pinprick_pin@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_pinprick_pin@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_pinprick_pin@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:female:sensation_pinprick_pin@leg_medial_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
    "id": "catalog-neg:female:sensation_vibration@toe_great_left",
    "detail": "",
    "status": "PASS"
@@ -483,6 +543,66 @@
   },
   {
    "id": "catalog-neg:male:rinne_test@ear_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_light_touch_swab@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_light_touch_swab@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_light_touch_swab@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_light_touch_swab@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_light_touch_swab@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_light_touch_swab@leg_medial_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_pinprick_pin@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_pinprick_pin@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_pinprick_pin@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_pinprick_pin@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_pinprick_pin@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-neg:male:sensation_pinprick_pin@leg_medial_right",
    "detail": "",
    "status": "PASS"
   },
@@ -809,6 +929,46 @@
   {
    "id": "catalog-oracle:female:rinne_test@ear_right",
    "detail": "at the anatomical point (ear_right#mastoid, bone step): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_light_touch_swab@foot_lateral_left",
+   "detail": "at the anatomical point (foot_lateral_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_light_touch_swab@foot_lateral_right",
+   "detail": "at the anatomical point (foot_lateral_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_light_touch_swab@leg_medial_left",
+   "detail": "at the anatomical point (leg_medial_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_light_touch_swab@leg_medial_right",
+   "detail": "at the anatomical point (leg_medial_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_pinprick_pin@foot_lateral_left",
+   "detail": "at the anatomical point (foot_lateral_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_pinprick_pin@foot_lateral_right",
+   "detail": "at the anatomical point (foot_lateral_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_pinprick_pin@leg_medial_left",
+   "detail": "at the anatomical point (leg_medial_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:sensation_pinprick_pin@leg_medial_right",
+   "detail": "at the anatomical point (leg_medial_right): ",
    "status": "PASS"
   },
   {
@@ -1174,6 +1334,46 @@
   {
    "id": "catalog-oracle:male:rinne_test@ear_right",
    "detail": "at the anatomical point (ear_right#mastoid, bone step): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_light_touch_swab@foot_lateral_left",
+   "detail": "at the anatomical point (foot_lateral_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_light_touch_swab@foot_lateral_right",
+   "detail": "at the anatomical point (foot_lateral_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_light_touch_swab@leg_medial_left",
+   "detail": "at the anatomical point (leg_medial_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_light_touch_swab@leg_medial_right",
+   "detail": "at the anatomical point (leg_medial_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_pinprick_pin@foot_lateral_left",
+   "detail": "at the anatomical point (foot_lateral_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_pinprick_pin@foot_lateral_right",
+   "detail": "at the anatomical point (foot_lateral_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_pinprick_pin@leg_medial_left",
+   "detail": "at the anatomical point (leg_medial_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:sensation_pinprick_pin@leg_medial_right",
+   "detail": "at the anatomical point (leg_medial_right): ",
    "status": "PASS"
   },
   {
@@ -2517,12 +2717,72 @@
    "status": "PASS"
   },
   {
+   "id": "catalog:female:sensation_light_touch_swab@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_light_touch_swab@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_light_touch_swab@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_light_touch_swab@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_light_touch_swab@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_light_touch_swab@leg_medial_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
    "id": "catalog:female:sensation_light_touch@neuro_sensory",
    "detail": "",
    "status": "PASS"
   },
   {
    "id": "catalog:female:sensation_pin_prick@neuro_sensory",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_pinprick_pin@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_pinprick_pin@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_pinprick_pin@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_pinprick_pin@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_pinprick_pin@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:sensation_pinprick_pin@leg_medial_right",
    "detail": "",
    "status": "PASS"
   },
@@ -4277,12 +4537,72 @@
    "status": "PASS"
   },
   {
+   "id": "catalog:male:sensation_light_touch_swab@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_light_touch_swab@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_light_touch_swab@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_light_touch_swab@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_light_touch_swab@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_light_touch_swab@leg_medial_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
    "id": "catalog:male:sensation_light_touch@neuro_sensory",
    "detail": "",
    "status": "PASS"
   },
   {
    "id": "catalog:male:sensation_pin_prick@neuro_sensory",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_pinprick_pin@foot_lateral_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_pinprick_pin@foot_lateral_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_pinprick_pin@foot_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_pinprick_pin@foot_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_pinprick_pin@leg_medial_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:sensation_pinprick_pin@leg_medial_right",
    "detail": "",
    "status": "PASS"
   },

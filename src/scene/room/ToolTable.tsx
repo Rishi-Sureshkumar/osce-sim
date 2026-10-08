@@ -11,7 +11,7 @@ import type { Tool } from "@/domain/schemas";
 export const TOOL_TABLE_POS: [number, number, number] = [-0.95, 0, -1.25];
 export const TOOL_TABLE_TOP = 0.9;
 
-export type TableItem = "stethoscope" | "reflex_hammer" | "fork_128" | "fork_512" | "penlight" | "otoscope" | "swabs" | "bp_cuff";
+export type TableItem = "stethoscope" | "reflex_hammer" | "fork_128" | "fork_512" | "penlight" | "otoscope" | "swabs" | "pin" | "bp_cuff";
 export const TABLE_ITEMS: { id: TableItem; label: string; tool?: Tool; mode?: string; at: [number, number] }[] = [
   { id: "stethoscope", label: "Stethoscope", tool: "stethoscope", at: [-0.17, -0.12] },
   { id: "reflex_hammer", label: "Reflex hammer", tool: "reflex_hammer", at: [0.05, -0.15] },
@@ -19,7 +19,8 @@ export const TABLE_ITEMS: { id: TableItem; label: string; tool?: Tool; mode?: st
   { id: "fork_512", label: "Tuning fork 512 Hz", tool: "tuning_fork", mode: "512", at: [0.24, 0.0] },
   { id: "penlight", label: "Penlight", tool: "penlight", at: [0.02, 0.05] },
   { id: "otoscope", label: "Otoscope / ophthalmoscope", at: [-0.12, 0.1] },
-  { id: "swabs", label: "Cotton swabs", at: [0.14, 0.13] },
+  { id: "swabs", label: "Cotton swabs", tool: "cotton_swab", at: [0.14, 0.13] },
+  { id: "pin", label: "Neurotip (pin)", tool: "pin", at: [0.06, 0.15] },
   { id: "bp_cuff", label: "BP cuff", tool: "bp_cuff", at: [-0.2, 0.12] },
 ];
 
@@ -160,6 +161,20 @@ export function ToolModel({ id }: { id: TableItem }) {
               <meshStandardMaterial color="#fef3c7" />
             </mesh>
           ))}
+        </group>
+      );
+    case "pin":
+      // a disposable neurotip: white shaft, sharp and blunt ends
+      return (
+        <group rotation={[0, 0.4, Math.PI / 2]} position={[0, 0.004, 0]}>
+          <mesh raycast={noRay} castShadow>
+            <cylinderGeometry args={[0.003, 0.003, 0.07, 8]} />
+            <meshStandardMaterial color="#f8fafc" roughness={0.4} />
+          </mesh>
+          <mesh position={[0, 0.04, 0]} raycast={noRay}>
+            <coneGeometry args={[0.003, 0.012, 8]} />
+            <meshStandardMaterial color="#facc15" roughness={0.4} />
+          </mesh>
         </group>
       );
     case "bp_cuff":

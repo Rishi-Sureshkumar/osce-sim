@@ -517,6 +517,77 @@
       "sourceText": ""
     },
     {
+      "id": "sensation_light_touch_swab",
+      "fcmId": null,
+      "label": "Light touch with a cotton swab (dermatomes)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "leg_medial_right",
+        "leg_medial_left",
+        "foot_right",
+        "foot_left",
+        "foot_lateral_right",
+        "foot_lateral_left"
+      ],
+      "normalFinding": {
+        "default": "Feels the cotton swab normally here, the same as on the other side."
+      },
+      "demo": {
+        "steps": [
+          "Ask the patient to close the eyes and say \"yes\" each time they feel the touch.",
+          "Touch the skin lightly with the cotton swab; do not stroke.",
+          "Compare the same spot on the other side: medial leg (L4), dorsum of the foot (L5), lateral border of the foot (S1)."
+        ]
+      },
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "cotton_swab",
+      "penTerms": [
+        "light touch",
+        "sensation",
+        "sensory",
+        "numb",
+        "dermatome"
+      ]
+    },
+    {
+      "id": "sensation_pinprick_pin",
+      "fcmId": null,
+      "label": "Pinprick with a neurotip (dermatomes)",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "leg_medial_right",
+        "leg_medial_left",
+        "foot_right",
+        "foot_left",
+        "foot_lateral_right",
+        "foot_lateral_left"
+      ],
+      "normalFinding": {
+        "default": "Feels the pin as sharp here, the same as on the other side."
+      },
+      "demo": {
+        "steps": [
+          "Show the patient the sharp and blunt ends first, then ask them to close the eyes.",
+          "Touch the skin with the sharp end (never hard enough to break the skin) and ask: sharp or blunt?",
+          "Compare the same spot on the other side: medial leg (L4), dorsum of the foot (L5), lateral border of the foot (S1)."
+        ]
+      },
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "pin",
+      "penTerms": [
+        "pinprick",
+        "pin prick",
+        "sharp",
+        "sensation",
+        "sensory",
+        "dermatome"
+      ]
+    },
+    {
       "id": "sensation_proprioception",
       "fcmId": 79,
       "label": "Test joint position sense",

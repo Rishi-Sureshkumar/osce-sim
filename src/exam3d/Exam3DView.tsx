@@ -289,7 +289,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
   const pickTool = (item: TableItem) => {
     const next = pickFromTable(props.tool, item);
     if (next === props.tool) {
-      setCaption(item === "otoscope" ? "Otoscope / ophthalmoscope: use the Examine… menu for the ear and eye exams." : "Cotton swabs: use the Examine… menu for light-touch sensation.");
+      setCaption("Otoscope / ophthalmoscope: use the Examine… menu for the ear and eye exams.");
       return;
     }
     props.onToolChange(next);
