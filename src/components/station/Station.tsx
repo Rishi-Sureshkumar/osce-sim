@@ -483,6 +483,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
             <ErrorBoundary label="3D exam view">
             <Exam3DView
                 sessionId={session.id}
+                bp={{ systolic: kase.vitals.bpSystolic, diastolic: kase.vitals.bpDiastolic }}
                 qa={qa}
                 maneuvers={catalog.maneuvers}
                 tool={tool}

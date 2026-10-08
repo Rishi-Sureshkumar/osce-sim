@@ -30,6 +30,9 @@ import { backgroundKind, contactOutcome, contactSound, recordsFinding } from "./
 import { decidePlacement, holdCandidate, holdKey, penlightSweeper, type PenlightSweep, type RememberedHold, type SweepEvent } from "./tools/decide";
 import { REFLEX_JERK, type Jerk } from "@/scene/animation/reflex";
 import { QA, configureQa, qaDelay, recordDecision } from "./qa";
+import { BpGauge, type BpRecord } from "./tools/BpGauge";
+import { bpNext, bpOutOfOrder, bpTouch, type BpState } from "./tools/bpSequence";
+import { korotkoffSound, pulsePalpable, type KorotkoffParams } from "@/audio/korotkoff";
 import { ToolHud, itemInHand, pickFromTable, toolModeOf, type ToolState } from "./tools/ToolTray";
 
 type M = PublicCatalog["maneuvers"][number];
@@ -40,6 +43,8 @@ const BED_STOPS: Position[] = ["supine", "reclined_30", "reclined_45", "seated"]
 
 export interface Exam3DViewProps {
   sessionId: string;
+  /** the case's blood pressure (shown on the door): the Korotkoff sounds and the gauge's reference (bug 9) */
+  bp?: { systolic: number; diastolic: number };
   regions: Region[];
   maneuvers: M[];
   /** regions that have at least one maneuver */
@@ -168,6 +173,15 @@ export default function Exam3DView(props: Exam3DViewProps) {
   holdRef.current = hold;
   const byId = useMemo(() => new Map(props.regions.map((r) => [r.id, r])), [props.regions]);
   const maneuverById = useMemo(() => new Map(props.maneuvers.map((m) => [m.id, m])), [props.maneuvers]);
+
+  // ------------------------------------------------------------------ blood pressure (bug 9)
+  // the cuffed arm and the steps done; kept while the student switches cuff → hands → stethoscope
+  const [bp, setBp] = useState<BpState | null>(null);
+  const bpManeuver = maneuverById.get("blood_pressure");
+  const bpSteps = useMemo(() => bpManeuver?.steps ?? [], [bpManeuver]);
+  const korotkoff = useRef<KorotkoffParams | null>(null);
+  const lastBeat = useRef(0);
+  const [pulseFelt, setPulseFelt] = useState(true);
   const { tool } = props.tool;
   const mode = toolModeOf(props.tool);
   const hr = props.presentation.hr;
@@ -391,6 +405,12 @@ export default function Exam3DView(props: Exam3DViewProps) {
 
   const onToolDown = (hit: BodyHit) => {
     if (!tool || props.disabled || busy) return;
+    // with the cuff on: the hands or the stethoscope in the elbow crease of that arm do the BP steps
+    if (bp && (tool === "hands" || tool === "stethoscope")) {
+      const t = bpTouch(bpSteps, bp, tool, hit.point, pose);
+      recordDecision(t ? { bpStep: t.step.id, distanceCm: t.distanceCm } : { bpStep: null });
+      if (t) return void doBpStep(t.step.id, { distanceCm: t.distanceCm, toleranceCm: t.step.toleranceCm ?? 2.5 });
+    }
     const c = contact(hit.point);
     if (!c) return;
     if (tool === "penlight") {
@@ -457,6 +477,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
     const d = decidePlacement({ point, tool, mode, maneuvers: props.maneuvers, toolRegions, pose });
     recordDecision(d ? { ...d } : { none: true });
     if (!d) return;
+    if (tool === "bp_cuff") return wrapCuff(d);
     const s = { regionId: d.regionId, toleranceCm: d.toleranceCm };
     const { distanceCm, outcome } = d;
     if (tool === "reflex_hammer") setSwingAt(performance.now());
@@ -491,6 +512,69 @@ export default function Exam3DView(props: Exam3DViewProps) {
       setJerk({ ...joint, grade: tool === "reflex_hammer" ? (visual?.reflex ?? 2) : 0, ...(visual?.clonusBeats ? { clonusBeats: visual.clonusBeats } : {}), muted, at: performance.now() / 1000 });
       if (muted) setCaption("Hard to see the reflex with the limb positioned like this.");
     }
+  };
+
+  /** The cuff placed: on the upper arm within tolerance it is wrapped (logs the cuff placement); elsewhere it is logged as misplaced. */
+  const wrapCuff = async (d: NonNullable<ReturnType<typeof decidePlacement>>) => {
+    const wrap = bpSteps.find((s) => s.id === "wrap");
+    void props.onToolContact({ tool: "bp_cuff", maneuverId: "blood_pressure", nearestRegionId: d.regionId, distanceCm: d.distanceCm, toleranceCm: d.toleranceCm, durationMs: 0, outcome: d.outcome });
+    if (d.outcome !== "finding" || !wrap) {
+      setCaption("The cuff goes on the bare upper arm, its lower edge 2–3 cm above the elbow crease.");
+      return;
+    }
+    setBp({ regionId: d.regionId, done: ["wrap"] });
+    korotkoff.current = null;
+    if (wrap.logsManeuver) await props.onToolExamine({ regionId: d.regionId, maneuverId: wrap.logsManeuver, tool: "bp_cuff", placementError: d.error, distanceCm: d.distanceCm, toleranceCm: d.toleranceCm, step: "wrap" });
+    setCaption("Cuff on. Support the arm, feel the brachial pulse in the elbow crease, then listen there with the stethoscope.");
+  };
+
+  /** A BP step done (support the arm, feel the pulse, listen): logged when the catalog says so. */
+  const doBpStep = async (id: string, placed?: { distanceCm: number; toleranceCm: number }) => {
+    const step = bpSteps.find((s) => s.id === id);
+    if (!bp || !step) return;
+    setBp((q) => (q && !q.done.includes(id) ? { ...q, done: [...q.done, id] } : q));
+    if (step.logsManeuver) await props.onToolExamine({ regionId: bp.regionId, maneuverId: step.logsManeuver, tool: step.tool ?? "bp_cuff", step: id, ...(placed ?? {}) });
+    if (id === "palpate") setCaption("Brachial pulse found. Inflate until it disappears to estimate the systolic pressure.");
+    if (id === "listen") {
+      setCaption("Listening over the brachial artery. Inflate 20–30 mmHg above where the pulse disappeared, then release slowly.");
+      // the sounds for this case (pressures from the case vitals; a case may add an auscultatory gap)
+      const res = await fetch(`/api/sessions/${props.sessionId}/listen`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ maneuverId: "blood_pressure", regionId: bp.regionId }) }).catch(() => null);
+      const { audio } = res?.ok ? ((await res.json()) as { audio: AudioSpec | null }) : { audio: null };
+      const p = audio && "generator" in audio && audio.generator === "korotkoff" ? audio.params : null;
+      const sys = p?.systolic ?? props.bp?.systolic;
+      const dia = p?.diastolic ?? props.bp?.diastolic;
+      if (sys && dia) korotkoff.current = { systolic: sys, diastolic: dia, muffleMmHg: p?.muffleMmHg ?? 6, intensity: p?.intensity ?? 0.7, ...(p?.auscultatoryGap ? { auscultatoryGap: p.auscultatoryGap } : {}) };
+    }
+  };
+
+  /** Cuff pressure from the gauge: the brachial pulse (palpated) and the Korotkoff sounds (stethoscope), one per heartbeat. */
+  const onCuffPressure = (mmHg: number) => {
+    const sys = korotkoff.current?.systolic ?? props.bp?.systolic;
+    if (sys) {
+      const felt = pulsePalpable(mmHg, sys);
+      if (felt !== pulseFelt) setPulseFelt(felt);
+    }
+    if (!bp?.done.includes("listen") || !korotkoff.current) return;
+    const now = performance.now();
+    if (now - lastBeat.current < 60_000 / Math.max(30, hr)) return;
+    lastBeat.current = now;
+    const k = korotkoffSound(mmHg, korotkoff.current);
+    if (k.audible) audioEngine.korotkoffTap(k.gain, k.freq, k.texture);
+  };
+
+  /** The reading recorded on the gauge: the blood-pressure exam, with how the cuff was handled. */
+  const recordBp = async (r: BpRecord) => {
+    if (!bp) return;
+    setBp((q) => (q && !q.done.includes("gauge") ? { ...q, done: [...q.done, "gauge"] } : q));
+    const q = r.quality;
+    await props.onToolExamine({
+      regionId: bp.regionId,
+      maneuverId: "blood_pressure",
+      tool: "bp_cuff",
+      step: "gauge",
+      bpReading: { systolic: r.systolic, diastolic: r.diastolic, peak: Math.round(r.peak), deflationRate: Math.round(q.deflationRate * 10) / 10, inflatedEnough: q.inflatedEnough, tooFast: q.tooFast, tooSlow: q.tooSlow },
+    });
+    setCaption(q.tooFast ? "Reading recorded — but the cuff came down too fast to be sure of it." : !q.inflatedEnough ? "Reading recorded — inflate further above the systolic next time." : "Reading recorded.");
   };
 
   // ------------------------------------------------------------------ penlight
@@ -788,6 +872,41 @@ export default function Exam3DView(props: Exam3DViewProps) {
             </button>
           )}
           {progress.complete && <p className="mt-1 text-emerald-800">Sequence complete.</p>}
+        </div>
+      )}
+
+      {bp && bpManeuver && (
+        <div className="rounded-md border border-sky-200 bg-sky-50 p-2 text-xs" data-testid="bp-panel">
+          <p className="font-semibold">
+            {bpManeuver.label} — {byId.get(bp.regionId)?.label}
+            {bpOutOfOrder(bpSteps, bp) && <span className="ml-2 text-red-700">steps out of order</span>}
+          </p>
+          <ol className="mt-1 list-decimal pl-5">
+            {bpSteps.map((st) => (
+              <li key={st.id} className={bp.done.includes(st.id) ? "text-emerald-800 line-through" : bpNext(bpSteps, bp)?.id === st.id ? "font-medium" : "text-slate-500"}>
+                {st.label}
+              </li>
+            ))}
+          </ol>
+          {!bp.done.includes("support") && (
+            <button type="button" data-testid="bp-support" disabled={props.disabled} onClick={() => void doBpStep("support")} className="mt-1 rounded bg-sky-700 px-2 py-1 text-white disabled:opacity-50">
+              Support the arm at heart level
+            </button>
+          )}
+          {bp.done.includes("palpate") && (
+            <p className="mt-1" aria-live="polite" data-testid="bp-pulse">
+              Brachial pulse: {pulseFelt ? "felt" : "gone"}
+            </p>
+          )}
+          <div className="mt-2">
+            <BpGauge
+              onPressure={onCuffPressure}
+              onRecord={(r) => void recordBp(r)}
+              onClose={() => setBp(null)}
+              timeScale={QA.enabled && QA.fast ? 8 : 1}
+              {...(props.bp ? { reference: props.bp } : {})}
+            />
+          </div>
         </div>
       )}
 

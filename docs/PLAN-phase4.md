@@ -474,7 +474,7 @@ M6  UI polish
 | S | Schema changes | done |
 | M0 | QA harness | done: catalog 946 checks (627 pass, 319 xfail owned by M2/M3/M6), anchors 1493 pass / 307 xfail, intersections 71 pass / 139 xfail, 163 screenshots reviewed (qa/REVIEW.md: 12 high defects open, owned by M2/M3) |
 | M1 | No external LLM | done: chat fixtures HF 100% / screening 96%; grading calibration 94.0% agreement, 5.9% needs_review; no-network tests; in-browser embeddings e2e |
-| M2 | Bug fixes 1–10 | in progress: 8 (M0.2), 10, 3, 4, 5, 1, 2, 7 committed with proofs in qa/regressions; 9 to do (per bug: Node checks + catalog subset; full catalog at the M2 gate) |
+| M2 | Bug fixes 1–10 | in progress: all ten committed with proofs in qa/regressions (8 in M0.2); the M2 gate is next (per bug: Node checks + catalog subset; full catalog at the M2 gate) |
 | M3 | Models, drapes, room | planned |
 | M4 | Hide findings and mistake alerts | planned |
 | M5 | Three new cases | planned |

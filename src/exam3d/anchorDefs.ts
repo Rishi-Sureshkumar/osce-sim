@@ -152,7 +152,7 @@ const LEFT: Def[] = [
   { regionId: "foot_left", landmark: "dorsum_l", offsetCm: [0, 0, 0], facing: "any", toleranceCm: 3, label: "Dorsalis pedis pulse" },
   { regionId: "toe_great_left", landmark: "toe_l", offsetCm: [0, 0, 0], facing: "any", toleranceCm: 2 },
   // Phase 4 (schema commit): rough placements, recalibrated against the anatomy oracle in M2
-  { regionId: "upper_arm_left", landmark: "antecubital_l", offsetCm: [1, 10, 0], facing: "any", toleranceCm: 3, label: "Upper arm, 2–3 cm above the antecubital fossa (cuff)" },
+  { regionId: "upper_arm_left", landmark: "antecubital_l", offsetCm: [1, 10, 0], offsetCmBy: { male: [-1.8, 8.7, 1.4] }, facing: "any", toleranceCm: 3, label: "Upper arm, 2–3 cm above the antecubital fossa (cuff)" },
   { regionId: "biceps_tendon_left", landmark: "antecubital_l", offsetCm: [0, 0, 0], offsetCmBy: { male: [0.6, -1.6, 0.8], female: [-1, 0.3, -1] }, facing: "front", toleranceCm: 2, label: "Biceps tendon in the antecubital fossa" },
   { regionId: "triceps_tendon_left", landmark: "olecranon_l", offsetCm: [0, 2.5, 0], offsetCmBy: { male: [1.3, -0.8, 0.2], female: [2.3, -0.7, 0.4] }, facing: "back", toleranceCm: 2, label: "Triceps tendon just above the olecranon" },
   { regionId: "brachioradialis_left", landmark: "radial_l", offsetCm: [0, 4, 0], offsetCmBy: { male: [-5.1, 4.5, -3.1], female: [-1.8, 4.6, -2.7] }, facing: "any", toleranceCm: 2, label: "Distal radius, 3–5 cm above the wrist" },

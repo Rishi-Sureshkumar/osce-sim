@@ -80,6 +80,9 @@ export function buildCatalogPlan(opts: { variants?: VariantId[]; filter?: string
     if (!kase) throw new Error(`catalog plan: case ${CASE_FOR_VARIANT[variant]} not found`);
     const prohibited = new Set((kase.doorInstructions?.prohibitedExams ?? []).flatMap((p) => p.regionIds));
     for (const m of c.maneuvers) {
+      // a sequence with on-screen control steps (the BP gauge) needs several tools in turn: it has
+      // its own end-to-end test (e2e/regressions/bug9-bp.spec.ts), not a catalog entry
+      if (m.steps?.some((st) => st.kind === "control")) continue;
       // a drag path is one sweep through its regions and back (A → B → A), recorded on A
       const regionIds = m.interaction === "drag_path" ? m.allowedRegions.slice(0, 1) : m.allowedRegions;
       for (const regionId of regionIds) {

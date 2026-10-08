@@ -62,10 +62,13 @@ export function stepForPlacement(
   world: Vec3,
   pose: Pose,
   radius = 0.022,
+  tool?: Tool,
 ): (SequenceStep & { error: number; point: Vec3 }) | undefined {
   let best: { step: SequenceStep; d: number; point: Vec3 } | undefined;
   for (const step of steps) {
     if (step.kind !== "place" || !step.landmark) continue;
+    // a step done with another tool (BP: the stethoscope over the brachial artery) is not this placement's
+    if (tool && step.tool && step.tool !== tool) continue;
     const point = landmarkWorld(step.landmark, regionId, pose);
     if (!point) continue;
     const d = distance(point, world);

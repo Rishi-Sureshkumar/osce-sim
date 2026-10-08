@@ -42,8 +42,6 @@ function oracleRuleFor(e: CatalogEntry, ruleIds: Set<string>): { rule: string; s
   const side = e.regionId.endsWith("_left") ? "left" : e.regionId.endsWith("_right") ? "right" : null;
   const map: Record<string, string> = {
     rinne_test: `ear_${side}#mastoid`,
-    bp_cuff_placement: `upper_arm_${side}`,
-    blood_pressure: `upper_arm_${side}`,
     reflex_biceps: `biceps_tendon_${side}`,
     reflex_triceps: `triceps_tendon_${side}`,
     reflex_brachioradialis: `brachioradialis_${side}`,
@@ -397,7 +395,12 @@ for (const [group, entries] of GROUPS) {
     // fewer camera moves: by shot, then region
     const ordered = [...entries].sort((a, b) => `${a.shot}${a.regionId}`.localeCompare(`${b.shot}${b.regionId}`));
     const results: CheckResult[] = [];
-    const ruleIds = new Set((await oracleFor(entries[0]!.variant)).map((o) => o.id));
+    const oracle = await oracleFor(entries[0]!.variant);
+    const ruleIds = new Set(oracle.map((o) => o.id));
+    // rules measured along a limb axis (the cuff's height: anywhere around the arm is fine) are about
+    // placing a tool; a plain click there may fairly pick the chest beside the arm (the BP cuff
+    // itself is checked by e2e/regressions/bug9-bp.spec.ts)
+    const axisRules = new Set(oracle.filter((o) => o.axis).map((o) => o.id));
     for (const [i, e] of ordered.entries()) {
       let fails: string[];
       const t0 = Date.now();
@@ -409,7 +412,8 @@ for (const [group, entries] of GROUPS) {
       }
       results.push({ id: e.id, pass: fails.length === 0, detail: fails.join("; ") });
       // a sweep's anatomical points are each eye's own entry
-      const o = (e.route === "tool" || e.route === "menu") && !e.sweep ? oracleRuleFor(e, ruleIds) : null;
+      const rule = (e.route === "tool" || e.route === "menu") && !e.sweep ? oracleRuleFor(e, ruleIds) : null;
+      const o = rule && !(e.route === "menu" && axisRules.has(rule.rule)) ? rule : null;
       if (o) {
         let ofails: string[];
         try {

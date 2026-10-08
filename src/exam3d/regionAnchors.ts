@@ -73,6 +73,9 @@ const SEQUENCE_LANDMARKS: { id: string; regionId: string; landmark: string }[] =
   { id: "ear_canal", regionId: "ear_left", landmark: "ear_canal_l" },
   { id: "vertex", regionId: "scalp", landmark: "vertex" },
   { id: "apex", regionId: "cardiac_mitral", landmark: "nipple_l" },
+  // the brachial artery in the elbow crease, below a cuff on that upper arm (BP: palpate, then listen)
+  { id: "brachial", regionId: "upper_arm_right", landmark: "antecubital_r" },
+  { id: "brachial", regionId: "upper_arm_left", landmark: "antecubital_l" },
 ];
 export const LANDMARK_IDS = [...new Set(SEQUENCE_LANDMARKS.map((l) => l.id))];
 

@@ -63,6 +63,12 @@ export const PROOFS: Record<string, Proof> = {
     tests: ["tests/regressions/bug7-reflexes.test.ts"],
     description: "reflexes didn't move the leg: every jerk flexed the same small amount from the elbow/knee/ankle regions (triceps and Achilles moved the wrong way), there was no legs-dangling position, left lateral bent the hips and knees backwards, and the reflex sites were off the tendons",
   },
+  bug9: {
+    kind: "e2e",
+    tests: ["e2e/regressions/bug9-bp.spec.ts"],
+    support: ["e2e/qa/fixtures.ts", "e2e/qa/openers.ts"],
+    description: "the BP cuff recorded nothing: no cuff site, no gauge, no Korotkoff sounds, so no blood pressure could be taken",
+  },
   bug10: {
     kind: "vitest",
     tests: ["tests/regressions/bug10-hold-choice.test.ts"],

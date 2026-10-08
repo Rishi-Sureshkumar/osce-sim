@@ -12,6 +12,8 @@ export interface ToolUse {
   toleranceCm?: number;
   durationMs?: number;
   step?: string;
+  /** the blood-pressure reading taken from the gauge (bug 9) */
+  bpReading?: NonNullable<Extract<ActionInput, { type: "examine" }>["payload"]["bpReading"]>;
 }
 
 /** A tool placed (and possibly held) on the 3D patient. Same `examine` Action as a click, plus technique. */
@@ -23,6 +25,7 @@ export function examineFromTool(u: ToolUse): ActionInput {
   if (u.step) payload.step = u.step;
   if (u.distanceCm !== undefined) payload.distanceCm = Math.round(u.distanceCm * 10) / 10;
   if (u.toleranceCm !== undefined) payload.toleranceCm = u.toleranceCm;
+  if (u.bpReading) payload.bpReading = u.bpReading;
   return { type: "examine", source: "click", payload };
 }
 

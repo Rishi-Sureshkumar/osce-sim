@@ -63,6 +63,8 @@
       "system": "vitals",
       "technique": "palpate",
       "allowedRegions": [
+        "upper_arm_right",
+        "upper_arm_left",
         "arm_right",
         "arm_left"
       ],
@@ -75,9 +77,7 @@
           "Feel for the brachial pulse in the antecubital fossa.",
           "Wrap the cuff snugly on bare skin with the bladder over the artery."
         ]
-      },
-      "interaction": "place",
-      "tool": "bp_cuff"
+      }
     },
     {
       "sourceText": "",
@@ -87,6 +87,8 @@
       "system": "vitals",
       "technique": "special",
       "allowedRegions": [
+        "upper_arm_right",
+        "upper_arm_left",
         "arm_right",
         "arm_left"
       ],
@@ -112,11 +114,17 @@
       "system": "vitals",
       "technique": "auscultate",
       "allowedRegions": [
-        "arm_right",
-        "arm_left"
+        "upper_arm_right",
+        "upper_arm_left"
       ],
       "normalFinding": {
-        "default": "Blood pressure {vitals.bpSystolic}/{vitals.bpDiastolic} mmHg."
+        "default": {
+          "text": "Blood pressure {vitals.bpSystolic}/{vitals.bpDiastolic} mmHg.",
+          "audio": {
+            "generator": "korotkoff",
+            "params": {}
+          }
+        }
       },
       "demo": {
         "steps": [
@@ -126,10 +134,49 @@
           "Record when tapping sounds start and when they stop."
         ]
       },
-      "interaction": "place",
+      "interaction": "sequence",
       "tool": "bp_cuff",
       "penTerms": [
         "blood pressure"
+      ],
+      "steps": [
+        {
+          "id": "wrap",
+          "label": "Wrap the cuff on the bare upper arm, lower edge 2–3 cm above the elbow crease",
+          "kind": "place",
+          "tool": "bp_cuff",
+          "toleranceCm": 3,
+          "logsManeuver": "bp_cuff_placement"
+        },
+        {
+          "id": "support",
+          "label": "Support the arm at heart level",
+          "kind": "control",
+          "control": "support_arm",
+          "logsManeuver": "bp_arm_support"
+        },
+        {
+          "id": "palpate",
+          "label": "Feel the brachial pulse in the elbow crease",
+          "kind": "place",
+          "tool": "hands",
+          "landmark": "brachial",
+          "toleranceCm": 2.5
+        },
+        {
+          "id": "listen",
+          "label": "Stethoscope over the brachial artery",
+          "kind": "place",
+          "tool": "stethoscope",
+          "landmark": "brachial",
+          "toleranceCm": 2.5
+        },
+        {
+          "id": "gauge",
+          "label": "Inflate, release slowly (2–3 mmHg per second) and record the reading",
+          "kind": "control",
+          "control": "bp_gauge"
+        }
       ]
     },
     {

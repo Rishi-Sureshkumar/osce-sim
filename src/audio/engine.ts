@@ -6,6 +6,7 @@
  */
 import type { AudioSpec } from "@/domain/schemas";
 import { breathSchedule, heartSchedule, toneEnvelope, type HeartEvent } from "./schedule";
+import { demoDeflation, korotkoffSchedule, type KorotkoffTexture } from "./korotkoff";
 
 const SR = 22050;
 
@@ -33,6 +34,7 @@ class AudioEngine {
   private manifest: Promise<Manifest> | null = null;
   private volume = 0.8;
   private muted = false;
+  private liveNoise: AudioBuffer | null = null;
 
   /** Must be called from a user gesture the first time (browser autoplay rules). */
   private ensure(): AudioContext | null {
@@ -115,6 +117,21 @@ class AudioEngine {
     });
   }
 
+  /**
+   * One Korotkoff tap right now (live cuff deflation: the caller decides, from the pure model in
+   * korotkoff.ts, when a beat is audible and how loud). Goes through the master volume/mute.
+   * Live taps are real time: while the context is not running (suspended before a user gesture,
+   * an OS audio interruption) or muted they are dropped, not queued at a frozen currentTime.
+   */
+  korotkoffTap(gain: number, freq: number, texture: KorotkoffTexture = "tap", opts: Omit<PlayOptions, "hr" | "rr"> = {}) {
+    const ctx = this.ensure();
+    if (!ctx || !this.master || ctx.state !== "running" || this.muted || gain <= 0) return;
+    this.liveNoise ??= noiseBuffer(ctx, 1);
+    const chain = this.chain(ctx, { ...opts, hr: 60, rr: 12 });
+    const lastNode = korotkoffTapNodes(ctx, chain.input, this.liveNoise, ctx.currentTime + 0.01, gain, freq, texture);
+    lastNode.onended = () => chain.input.disconnect(); // release this tap's chain at once
+  }
+
   private chain(ctx: AudioContext, opts: PlayOptions) {
     const gain = ctx.createGain();
     gain.gain.value = opts.attenuation ?? 1;
@@ -161,8 +178,18 @@ async function render(spec: Exclude<AudioSpec, { clipId: string }>, opts: PlayOp
     }
     return buf;
   }
-  if (spec.generator === "korotkoff" || spec.generator === "percussion" || spec.generator === "voice") {
-    // Phase 4 generators are rendered by their own schedules (added with the BP sequence and hide-findings stimuli)
+  if (spec.generator === "korotkoff") {
+    // a looped spec plays one standard teaching deflation (live cuff use calls audioEngine.korotkoffTap)
+    const p = { ...spec.params, systolic: spec.params.systolic ?? 120, diastolic: spec.params.diastolic ?? 80 };
+    const sweep = demoDeflation(p);
+    const seconds = sweep.seconds + 1;
+    const ctx = new OfflineAudioContext(1, Math.ceil(seconds * SR), SR);
+    const noise = noiseBuffer(ctx, 1);
+    for (const e of korotkoffSchedule(p, opts.hr, sweep.pressureAt, sweep.seconds)) korotkoffTapNodes(ctx, ctx.destination, noise, e.t, e.gain, e.freq, e.texture);
+    return ctx.startRendering();
+  }
+  if (spec.generator === "percussion" || spec.generator === "voice") {
+    // Phase 4 generators are rendered by their own schedules (added with the hide-findings stimuli)
     return new OfflineAudioContext(1, SR / 10, SR).startRendering();
   }
   const period = spec.generator === "heart" ? 60 / opts.hr : 60 / opts.rr;
@@ -255,6 +282,41 @@ function heartEvent(ctx: OfflineAudioContext, noise: AudioBuffer, e: HeartEvent)
   osc.start(e.t);
   osc.stop(e.t + e.dur + 0.02);
   burst(ctx, noise, e.t, e.dur * 0.6, e.gain * 0.25, e.freq * 3, "lowpass");
+}
+
+/**
+ * A Korotkoff tap: a short low sine thump (~50 ms) plus a little filtered noise. Phase II taps get a
+ * longer band-passed swish; phase IV is low-passed and softer (muffled). Returns whichever source
+ * stops last.
+ */
+function korotkoffTapNodes(ctx: BaseAudioContext, dest: AudioNode, noise: AudioBuffer, t: number, gain: number, freq: number, texture: KorotkoffTexture): AudioScheduledSourceNode {
+  const dur = texture === "muffled" ? 0.06 : 0.045;
+  const osc = ctx.createOscillator();
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(freq * 1.5, t);
+  osc.frequency.exponentialRampToValueAtTime(freq, t + dur);
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(Math.max(0.0002, gain), t + 0.005);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  const lp = ctx.createBiquadFilter();
+  lp.type = "lowpass";
+  lp.frequency.value = texture === "muffled" ? 180 : 900;
+  osc.connect(g).connect(lp).connect(dest);
+  osc.start(t);
+  osc.stop(t + dur + 0.02);
+  const src = ctx.createBufferSource();
+  src.buffer = noise;
+  const f = ctx.createBiquadFilter();
+  f.type = texture === "swish" ? "bandpass" : "lowpass";
+  f.frequency.value = texture === "swish" ? 300 : texture === "muffled" ? 150 : freq * 4;
+  const ng = ctx.createGain();
+  const noiseDur = texture === "swish" ? 0.12 : dur * 0.6;
+  ng.gain.setValueAtTime(gain * (texture === "swish" ? 0.35 : 0.2), t);
+  ng.gain.exponentialRampToValueAtTime(0.001, t + noiseDur);
+  src.connect(f).connect(ng).connect(dest);
+  src.start(t, t % 0.5, noiseDur + 0.01);
+  return noiseDur + 0.01 > dur + 0.02 ? src : osc;
 }
 
 function burst(ctx: OfflineAudioContext, noise: AudioBuffer, t: number, dur: number, gain: number, freq: number, type: BiquadFilterType) {

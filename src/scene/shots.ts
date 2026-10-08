@@ -15,7 +15,7 @@ import { TOOL_TABLE_POS, TOOL_TABLE_TOP } from "./room/ToolTable";
 import { ROOM } from "./room/ExamRoom";
 
 export type FocusShotId = Exclude<RegionGroup, "whole" | "neuro">;
-export type ShotId = "corridor" | "overview" | "sink" | "tool_table" | "seated" | FocusShotId | "face" | "ear_left" | "ear_right" | "ankle_left" | "ankle_right";
+export type ShotId = "corridor" | "overview" | "sink" | "tool_table" | "seated" | FocusShotId | "face" | "ear_left" | "ear_right" | "ankle_left" | "ankle_right" | "arms_left";
 
 type Framing =
   /** fixed camera in the room */
@@ -49,7 +49,7 @@ export interface Shot {
 }
 
 const FOCUS: FocusShotId[] = ["head_neck", "chest_front", "chest_back", "abdomen", "arms", "hands", "legs", "feet"];
-const ROOM_SHOTS: ShotId[] = ["overview", "sink", "tool_table", "seated", ...FOCUS, "face", "ear_left", "ear_right", "ankle_left", "ankle_right"];
+const ROOM_SHOTS: ShotId[] = ["overview", "sink", "tool_table", "seated", ...FOCUS, "face", "ear_left", "ear_right", "ankle_left", "ankle_right", "arms_left"];
 const look = (yawDeg: number, zoomMin = 0.8, zoomMax = 1.25) => ({ yawDeg, zoomMin, zoomMax });
 
 export const SHOTS: Record<ShotId, Shot> = {
@@ -193,6 +193,17 @@ export const SHOTS: Record<ShotId, Shot> = {
     freeLook: look(35, 0.7, 1.3),
     transitions: ROOM_SHOTS,
   },
+  // the left arm from the patient's left (the arms shot looks at the right arm from the right; the
+  // left arm is behind the body from there)
+  arms_left: {
+    id: "arms_left",
+    label: "Left arm",
+    parent: "overview",
+    framing: { kind: "patient", on: [{ anchor: "arm_left" }, { anchor: "elbow_left" }], normalFrom: { landmark: "sternal_notch" }, distance: 0.75, side: -0.3 },
+    fov: 40,
+    freeLook: look(35, 0.7, 1.3),
+    transitions: ROOM_SHOTS,
+  },
   // the back of each ankle (the Achilles tendon), from the side and a little behind, on the shank's
   // own axes: legs hanging over the table's end, the front views see only the shins
   ankle_left: {
@@ -271,6 +282,11 @@ const REGION_SHOT: Record<string, ShotId> = {
   achilles_left: "ankle_left",
   achilles_right: "ankle_right",
   triceps_tendon_left: "chest_back",
+  shoulder_left: "arms_left",
+  arm_left: "arms_left",
+  elbow_left: "arms_left",
+  upper_arm_left: "arms_left",
+  biceps_tendon_left: "arms_left",
   triceps_tendon_right: "chest_back",
   scalp: "ear_right",
   eye_left: "face",

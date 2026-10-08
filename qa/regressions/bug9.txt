@@ -1,0 +1,24 @@
+# Regression proof: bug9
+
+the BP cuff recorded nothing: no cuff site, no gauge, no Korotkoff sounds, so no blood pressure could be taken
+
+test:      e2e/regressions/bug9-bp.spec.ts
+command:   npx playwright test e2e/regressions/bug9-bp.spec.ts --reporter=line
+old code:  071b1d0 (git worktree)  → exit 1 (FAILS, as it must)
+new code:  071b1d0 + working tree     → exit 0 (passes)
+result:    PROVEN
+date:      2026-10-08T04:14:22.550Z
+
+## Old code: why it fails
+```
+    Error: expect(locator).toBeVisible() failed
+    Expected: visible
+    Error: element(s) not found
+    > 78 |   await expect(page.getByTestId("bp-panel")).toBeVisible();
+  1 failed
+```
+
+## New code
+```
+  1 passed (47.8s)
+```

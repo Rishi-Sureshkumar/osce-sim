@@ -687,6 +687,21 @@ const ExamTechnique = {
   /** Phase 3: distance from the hidden anchor (cm) and that anchor's tolerance. */
   distanceCm: z.number().min(0).max(500).optional(),
   toleranceCm: z.number().min(0).max(50).optional(),
+  /** Phase 4 M2 bug 9: the reading the student took from the aneroid gauge, and how the cuff was handled. */
+  bpReading: z
+    .object({
+      systolic: z.number().int().min(20).max(300),
+      diastolic: z.number().int().min(10).max(250),
+      /** highest cuff pressure before the deflation (mmHg) */
+      peak: z.number().min(0).max(300),
+      /** fastest local deflation where a value was read (mmHg/s) */
+      deflationRate: z.number().min(0).max(100),
+      inflatedEnough: z.boolean(),
+      tooFast: z.boolean(),
+      tooSlow: z.boolean(),
+    })
+    .strict()
+    .optional(),
 };
 
 const ExaminePayload = z.object({ regionId: RegionId, maneuverId: ManeuverId, ...ExamTechnique });

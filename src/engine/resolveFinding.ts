@@ -68,6 +68,9 @@ export function resolveFinding(
       visual = variant.visual ?? visual;
     }
   }
+  // Korotkoff sounds default to the case's blood pressure
+  if (audio && "generator" in audio && audio.generator === "korotkoff")
+    audio = { ...audio, params: { ...audio.params, systolic: audio.params.systolic ?? kase.vitals.bpSystolic, diastolic: audio.params.diastolic ?? kase.vitals.bpDiastolic } };
   return {
     findingText: fillVitals(text, kase.vitals),
     resolvedFrom: from,

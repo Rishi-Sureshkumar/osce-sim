@@ -9,6 +9,8 @@ export default defineConfig({
       "server-only": fileURLToPath(new URL("./tests/stubs/server-only.ts", import.meta.url)),
     },
   },
+  // tsconfig keeps JSX for Next ("preserve"); tests that render a component need the React 17+ runtime
+  esbuild: { jsx: "automatic" },
   test: {
     include: ["src/**/*.test.ts", "tests/**/*.test.ts"],
     environment: "node",

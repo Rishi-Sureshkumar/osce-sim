@@ -122,16 +122,6 @@
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:female:blood_pressure@arm_left",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
-   "id": "catalog-neg:female:blood_pressure@arm_right",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
    "id": "catalog-neg:female:bowel_sounds@abd_epigastric",
    "detail": "",
    "status": "PASS"
@@ -382,16 +372,6 @@
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:male:blood_pressure@arm_left",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
-   "id": "catalog-neg:male:blood_pressure@arm_right",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
    "id": "catalog-neg:male:bowel_sounds@abd_epigastric",
    "detail": "",
    "status": "PASS"
@@ -458,8 +438,8 @@
   },
   {
    "id": "catalog-neg:male:reflex_biceps@biceps_tendon_left",
-   "detail": "",
-   "status": "PASS"
+   "detail": "(neg) 2× the tolerance away still recorded the exam",
+   "status": "XFAIL"
   },
   {
    "id": "catalog-neg:male:reflex_biceps@biceps_tendon_right",
@@ -647,16 +627,6 @@
    "status": "PASS"
   },
   {
-   "id": "catalog-oracle:female:blood_pressure@arm_left",
-   "detail": "at the anatomical point (upper_arm_left): (b) placement → arm_left nothing (17.5 cm); (c) no examine for blood_pressure@arm_left (got none)",
-   "status": "XFAIL"
-  },
-  {
-   "id": "catalog-oracle:female:blood_pressure@arm_right",
-   "detail": "at the anatomical point (upper_arm_right): (b) placement → arm_right nothing (7.4 cm); (c) no examine for blood_pressure@arm_right (got none)",
-   "status": "XFAIL"
-  },
-  {
    "id": "catalog-oracle:female:bowel_sounds@abd_llq",
    "detail": "at the anatomical point (abd_llq): ",
    "status": "PASS"
@@ -675,16 +645,6 @@
    "id": "catalog-oracle:female:bowel_sounds@abd_ruq",
    "detail": "at the anatomical point (abd_ruq): ",
    "status": "PASS"
-  },
-  {
-   "id": "catalog-oracle:female:bp_cuff_placement@arm_left",
-   "detail": "at the anatomical point (upper_arm_left): (b) placement → arm_left nothing (17.7 cm); (c) no examine for bp_cuff_placement@arm_left (got none)",
-   "status": "XFAIL"
-  },
-  {
-   "id": "catalog-oracle:female:bp_cuff_placement@arm_right",
-   "detail": "at the anatomical point (upper_arm_right): (b) placement → arm_right nothing (7.4 cm); (c) no examine for bp_cuff_placement@arm_right (got none)",
-   "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:female:cn_ii_acuity@eye_left",
@@ -803,8 +763,8 @@
   },
   {
    "id": "catalog-oracle:female:reflex_biceps@biceps_tendon_left",
-   "detail": "at the anatomical point (biceps_tendon_left): (a) first hit is drape (roll-chest), not the patient",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (biceps_tendon_left): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:reflex_biceps@biceps_tendon_right",
@@ -1032,16 +992,6 @@
    "status": "PASS"
   },
   {
-   "id": "catalog-oracle:male:blood_pressure@arm_left",
-   "detail": "at the anatomical point (upper_arm_left): (b) placement → arm_left nothing (15.2 cm); (c) no examine for blood_pressure@arm_left (got none)",
-   "status": "XFAIL"
-  },
-  {
-   "id": "catalog-oracle:male:blood_pressure@arm_right",
-   "detail": "at the anatomical point (upper_arm_right): (b) placement → arm_right near (6.1 cm); (c) no examine for blood_pressure@arm_right (got none)",
-   "status": "XFAIL"
-  },
-  {
    "id": "catalog-oracle:male:bowel_sounds@abd_llq",
    "detail": "at the anatomical point (abd_llq): ",
    "status": "PASS"
@@ -1060,16 +1010,6 @@
    "id": "catalog-oracle:male:bowel_sounds@abd_ruq",
    "detail": "at the anatomical point (abd_ruq): ",
    "status": "PASS"
-  },
-  {
-   "id": "catalog-oracle:male:bp_cuff_placement@arm_left",
-   "detail": "at the anatomical point (upper_arm_left): (b) placement → arm_left nothing (15.2 cm); (c) no examine for bp_cuff_placement@arm_left (got none)",
-   "status": "XFAIL"
-  },
-  {
-   "id": "catalog-oracle:male:bp_cuff_placement@arm_right",
-   "detail": "at the anatomical point (upper_arm_right): (b) placement → arm_right near (6.1 cm); (c) no examine for bp_cuff_placement@arm_right (got none)",
-   "status": "XFAIL"
   },
   {
    "id": "catalog-oracle:male:cn_ii_acuity@eye_left",
@@ -1627,16 +1567,6 @@
    "status": "XFAIL"
   },
   {
-   "id": "catalog:female:blood_pressure@arm_left",
-   "detail": "(a) first hit is drape (fold-chest), not the patient",
-   "status": "XFAIL"
-  },
-  {
-   "id": "catalog:female:blood_pressure@arm_right",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
    "id": "catalog:female:bowel_sounds@abd_epigastric",
    "detail": "",
    "status": "PASS"
@@ -1663,8 +1593,8 @@
   },
   {
    "id": "catalog:female:bp_arm_support@arm_left",
-   "detail": "(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:bp_arm_support@arm_right",
@@ -1672,12 +1602,32 @@
    "status": "PASS"
   },
   {
+   "id": "catalog:female:bp_arm_support@upper_arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bp_arm_support@upper_arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
    "id": "catalog:female:bp_cuff_placement@arm_left",
-   "detail": "(a) first hit is drape (roll-chest), not the patient",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:bp_cuff_placement@arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bp_cuff_placement@upper_arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:bp_cuff_placement@upper_arm_right",
    "detail": "",
    "status": "PASS"
   },
@@ -1958,7 +1908,7 @@
   },
   {
    "id": "catalog:female:elbow_inspection@elbow_left",
-   "detail": "(b) the click resolved to precordium_wall; (b) the maneuver menu did not open",
+   "detail": "(b) the click resolved to upper_arm_left; (b) elbow_inspection is not in the menu for this region",
    "status": "XFAIL"
   },
   {
@@ -1968,7 +1918,7 @@
   },
   {
    "id": "catalog:female:elbow_palpation@elbow_left",
-   "detail": "(b) the click resolved to precordium_wall; (b) the maneuver menu did not open",
+   "detail": "(b) the click resolved to upper_arm_left; (b) elbow_palpation is not in the menu for this region",
    "status": "XFAIL"
   },
   {
@@ -1978,7 +1928,7 @@
   },
   {
    "id": "catalog:female:elbow_rom@elbow_left",
-   "detail": "(b) the click resolved to precordium_wall; (b) the maneuver menu did not open",
+   "detail": "(b) the click resolved to upper_arm_left; (b) elbow_rom is not in the menu for this region",
    "status": "XFAIL"
   },
   {
@@ -2358,8 +2308,8 @@
   },
   {
    "id": "catalog:female:peripheral_pulses@arm_left",
-   "detail": "(a) first hit is drape (fold-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:peripheral_pulses@arm_right",
@@ -2473,8 +2423,8 @@
   },
   {
    "id": "catalog:female:reflex_biceps@biceps_tendon_left",
-   "detail": "(a) first hit is drape (fold-chest), not the patient",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:reflex_biceps@biceps_tendon_right",
@@ -2738,7 +2688,7 @@
   },
   {
    "id": "catalog:female:strength_c5_6_elbow_flexion@elbow_left",
-   "detail": "(b) the click resolved to precordium_wall; (b) the maneuver menu did not open",
+   "detail": "(b) the click resolved to upper_arm_left; (b) strength_c5_6_elbow_flexion is not in the menu for this region",
    "status": "XFAIL"
   },
   {
@@ -2753,7 +2703,7 @@
   },
   {
    "id": "catalog:female:strength_c5_7_elbow_extension@elbow_left",
-   "detail": "(b) the click resolved to precordium_wall; (b) the maneuver menu did not open",
+   "detail": "(b) the click resolved to upper_arm_left; (b) strength_c5_7_elbow_extension is not in the menu for this region",
    "status": "XFAIL"
   },
   {
@@ -3377,16 +3327,6 @@
    "status": "PASS"
   },
   {
-   "id": "catalog:male:blood_pressure@arm_left",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
-   "id": "catalog:male:blood_pressure@arm_right",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
    "id": "catalog:male:bowel_sounds@abd_epigastric",
    "detail": "",
    "status": "PASS"
@@ -3422,12 +3362,32 @@
    "status": "PASS"
   },
   {
+   "id": "catalog:male:bp_arm_support@upper_arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bp_arm_support@upper_arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
    "id": "catalog:male:bp_cuff_placement@arm_left",
    "detail": "",
    "status": "PASS"
   },
   {
    "id": "catalog:male:bp_cuff_placement@arm_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bp_cuff_placement@upper_arm_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:bp_cuff_placement@upper_arm_right",
    "detail": "",
    "status": "PASS"
   },
@@ -3708,8 +3668,8 @@
   },
   {
    "id": "catalog:male:elbow_inspection@elbow_left",
-   "detail": "(b) the click resolved to breast_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:elbow_inspection@elbow_right",
@@ -3718,8 +3678,8 @@
   },
   {
    "id": "catalog:male:elbow_palpation@elbow_left",
-   "detail": "(b) the click resolved to breast_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:elbow_palpation@elbow_right",
@@ -3728,8 +3688,8 @@
   },
   {
    "id": "catalog:male:elbow_rom@elbow_left",
-   "detail": "(b) the click resolved to breast_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:elbow_rom@elbow_right",
@@ -4488,8 +4448,8 @@
   },
   {
    "id": "catalog:male:strength_c5_6_elbow_flexion@elbow_left",
-   "detail": "(b) the click resolved to breast_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:strength_c5_6_elbow_flexion@elbow_right",
@@ -4503,8 +4463,8 @@
   },
   {
    "id": "catalog:male:strength_c5_7_elbow_extension@elbow_left",
-   "detail": "(b) the click resolved to breast_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:strength_c5_7_elbow_extension@elbow_right",
