@@ -477,7 +477,7 @@ M6  UI polish
 | M2 | Bug fixes 1–10 | done: nine fixed with proofs in qa/regressions (plus begin-race and the M2 review findings); bug 6 (legs through the drapes) belongs to M3 and stays open; no M2 xfail left; catalog 950 checks (911 pass, 39 xfail owned by M3/M6, 0 fail); anchors 1810 pass / 14 xfail (M3); 207 screenshots reviewed (qa/REVIEW.md, no open M2 defect); unit 330/330, e2e 13/13. The full `npm run qa` re-run was skipped: hackathon scope (see below) |
 | M3 | Models, drapes, room | deferred (hackathon scope) |
 | M4 | Hide findings and mistake alerts | done (hackathon scope): findings display chosen at start (CasePicker; fixed in `session.settings` and the session_start payload); in hide mode an exam with a sound or visual shows only what was done (`doneText`) and the student writes an `interpretation`, while text-only findings are still shown; neutral captions; results and coach pages gain Recognition (informational word match, `src/engine/recognition.ts`) and Mistakes sections; 5 global mistake rules in `content/mistakes.json` (same rule language as mark sheets, `src/engine/mistakes.ts`), alerted with a chime in practice and logged silently in exam; V-JUSTIFY fixed (diagnosis support counts only findings elicited in the encounter). Not built: new stimuli (percussion, voice, pit dent), `qa:stimuli`, idle-exposure rules, per-anchor badges (alerts sit above Findings). Unit 344/344, e2e smoke + hide-mistakes + dialogs + regressions green |
-| M5 | Three new cases | planned |
+| M5 | Three new cases | done (hackathon scope: two cases): `s1-radiculopathy-01` and `aortic-stenosis-01`, each written by an author agent, checked by an adversarial clinical reviewer (all must-fix items applied) and a blind 60-question chat fixture (S1 98%+, AS 96.7%); `complete-s1` / `complete-as` e2e play each case to a credited note with off-host requests blocked. Shared additions: dermatome sensation with a cotton swab and a pin (medial leg, foot dorsum, lateral foot), soft S2 and late-peaking ejection murmurs audible (`s2Intensity`, `MurmurSpec.peak`), "intact / preserved / symmetric" negate a finding in note grading. Not built: the pneumonia case, percussion and voice sounds, spoken patient responses (`response.say` is in the data but not shown) |
 | M6 | UI polish | deferred (hackathon scope) |
 
 ## Assets and sources
@@ -508,6 +508,11 @@ M6  UI polish
 19. (M1) "If relevant" items (sexual or travel history) need a per-case decision: `itemsNotApplicable` now switches an item off for a case (HF: sexual history). Who decides relevance for each case?
 20. (M1) The history bank answers generic yes/no questions with the case's `negativeReply`; it only answers when nothing in the case matches. Should every new case review the bank topics it leaves unanswered (`notRelevantTopics`)?
 21. (M1) No provider abstraction (`providers/anthropic-stub.ts`) was built: nothing plugs in beside the deterministic layer, and a stub would be dead code. Revisit if an external model is ever allowed back for advisory use.
+
+22. (M5) Note grading can't tell side or level apart by similarity: "Right S1 radiculopathy" and "positive SLR on the right" are credited on a left-sided case, and a pen item can't carry counter-examples (`MatchSpec.counterExemplars` isn't passed to generated pen items). Add `side` / `excludes` to penKey items?
+23. (M5) Case ids reach the browser (`toPublicCase`) and name the diagnosis (`aortic-stenosis-01`). Use opaque ids for cases?
+24. (M5) `src/lang/split.ts` splits "weakness in your arms or legs?" into a fragment ("any legs") that gets the bank's "No". Only split on "or" between whole questions?
+25. (M5) Maneuvers without `penTerms` (straight_leg_raise, reflexes, strength, gait, FABER) can't be flagged by "reports only exam findings that were performed".
 
 ### Hackathon scope (decided after M2)
 The project is for a two-day hackathon, so the remaining work is cut to what shows in a demo, with light
