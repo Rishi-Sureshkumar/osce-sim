@@ -15,7 +15,7 @@ import { TOOL_TABLE_POS, TOOL_TABLE_TOP } from "./room/ToolTable";
 import { ROOM } from "./room/ExamRoom";
 
 export type FocusShotId = Exclude<RegionGroup, "whole" | "neuro">;
-export type ShotId = "corridor" | "overview" | "sink" | "tool_table" | "seated" | FocusShotId | "face" | "ear_left" | "ear_right";
+export type ShotId = "corridor" | "overview" | "sink" | "tool_table" | "seated" | FocusShotId | "face" | "ear_left" | "ear_right" | "ankle_left" | "ankle_right";
 
 type Framing =
   /** fixed camera in the room */
@@ -49,7 +49,7 @@ export interface Shot {
 }
 
 const FOCUS: FocusShotId[] = ["head_neck", "chest_front", "chest_back", "abdomen", "arms", "hands", "legs", "feet"];
-const ROOM_SHOTS: ShotId[] = ["overview", "sink", "tool_table", "seated", ...FOCUS, "face", "ear_left", "ear_right"];
+const ROOM_SHOTS: ShotId[] = ["overview", "sink", "tool_table", "seated", ...FOCUS, "face", "ear_left", "ear_right", "ankle_left", "ankle_right"];
 const look = (yawDeg: number, zoomMin = 0.8, zoomMax = 1.25) => ({ yawDeg, zoomMin, zoomMax });
 
 export const SHOTS: Record<ShotId, Shot> = {
@@ -193,6 +193,26 @@ export const SHOTS: Record<ShotId, Shot> = {
     freeLook: look(35, 0.7, 1.3),
     transitions: ROOM_SHOTS,
   },
+  // the back of each ankle (the Achilles tendon), from the side and a little behind, on the shank's
+  // own axes: legs hanging over the table's end, the front views see only the shins
+  ankle_left: {
+    id: "ankle_left",
+    label: "Left ankle (back)",
+    parent: "feet",
+    framing: { kind: "patient", on: [{ anchor: "achilles_left" }], normalFrom: { anchor: "achilles_left" }, forwardBone: "lowerleg02_L", forwardAxis: [0.8, 0, -0.6], distance: 0.45 },
+    fov: 40,
+    freeLook: look(30, 0.7, 1.3),
+    transitions: ROOM_SHOTS,
+  },
+  ankle_right: {
+    id: "ankle_right",
+    label: "Right ankle (back)",
+    parent: "feet",
+    framing: { kind: "patient", on: [{ anchor: "achilles_right" }], normalFrom: { anchor: "achilles_right" }, forwardBone: "lowerleg02_R", forwardAxis: [-0.8, 0, -0.6], distance: 0.45 },
+    fov: 40,
+    freeLook: look(30, 0.7, 1.3),
+    transitions: ROOM_SHOTS,
+  },
   feet: {
     id: "feet",
     label: "Feet",
@@ -247,6 +267,11 @@ const REGION_SHOT: Record<string, ShotId> = {
   ln_post_auricular: "ear_right",
   ln_occipital: "ear_right",
   ln_pre_auricular: "ear_left",
+  // the back of the limb: the Achilles from beside the ankle; the triceps from behind (sitting at the table's end)
+  achilles_left: "ankle_left",
+  achilles_right: "ankle_right",
+  triceps_tendon_left: "chest_back",
+  triceps_tendon_right: "chest_back",
   scalp: "ear_right",
   eye_left: "face",
   eye_right: "face",

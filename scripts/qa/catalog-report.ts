@@ -10,6 +10,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { classify, type XfailEntry } from "./lib/xfail";
+import { buildCatalogPlan } from "../../e2e/qa/catalogPlan";
 
 const ROOT = process.cwd();
 const DIR = path.join(ROOT, "test-results/catalog");
@@ -59,6 +60,9 @@ function main() {
   const file = path.join(ROOT, "qa/catalog.json");
   const merged = new Map<string, Row>((fs.existsSync(file) ? (JSON.parse(fs.readFileSync(file, "utf8")) as { results: Row[] }).results : []).map((r) => [r.id, r]));
   for (const r of rows) merged.set(r.id, r);
+  // drop rows for entries the current catalog no longer has (a maneuver moved region, etc.)
+  const planned = new Set(buildCatalogPlan().map((e) => e.id));
+  for (const id of [...merged.keys()]) if (!planned.has(id.replace(/^catalog-(oracle|neg):/, "catalog:"))) merged.delete(id);
   // statuses against the current qa/xfail.json (a kept row may predate an entry, or its removal)
   const reclassified = classify([...merged.values()].map((r) => ({ id: r.id, pass: r.status === "PASS" || r.status === "XPASS", detail: r.detail }))).results.map(({ xfail: _x, pass: _p, ...r }) => r as Row);
   merged.clear();

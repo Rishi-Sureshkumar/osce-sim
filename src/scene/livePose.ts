@@ -4,7 +4,7 @@
  * state (blink timer, eased look) and calls this every frame.
  */
 import type { Position } from "@/domain/schemas";
-import { jerkDelta } from "./animation/reflex";
+import { jerkDelta, type Jerk } from "./animation/reflex";
 import { poseRotations, type BoneRotations } from "./rig";
 
 const DEG = Math.PI / 180;
@@ -21,7 +21,7 @@ export interface LiveInput {
   blink: number;
   /** eased head turn toward the speaker (radians) */
   look: { yaw: number; pitch: number };
-  jerk?: { bone: string; amount: number; ageSec: number } | null;
+  jerk?: (Jerk & { ageSec: number }) | null;
   /** hold the head still (eye exam): no idle sway, no turn toward the speaker */
   steady?: boolean;
 }
@@ -55,6 +55,6 @@ export function liveRotations(i: LiveInput): BoneRotations {
     add("neck03", i.look.pitch * 0.5, i.look.yaw * 0.5);
     add("head", i.look.pitch * 0.5, i.look.yaw * 0.5);
   }
-  if (i.jerk) add(i.jerk.bone, jerkDelta(i.jerk.amount, i.jerk.ageSec));
+  if (i.jerk) add(i.jerk.bone, jerkDelta(i.jerk, i.jerk.ageSec));
   return rot;
 }

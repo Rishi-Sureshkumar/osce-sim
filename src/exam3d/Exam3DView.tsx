@@ -28,7 +28,7 @@ import { Dialog } from "@/components/ui/Overlay";
 import { MIN_LISTEN_MS, regionsForTool, sequenceProgress } from "./tools/toolLogic";
 import { backgroundKind, contactOutcome, contactSound, recordsFinding } from "./tools/contact";
 import { decidePlacement, holdCandidate, holdKey, penlightSweeper, type PenlightSweep, type RememberedHold, type SweepEvent } from "./tools/decide";
-import { JERK_BONE } from "@/scene/animation/reflex";
+import { REFLEX_JERK, type Jerk } from "@/scene/animation/reflex";
 import { QA, configureQa, qaDelay, recordDecision } from "./qa";
 import { ToolHud, itemInHand, pickFromTable, toolModeOf, type ToolState } from "./tools/ToolTray";
 
@@ -140,7 +140,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
   const [sweeping, setSweeping] = useState(false);
   const eyeLight = useRef<Record<string, { direct: number; consensual: number }>>({});
   const relaxPupils = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [jerk, setJerk] = useState<{ bone: string; amount: number; at: number } | null>(null);
+  const [jerk, setJerk] = useState<(Jerk & { at: number }) | null>(null);
   const [swingAt, setSwingAt] = useState<number | null>(null);
   const [sequence, setSequence] = useState<Sequence | null>(null);
   const [now, setNow] = useState(() => performance.now());
@@ -482,7 +482,15 @@ export default function Exam3DView(props: Exam3DViewProps) {
       }
       playTone(toneSpec, m.interaction !== "sequence");
     }
-    if (tool === "reflex_hammer" && JERK_BONE[s.regionId]) setJerk({ bone: JERK_BONE[s.regionId]!, amount: result?.visual?.reflex ?? 2, at: performance.now() / 1000 });
+    // a tendon tap (or a clonus test) moves its joint: the right way, by the reflex grade, with any
+    // clonus; muted when the limb isn't positioned for the reflex (e.g. the knee jerk lying flat)
+    const joint = REFLEX_JERK[s.regionId];
+    const visual = result?.visual;
+    if (joint && (tool === "reflex_hammer" || visual?.clonusBeats)) {
+      const muted = !!m.requiresPositioning?.length && !m.requiresPositioning.includes(state.position);
+      setJerk({ ...joint, grade: tool === "reflex_hammer" ? (visual?.reflex ?? 2) : 0, ...(visual?.clonusBeats ? { clonusBeats: visual.clonusBeats } : {}), muted, at: performance.now() / 1000 });
+      if (muted) setCaption("Hard to see the reflex with the limb positioned like this.");
+    }
   };
 
   // ------------------------------------------------------------------ penlight

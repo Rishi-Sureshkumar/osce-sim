@@ -187,52 +187,52 @@
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:female:reflex_achilles@ankle_left",
+   "id": "catalog-neg:female:reflex_achilles@achilles_left",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:female:reflex_achilles@ankle_right",
+   "id": "catalog-neg:female:reflex_achilles@achilles_right",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:female:reflex_biceps@elbow_left",
+   "id": "catalog-neg:female:reflex_biceps@biceps_tendon_left",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:female:reflex_biceps@elbow_right",
+   "id": "catalog-neg:female:reflex_biceps@biceps_tendon_right",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:female:reflex_brachioradialis@wrist_left",
+   "id": "catalog-neg:female:reflex_brachioradialis@brachioradialis_left",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:female:reflex_brachioradialis@wrist_right",
+   "id": "catalog-neg:female:reflex_brachioradialis@brachioradialis_right",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:female:reflex_patellar@knee_left",
+   "id": "catalog-neg:female:reflex_patellar@patellar_tendon_left",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:female:reflex_patellar@knee_right",
+   "id": "catalog-neg:female:reflex_patellar@patellar_tendon_right",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:female:reflex_triceps@elbow_left",
+   "id": "catalog-neg:female:reflex_triceps@triceps_tendon_left",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:female:reflex_triceps@elbow_right",
+   "id": "catalog-neg:female:reflex_triceps@triceps_tendon_right",
    "detail": "",
    "status": "PASS"
   },
@@ -447,52 +447,52 @@
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:male:reflex_achilles@ankle_left",
+   "id": "catalog-neg:male:reflex_achilles@achilles_left",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:male:reflex_achilles@ankle_right",
+   "id": "catalog-neg:male:reflex_achilles@achilles_right",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:male:reflex_biceps@elbow_left",
+   "id": "catalog-neg:male:reflex_biceps@biceps_tendon_left",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:male:reflex_biceps@elbow_right",
+   "id": "catalog-neg:male:reflex_biceps@biceps_tendon_right",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:male:reflex_brachioradialis@wrist_left",
+   "id": "catalog-neg:male:reflex_brachioradialis@brachioradialis_left",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:male:reflex_brachioradialis@wrist_right",
+   "id": "catalog-neg:male:reflex_brachioradialis@brachioradialis_right",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:male:reflex_patellar@knee_left",
+   "id": "catalog-neg:male:reflex_patellar@patellar_tendon_left",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:male:reflex_patellar@knee_right",
+   "id": "catalog-neg:male:reflex_patellar@patellar_tendon_right",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:male:reflex_triceps@elbow_left",
+   "id": "catalog-neg:male:reflex_triceps@triceps_tendon_left",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog-neg:male:reflex_triceps@elbow_right",
+   "id": "catalog-neg:male:reflex_triceps@triceps_tendon_right",
    "detail": "",
    "status": "PASS"
   },
@@ -599,6 +599,16 @@
   {
    "id": "catalog-oracle:female:abd_light_palpation@abd_ruq",
    "detail": "at the anatomical point (abd_ruq): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:ankle_clonus@achilles_left",
+   "detail": "at the anatomical point (achilles_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:ankle_clonus@achilles_right",
+   "detail": "at the anatomical point (achilles_right): ",
    "status": "PASS"
   },
   {
@@ -782,54 +792,54 @@
    "status": "PASS"
   },
   {
-   "id": "catalog-oracle:female:reflex_achilles@ankle_left",
-   "detail": "at the anatomical point (achilles_left): (b) placement → ankle_left nothing (8.0 cm); (c) no examine for reflex_achilles@ankle_left (got none)",
+   "id": "catalog-oracle:female:reflex_achilles@achilles_left",
+   "detail": "at the anatomical point (achilles_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:reflex_achilles@achilles_right",
+   "detail": "at the anatomical point (achilles_right): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:female:reflex_biceps@biceps_tendon_left",
+   "detail": "at the anatomical point (biceps_tendon_left): (a) first hit is drape (roll-chest), not the patient",
    "status": "XFAIL"
   },
   {
-   "id": "catalog-oracle:female:reflex_achilles@ankle_right",
-   "detail": "at the anatomical point (achilles_right): (b) placement → ankle_right nothing (8.4 cm); (c) no examine for reflex_achilles@ankle_right (got none)",
-   "status": "XFAIL"
+   "id": "catalog-oracle:female:reflex_biceps@biceps_tendon_right",
+   "detail": "at the anatomical point (biceps_tendon_right): ",
+   "status": "PASS"
   },
   {
-   "id": "catalog-oracle:female:reflex_biceps@elbow_left",
-   "detail": "at the anatomical point (biceps_tendon_left): (a) first hit is drape (fold-chest), not the patient; (b) placement → elbow_left nothing (7.9 cm); (c) no examine for reflex_biceps@elbow_left (got none)",
-   "status": "XFAIL"
-  },
-  {
-   "id": "catalog-oracle:female:reflex_biceps@elbow_right",
-   "detail": "at the anatomical point (biceps_tendon_right): (b) placement → elbow_right nothing (7.9 cm); (c) no examine for reflex_biceps@elbow_right (got none)",
-   "status": "XFAIL"
-  },
-  {
-   "id": "catalog-oracle:female:reflex_brachioradialis@wrist_left",
+   "id": "catalog-oracle:female:reflex_brachioradialis@brachioradialis_left",
    "detail": "at the anatomical point (brachioradialis_left): ",
    "status": "PASS"
   },
   {
-   "id": "catalog-oracle:female:reflex_brachioradialis@wrist_right",
+   "id": "catalog-oracle:female:reflex_brachioradialis@brachioradialis_right",
    "detail": "at the anatomical point (brachioradialis_right): ",
    "status": "PASS"
   },
   {
-   "id": "catalog-oracle:female:reflex_patellar@knee_left",
-   "detail": "at the anatomical point (patellar_tendon_left): (b) placement → knee_left nothing (9.2 cm); (c) no examine for reflex_patellar@knee_left (got none)",
-   "status": "XFAIL"
+   "id": "catalog-oracle:female:reflex_patellar@patellar_tendon_left",
+   "detail": "at the anatomical point (patellar_tendon_left): ",
+   "status": "PASS"
   },
   {
-   "id": "catalog-oracle:female:reflex_patellar@knee_right",
-   "detail": "at the anatomical point (patellar_tendon_right): (b) placement → knee_right nothing (9.2 cm); (c) no examine for reflex_patellar@knee_right (got none)",
-   "status": "XFAIL"
+   "id": "catalog-oracle:female:reflex_patellar@patellar_tendon_right",
+   "detail": "at the anatomical point (patellar_tendon_right): ",
+   "status": "PASS"
   },
   {
-   "id": "catalog-oracle:female:reflex_triceps@elbow_left",
-   "detail": "at the anatomical point (triceps_tendon_left): (b) placement → wrist_left nothing (16.7 cm); (c) no examine for reflex_triceps@elbow_left (got none)",
-   "status": "XFAIL"
+   "id": "catalog-oracle:female:reflex_triceps@triceps_tendon_left",
+   "detail": "at the anatomical point (triceps_tendon_left): ",
+   "status": "PASS"
   },
   {
-   "id": "catalog-oracle:female:reflex_triceps@elbow_right",
-   "detail": "at the anatomical point (triceps_tendon_right): (b) placement → elbow_right near (3.5 cm); (c) no examine for reflex_triceps@elbow_right (got none)",
-   "status": "XFAIL"
+   "id": "catalog-oracle:female:reflex_triceps@triceps_tendon_right",
+   "detail": "at the anatomical point (triceps_tendon_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:rinne_test@ear_left",
@@ -977,6 +987,16 @@
    "status": "PASS"
   },
   {
+   "id": "catalog-oracle:male:ankle_clonus@achilles_left",
+   "detail": "at the anatomical point (achilles_left): ",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog-oracle:male:ankle_clonus@achilles_right",
+   "detail": "at the anatomical point (achilles_right): ",
+   "status": "PASS"
+  },
+  {
    "id": "catalog-oracle:male:auscultate_heart_bell@cardiac_mitral",
    "detail": "at the anatomical point (cardiac_mitral): (a) first hit is drape (roll-chest), not the patient",
    "status": "XFAIL"
@@ -998,7 +1018,7 @@
   },
   {
    "id": "catalog-oracle:male:auscultate_heart_diaphragm@cardiac_mitral",
-   "detail": "at the anatomical point (cardiac_mitral): (a) first hit is drape (roll-chest), not the patient",
+   "detail": "at the anatomical point (cardiac_mitral): error: apiRequestContext.get: read ECONNRESET",
    "status": "XFAIL"
   },
   {
@@ -1157,54 +1177,54 @@
    "status": "PASS"
   },
   {
-   "id": "catalog-oracle:male:reflex_achilles@ankle_left",
-   "detail": "at the anatomical point (achilles_left): (b) placement → ankle_left nothing (8.7 cm); (c) no examine for reflex_achilles@ankle_left (got none)",
-   "status": "XFAIL"
+   "id": "catalog-oracle:male:reflex_achilles@achilles_left",
+   "detail": "at the anatomical point (achilles_left): ",
+   "status": "PASS"
   },
   {
-   "id": "catalog-oracle:male:reflex_achilles@ankle_right",
-   "detail": "at the anatomical point (achilles_right): (b) placement → foot_right nothing (11.0 cm); (c) no examine for reflex_achilles@ankle_right (got none)",
-   "status": "XFAIL"
+   "id": "catalog-oracle:male:reflex_achilles@achilles_right",
+   "detail": "at the anatomical point (achilles_right): ",
+   "status": "PASS"
   },
   {
-   "id": "catalog-oracle:male:reflex_biceps@elbow_left",
-   "detail": "at the anatomical point (biceps_tendon_left): (b) placement → elbow_left nothing (8.5 cm); (c) no examine for reflex_biceps@elbow_left (got none)",
-   "status": "XFAIL"
+   "id": "catalog-oracle:male:reflex_biceps@biceps_tendon_left",
+   "detail": "at the anatomical point (biceps_tendon_left): ",
+   "status": "PASS"
   },
   {
-   "id": "catalog-oracle:male:reflex_biceps@elbow_right",
-   "detail": "at the anatomical point (biceps_tendon_right): (b) placement → elbow_right nothing (8.2 cm); (c) no examine for reflex_biceps@elbow_right (got none)",
-   "status": "XFAIL"
+   "id": "catalog-oracle:male:reflex_biceps@biceps_tendon_right",
+   "detail": "at the anatomical point (biceps_tendon_right): ",
+   "status": "PASS"
   },
   {
-   "id": "catalog-oracle:male:reflex_brachioradialis@wrist_left",
+   "id": "catalog-oracle:male:reflex_brachioradialis@brachioradialis_left",
    "detail": "at the anatomical point (brachioradialis_left): ",
    "status": "PASS"
   },
   {
-   "id": "catalog-oracle:male:reflex_brachioradialis@wrist_right",
+   "id": "catalog-oracle:male:reflex_brachioradialis@brachioradialis_right",
    "detail": "at the anatomical point (brachioradialis_right): ",
    "status": "PASS"
   },
   {
-   "id": "catalog-oracle:male:reflex_patellar@knee_left",
-   "detail": "at the anatomical point (patellar_tendon_left): (b) placement → knee_left nothing (10.3 cm); (c) no examine for reflex_patellar@knee_left (got none)",
-   "status": "XFAIL"
+   "id": "catalog-oracle:male:reflex_patellar@patellar_tendon_left",
+   "detail": "at the anatomical point (patellar_tendon_left): ",
+   "status": "PASS"
   },
   {
-   "id": "catalog-oracle:male:reflex_patellar@knee_right",
-   "detail": "at the anatomical point (patellar_tendon_right): (b) placement → knee_right nothing (10.3 cm); (c) no examine for reflex_patellar@knee_right (got none)",
-   "status": "XFAIL"
+   "id": "catalog-oracle:male:reflex_patellar@patellar_tendon_right",
+   "detail": "at the anatomical point (patellar_tendon_right): ",
+   "status": "PASS"
   },
   {
-   "id": "catalog-oracle:male:reflex_triceps@elbow_left",
-   "detail": "at the anatomical point (triceps_tendon_left): (a) first hit is drape (fold-chest), not the patient; (b) placement → wrist_left nothing (17.3 cm); (c) no examine for reflex_triceps@elbow_left (got none)",
-   "status": "XFAIL"
+   "id": "catalog-oracle:male:reflex_triceps@triceps_tendon_left",
+   "detail": "at the anatomical point (triceps_tendon_left): ",
+   "status": "PASS"
   },
   {
-   "id": "catalog-oracle:male:reflex_triceps@elbow_right",
-   "detail": "at the anatomical point (triceps_tendon_right): (a) first hit is bed (exam-table), not the patient; (b) the placement never reached the patient; (c) no examine for reflex_triceps@elbow_right (got none)",
-   "status": "XFAIL"
+   "id": "catalog-oracle:male:reflex_triceps@triceps_tendon_right",
+   "detail": "at the anatomical point (triceps_tendon_right): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:male:rinne_test@ear_left",
@@ -1368,6 +1388,21 @@
   },
   {
    "id": "catalog:female:abd_light_palpation@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_clonus@achilles_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_clonus@achilles_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:ankle_clonus@neuro_reflexes",
    "detail": "",
    "status": "PASS"
   },
@@ -2422,12 +2457,12 @@
    "status": "PASS"
   },
   {
-   "id": "catalog:female:reflex_achilles@ankle_left",
+   "id": "catalog:female:reflex_achilles@achilles_left",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog:female:reflex_achilles@ankle_right",
+   "id": "catalog:female:reflex_achilles@achilles_right",
    "detail": "",
    "status": "PASS"
   },
@@ -2437,17 +2472,27 @@
    "status": "PASS"
   },
   {
-   "id": "catalog:female:reflex_biceps@elbow_left",
-   "detail": "(b) placement → wrist_left nothing (19.0 cm); (c) no examine for reflex_biceps@elbow_left (got none)",
+   "id": "catalog:female:reflex_biceps@biceps_tendon_left",
+   "detail": "(a) first hit is drape (fold-chest), not the patient",
    "status": "XFAIL"
   },
   {
-   "id": "catalog:female:reflex_biceps@elbow_right",
-   "detail": "(b) placement → elbow_right near (4.4 cm); (c) no examine for reflex_biceps@elbow_right (got none)",
-   "status": "XFAIL"
+   "id": "catalog:female:reflex_biceps@biceps_tendon_right",
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:reflex_biceps@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_brachioradialis@brachioradialis_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_brachioradialis@brachioradialis_right",
    "detail": "",
    "status": "PASS"
   },
@@ -2457,42 +2502,32 @@
    "status": "PASS"
   },
   {
-   "id": "catalog:female:reflex_brachioradialis@wrist_left",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
-   "id": "catalog:female:reflex_brachioradialis@wrist_right",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
-   "id": "catalog:female:reflex_patellar@knee_left",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
-   "id": "catalog:female:reflex_patellar@knee_right",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
    "id": "catalog:female:reflex_patellar@neuro_reflexes",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog:female:reflex_triceps@elbow_left",
-   "detail": "(b) placement → wrist_left nothing (19.0 cm); (c) no examine for reflex_triceps@elbow_left (got none)",
-   "status": "XFAIL"
+   "id": "catalog:female:reflex_patellar@patellar_tendon_left",
+   "detail": "",
+   "status": "PASS"
   },
   {
-   "id": "catalog:female:reflex_triceps@elbow_right",
-   "detail": "(b) placement → elbow_right near (4.4 cm); (c) no examine for reflex_triceps@elbow_right (got none)",
-   "status": "XFAIL"
+   "id": "catalog:female:reflex_patellar@patellar_tendon_right",
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:reflex_triceps@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_triceps@triceps_tendon_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:female:reflex_triceps@triceps_tendon_right",
    "detail": "",
    "status": "PASS"
   },
@@ -3103,6 +3138,21 @@
   },
   {
    "id": "catalog:male:abd_light_palpation@abd_ruq",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_clonus@achilles_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_clonus@achilles_right",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:ankle_clonus@neuro_reflexes",
    "detail": "",
    "status": "PASS"
   },
@@ -4157,14 +4207,14 @@
    "status": "PASS"
   },
   {
-   "id": "catalog:male:reflex_achilles@ankle_left",
+   "id": "catalog:male:reflex_achilles@achilles_left",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog:male:reflex_achilles@ankle_right",
-   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the placement never reached the patient; (c) no examine for reflex_achilles@ankle_right (got none)",
-   "status": "XFAIL"
+   "id": "catalog:male:reflex_achilles@achilles_right",
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:reflex_achilles@neuro_reflexes",
@@ -4172,17 +4222,27 @@
    "status": "PASS"
   },
   {
-   "id": "catalog:male:reflex_biceps@elbow_left",
-   "detail": "(b) placement → wrist_left nothing (18.7 cm); (c) no examine for reflex_biceps@elbow_left (got none)",
-   "status": "XFAIL"
+   "id": "catalog:male:reflex_biceps@biceps_tendon_left",
+   "detail": "",
+   "status": "PASS"
   },
   {
-   "id": "catalog:male:reflex_biceps@elbow_right",
-   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the placement never reached the patient; (c) no examine for reflex_biceps@elbow_right (got none)",
-   "status": "XFAIL"
+   "id": "catalog:male:reflex_biceps@biceps_tendon_right",
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:reflex_biceps@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_brachioradialis@brachioradialis_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_brachioradialis@brachioradialis_right",
    "detail": "",
    "status": "PASS"
   },
@@ -4192,42 +4252,32 @@
    "status": "PASS"
   },
   {
-   "id": "catalog:male:reflex_brachioradialis@wrist_left",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
-   "id": "catalog:male:reflex_brachioradialis@wrist_right",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
-   "id": "catalog:male:reflex_patellar@knee_left",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
-   "id": "catalog:male:reflex_patellar@knee_right",
-   "detail": "",
-   "status": "PASS"
-  },
-  {
    "id": "catalog:male:reflex_patellar@neuro_reflexes",
    "detail": "",
    "status": "PASS"
   },
   {
-   "id": "catalog:male:reflex_triceps@elbow_left",
-   "detail": "(b) placement → wrist_left nothing (18.7 cm); (c) no examine for reflex_triceps@elbow_left (got none)",
-   "status": "XFAIL"
+   "id": "catalog:male:reflex_patellar@patellar_tendon_left",
+   "detail": "",
+   "status": "PASS"
   },
   {
-   "id": "catalog:male:reflex_triceps@elbow_right",
-   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the placement never reached the patient; (c) no examine for reflex_triceps@elbow_right (got none)",
-   "status": "XFAIL"
+   "id": "catalog:male:reflex_patellar@patellar_tendon_right",
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:reflex_triceps@neuro_reflexes",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_triceps@triceps_tendon_left",
+   "detail": "",
+   "status": "PASS"
+  },
+  {
+   "id": "catalog:male:reflex_triceps@triceps_tendon_right",
    "detail": "",
    "status": "PASS"
   },

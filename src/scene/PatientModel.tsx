@@ -8,6 +8,7 @@ import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.j
 import type { DrapeZone, Position } from "@/domain/schemas";
 import { QA } from "@/exam3d/qa";
 import { liveRotations } from "./livePose";
+import type { Jerk } from "./animation/reflex";
 import { PATIENT_VARIANTS } from "./patientRig.generated";
 import { placement, rotationOf, type VariantId } from "./rig";
 
@@ -32,8 +33,8 @@ export interface PatientModelProps {
   quality: "high" | "low";
   /** animated head-section angle (degrees), shared with the table so posture follows it smoothly */
   angle?: { current: number };
-  /** a reflex jerk to animate: bone, size (grade), when (seconds, performance clock) */
-  jerk?: { bone: string; amount: number; at: number } | null;
+  /** a reflex jerk to animate, and when it was struck (seconds, performance clock) */
+  jerk?: (Jerk & { at: number }) | null;
 }
 
 /**
@@ -189,7 +190,7 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
       blink: blinkK,
       look: lk,
       steady: !!p.steadyHead,
-      jerk: p.jerk ? { bone: p.jerk.bone, amount: p.jerk.amount, ageSec: performance.now() / 1000 - p.jerk.at } : null,
+      jerk: p.jerk ? { ...p.jerk, ageSec: performance.now() / 1000 - p.jerk.at } : null,
     });
 
     // pupils ease toward their targets: constrict quickly (~0.15 s), widen slowly (~0.6 s)
@@ -246,7 +247,7 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
     for (const m of meshes.values()) m.raycast = () => undefined;
   }, [meshes]);
 
-  const rootMatrix = useMemo(() => placement(p.position), [p.position]);
+  const rootMatrix = useMemo(() => placement(p.position, p.variant), [p.position, p.variant]);
   useEffect(() => {
     const r = root.current;
     if (!r) return;

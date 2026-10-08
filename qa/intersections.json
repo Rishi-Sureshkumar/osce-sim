@@ -305,7 +305,7 @@
   {
    "id": "intersections:male:sitting_dangling:covered:bed",
    "status": "PASS",
-   "detail": "30 of 14517 skin vertices (0.21%, max 0.5%)"
+   "detail": "60 of 14517 skin vertices (0.41%, max 0.5%)"
   },
   {
    "id": "intersections:male:sitting_dangling:covered:gown",
@@ -315,12 +315,12 @@
   {
    "id": "intersections:male:sitting_dangling:covered:sheet",
    "status": "XFAIL",
-   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+   "detail": "390 of 14517 skin vertices (2.69%, max 0.5%)"
   },
   {
    "id": "intersections:male:sitting_dangling:chest-exposed:bed",
    "status": "PASS",
-   "detail": "30 of 14517 skin vertices (0.21%, max 0.5%)"
+   "detail": "60 of 14517 skin vertices (0.41%, max 0.5%)"
   },
   {
    "id": "intersections:male:sitting_dangling:chest-exposed:gown",
@@ -330,12 +330,12 @@
   {
    "id": "intersections:male:sitting_dangling:chest-exposed:sheet",
    "status": "XFAIL",
-   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+   "detail": "390 of 14517 skin vertices (2.69%, max 0.5%)"
   },
   {
    "id": "intersections:male:sitting_dangling:abdomen-exposed:bed",
    "status": "PASS",
-   "detail": "30 of 14517 skin vertices (0.21%, max 0.5%)"
+   "detail": "60 of 14517 skin vertices (0.41%, max 0.5%)"
   },
   {
    "id": "intersections:male:sitting_dangling:abdomen-exposed:gown",
@@ -345,12 +345,12 @@
   {
    "id": "intersections:male:sitting_dangling:abdomen-exposed:sheet",
    "status": "XFAIL",
-   "detail": "2198 of 14517 skin vertices (15.14%, max 0.5%)"
+   "detail": "390 of 14517 skin vertices (2.69%, max 0.5%)"
   },
   {
    "id": "intersections:male:sitting_dangling:legs-exposed:bed",
    "status": "PASS",
-   "detail": "30 of 14517 skin vertices (0.21%, max 0.5%)"
+   "detail": "60 of 14517 skin vertices (0.41%, max 0.5%)"
   },
   {
    "id": "intersections:male:sitting_dangling:legs-exposed:gown",
@@ -365,7 +365,7 @@
   {
    "id": "intersections:male:sitting_dangling:all-exposed:bed",
    "status": "PASS",
-   "detail": "30 of 14517 skin vertices (0.21%, max 0.5%)"
+   "detail": "60 of 14517 skin vertices (0.41%, max 0.5%)"
   },
   {
    "id": "intersections:male:sitting_dangling:all-exposed:gown",
@@ -380,12 +380,12 @@
   {
    "id": "intersections:male:left_lateral_decubitus:covered:bed",
    "status": "XFAIL",
-   "detail": "2316 of 14517 skin vertices (15.95%, max 0.5%)"
+   "detail": "277 of 14517 skin vertices (1.91%, max 0.5%)"
   },
   {
    "id": "intersections:male:left_lateral_decubitus:covered:gown",
    "status": "PASS",
-   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+   "detail": "3 of 14517 skin vertices (0.02%, max 0.5%)"
   },
   {
    "id": "intersections:male:left_lateral_decubitus:covered:sheet",
@@ -395,12 +395,12 @@
   {
    "id": "intersections:male:left_lateral_decubitus:chest-exposed:bed",
    "status": "XFAIL",
-   "detail": "2316 of 14517 skin vertices (15.95%, max 0.5%)"
+   "detail": "277 of 14517 skin vertices (1.91%, max 0.5%)"
   },
   {
    "id": "intersections:male:left_lateral_decubitus:chest-exposed:gown",
    "status": "PASS",
-   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+   "detail": "1 of 14517 skin vertices (0.01%, max 0.5%)"
   },
   {
    "id": "intersections:male:left_lateral_decubitus:chest-exposed:sheet",
@@ -410,12 +410,12 @@
   {
    "id": "intersections:male:left_lateral_decubitus:abdomen-exposed:bed",
    "status": "XFAIL",
-   "detail": "2316 of 14517 skin vertices (15.95%, max 0.5%)"
+   "detail": "277 of 14517 skin vertices (1.91%, max 0.5%)"
   },
   {
    "id": "intersections:male:left_lateral_decubitus:abdomen-exposed:gown",
    "status": "PASS",
-   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+   "detail": "2 of 14517 skin vertices (0.01%, max 0.5%)"
   },
   {
    "id": "intersections:male:left_lateral_decubitus:abdomen-exposed:sheet",
@@ -425,12 +425,12 @@
   {
    "id": "intersections:male:left_lateral_decubitus:legs-exposed:bed",
    "status": "XFAIL",
-   "detail": "2316 of 14517 skin vertices (15.95%, max 0.5%)"
+   "detail": "277 of 14517 skin vertices (1.91%, max 0.5%)"
   },
   {
    "id": "intersections:male:left_lateral_decubitus:legs-exposed:gown",
    "status": "PASS",
-   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+   "detail": "3 of 14517 skin vertices (0.02%, max 0.5%)"
   },
   {
    "id": "intersections:male:left_lateral_decubitus:legs-exposed:sheet",
@@ -440,7 +440,7 @@
   {
    "id": "intersections:male:left_lateral_decubitus:all-exposed:bed",
    "status": "XFAIL",
-   "detail": "2316 of 14517 skin vertices (15.95%, max 0.5%)"
+   "detail": "277 of 14517 skin vertices (1.91%, max 0.5%)"
   },
   {
    "id": "intersections:male:left_lateral_decubitus:all-exposed:gown",
@@ -830,7 +830,7 @@
   {
    "id": "intersections:female:sitting_dangling:covered:bed",
    "status": "PASS",
-   "detail": "12 of 14517 skin vertices (0.08%, max 0.5%)"
+   "detail": "52 of 14517 skin vertices (0.36%, max 0.5%)"
   },
   {
    "id": "intersections:female:sitting_dangling:covered:gown",
@@ -840,12 +840,12 @@
   {
    "id": "intersections:female:sitting_dangling:covered:sheet",
    "status": "XFAIL",
-   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+   "detail": "408 of 14517 skin vertices (2.81%, max 0.5%)"
   },
   {
    "id": "intersections:female:sitting_dangling:chest-exposed:bed",
    "status": "PASS",
-   "detail": "12 of 14517 skin vertices (0.08%, max 0.5%)"
+   "detail": "52 of 14517 skin vertices (0.36%, max 0.5%)"
   },
   {
    "id": "intersections:female:sitting_dangling:chest-exposed:gown",
@@ -855,12 +855,12 @@
   {
    "id": "intersections:female:sitting_dangling:chest-exposed:sheet",
    "status": "XFAIL",
-   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+   "detail": "408 of 14517 skin vertices (2.81%, max 0.5%)"
   },
   {
    "id": "intersections:female:sitting_dangling:abdomen-exposed:bed",
    "status": "PASS",
-   "detail": "12 of 14517 skin vertices (0.08%, max 0.5%)"
+   "detail": "52 of 14517 skin vertices (0.36%, max 0.5%)"
   },
   {
    "id": "intersections:female:sitting_dangling:abdomen-exposed:gown",
@@ -870,12 +870,12 @@
   {
    "id": "intersections:female:sitting_dangling:abdomen-exposed:sheet",
    "status": "XFAIL",
-   "detail": "2266 of 14517 skin vertices (15.61%, max 0.5%)"
+   "detail": "408 of 14517 skin vertices (2.81%, max 0.5%)"
   },
   {
    "id": "intersections:female:sitting_dangling:legs-exposed:bed",
    "status": "PASS",
-   "detail": "12 of 14517 skin vertices (0.08%, max 0.5%)"
+   "detail": "52 of 14517 skin vertices (0.36%, max 0.5%)"
   },
   {
    "id": "intersections:female:sitting_dangling:legs-exposed:gown",
@@ -890,7 +890,7 @@
   {
    "id": "intersections:female:sitting_dangling:all-exposed:bed",
    "status": "PASS",
-   "detail": "12 of 14517 skin vertices (0.08%, max 0.5%)"
+   "detail": "52 of 14517 skin vertices (0.36%, max 0.5%)"
   },
   {
    "id": "intersections:female:sitting_dangling:all-exposed:gown",
@@ -905,12 +905,12 @@
   {
    "id": "intersections:female:left_lateral_decubitus:covered:bed",
    "status": "XFAIL",
-   "detail": "2221 of 14517 skin vertices (15.30%, max 0.5%)"
+   "detail": "230 of 14517 skin vertices (1.58%, max 0.5%)"
   },
   {
    "id": "intersections:female:left_lateral_decubitus:covered:gown",
    "status": "PASS",
-   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+   "detail": "1 of 14517 skin vertices (0.01%, max 0.5%)"
   },
   {
    "id": "intersections:female:left_lateral_decubitus:covered:sheet",
@@ -920,7 +920,7 @@
   {
    "id": "intersections:female:left_lateral_decubitus:chest-exposed:bed",
    "status": "XFAIL",
-   "detail": "2221 of 14517 skin vertices (15.30%, max 0.5%)"
+   "detail": "230 of 14517 skin vertices (1.58%, max 0.5%)"
   },
   {
    "id": "intersections:female:left_lateral_decubitus:chest-exposed:gown",
@@ -935,12 +935,12 @@
   {
    "id": "intersections:female:left_lateral_decubitus:abdomen-exposed:bed",
    "status": "XFAIL",
-   "detail": "2221 of 14517 skin vertices (15.30%, max 0.5%)"
+   "detail": "230 of 14517 skin vertices (1.58%, max 0.5%)"
   },
   {
    "id": "intersections:female:left_lateral_decubitus:abdomen-exposed:gown",
    "status": "PASS",
-   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+   "detail": "1 of 14517 skin vertices (0.01%, max 0.5%)"
   },
   {
    "id": "intersections:female:left_lateral_decubitus:abdomen-exposed:sheet",
@@ -950,12 +950,12 @@
   {
    "id": "intersections:female:left_lateral_decubitus:legs-exposed:bed",
    "status": "XFAIL",
-   "detail": "2221 of 14517 skin vertices (15.30%, max 0.5%)"
+   "detail": "230 of 14517 skin vertices (1.58%, max 0.5%)"
   },
   {
    "id": "intersections:female:left_lateral_decubitus:legs-exposed:gown",
    "status": "PASS",
-   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
+   "detail": "1 of 14517 skin vertices (0.01%, max 0.5%)"
   },
   {
    "id": "intersections:female:left_lateral_decubitus:legs-exposed:sheet",
@@ -965,7 +965,7 @@
   {
    "id": "intersections:female:left_lateral_decubitus:all-exposed:bed",
    "status": "XFAIL",
-   "detail": "2221 of 14517 skin vertices (15.30%, max 0.5%)"
+   "detail": "230 of 14517 skin vertices (1.58%, max 0.5%)"
   },
   {
    "id": "intersections:female:left_lateral_decubitus:all-exposed:gown",
@@ -1539,8 +1539,8 @@
    "position": "sitting_dangling",
    "drape": "covered",
    "kind": "bed",
-   "vertices": 30,
-   "percent": 0.207
+   "vertices": 60,
+   "percent": 0.413
   },
   {
    "variant": "male",
@@ -1555,16 +1555,16 @@
    "position": "sitting_dangling",
    "drape": "covered",
    "kind": "sheet",
-   "vertices": 2198,
-   "percent": 15.141
+   "vertices": 390,
+   "percent": 2.687
   },
   {
    "variant": "male",
    "position": "sitting_dangling",
    "drape": "chest-exposed",
    "kind": "bed",
-   "vertices": 30,
-   "percent": 0.207
+   "vertices": 60,
+   "percent": 0.413
   },
   {
    "variant": "male",
@@ -1579,16 +1579,16 @@
    "position": "sitting_dangling",
    "drape": "chest-exposed",
    "kind": "sheet",
-   "vertices": 2198,
-   "percent": 15.141
+   "vertices": 390,
+   "percent": 2.687
   },
   {
    "variant": "male",
    "position": "sitting_dangling",
    "drape": "abdomen-exposed",
    "kind": "bed",
-   "vertices": 30,
-   "percent": 0.207
+   "vertices": 60,
+   "percent": 0.413
   },
   {
    "variant": "male",
@@ -1603,16 +1603,16 @@
    "position": "sitting_dangling",
    "drape": "abdomen-exposed",
    "kind": "sheet",
-   "vertices": 2198,
-   "percent": 15.141
+   "vertices": 390,
+   "percent": 2.687
   },
   {
    "variant": "male",
    "position": "sitting_dangling",
    "drape": "legs-exposed",
    "kind": "bed",
-   "vertices": 30,
-   "percent": 0.207
+   "vertices": 60,
+   "percent": 0.413
   },
   {
    "variant": "male",
@@ -1635,8 +1635,8 @@
    "position": "sitting_dangling",
    "drape": "all-exposed",
    "kind": "bed",
-   "vertices": 30,
-   "percent": 0.207
+   "vertices": 60,
+   "percent": 0.413
   },
   {
    "variant": "male",
@@ -1659,16 +1659,16 @@
    "position": "left_lateral_decubitus",
    "drape": "covered",
    "kind": "bed",
-   "vertices": 2316,
-   "percent": 15.954
+   "vertices": 277,
+   "percent": 1.908
   },
   {
    "variant": "male",
    "position": "left_lateral_decubitus",
    "drape": "covered",
    "kind": "gown",
-   "vertices": 0,
-   "percent": 0
+   "vertices": 3,
+   "percent": 0.021
   },
   {
    "variant": "male",
@@ -1683,16 +1683,16 @@
    "position": "left_lateral_decubitus",
    "drape": "chest-exposed",
    "kind": "bed",
-   "vertices": 2316,
-   "percent": 15.954
+   "vertices": 277,
+   "percent": 1.908
   },
   {
    "variant": "male",
    "position": "left_lateral_decubitus",
    "drape": "chest-exposed",
    "kind": "gown",
-   "vertices": 0,
-   "percent": 0
+   "vertices": 1,
+   "percent": 0.007
   },
   {
    "variant": "male",
@@ -1707,16 +1707,16 @@
    "position": "left_lateral_decubitus",
    "drape": "abdomen-exposed",
    "kind": "bed",
-   "vertices": 2316,
-   "percent": 15.954
+   "vertices": 277,
+   "percent": 1.908
   },
   {
    "variant": "male",
    "position": "left_lateral_decubitus",
    "drape": "abdomen-exposed",
    "kind": "gown",
-   "vertices": 0,
-   "percent": 0
+   "vertices": 2,
+   "percent": 0.014
   },
   {
    "variant": "male",
@@ -1731,16 +1731,16 @@
    "position": "left_lateral_decubitus",
    "drape": "legs-exposed",
    "kind": "bed",
-   "vertices": 2316,
-   "percent": 15.954
+   "vertices": 277,
+   "percent": 1.908
   },
   {
    "variant": "male",
    "position": "left_lateral_decubitus",
    "drape": "legs-exposed",
    "kind": "gown",
-   "vertices": 0,
-   "percent": 0
+   "vertices": 3,
+   "percent": 0.021
   },
   {
    "variant": "male",
@@ -1755,8 +1755,8 @@
    "position": "left_lateral_decubitus",
    "drape": "all-exposed",
    "kind": "bed",
-   "vertices": 2316,
-   "percent": 15.954
+   "vertices": 277,
+   "percent": 1.908
   },
   {
    "variant": "male",
@@ -2379,8 +2379,8 @@
    "position": "sitting_dangling",
    "drape": "covered",
    "kind": "bed",
-   "vertices": 12,
-   "percent": 0.083
+   "vertices": 52,
+   "percent": 0.358
   },
   {
    "variant": "female",
@@ -2395,16 +2395,16 @@
    "position": "sitting_dangling",
    "drape": "covered",
    "kind": "sheet",
-   "vertices": 2266,
-   "percent": 15.609
+   "vertices": 408,
+   "percent": 2.81
   },
   {
    "variant": "female",
    "position": "sitting_dangling",
    "drape": "chest-exposed",
    "kind": "bed",
-   "vertices": 12,
-   "percent": 0.083
+   "vertices": 52,
+   "percent": 0.358
   },
   {
    "variant": "female",
@@ -2419,16 +2419,16 @@
    "position": "sitting_dangling",
    "drape": "chest-exposed",
    "kind": "sheet",
-   "vertices": 2266,
-   "percent": 15.609
+   "vertices": 408,
+   "percent": 2.81
   },
   {
    "variant": "female",
    "position": "sitting_dangling",
    "drape": "abdomen-exposed",
    "kind": "bed",
-   "vertices": 12,
-   "percent": 0.083
+   "vertices": 52,
+   "percent": 0.358
   },
   {
    "variant": "female",
@@ -2443,16 +2443,16 @@
    "position": "sitting_dangling",
    "drape": "abdomen-exposed",
    "kind": "sheet",
-   "vertices": 2266,
-   "percent": 15.609
+   "vertices": 408,
+   "percent": 2.81
   },
   {
    "variant": "female",
    "position": "sitting_dangling",
    "drape": "legs-exposed",
    "kind": "bed",
-   "vertices": 12,
-   "percent": 0.083
+   "vertices": 52,
+   "percent": 0.358
   },
   {
    "variant": "female",
@@ -2475,8 +2475,8 @@
    "position": "sitting_dangling",
    "drape": "all-exposed",
    "kind": "bed",
-   "vertices": 12,
-   "percent": 0.083
+   "vertices": 52,
+   "percent": 0.358
   },
   {
    "variant": "female",
@@ -2499,16 +2499,16 @@
    "position": "left_lateral_decubitus",
    "drape": "covered",
    "kind": "bed",
-   "vertices": 2221,
-   "percent": 15.299
+   "vertices": 230,
+   "percent": 1.584
   },
   {
    "variant": "female",
    "position": "left_lateral_decubitus",
    "drape": "covered",
    "kind": "gown",
-   "vertices": 0,
-   "percent": 0
+   "vertices": 1,
+   "percent": 0.007
   },
   {
    "variant": "female",
@@ -2523,8 +2523,8 @@
    "position": "left_lateral_decubitus",
    "drape": "chest-exposed",
    "kind": "bed",
-   "vertices": 2221,
-   "percent": 15.299
+   "vertices": 230,
+   "percent": 1.584
   },
   {
    "variant": "female",
@@ -2547,16 +2547,16 @@
    "position": "left_lateral_decubitus",
    "drape": "abdomen-exposed",
    "kind": "bed",
-   "vertices": 2221,
-   "percent": 15.299
+   "vertices": 230,
+   "percent": 1.584
   },
   {
    "variant": "female",
    "position": "left_lateral_decubitus",
    "drape": "abdomen-exposed",
    "kind": "gown",
-   "vertices": 0,
-   "percent": 0
+   "vertices": 1,
+   "percent": 0.007
   },
   {
    "variant": "female",
@@ -2571,16 +2571,16 @@
    "position": "left_lateral_decubitus",
    "drape": "legs-exposed",
    "kind": "bed",
-   "vertices": 2221,
-   "percent": 15.299
+   "vertices": 230,
+   "percent": 1.584
   },
   {
    "variant": "female",
    "position": "left_lateral_decubitus",
    "drape": "legs-exposed",
    "kind": "gown",
-   "vertices": 0,
-   "percent": 0
+   "vertices": 1,
+   "percent": 0.007
   },
   {
    "variant": "female",
@@ -2595,8 +2595,8 @@
    "position": "left_lateral_decubitus",
    "drape": "all-exposed",
    "kind": "bed",
-   "vertices": 2221,
-   "percent": 15.299
+   "vertices": 230,
+   "percent": 1.584
   },
   {
    "variant": "female",

@@ -1,0 +1,60 @@
+# Regression proof: bug7
+
+reflexes didn't move the leg: every jerk flexed the same small amount from the elbow/knee/ankle regions (triceps and Achilles moved the wrong way), there was no legs-dangling position, left lateral bent the hips and knees backwards, and the reflex sites were off the tendons
+
+test:      tests/regressions/bug7-reflexes.test.ts
+command:   npx vitest run tests/regressions/bug7-reflexes.test.ts
+old code:  997fe24 (git worktree)  → exit 1 (FAILS, as it must)
+new code:  997fe24 + working tree     → exit 0 (passes)
+result:    PROVEN
+date:      2026-10-08T03:58:01.637Z
+
+## Old code: why it fails
+```
+ ❯ tests/regressions/bug7-reflexes.test.ts (12 tests | 12 failed) 156ms
+   × bug 7: reflexes move the right joint the right way > male: knee jerk extends the knee and the ankle jerk plantarflexes, sitting with the legs hanging 4ms
+   × bug 7: reflexes move the right joint the right way > male: biceps and brachioradialis flex the elbow; triceps extends it 1ms
+   × bug 7: reflexes move the right joint the right way > female: knee jerk extends the knee and the ankle jerk plantarflexes, sitting with the legs hanging 0ms
+   × bug 7: reflexes move the right joint the right way > female: biceps and brachioradialis flex the elbow; triceps extends it 0ms
+   × bug 7: reflexes move the right joint the right way > the movement scales with the grade, and grade 4 adds clonus beats 0ms
+   × bug 7: positions for the reflexes > male: sitting with the legs dangling — knees past the foot end, shanks hanging, feet off the floor 2ms
+   × bug 7: positions for the reflexes > male: left lateral flexes the hips and knees and brings the arms forward 1ms
+   × bug 7: positions for the reflexes > female: sitting with the legs dangling — knees past the foot end, shanks hanging, feet off the floor 0ms
+   × bug 7: positions for the reflexes > female: left lateral flexes the hips and knees and brings the arms forward 1ms
+   × bug 7: the reflexes are struck on the tendons > male: each reflex site is within its tolerance of the anatomical tendon point 98ms
+   × bug 7: the reflexes are struck on the tendons > female: each reflex site is within its tolerance of the anatomical tendon point 43ms
+   × bug 7: the reflexes are struck on the tendons > the catalog examines each reflex at its tendon, and has an ankle clonus test 4ms
+ Test Files  1 failed (1)
+      Tests  12 failed (12)
+ FAIL  tests/regressions/bug7-reflexes.test.ts > bug 7: reflexes move the right joint the right way > male: knee jerk extends the knee and the ankle jerk plantarflexes, sitting with the legs hanging
+ FAIL  tests/regressions/bug7-reflexes.test.ts > bug 7: reflexes move the right joint the right way > female: knee jerk extends the knee and the ankle jerk plantarflexes, sitting with the legs hanging
+TypeError: Cannot read properties of undefined (reading 'patellar_tendon_right')
+ FAIL  tests/regressions/bug7-reflexes.test.ts > bug 7: reflexes move the right joint the right way > male: biceps and brachioradialis flex the elbow; triceps extends it
+ FAIL  tests/regressions/bug7-reflexes.test.ts > bug 7: reflexes move the right joint the right way > female: biceps and brachioradialis flex the elbow; triceps extends it
+TypeError: Cannot read properties of undefined (reading 'biceps_tendon_right')
+ FAIL  tests/regressions/bug7-reflexes.test.ts > bug 7: reflexes move the right joint the right way > the movement scales with the grade, and grade 4 adds clonus beats
+TypeError: Cannot read properties of undefined (reading 'patellar_tendon_right')
+     68|     expect(jerkDelta(knee, JERK_RISE)).toBe(0);
+ FAIL  tests/regressions/bug7-reflexes.test.ts > bug 7: positions for the reflexes > male: sitting with the legs dangling — knees past the foot end, shanks hanging, feet off the floor
+AssertionError: R knee at the edge: expected 0.398082308211936 to be greater than NaN
+     92|         expect(knee.z, `${side} knee at the edge`).toBeGreaterThan(foo…
+     93|         expect(knee.z).toBeLessThan(footEnd + 0.12);
+     94|         expect(ankle.y, `${side} ankle below the table top`).toBeLessT…
+ FAIL  tests/regressions/bug7-reflexes.test.ts > bug 7: positions for the reflexes > male: left lateral flexes the hips and knees and brings the arms forward
+AssertionError: R hip flexed (knee in front of the hip): expected -0.25118438641128027 to be greater than 0.1
+    108|         expect(knee.clone().sub(hip).dot(front), `${side} hip flexed (…
+    109|         expect(hip.clone().sub(knee).angleTo(ankle.clone().sub(knee)) …
+ FAIL  tests/regressions/bug7-reflexes.test.ts > bug 7: positions for the reflexes > female: sitting with the legs dangling — knees past the foot end, shanks hanging, feet off the floor
+AssertionError: R knee at the edge: expected 0.3826191047970783 to be greater than NaN
+     92|         expect(knee.z, `${side} knee at the edge`).toBeGreaterThan(foo…
+     93|         expect(knee.z).toBeLessThan(footEnd + 0.12);
+     94|         expect(ankle.y, `${side} ankle below the table top`).toBeLessT…
+ FAIL  tests/regressions/bug7-reflexes.test.ts > bug 7: positions for the reflexes > female: left lateral flexes the hips and knees and brings the arms forward
+AssertionError: R hip flexed (knee in front of the hip): expected -0.24013560313257687 to be greater than 0.1
+```
+
+## New code
+```
+ Test Files  1 passed (1)
+      Tests  12 passed (12)
+```

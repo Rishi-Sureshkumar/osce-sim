@@ -1,33 +1,13 @@
 [
  {
-  "id": "anchors:occlusion:*:left_lateral_decubitus:sacrum",
-  "owner": "M2",
-  "reason": "bug 5 / shots: seated, the hands and wrists are hidden behind the thighs in the hands shot; the far hip and the left-lateral back are out of view of their shots"
- },
- {
   "id": "anchors:occlusion:*:seated:elbow_left",
   "owner": "M2",
   "reason": "bug 5 / shots: seated, the hands and wrists are hidden behind the thighs in the hands shot; the far hip and the left-lateral back are out of view of their shots"
  },
  {
-  "id": "anchors:occlusion:*:seated:ln_occipital",
-  "owner": "M3",
-  "reason": "V-BACKREST / V-EARBACK: seated, the head sits inside the raised backrest, so these targets behind or beside the head are hidden from their shots (hair no longer blocks: clicks pass through it) (M3 table placement)"
- },
- {
-  "id": "anchors:occlusion:*:seated:ln_post_auricular",
-  "owner": "M3",
-  "reason": "V-BACKREST / V-EARBACK: seated, the head sits inside the raised backrest, so these targets behind or beside the head are hidden from their shots (hair no longer blocks: clicks pass through it) (M3 table placement)"
- },
- {
   "id": "anchors:occlusion:*:seated:lung_lat_l",
   "owner": "M2",
   "reason": "bug 5 / shots: seated, the hands and wrists are hidden behind the thighs in the hands shot; the far hip and the left-lateral back are out of view of their shots"
- },
- {
-  "id": "anchors:occlusion:*:seated:scalp",
-  "owner": "M3",
-  "reason": "V-BACKREST / V-EARBACK: seated, the head sits inside the raised backrest, so these targets behind or beside the head are hidden from their shots (hair no longer blocks: clicks pass through it) (M3 table placement)"
  },
  {
   "id": "anchors:occlusion:male:seated:hip_left",
@@ -43,46 +23,6 @@
   "id": "anchors:occlusion:male:supine:hip_left",
   "owner": "M2",
   "reason": "bug 5 / shots: seated, the hands and wrists are hidden behind the thighs in the hands shot; the far hip and the left-lateral back are out of view of their shots"
- },
- {
-  "id": "anchors:oracle:*:*:brachioradialis_left",
-  "owner": "M2",
-  "reason": "bug 7: the +4 cm offset is applied in bind Y, not along the forearm, so the site is ~2 cm from the wrist (should be 3–5 cm, radial side)"
- },
- {
-  "id": "anchors:oracle:*:*:brachioradialis_right",
-  "owner": "M2",
-  "reason": "bug 7: the +4 cm offset is applied in bind Y, not along the forearm, so the site is ~2 cm from the wrist (should be 3–5 cm, radial side)"
- },
- {
-  "id": "anchors:oracle:*:*:patellar_tendon_left",
-  "owner": "M2",
-  "reason": "bug 7: the patellar tendon anchor is on the lower patella, not 2–3 cm below it"
- },
- {
-  "id": "anchors:oracle:*:*:patellar_tendon_right",
-  "owner": "M2",
-  "reason": "bug 7: the patellar tendon anchor is on the lower patella, not 2–3 cm below it"
- },
- {
-  "id": "anchors:oracle:*:*:triceps_tendon_left",
-  "owner": "M2",
-  "reason": "bug 7: the olecranon landmark is ~4 cm proximal of the elbow joint, so the triceps site is ~6 cm above it"
- },
- {
-  "id": "anchors:oracle:*:*:triceps_tendon_right",
-  "owner": "M2",
-  "reason": "bug 7: the olecranon landmark is ~4 cm proximal of the elbow joint, so the triceps site is ~6 cm above it"
- },
- {
-  "id": "anchors:oracle:male:*:achilles_left",
-  "owner": "M2",
-  "reason": "bug 7: the male Achilles anchor is on the medial malleolus, not the posterior tendon"
- },
- {
-  "id": "anchors:oracle:male:*:achilles_right",
-  "owner": "M2",
-  "reason": "bug 7: the male Achilles anchor is on the medial malleolus, not the posterior tendon"
  },
  {
   "id": "catalog-oracle:female:blood_pressure@arm_left",
@@ -105,41 +45,6 @@
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (upper_arm_right): (b) placement → arm_right nothing (10.5 cm); (c) no examine for bp_cuff_placement@arm_right (got none)]"
  },
  {
-  "id": "catalog-oracle:female:reflex_achilles@ankle_left",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (achilles_left): (b) placement → ankle_left nothing (8.0 cm); (c) no examine for reflex_achilles@ankle_left (got none)]"
- },
- {
-  "id": "catalog-oracle:female:reflex_achilles@ankle_right",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (achilles_right): (b) placement → ankle_right nothing (8.4 cm); (c) no examine for reflex_achilles@ankle_right (got none)]"
- },
- {
-  "id": "catalog-oracle:female:reflex_biceps@elbow_right",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (biceps_tendon_right): (b) placement → elbow_right nothing (9.3 cm); (c) no examine for reflex_biceps@elbow_right (got none)]"
- },
- {
-  "id": "catalog-oracle:female:reflex_patellar@knee_left",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (patellar_tendon_left): (b) placement → knee_left nothing (9.2 cm); (c) no examine for reflex_patellar@knee_left (got none)]"
- },
- {
-  "id": "catalog-oracle:female:reflex_patellar@knee_right",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (patellar_tendon_right): (b) placement → knee_right nothing (9.2 cm); (c) no examine for reflex_patellar@knee_right (got none)]"
- },
- {
-  "id": "catalog-oracle:female:reflex_triceps@elbow_left",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (triceps_tendon_left): (b) placement → elbow_left nothing (24.0 cm); (c) no examine for reflex_triceps@elbow_left (got none)]"
- },
- {
-  "id": "catalog-oracle:female:reflex_triceps@elbow_right",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (triceps_tendon_right): (b) placement → elbow_right nothing (7.5 cm); (c) no examine for reflex_triceps@elbow_right (got none)]"
- },
- {
   "id": "catalog-oracle:male:blood_pressure@arm_left",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (upper_arm_left): (b) placement → arm_left nothing (16.9 cm); (c) no examine for blood_pressure@arm_left (got none)]"
@@ -158,46 +63,6 @@
   "id": "catalog-oracle:male:bp_cuff_placement@arm_right",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [at the anatomical point (upper_arm_right): (b) placement → arm_right nothing (7.8 cm); (c) no examine for bp_cuff_placement@arm_right (got none)]"
- },
- {
-  "id": "catalog-oracle:male:reflex_achilles@ankle_left",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (achilles_left): (b) placement → ankle_left nothing (8.7 cm); (c) no examine for reflex_achilles@ankle_left (got none)]"
- },
- {
-  "id": "catalog-oracle:male:reflex_achilles@ankle_right",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (achilles_right): (b) placement → foot_right nothing (11.0 cm); (c) no examine for reflex_achilles@ankle_right (got none)]"
- },
- {
-  "id": "catalog-oracle:male:reflex_biceps@elbow_left",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (biceps_tendon_left): (b) placement → elbow_left nothing (10.4 cm); (c) no examine for reflex_biceps@elbow_left (got none)]"
- },
- {
-  "id": "catalog-oracle:male:reflex_biceps@elbow_right",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (biceps_tendon_right): (b) placement → elbow_right nothing (10.2 cm); (c) no examine for reflex_biceps@elbow_right (got none)]"
- },
- {
-  "id": "catalog-oracle:male:reflex_patellar@knee_left",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (patellar_tendon_left): (b) placement → knee_left nothing (10.3 cm); (c) no examine for reflex_patellar@knee_left (got none)]"
- },
- {
-  "id": "catalog-oracle:male:reflex_patellar@knee_right",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (patellar_tendon_right): (b) placement → knee_right nothing (10.3 cm); (c) no examine for reflex_patellar@knee_right (got none)]"
- },
- {
-  "id": "catalog-oracle:male:reflex_triceps@elbow_left",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (triceps_tendon_left): (b) placement → elbow_left nothing (23.4 cm); (c) no examine for reflex_triceps@elbow_left (got none)]"
- },
- {
-  "id": "catalog-oracle:male:reflex_triceps@elbow_right",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (triceps_tendon_right): (b) placement → elbow_right nothing (8.1 cm); (c) no examine for reflex_triceps@elbow_right (got none)]"
  },
  {
   "id": "catalog:female:ankle_foot_inspection@ankle_left",
@@ -280,26 +145,6 @@
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click never reached the patient; (b) the maneuver menu did not open]"
  },
  {
-  "id": "catalog:female:reflex_biceps@elbow_left",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [(b) placement → elbow_left nothing (24.9 cm); (c) no examine for reflex_biceps@elbow_left (got none)]"
- },
- {
-  "id": "catalog:female:reflex_biceps@elbow_right",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [(b) placement → elbow_right nothing (9.0 cm); (c) no examine for reflex_biceps@elbow_right (got none)]"
- },
- {
-  "id": "catalog:female:reflex_triceps@elbow_left",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [(b) placement → elbow_left nothing (24.9 cm); (c) no examine for reflex_triceps@elbow_left (got none)]"
- },
- {
-  "id": "catalog:female:reflex_triceps@elbow_right",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [(b) placement → elbow_right nothing (9.0 cm); (c) no examine for reflex_triceps@elbow_right (got none)]"
- },
- {
   "id": "catalog:female:straight_leg_raise@spine_lumbar",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to wrist_right; (b) the maneuver menu did not open]"
@@ -318,11 +163,6 @@
   "id": "catalog:female:strength_l4_s1_ankle@ankle_left",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click never reached the patient; (b) the maneuver menu did not open]"
- },
- {
-  "id": "catalog:female:weber_test@scalp",
-  "owner": "M6",
-  "reason": "the crown sits under the camera-shot selector at the top of the ear view (page UI over the canvas; M6 layout) [(a) first hit is hair (proxy:hair), not the patient]"
  },
  {
   "id": "catalog:male:cva_tenderness@cva_left",
@@ -370,26 +210,6 @@
   "reason": "harness: describe_exam was not yet in the QA log when read right after Done (passes on its own); recheck at the M2 gate [(c) no describe_exam logged]"
  },
  {
-  "id": "catalog:male:reflex_biceps@elbow_left",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [(b) placement → elbow_left nothing (24.1 cm); (c) no examine for reflex_biceps@elbow_left (got none)]"
- },
- {
-  "id": "catalog:male:reflex_biceps@elbow_right",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [(b) placement → elbow_right nothing (8.5 cm); (c) no examine for reflex_biceps@elbow_right (got none)]"
- },
- {
-  "id": "catalog:male:reflex_triceps@elbow_left",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [(b) placement → elbow_left nothing (24.1 cm); (c) no examine for reflex_triceps@elbow_left (got none)]"
- },
- {
-  "id": "catalog:male:reflex_triceps@elbow_right",
-  "owner": "M2",
-  "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [(b) placement → elbow_right nothing (8.5 cm); (c) no examine for reflex_triceps@elbow_right (got none)]"
- },
- {
   "id": "catalog:male:strength_c5_6_elbow_flexion@elbow_left",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to precordium_wall; (b) the maneuver menu did not open]"
@@ -410,14 +230,19 @@
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to lung_lat_r; (b) the maneuver menu did not open]"
  },
  {
-  "id": "catalog:male:weber_test@scalp",
-  "owner": "M6",
-  "reason": "the crown sits under the camera-shot selector at the top of the ear view (page UI over the canvas; M6 layout) [(a) first hit is hair (proxy:hair), not the patient]"
- },
- {
   "id": "anchors:occlusion:*:seated:elbow_right",
   "owner": "M3",
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
+ },
+ {
+  "id": "anchors:occlusion:*:seated:ln_occipital",
+  "owner": "M3",
+  "reason": "V-BACKREST / V-EARBACK: seated, the head sits inside the raised backrest, so these targets behind or beside the head are hidden from their shots (hair no longer blocks: clicks pass through it) (M3 table placement)"
+ },
+ {
+  "id": "anchors:occlusion:*:seated:ln_post_auricular",
+  "owner": "M3",
+  "reason": "V-BACKREST / V-EARBACK: seated, the head sits inside the raised backrest, so these targets behind or beside the head are hidden from their shots (hair no longer blocks: clicks pass through it) (M3 table placement)"
  },
  {
   "id": "anchors:occlusion:*:seated:ln_post_cervical",
@@ -430,14 +255,74 @@
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
  },
  {
+  "id": "anchors:occlusion:*:seated:scalp",
+  "owner": "M3",
+  "reason": "V-BACKREST / V-EARBACK: seated, the head sits inside the raised backrest, so these targets behind or beside the head are hidden from their shots (hair no longer blocks: clicks pass through it) (M3 table placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:cva_left",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:cva_right",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
   "id": "anchors:occlusion:female:seated:ln_post_cervical#1",
   "owner": "M3",
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
  },
  {
+  "id": "anchors:occlusion:female:seated:lung_post_ll",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:lung_post_lu",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:lung_post_rl",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:lung_post_ru",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
   "id": "anchors:occlusion:female:seated:sacrum",
   "owner": "M3",
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:spine_cervical",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:spine_lumbar",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:spine_thoracic",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:male:seated:cva_left",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:male:seated:cva_right",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
  },
  {
   "id": "anchors:occlusion:male:seated:ln_post_cervical#1",
@@ -450,9 +335,14 @@
   "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
  },
  {
-  "id": "catalog-oracle:female:reflex_biceps@elbow_left",
+  "id": "anchors:occlusion:male:seated:spine_lumbar",
   "owner": "M3",
-  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [at the anatomical point (biceps_tendon_left): (a) first hit is drape (fold-chest), not the patient; (b) placement → elbow_left nothing (19.1 cm); (c) no examine]"
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "catalog-oracle:female:reflex_biceps@biceps_tendon_left",
+  "owner": "M3",
+  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [at the anatomical point (biceps_tendon_left): (a) first hit is drape (roll-chest), not the patient]"
  },
  {
   "id": "catalog-oracle:male:auscultate_heart_bell@cardiac_mitral",
@@ -595,6 +485,11 @@
   "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (fold-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
  },
  {
+  "id": "catalog:female:reflex_biceps@biceps_tendon_left",
+  "owner": "M3",
+  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (fold-chest), not the patient]"
+ },
+ {
   "id": "catalog:female:rise_from_chair@hip_left",
   "owner": "M3",
   "reason": "V-ARMS: seated, the hand resting on the thigh lies over the far hip, so a click there resolves to the wrist; the resting-arm pose is reworked with the new models (M3)"
@@ -688,11 +583,6 @@
   "id": "catalog:male:pmi_palpation@cardiac_mitral",
   "owner": "M3",
   "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open]"
- },
- {
-  "id": "catalog:male:reflex_achilles@ankle_right",
-  "owner": "M3",
-  "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the placement never reached the patient; (c) no examine for reflex_achilles@ankle_right (got none)]"
  },
  {
   "id": "catalog:male:strength_l4_s1_ankle@ankle_right",
@@ -1085,63 +975,13 @@
   "reason": "page UI covers the 3D view at the target (toasts/overlays over the canvas) [(a) the page covers the canvas here (div.mx-auto.flex); (b) the click never reached the patient; (b) the maneuver menu did not open]"
  },
  {
-  "id": "anchors:occlusion:male:seated:cva_right",
-  "owner": "M3",
-  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+  "id": "catalog:female:weber_test@scalp",
+  "owner": "M6",
+  "reason": "the crown sits under the camera-shot selector at the top of the ear view (page UI over the canvas; M6 layout) [(a) first hit is hair (proxy:hair), not the patient]"
  },
  {
-  "id": "anchors:occlusion:male:seated:cva_left",
-  "owner": "M3",
-  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
- },
- {
-  "id": "anchors:occlusion:male:seated:spine_lumbar",
-  "owner": "M3",
-  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
- },
- {
-  "id": "anchors:occlusion:female:seated:cva_right",
-  "owner": "M3",
-  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
- },
- {
-  "id": "anchors:occlusion:female:seated:cva_left",
-  "owner": "M3",
-  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
- },
- {
-  "id": "anchors:occlusion:female:seated:spine_cervical",
-  "owner": "M3",
-  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
- },
- {
-  "id": "anchors:occlusion:female:seated:spine_thoracic",
-  "owner": "M3",
-  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
- },
- {
-  "id": "anchors:occlusion:female:seated:spine_lumbar",
-  "owner": "M3",
-  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
- },
- {
-  "id": "anchors:occlusion:female:seated:lung_post_ru",
-  "owner": "M3",
-  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
- },
- {
-  "id": "anchors:occlusion:female:seated:lung_post_lu",
-  "owner": "M3",
-  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
- },
- {
-  "id": "anchors:occlusion:female:seated:lung_post_rl",
-  "owner": "M3",
-  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
- },
- {
-  "id": "anchors:occlusion:female:seated:lung_post_ll",
-  "owner": "M3",
-  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+  "id": "catalog:male:weber_test@scalp",
+  "owner": "M6",
+  "reason": "the crown sits under the camera-shot selector at the top of the ear view (page UI over the canvas; M6 layout) [(a) first hit is hair (proxy:hair), not the patient]"
  }
 ]

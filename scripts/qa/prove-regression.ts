@@ -58,6 +58,11 @@ export const PROOFS: Record<string, Proof> = {
     tests: ["tests/regressions/bug5-skinned-anchors.test.ts"],
     description: "exam landmarks drifted between views: each anchor rode one bone rigidly while the skin blends several, so near joints the targets floated off the skin and slid along it from pose to pose",
   },
+  bug7: {
+    kind: "vitest",
+    tests: ["tests/regressions/bug7-reflexes.test.ts"],
+    description: "reflexes didn't move the leg: every jerk flexed the same small amount from the elbow/knee/ankle regions (triceps and Achilles moved the wrong way), there was no legs-dangling position, left lateral bent the hips and knees backwards, and the reflex sites were off the tendons",
+  },
   bug10: {
     kind: "vitest",
     tests: ["tests/regressions/bug10-hold-choice.test.ts"],

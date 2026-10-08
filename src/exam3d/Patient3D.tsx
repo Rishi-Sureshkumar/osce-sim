@@ -5,6 +5,7 @@ import type { DrapeZone } from "@/domain/schemas";
 import { PatientModel } from "@/scene/PatientModel";
 import { PART_NAMES } from "@/scene/patientRig.generated";
 import type { VariantId } from "@/scene/rig";
+import type { Jerk } from "@/scene/animation/reflex";
 import type { CursorPoint } from "@/scene/tools/ToolCursor";
 import { resolveHit, type BodyHit, type RawHit } from "./hit";
 import { QA, recordPointer, type ProbeHit } from "./qa";
@@ -27,7 +28,7 @@ export interface Patient3DProps {
   quality: "high" | "low";
   pupilScale: number | { left: number; right: number };
   angle: { current: number };
-  jerk?: { bone: string; amount: number; at: number } | null;
+  jerk?: (Jerk & { at: number }) | null;
   /** regions a click can resolve to (examinable + prohibited, or the tool's regions) */
   pickableRegionIds: readonly string[];
   toolActive: boolean;

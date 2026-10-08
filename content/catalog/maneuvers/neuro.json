@@ -584,8 +584,8 @@
       "technique": "special",
       "allowedRegions": [
         "neuro_reflexes",
-        "elbow_right",
-        "elbow_left"
+        "biceps_tendon_right",
+        "biceps_tendon_left"
       ],
       "normalFinding": {
         "default": {
@@ -614,8 +614,8 @@
       "technique": "special",
       "allowedRegions": [
         "neuro_reflexes",
-        "elbow_right",
-        "elbow_left"
+        "triceps_tendon_right",
+        "triceps_tendon_left"
       ],
       "normalFinding": {
         "default": {
@@ -634,7 +634,10 @@
       },
       "sourceText": "",
       "interaction": "place",
-      "tool": "reflex_hammer"
+      "tool": "reflex_hammer",
+      "requiresPositioning": [
+        "sitting_dangling"
+      ]
     },
     {
       "id": "reflex_brachioradialis",
@@ -644,8 +647,8 @@
       "technique": "special",
       "allowedRegions": [
         "neuro_reflexes",
-        "wrist_right",
-        "wrist_left"
+        "brachioradialis_right",
+        "brachioradialis_left"
       ],
       "normalFinding": {
         "default": {
@@ -674,8 +677,8 @@
       "technique": "special",
       "allowedRegions": [
         "neuro_reflexes",
-        "knee_right",
-        "knee_left"
+        "patellar_tendon_right",
+        "patellar_tendon_left"
       ],
       "normalFinding": {
         "default": {
@@ -694,7 +697,10 @@
       },
       "sourceText": "",
       "interaction": "place",
-      "tool": "reflex_hammer"
+      "tool": "reflex_hammer",
+      "requiresPositioning": [
+        "sitting_dangling"
+      ]
     },
     {
       "id": "reflex_achilles",
@@ -704,8 +710,8 @@
       "technique": "special",
       "allowedRegions": [
         "neuro_reflexes",
-        "ankle_right",
-        "ankle_left"
+        "achilles_right",
+        "achilles_left"
       ],
       "normalFinding": {
         "default": {
@@ -724,7 +730,44 @@
       },
       "sourceText": "",
       "interaction": "place",
-      "tool": "reflex_hammer"
+      "tool": "reflex_hammer",
+      "requiresPositioning": [
+        "sitting_dangling"
+      ]
+    },
+    {
+      "id": "ankle_clonus",
+      "fcmId": null,
+      "label": "Test for ankle clonus",
+      "system": "neuro",
+      "technique": "special",
+      "allowedRegions": [
+        "neuro_reflexes",
+        "achilles_right",
+        "achilles_left"
+      ],
+      "requiresPositioning": [
+        "sitting_dangling",
+        "supine"
+      ],
+      "normalFinding": {
+        "default": {
+          "text": "No ankle clonus: a brisk, sustained push of the foot upward produces no rhythmic beats.",
+          "visual": {
+            "clonusBeats": 0
+          }
+        }
+      },
+      "demo": {
+        "steps": [
+          "Support the knee in slight flexion with the leg relaxed.",
+          "Push the foot up sharply at the ankle and hold it there.",
+          "Watch and feel for rhythmic beats of the foot; more than a few sustained beats is abnormal."
+        ]
+      },
+      "sourceText": "",
+      "interaction": "place",
+      "tool": "hands"
     },
     {
       "id": "babinski",

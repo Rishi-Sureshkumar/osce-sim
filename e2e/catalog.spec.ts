@@ -235,7 +235,18 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
     for (const st of steps) {
       const lm = st.landmark;
       const useOracle = at && (!at.step || at.step === st.id);
-      const p = useOracle ? await page.evaluate((w) => window.__osce3d!.projectPoint(w), at!.world) : await page.evaluate(([r, l]) => window.__osce3d!.project(r!, l ?? undefined), [st.regionId, lm ?? null] as const);
+      // an anchor is aimed 3 mm under the skin (as the Node occlusion check does): one on the body's
+      // outline from its shot is still clicked on the body, not on the edge
+      const p = useOracle
+        ? await page.evaluate((w) => window.__osce3d!.projectPoint(w), at!.world)
+        : lm
+          ? await page.evaluate(([r, l]) => window.__osce3d!.project(r!, l!), [st.regionId, lm] as const)
+          : await page.evaluate((r) => {
+              const h = window.__osce3d!;
+              const w = h.anchor(r);
+              const n = h.anchorNormal(r) ?? [0, 0, 0];
+              return w ? h.projectPoint([w[0] - n[0] * 0.003, w[1] - n[1] * 0.003, w[2] - n[2] * 0.003]) : null;
+            }, st.regionId);
       if (!p) {
         fails.push(`no anchor${lm ? ` for landmark ${lm}` : ""} to click`);
         return fails;

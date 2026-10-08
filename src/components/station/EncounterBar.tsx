@@ -9,7 +9,7 @@ import { HoldRing } from "./HoldRing";
 /** Bed-angle slider stops (positions the bed itself can produce). */
 export const BED_STOPS: Position[] = ["supine", "reclined_30", "reclined_45", "seated"];
 /** Positions that need the patient to move: reachable by asking, or from the Actions menu. */
-const OTHER_POSITIONS: Position[] = ["left_lateral_decubitus", "seated_leaning_forward", "standing", "prone"];
+const OTHER_POSITIONS: Position[] = ["left_lateral_decubitus", "seated_leaning_forward", "sitting_dangling", "standing", "prone"];
 const ZONES: { zone: DrapeZone; label: string }[] = [
   { zone: "chest", label: "Chest" },
   { zone: "abdomen", label: "Abdomen" },

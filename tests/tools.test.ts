@@ -19,8 +19,10 @@ describe("tool → maneuver resolution", () => {
     expect(toolFor(maneuverById.get("general_appearance")!)).toBeUndefined();
     expect(regionsForTool(maneuvers, "tuning_fork").sort()).toEqual(["ear_left", "ear_right", "scalp", "toe_great_left", "toe_great_right", "neuro_sensory"].sort());
   });
-  it("a reflex hammer on the elbow is ambiguous (biceps/triceps) → the student chooses", () => {
-    expect(candidatesFor(maneuvers, "reflex_hammer", undefined, "elbow_right").map((m) => m.id).sort()).toEqual(["reflex_biceps", "reflex_triceps"]);
+  it("each reflex is struck on its own tendon (Phase 4 bug 7: no biceps/triceps question at the elbow)", () => {
+    expect(candidatesFor(maneuvers, "reflex_hammer", undefined, "biceps_tendon_right").map((m) => m.id)).toEqual(["reflex_biceps"]);
+    expect(candidatesFor(maneuvers, "reflex_hammer", undefined, "triceps_tendon_right").map((m) => m.id)).toEqual(["reflex_triceps"]);
+    expect(candidatesFor(maneuvers, "reflex_hammer", undefined, "elbow_right")).toEqual([]);
   });
 });
 

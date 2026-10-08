@@ -21,6 +21,8 @@ export const TABLE = {
   /** where the head section hinges (patient's hip level), on the long axis */
   hingeZ: 0,
   length: 1.9,
+  /** foot section length from the hinge (its end is where a patient sits with the legs dangling) */
+  footLen: 1.0,
   width: 0.7,
   /** world X of the table centre line */
   x: 0,
@@ -65,22 +67,37 @@ export function poseRotations(position: Position, bedAngleDeg: number): BoneRota
     r["upperarm01_R"] = [-15 * DEG, 35 * DEG, 38 * DEG];
   }
   if (position === "left_lateral_decubitus") {
-    // knees and hips bent, uppermost arm in front of the body
-    r["upperleg01_L"] = [35 * DEG, 0, -3 * DEG];
-    r["upperleg01_R"] = [45 * DEG, 0, 6 * DEG];
-    r["lowerleg01_L"] = [-55 * DEG, 0, 0];
-    r["lowerleg01_R"] = [-65 * DEG, 0, 0];
-    r["upperarm01_R"] = [55 * DEG, 0, 20 * DEG];
-    r["upperarm01_L"] = [70 * DEG, 0, -10 * DEG];
+    // knees and hips bent, both arms in front of the body (for a limb hanging from its joint, −X
+    // flexes the hip and shoulder and +X flexes the knee; Phase 3 had these signs reversed, so the
+    // hips and shoulders were extended and the knees hyperextended)
+    r["upperleg01_L"] = [-35 * DEG, 0, -3 * DEG];
+    r["upperleg01_R"] = [-45 * DEG, 0, 6 * DEG];
+    r["lowerleg01_L"] = [55 * DEG, 0, 0];
+    r["lowerleg01_R"] = [65 * DEG, 0, 0];
+    r["upperarm01_R"] = [-55 * DEG, 0, 20 * DEG];
+    r["upperarm01_L"] = [-70 * DEG, 0, -10 * DEG];
+  }
+  if (position === "sitting_dangling") {
+    // sitting upright at the foot end of the table, knees over the edge, shanks hanging (knee flexion +X)
+    r["lowerleg01_L"] = [90 * DEG, 0, 0];
+    r["lowerleg01_R"] = [90 * DEG, 0, 0];
   }
   return r;
 }
 
+/** Hip-to-knee length of a body model (metres), from its rig. */
+function thighLength(variant: VariantId): number {
+  const { heads } = rigOf(variant);
+  return heads.get("upperleg01_L")!.distanceTo(heads.get("lowerleg01_L")!);
+}
+
 /** World transform of the patient's root (pelvis) for a position: lying on the table, head toward −Z. */
-export function placement(position: Position): Matrix4 {
+export function placement(position: Position, variant: VariantId = "male"): Matrix4 {
   // standing bind pose → lying supine: body +Y (head) → world −Z, body front (+Z) → world +Y
   const lie = new Matrix4().makeRotationX(-Math.PI / 2);
-  let m = new Matrix4().makeTranslation(TABLE.x, TABLE.topY + 0.012, TABLE.hingeZ).multiply(lie);
+  // sitting with the legs dangling: at the foot end, the knees just past the edge (the trunk is raised by the spine)
+  const z = position === "sitting_dangling" ? TABLE.hingeZ + TABLE.footLen - thighLength(variant) + 0.04 : TABLE.hingeZ;
+  let m = new Matrix4().makeTranslation(TABLE.x, TABLE.topY + 0.012, z).multiply(lie);
   if (position === "left_lateral_decubitus") {
     // roll onto the left side about the table's long axis, lifted by the half-width of the trunk
     const roll = new Matrix4().makeRotationZ(-78 * DEG);
@@ -124,7 +141,7 @@ export function computePose(variant: VariantId, position: Position, bedAngle: nu
     rotations[b] = [base[0] + e[0], base[1] + e[1], base[2] + e[2]];
   }
   const world = new Map<string, Matrix4>();
-  const root = placement(position);
+  const root = placement(position, variant);
   for (const b of bones) {
     const head = heads.get(b.name)!;
     const parentHead = b.parent ? heads.get(b.parent)! : new Vector3();

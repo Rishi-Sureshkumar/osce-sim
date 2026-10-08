@@ -7,7 +7,7 @@ import { TABLE } from "../rig";
 
 export const TABLE_PARTS = {
   headLen: 0.85,
-  footLen: 1.0,
+  footLen: TABLE.footLen,
   mattress: 0.12,
   cabinet: { width: 0.56, depth: 1.4, z: 0.15 },
   step: { width: 0.5, height: 0.06, depth: 0.3, y: 0.16 },

@@ -12,7 +12,7 @@ import { REACH_CM, resolveHit } from "@/exam3d/hit";
 import { anchorWorldNormals, anchorWorldPoints, poseFor, type Vec3 } from "@/exam3d/regionAnchors";
 import { decidePlacement, holdCandidate } from "@/exam3d/tools/decide";
 import { regionsForTool } from "@/exam3d/tools/toolLogic";
-import { JERK_BONE, JERK_SECONDS, jerkDelta } from "@/scene/animation/reflex";
+import { JERK_SECONDS, REFLEX_JERK, jerkDelta } from "@/scene/animation/reflex";
 import { LEG_SHEET, legSheetFrame, legSheetPenetration } from "@/scene/drapeGeometry";
 import { liveRotations } from "@/scene/livePose";
 import { poseRotations, TABLE } from "@/scene/rig";
@@ -33,18 +33,20 @@ function tangent(regionId: string, pose = poseFor("supine", 0)): Vec3 {
 }
 
 describe("reflex jerk (src/scene/animation/reflex.ts)", () => {
-  it("is zero outside the 0.6 s window and a flexion (negative x) inside it", () => {
-    expect(jerkDelta(1, -0.01)).toBe(0);
-    expect(jerkDelta(1, JERK_SECONDS)).toBe(0);
-    expect(jerkDelta(1, 0.2)).toBeLessThan(0);
-    expect(jerkDelta(2, 0.2)).toBeCloseTo(2 * jerkDelta(1, 0.2), 10);
-    // Phase 3 formula, pinned
-    expect(jerkDelta(1, 0.15)).toBeCloseTo(-Math.sin(0.25 * Math.PI) * 5 * (Math.PI / 180) * Math.exp(-0.45), 10);
+  const knee = { bone: "lowerleg01_R", sign: -1 as const, grade: 2 };
+  it("is zero outside its window and moves the joint the reflex's way, scaled by grade", () => {
+    expect(jerkDelta(knee, -0.01)).toBe(0);
+    expect(jerkDelta(knee, JERK_SECONDS)).toBe(0);
+    expect(jerkDelta(knee, 0.12)).toBeLessThan(0);
+    expect(jerkDelta({ ...knee, sign: 1 }, 0.12)).toBeGreaterThan(0);
+    expect(jerkDelta({ ...knee, grade: 0 }, 0.12)).toBe(0);
+    expect(Math.abs(jerkDelta({ ...knee, grade: 3 }, 0.12))).toBeGreaterThan(Math.abs(jerkDelta(knee, 0.12)));
+    expect(jerkDelta({ ...knee, muted: true }, 0.12)).toBeCloseTo(jerkDelta(knee, 0.12) / 4, 10);
   });
-  it("maps the Phase 3 reflex regions to limb bones", () => {
-    expect(JERK_BONE.knee_right).toBe("lowerleg01_R");
-    expect(JERK_BONE.ankle_left).toBe("foot_L");
-    expect(JERK_BONE.elbow_right).toBe("lowerarm01_R");
+  it("maps the tendon regions to their joints", () => {
+    expect(REFLEX_JERK.patellar_tendon_right).toEqual({ bone: "lowerleg01_R", sign: -1 });
+    expect(REFLEX_JERK.achilles_left).toEqual({ bone: "foot_L", sign: 1 });
+    expect(REFLEX_JERK.triceps_tendon_right).toEqual({ bone: "lowerarm01_R", sign: 1 });
   });
 });
 
@@ -62,7 +64,7 @@ describe("live pose (src/scene/livePose.ts)", () => {
   });
   it("breathing, blink, head turn and a jerk move the expected bones", () => {
     const base = frozen("supine");
-    const live = liveRotations({ position: "supine", angle: 0, t: 0.9, rr: 20, laboured: true, blink: 1, look: { yaw: 0.4, pitch: 0 }, jerk: { bone: "lowerleg01_R", amount: 1, ageSec: 0.2 } });
+    const live = liveRotations({ position: "supine", angle: 0, t: 0.9, rr: 20, laboured: true, blink: 1, look: { yaw: 0.4, pitch: 0 }, jerk: { bone: "lowerleg01_R", sign: -1, grade: 2, ageSec: 0.12 } });
     expect(live.spine01![0]).not.toBeCloseTo(base.spine01?.[0] ?? 0, 6);
     expect(live.orbicularis03_L![0]).toBeGreaterThan(base.orbicularis03_L?.[0] ?? 0);
     expect(live.head![1]).toBeCloseTo((base.head?.[1] ?? 0) + 0.2, 6);
