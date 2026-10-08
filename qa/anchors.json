@@ -799,8 +799,8 @@
   },
   {
    "id": "anchors:occlusion:male:supine:hip_left",
-   "status": "XFAIL",
-   "detail": "from the legs shot the ray first meets skin (thigh_l) 6.5 cm from the anchor (tolerance 6)"
+   "status": "PASS",
+   "detail": "from the legs_left shot the ray first meets skin (thigh_l) 0.1 cm from the anchor (tolerance 6)"
   },
   {
    "id": "anchors:occlusion:male:supine:toe_great_right",
@@ -2929,13 +2929,13 @@
   },
   {
    "id": "anchors:occlusion:male:seated:ln_occipital",
-   "status": "XFAIL",
-   "detail": "from the ear_right shot the ray first meets skin (scalp) 4.7 cm from the anchor (tolerance 2.5)"
+   "status": "PASS",
+   "detail": "from the neck_back shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_occipital#1",
    "status": "PASS",
-   "detail": "from the ear_right shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the neck_back shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_post_auricular",
@@ -2969,13 +2969,13 @@
   },
   {
    "id": "anchors:occlusion:male:seated:ln_post_cervical",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets skin (neck) 7.8 cm from the anchor (tolerance 3)"
+   "status": "PASS",
+   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_post_cervical#1",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets skin (neck) 5.1 cm from the anchor (tolerance 3)"
+   "status": "PASS",
+   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_ant_cervical",
@@ -3059,8 +3059,8 @@
   },
   {
    "id": "anchors:occlusion:male:seated:hip_left",
-   "status": "XFAIL",
-   "detail": "from the legs shot the ray first meets skin (thigh_l) 6.5 cm from the anchor (tolerance 6)"
+   "status": "PASS",
+   "detail": "from the legs_left shot the ray first meets skin (thigh_l) 0.1 cm from the anchor (tolerance 6)"
   },
   {
    "id": "anchors:occlusion:male:seated:shoulder_right",
@@ -3074,13 +3074,13 @@
   },
   {
    "id": "anchors:occlusion:male:seated:elbow_right",
-   "status": "XFAIL",
-   "detail": "from the arms shot the ray first meets skin (upper_arm_r) 3.5 cm from the anchor (tolerance 3.5)"
+   "status": "PASS",
+   "detail": "from the elbow_right shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:elbow_left",
-   "status": "XFAIL",
-   "detail": "from the arms_left shot the ray first meets skin (upper_arm_l) 3.5 cm from the anchor (tolerance 3.5)"
+   "status": "PASS",
+   "detail": "from the elbow_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:face",
@@ -3150,12 +3150,12 @@
   {
    "id": "anchors:occlusion:male:seated:lung_lat_r",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_right shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:lung_lat_l",
-   "status": "XFAIL",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 9.1 cm from the anchor (tolerance 4)"
+   "status": "PASS",
+   "detail": "from the chest_left shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:skin:male:sitting_dangling:cardiac_aortic",
@@ -5360,7 +5360,7 @@
   {
    "id": "anchors:occlusion:female:supine:hip_left",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (thigh_l) 0.3 cm from the anchor (tolerance 6)"
+   "detail": "from the legs_left shot the ray first meets skin (thigh_l) 0.0 cm from the anchor (tolerance 6)"
   },
   {
    "id": "anchors:occlusion:female:supine:toe_great_right",
@@ -7489,13 +7489,13 @@
   },
   {
    "id": "anchors:occlusion:female:seated:ln_occipital",
-   "status": "XFAIL",
-   "detail": "from the ear_right shot the ray first meets skin (scalp) 5.5 cm from the anchor (tolerance 2.5)"
+   "status": "PASS",
+   "detail": "from the neck_back shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_occipital#1",
    "status": "PASS",
-   "detail": "from the ear_right shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the neck_back shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_post_auricular",
@@ -7529,13 +7529,13 @@
   },
   {
    "id": "anchors:occlusion:female:seated:ln_post_cervical",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets skin (neck) 5.5 cm from the anchor (tolerance 3)"
+   "status": "PASS",
+   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_post_cervical#1",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets skin (neck) 3.3 cm from the anchor (tolerance 3)"
+   "status": "PASS",
+   "detail": "from the neck_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_ant_cervical",
@@ -7620,7 +7620,7 @@
   {
    "id": "anchors:occlusion:female:seated:hip_left",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (thigh_l) 0.3 cm from the anchor (tolerance 6)"
+   "detail": "from the legs_left shot the ray first meets skin (thigh_l) 0.0 cm from the anchor (tolerance 6)"
   },
   {
    "id": "anchors:occlusion:female:seated:shoulder_right",
@@ -7634,13 +7634,13 @@
   },
   {
    "id": "anchors:occlusion:female:seated:elbow_right",
-   "status": "XFAIL",
-   "detail": "from the arms shot the ray first meets skin (upper_arm_r) 4.3 cm from the anchor (tolerance 3.5)"
+   "status": "PASS",
+   "detail": "from the elbow_right shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:elbow_left",
-   "status": "XFAIL",
-   "detail": "from the arms_left shot the ray first meets skin (upper_arm_l) 4.3 cm from the anchor (tolerance 3.5)"
+   "status": "PASS",
+   "detail": "from the elbow_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:face",
@@ -7710,12 +7710,12 @@
   {
    "id": "anchors:occlusion:female:seated:lung_lat_r",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_right shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:lung_lat_l",
-   "status": "XFAIL",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 12.8 cm from the anchor (tolerance 4)"
+   "status": "PASS",
+   "detail": "from the chest_left shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:skin:female:sitting_dangling:cardiac_aortic",
@@ -10344,10 +10344,10 @@
    "variant": "male",
    "position": "supine",
    "regionId": "hip_left",
-   "shot": "legs",
+   "shot": "legs_left",
    "first": "skin",
    "part": "thigh_l",
-   "offCm": 6.53
+   "offCm": 0.09
   },
   {
    "check": "occlusion",
@@ -13479,17 +13479,17 @@
    "variant": "male",
    "position": "seated",
    "regionId": "ln_occipital",
-   "shot": "ear_right",
+   "shot": "neck_back",
    "first": "skin",
    "part": "scalp",
-   "offCm": 4.73
+   "offCm": 0
   },
   {
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
    "regionId": "ln_occipital",
-   "shot": "ear_right",
+   "shot": "neck_back",
    "first": "skin",
    "part": "scalp",
    "offCm": 0
@@ -13559,20 +13559,20 @@
    "variant": "male",
    "position": "seated",
    "regionId": "ln_post_cervical",
-   "shot": "head_neck",
+   "shot": "neck_back",
    "first": "skin",
    "part": "neck",
-   "offCm": 7.82
+   "offCm": 0
   },
   {
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
    "regionId": "ln_post_cervical",
-   "shot": "head_neck",
+   "shot": "neck_back",
    "first": "skin",
    "part": "neck",
-   "offCm": 5.15
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -13739,10 +13739,10 @@
    "variant": "male",
    "position": "seated",
    "regionId": "hip_left",
-   "shot": "legs",
+   "shot": "legs_left",
    "first": "skin",
    "part": "thigh_l",
-   "offCm": 6.53
+   "offCm": 0.09
   },
   {
    "check": "occlusion",
@@ -13769,20 +13769,20 @@
    "variant": "male",
    "position": "seated",
    "regionId": "elbow_right",
-   "shot": "arms",
+   "shot": "elbow_right",
    "first": "skin",
    "part": "upper_arm_r",
-   "offCm": 3.52
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
    "regionId": "elbow_left",
-   "shot": "arms_left",
+   "shot": "elbow_left",
    "first": "skin",
    "part": "upper_arm_l",
-   "offCm": 3.52
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -13919,20 +13919,20 @@
    "variant": "male",
    "position": "seated",
    "regionId": "lung_lat_r",
-   "shot": "chest_front",
+   "shot": "chest_right",
    "first": "skin",
    "part": "torso",
-   "offCm": 0.02
+   "offCm": 0
   },
   {
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
    "regionId": "lung_lat_l",
-   "shot": "chest_front",
+   "shot": "chest_left",
    "first": "skin",
    "part": "torso",
-   "offCm": 9.06
+   "offCm": 0
   },
   {
    "check": "skin",
@@ -17214,10 +17214,10 @@
    "variant": "female",
    "position": "supine",
    "regionId": "hip_left",
-   "shot": "legs",
+   "shot": "legs_left",
    "first": "skin",
    "part": "thigh_l",
-   "offCm": 0.26
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -20349,17 +20349,17 @@
    "variant": "female",
    "position": "seated",
    "regionId": "ln_occipital",
-   "shot": "ear_right",
+   "shot": "neck_back",
    "first": "skin",
    "part": "scalp",
-   "offCm": 5.51
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
    "regionId": "ln_occipital",
-   "shot": "ear_right",
+   "shot": "neck_back",
    "first": "skin",
    "part": "scalp",
    "offCm": 0.01
@@ -20429,20 +20429,20 @@
    "variant": "female",
    "position": "seated",
    "regionId": "ln_post_cervical",
-   "shot": "head_neck",
+   "shot": "neck_back",
    "first": "skin",
    "part": "neck",
-   "offCm": 5.49
+   "offCm": 0
   },
   {
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
    "regionId": "ln_post_cervical",
-   "shot": "head_neck",
+   "shot": "neck_back",
    "first": "skin",
-   "part": "neck",
-   "offCm": 3.29
+   "part": "torso",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -20609,10 +20609,10 @@
    "variant": "female",
    "position": "seated",
    "regionId": "hip_left",
-   "shot": "legs",
+   "shot": "legs_left",
    "first": "skin",
    "part": "thigh_l",
-   "offCm": 0.26
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -20639,20 +20639,20 @@
    "variant": "female",
    "position": "seated",
    "regionId": "elbow_right",
-   "shot": "arms",
+   "shot": "elbow_right",
    "first": "skin",
    "part": "upper_arm_r",
-   "offCm": 4.33
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
    "regionId": "elbow_left",
-   "shot": "arms_left",
+   "shot": "elbow_left",
    "first": "skin",
    "part": "upper_arm_l",
-   "offCm": 4.33
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -20789,20 +20789,20 @@
    "variant": "female",
    "position": "seated",
    "regionId": "lung_lat_r",
-   "shot": "chest_front",
+   "shot": "chest_right",
    "first": "skin",
    "part": "torso",
-   "offCm": 0.02
+   "offCm": 0
   },
   {
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
    "regionId": "lung_lat_l",
-   "shot": "chest_front",
+   "shot": "chest_left",
    "first": "skin",
    "part": "torso",
-   "offCm": 12.81
+   "offCm": 0
   },
   {
    "check": "skin",

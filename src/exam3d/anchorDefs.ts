@@ -125,7 +125,9 @@ const LEFT: Def[] = [
   // chest
   { regionId: "lung_ant_lu", landmark: "sternal_notch", offsetCm: [7, -6, 0], facing: "front", toleranceCm: 4, label: "2nd intercostal space, midclavicular line" },
   { regionId: "lung_ant_ll", landmark: "nipple_l", offsetCm: [3, -7, 0], facing: "front", toleranceCm: 4, label: "6th intercostal space" },
-  { regionId: "lung_lat_l", landmark: "nipple_l", offsetCm: [9, -6, -9], facing: "left", toleranceCm: 4, label: "Mid-axillary line" },
+  // just in front of the mid-axillary line (within its tolerance): with the arms down the line itself is
+  // at the edge of the hanging upper arm, and breathing moves the arm over it
+  { regionId: "lung_lat_l", landmark: "nipple_l", offsetCm: [9, -6, -7], facing: "left", toleranceCm: 4, label: "Mid-axillary line" },
   { regionId: "lung_post_lu", landmark: "c7", offsetCm: [5, -10, 0], facing: "back", toleranceCm: 4, label: "Upper back, beside the scapula" },
   { regionId: "lung_post_ll", landmark: "c7", offsetCm: [7, -25, 0], facing: "back", toleranceCm: 4, label: "Lung base, below the scapula" },
   { regionId: "cva_left", landmark: "c7", offsetCm: [7, -31, 0], facing: "back", toleranceCm: 3, label: "Costovertebral angle" },
@@ -142,7 +144,7 @@ const LEFT: Def[] = [
   // radial pulse ~2 cm above the wrist crease, thumb side (the radial landmark is on the thumb base)
   { regionId: "wrist_left", landmark: "radial_l", offsetCm: [0, 0, 0], offsetCmBy: { male: [-4.4, 2, -3.6], female: [-0.7, 1.8, -3.7] }, facing: "any", toleranceCm: 2.5, label: "Radial pulse" },
   { regionId: "hand_left", landmark: "knuckle_l", offsetCm: [0, 0, 0], facing: "any", toleranceCm: 4 },
-  // the greater trochanter; on the female model it is on the body's outline from the legs shot, so
+  // the greater trochanter; on the female model it is on the body's outline from the side views, so
   // the target sits a little above it (still within the tolerance of the trochanter)
   { regionId: "hip_left", landmark: "hip_l", offsetCm: [0, 0, 0], offsetCmBy: { female: [0, 4, 1] }, facing: "any", toleranceCm: 6 },
   { regionId: "knee_left", landmark: "patella_l", offsetCm: [0, 0, 0], facing: "any", toleranceCm: 4.5 },

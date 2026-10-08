@@ -24,6 +24,18 @@ const VARIANTS = [
 ] as const;
 const POSITIONS: Position[] = ["supine", "reclined_30", "reclined_45", "seated", "sitting_dangling", "left_lateral_decubitus"];
 const PATIENT_SHOTS = ["overview", "seated", "head_neck", "ear_left", "ear_right", "chest_front", "chest_back", "abdomen", "arms", "hands", "legs", "feet"];
+/** the close views of single regions (Phase 4 M2), each in the position its exams use */
+const REGION_VIEWS: [string, Position][] = [
+  ["face", "seated"],
+  ["neck_back", "seated"],
+  ["arms_left", "seated"],
+  ["elbow_right", "seated"],
+  ["elbow_left", "seated"],
+  ["chest_right", "seated"],
+  ["chest_left", "seated"],
+  ["ankle_right", "sitting_dangling"],
+  ["ankle_left", "sitting_dangling"],
+];
 
 interface ManifestEntry {
   file: string;
@@ -131,6 +143,12 @@ for (const v of VARIANTS) {
         await camera(page, shot);
         await shoot(page, `${v.slug}/shots/${String(k++).padStart(3, "0")}-${shot}__${position}__covered`, { area: "shots", case: v.caseId, shot, position, drape: "covered" });
       }
+    }
+    let r = 1;
+    for (const [shot, position] of REGION_VIEWS) {
+      if (!(await setPosition(page, position))) continue;
+      await camera(page, shot);
+      await shoot(page, `${v.slug}/views/${String(r++).padStart(2, "0")}-${shot}__${position}__covered`, { area: "views", case: v.caseId, shot, position, drape: "covered" });
     }
     // drape states (supine): each zone uncovered on its own, then everything uncovered
     await setPosition(page, "supine");

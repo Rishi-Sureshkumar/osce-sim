@@ -6,7 +6,7 @@
  * Room shots are fixed in world space. Patient shots are framed on skin landmarks/anchors, so
  * they follow the patient's position (reclined, seated, left lateral…).
  */
-import type { RegionGroup } from "@/domain/schemas";
+import type { Position, RegionGroup } from "@/domain/schemas";
 import { anchorWorldNormals, anchorWorldPoints, skinLandmark, type Pose, type Vec3 } from "@/exam3d/regionAnchors";
 import { dirToWorld } from "./rig";
 import { DISPENSER_POS } from "./room/Dispenser";
@@ -15,7 +15,7 @@ import { TOOL_TABLE_POS, TOOL_TABLE_TOP } from "./room/ToolTable";
 import { ROOM } from "./room/ExamRoom";
 
 export type FocusShotId = Exclude<RegionGroup, "whole" | "neuro">;
-export type ShotId = "corridor" | "overview" | "sink" | "tool_table" | "seated" | FocusShotId | "face" | "ear_left" | "ear_right" | "ankle_left" | "ankle_right" | "arms_left";
+export type ShotId = "corridor" | "overview" | "sink" | "tool_table" | "seated" | FocusShotId | "face" | "ear_left" | "ear_right" | "ankle_left" | "ankle_right" | "arms_left" | "elbow_left" | "elbow_right" | "chest_left" | "chest_right" | "neck_back" | "legs_left";
 
 type Framing =
   /** fixed camera in the room */
@@ -49,7 +49,7 @@ export interface Shot {
 }
 
 const FOCUS: FocusShotId[] = ["head_neck", "chest_front", "chest_back", "abdomen", "arms", "hands", "legs", "feet"];
-const ROOM_SHOTS: ShotId[] = ["overview", "sink", "tool_table", "seated", ...FOCUS, "face", "ear_left", "ear_right", "ankle_left", "ankle_right", "arms_left"];
+const ROOM_SHOTS: ShotId[] = ["overview", "sink", "tool_table", "seated", ...FOCUS, "face", "ear_left", "ear_right", "ankle_left", "ankle_right", "arms_left", "elbow_left", "elbow_right", "chest_left", "chest_right", "neck_back", "legs_left"];
 const look = (yawDeg: number, zoomMin = 0.8, zoomMax = 1.25) => ({ yawDeg, zoomMin, zoomMax });
 
 export const SHOTS: Record<ShotId, Shot> = {
@@ -117,6 +117,17 @@ export const SHOTS: Record<ShotId, Shot> = {
     framing: { kind: "patient", on: [{ landmark: "eye_l" }, { landmark: "eye_r" }], normalFrom: { landmark: "nose_tip" }, forwardBone: "head", distance: 0.4 },
     fov: 35,
     freeLook: look(15, 0.8, 1.2),
+    transitions: ROOM_SHOTS,
+  },
+  // the back of the neck and head from behind and above (the posterior triangles and the occiput, both
+  // sides at once): the front view sees the posterior cervical nodes edge-on behind the neck muscles
+  neck_back: {
+    id: "neck_back",
+    label: "Neck (back)",
+    parent: "head_neck",
+    framing: { kind: "patient", on: [{ landmark: "c7" }, { landmark: "occiput" }], normalFrom: { landmark: "c7" }, forwardBone: "neck01", forwardAxis: [0, 0.5, -1], distance: 0.5 },
+    fov: 40,
+    freeLook: look(30, 0.7, 1.3),
     transitions: ROOM_SHOTS,
   },
   ear_left: {
@@ -193,6 +204,16 @@ export const SHOTS: Record<ShotId, Shot> = {
     freeLook: look(35, 0.7, 1.3),
     transitions: ROOM_SHOTS,
   },
+  // the legs from the patient's left (the legs shot leans to the right: the left hip is on the far outline)
+  legs_left: {
+    id: "legs_left",
+    label: "Legs (left side)",
+    parent: "legs",
+    framing: { kind: "patient", on: [{ anchor: "knee_left" }, { anchor: "shin_right" }], normalFrom: { anchor: "shin_left" }, distance: 0.85, side: -0.25, normalBlendUp: 0.5 },
+    fov: 40,
+    freeLook: look(35, 0.7, 1.3),
+    transitions: ROOM_SHOTS,
+  },
   // the left arm from the patient's left (the arms shot looks at the right arm from the right; the
   // left arm is behind the body from there)
   arms_left: {
@@ -202,6 +223,46 @@ export const SHOTS: Record<ShotId, Shot> = {
     framing: { kind: "patient", on: [{ anchor: "arm_left" }, { anchor: "elbow_left" }], normalFrom: { landmark: "sternal_notch" }, distance: 0.75, side: -0.3 },
     fov: 40,
     freeLook: look(35, 0.7, 1.3),
+    transitions: ROOM_SHOTS,
+  },
+  // the back of each elbow (the olecranon), from above, behind and outside it: seated with the hands in
+  // the lap, the olecranon faces back and the front views see only the upper arm
+  elbow_left: {
+    id: "elbow_left",
+    label: "Left elbow (back)",
+    parent: "arms_left",
+    framing: { kind: "patient", on: [{ anchor: "elbow_left" }], normalFrom: { anchor: "elbow_left" }, distance: 0.55, normalBlendUp: 0.6 },
+    fov: 40,
+    freeLook: look(30, 0.7, 1.3),
+    transitions: ROOM_SHOTS,
+  },
+  elbow_right: {
+    id: "elbow_right",
+    label: "Right elbow (back)",
+    parent: "arms",
+    framing: { kind: "patient", on: [{ anchor: "elbow_right" }], normalFrom: { anchor: "elbow_right" }, distance: 0.55, normalBlendUp: 0.6 },
+    fov: 40,
+    freeLook: look(30, 0.7, 1.3),
+    transitions: ROOM_SHOTS,
+  },
+  // each side of the chest (the mid-axillary line) from in front and outside, in front of the hanging
+  // upper arm: the front view sees the far side edge-on, and a view straight from the side meets the arm
+  chest_left: {
+    id: "chest_left",
+    label: "Chest (left side)",
+    parent: "chest_front",
+    framing: { kind: "patient", on: [{ anchor: "lung_lat_l" }], normalFrom: { landmark: "sternal_notch" }, distance: 0.6, side: -0.4 },
+    fov: 40,
+    freeLook: look(30, 0.7, 1.3),
+    transitions: ROOM_SHOTS,
+  },
+  chest_right: {
+    id: "chest_right",
+    label: "Chest (right side)",
+    parent: "chest_front",
+    framing: { kind: "patient", on: [{ anchor: "lung_lat_r" }], normalFrom: { landmark: "sternal_notch" }, distance: 0.6, side: 0.4 },
+    fov: 40,
+    freeLook: look(30, 0.7, 1.3),
     transitions: ROOM_SHOTS,
   },
   // the back of each ankle (the Achilles tendon), from the side and a little behind, on the shank's
@@ -270,13 +331,14 @@ function scaleV(a: Vec3, k: number): Vec3 {
   return [a[0] * k, a[1] * k, a[2] * k];
 }
 
-/** Regions with a closer shot of their own (the ears need a side view for the mastoid; the eyes and face a front view). */
+/** Regions with a closer shot of their own (the ears need a side view for the mastoid; the eyes and face a front view; the elbows a view from behind; the mid-axillary lines a side view). */
 const REGION_SHOT: Record<string, ShotId> = {
   ear_left: "ear_left",
   ear_right: "ear_right",
   // behind the head: the frontal head & neck shot can't see them; the posterolateral ear view can
   ln_post_auricular: "ear_right",
-  ln_occipital: "ear_right",
+  ln_occipital: "neck_back",
+  ln_post_cervical: "neck_back",
   ln_pre_auricular: "ear_left",
   // the back of the limb: the Achilles from beside the ankle; the triceps from behind (sitting at the table's end)
   achilles_left: "ankle_left",
@@ -284,7 +346,12 @@ const REGION_SHOT: Record<string, ShotId> = {
   triceps_tendon_left: "chest_back",
   shoulder_left: "arms_left",
   arm_left: "arms_left",
-  elbow_left: "arms_left",
+  elbow_left: "elbow_left",
+  hip_left: "legs_left",
+  elbow_right: "elbow_right",
+  // the mid-axillary line: from in front of the hanging arm on that side
+  lung_lat_l: "chest_left",
+  lung_lat_r: "chest_right",
   upper_arm_left: "arms_left",
   biceps_tendon_left: "arms_left",
   triceps_tendon_right: "chest_back",
@@ -300,6 +367,17 @@ const REGION_SHOT: Record<string, ShotId> = {
 export function focusShotFor(group: RegionGroup, regionId?: string): ShotId | null {
   if (regionId && REGION_SHOT[regionId]) return REGION_SHOT[regionId]!;
   return group === "whole" || group === "neuro" ? null : group;
+}
+
+/** positions in which the patient lies back on the table (the back is out of reach) */
+const BACK_ON_TABLE: readonly Position[] = ["supine", "reclined_30", "reclined_45"];
+
+/** A hint when a shot shows a part the patient is lying on (it can't be examined in this position). */
+export function shotHint(id: ShotId, position: Position): string | null {
+  if ((id === "chest_back" || id === "neck_back") && BACK_ON_TABLE.includes(position))
+    return "The back is against the table. Ask the patient to sit up or lean forward to examine it.";
+  if (id === "ear_left" && position === "left_lateral_decubitus") return "The left ear is against the table. Ask the patient to sit up or turn to examine it.";
+  return null;
 }
 
 // ---------------------------------------------------------------- state machine (pure)

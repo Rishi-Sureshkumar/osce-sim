@@ -17,7 +17,7 @@ import { FpsMeter, LoadingOverlay } from "@/scene/Loading";
 import { ExamRoom } from "@/scene/room/ExamRoom";
 import type { VariantId } from "@/scene/rig";
 import { ShotCamera, type CameraGoal } from "@/scene/ShotCamera";
-import { SHOTS, back, breadcrumb, focusShotFor, go, shotCamera, type ShotId, type ShotState } from "@/scene/shots";
+import { SHOTS, back, breadcrumb, focusShotFor, go, shotCamera, shotHint, type ShotId, type ShotState } from "@/scene/shots";
 import { ToolCursor, type CursorPoint } from "@/scene/tools/ToolCursor";
 import type { TableItem } from "@/scene/room/ToolTable";
 import { Patient3D, type BodyHit } from "./Patient3D";
@@ -236,7 +236,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
   );
   const edema = useMemo(() => Object.fromEntries((props.presentation.visibleSigns.edema ?? []).map((e) => [e.regionId, e.grade])), [props.presentation]);
   const panelRegions = props.regions.filter((r) => r.group === "neuro");
-  const backHidden = shot.current === "chest_back" && state.bedAngle < 45;
+  const hint = shotHint(shot.current, state.position);
   const busy = washing !== null || opening;
   QA.busy = busy;
   const washMs = QA.enabled && QA.fast ? 250 : WASH_MS;
@@ -815,9 +815,9 @@ export default function Exam3DView(props: Exam3DViewProps) {
         {tool === "tuning_fork" && props.tool.struckAt && (
           <p className="pointer-events-none absolute top-2 right-2 rounded bg-amber-50 px-2 py-0.5 text-xs text-amber-900">Fork struck {forkElapsed.toFixed(0)} s ago</p>
         )}
-        {backHidden && (
-          <p className="pointer-events-none absolute bottom-8 left-2 max-w-xs rounded-md bg-amber-50 px-2 py-1 text-xs text-amber-900">
-            The back is against the table. Ask the patient to sit up (or raise the head of the table) to examine it.
+        {hint && (
+          <p className="pointer-events-none absolute bottom-8 left-2 max-w-xs rounded-md bg-amber-50 px-2 py-1 text-xs text-amber-900" data-testid="shot-hint">
+            {hint}
           </p>
         )}
       </div>

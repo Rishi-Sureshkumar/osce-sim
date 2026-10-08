@@ -438,8 +438,8 @@
   },
   {
    "id": "catalog-neg:male:reflex_biceps@biceps_tendon_left",
-   "detail": "(neg) 2× the tolerance away still recorded the exam",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog-neg:male:reflex_biceps@biceps_tendon_right",
@@ -1348,8 +1348,8 @@
   },
   {
    "id": "catalog:female:ankle_foot_inspection@ankle_left",
-   "detail": "(b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:ankle_foot_inspection@ankle_right",
@@ -1368,8 +1368,8 @@
   },
   {
    "id": "catalog:female:ankle_foot_palpation@ankle_left",
-   "detail": "(b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:ankle_foot_palpation@ankle_right",
@@ -1388,8 +1388,8 @@
   },
   {
    "id": "catalog:female:ankle_foot_rom@ankle_left",
-   "detail": "(b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:ankle_foot_rom@ankle_right",
@@ -1468,8 +1468,8 @@
   },
   {
    "id": "catalog:female:auscultate_lungs@lung_lat_l",
-   "detail": "(c) no examine for auscultate_lungs@lung_lat_l (got none)",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:auscultate_lungs@lung_lat_r",
@@ -1673,13 +1673,13 @@
   },
   {
    "id": "catalog:female:chest_inspection@lung_lat_l",
-   "detail": "(b) the click resolved to breast_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:chest_inspection@lung_lat_r",
-   "detail": "(b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:chest_inspection@lung_post_ll",
@@ -1723,13 +1723,13 @@
   },
   {
    "id": "catalog:female:chest_percussion@lung_lat_l",
-   "detail": "(b) the click resolved to breast_left; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:chest_percussion@lung_lat_r",
-   "detail": "(b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:chest_percussion@lung_post_ll",
@@ -1873,8 +1873,8 @@
   },
   {
    "id": "catalog:female:edema_assessment@ankle_left",
-   "detail": "(b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:edema_assessment@ankle_right",
@@ -1908,8 +1908,8 @@
   },
   {
    "id": "catalog:female:elbow_inspection@elbow_left",
-   "detail": "(b) the click resolved to upper_arm_left; (b) elbow_inspection is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:elbow_inspection@elbow_right",
@@ -1918,8 +1918,8 @@
   },
   {
    "id": "catalog:female:elbow_palpation@elbow_left",
-   "detail": "(b) the click resolved to upper_arm_left; (b) elbow_palpation is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:elbow_palpation@elbow_right",
@@ -1928,8 +1928,8 @@
   },
   {
    "id": "catalog:female:elbow_rom@elbow_left",
-   "detail": "(b) the click resolved to upper_arm_left; (b) elbow_rom is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:elbow_rom@elbow_right",
@@ -2003,8 +2003,8 @@
   },
   {
    "id": "catalog:female:faber_test@sacrum",
-   "detail": "(b) the click resolved to hand_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:finger_nose_finger@neuro_cerebellar",
@@ -2168,8 +2168,8 @@
   },
   {
    "id": "catalog:female:ln_post_cervical_palpation@ln_post_cervical",
-   "detail": "(b) the click resolved to carotid_left; (b) ln_post_cervical_palpation is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:ln_pre_auricular_palpation@ln_pre_auricular",
@@ -2178,8 +2178,8 @@
   },
   {
    "id": "catalog:female:ln_submandibular_palpation@ln_submandibular",
-   "detail": "(a) first hit is prop, not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:ln_submental_palpation@ln_submental",
@@ -2193,8 +2193,8 @@
   },
   {
    "id": "catalog:female:lower_limb_standing_inspection@ankle_left",
-   "detail": "(b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:lower_limb_standing_inspection@ankle_right",
@@ -2683,13 +2683,13 @@
   },
   {
    "id": "catalog:female:straight_leg_raise@spine_lumbar",
-   "detail": "(b) the click resolved to wrist_right; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:strength_c5_6_elbow_flexion@elbow_left",
-   "detail": "(b) the click resolved to upper_arm_left; (b) strength_c5_6_elbow_flexion is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:strength_c5_6_elbow_flexion@elbow_right",
@@ -2703,8 +2703,8 @@
   },
   {
    "id": "catalog:female:strength_c5_7_elbow_extension@elbow_left",
-   "detail": "(b) the click resolved to upper_arm_left; (b) strength_c5_7_elbow_extension is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:strength_c5_7_elbow_extension@elbow_right",
@@ -2808,8 +2808,8 @@
   },
   {
    "id": "catalog:female:strength_l4_s1_ankle@ankle_left",
-   "detail": "(b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:female:strength_l4_s1_ankle@ankle_right",
@@ -3228,8 +3228,8 @@
   },
   {
    "id": "catalog:male:auscultate_lungs@lung_lat_l",
-   "detail": "(a) first hit is drape (roll-chest), not the patient; (c) no examine for auscultate_lungs@lung_lat_l (got auscultate_heart_diaphragm@cardiac_mitral)",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:male:auscultate_lungs@lung_lat_r",
@@ -3433,7 +3433,7 @@
   },
   {
    "id": "catalog:male:chest_inspection@lung_lat_l",
-   "detail": "(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "detail": "(b) the click resolved to arm_left; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
@@ -3483,13 +3483,13 @@
   },
   {
    "id": "catalog:male:chest_percussion@lung_lat_l",
-   "detail": "(a) first hit is drape (roll-chest), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
+   "detail": "(b) the click resolved to arm_left; (b) the maneuver menu did not open",
    "status": "XFAIL"
   },
   {
    "id": "catalog:male:chest_percussion@lung_lat_r",
-   "detail": "",
-   "status": "PASS"
+   "detail": "(b) the click resolved to arm_right; (b) the maneuver menu did not open",
+   "status": "FAIL"
   },
   {
    "id": "catalog:male:chest_percussion@lung_post_ll",
@@ -3673,8 +3673,8 @@
   },
   {
    "id": "catalog:male:elbow_inspection@elbow_right",
-   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:male:elbow_palpation@elbow_left",
@@ -3683,8 +3683,8 @@
   },
   {
    "id": "catalog:male:elbow_palpation@elbow_right",
-   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:male:elbow_rom@elbow_left",
@@ -3693,8 +3693,8 @@
   },
   {
    "id": "catalog:male:elbow_rom@elbow_right",
-   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:male:eom_accommodation@eye_left",
@@ -3928,8 +3928,8 @@
   },
   {
    "id": "catalog:male:ln_post_cervical_palpation@ln_post_cervical",
-   "detail": "(b) the click resolved to carotid_left; (b) ln_post_cervical_palpation is not in the menu for this region",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:male:ln_pre_auricular_palpation@ln_pre_auricular",
@@ -4018,8 +4018,8 @@
   },
   {
    "id": "catalog:male:nares_inspection@nose",
-   "detail": "(c) no describe_exam logged",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:male:nuchal_rigidity@neuro_meningeal",
@@ -4258,8 +4258,8 @@
   },
   {
    "id": "catalog:male:rise_from_chair@hip_left",
-   "detail": "",
-   "status": "PASS"
+   "detail": "(b) the click resolved to wrist_left; (b) the maneuver menu did not open",
+   "status": "FAIL"
   },
   {
    "id": "catalog:male:rise_from_chair@hip_right",
@@ -4453,8 +4453,8 @@
   },
   {
    "id": "catalog:male:strength_c5_6_elbow_flexion@elbow_right",
-   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:male:strength_c5_6_elbow_flexion@neuro_motor_upper",
@@ -4468,8 +4468,8 @@
   },
   {
    "id": "catalog:male:strength_c5_7_elbow_extension@elbow_right",
-   "detail": "(a) first hit is bed (exam-table), not the patient; (b) the click never reached the patient; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:male:strength_c5_7_elbow_extension@neuro_motor_upper",

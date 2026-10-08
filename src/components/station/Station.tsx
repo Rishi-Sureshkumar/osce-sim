@@ -281,9 +281,22 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
   };
 
   // ---- 1B flow: "You may begin", warnings, deadlines
+  /** the server applies any passed deadline and returns the log (the flow may have moved on without this page) */
+  const resync = async () => {
+    const res = await fetch(`/api/sessions/${session.id}/tick`, { method: "POST" });
+    const body = await res.json();
+    if (!res.ok) throw new Error(body.error ?? "Could not reach the server");
+    setActions(body.actions as Action[]);
+  };
   const begin = () =>
     run(async () => {
-      await post({ type: "timer", source: mode === "practice" ? "system" : "click", payload: { event: "begin" } });
+      try {
+        await post({ type: "timer", source: mode === "practice" ? "system" : "click", payload: { event: "begin" } });
+      } catch {
+        // already begun: a page reloaded straight after opening reads the log before the first load's
+        // "begin" lands, so the server refuses this one; pick up its log instead of waiting forever
+        return resync();
+      }
       setBegunBanner(true);
       setTimeout(() => setBegunBanner(false), 4000);
       try {
@@ -308,10 +321,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
   const onDeadline = (which: "encounter" | "pen") => {
     if (which === "pen") return setPenLock(true);
     void run(async () => {
-      const res = await fetch(`/api/sessions/${session.id}/tick`, { method: "POST" });
-      const body = await res.json();
-      if (!res.ok) throw new Error(body.error ?? "Could not reach the server");
-      setActions(body.actions as Action[]);
+      await resync();
       setSelected(null);
       setPerforming(null);
       setTool((t) => ({ ...t, tool: null }));

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { SHOTS, back, breadcrumb, canGo, ease, focusShotFor, go, shotCamera, tweenSeconds, type ShotId, type ShotState } from "@/scene/shots";
+import { SHOTS, back, breadcrumb, canGo, ease, focusShotFor, go, shotCamera, shotHint, tweenSeconds, type ShotId, type ShotState } from "@/scene/shots";
 import { poseFor } from "@/exam3d/regionAnchors";
 import { loadContentFromDisk } from "@/content/loadFromDisk";
 
@@ -62,5 +62,20 @@ describe("camera shot state machine", () => {
       expect(d, id).toBeGreaterThan(0.3);
       expect(d, id).toBeLessThan(3);
     }
+  });
+});
+
+describe("hints for parts the patient lies on", () => {
+  it("the back is out of reach lying back (up to 45°), not sitting up or on the side", () => {
+    for (const p of ["supine", "reclined_30", "reclined_45"] as const) {
+      expect(shotHint("chest_back", p), p).toMatch(/back is against the table/);
+      expect(shotHint("neck_back", p), p).toMatch(/back is against the table/);
+    }
+    for (const p of ["seated", "seated_leaning_forward", "sitting_dangling", "left_lateral_decubitus", "standing"] as const) expect(shotHint("chest_back", p), p).toBeNull();
+  });
+  it("lying on the left side, the left ear is against the table", () => {
+    expect(shotHint("ear_left", "left_lateral_decubitus")).toMatch(/left ear is against the table/);
+    expect(shotHint("ear_right", "left_lateral_decubitus")).toBeNull();
+    expect(shotHint("ear_left", "seated")).toBeNull();
   });
 });

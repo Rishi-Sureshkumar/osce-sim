@@ -269,13 +269,14 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
     if (!(await dlg.isVisible({ timeout: 2_000 }).catch(() => false))) return [...fails, "(c) the verbal exam dialog did not open"];
     await dlg.getByLabel("Describe the exam").fill("I would inspect this area with a light and describe what I see.");
     await dlg.getByRole("button", { name: "Done" }).click();
-    const log = await qaLog(api, sessionId);
-    if (!log.some((a) => a.type === "describe_exam" && a.payload.regionId === e.regionId)) fails.push("(c) no describe_exam logged");
+    // Done posts the description; the log may be read before that request has landed
+    const logged = async () => (await qaLog(api, sessionId)).some((a) => a.type === "describe_exam" && a.payload.regionId === e.regionId);
+    if (!(await expect.poll(logged, { timeout: 5_000 }).toBe(true).then(() => true, () => false))) fails.push("(c) no describe_exam logged");
     return fails;
   }
   if (e.route === "prohibited") {
-    const log = await qaLog(api, sessionId);
-    if (!log.some((a) => a.type === "prohibited_attempt" && a.payload.regionId === e.regionId)) fails.push("(c) no prohibited_attempt logged");
+    const logged = async () => (await qaLog(api, sessionId)).some((a) => a.type === "prohibited_attempt" && a.payload.regionId === e.regionId);
+    if (!(await expect.poll(logged, { timeout: 5_000 }).toBe(true).then(() => true, () => false))) fails.push("(c) no prohibited_attempt logged");
     return fails;
   }
 
@@ -354,9 +355,18 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
 async function runNegative(page: Page, api: APIRequestContext, sessionId: string, e: CatalogEntry): Promise<string[]> {
   if (e.route !== "tool" || e.steps?.length || e.sweep || !e.toleranceCm) return [];
   await closeAll(page);
-  const pts = await page.evaluate(([r, cm]) => window.__osce3d!.skinPointNear(r!, cm!, 8), [e.regionId, e.toleranceCm * 2] as const);
-  const p = pts.find((q) => q.page.x > 0 && q.page.y > 0);
-  if (!p) return ["(neg) no skin 2× the tolerance away to test"];
+  // a skin point the click actually reaches: one hidden behind another limb would land nearer the anchor
+  const p = await page.evaluate(([r, cm]) => {
+    const h = window.__osce3d!;
+    return (
+      h.skinPointNear(r!, cm!, 8).find((q) => {
+        if (q.page.x <= 0 || q.page.y <= 0) return false;
+        const first = h.probe(q.page.x, q.page.y).find((x) => x.kind !== "hair");
+        return !!first && Math.hypot(first.point[0] - q.world[0], first.point[1] - q.world[1], first.point[2] - q.world[2]) < 0.01;
+      }) ?? null
+    );
+  }, [e.regionId, e.toleranceCm * 2] as const);
+  if (!p) return ["(neg) no visible skin 2× the tolerance away to test"];
   const before = (await newestExamine(api, sessionId, 0)).count;
   await page.mouse.move(p.page.x, p.page.y);
   await page.mouse.down();
