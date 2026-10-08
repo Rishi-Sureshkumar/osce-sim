@@ -3035,7 +3035,7 @@
   {
    "id": "anchors:occlusion:male:seated:scalp",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (scalp) 0.1 cm from the anchor (tolerance 4)"
+   "detail": "from the head_top shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:spine_cervical",
@@ -7595,7 +7595,7 @@
   {
    "id": "anchors:occlusion:female:seated:scalp",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (scalp) 1.7 cm from the anchor (tolerance 4)"
+   "detail": "from the head_top shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:spine_cervical",
@@ -13689,10 +13689,10 @@
    "variant": "male",
    "position": "seated",
    "regionId": "scalp",
-   "shot": "neck_back",
+   "shot": "head_top",
    "first": "skin",
    "part": "scalp",
-   "offCm": 0.07
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -20559,10 +20559,10 @@
    "variant": "female",
    "position": "seated",
    "regionId": "scalp",
-   "shot": "neck_back",
+   "shot": "head_top",
    "first": "skin",
    "part": "scalp",
-   "offCm": 1.66
+   "offCm": 0
   },
   {
    "check": "occlusion",

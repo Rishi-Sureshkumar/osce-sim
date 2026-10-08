@@ -28,6 +28,7 @@ const PATIENT_SHOTS = ["overview", "seated", "head_neck", "ear_left", "ear_right
 const REGION_VIEWS: [string, Position][] = [
   ["face", "seated"],
   ["neck_back", "seated"],
+  ["head_top", "seated"],
   ["arms_left", "seated"],
   ["elbow_right", "seated"],
   ["elbow_left", "seated"],

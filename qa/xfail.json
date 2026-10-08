@@ -195,11 +195,6 @@
   "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient]"
  },
  {
-  "id": "catalog:male:auscultate_heart_diaphragm@cardiac_mitral",
-  "owner": "M3",
-  "reason": "the folded gown edge / fold tab lies over the target and takes the click (sectioned drapes, M3) [(a) first hit is drape (roll-chest), not the patient]"
- },
- {
   "id": "catalog:male:back_inspection@sacrum",
   "owner": "M3",
   "reason": "the exam table is in front of the target (patient sinks into the table / backrest; M3 hinge and placement) [(a) first hit is bed (exam-table), not the patient; (b) the click resolved to spine_lumbar; (c) no examine for back_inspection@sacrum (got back_inspection@spine]"

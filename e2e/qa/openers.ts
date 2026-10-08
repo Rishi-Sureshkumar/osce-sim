@@ -53,7 +53,8 @@ export const OPENERS = {
     await clickRegion(page, "abd_ruq");
   },
   describe: async (page) => {
-    await camera(page, "head_neck");
+    // from its own close view (from head & neck, the first click on the mouth moves the camera to the face)
+    await camera(page, "face");
     await clickRegion(page, "mouth");
   },
   "leave-confirm": async (page) => {
@@ -66,7 +67,8 @@ export const OPENERS = {
     await page.getByRole("button", { name: "Tools…" }).click();
   },
   "bed-hud": async (page) => {
-    await camera(page, "overview");
+    // the lever is on the patient's right: from the room view it lies behind the seated patient's neck
+    await camera(page, "seated");
     const p = await page.evaluate(() => window.__osce3d!.projectObject("table-head-control"));
     await page.mouse.click(p!.x, p!.y);
   },

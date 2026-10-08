@@ -237,6 +237,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
     () => (tool ? toolRegions : [...new Set([...props.examinableRegionIds, ...props.prohibitedRegionIds])].filter((id) => ANCHOR_BY_REGION.has(id))),
     [tool, toolRegions, props.examinableRegionIds, props.prohibitedRegionIds],
   );
+  const examinablePickable = useMemo(() => pickable.filter((id) => !props.prohibitedRegionIds.has(id)), [pickable, props.prohibitedRegionIds]);
   const edema = useMemo(() => Object.fromEntries((props.presentation.visibleSigns.edema ?? []).map((e) => [e.regionId, e.grade])), [props.presentation]);
   const panelRegions = props.regions.filter((r) => r.group === "neuro");
   const hint = shotHint(shot.current, state.position);
@@ -721,6 +722,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
               angle={trunk.current}
               jerk={jerk}
               pickableRegionIds={pickable}
+              {...(tool ? {} : { examinableRegionIds: examinablePickable })}
               toolActive={!!tool && inside}
               onBodyClick={onBodyClick}
               onToolDown={onToolDown}

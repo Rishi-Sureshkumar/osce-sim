@@ -84,7 +84,8 @@ export const PROOFS: Record<string, Proof> = {
   "m2-review": {
     kind: "vitest",
     tests: ["tests/m2-review.test.ts"],
-    description: "M2 review findings: the Achilles close-up camera inside the table when the legs lie on it; a hands clonus test that never moved the foot; a wobble hiding the swinging-light test; touching the upper arm with the hands logging a cuff placement",
+    commit: "0de4946",
+    description: "M2 review findings: the Achilles close-up camera inside the table when the legs lie on it; a hands clonus test that never moved the foot; a wobble hiding the swinging-light test; touching the upper arm with the hands logging a cuff placement; a click just off the male apex logged as a prohibited breast exam",
   },
 };
 

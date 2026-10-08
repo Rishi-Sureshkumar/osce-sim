@@ -27,14 +27,24 @@ test("bug 8: the Achilles reflex result card can be closed (✕, Esc, outside cl
   await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "overview", { timeout: 10_000 });
   await settle(page);
 
+  // the Achilles reflex is struck on the tendon, legs hanging (Phase 4 bug 7)
+  await page.getByRole("button", { name: "Actions ▾" }).click();
+  await page.getByRole("menuitem", { name: "Position: Sitting, legs dangling" }).click();
+  await expect(page.getByTestId("position-label")).toHaveText("Sitting, legs dangling");
   await page.getByRole("button", { name: "Tools…" }).click();
   await page.locator('[role=menuitem][data-tool="reflex_hammer"]').click();
-  await page.getByLabel("Camera shot").selectOption("feet");
-  await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "feet");
+  await page.getByLabel("Camera shot").selectOption("ankle_left");
+  await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "ankle_left");
 
   const tap = async () => {
     await settle(page);
-    const p = await page.evaluate(() => window.__osce3d!.project("ankle_left"));
+    // the tendon's anchor aimed 3 mm under the skin (as the catalog does): it is on the shank's outline
+    const p = await page.evaluate(() => {
+      const h = window.__osce3d!;
+      const w = h.anchor("achilles_left");
+      const n = h.anchorNormal("achilles_left") ?? [0, 0, 0];
+      return w ? h.projectPoint([w[0] - n[0] * 0.003, w[1] - n[1] * 0.003, w[2] - n[2] * 0.003]) : null;
+    });
     await page.mouse.click(p!.x, p!.y);
     await expect(page.locator('[data-testid="findings"]')).toContainText(/Achilles/i);
   };

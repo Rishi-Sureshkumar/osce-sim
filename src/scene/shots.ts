@@ -16,7 +16,7 @@ import { ROOM } from "./room/ExamRoom";
 import { insideBox, tableAngle, tableBoxes } from "./room/tableGeometry";
 
 export type FocusShotId = Exclude<RegionGroup, "whole" | "neuro">;
-export type ShotId = "corridor" | "overview" | "sink" | "tool_table" | "seated" | FocusShotId | "face" | "ear_left" | "ear_right" | "ankle_left" | "ankle_right" | "arms_left" | "elbow_left" | "elbow_right" | "chest_left" | "chest_right" | "neck_back" | "legs_left";
+export type ShotId = "corridor" | "overview" | "sink" | "tool_table" | "seated" | FocusShotId | "face" | "ear_left" | "ear_right" | "ankle_left" | "ankle_right" | "arms_left" | "elbow_left" | "elbow_right" | "chest_left" | "chest_right" | "neck_back" | "legs_left" | "head_top";
 
 type Framing =
   /** fixed camera in the room */
@@ -53,7 +53,7 @@ export interface Shot {
 }
 
 const FOCUS: FocusShotId[] = ["head_neck", "chest_front", "chest_back", "abdomen", "arms", "hands", "legs", "feet"];
-const ROOM_SHOTS: ShotId[] = ["overview", "sink", "tool_table", "seated", ...FOCUS, "face", "ear_left", "ear_right", "ankle_left", "ankle_right", "arms_left", "elbow_left", "elbow_right", "chest_left", "chest_right", "neck_back", "legs_left"];
+const ROOM_SHOTS: ShotId[] = ["overview", "sink", "tool_table", "seated", ...FOCUS, "face", "ear_left", "ear_right", "ankle_left", "ankle_right", "arms_left", "elbow_left", "elbow_right", "chest_left", "chest_right", "neck_back", "legs_left", "head_top"];
 const look = (yawDeg: number, zoomMin = 0.8, zoomMax = 1.25) => ({ yawDeg, zoomMin, zoomMax });
 
 export const SHOTS: Record<ShotId, Shot> = {
@@ -129,7 +129,18 @@ export const SHOTS: Record<ShotId, Shot> = {
     id: "neck_back",
     label: "Neck (back)",
     parent: "head_neck",
-    framing: { kind: "patient", on: [{ landmark: "c7" }, { landmark: "occiput" }], normalFrom: { landmark: "c7" }, forwardBone: "neck01", forwardAxis: [0, 0.5, -1], distance: 0.5 },
+    framing: { kind: "patient", on: [{ landmark: "c7" }, { landmark: "occiput" }], normalFrom: { landmark: "c7" }, forwardBone: "neck01", forwardAxis: [0, 0.5, -1], distance: 0.5, clearTable: true },
+    fov: 40,
+    freeLook: look(30, 0.7, 1.3),
+    transitions: ROOM_SHOTS,
+  },
+  // the top of the head from above and a little in front (the vertex, for the Weber test): from the
+  // front views it is out of sight, and from behind it is on the head's outline
+  head_top: {
+    id: "head_top",
+    label: "Top of the head",
+    parent: "head_neck",
+    framing: { kind: "patient", on: [{ anchor: "scalp" }], normalFrom: { anchor: "scalp" }, forwardBone: "head", forwardAxis: [0, 1, 0.35], distance: 0.45, clearTable: true },
     fov: 40,
     freeLook: look(30, 0.7, 1.3),
     transitions: ROOM_SHOTS,
@@ -380,8 +391,8 @@ const REGION_SHOT: Record<string, ShotId> = {
   upper_arm_left: "arms_left",
   biceps_tendon_left: "arms_left",
   triceps_tendon_right: "elbow_right",
-  // the vertex (Weber): from behind and above
-  scalp: "neck_back",
+  // the vertex (Weber): from above
+  scalp: "head_top",
   eye_left: "face",
   eye_right: "face",
   nose: "face",

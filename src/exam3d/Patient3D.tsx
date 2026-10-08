@@ -31,6 +31,8 @@ export interface Patient3DProps {
   jerk?: (Jerk & { at: number }) | null;
   /** regions a click can resolve to (examinable + prohibited, or the tool's regions) */
   pickableRegionIds: readonly string[];
+  /** of those, the ones that are not excluded exams (plain clicks; see resolveHit) */
+  examinableRegionIds?: readonly string[];
   toolActive: boolean;
   onBodyClick: (hit: BodyHit) => void;
   onToolDown: (hit: BodyHit) => void;
@@ -46,7 +48,7 @@ export interface Patient3DProps {
 export function Patient3D(p: Patient3DProps) {
   const toHit = (e: ThreeEvent<MouseEvent | PointerEvent>, record = false): BodyHit | null => {
     const raw: RawHit[] = e.intersections.map((x) => ({ kind: x.object.userData.kind as string | undefined, point: [x.point.x, x.point.y, x.point.z] as Vec3, normal: worldNormal(x) }));
-    const h = resolveHit(raw, p.pickableRegionIds, p.pose);
+    const h = resolveHit(raw, p.pickableRegionIds, p.pose, undefined, p.examinableRegionIds);
     if (record && QA.enabled) recordPointer({ hits: e.intersections.map(probeHitOf), bodyHit: h ? { point: h.point, kind: h.kind, regionId: h.regionId } : null });
     return h;
   };

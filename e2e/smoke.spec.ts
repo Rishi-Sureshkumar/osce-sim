@@ -179,7 +179,8 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await expect(page.locator('[data-testid="position-label"]')).toHaveText("Reclined to 30°");
   await examine(page, "neck_jvp_right", "jvp_inspection");
   await expect(page.locator('[data-testid="findings"]')).toContainText("JVP clearly elevated");
-  // real clicks on the canvas: the first click on the chest moves the camera close, the second opens the menu
+  // real clicks on the canvas, from the room: the first click on the chest moves the camera close, the second opens the menu
+  await camera(page, "overview");
   await page.waitForTimeout(1500);
   let apex = await page.evaluate(() => window.__osce3d!.project("cardiac_mitral"));
   await page.mouse.click(apex!.x, apex!.y);
@@ -390,8 +391,8 @@ test("tuning forks: Weber and the Rinne sequence on the screening patient", asyn
   await page.getByRole("button", { name: "Continue" }).click();
   await expect(page.locator('[data-testid="voice-status"]')).toContainText("Voice input isn't available in this browser");
   await expect(page.getByRole("button", { name: "Hold to talk" })).toBeDisabled();
-  // verbal-only exam (masked patient): clicking the mouth in the head & neck shot asks for a description
-  await camera(page, "head_neck");
+  // verbal-only exam (masked patient): clicking the mouth in its close view (the face) asks for a description
+  await camera(page, "face");
   const mouth = await page.evaluate(() => window.__osce3d!.project("mouth"));
   await page.mouse.click(mouth!.x, mouth!.y);
   await expect(page.getByRole("dialog", { name: /Mouth & throat: verbal exam/ })).toBeVisible();
@@ -402,7 +403,7 @@ test("tuning forks: Weber and the Rinne sequence on the screening patient", asyn
   await expect(page.locator('[data-testid="tool-in-hand"]')).toContainText("Tuning fork 512 Hz");
   // Weber at the vertex
   await page.getByRole("button", { name: "Strike fork" }).click();
-  await camera(page, "head_neck");
+  await camera(page, "head_top");
   await holdTool(page, "scalp", 80, "vertex");
   // touching the patient without hand hygiene is allowed but logged, with a practice nudge
   await expect(page.getByRole("status").filter({ hasText: "You haven't cleaned your hands yet" })).toBeVisible();

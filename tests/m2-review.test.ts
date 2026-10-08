@@ -4,6 +4,8 @@
  *  - a clonus test with the hands (no tendon tap: grade 0) never moved the foot;
  *  - leaving an eye and coming back into it hid the swinging-light test;
  *  - bp_cuff_placement had become a hands exam: touching the upper arm logged a cuff placement.
+ * And from the gate's e2e runs: on the male model the apex lies ~1 cm from the nipple, so a click just
+ * off the apex was logged as a prohibited breast exam (HF case: breast exams excluded).
  */
 import { describe, expect, it } from "vitest";
 import type { Position } from "@/domain/schemas";
@@ -11,6 +13,8 @@ import { POSITION_ANGLE } from "@/engine/patientState";
 import { loadContentFromDisk } from "@/content/loadFromDisk";
 import { anchorWorldPoints, distance, landmarkWorld, poseFor, type Pose, type Vec3 } from "@/exam3d/regionAnchors";
 import { decidePlacement, penlightSweeper } from "@/exam3d/tools/decide";
+import { resolveHit } from "@/exam3d/hit";
+import { ANCHOR_BY_REGION } from "@/exam3d/regionAnchors";
 import { candidatesFor, regionsForTool, toolFor } from "@/exam3d/tools/toolLogic";
 import { JERK_RISE, REFLEX_JERK, jerkDelta, jerkDuration } from "@/scene/animation/reflex";
 import { shotCamera, shotHint } from "@/scene/shots";
@@ -19,14 +23,18 @@ import { insideBox, tableAngle, tableBoxes } from "@/scene/room/tableGeometry";
 const { maneuvers, maneuverById } = loadContentFromDisk();
 const POSITIONS: Position[] = ["supine", "reclined_30", "reclined_45", "seated", "seated_leaning_forward", "sitting_dangling", "left_lateral_decubitus"];
 
-describe("the Achilles close-ups stay out of the table", () => {
+describe("the Achilles (and back-of-neck, top-of-head) close-ups stay out of the table", () => {
   for (const variant of ["male", "female"] as const)
-    it(`${variant}: in every position the camera and its line of sight clear the table`, () => {
+    it(`${variant}: in every position the camera is outside the table, and its line of sight clears it (bar the back of the neck lying on it)`, () => {
       for (const position of POSITIONS) {
         const pose = poseFor(position, POSITION_ANGLE[position], variant);
         const boxes = tableBoxes(tableAngle(position, POSITION_ANGLE[position]));
-        for (const shot of ["ankle_left", "ankle_right"] as const) {
+        for (const shot of ["ankle_left", "ankle_right", "neck_back", "head_top"] as const) {
           const { position: cam, target } = shotCamera(shot, pose);
+          expect(boxes.some((b) => insideBox(cam, b)), `${shot} ${position}: camera inside the table`).toBe(false);
+          // the back of the neck against the raised backrest can't be seen past it from anywhere (a hint says so);
+          // the ankles can always be seen from above, so they are held to the full check
+          if (shot === "neck_back" && shotHint(shot, position)) continue;
           const len = distance(cam, target);
           for (let i = 0; i <= 40; i++) {
             const t = i / 40;
@@ -101,4 +109,26 @@ describe("the BP cuff placement is not a hands exam", () => {
       }
     }
   });
+});
+
+describe("a click near the male apex is not a prohibited breast exam", () => {
+  const pickable = loadContentFromDisk().regions.map((r) => r.id).filter((id) => ANCHOR_BY_REGION.has(id));
+  const examinable = pickable.filter((id) => id !== "breast_left" && id !== "breast_right");
+  const body = (p: Vec3) => [{ kind: "body", point: p, normal: [0, 1, 0] as Vec3 }];
+  for (const position of ["reclined_30", "reclined_45", "seated", "supine"] as Position[])
+    it(`male, ${position}: around the apex → the apex; on the nipple → the breast`, () => {
+      const pose = poseFor(position, POSITION_ANGLE[position], "male");
+      const apex = anchorWorldPoints("cardiac_mitral", pose)[0]!;
+      const nipple = anchorWorldPoints("breast_left", pose)[0]!;
+      // 1 cm from the apex, directly away from the nipple and to either side of that line
+      const away: Vec3 = [apex[0] - nipple[0], apex[1] - nipple[1], apex[2] - nipple[2]];
+      const len = Math.hypot(...away) || 1;
+      const offs = [away.map((x) => (x / len) * 0.01) as Vec3, [0.007, 0, 0.007] as Vec3, [-0.007, 0, -0.007] as Vec3];
+      for (const o of offs) {
+        const p: Vec3 = [apex[0] + o[0], apex[1] + o[1], apex[2] + o[2]];
+        if (distance(p, nipple) <= distance(p, apex)) continue;
+        expect(resolveHit(body(p), pickable, pose, undefined, examinable)?.regionId, `${position} ${o}`).toBe("cardiac_mitral");
+      }
+      expect(resolveHit(body(nipple), pickable, pose, undefined, examinable)?.regionId).toBe("breast_left");
+    });
 });

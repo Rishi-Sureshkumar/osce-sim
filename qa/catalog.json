@@ -1448,7 +1448,7 @@
   },
   {
    "id": "catalog:female:auscultate_lungs@lung_ant_ll",
-   "detail": "(a) first hit is drape (roll-chest), not the patient",
+   "detail": "(a) first hit is drape (fold-chest), not the patient",
    "status": "XFAIL"
   },
   {
@@ -3193,8 +3193,8 @@
   },
   {
    "id": "catalog:male:auscultate_heart_diaphragm@cardiac_mitral",
-   "detail": "(a) first hit is drape (roll-chest), not the patient",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "XPASS"
   },
   {
    "id": "catalog:male:auscultate_heart_diaphragm@cardiac_pulmonic",
