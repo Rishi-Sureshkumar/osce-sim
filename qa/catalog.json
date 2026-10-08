@@ -833,8 +833,8 @@
   },
   {
    "id": "catalog-oracle:female:rinne_test@ear_left",
-   "detail": "at the anatomical point (ear_left#mastoid, bone step): (a) first hit is hair (proxy:hair), not the patient",
-   "status": "XFAIL"
+   "detail": "at the anatomical point (ear_left#mastoid, bone step): ",
+   "status": "PASS"
   },
   {
    "id": "catalog-oracle:female:rinne_test@ear_right",
@@ -2173,13 +2173,13 @@
   },
   {
    "id": "catalog:female:ln_occipital_palpation@ln_occipital",
-   "detail": "(b) the click resolved to mouth; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:ln_post_auricular_palpation@ln_post_auricular",
-   "detail": "(b) the click resolved to mouth; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:ln_post_cervical_palpation@ln_post_cervical",
@@ -2188,8 +2188,8 @@
   },
   {
    "id": "catalog:female:ln_pre_auricular_palpation@ln_pre_auricular",
-   "detail": "(a) the ear (ear_l) is in front",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:ln_submandibular_palpation@ln_submandibular",
@@ -2503,13 +2503,13 @@
   },
   {
    "id": "catalog:female:rinne_test@ear_left",
-   "detail": "(a) first hit is hair (proxy:hair), not the patient",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:rinne_test@ear_right",
-   "detail": "(a) first hit is hair (proxy:hair), not the patient",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:female:rise_from_chair@hip_left",
@@ -2943,7 +2943,7 @@
   },
   {
    "id": "catalog:female:weber_test@scalp",
-   "detail": "(a) the page covers the canvas here (div[data-testid=breadcrumb].absolute.top-2); (b) the placement never reached the patient; (c) no examine for weber_test@scalp (got none)",
+   "detail": "(a) the page covers the canvas here (select.bg-transparent.text-xs); (b) the placement never reached the patient; (c) no examine for weber_test@scalp (got none)",
    "status": "XFAIL"
   },
   {
@@ -3908,13 +3908,13 @@
   },
   {
    "id": "catalog:male:ln_occipital_palpation@ln_occipital",
-   "detail": "(b) the click resolved to mouth; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:ln_post_auricular_palpation@ln_post_auricular",
-   "detail": "(b) the click resolved to mouth; (b) the maneuver menu did not open",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:ln_post_cervical_palpation@ln_post_cervical",
@@ -3923,8 +3923,8 @@
   },
   {
    "id": "catalog:male:ln_pre_auricular_palpation@ln_pre_auricular",
-   "detail": "(a) the ear (ear_l) is in front",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:ln_submandibular_palpation@ln_submandibular",
@@ -4238,13 +4238,13 @@
   },
   {
    "id": "catalog:male:rinne_test@ear_left",
-   "detail": "(a) first hit is hair (proxy:hair), not the patient",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:rinne_test@ear_right",
-   "detail": "(a) first hit is hair (proxy:hair), not the patient",
-   "status": "XFAIL"
+   "detail": "",
+   "status": "PASS"
   },
   {
    "id": "catalog:male:rise_from_chair@hip_left",
@@ -4678,7 +4678,7 @@
   },
   {
    "id": "catalog:male:weber_test@scalp",
-   "detail": "(b) placement → scalp nothing (13.3 cm); (c) no examine for weber_test@scalp (got none)",
+   "detail": "(a) the page covers the canvas here (select.bg-transparent.text-xs); (b) the placement never reached the patient; (c) no examine for weber_test@scalp (got none)",
    "status": "XFAIL"
   },
   {

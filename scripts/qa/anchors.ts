@@ -17,7 +17,7 @@ import { anchorsFor, anchorWorldNormals, anchorWorldPoints, landmarkWorld, poseF
 import { PART_NAMES } from "@/scene/patientRig.generated";
 import { shotCamera } from "@/scene/shots";
 import type { Pose, VariantId } from "@/scene/rig";
-import { tableBoxes, type OrientedBox } from "@/scene/room/tableGeometry";
+import { tableAngle, tableBoxes, type OrientedBox } from "@/scene/room/tableGeometry";
 import { oracleFor, sampleWorld } from "../../qa/anatomy/oracle";
 import { examinedAnchors } from "../../e2e/qa/catalogPlan";
 import { skinnedPatient, type SkinnedPatient } from "./lib/patientMesh";
@@ -103,6 +103,7 @@ function firstHit(p: SkinnedPatient, from: Vec3, target: Vec3, angle: number) {
   let best: { what: string; part: string | null; t: number; point: Vec3 } | null = null;
   for (const m of p.meshes) {
     if (m.mesh.name.startsWith("gown")) continue; // the region is exposed for its exam
+    if (m.mesh.name === "hair") continue; // clicks pass through hair to the scalp (src/exam3d/hit.ts)
     const h = m.bvh.raycastFirst(ray, DoubleSide);
     if (!h) continue;
     if (best && h.distance >= best.t) continue;
@@ -174,7 +175,7 @@ async function main() {
           // (the lateral hip seen from above) is clickable if either reaches the right skin
           const n = normals[i] ?? [0, 0, 0];
           const tries = [w, [w[0] - n[0] * 0.003, w[1] - n[1] * 0.003, w[2] - n[2] * 0.003] as Vec3].map((aim) => {
-            const h = firstHit(sp, cam, aim, angle);
+            const h = firstHit(sp, cam, aim, tableAngle(position, angle));
             const offCm = h ? dist(h.point, w) * 100 : Infinity;
             const isEye = /^eye_/.test(e.regionId);
             const surfaceOk = !!h && (h.what === "skin" || (isEye && (h.what === "eyes" || h.what === "pupils")) || (e.regionId === "mouth" && h.what === "mouth"));

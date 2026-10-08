@@ -37,6 +37,11 @@ export const PROOFS: Record<string, Proof> = {
     tests: ["tests/regressions/bug1-penlight.test.ts"],
     description: "the penlight hit area was far too large: the eye target sat on the lids 1.4–1.9 cm from the pupil with a 1.5 cm tolerance, and only one eye could be lit per click (no sweep, no swinging-light test)",
   },
+  bug2: {
+    kind: "vitest",
+    tests: ["tests/regressions/bug2-mastoid.test.ts"],
+    description: "the mastoid was not detected: its landmark sat ~5 cm behind the ear canal under the hair cap, so the Rinne bone step and the post-auricular nodes were not where a clinician puts them",
+  },
   bug3: {
     kind: "e2e",
     tests: ["e2e/regressions/bug3-sink.spec.ts"],

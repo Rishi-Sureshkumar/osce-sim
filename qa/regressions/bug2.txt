@@ -1,0 +1,45 @@
+# Regression proof: bug2
+
+the mastoid was not detected: its landmark sat ~5 cm behind the ear canal under the hair cap, so the Rinne bone step and the post-auricular nodes were not where a clinician puts them
+
+test:      tests/regressions/bug2-mastoid.test.ts
+command:   npx vitest run tests/regressions/bug2-mastoid.test.ts
+old code:  c237328 (git worktree)  → exit 1 (FAILS, as it must)
+new code:  c237328 + working tree     → exit 0 (passes)
+result:    PROVEN
+date:      2026-10-08T03:36:37.785Z
+
+## Old code: why it fails
+```
+ ❯ tests/regressions/bug2-mastoid.test.ts (9 tests | 5 failed) 69ms
+   × bug 2: the mastoid is behind and below the ear canal, bare and findable > male: mastoid 1.2–3.2 cm from the ear canal, behind and below it, in every position 6ms
+   × bug 2: the mastoid is behind and below the ear canal, bare and findable > male: no hair over the mastoid 33ms
+   × bug 2: the mastoid is behind and below the ear canal, bare and findable > female: mastoid 1.2–3.2 cm from the ear canal, behind and below it, in every position 1ms
+   × bug 2: the mastoid is behind and below the ear canal, bare and findable > female: no hair over the mastoid 23ms
+   × bug 2: the mastoid is behind and below the ear canal, bare and findable > female: each ear view looks at the side of the head 1ms
+ Test Files  1 failed (1)
+      Tests  5 failed | 4 passed (9)
+ FAIL  tests/regressions/bug2-mastoid.test.ts > bug 2: the mastoid is behind and below the ear canal, bare and findable > male: mastoid 1.2–3.2 cm from the ear canal, behind and below it, in every position
+AssertionError: supine ear_left: expected 5.054710674212716 to be less than 3.2
+     46|           expect(cm, `${position} ${region}`).toBeGreaterThan(1.2);
+     47|           expect(cm, `${position} ${region}`).toBeLessThan(3.2);
+ FAIL  tests/regressions/bug2-mastoid.test.ts > bug 2: the mastoid is behind and below the ear canal, bare and findable > male: no hair over the mastoid
+AssertionError: l: nearest hair (cm): expected 0.40058896593357357 to be greater than 1.2
+     58|         expect(nearest * 100, `${lr}: nearest hair (cm)`).toBeGreaterT…
+ FAIL  tests/regressions/bug2-mastoid.test.ts > bug 2: the mastoid is behind and below the ear canal, bare and findable > female: mastoid 1.2–3.2 cm from the ear canal, behind and below it, in every position
+AssertionError: supine ear_left: expected 5.806160521377269 to be less than 3.2
+     46|           expect(cm, `${position} ${region}`).toBeGreaterThan(1.2);
+     47|           expect(cm, `${position} ${region}`).toBeLessThan(3.2);
+ FAIL  tests/regressions/bug2-mastoid.test.ts > bug 2: the mastoid is behind and below the ear canal, bare and findable > female: no hair over the mastoid
+AssertionError: l: nearest hair (cm): expected 0.399587726594673 to be greater than 1.2
+     58|         expect(nearest * 100, `${lr}: nearest hair (cm)`).toBeGreaterT…
+ FAIL  tests/regressions/bug2-mastoid.test.ts > bug 2: the mastoid is behind and below the ear canal, bare and findable > female: each ear view looks at the side of the head
+AssertionError: ear_left: angle from the head's lateral axis: expected 44.79645603047466 to be less than 30
+     83|         expect(Math.acos(cos) * (180 / Math.PI), `ear_${side}: angle f…
+```
+
+## New code
+```
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+```

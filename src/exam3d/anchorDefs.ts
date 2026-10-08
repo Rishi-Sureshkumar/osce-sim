@@ -28,6 +28,8 @@ export interface LandmarkDef {
   dimple?: number;
   /** instead: the centre of this side's rendered pupil, carried by the eye bone (not on the skin) */
   pupil?: boolean;
+  /** instead: the skin (never the ear) nearest to another landmark + an offset in cm (the mastoid from the ear canal) */
+  near?: { landmark: string; offsetCm: [number, number, number] };
   /** label for the practice-mode "Show landmarks" hint (own words) */
   label?: string;
 }
@@ -66,7 +68,8 @@ const L_LANDMARKS: LandmarkDef[] = [
   { id: "nipple_l", ref: { kind: "mid", bone: "clavicle.L", other: "upperarm01.L" }, box: [[0, 0.008], [-0.15, 0.025], [0, 0.3]], pick: [0, 0, 1], label: "Nipple (midclavicular line)" },
   { id: "asis_l", ref: { kind: "joint", bone: "root" }, box: [[0.11, 0.035], [0.06, 0.05], [0.1, 0.1]], pick: [0.2, 0, 1], label: "Anterior superior iliac spine" },
   { id: "ear_canal_l", ref: { kind: "joint", bone: "head" }, box: [[0.07, 0.04], [0.04, 0.025], [0, 0.03]], pick: [1, 0, 0], label: "Ear" },
-  { id: "mastoid_l", ref: { kind: "joint", bone: "head" }, box: [[0.055, 0.025], [0.01, 0.02], [-0.03, 0.025]], pick: [0.5, -0.2, -1], label: "Mastoid process" },
+  // the mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the skin behind the ear
+  { id: "mastoid_l", ref: { kind: "joint", bone: "head" }, pick: [0, 0, -1], near: { landmark: "ear_canal_l", offsetCm: [0, -1.5, -2] }, label: "Mastoid process" },
   // the pupil itself (the penlight must land on it; the skin around the eye is the lids)
   { id: "eye_l", ref: { kind: "joint", bone: "eye.L", end: "tail" }, pick: [0, 0, 1], pupil: true, label: "Eye" },
   { id: "jaw_angle_l", ref: { kind: "joint", bone: "jaw" }, box: [[0.05, 0.025], [-0.04, 0.025], [-0.02, 0.035]], pick: [1, -0.3, 0], label: "Angle of the jaw" },
@@ -106,6 +109,7 @@ function mirrorLandmark(l: LandmarkDef): LandmarkDef {
     ref: l.ref.kind === "mid" ? { ...l.ref, bone: mirrorBone(l.ref.bone), other: mirrorBone(l.ref.other) } : { ...l.ref, bone: mirrorBone(l.ref.bone) },
     box: l.box ? [[-l.box[0][0], l.box[0][1]], l.box[1], l.box[2]] : undefined,
     pick: [-l.pick[0], l.pick[1], l.pick[2]],
+    ...(l.near ? { near: { landmark: l.near.landmark.replace(/_l$/, "_r"), offsetCm: [-l.near.offsetCm[0], l.near.offsetCm[1], l.near.offsetCm[2]] as [number, number, number] } } : {}),
   };
 }
 

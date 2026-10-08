@@ -224,6 +224,30 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
     return ring.reduce((a, b) => a + b, 0) / ring.length - p[2];
   };
   const findLandmark = (def: (typeof LANDMARK_DEFS)[number]): { point: V3; normal: V3; bone: string; weights: [string, number][] } => {
+    if (def.near) {
+      const from = landmarks[def.near.landmark];
+      if (!from) throw new Error(`landmark ${def.id}: ${def.near.landmark} must be defined before it`);
+      const target = add(from.point, scale(def.near.offsetCm, 0.01));
+      // skin of the head and neck, but never the ear (the same rule as the QA part labels)
+      const earX = Math.abs(landmarks.ear_canal_l!.point[0]);
+      const earY = landmarks.ear_canal_l!.point[1];
+      const headC = headOf("head");
+      let bestI = -1;
+      let bestD = Infinity;
+      for (let i = 0; i < skin.pos.length; i++) {
+        const b = dominant(skin.src[i]!);
+        if (!/^(head|jaw|neck)/.test(b)) continue;
+        const p = skin.pos[i]!;
+        if (/^(head|jaw)/.test(b) && Math.abs(p[0]) > earX - 0.012 && p[1] < earY + 0.035 && p[1] > earY - 0.035 && p[2] > headC[2] - 0.03) continue;
+        const d = len(sub(p, target));
+        if (d < bestD) {
+          bestD = d;
+          bestI = i;
+        }
+      }
+      if (bestI < 0) throw new Error(`landmark ${def.id}: no skin near its target`);
+      return { point: skin.pos[bestI]!, normal: normals[bestI]!, bone: dominant(skin.src[bestI]!), weights: weightsOf(skin.src[bestI]!) };
+    }
     if (def.pupil) {
       const side = def.id.endsWith("_r") ? "R" : "L";
       const { centre, fwd } = pupilCentre(side);
@@ -353,6 +377,7 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
     const n = normals[i]!;
     if (n[2] > 0.35 && p[1] < browY + 0.02) return false; // forehead and face stay bare
     if (Math.abs(p[0]) > Math.abs(landmarks.ear_canal_l!.point[0]) - 0.012 && p[1] < earY + 0.035 && p[2] > headC[2] - 0.03) return false; // ears
+    if (len(sub(p, landmarks.mastoid_l!.point)) < 0.022 || len(sub(p, landmarks.mastoid_r!.point)) < 0.022) return false; // bare skin over the mastoid
     return p[1] > (p[2] < headC[2] - 0.02 ? earY - 0.035 : earY + 0.01);
   };
   for (let t = 0; t < skin.idx.length; t += 3) {
@@ -373,12 +398,15 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
 
   // ---- body-part labels (QA): dominant bone + head geometry (ear / scalp / face)
   const earX = Math.abs(landmarks.ear_canal_l!.point[0]);
+  const earZ = landmarks.ear_canal_l!.point[2];
   const partOf = (i: number): number => {
     const bone = dominant(skin.src[i]!);
     const p = skin.pos[i]!;
     const side = bone.endsWith(".L") ? "l" : bone.endsWith(".R") ? "r" : p[0] >= 0 ? "l" : "r";
     if (/^(head|jaw|orbicularis|eye)/.test(bone)) {
-      const nearEar = Math.abs(p[0]) > earX - 0.012 && p[1] < earY + 0.035 && p[1] > earY - 0.035 && p[2] > headC[2] - 0.03;
+      // the pinna: lateral, at ear height, from behind the head joint to 1 cm in front of the canal
+      // (the pre-auricular skin further forward is face)
+      const nearEar = Math.abs(p[0]) > earX - 0.012 && p[1] < earY + 0.035 && p[1] > earY - 0.035 && p[2] > headC[2] - 0.03 && p[2] < earZ + 0.01;
       if (nearEar) return PART[`ear_${side}` as "ear_l"];
       return inHair(i) ? PART.scalp : PART.face;
     }

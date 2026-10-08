@@ -11,23 +11,13 @@
  },
  {
   "id": "anchors:occlusion:*:seated:ln_occipital",
-  "owner": "M2",
-  "reason": "bug 2: hair covers these anchors; decide whether hair blocks or a click passes through to the scalp (hair proxy)"
- },
- {
-  "id": "anchors:occlusion:*:seated:ln_occipital#1",
-  "owner": "M2",
-  "reason": "bug 2: hair covers these anchors; decide whether hair blocks or a click passes through to the scalp (hair proxy)"
+  "owner": "M3",
+  "reason": "V-BACKREST / V-EARBACK: seated, the head sits inside the raised backrest, so these targets behind or beside the head are hidden from their shots (hair no longer blocks: clicks pass through it) (M3 table placement)"
  },
  {
   "id": "anchors:occlusion:*:seated:ln_post_auricular",
-  "owner": "M2",
-  "reason": "bug 2: hair covers these anchors; decide whether hair blocks or a click passes through to the scalp (hair proxy)"
- },
- {
-  "id": "anchors:occlusion:*:seated:ln_post_auricular#1",
-  "owner": "M2",
-  "reason": "bug 2: hair covers these anchors; decide whether hair blocks or a click passes through to the scalp (hair proxy)"
+  "owner": "M3",
+  "reason": "V-BACKREST / V-EARBACK: seated, the head sits inside the raised backrest, so these targets behind or beside the head are hidden from their shots (hair no longer blocks: clicks pass through it) (M3 table placement)"
  },
  {
   "id": "anchors:occlusion:*:seated:lung_lat_l",
@@ -36,18 +26,13 @@
  },
  {
   "id": "anchors:occlusion:*:seated:scalp",
-  "owner": "M2",
-  "reason": "bug 2: hair covers these anchors; decide whether hair blocks or a click passes through to the scalp (hair proxy)"
+  "owner": "M3",
+  "reason": "V-BACKREST / V-EARBACK: seated, the head sits inside the raised backrest, so these targets behind or beside the head are hidden from their shots (hair no longer blocks: clicks pass through it) (M3 table placement)"
  },
  {
   "id": "anchors:occlusion:male:seated:hip_left",
   "owner": "M2",
   "reason": "bug 5 / shots: seated, the hands and wrists are hidden behind the thighs in the hands shot; the far hip and the left-lateral back are out of view of their shots"
- },
- {
-  "id": "anchors:occlusion:male:seated:ln_pre_auricular",
-  "owner": "M2",
-  "reason": "bug 2: hair covers these anchors; decide whether hair blocks or a click passes through to the scalp (hair proxy)"
  },
  {
   "id": "anchors:occlusion:male:seated:sacrum",
@@ -68,16 +53,6 @@
   "id": "anchors:oracle:*:*:brachioradialis_right",
   "owner": "M2",
   "reason": "bug 7: the +4 cm offset is applied in bind Y, not along the forearm, so the site is ~2 cm from the wrist (should be 3–5 cm, radial side)"
- },
- {
-  "id": "anchors:oracle:*:*:ear_left#mastoid",
-  "owner": "M2",
-  "reason": "bug 2: the mastoid landmark sits ~5 cm behind and ~3 cm medial of the ear canal (oracle: 1.5–2.5 cm behind, 1–2 cm below, on the scalp)"
- },
- {
-  "id": "anchors:oracle:*:*:ear_right#mastoid",
-  "owner": "M2",
-  "reason": "bug 2: the mastoid landmark sits ~5 cm behind and ~3 cm medial of the ear canal (oracle: 1.5–2.5 cm behind, 1–2 cm below, on the scalp)"
  },
  {
   "id": "anchors:oracle:*:*:patellar_tendon_left",
@@ -163,11 +138,6 @@
   "id": "catalog-oracle:female:reflex_triceps@elbow_right",
   "owner": "M2",
   "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [at the anatomical point (triceps_tendon_right): (b) placement → elbow_right nothing (7.5 cm); (c) no examine for reflex_triceps@elbow_right (got none)]"
- },
- {
-  "id": "catalog-oracle:female:rinne_test@ear_left",
-  "owner": "M2",
-  "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [at the anatomical point (ear_left#mastoid, bone step): (a) first hit is hair (proxy:hair), not the patient]"
  },
  {
   "id": "catalog-oracle:male:blood_pressure@arm_left",
@@ -295,24 +265,9 @@
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to wrist_right; (b) the maneuver menu did not open]"
  },
  {
-  "id": "catalog:female:ln_occipital_palpation@ln_occipital",
-  "owner": "M2",
-  "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [(a) first hit is hair (proxy:hair), not the patient; (b) the click resolved to scalp; (b) ln_occipital_palpation is not in the menu for this region]"
- },
- {
-  "id": "catalog:female:ln_post_auricular_palpation@ln_post_auricular",
-  "owner": "M2",
-  "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [(a) first hit is hair (proxy:hair), not the patient; (b) the click resolved to scalp; (b) ln_post_auricular_palpation is not in the menu for this region]"
- },
- {
   "id": "catalog:female:ln_post_cervical_palpation@ln_post_cervical",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to eye_left; (b) ln_post_cervical_palpation is not in the menu for this region]"
- },
- {
-  "id": "catalog:female:ln_pre_auricular_palpation@ln_pre_auricular",
-  "owner": "M2",
-  "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to eye_left; (b) ln_pre_auricular_palpation is not in the menu for this region]"
  },
  {
   "id": "catalog:female:ln_submandibular_palpation@ln_submandibular",
@@ -345,16 +300,6 @@
   "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [(b) placement → elbow_right nothing (9.0 cm); (c) no examine for reflex_triceps@elbow_right (got none)]"
  },
  {
-  "id": "catalog:female:rinne_test@ear_left",
-  "owner": "M2",
-  "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [(a) first hit is hair (proxy:hair), not the patient]"
- },
- {
-  "id": "catalog:female:rinne_test@ear_right",
-  "owner": "M2",
-  "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [(a) first hit is hair (proxy:hair), not the patient]"
- },
- {
   "id": "catalog:female:straight_leg_raise@spine_lumbar",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to wrist_right; (b) the maneuver menu did not open]"
@@ -376,8 +321,8 @@
  },
  {
   "id": "catalog:female:weber_test@scalp",
-  "owner": "M2",
-  "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [(a) first hit is hair (proxy:hair), not the patient]"
+  "owner": "M6",
+  "reason": "the crown sits under the camera-shot selector at the top of the ear view (page UI over the canvas; M6 layout) [(a) first hit is hair (proxy:hair), not the patient]"
  },
  {
   "id": "catalog:male:cva_tenderness@cva_left",
@@ -415,24 +360,9 @@
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to lung_lat_r; (b) the maneuver menu did not open]"
  },
  {
-  "id": "catalog:male:ln_occipital_palpation@ln_occipital",
-  "owner": "M2",
-  "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [(a) first hit is hair (proxy:hair), not the patient; (b) the click resolved to scalp; (b) ln_occipital_palpation is not in the menu for this region]"
- },
- {
-  "id": "catalog:male:ln_post_auricular_palpation@ln_post_auricular",
-  "owner": "M2",
-  "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [(a) first hit is hair (proxy:hair), not the patient; (b) the click resolved to scalp; (b) ln_post_auricular_palpation is not in the menu for this region]"
- },
- {
   "id": "catalog:male:ln_post_cervical_palpation@ln_post_cervical",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to eye_left; (b) ln_post_cervical_palpation is not in the menu for this region]"
- },
- {
-  "id": "catalog:male:ln_pre_auricular_palpation@ln_pre_auricular",
-  "owner": "M2",
-  "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [(a) first hit is hair (proxy:hair), not the patient]"
  },
  {
   "id": "catalog:male:nares_inspection@nose",
@@ -460,16 +390,6 @@
   "reason": "bug 7: reflex sites are not on the tendons (elbow anchor on the olecranon, etc.) [(b) placement → elbow_right nothing (8.5 cm); (c) no examine for reflex_triceps@elbow_right (got none)]"
  },
  {
-  "id": "catalog:male:rinne_test@ear_left",
-  "owner": "M2",
-  "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [(a) first hit is hair (proxy:hair), not the patient]"
- },
- {
-  "id": "catalog:male:rinne_test@ear_right",
-  "owner": "M2",
-  "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [(a) first hit is hair (proxy:hair), not the patient]"
- },
- {
   "id": "catalog:male:strength_c5_6_elbow_flexion@elbow_left",
   "owner": "M2",
   "reason": "bug 5 / shots: the target is hidden or misplaced from its camera shot (occluded by another body part, or the anchor is off) [(b) the click resolved to precordium_wall; (b) the maneuver menu did not open]"
@@ -491,46 +411,11 @@
  },
  {
   "id": "catalog:male:weber_test@scalp",
-  "owner": "M2",
-  "reason": "bug 2: hair or the ear lies over the target (hair/ear proxies, mastoid recalibration) [(a) first hit is hair (proxy:hair), not the patient]"
- },
- {
-  "id": "anchors:occlusion:*:seated:arm_left",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:*:seated:arm_right",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:*:seated:carotid_left",
-  "owner": "M3",
-  "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
- },
- {
-  "id": "anchors:occlusion:*:seated:carotid_right",
-  "owner": "M3",
-  "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
- },
- {
-  "id": "anchors:occlusion:*:seated:ear_left",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:*:seated:ear_right",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
+  "owner": "M6",
+  "reason": "the crown sits under the camera-shot selector at the top of the ear view (page UI over the canvas; M6 layout) [(a) first hit is hair (proxy:hair), not the patient]"
  },
  {
   "id": "anchors:occlusion:*:seated:elbow_right",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:*:seated:ln_ant_cervical#1",
   "owner": "M3",
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
  },
@@ -545,52 +430,7 @@
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
  },
  {
-  "id": "anchors:occlusion:*:seated:ln_supraclavicular",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:*:seated:ln_supraclavicular#1",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:*:seated:lung_lat_r",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:*:seated:neck_trachea",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:*:seated:shoulder_left",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:*:seated:shoulder_right",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:female:seated:ln_ant_cervical",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
   "id": "anchors:occlusion:female:seated:ln_post_cervical#1",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:female:seated:ln_pre_auricular",
-  "owner": "M3",
-  "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
- },
- {
-  "id": "anchors:occlusion:female:seated:neck_thyroid",
   "owner": "M3",
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
  },
@@ -600,37 +440,12 @@
   "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
  },
  {
-  "id": "anchors:occlusion:male:seated:ln_ant_cervical",
-  "owner": "M3",
-  "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
- },
- {
   "id": "anchors:occlusion:male:seated:ln_post_cervical#1",
   "owner": "M3",
   "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
  },
  {
   "id": "anchors:occlusion:male:seated:ln_submandibular",
-  "owner": "M3",
-  "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
- },
- {
-  "id": "anchors:occlusion:male:seated:ln_submandibular#1",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:male:seated:lung_ant_lu",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:male:seated:lung_ant_ru",
-  "owner": "M3",
-  "reason": "the raised backrest/mattress is in the way: seated, the patient's back and head pass 11–15 cm through the backrest (trunk pivot ≠ table hinge) and side cameras end up inside it; feet sink into the foot mattress"
- },
- {
-  "id": "anchors:occlusion:male:seated:neck_thyroid",
   "owner": "M3",
   "reason": "seated: the neck lies inside the raised backrest (the patient sinks 11–15 cm into it; M3 table placement), so from the new front head & neck shot the backrest is hit first"
  },
@@ -1015,11 +830,6 @@
   "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
  },
  {
-  "id": "intersections:female:sitting_dangling:*:bed",
-  "owner": "M3",
-  "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
- },
- {
   "id": "intersections:female:sitting_dangling:abdomen-exposed:sheet",
   "owner": "M3",
   "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
@@ -1205,11 +1015,6 @@
   "reason": "skin pokes out through the gown panels (female chest when lying back; shoulders/abdomen when the trunk flexes): the gown is a fixed offset shell, not a skinned drape"
  },
  {
-  "id": "intersections:male:sitting_dangling:*:bed",
-  "owner": "M3",
-  "reason": "the patient sinks into the exam table: seated/sitting the trunk and head pass 10–15 cm through the raised backrest (trunk pivot ≠ table hinge); left lateral the lower limbs go into the mattress (M2 fixes the left-lateral joint signs, M3 the hinge and placement)"
- },
- {
   "id": "intersections:male:sitting_dangling:abdomen-exposed:sheet",
   "owner": "M3",
   "reason": "bug 6: the legs poke through the leg sheet (fixed cylinder ~17 cm below the hips, radius 24 cm) in every position"
@@ -1278,5 +1083,65 @@
   "id": "catalog:female:back_rom@spine_cervical",
   "owner": "M6",
   "reason": "page UI covers the 3D view at the target (toasts/overlays over the canvas) [(a) the page covers the canvas here (div.mx-auto.flex); (b) the click never reached the patient; (b) the maneuver menu did not open]"
+ },
+ {
+  "id": "anchors:occlusion:male:seated:cva_right",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:male:seated:cva_left",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:male:seated:spine_lumbar",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:cva_right",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:cva_left",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:spine_cervical",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:spine_thoracic",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:spine_lumbar",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:lung_post_ru",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:lung_post_lu",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:lung_post_rl",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
+ },
+ {
+  "id": "anchors:occlusion:female:seated:lung_post_ll",
+  "owner": "M3",
+  "reason": "V-BACKREST: seated, the patient sits inside the raised backrest (trunk 80°, backrest 50°), so the back exams are hidden behind it from the back shot (M3 table hinge and placement)"
  }
 ]

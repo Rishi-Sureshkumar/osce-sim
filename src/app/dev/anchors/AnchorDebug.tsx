@@ -11,7 +11,7 @@ import { Suspense, useMemo, useState } from "react";
 import { Position } from "@/domain/schemas";
 import { anchorWorldPoints, anchorsFor, poseFor } from "@/exam3d/regionAnchors";
 import { POSITION_ANGLE } from "@/engine/patientState";
-import { tableAngle } from "@/exam3d/Exam3DView";
+import { tableAngle } from "@/scene/room/tableGeometry";
 import { NEAR_FACTOR } from "@/exam3d/tools/contact";
 import { PatientModel } from "@/scene/PatientModel";
 import { ExamTable } from "@/scene/room/ExamRoom";

@@ -31,6 +31,8 @@ type Framing =
       normalBlendUp?: number;
       /** look along this bone's forward axis instead of a skin normal (the face: the head's +Z) */
       forwardBone?: string;
+      /** the bone-frame axis to look along with forwardBone (default +Z; the ears: lateral and a little back) */
+      forwardAxis?: Vec3;
       /** move the camera this far toward the feet along the body axis (look slightly up, under the chin) */
       down?: number;
     };
@@ -121,8 +123,9 @@ export const SHOTS: Record<ShotId, Shot> = {
     id: "ear_left",
     label: "Left ear",
     parent: "head_neck",
-    framing: { kind: "patient", on: [{ landmark: "ear_canal_l" }, { landmark: "mastoid_l" }], normalFrom: { landmark: "ear_canal_l" }, distance: 0.5, lift: 0.05 },
-    fov: 40,
+    // from the side and a little behind, on the head's own axes, so the ear and the mastoid behind it fill the view
+    framing: { kind: "patient", on: [{ landmark: "ear_canal_l" }, { landmark: "mastoid_l" }], normalFrom: { landmark: "ear_canal_l" }, forwardBone: "head", forwardAxis: [0.98, 0, -0.2], distance: 0.34 },
+    fov: 35,
     freeLook: look(30, 0.7, 1.3),
     transitions: ROOM_SHOTS,
   },
@@ -130,8 +133,9 @@ export const SHOTS: Record<ShotId, Shot> = {
     id: "ear_right",
     label: "Right ear",
     parent: "head_neck",
-    framing: { kind: "patient", on: [{ landmark: "ear_canal_r" }, { landmark: "mastoid_r" }], normalFrom: { landmark: "ear_canal_r" }, distance: 0.5, lift: 0.05 },
-    fov: 40,
+    // from the side and a little behind, on the head's own axes, so the ear and the mastoid behind it fill the view
+    framing: { kind: "patient", on: [{ landmark: "ear_canal_r" }, { landmark: "mastoid_r" }], normalFrom: { landmark: "ear_canal_r" }, forwardBone: "head", forwardAxis: [-0.98, 0, -0.2], distance: 0.34 },
+    fov: 35,
     freeLook: look(30, 0.7, 1.3),
     transitions: ROOM_SHOTS,
   },
@@ -220,7 +224,7 @@ export function shotCamera(id: ShotId, pose: Pose): { position: Vec3; target: Ve
   if (f.kind === "fixed") return { position: f.position, target: f.target, fov: shot.fov };
   const pts = f.on.map((r) => pointOf(r, pose).point);
   const target: Vec3 = [0, 1, 2].map((k) => pts.reduce((s, p) => s + p[k]!, 0) / pts.length) as Vec3;
-  let n = f.forwardBone ? norm(dirToWorld([0, 0, 1], f.forwardBone, pose)) : pointOf(f.normalFrom, pose).normal;
+  let n = f.forwardBone ? norm(dirToWorld(f.forwardAxis ?? [0, 0, 1], f.forwardBone, pose)) : pointOf(f.normalFrom, pose).normal;
   if (f.normalBlendUp) n = norm(add(scaleV(n, 1 - f.normalBlendUp), [0, f.normalBlendUp, 0]));
   // never put the camera under the table: a surface facing down (the back of a lying patient) is viewed from above
   // (the face always has room in front of it, even leaning forward)
@@ -236,7 +240,20 @@ function scaleV(a: Vec3, k: number): Vec3 {
 }
 
 /** Regions with a closer shot of their own (the ears need a side view for the mastoid; the eyes and face a front view). */
-const REGION_SHOT: Record<string, ShotId> = { ear_left: "ear_left", ear_right: "ear_right", eye_left: "face", eye_right: "face", nose: "face", mouth: "face", face: "face" };
+const REGION_SHOT: Record<string, ShotId> = {
+  ear_left: "ear_left",
+  ear_right: "ear_right",
+  // behind the head: the frontal head & neck shot can't see them; the posterolateral ear view can
+  ln_post_auricular: "ear_right",
+  ln_occipital: "ear_right",
+  ln_pre_auricular: "ear_left",
+  scalp: "ear_right",
+  eye_left: "face",
+  eye_right: "face",
+  nose: "face",
+  mouth: "face",
+  face: "face",
+};
 
 /** The focus shot for a region group (whole-patient and neuro panels stay on the current shot). */
 export function focusShotFor(group: RegionGroup, regionId?: string): ShotId | null {

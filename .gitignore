@@ -20,3 +20,6 @@ qa/screens/**/*.png
 
 # language model + wasm runtime (npm run lang:vendor)
 public/lang/
+
+# agent worktrees (workflows)
+.claude/worktrees/

@@ -23,6 +23,17 @@ export interface OrientedBox {
   rotX: number;
 }
 
+/**
+ * The table's head-section angle for a patient position (degrees from flat): lying and side-lying
+ * flat, dangling at the foot end flat, sitting up against the raised backrest at 50°; reclined
+ * positions follow the trunk.
+ */
+export function tableAngle(position: string, bedAngle: number): number {
+  if (position === "left_lateral_decubitus" || position === "prone" || position === "sitting_dangling") return 0;
+  if (position === "seated" || position === "seated_leaning_forward" || position === "standing") return 50;
+  return bedAngle;
+}
+
 /** Solid boxes of the table at a head-section angle (degrees from flat). */
 export function tableBoxes(headAngleDeg: number): OrientedBox[] {
   const top = TABLE.topY;

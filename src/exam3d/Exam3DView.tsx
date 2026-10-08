@@ -10,6 +10,9 @@ import type { ToolContact, ToolUse } from "@/input/adapters/tool";
 import { Drapes } from "@/scene/Drapes";
 import { HandWash } from "@/scene/HandWash";
 import { washHandsPosition } from "@/scene/room/sinkGeometry";
+import { tableAngle } from "@/scene/room/tableGeometry";
+
+export { tableAngle };
 import { FpsMeter, LoadingOverlay } from "@/scene/Loading";
 import { ExamRoom } from "@/scene/room/ExamRoom";
 import type { VariantId } from "@/scene/rig";
@@ -101,11 +104,6 @@ interface Sequence {
 }
 
 /** The table's head section: flat for left lateral; behind the patient (back free) when sitting up. */
-export function tableAngle(position: string, bedAngle: number): number {
-  if (position === "left_lateral_decubitus" || position === "prone" || position === "sitting_dangling") return 0;
-  if (position === "seated" || position === "seated_leaning_forward" || position === "standing") return 50;
-  return bedAngle;
-}
 
 type Anim = { current: number };
 /** Animates the table head section, the patient's trunk angle and the door toward their targets (inside the Canvas). */

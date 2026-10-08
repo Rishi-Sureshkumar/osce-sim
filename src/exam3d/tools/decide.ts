@@ -34,15 +34,16 @@ export function decidePlacement(a: { point: Vec3; tool: Tool; mode?: ToolMode; m
   const m0 = cands[0]!;
   // sequences measure placement against the step's landmark (e.g. mastoid vs ear canal)
   const seqStep = m0.interaction === "sequence" && m0.steps ? stepForPlacement(m0.steps, s.regionId, a.point, a.pose, ANCHOR_BY_REGION.get(s.regionId)?.radius) : undefined;
-  // the exam's own tolerance (the penlight must land on the iris), else the anchor's
-  const toleranceCm = m0.toleranceCm ?? s.toleranceCm;
+  // the step's own tolerance (Rinne on the mastoid), else the exam's (the penlight must land on the
+  // iris), else the anchor's
+  const toleranceCm = seqStep?.toleranceCm ?? m0.toleranceCm ?? s.toleranceCm;
   const distanceCm = seqStep ? seqStep.error * s.toleranceCm : s.distanceCm;
   return {
     regionId: s.regionId,
     candidates: cands.map((c) => c.id),
     maneuverId: m0.id,
     ...(seqStep ? { stepId: seqStep.id } : {}),
-    error: seqStep?.error ?? distanceCm / toleranceCm,
+    error: distanceCm / toleranceCm,
     distanceCm,
     toleranceCm,
     outcome: contactOutcome(distanceCm, toleranceCm, s.regionId),

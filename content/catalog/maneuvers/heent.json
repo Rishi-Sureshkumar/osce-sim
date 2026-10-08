@@ -490,7 +490,8 @@
           "id": "bone",
           "label": "Base of the fork on the mastoid (bone conduction)",
           "kind": "place",
-          "landmark": "mastoid"
+          "landmark": "mastoid",
+          "toleranceCm": 2
         },
         {
           "id": "signal",

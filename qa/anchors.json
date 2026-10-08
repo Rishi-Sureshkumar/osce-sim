@@ -519,8 +519,8 @@
   },
   {
    "id": "anchors:oracle:male:supine:ear_left#mastoid",
-   "status": "XFAIL",
-   "detail": "2.7 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:male:supine:eye_left",
@@ -579,8 +579,8 @@
   },
   {
    "id": "anchors:oracle:male:supine:ear_right#mastoid",
-   "status": "XFAIL",
-   "detail": "2.7 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:male:supine:eye_right",
@@ -1329,8 +1329,8 @@
   },
   {
    "id": "anchors:oracle:male:reclined_30:ear_left#mastoid",
-   "status": "XFAIL",
-   "detail": "2.7 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:male:reclined_30:eye_left",
@@ -1389,8 +1389,8 @@
   },
   {
    "id": "anchors:oracle:male:reclined_30:ear_right#mastoid",
-   "status": "XFAIL",
-   "detail": "2.7 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:male:reclined_30:eye_right",
@@ -2019,8 +2019,8 @@
   },
   {
    "id": "anchors:oracle:male:reclined_45:ear_left#mastoid",
-   "status": "XFAIL",
-   "detail": "2.7 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:male:reclined_45:eye_left",
@@ -2079,8 +2079,8 @@
   },
   {
    "id": "anchors:oracle:male:reclined_45:ear_right#mastoid",
-   "status": "XFAIL",
-   "detail": "2.7 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:male:reclined_45:eye_right",
@@ -2699,8 +2699,8 @@
   },
   {
    "id": "anchors:oracle:male:seated:ear_left#mastoid",
-   "status": "XFAIL",
-   "detail": "2.7 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:male:seated:eye_left",
@@ -2759,8 +2759,8 @@
   },
   {
    "id": "anchors:oracle:male:seated:ear_right#mastoid",
-   "status": "XFAIL",
-   "detail": "2.7 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:male:seated:eye_right",
@@ -2864,33 +2864,33 @@
   },
   {
    "id": "anchors:occlusion:male:seated:cva_right",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "status": "XFAIL",
+   "detail": "from the chest_back shot the ray first meets table:head-mattress 8.7 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated:cva_left",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "status": "XFAIL",
+   "detail": "from the chest_back shot the ray first meets table:head-mattress 9.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated:carotid_right",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 4.8 cm from the anchor (tolerance 2)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:carotid_left",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 4.8 cm from the anchor (tolerance 2)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:arm_right",
-   "status": "XFAIL",
-   "detail": "from the arms shot the ray first meets table:head-mattress 5.6 cm from the anchor (tolerance 3.5)"
+   "status": "PASS",
+   "detail": "from the arms shot the ray first meets skin (forearm_r) 0.6 cm from the anchor (tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:arm_left",
-   "status": "XFAIL",
-   "detail": "from the arms shot the ray first meets table:head-mattress 7.0 cm from the anchor (tolerance 3.5)"
+   "status": "PASS",
+   "detail": "from the arms shot the ray first meets skin (forearm_l) 0.5 cm from the anchor (tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:hand_right",
@@ -2905,7 +2905,7 @@
   {
    "id": "anchors:occlusion:male:seated:sacrum",
    "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 22.4 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets table:head-mattress 52.9 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:wrist_right",
@@ -2920,32 +2920,32 @@
   {
    "id": "anchors:occlusion:male:seated:ln_occipital",
    "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets skin (face) 18.2 cm from the anchor (tolerance 2.5)"
+   "detail": "from the ear_right shot the ray first meets skin (scalp) 4.7 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_occipital#1",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets skin (face) 16.2 cm from the anchor (tolerance 2.5)"
+   "status": "PASS",
+   "detail": "from the ear_right shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_post_auricular",
    "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets skin (face) 16.1 cm from the anchor (tolerance 2)"
+   "detail": "from the ear_right shot the ray first meets skin (face) 12.7 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_post_auricular#1",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets skin (face) 11.7 cm from the anchor (tolerance 2)"
+   "status": "PASS",
+   "detail": "from the ear_right shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_pre_auricular",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 4.6 cm from the anchor (tolerance 2)"
+   "status": "PASS",
+   "detail": "from the ear_left shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_pre_auricular#1",
    "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 4.5 cm from the anchor (tolerance 2)"
+   "detail": "from the ear_left shot the ray first meets skin (face) 15.1 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_submandibular",
@@ -2954,28 +2954,28 @@
   },
   {
    "id": "anchors:occlusion:male:seated:ln_submandibular#1",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 3.1 cm from the anchor (tolerance 2.5)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_post_cervical",
    "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 13.0 cm from the anchor (tolerance 3)"
+   "detail": "from the head_neck shot the ray first meets skin (neck) 7.8 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_post_cervical#1",
    "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 12.8 cm from the anchor (tolerance 3)"
+   "detail": "from the head_neck shot the ray first meets skin (neck) 5.1 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_ant_cervical",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 4.9 cm from the anchor (tolerance 3)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_ant_cervical#1",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 4.8 cm from the anchor (tolerance 3)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_submental",
@@ -2984,23 +2984,23 @@
   },
   {
    "id": "anchors:occlusion:male:seated:ln_supraclavicular",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 3.1 cm from the anchor (tolerance 2.5)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_supraclavicular#1",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 3.0 cm from the anchor (tolerance 2.5)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:neck_trachea",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 3.5 cm from the anchor (tolerance 2)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:neck_thyroid",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 4.1 cm from the anchor (tolerance 2.5)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:eye_right",
@@ -3014,18 +3014,18 @@
   },
   {
    "id": "anchors:occlusion:male:seated:ear_right",
-   "status": "XFAIL",
-   "detail": "from the ear_right shot the ray first meets table:head-mattress 19.8 cm from the anchor (tolerance 1.5)"
+   "status": "PASS",
+   "detail": "from the ear_right shot the ray first meets skin (ear_r) 0.0 cm from the anchor (tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ear_left",
-   "status": "XFAIL",
-   "detail": "from the ear_left shot the ray first meets table:head-mattress 19.8 cm from the anchor (tolerance 1.5)"
+   "status": "PASS",
+   "detail": "from the ear_left shot the ray first meets skin (ear_l) 0.0 cm from the anchor (tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:scalp",
    "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets skin (face) 13.4 cm from the anchor (tolerance 4)"
+   "detail": "from the ear_right shot the ray first meets skin (scalp) 4.3 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:spine_cervical",
@@ -3039,8 +3039,8 @@
   },
   {
    "id": "anchors:occlusion:male:seated:spine_lumbar",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 6)"
+   "status": "XFAIL",
+   "detail": "from the chest_back shot the ray first meets table:head-mattress 47.8 cm from the anchor (tolerance 6)"
   },
   {
    "id": "anchors:occlusion:male:seated:hip_right",
@@ -3054,18 +3054,18 @@
   },
   {
    "id": "anchors:occlusion:male:seated:shoulder_right",
-   "status": "XFAIL",
-   "detail": "from the arms shot the ray first meets table:head-mattress 5.6 cm from the anchor (tolerance 5)"
+   "status": "PASS",
+   "detail": "from the arms shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 5)"
   },
   {
    "id": "anchors:occlusion:male:seated:shoulder_left",
-   "status": "XFAIL",
-   "detail": "from the arms shot the ray first meets table:head-mattress 7.3 cm from the anchor (tolerance 5)"
+   "status": "PASS",
+   "detail": "from the arms shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 5)"
   },
   {
    "id": "anchors:occlusion:male:seated:elbow_right",
    "status": "XFAIL",
-   "detail": "from the arms shot the ray first meets table:head-mattress 13.7 cm from the anchor (tolerance 3.5)"
+   "detail": "from the arms shot the ray first meets skin (upper_arm_r) 3.5 cm from the anchor (tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:elbow_left",
@@ -3079,13 +3079,13 @@
   },
   {
    "id": "anchors:occlusion:male:seated:lung_ant_ru",
-   "status": "XFAIL",
-   "detail": "from the chest_front shot the ray first meets table:head-mattress 1.1 cm from the anchor (tolerance 4)"
+   "status": "PASS",
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:lung_ant_lu",
-   "status": "XFAIL",
-   "detail": "from the chest_front shot the ray first meets table:head-mattress 1.1 cm from the anchor (tolerance 4)"
+   "status": "PASS",
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:lung_ant_rl",
@@ -3119,8 +3119,8 @@
   },
   {
    "id": "anchors:occlusion:male:seated:lung_lat_r",
-   "status": "XFAIL",
-   "detail": "from the chest_front shot the ray first meets table:head-mattress 8.3 cm from the anchor (tolerance 4)"
+   "status": "PASS",
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:lung_lat_l",
@@ -3644,8 +3644,8 @@
   },
   {
    "id": "anchors:oracle:male:sitting_dangling:ear_left#mastoid",
-   "status": "XFAIL",
-   "detail": "2.7 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:male:sitting_dangling:eye_left",
@@ -3704,8 +3704,8 @@
   },
   {
    "id": "anchors:oracle:male:sitting_dangling:ear_right#mastoid",
-   "status": "XFAIL",
-   "detail": "2.7 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:male:sitting_dangling:eye_right",
@@ -4324,8 +4324,8 @@
   },
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:ear_left#mastoid",
-   "status": "XFAIL",
-   "detail": "2.7 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:eye_left",
@@ -4384,8 +4384,8 @@
   },
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:ear_right#mastoid",
-   "status": "XFAIL",
-   "detail": "2.7 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:eye_right",
@@ -5019,8 +5019,8 @@
   },
   {
    "id": "anchors:oracle:female:supine:ear_left#mastoid",
-   "status": "XFAIL",
-   "detail": "3.3 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:female:supine:eye_left",
@@ -5079,8 +5079,8 @@
   },
   {
    "id": "anchors:oracle:female:supine:ear_right#mastoid",
-   "status": "XFAIL",
-   "detail": "3.3 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:female:supine:eye_right",
@@ -5829,8 +5829,8 @@
   },
   {
    "id": "anchors:oracle:female:reclined_30:ear_left#mastoid",
-   "status": "XFAIL",
-   "detail": "3.3 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:female:reclined_30:eye_left",
@@ -5889,8 +5889,8 @@
   },
   {
    "id": "anchors:oracle:female:reclined_30:ear_right#mastoid",
-   "status": "XFAIL",
-   "detail": "3.3 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:female:reclined_30:eye_right",
@@ -6519,8 +6519,8 @@
   },
   {
    "id": "anchors:oracle:female:reclined_45:ear_left#mastoid",
-   "status": "XFAIL",
-   "detail": "3.3 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:female:reclined_45:eye_left",
@@ -6579,8 +6579,8 @@
   },
   {
    "id": "anchors:oracle:female:reclined_45:ear_right#mastoid",
-   "status": "XFAIL",
-   "detail": "3.3 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:female:reclined_45:eye_right",
@@ -7199,8 +7199,8 @@
   },
   {
    "id": "anchors:oracle:female:seated:ear_left#mastoid",
-   "status": "XFAIL",
-   "detail": "3.3 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:female:seated:eye_left",
@@ -7259,8 +7259,8 @@
   },
   {
    "id": "anchors:oracle:female:seated:ear_right#mastoid",
-   "status": "XFAIL",
-   "detail": "3.3 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:female:seated:eye_right",
@@ -7364,33 +7364,33 @@
   },
   {
    "id": "anchors:occlusion:female:seated:cva_right",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "status": "XFAIL",
+   "detail": "from the chest_back shot the ray first meets table:head-mattress 50.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:cva_left",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "status": "XFAIL",
+   "detail": "from the chest_back shot the ray first meets table:head-mattress 51.7 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:carotid_right",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 4.5 cm from the anchor (tolerance 2)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:carotid_left",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 4.5 cm from the anchor (tolerance 2)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:arm_right",
-   "status": "XFAIL",
-   "detail": "from the arms shot the ray first meets table:head-mattress 2.7 cm from the anchor (tolerance 3.5)"
+   "status": "PASS",
+   "detail": "from the arms shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:arm_left",
-   "status": "XFAIL",
-   "detail": "from the arms shot the ray first meets table:head-mattress 3.3 cm from the anchor (tolerance 3.5)"
+   "status": "PASS",
+   "detail": "from the arms shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:hand_right",
@@ -7405,7 +7405,7 @@
   {
    "id": "anchors:occlusion:female:seated:sacrum",
    "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 6.7 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets table:head-mattress 49.7 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:wrist_right",
@@ -7420,62 +7420,62 @@
   {
    "id": "anchors:occlusion:female:seated:ln_occipital",
    "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets skin (face) 16.5 cm from the anchor (tolerance 2.5)"
+   "detail": "from the ear_right shot the ray first meets skin (scalp) 5.5 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_occipital#1",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets skin (face) 13.9 cm from the anchor (tolerance 2.5)"
+   "status": "PASS",
+   "detail": "from the ear_right shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_post_auricular",
    "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets skin (face) 15.6 cm from the anchor (tolerance 2)"
+   "detail": "from the ear_right shot the ray first meets skin (face) 11.8 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_post_auricular#1",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets skin (face) 11.6 cm from the anchor (tolerance 2)"
+   "status": "PASS",
+   "detail": "from the ear_right shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_pre_auricular",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 3.0 cm from the anchor (tolerance 2)"
+   "status": "PASS",
+   "detail": "from the ear_left shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_pre_auricular#1",
    "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 2.9 cm from the anchor (tolerance 2)"
+   "detail": "from the ear_left shot the ray first meets skin (face) 14.2 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_submandibular",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (face) 1.5 cm from the anchor (tolerance 2.5)"
+   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_submandibular#1",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (face) 0.7 cm from the anchor (tolerance 2.5)"
+   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_post_cervical",
    "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 12.1 cm from the anchor (tolerance 3)"
+   "detail": "from the head_neck shot the ray first meets skin (neck) 5.5 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_post_cervical#1",
    "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 11.9 cm from the anchor (tolerance 3)"
+   "detail": "from the head_neck shot the ray first meets skin (neck) 3.3 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_ant_cervical",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 3.0 cm from the anchor (tolerance 3)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_ant_cervical#1",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 2.9 cm from the anchor (tolerance 3)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_submental",
@@ -7484,23 +7484,23 @@
   },
   {
    "id": "anchors:occlusion:female:seated:ln_supraclavicular",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 1.6 cm from the anchor (tolerance 2.5)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_supraclavicular#1",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 1.5 cm from the anchor (tolerance 2.5)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:neck_trachea",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 1.6 cm from the anchor (tolerance 2)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:neck_thyroid",
-   "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets table:head-mattress 2.6 cm from the anchor (tolerance 2.5)"
+   "status": "PASS",
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:eye_right",
@@ -7514,33 +7514,33 @@
   },
   {
    "id": "anchors:occlusion:female:seated:ear_right",
-   "status": "XFAIL",
-   "detail": "from the ear_right shot the ray first meets table:head-mattress 20.9 cm from the anchor (tolerance 1.5)"
+   "status": "PASS",
+   "detail": "from the ear_right shot the ray first meets skin (ear_r) 0.0 cm from the anchor (tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ear_left",
-   "status": "XFAIL",
-   "detail": "from the ear_left shot the ray first meets table:head-mattress 20.9 cm from the anchor (tolerance 1.5)"
+   "status": "PASS",
+   "detail": "from the ear_left shot the ray first meets skin (ear_l) 0.0 cm from the anchor (tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:scalp",
    "status": "XFAIL",
-   "detail": "from the head_neck shot the ray first meets hair (hair) 9.8 cm from the anchor (tolerance 4)"
+   "detail": "from the ear_right shot the ray first meets skin (scalp) 4.1 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:spine_cervical",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "status": "XFAIL",
+   "detail": "from the chest_back shot the ray first meets table:head-mattress 39.9 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:spine_thoracic",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 5)"
+   "status": "XFAIL",
+   "detail": "from the chest_back shot the ray first meets table:head-mattress 46.3 cm from the anchor (tolerance 5)"
   },
   {
    "id": "anchors:occlusion:female:seated:spine_lumbar",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 6)"
+   "status": "XFAIL",
+   "detail": "from the chest_back shot the ray first meets table:head-mattress 47.2 cm from the anchor (tolerance 6)"
   },
   {
    "id": "anchors:occlusion:female:seated:hip_right",
@@ -7554,18 +7554,18 @@
   },
   {
    "id": "anchors:occlusion:female:seated:shoulder_right",
-   "status": "XFAIL",
-   "detail": "from the arms shot the ray first meets table:head-mattress 4.4 cm from the anchor (tolerance 5)"
+   "status": "PASS",
+   "detail": "from the arms shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 5)"
   },
   {
    "id": "anchors:occlusion:female:seated:shoulder_left",
-   "status": "XFAIL",
-   "detail": "from the arms shot the ray first meets table:head-mattress 5.7 cm from the anchor (tolerance 5)"
+   "status": "PASS",
+   "detail": "from the arms shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 5)"
   },
   {
    "id": "anchors:occlusion:female:seated:elbow_right",
    "status": "XFAIL",
-   "detail": "from the arms shot the ray first meets table:head-mattress 13.2 cm from the anchor (tolerance 3.5)"
+   "detail": "from the arms shot the ray first meets skin (upper_arm_r) 4.3 cm from the anchor (tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:elbow_left",
@@ -7599,28 +7599,28 @@
   },
   {
    "id": "anchors:occlusion:female:seated:lung_post_ru",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "status": "XFAIL",
+   "detail": "from the chest_back shot the ray first meets table:head-mattress 42.7 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:lung_post_lu",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "status": "XFAIL",
+   "detail": "from the chest_back shot the ray first meets table:head-mattress 44.7 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:lung_post_rl",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "status": "XFAIL",
+   "detail": "from the chest_back shot the ray first meets table:head-mattress 49.4 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:lung_post_ll",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "status": "XFAIL",
+   "detail": "from the chest_back shot the ray first meets table:head-mattress 51.2 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:lung_lat_r",
-   "status": "XFAIL",
-   "detail": "from the chest_front shot the ray first meets table:head-mattress 5.5 cm from the anchor (tolerance 4)"
+   "status": "PASS",
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:lung_lat_l",
@@ -8144,8 +8144,8 @@
   },
   {
    "id": "anchors:oracle:female:sitting_dangling:ear_left#mastoid",
-   "status": "XFAIL",
-   "detail": "3.3 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:female:sitting_dangling:eye_left",
@@ -8204,8 +8204,8 @@
   },
   {
    "id": "anchors:oracle:female:sitting_dangling:ear_right#mastoid",
-   "status": "XFAIL",
-   "detail": "3.3 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:female:sitting_dangling:eye_right",
@@ -8824,8 +8824,8 @@
   },
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:ear_left#mastoid",
-   "status": "XFAIL",
-   "detail": "3.3 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:eye_left",
@@ -8884,8 +8884,8 @@
   },
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:ear_right#mastoid",
-   "status": "XFAIL",
-   "detail": "3.3 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
   },
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:eye_right",
@@ -9730,7 +9730,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "ear_left#mastoid",
-   "cm": 2.65,
+   "cm": 0,
    "max": 1.2
   },
   {
@@ -9826,7 +9826,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "ear_right#mastoid",
-   "cm": 2.65,
+   "cm": 0,
    "max": 1.2
   },
   {
@@ -10975,7 +10975,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "ear_left#mastoid",
-   "cm": 2.65,
+   "cm": 0,
    "max": 1.2
   },
   {
@@ -11071,7 +11071,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "ear_right#mastoid",
-   "cm": 2.65,
+   "cm": 0,
    "max": 1.2
   },
   {
@@ -11980,7 +11980,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "ear_left#mastoid",
-   "cm": 2.65,
+   "cm": 0,
    "max": 1.2
   },
   {
@@ -12076,7 +12076,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "ear_right#mastoid",
-   "cm": 2.65,
+   "cm": 0,
    "max": 1.2
   },
   {
@@ -12965,7 +12965,7 @@
    "variant": "male",
    "position": "seated",
    "rule": "ear_left#mastoid",
-   "cm": 2.65,
+   "cm": 0,
    "max": 1.2
   },
   {
@@ -13061,7 +13061,7 @@
    "variant": "male",
    "position": "seated",
    "rule": "ear_right#mastoid",
-   "cm": 2.65,
+   "cm": 0,
    "max": 1.2
   },
   {
@@ -13230,9 +13230,9 @@
    "position": "seated",
    "regionId": "cva_right",
    "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0.01
+   "first": "table:head-mattress",
+   "part": null,
+   "offCm": 8.74
   },
   {
    "check": "occlusion",
@@ -13240,9 +13240,9 @@
    "position": "seated",
    "regionId": "cva_left",
    "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0.03
+   "first": "table:head-mattress",
+   "part": null,
+   "offCm": 9
   },
   {
    "check": "occlusion",
@@ -13250,9 +13250,9 @@
    "position": "seated",
    "regionId": "carotid_right",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 4.79
+   "first": "skin",
+   "part": "neck",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -13260,9 +13260,9 @@
    "position": "seated",
    "regionId": "carotid_left",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 4.84
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -13270,9 +13270,9 @@
    "position": "seated",
    "regionId": "arm_right",
    "shot": "arms",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 5.62
+   "first": "skin",
+   "part": "forearm_r",
+   "offCm": 0.64
   },
   {
    "check": "occlusion",
@@ -13280,9 +13280,9 @@
    "position": "seated",
    "regionId": "arm_left",
    "shot": "arms",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 7.04
+   "first": "skin",
+   "part": "forearm_l",
+   "offCm": 0.5
   },
   {
    "check": "occlusion",
@@ -13310,9 +13310,9 @@
    "position": "seated",
    "regionId": "sacrum",
    "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 22.37
+   "first": "table:head-mattress",
+   "part": null,
+   "offCm": 52.9
   },
   {
    "check": "occlusion",
@@ -13339,60 +13339,60 @@
    "variant": "male",
    "position": "seated",
    "regionId": "ln_occipital",
-   "shot": "head_neck",
+   "shot": "ear_right",
    "first": "skin",
-   "part": "face",
-   "offCm": 18.16
+   "part": "scalp",
+   "offCm": 4.73
   },
   {
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
    "regionId": "ln_occipital",
-   "shot": "head_neck",
+   "shot": "ear_right",
    "first": "skin",
-   "part": "face",
-   "offCm": 16.21
+   "part": "scalp",
+   "offCm": 0
   },
   {
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
    "regionId": "ln_post_auricular",
-   "shot": "head_neck",
+   "shot": "ear_right",
    "first": "skin",
    "part": "face",
-   "offCm": 16.11
+   "offCm": 12.67
   },
   {
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
    "regionId": "ln_post_auricular",
-   "shot": "head_neck",
+   "shot": "ear_right",
    "first": "skin",
    "part": "face",
-   "offCm": 11.72
+   "offCm": 0
   },
   {
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
    "regionId": "ln_pre_auricular",
-   "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 4.65
+   "shot": "ear_left",
+   "first": "skin",
+   "part": "face",
+   "offCm": 0
   },
   {
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
    "regionId": "ln_pre_auricular",
-   "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 4.52
+   "shot": "ear_left",
+   "first": "skin",
+   "part": "face",
+   "offCm": 15.06
   },
   {
    "check": "occlusion",
@@ -13410,9 +13410,9 @@
    "position": "seated",
    "regionId": "ln_submandibular",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 3.05
+   "first": "skin",
+   "part": "face",
+   "offCm": 0.03
   },
   {
    "check": "occlusion",
@@ -13420,9 +13420,9 @@
    "position": "seated",
    "regionId": "ln_post_cervical",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 12.98
+   "first": "skin",
+   "part": "neck",
+   "offCm": 7.82
   },
   {
    "check": "occlusion",
@@ -13430,9 +13430,9 @@
    "position": "seated",
    "regionId": "ln_post_cervical",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 12.77
+   "first": "skin",
+   "part": "neck",
+   "offCm": 5.15
   },
   {
    "check": "occlusion",
@@ -13440,9 +13440,9 @@
    "position": "seated",
    "regionId": "ln_ant_cervical",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 4.91
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -13450,9 +13450,9 @@
    "position": "seated",
    "regionId": "ln_ant_cervical",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 4.84
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -13470,9 +13470,9 @@
    "position": "seated",
    "regionId": "ln_supraclavicular",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 3.11
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -13480,9 +13480,9 @@
    "position": "seated",
    "regionId": "ln_supraclavicular",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 3.05
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -13490,9 +13490,9 @@
    "position": "seated",
    "regionId": "neck_trachea",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 3.54
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -13500,9 +13500,9 @@
    "position": "seated",
    "regionId": "neck_thyroid",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 4.13
+   "first": "skin",
+   "part": "neck",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -13530,9 +13530,9 @@
    "position": "seated",
    "regionId": "ear_right",
    "shot": "ear_right",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 19.77
+   "first": "skin",
+   "part": "ear_r",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -13540,19 +13540,19 @@
    "position": "seated",
    "regionId": "ear_left",
    "shot": "ear_left",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 19.77
+   "first": "skin",
+   "part": "ear_l",
+   "offCm": 0
   },
   {
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
    "regionId": "scalp",
-   "shot": "head_neck",
+   "shot": "ear_right",
    "first": "skin",
-   "part": "face",
-   "offCm": 13.42
+   "part": "scalp",
+   "offCm": 4.3
   },
   {
    "check": "occlusion",
@@ -13580,9 +13580,9 @@
    "position": "seated",
    "regionId": "spine_lumbar",
    "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0.01
+   "first": "table:head-mattress",
+   "part": null,
+   "offCm": 47.81
   },
   {
    "check": "occlusion",
@@ -13610,9 +13610,9 @@
    "position": "seated",
    "regionId": "shoulder_right",
    "shot": "arms",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 5.55
+   "first": "skin",
+   "part": "upper_arm_r",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -13620,9 +13620,9 @@
    "position": "seated",
    "regionId": "shoulder_left",
    "shot": "arms",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 7.3
+   "first": "skin",
+   "part": "upper_arm_l",
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -13630,9 +13630,9 @@
    "position": "seated",
    "regionId": "elbow_right",
    "shot": "arms",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 13.7
+   "first": "skin",
+   "part": "upper_arm_r",
+   "offCm": 3.52
   },
   {
    "check": "occlusion",
@@ -13660,9 +13660,9 @@
    "position": "seated",
    "regionId": "lung_ant_ru",
    "shot": "chest_front",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 1.08
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -13670,9 +13670,9 @@
    "position": "seated",
    "regionId": "lung_ant_lu",
    "shot": "chest_front",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 1.12
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -13740,9 +13740,9 @@
    "position": "seated",
    "regionId": "lung_lat_r",
    "shot": "chest_front",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 8.26
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.02
   },
   {
    "check": "occlusion",
@@ -14480,7 +14480,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "ear_left#mastoid",
-   "cm": 2.65,
+   "cm": 0,
    "max": 1.2
   },
   {
@@ -14576,7 +14576,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "ear_right#mastoid",
-   "cm": 2.65,
+   "cm": 0,
    "max": 1.2
   },
   {
@@ -15465,7 +15465,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "ear_left#mastoid",
-   "cm": 2.65,
+   "cm": 0,
    "max": 1.2
   },
   {
@@ -15561,7 +15561,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "ear_right#mastoid",
-   "cm": 2.65,
+   "cm": 0,
    "max": 1.2
   },
   {
@@ -16480,7 +16480,7 @@
    "variant": "female",
    "position": "supine",
    "rule": "ear_left#mastoid",
-   "cm": 3.27,
+   "cm": 0.01,
    "max": 1.2
   },
   {
@@ -16576,7 +16576,7 @@
    "variant": "female",
    "position": "supine",
    "rule": "ear_right#mastoid",
-   "cm": 3.27,
+   "cm": 0.01,
    "max": 1.2
   },
   {
@@ -17725,7 +17725,7 @@
    "variant": "female",
    "position": "reclined_30",
    "rule": "ear_left#mastoid",
-   "cm": 3.27,
+   "cm": 0.01,
    "max": 1.2
   },
   {
@@ -17821,7 +17821,7 @@
    "variant": "female",
    "position": "reclined_30",
    "rule": "ear_right#mastoid",
-   "cm": 3.27,
+   "cm": 0.01,
    "max": 1.2
   },
   {
@@ -18730,7 +18730,7 @@
    "variant": "female",
    "position": "reclined_45",
    "rule": "ear_left#mastoid",
-   "cm": 3.27,
+   "cm": 0.01,
    "max": 1.2
   },
   {
@@ -18826,7 +18826,7 @@
    "variant": "female",
    "position": "reclined_45",
    "rule": "ear_right#mastoid",
-   "cm": 3.27,
+   "cm": 0.01,
    "max": 1.2
   },
   {
@@ -19715,7 +19715,7 @@
    "variant": "female",
    "position": "seated",
    "rule": "ear_left#mastoid",
-   "cm": 3.27,
+   "cm": 0.01,
    "max": 1.2
   },
   {
@@ -19811,7 +19811,7 @@
    "variant": "female",
    "position": "seated",
    "rule": "ear_right#mastoid",
-   "cm": 3.27,
+   "cm": 0.01,
    "max": 1.2
   },
   {
@@ -19980,9 +19980,9 @@
    "position": "seated",
    "regionId": "cva_right",
    "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0.02
+   "first": "table:head-mattress",
+   "part": null,
+   "offCm": 50
   },
   {
    "check": "occlusion",
@@ -19990,9 +19990,9 @@
    "position": "seated",
    "regionId": "cva_left",
    "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0.02
+   "first": "table:head-mattress",
+   "part": null,
+   "offCm": 51.7
   },
   {
    "check": "occlusion",
@@ -20000,9 +20000,9 @@
    "position": "seated",
    "regionId": "carotid_right",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 4.48
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -20010,9 +20010,9 @@
    "position": "seated",
    "regionId": "carotid_left",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 4.52
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -20020,9 +20020,9 @@
    "position": "seated",
    "regionId": "arm_right",
    "shot": "arms",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 2.68
+   "first": "skin",
+   "part": "forearm_r",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -20030,9 +20030,9 @@
    "position": "seated",
    "regionId": "arm_left",
    "shot": "arms",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 3.29
+   "first": "skin",
+   "part": "forearm_l",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -20060,9 +20060,9 @@
    "position": "seated",
    "regionId": "sacrum",
    "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 6.68
+   "first": "table:head-mattress",
+   "part": null,
+   "offCm": 49.66
   },
   {
    "check": "occlusion",
@@ -20089,60 +20089,60 @@
    "variant": "female",
    "position": "seated",
    "regionId": "ln_occipital",
-   "shot": "head_neck",
+   "shot": "ear_right",
    "first": "skin",
-   "part": "face",
-   "offCm": 16.48
+   "part": "scalp",
+   "offCm": 5.51
   },
   {
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
    "regionId": "ln_occipital",
-   "shot": "head_neck",
+   "shot": "ear_right",
    "first": "skin",
-   "part": "face",
-   "offCm": 13.95
+   "part": "scalp",
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
    "regionId": "ln_post_auricular",
-   "shot": "head_neck",
+   "shot": "ear_right",
    "first": "skin",
    "part": "face",
-   "offCm": 15.58
+   "offCm": 11.83
   },
   {
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
    "regionId": "ln_post_auricular",
-   "shot": "head_neck",
+   "shot": "ear_right",
    "first": "skin",
    "part": "face",
-   "offCm": 11.56
+   "offCm": 0
   },
   {
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
    "regionId": "ln_pre_auricular",
-   "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 3.02
+   "shot": "ear_left",
+   "first": "skin",
+   "part": "face",
+   "offCm": 0
   },
   {
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
    "regionId": "ln_pre_auricular",
-   "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 2.94
+   "shot": "ear_left",
+   "first": "skin",
+   "part": "face",
+   "offCm": 14.2
   },
   {
    "check": "occlusion",
@@ -20152,7 +20152,7 @@
    "shot": "head_neck",
    "first": "skin",
    "part": "face",
-   "offCm": 1.53
+   "offCm": 0.03
   },
   {
    "check": "occlusion",
@@ -20162,7 +20162,7 @@
    "shot": "head_neck",
    "first": "skin",
    "part": "face",
-   "offCm": 0.7
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -20170,9 +20170,9 @@
    "position": "seated",
    "regionId": "ln_post_cervical",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 12.13
+   "first": "skin",
+   "part": "neck",
+   "offCm": 5.49
   },
   {
    "check": "occlusion",
@@ -20180,9 +20180,9 @@
    "position": "seated",
    "regionId": "ln_post_cervical",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 11.91
+   "first": "skin",
+   "part": "neck",
+   "offCm": 3.29
   },
   {
    "check": "occlusion",
@@ -20190,9 +20190,9 @@
    "position": "seated",
    "regionId": "ln_ant_cervical",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 2.96
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -20200,9 +20200,9 @@
    "position": "seated",
    "regionId": "ln_ant_cervical",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 2.91
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -20220,9 +20220,9 @@
    "position": "seated",
    "regionId": "ln_supraclavicular",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 1.58
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -20230,9 +20230,9 @@
    "position": "seated",
    "regionId": "ln_supraclavicular",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 1.54
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -20240,9 +20240,9 @@
    "position": "seated",
    "regionId": "neck_trachea",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 1.64
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -20250,9 +20250,9 @@
    "position": "seated",
    "regionId": "neck_thyroid",
    "shot": "head_neck",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 2.57
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -20280,9 +20280,9 @@
    "position": "seated",
    "regionId": "ear_right",
    "shot": "ear_right",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 20.85
+   "first": "skin",
+   "part": "ear_r",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -20290,19 +20290,19 @@
    "position": "seated",
    "regionId": "ear_left",
    "shot": "ear_left",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 20.85
+   "first": "skin",
+   "part": "ear_l",
+   "offCm": 0
   },
   {
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
    "regionId": "scalp",
-   "shot": "head_neck",
-   "first": "hair",
-   "part": "hair",
-   "offCm": 9.83
+   "shot": "ear_right",
+   "first": "skin",
+   "part": "scalp",
+   "offCm": 4.07
   },
   {
    "check": "occlusion",
@@ -20310,9 +20310,9 @@
    "position": "seated",
    "regionId": "spine_cervical",
    "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0
+   "first": "table:head-mattress",
+   "part": null,
+   "offCm": 39.91
   },
   {
    "check": "occlusion",
@@ -20320,9 +20320,9 @@
    "position": "seated",
    "regionId": "spine_thoracic",
    "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0.02
+   "first": "table:head-mattress",
+   "part": null,
+   "offCm": 46.25
   },
   {
    "check": "occlusion",
@@ -20330,9 +20330,9 @@
    "position": "seated",
    "regionId": "spine_lumbar",
    "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0
+   "first": "table:head-mattress",
+   "part": null,
+   "offCm": 47.18
   },
   {
    "check": "occlusion",
@@ -20360,9 +20360,9 @@
    "position": "seated",
    "regionId": "shoulder_right",
    "shot": "arms",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 4.45
+   "first": "skin",
+   "part": "upper_arm_r",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -20370,9 +20370,9 @@
    "position": "seated",
    "regionId": "shoulder_left",
    "shot": "arms",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 5.73
+   "first": "skin",
+   "part": "upper_arm_l",
+   "offCm": 0.03
   },
   {
    "check": "occlusion",
@@ -20380,9 +20380,9 @@
    "position": "seated",
    "regionId": "elbow_right",
    "shot": "arms",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 13.16
+   "first": "skin",
+   "part": "upper_arm_r",
+   "offCm": 4.33
   },
   {
    "check": "occlusion",
@@ -20450,9 +20450,9 @@
    "position": "seated",
    "regionId": "lung_post_ru",
    "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0.01
+   "first": "table:head-mattress",
+   "part": null,
+   "offCm": 42.65
   },
   {
    "check": "occlusion",
@@ -20460,9 +20460,9 @@
    "position": "seated",
    "regionId": "lung_post_lu",
    "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0.01
+   "first": "table:head-mattress",
+   "part": null,
+   "offCm": 44.66
   },
   {
    "check": "occlusion",
@@ -20470,9 +20470,9 @@
    "position": "seated",
    "regionId": "lung_post_rl",
    "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0
+   "first": "table:head-mattress",
+   "part": null,
+   "offCm": 49.39
   },
   {
    "check": "occlusion",
@@ -20480,9 +20480,9 @@
    "position": "seated",
    "regionId": "lung_post_ll",
    "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0
+   "first": "table:head-mattress",
+   "part": null,
+   "offCm": 51.19
   },
   {
    "check": "occlusion",
@@ -20490,9 +20490,9 @@
    "position": "seated",
    "regionId": "lung_lat_r",
    "shot": "chest_front",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 5.47
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.02
   },
   {
    "check": "occlusion",
@@ -21230,7 +21230,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "rule": "ear_left#mastoid",
-   "cm": 3.27,
+   "cm": 0.01,
    "max": 1.2
   },
   {
@@ -21326,7 +21326,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "rule": "ear_right#mastoid",
-   "cm": 3.27,
+   "cm": 0.01,
    "max": 1.2
   },
   {
@@ -22215,7 +22215,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "rule": "ear_left#mastoid",
-   "cm": 3.27,
+   "cm": 0.01,
    "max": 1.2
   },
   {
@@ -22311,7 +22311,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "rule": "ear_right#mastoid",
-   "cm": 3.27,
+   "cm": 0.01,
    "max": 1.2
   },
   {

@@ -179,7 +179,8 @@ interface Probe {
 }
 async function probeAt(page: Page, x: number, y: number): Promise<Probe> {
   return page.evaluate(([px, py]) => {
-    const hits = window.__osce3d!.probe(px!, py!).map((h) => ({ kind: h.kind, part: h.part, name: h.name }));
+    // clicks pass through hair to the scalp beneath (src/exam3d/hit.ts), so hair never blocks
+    const hits = window.__osce3d!.probe(px!, py!).map((h) => ({ kind: h.kind, part: h.part, name: h.name })).filter((h) => h.kind !== "hair");
     const el = document.elementFromPoint(px!, py!);
     const covering = !el || el.tagName === "CANVAS" ? null : `${el.tagName.toLowerCase()}${el.getAttribute("data-testid") ? `[data-testid=${el.getAttribute("data-testid")}]` : ""}${el.getAttribute("data-dialog") ? `[data-dialog=${el.getAttribute("data-dialog")}]` : ""}${el.className && typeof el.className === "string" ? `.${el.className.split(" ").slice(0, 2).join(".")}` : ""}`;
     return { first: hits[0] ?? null, covering };

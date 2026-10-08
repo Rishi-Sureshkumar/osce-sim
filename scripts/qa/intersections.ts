@@ -18,7 +18,7 @@ import { poseFor } from "@/exam3d/regionAnchors";
 import { PART_NAMES } from "@/scene/patientRig.generated";
 import { legSheetFrame, legSheetPenetration } from "@/scene/drapeGeometry";
 import type { VariantId } from "@/scene/rig";
-import { insideBox, tableBoxes } from "@/scene/room/tableGeometry";
+import { insideBox, tableAngle, tableBoxes } from "@/scene/room/tableGeometry";
 import { skinnedPatient } from "./lib/patientMesh";
 import { classify, report, type CheckResult } from "./lib/xfail";
 
@@ -50,7 +50,8 @@ async function main() {
       const sp = await skinnedPatient(pose);
       const skin = sp.byName("skin")!;
       const n = skin.positions.length / 3;
-      const boxes = tableBoxes(angle);
+      // the table's head section as the app sets it for the position (not the trunk angle)
+      const boxes = tableBoxes(tableAngle(position, angle));
       const sheet = legSheetFrame(pose);
       const lateral = position === "left_lateral_decubitus";
       const p = new Vector3();
