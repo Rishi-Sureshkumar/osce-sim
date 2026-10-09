@@ -5,12 +5,13 @@
  */
 import type { Position } from "@/domain/schemas";
 import { jerkDelta, type Jerk } from "./animation/reflex";
-import { poseRotations, type BoneRotations } from "./rig";
+import { poseRotations, type BoneRotations, type VariantId } from "./rig";
 
 const DEG = Math.PI / 180;
 
 export interface LiveInput {
   position: Position;
+  variant?: VariantId;
   /** animated trunk angle (degrees) */
   angle: number;
   /** seconds since start (0 when frozen) */
@@ -27,7 +28,7 @@ export interface LiveInput {
 }
 
 export function liveRotations(i: LiveInput): BoneRotations {
-  const rot = poseRotations(i.position, i.angle);
+  const rot = poseRotations(i.position, i.angle, i.variant);
   const add = (b: string, x: number, y = 0, z = 0) => {
     const r = rot[b] ?? [0, 0, 0];
     rot[b] = [r[0] + x, r[1] + y, r[2] + z];

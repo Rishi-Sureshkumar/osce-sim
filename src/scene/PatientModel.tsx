@@ -187,6 +187,7 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
     }
     const rot = liveRotations({
       position: p.position,
+      variant: p.variant,
       angle: p.angle?.current ?? p.bedAngle,
       t,
       rr: p.rr,

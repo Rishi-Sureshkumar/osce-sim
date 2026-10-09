@@ -3,7 +3,8 @@
   "maneuvers": [
     {
       "requiresPositioning": [
-        "seated"
+        "seated",
+        "seated_leaning_forward"
       ],
       "sourceText": "",
       "id": "chest_inspection",

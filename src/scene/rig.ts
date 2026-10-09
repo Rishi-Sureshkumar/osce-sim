@@ -33,11 +33,69 @@ export type BoneRotations = Record<string, Rot>;
 const DEG = Math.PI / 180;
 
 /**
+ * Elbow angle (degrees, −X flexes) as the trunk comes up: straight on the mattress lying flat, then
+ * bending so the forearms rest on the lap ~2 cm above the thighs (on the gown and sheet) instead of
+ * sinking into them — fitted at 30°, 45° and 80° (Phase 4 M3 lab).
+ */
+const ELBOW_KNOTS: Record<VariantId, [number, number][]> = {
+  male: [
+    [0, 32],
+    [0.2, 4],
+    [0.5, -21],
+    [1, -55],
+  ],
+  female: [
+    [0, 32],
+    [0.2, 6],
+    [0.5, -19],
+    [1, -60],
+  ],
+};
+function elbowForLap(lap: number, variant: VariantId): number {
+  const k = ELBOW_KNOTS[variant];
+  for (let i = 1; i < k.length; i++) {
+    const [x1, y1] = k[i]!;
+    const [x0, y0] = k[i - 1]!;
+    if (lap <= x1) return y0 + ((lap - x0) / (x1 - x0)) * (y1 - y0);
+  }
+  return k[k.length - 1]![1];
+}
+
+/**
+ * Shoulder extension, wrist angle and arm-to-body angle (degrees) that lay each body's arms on the mattress
+ * when flat, the hands beside the gown (lab-fitted); sitting up the arms come in to 38° and turn inward
+ * so the forearms lie on the thighs (clear of the lateral hip).
+ */
+const ARM_REST: Record<VariantId, { shoulder: number; wrist: number; abduct: number; inward: number }> = {
+  male: { shoulder: 19, wrist: -10, abduct: 30, inward: 46 },
+  female: { shoulder: 16, wrist: -14, abduct: 24, inward: 40 },
+};
+
+/** Arms resting on the lap, per sitting position and body: shoulder [flex, inward turn, adduction], elbow, wrist (degrees). */
+const LAP_ARMS: Record<"seated_leaning_forward" | "sitting_dangling", Record<VariantId, { shoulder: [number, number, number]; elbow: number; wrist: number }>> = {
+  seated_leaning_forward: {
+    male: { shoulder: [-25, 20, 38], elbow: -45, wrist: 20 },
+    female: { shoulder: [-15, 20, 30], elbow: -45, wrist: 20 },
+  },
+  sitting_dangling: {
+    male: { shoulder: [5, 30, 34], elbow: -55, wrist: 10 },
+    female: { shoulder: [5, 20, 38], elbow: -55, wrist: 20 },
+  },
+};
+
+/** Left lateral decubitus per body: lumbar side bend per bone (degrees) and the lower arm's abduction. */
+const LLD_POSE: Record<VariantId, { bend: number; armZ: number }> = {
+  male: { bend: 2.5, armZ: -23 },
+  female: { bend: 1.8, armZ: -25 },
+};
+
+/**
  * Local bone rotations for a position. Trunk elevation is spread over the lumbar spine (the
  * hinge is at the hips); arms rest at the sides and the legs lie together.
  */
-export function poseRotations(position: Position, bedAngleDeg: number): BoneRotations {
+export function poseRotations(position: Position, bedAngleDeg: number, variant: VariantId = "male"): BoneRotations {
   const a = bedAngleDeg * DEG;
+  const arm = ARM_REST[variant];
   // 0 lying flat, 1 sitting up (≥ 80°): reclined, the forearms already rest partly on the thighs
   // (hanging by the sides of a reclined trunk, the hands slid under the thighs out of sight — V-HANDS)
   const t = Math.min(1, Math.max(0, (bedAngleDeg - 10) / 70));
@@ -52,10 +110,15 @@ export function poseRotations(position: Position, bedAngleDeg: number): BoneRota
     // arms by the sides; as the trunk comes up the forearms come to rest on the thighs (seated,
     // hands by the hips are hidden behind the thighs). For a hanging limb −X is flexion; +Y on the
     // right upper arm (−Y on the left) turns it inward so the forearm lies across the thigh.
-    "upperarm01_L": [6 * (1 - lap) * DEG, -40 * lap * DEG, -38 * DEG],
-    "upperarm01_R": [6 * (1 - lap) * DEG, 40 * lap * DEG, 38 * DEG],
-    "lowerarm01_L": [(18 - 63 * lap) * DEG, 0, 0],
-    "lowerarm01_R": [(18 - 63 * lap) * DEG, 0, 0],
+    // Lying flat the arms rest on the mattress (V-ARMS): the bind pose has the elbows and wrists bent,
+    // so the shoulder extends and the elbow and wrist straighten until the arm lies on the table, a
+    // little away from the body so the hands lie beside the gown, not under its side panel.
+    "upperarm01_L": [arm.shoulder * (1 - lap) * DEG, -arm.inward * lap * DEG, -(arm.abduct + (38 - arm.abduct) * lap) * DEG],
+    "upperarm01_R": [arm.shoulder * (1 - lap) * DEG, arm.inward * lap * DEG, (arm.abduct + (38 - arm.abduct) * lap) * DEG],
+    "lowerarm01_L": [elbowForLap(lap, variant) * DEG, 0, 0],
+    "lowerarm01_R": [elbowForLap(lap, variant) * DEG, 0, 0],
+    wrist_L: [arm.wrist * (1 - lap) * DEG, 0, 0],
+    wrist_R: [arm.wrist * (1 - lap) * DEG, 0, 0],
     // legs together
     "upperleg01_L": [0, 0, -3.5 * DEG],
     "upperleg01_R": [0, 0, 3.5 * DEG],
@@ -63,20 +126,42 @@ export function poseRotations(position: Position, bedAngleDeg: number): BoneRota
   if (position === "seated_leaning_forward") {
     r.spine03 = [a * 0.15 + 18 * DEG, 0, 0];
     r.spine02 = [10 * DEG, 0, 0];
-    // leaning in, the upper arms come forward so the forearms clear the belly
-    r["upperarm01_L"] = [-15 * DEG, -35 * DEG, -38 * DEG];
-    r["upperarm01_R"] = [-15 * DEG, 35 * DEG, 38 * DEG];
+  }
+  // leaning in (the upper arms come forward so the forearms clear the belly) or sitting on the end of the
+  // table: the hands rest on the lap instead of sinking into the thighs (Phase 4 M3 lab fit)
+  const lapArm = position === "seated_leaning_forward" || position === "sitting_dangling" ? LAP_ARMS[position][variant] : null;
+  if (lapArm) {
+    const [sx, sy, sz] = lapArm.shoulder;
+    r["upperarm01_L"] = [sx * DEG, -sy * DEG, -sz * DEG];
+    r["upperarm01_R"] = [sx * DEG, sy * DEG, sz * DEG];
+    r["lowerarm01_L"] = [lapArm.elbow * DEG, 0, 0];
+    r["lowerarm01_R"] = [lapArm.elbow * DEG, 0, 0];
+    r.wrist_L = [lapArm.wrist * DEG, 0, 0];
+    r.wrist_R = [lapArm.wrist * DEG, 0, 0];
   }
   if (position === "left_lateral_decubitus") {
-    // knees and hips bent, both arms in front of the body (for a limb hanging from its joint, −X
-    // flexes the hip and shoulder and +X flexes the knee; Phase 3 had these signs reversed, so the
-    // hips and shoulders were extended and the knees hyperextended)
+    // knees and hips bent (for a limb hanging from its joint, −X flexes the hip and shoulder and +X
+    // flexes the knee; Phase 3 had these signs reversed, so the hips and shoulders were extended and
+    // the knees hyperextended)
     r["upperleg01_L"] = [-35 * DEG, 0, -3 * DEG];
     r["upperleg01_R"] = [-45 * DEG, 0, 6 * DEG];
     r["lowerleg01_L"] = [55 * DEG, 0, 0];
     r["lowerleg01_R"] = [65 * DEG, 0, 0];
-    r["upperarm01_R"] = [-55 * DEG, 0, 20 * DEG];
-    r["upperarm01_L"] = [-70 * DEG, 0, -10 * DEG];
+    // Phase 4 M3 (V-LLD): the waist sags toward the mattress so the patient rests on the lower shoulder
+    // and hip (the shoulder sank 6–10 cm into the mattress before); the head tips onto the side pillow.
+    const lld = LLD_POSE[variant];
+    for (const b of ["spine05", "spine04", "spine03"]) r[b] = [0, 0, lld.bend * DEG];
+    r.neck01 = [12 * DEG, 0, -8 * DEG];
+    r.neck02 = [0, 0, -8 * DEG];
+    // lower (left) arm forward on the mattress, the forearm in front of the face (clear of the apex and
+    // on the table); upper (right) arm along the flank with the hand on the hip — fitted with a two-bone
+    // IK to world targets (Phase 4 M3 lab), instead of the Phase 3 arm flung up in the air
+    r["upperarm01_L"] = [-99 * DEG, -25 * DEG, lld.armZ * DEG];
+    r["lowerarm01_L"] = [-49 * DEG, 0, 0];
+    r.wrist_L = [0, 0, 0];
+    r["upperarm01_R"] = [-14.5 * DEG, -2 * DEG, 43.3 * DEG];
+    r["lowerarm01_R"] = [13 * DEG, 0, 0];
+    r.wrist_R = [-10 * DEG, 0, 0];
   }
   if (position === "sitting_dangling") {
     // sitting upright at the foot end of the table, knees over the edge, shanks hanging (knee flexion +X)
@@ -92,17 +177,25 @@ function thighLength(variant: VariantId): number {
   return heads.get("upperleg01_L")!.distanceTo(heads.get("lowerleg01_L")!);
 }
 
+/**
+ * Height of the pelvis bone above the mattress top when lying on it: the older male's rounded upper back
+ * (kyphosis) sank 2.3 cm into the head mattress at the female's lift (bed intersections, Phase 4 M3).
+ */
+const REST_LIFT: Record<VariantId, number> = { male: 0.025, female: 0.016 };
+
 /** World transform of the patient's root (pelvis) for a position: lying on the table, head toward −Z. */
 export function placement(position: Position, variant: VariantId = "male"): Matrix4 {
   // standing bind pose → lying supine: body +Y (head) → world −Z, body front (+Z) → world +Y
   const lie = new Matrix4().makeRotationX(-Math.PI / 2);
-  // sitting with the legs dangling: at the foot end, the knees just past the edge (the trunk is raised by the spine)
-  const z = position === "sitting_dangling" ? TABLE.hingeZ + TABLE.footLen - thighLength(variant) + 0.04 : TABLE.hingeZ;
-  let m = new Matrix4().makeTranslation(TABLE.x, TABLE.topY + 0.012, z).multiply(lie);
+  // sitting with the legs dangling: at the foot end, the knees past the edge so the calves hang clear of the
+  // mattress (they sank 3.5 cm into its end at +4 cm); the trunk is raised by the spine
+  const z = position === "sitting_dangling" ? TABLE.hingeZ + TABLE.footLen - thighLength(variant) + 0.085 : TABLE.hingeZ;
+  let m = new Matrix4().makeTranslation(TABLE.x, TABLE.topY + REST_LIFT[variant], z).multiply(lie);
   if (position === "left_lateral_decubitus") {
     // roll onto the left side about the table's long axis, lifted by the half-width of the trunk
     const roll = new Matrix4().makeRotationZ(-78 * DEG);
-    m = new Matrix4().makeTranslation(TABLE.x - 0.02, TABLE.topY + 0.17, TABLE.hingeZ).multiply(roll).multiply(lie);
+    // back toward the far edge so the arm in front has room on the table (it hung off the edge)
+    m = new Matrix4().makeTranslation(TABLE.x - 0.1, TABLE.topY + 0.155, TABLE.hingeZ).multiply(roll).multiply(lie);
   }
   if (position === "prone") {
     const flip = new Matrix4().makeRotationZ(Math.PI);
@@ -136,7 +229,7 @@ function rigOf(variant: VariantId) {
 /** Forward kinematics with optional extra rotations layered on top (breathing, head turn…). */
 export function computePose(variant: VariantId, position: Position, bedAngle: number, extra: BoneRotations = {}): Pose {
   const { bones, heads } = rigOf(variant);
-  const rotations = poseRotations(position, bedAngle);
+  const rotations = poseRotations(position, bedAngle, variant);
   for (const [b, e] of Object.entries(extra)) {
     const base = rotations[b] ?? [0, 0, 0];
     rotations[b] = [base[0] + e[0], base[1] + e[1], base[2] + e[2]];

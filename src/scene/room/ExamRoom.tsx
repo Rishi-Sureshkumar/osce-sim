@@ -8,11 +8,12 @@
  * Layout (metres): the table's long axis is Z with the head toward −Z; the door is in the wall at
  * +Z; the examiner works from the patient's right (−X).
  */
+import { RoundedBox } from "@react-three/drei";
 import { useFrame, type ThreeEvent } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import { DoubleSide, ExtrudeGeometry, LatheGeometry, Path, Shape, Vector2, type Group } from "three";
 import { TABLE, type VariantId } from "../rig";
-import { HEAD_PIVOT, TABLE_PARTS } from "./tableGeometry";
+import { HEAD_PIVOT, SIDE_PILLOW, TABLE_PARTS } from "./tableGeometry";
 import { Dispenser } from "./Dispenser";
 import { FAUCET, SINK, basinCenter, basinProfile } from "./sinkGeometry";
 import { ToolTable, type ToolTableProps } from "./ToolTable";
@@ -51,6 +52,8 @@ export interface ExamRoomProps extends RoomHandlers {
   angle: { current: number };
   /** the patient's body model (the head section pivots where its trunk bends) */
   variant?: VariantId;
+  /** lying on the left side: a firm side pillow replaces the flat one */
+  sideLying?: boolean;
   /** animated door swing 0 (closed) … 1 (open); read every frame */
   door: { current: number };
   sanitiser?: { progress: number; clean: boolean; start: () => void; cancel: () => void; disabled?: boolean };
@@ -79,7 +82,7 @@ export function clickable(handler?: () => void) {
   };
 }
 
-export function ExamRoom({ angle, variant, door, sanitiser, placard, toolTable, sinkRunning, onDoor, onSink, onToolTable, onStool, onHeadControl }: ExamRoomProps) {
+export function ExamRoom({ angle, variant, sideLying, door, sanitiser, placard, toolTable, sinkRunning, onDoor, onSink, onToolTable, onStool, onHeadControl }: ExamRoomProps) {
   const { halfX, backZ, doorZ, height } = ROOM;
   const wall = "#eef2f4";
   return (
@@ -121,7 +124,7 @@ export function ExamRoom({ angle, variant, door, sanitiser, placard, toolTable, 
       {sanitiser && (
         <Dispenser progress={sanitiser.progress} clean={sanitiser.clean} onStart={() => !sanitiser.disabled && sanitiser.start()} onCancel={sanitiser.cancel} />
       )}
-      <ExamTable angle={angle} variant={variant} onHeadControl={onHeadControl} />
+      <ExamTable angle={angle} variant={variant} sideLying={sideLying} onHeadControl={onHeadControl} />
       <group {...clickable(onToolTable)}>
         <ToolTable {...toolTable} />
       </group>
@@ -258,7 +261,17 @@ function Sink({ running }: { running?: boolean }) {
   );
 }
 
-export function ExamTable({ angle, variant = "male", onHeadControl }: { angle: { current: number }; variant?: VariantId; onHeadControl?: () => void }) {
+export function ExamTable({
+  angle,
+  variant = "male",
+  sideLying = false,
+  onHeadControl,
+}: {
+  angle: { current: number };
+  variant?: VariantId;
+  sideLying?: boolean;
+  onHeadControl?: () => void;
+}) {
   const top = TABLE.topY;
   const { headLen, footLen, mattress, cabinet, step } = TABLE_PARTS;
   // the head section pivots where the patient's trunk bends (tableGeometry.ts HEAD_PIVOT)
@@ -267,7 +280,7 @@ export function ExamTable({ angle, variant = "male", onHeadControl }: { angle: {
   const pillow = useRef<Group>(null);
   useFrame(() => {
     if (head.current) head.current.rotation.x = (angle.current * Math.PI) / 180;
-    if (pillow.current) pillow.current.visible = angle.current < 50;
+    if (pillow.current) pillow.current.visible = angle.current < 50 && !sideLying;
   });
   const vinyl = "#475569";
   return (
@@ -290,6 +303,21 @@ export function ExamTable({ angle, variant = "male", onHeadControl }: { angle: {
         </mesh>
         </group>
       </group>
+      {/* firm pillow under the head when lying on the left side */}
+      {sideLying && (
+        <RoundedBox
+          args={SIDE_PILLOW.size}
+          radius={0.04}
+          smoothness={4}
+          position={[SIDE_PILLOW.center[0] - TABLE.x, SIDE_PILLOW.center[1], SIDE_PILLOW.center[2] - TABLE.hingeZ]}
+          name="side-pillow"
+          raycast={noRay}
+          castShadow
+          receiveShadow
+        >
+          <meshStandardMaterial color="#f1f5f9" roughness={0.95} />
+        </RoundedBox>
+      )}
       {/* head-section control lever on the patient's right side */}
       <group position={[-TABLE.width / 2 - 0.03, top - 0.12, -0.15]}>
         <Box p={[0, 0, 0]} s={[0.03, 0.05, 0.12]} c="#334155" r={0.4} />

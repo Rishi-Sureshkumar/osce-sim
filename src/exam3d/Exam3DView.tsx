@@ -693,6 +693,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
           <ExamRoom
             angle={angle.current}
             variant={props.variant}
+            sideLying={state.position === "left_lateral_decubitus"}
             door={door.current}
             onDoor={onDoor}
             onSink={inside ? () => wash("sink") : undefined}

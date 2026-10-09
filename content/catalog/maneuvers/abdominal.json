@@ -203,7 +203,8 @@
         "cva_left"
       ],
       "requiresPositioning": [
-        "seated"
+        "seated",
+        "seated_leaning_forward"
       ],
       "normalFinding": {
         "default": "No costovertebral angle tenderness bilaterally."

@@ -65,7 +65,7 @@ export function AnchorDebug() {
           <color attach="background" args={["#eef2f4"]} />
           <hemisphereLight args={["#ffffff", "#9aa7b0", 1.2]} />
           <directionalLight position={[-1, 3, 1]} intensity={1.2} />
-          <ExamTable angle={angle} variant={variant} />
+          <ExamTable angle={angle} variant={variant} sideLying={position === "left_lateral_decubitus"} />
           <Suspense fallback={null}>
             <PatientModel variant={variant} position={position} bedAngle={bedAngle} angle={angle} sections={NO_DRAPE} hr={70} rr={0.001} laboured={false} jvpCm={0} edema={{}} pupilScale={1} speaking={false} quality="low" />
           </Suspense>

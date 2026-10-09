@@ -101,7 +101,11 @@ async function main() {
           const out = gm.bvh.raycastFirst(new Ray(p.clone().addScaledVector(nrm, 0.001), nrm.clone()), DoubleSide);
           if (out && out.distance <= GOWN_REACH) continue; // the panel is in front of the skin: covered
           const back = gm.bvh.raycastFirst(new Ray(p.clone().addScaledVector(nrm, -0.001), nrm.clone().negate()), DoubleSide);
-          if (back && back.distance <= GOWN_REACH) outsideGown[g]![i] = 1; // the panel is behind the skin: poking through
+          if (!back || back.distance > GOWN_REACH) continue;
+          // the panel is behind the skin: poking through — unless the ray leaves this body part first (a hand
+          // lying beside the hip has the gown beyond it, not inside it)
+          const exit = skin.bvh.raycastFirst(new Ray(p.clone().addScaledVector(nrm, -0.001), nrm.clone().negate()), DoubleSide);
+          if (!exit || back.distance < exit.distance) outsideGown[g]![i] = 1;
         }
       }
 

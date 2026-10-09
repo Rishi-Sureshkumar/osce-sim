@@ -25,7 +25,7 @@ import { classify, report, type CheckResult } from "./lib/xfail";
 
 /** Anchors are skinned like skin vertices (M2 bug 5), so they must sit within 3 mm of the deformed skin. */
 const ANCHOR_SKIN_CM = Number(process.env.ANCHOR_SKIN_CM ?? 0.3);
-export const POSITIONS: Position[] = ["supine", "reclined_30", "reclined_45", "seated", "sitting_dangling", "left_lateral_decubitus"];
+export const POSITIONS: Position[] = ["supine", "reclined_30", "reclined_45", "seated", "seated_leaning_forward", "sitting_dangling", "left_lateral_decubitus"];
 const VARIANTS: VariantId[] = ["male", "female"];
 
 const dist = (a: Vec3, b: Vec3) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);

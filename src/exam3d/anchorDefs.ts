@@ -202,7 +202,8 @@ const SINGLE: Def[] = [
   { regionId: "spine_cervical", landmark: "c7", offsetCm: [0, 4, 0], facing: "back", toleranceCm: 3 },
   { regionId: "spine_thoracic", landmark: "c7", offsetCm: [0, -15, 0], facing: "back", toleranceCm: 5 },
   { regionId: "spine_lumbar", landmark: "sacrum_pt", offsetCm: [0, 12, 0], facing: "back", toleranceCm: 6 },
-  { regionId: "sacrum", landmark: "sacrum_pt", offsetCm: [0, 0, 0], facing: "back", toleranceCm: 4 },
+  // over S2 (the sacral dimples): the landmark is the lowest sacrum, at seat level when sitting (Phase 4 M3)
+  { regionId: "sacrum", landmark: "sacrum_pt", offsetCm: [0, 6, 0], facing: "back", toleranceCm: 4 },
   { regionId: "abd_epigastric", landmark: "umbilicus", offsetCm: [0, 9, 0], facing: "front", toleranceCm: 3.5 },
   { regionId: "pelvic", landmark: "umbilicus", offsetCm: [0, -11, 0], facing: "front", toleranceCm: 6 },
 ];

@@ -45,6 +45,13 @@ export const HEAD_PIVOT: Record<VariantId, { dy: number; dz: number }> = {
   female: { dy: 0, dz: -0.095 },
 };
 
+/**
+ * The firm pillow used when the patient lies on the left side (V-LLD): fills the gap between the
+ * mattress and the head (12–14 cm, the lower shoulder's width), behind the forearm lying in front of
+ * the face. World centre and full size, metres.
+ */
+export const SIDE_PILLOW = { center: [TABLE.x - 0.06, TABLE.topY + 0.065, TABLE.hingeZ - 0.69] as [number, number, number], size: [0.34, 0.13, 0.3] as [number, number, number] };
+
 /** Solid boxes of the table at a head-section angle (degrees from flat). */
 export function tableBoxes(headAngleDeg: number, variant: VariantId = "male"): OrientedBox[] {
   const top = TABLE.topY;

@@ -48,7 +48,9 @@ export const CASE_FOR_VARIANT: Record<VariantId, string> = { male: "hf-decompens
 const GROUP_POSITION: Record<Region["group"], Position> = {
   head_neck: "seated",
   chest_front: "reclined_30",
-  chest_back: "seated",
+  // sitting on the end of the table with the backrest down: the whole back, sacrum included, is in
+  // reach (seated against the raised backrest it isn't; the station hints "lean forward")
+  chest_back: "sitting_dangling",
   abdomen: "supine",
   arms: "seated",
   hands: "seated",

@@ -15,7 +15,7 @@
   {
    "id": "anchors:skin:male:supine:cardiac_erbs",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:supine:cardiac_tricuspid",
@@ -1760,7 +1760,7 @@
   {
    "id": "anchors:skin:male:reclined_45:groin_left",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:reclined_45:shoulder_left",
@@ -1930,7 +1930,7 @@
   {
    "id": "anchors:skin:male:reclined_45:groin_right",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:reclined_45:shoulder_right",
@@ -2050,7 +2050,7 @@
   {
    "id": "anchors:oracle:male:reclined_45:upper_arm_left",
    "status": "PASS",
-   "detail": "1.3 cm from the anatomical point (max 3) — BP cuff centre: lower edge 2–3 cm above the antecubital crease + half a cuff width (~6 cm), front of the arm over the brachial artery"
+   "detail": "1.2 cm from the anatomical point (max 3) — BP cuff centre: lower edge 2–3 cm above the antecubital crease + half a cuff width (~6 cm), front of the arm over the brachial artery"
   },
   {
    "id": "anchors:oracle:male:reclined_45:biceps_tendon_left",
@@ -2110,7 +2110,7 @@
   {
    "id": "anchors:oracle:male:reclined_45:upper_arm_right",
    "status": "PASS",
-   "detail": "1.3 cm from the anatomical point (max 3) — BP cuff centre: lower edge 2–3 cm above the antecubital crease + half a cuff width (~6 cm), front of the arm over the brachial artery"
+   "detail": "1.2 cm from the anatomical point (max 3) — BP cuff centre: lower edge 2–3 cm above the antecubital crease + half a cuff width (~6 cm), front of the arm over the brachial artery"
   },
   {
    "id": "anchors:oracle:male:reclined_45:biceps_tendon_right",
@@ -2365,7 +2365,7 @@
   {
    "id": "anchors:skin:male:seated:sacrum",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:seated:abd_epigastric",
@@ -2440,7 +2440,7 @@
   {
    "id": "anchors:skin:male:seated:groin_left",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:seated:shoulder_left",
@@ -2610,7 +2610,7 @@
   {
    "id": "anchors:skin:male:seated:groin_right",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:seated:shoulder_right",
@@ -2883,16 +2883,6 @@
    "detail": "0.1 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
   },
   {
-   "id": "anchors:occlusion:male:seated:cva_right",
-   "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets table:head-mattress 8.7 cm from the anchor (tolerance 3)"
-  },
-  {
-   "id": "anchors:occlusion:male:seated:cva_left",
-   "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets table:head-mattress 9.0 cm from the anchor (tolerance 3)"
-  },
-  {
    "id": "anchors:occlusion:male:seated:carotid_right",
    "status": "PASS",
    "detail": "from the head_neck shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 2)"
@@ -2905,27 +2895,22 @@
   {
    "id": "anchors:occlusion:male:seated:arm_right",
    "status": "PASS",
-   "detail": "from the arms shot the ray first meets skin (forearm_r) 0.6 cm from the anchor (tolerance 3.5)"
+   "detail": "from the arms shot the ray first meets skin (forearm_r) 1.4 cm from the anchor (tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:arm_left",
    "status": "PASS",
-   "detail": "from the arms_left shot the ray first meets skin (forearm_l) 0.6 cm from the anchor (tolerance 3.5)"
+   "detail": "from the arms_left shot the ray first meets skin (forearm_l) 1.4 cm from the anchor (tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:hand_right",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (hand_r) 2.0 cm from the anchor (tolerance 4)"
+   "detail": "from the hands shot the ray first meets skin (hand_r) 2.2 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:hand_left",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (hand_l) 2.0 cm from the anchor (tolerance 4)"
-  },
-  {
-   "id": "anchors:occlusion:male:seated:sacrum",
-   "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets table:head-mattress 52.9 cm from the anchor (tolerance 4)"
+   "detail": "from the hands shot the ray first meets skin (hand_l) 2.2 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:wrist_right",
@@ -3058,21 +3043,6 @@
    "detail": "from the head_top shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 4)"
   },
   {
-   "id": "anchors:occlusion:male:seated:spine_cervical",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 3)"
-  },
-  {
-   "id": "anchors:occlusion:male:seated:spine_thoracic",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 5)"
-  },
-  {
-   "id": "anchors:occlusion:male:seated:spine_lumbar",
-   "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets table:head-mattress 47.8 cm from the anchor (tolerance 6)"
-  },
-  {
    "id": "anchors:occlusion:male:seated:hip_right",
    "status": "PASS",
    "detail": "from the legs shot the ray first meets skin (thigh_r) 0.1 cm from the anchor (tolerance 6)"
@@ -3148,26 +3118,6 @@
    "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
   },
   {
-   "id": "anchors:occlusion:male:seated:lung_post_ru",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
-  },
-  {
-   "id": "anchors:occlusion:male:seated:lung_post_lu",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
-  },
-  {
-   "id": "anchors:occlusion:male:seated:lung_post_rl",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
-  },
-  {
-   "id": "anchors:occlusion:male:seated:lung_post_ll",
-   "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
-  },
-  {
    "id": "anchors:occlusion:male:seated:lung_lat_r",
    "status": "PASS",
    "detail": "from the chest_right shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
@@ -3176,6 +3126,716 @@
    "id": "anchors:occlusion:male:seated:lung_lat_l",
    "status": "PASS",
    "detail": "from the chest_left shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:cardiac_aortic",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:cardiac_pulmonic",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:cardiac_erbs",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:cardiac_tricuspid",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:cardiac_mitral",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:precordium_lsb",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:precordium_wall",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:neck_trachea",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:neck_thyroid",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:neck_jvp_right",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:scalp",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:nose",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:mouth",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:face",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_occipital#0",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_occipital#1",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_post_auricular#0",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_post_auricular#1",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_pre_auricular#0",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_pre_auricular#1",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_submandibular#0",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_submandibular#1",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_submental",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_ant_cervical#0",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_ant_cervical#1",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_post_cervical#0",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_post_cervical#1",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_supraclavicular#0",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ln_supraclavicular#1",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:spine_cervical",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:spine_thoracic",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:spine_lumbar",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:sacrum",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:abd_epigastric",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:pelvic",
+   "status": "PASS",
+   "detail": "0.02 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:carotid_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:eye_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ear_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:lung_ant_lu",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:lung_ant_ll",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:lung_lat_l",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:lung_post_lu",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:lung_post_ll",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:cva_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:breast_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:abd_luq",
+   "status": "PASS",
+   "detail": "0.03 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:abd_llq",
+   "status": "PASS",
+   "detail": "0.02 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:groin_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:shoulder_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:arm_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:elbow_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:wrist_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:hand_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:hip_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:knee_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:shin_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:calf_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ankle_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:foot_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:toe_great_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:upper_arm_left",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:biceps_tendon_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:triceps_tendon_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:brachioradialis_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:patellar_tendon_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:leg_medial_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:achilles_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:sole_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:foot_lateral_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:carotid_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:eye_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ear_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:lung_ant_ru",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:lung_ant_rl",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:lung_lat_r",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:lung_post_ru",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:lung_post_rl",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:cva_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:breast_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:abd_ruq",
+   "status": "PASS",
+   "detail": "0.03 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:abd_rlq",
+   "status": "PASS",
+   "detail": "0.02 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:groin_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:shoulder_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:arm_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:elbow_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:wrist_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:hand_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:hip_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:knee_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:shin_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:calf_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:ankle_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:foot_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:toe_great_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:upper_arm_right",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:biceps_tendon_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:triceps_tendon_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:brachioradialis_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:patellar_tendon_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:leg_medial_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:achilles_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:sole_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:male:seated_leaning_forward:foot_lateral_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:ear_left#mastoid",
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:eye_left",
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:upper_arm_left",
+   "status": "PASS",
+   "detail": "1.2 cm from the anatomical point (max 3) — BP cuff centre: lower edge 2–3 cm above the antecubital crease + half a cuff width (~6 cm), front of the arm over the brachial artery"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:biceps_tendon_left",
+   "status": "PASS",
+   "detail": "0.8 cm from the anatomical point (max 2) — biceps tendon: in the antecubital fossa, front of the elbow joint"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:triceps_tendon_left",
+   "status": "PASS",
+   "detail": "0.6 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:brachioradialis_left",
+   "status": "PASS",
+   "detail": "1.7 cm from the anatomical point (max 2) — brachioradialis: distal radius 3–5 cm above the wrist, thumb side"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:wrist_left",
+   "status": "PASS",
+   "detail": "0.4 cm from the anatomical point (max 2.5) — radial pulse: ~2 cm above the wrist crease on the thumb side"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:patellar_tendon_left",
+   "status": "PASS",
+   "detail": "0.8 cm from the anatomical point (max 2) — patellar tendon: just below the lower pole of the patella, front of the knee"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:achilles_left",
+   "status": "PASS",
+   "detail": "0.3 cm from the anatomical point (max 2) — Achilles tendon: back of the ankle, 2–4 cm above the heel"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:sole_left",
+   "status": "PASS",
+   "detail": "1.6 cm from the anatomical point (max 3) — sole of the foot, mid-foot (plantar surface)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:foot_lateral_left",
+   "status": "PASS",
+   "detail": "2.6 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:leg_medial_left",
+   "status": "PASS",
+   "detail": "3.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:ear_right#mastoid",
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:eye_right",
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:upper_arm_right",
+   "status": "PASS",
+   "detail": "1.2 cm from the anatomical point (max 3) — BP cuff centre: lower edge 2–3 cm above the antecubital crease + half a cuff width (~6 cm), front of the arm over the brachial artery"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:biceps_tendon_right",
+   "status": "PASS",
+   "detail": "0.8 cm from the anatomical point (max 2) — biceps tendon: in the antecubital fossa, front of the elbow joint"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:triceps_tendon_right",
+   "status": "PASS",
+   "detail": "0.6 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:brachioradialis_right",
+   "status": "PASS",
+   "detail": "1.7 cm from the anatomical point (max 2) — brachioradialis: distal radius 3–5 cm above the wrist, thumb side"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:wrist_right",
+   "status": "PASS",
+   "detail": "0.4 cm from the anatomical point (max 2.5) — radial pulse: ~2 cm above the wrist crease on the thumb side"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:patellar_tendon_right",
+   "status": "PASS",
+   "detail": "0.8 cm from the anatomical point (max 2) — patellar tendon: just below the lower pole of the patella, front of the knee"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:achilles_right",
+   "status": "PASS",
+   "detail": "0.3 cm from the anatomical point (max 2) — Achilles tendon: back of the ankle, 2–4 cm above the heel"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:sole_right",
+   "status": "PASS",
+   "detail": "1.6 cm from the anatomical point (max 3) — sole of the foot, mid-foot (plantar surface)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:foot_lateral_right",
+   "status": "PASS",
+   "detail": "2.6 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:leg_medial_right",
+   "status": "PASS",
+   "detail": "3.7 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:abd_ruq",
+   "status": "PASS",
+   "detail": "0.7 cm from the anatomical point (max 4) — upper right quadrant centre: ~6.5 cm right of the midline, ~6 cm above the navel (navel found as the deepest midline dimple)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:abd_luq",
+   "status": "PASS",
+   "detail": "0.7 cm from the anatomical point (max 4) — upper left quadrant centre: ~6.5 cm left of the midline, ~6 cm above the navel (navel found as the deepest midline dimple)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:abd_rlq",
+   "status": "PASS",
+   "detail": "0.9 cm from the anatomical point (max 4) — lower right quadrant centre: ~6.5 cm right of the midline, ~6 cm below the navel (navel found as the deepest midline dimple)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:abd_llq",
+   "status": "PASS",
+   "detail": "0.9 cm from the anatomical point (max 4) — lower left quadrant centre: ~6.5 cm left of the midline, ~6 cm below the navel (navel found as the deepest midline dimple)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:cardiac_aortic",
+   "status": "PASS",
+   "detail": "0.8 cm from the anatomical point (max 2) — 2nd ICS, right sternal border (~27% notch→xiphoid, 2.5 cm right)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:cardiac_pulmonic",
+   "status": "PASS",
+   "detail": "0.8 cm from the anatomical point (max 2) — 2nd ICS, left sternal border"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:cardiac_erbs",
+   "status": "PASS",
+   "detail": "0.5 cm from the anatomical point (max 2) — 3rd ICS, left sternal border (~45%)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:cardiac_tricuspid",
+   "status": "PASS",
+   "detail": "0.9 cm from the anatomical point (max 2) — 4th–5th ICS, left lower sternal border (~80%)"
+  },
+  {
+   "id": "anchors:oracle:male:seated_leaning_forward:cardiac_mitral",
+   "status": "PASS",
+   "detail": "0.1 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
+  },
+  {
+   "id": "anchors:occlusion:male:seated_leaning_forward:cva_right",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+  },
+  {
+   "id": "anchors:occlusion:male:seated_leaning_forward:cva_left",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+  },
+  {
+   "id": "anchors:occlusion:male:seated_leaning_forward:lung_post_ru",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+  },
+  {
+   "id": "anchors:occlusion:male:seated_leaning_forward:lung_post_lu",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+  },
+  {
+   "id": "anchors:occlusion:male:seated_leaning_forward:lung_post_rl",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+  },
+  {
+   "id": "anchors:occlusion:male:seated_leaning_forward:lung_post_ll",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:skin:male:sitting_dangling:cardiac_aortic",
@@ -3190,7 +3850,7 @@
   {
    "id": "anchors:skin:male:sitting_dangling:cardiac_erbs",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:sitting_dangling:cardiac_tricuspid",
@@ -3330,7 +3990,7 @@
   {
    "id": "anchors:skin:male:sitting_dangling:spine_thoracic",
    "status": "PASS",
-   "detail": "0.02 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:sitting_dangling:spine_lumbar",
@@ -3340,7 +4000,7 @@
   {
    "id": "anchors:skin:male:sitting_dangling:sacrum",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:sitting_dangling:abd_epigastric",
@@ -3415,7 +4075,7 @@
   {
    "id": "anchors:skin:male:sitting_dangling:groin_left",
    "status": "PASS",
-   "detail": "0.02 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:sitting_dangling:shoulder_left",
@@ -3585,7 +4245,7 @@
   {
    "id": "anchors:skin:male:sitting_dangling:groin_right",
    "status": "PASS",
-   "detail": "0.02 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:sitting_dangling:shoulder_right",
@@ -3720,7 +4380,7 @@
   {
    "id": "anchors:oracle:male:sitting_dangling:brachioradialis_left",
    "status": "PASS",
-   "detail": "1.6 cm from the anatomical point (max 2) — brachioradialis: distal radius 3–5 cm above the wrist, thumb side"
+   "detail": "1.7 cm from the anatomical point (max 2) — brachioradialis: distal radius 3–5 cm above the wrist, thumb side"
   },
   {
    "id": "anchors:oracle:male:sitting_dangling:wrist_left",
@@ -3780,7 +4440,7 @@
   {
    "id": "anchors:oracle:male:sitting_dangling:brachioradialis_right",
    "status": "PASS",
-   "detail": "1.6 cm from the anatomical point (max 2) — brachioradialis: distal radius 3–5 cm above the wrist, thumb side"
+   "detail": "1.7 cm from the anatomical point (max 2) — brachioradialis: distal radius 3–5 cm above the wrist, thumb side"
   },
   {
    "id": "anchors:oracle:male:sitting_dangling:wrist_right",
@@ -3856,6 +4516,26 @@
    "id": "anchors:oracle:male:sitting_dangling:cardiac_mitral",
    "status": "PASS",
    "detail": "0.1 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
+  },
+  {
+   "id": "anchors:occlusion:male:sitting_dangling:sacrum",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.8 cm from the anchor (tolerance 4)"
+  },
+  {
+   "id": "anchors:occlusion:male:sitting_dangling:spine_cervical",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 3)"
+  },
+  {
+   "id": "anchors:occlusion:male:sitting_dangling:spine_thoracic",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 5)"
+  },
+  {
+   "id": "anchors:occlusion:male:sitting_dangling:spine_lumbar",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 6)"
   },
   {
    "id": "anchors:occlusion:male:sitting_dangling:triceps_tendon_right",
@@ -3935,7 +4615,7 @@
   {
    "id": "anchors:skin:male:left_lateral_decubitus:neck_jvp_right",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:left_lateral_decubitus:scalp",
@@ -4040,7 +4720,7 @@
   {
    "id": "anchors:skin:male:left_lateral_decubitus:spine_thoracic",
    "status": "PASS",
-   "detail": "0.02 cm from the skin (max 0.3)"
+   "detail": "0.03 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:left_lateral_decubitus:spine_lumbar",
@@ -4125,7 +4805,7 @@
   {
    "id": "anchors:skin:male:left_lateral_decubitus:groin_left",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:left_lateral_decubitus:shoulder_left",
@@ -4190,7 +4870,7 @@
   {
    "id": "anchors:skin:male:left_lateral_decubitus:upper_arm_left",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:left_lateral_decubitus:biceps_tendon_left",
@@ -4295,7 +4975,7 @@
   {
    "id": "anchors:skin:male:left_lateral_decubitus:groin_right",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:male:left_lateral_decubitus:shoulder_right",
@@ -4415,7 +5095,7 @@
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:upper_arm_left",
    "status": "PASS",
-   "detail": "1.3 cm from the anatomical point (max 3) — BP cuff centre: lower edge 2–3 cm above the antecubital crease + half a cuff width (~6 cm), front of the arm over the brachial artery"
+   "detail": "1.2 cm from the anatomical point (max 3) — BP cuff centre: lower edge 2–3 cm above the antecubital crease + half a cuff width (~6 cm), front of the arm over the brachial artery"
   },
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:biceps_tendon_left",
@@ -4425,7 +5105,7 @@
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:triceps_tendon_left",
    "status": "PASS",
-   "detail": "0.4 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
+   "detail": "0.6 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
   },
   {
    "id": "anchors:oracle:male:left_lateral_decubitus:brachioradialis_left",
@@ -4570,7 +5250,7 @@
   {
    "id": "anchors:occlusion:male:left_lateral_decubitus:sacrum",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 3.1 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:left_lateral_decubitus:spine_cervical",
@@ -4745,7 +5425,7 @@
   {
    "id": "anchors:skin:female:supine:sacrum",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:supine:abd_epigastric",
@@ -4775,7 +5455,7 @@
   {
    "id": "anchors:skin:female:supine:lung_ant_lu",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:supine:lung_ant_ll",
@@ -4945,7 +5625,7 @@
   {
    "id": "anchors:skin:female:supine:lung_ant_ru",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:supine:lung_ant_rl",
@@ -5575,7 +6255,7 @@
   {
    "id": "anchors:skin:female:reclined_30:sacrum",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:reclined_30:abd_epigastric",
@@ -5605,7 +6285,7 @@
   {
    "id": "anchors:skin:female:reclined_30:lung_ant_lu",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:reclined_30:lung_ant_ll",
@@ -5650,7 +6330,7 @@
   {
    "id": "anchors:skin:female:reclined_30:groin_left",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:reclined_30:shoulder_left",
@@ -5775,7 +6455,7 @@
   {
    "id": "anchors:skin:female:reclined_30:lung_ant_ru",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:reclined_30:lung_ant_rl",
@@ -5820,7 +6500,7 @@
   {
    "id": "anchors:skin:female:reclined_30:groin_right",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:reclined_30:shoulder_right",
@@ -6265,7 +6945,7 @@
   {
    "id": "anchors:skin:female:reclined_45:sacrum",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:reclined_45:abd_epigastric",
@@ -6340,7 +7020,7 @@
   {
    "id": "anchors:skin:female:reclined_45:groin_left",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:reclined_45:shoulder_left",
@@ -6510,7 +7190,7 @@
   {
    "id": "anchors:skin:female:reclined_45:groin_right",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:reclined_45:shoulder_right",
@@ -6640,7 +7320,7 @@
   {
    "id": "anchors:oracle:female:reclined_45:triceps_tendon_left",
    "status": "PASS",
-   "detail": "0.7 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
+   "detail": "0.8 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
   },
   {
    "id": "anchors:oracle:female:reclined_45:brachioradialis_left",
@@ -6700,7 +7380,7 @@
   {
    "id": "anchors:oracle:female:reclined_45:triceps_tendon_right",
    "status": "PASS",
-   "detail": "0.7 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
+   "detail": "0.8 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
   },
   {
    "id": "anchors:oracle:female:reclined_45:brachioradialis_right",
@@ -6945,7 +7625,7 @@
   {
    "id": "anchors:skin:female:seated:sacrum",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:seated:abd_epigastric",
@@ -7020,7 +7700,7 @@
   {
    "id": "anchors:skin:female:seated:groin_left",
    "status": "PASS",
-   "detail": "0.02 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:seated:shoulder_left",
@@ -7035,7 +7715,7 @@
   {
    "id": "anchors:skin:female:seated:elbow_left",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:seated:wrist_left",
@@ -7190,7 +7870,7 @@
   {
    "id": "anchors:skin:female:seated:groin_right",
    "status": "PASS",
-   "detail": "0.02 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:seated:shoulder_right",
@@ -7205,7 +7885,7 @@
   {
    "id": "anchors:skin:female:seated:elbow_right",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:seated:wrist_right",
@@ -7320,7 +8000,7 @@
   {
    "id": "anchors:oracle:female:seated:triceps_tendon_left",
    "status": "PASS",
-   "detail": "0.9 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
+   "detail": "1.0 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
   },
   {
    "id": "anchors:oracle:female:seated:brachioradialis_left",
@@ -7380,7 +8060,7 @@
   {
    "id": "anchors:oracle:female:seated:triceps_tendon_right",
    "status": "PASS",
-   "detail": "0.9 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
+   "detail": "1.0 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
   },
   {
    "id": "anchors:oracle:female:seated:brachioradialis_right",
@@ -7463,16 +8143,6 @@
    "detail": "1.0 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
   },
   {
-   "id": "anchors:occlusion:female:seated:cva_right",
-   "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets table:head-mattress 50.0 cm from the anchor (tolerance 3)"
-  },
-  {
-   "id": "anchors:occlusion:female:seated:cva_left",
-   "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets table:head-mattress 51.7 cm from the anchor (tolerance 3)"
-  },
-  {
    "id": "anchors:occlusion:female:seated:carotid_right",
    "status": "PASS",
    "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
@@ -7495,17 +8165,12 @@
   {
    "id": "anchors:occlusion:female:seated:hand_right",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (hand_r) 1.7 cm from the anchor (tolerance 4)"
+   "detail": "from the hands shot the ray first meets skin (hand_r) 2.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:hand_left",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (hand_l) 1.7 cm from the anchor (tolerance 4)"
-  },
-  {
-   "id": "anchors:occlusion:female:seated:sacrum",
-   "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets table:head-mattress 49.7 cm from the anchor (tolerance 4)"
+   "detail": "from the hands shot the ray first meets skin (hand_l) 2.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:wrist_right",
@@ -7638,21 +8303,6 @@
    "detail": "from the head_top shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 4)"
   },
   {
-   "id": "anchors:occlusion:female:seated:spine_cervical",
-   "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets table:head-mattress 39.9 cm from the anchor (tolerance 3)"
-  },
-  {
-   "id": "anchors:occlusion:female:seated:spine_thoracic",
-   "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets table:head-mattress 46.3 cm from the anchor (tolerance 5)"
-  },
-  {
-   "id": "anchors:occlusion:female:seated:spine_lumbar",
-   "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets table:head-mattress 47.2 cm from the anchor (tolerance 6)"
-  },
-  {
    "id": "anchors:occlusion:female:seated:hip_right",
    "status": "PASS",
    "detail": "from the legs shot the ray first meets skin (thigh_r) 0.0 cm from the anchor (tolerance 6)"
@@ -7728,26 +8378,6 @@
    "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
   },
   {
-   "id": "anchors:occlusion:female:seated:lung_post_ru",
-   "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets table:head-mattress 42.7 cm from the anchor (tolerance 4)"
-  },
-  {
-   "id": "anchors:occlusion:female:seated:lung_post_lu",
-   "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets table:head-mattress 44.7 cm from the anchor (tolerance 4)"
-  },
-  {
-   "id": "anchors:occlusion:female:seated:lung_post_rl",
-   "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets table:head-mattress 49.4 cm from the anchor (tolerance 4)"
-  },
-  {
-   "id": "anchors:occlusion:female:seated:lung_post_ll",
-   "status": "XFAIL",
-   "detail": "from the chest_back shot the ray first meets table:head-mattress 51.2 cm from the anchor (tolerance 4)"
-  },
-  {
    "id": "anchors:occlusion:female:seated:lung_lat_r",
    "status": "PASS",
    "detail": "from the chest_right shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
@@ -7756,6 +8386,716 @@
    "id": "anchors:occlusion:female:seated:lung_lat_l",
    "status": "PASS",
    "detail": "from the chest_left shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:cardiac_aortic",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:cardiac_pulmonic",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:cardiac_erbs",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:cardiac_tricuspid",
+   "status": "PASS",
+   "detail": "0.02 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:cardiac_mitral",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:precordium_lsb",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:precordium_wall",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:neck_trachea",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:neck_thyroid",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:neck_jvp_right",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:scalp",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:nose",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:mouth",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:face",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_occipital#0",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_occipital#1",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_post_auricular#0",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_post_auricular#1",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_pre_auricular#0",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_pre_auricular#1",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_submandibular#0",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_submandibular#1",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_submental",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_ant_cervical#0",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_ant_cervical#1",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_post_cervical#0",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_post_cervical#1",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_supraclavicular#0",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ln_supraclavicular#1",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:spine_cervical",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:spine_thoracic",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:spine_lumbar",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:sacrum",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:abd_epigastric",
+   "status": "PASS",
+   "detail": "0.04 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:pelvic",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:carotid_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:eye_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ear_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:lung_ant_lu",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:lung_ant_ll",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:lung_lat_l",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:lung_post_lu",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:lung_post_ll",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:cva_left",
+   "status": "PASS",
+   "detail": "0.02 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:breast_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:abd_luq",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:abd_llq",
+   "status": "PASS",
+   "detail": "0.02 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:groin_left",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:shoulder_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:arm_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:elbow_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:wrist_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:hand_left",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:hip_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:knee_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:shin_left",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:calf_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ankle_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:foot_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:toe_great_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:upper_arm_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:biceps_tendon_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:triceps_tendon_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:brachioradialis_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:patellar_tendon_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:leg_medial_left",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:achilles_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:sole_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:foot_lateral_left",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:carotid_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:eye_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the eye or skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ear_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:lung_ant_ru",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:lung_ant_rl",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:lung_lat_r",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:lung_post_ru",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:lung_post_rl",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:cva_right",
+   "status": "PASS",
+   "detail": "0.02 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:breast_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:abd_ruq",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:abd_rlq",
+   "status": "PASS",
+   "detail": "0.02 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:groin_right",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:shoulder_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:arm_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:elbow_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:wrist_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:hand_right",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:hip_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:knee_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:shin_right",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:calf_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:ankle_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:foot_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:toe_great_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:upper_arm_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:biceps_tendon_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:triceps_tendon_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:brachioradialis_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:patellar_tendon_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:leg_medial_right",
+   "status": "PASS",
+   "detail": "0.01 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:achilles_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:sole_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:skin:female:seated_leaning_forward:foot_lateral_right",
+   "status": "PASS",
+   "detail": "0.00 cm from the skin (max 0.3)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:ear_left#mastoid",
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:eye_left",
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:upper_arm_left",
+   "status": "PASS",
+   "detail": "2.1 cm from the anatomical point (max 3) — BP cuff centre: lower edge 2–3 cm above the antecubital crease + half a cuff width (~6 cm), front of the arm over the brachial artery"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:biceps_tendon_left",
+   "status": "PASS",
+   "detail": "0.5 cm from the anatomical point (max 2) — biceps tendon: in the antecubital fossa, front of the elbow joint"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:triceps_tendon_left",
+   "status": "PASS",
+   "detail": "0.9 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:brachioradialis_left",
+   "status": "PASS",
+   "detail": "0.8 cm from the anatomical point (max 2) — brachioradialis: distal radius 3–5 cm above the wrist, thumb side"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:wrist_left",
+   "status": "PASS",
+   "detail": "0.5 cm from the anatomical point (max 2.5) — radial pulse: ~2 cm above the wrist crease on the thumb side"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:patellar_tendon_left",
+   "status": "PASS",
+   "detail": "1.6 cm from the anatomical point (max 2) — patellar tendon: just below the lower pole of the patella, front of the knee"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:achilles_left",
+   "status": "PASS",
+   "detail": "0.5 cm from the anatomical point (max 2) — Achilles tendon: back of the ankle, 2–4 cm above the heel"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:sole_left",
+   "status": "PASS",
+   "detail": "1.1 cm from the anatomical point (max 3) — sole of the foot, mid-foot (plantar surface)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:foot_lateral_left",
+   "status": "PASS",
+   "detail": "2.2 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:leg_medial_left",
+   "status": "PASS",
+   "detail": "3.3 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:ear_right#mastoid",
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 1.2) — mastoid process: ~2 cm behind and ~1.5 cm below the ear canal, on the scalp/neck skin (not the ear)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:eye_right",
+   "status": "PASS",
+   "detail": "0.0 cm from the anatomical point (max 0.6) — front of the pupil (the penlight's target), on the eye surface"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:upper_arm_right",
+   "status": "PASS",
+   "detail": "2.1 cm from the anatomical point (max 3) — BP cuff centre: lower edge 2–3 cm above the antecubital crease + half a cuff width (~6 cm), front of the arm over the brachial artery"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:biceps_tendon_right",
+   "status": "PASS",
+   "detail": "0.5 cm from the anatomical point (max 2) — biceps tendon: in the antecubital fossa, front of the elbow joint"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:triceps_tendon_right",
+   "status": "PASS",
+   "detail": "0.9 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:brachioradialis_right",
+   "status": "PASS",
+   "detail": "0.8 cm from the anatomical point (max 2) — brachioradialis: distal radius 3–5 cm above the wrist, thumb side"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:wrist_right",
+   "status": "PASS",
+   "detail": "0.5 cm from the anatomical point (max 2.5) — radial pulse: ~2 cm above the wrist crease on the thumb side"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:patellar_tendon_right",
+   "status": "PASS",
+   "detail": "1.6 cm from the anatomical point (max 2) — patellar tendon: just below the lower pole of the patella, front of the knee"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:achilles_right",
+   "status": "PASS",
+   "detail": "0.5 cm from the anatomical point (max 2) — Achilles tendon: back of the ankle, 2–4 cm above the heel"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:sole_right",
+   "status": "PASS",
+   "detail": "1.1 cm from the anatomical point (max 3) — sole of the foot, mid-foot (plantar surface)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:foot_lateral_right",
+   "status": "PASS",
+   "detail": "2.2 cm from the anatomical point (max 4) — lateral border of the foot (S1 dermatome), mid-foot (a broad area)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:leg_medial_right",
+   "status": "PASS",
+   "detail": "3.3 cm from the anatomical point (max 5) — medial lower leg (L4 dermatome), mid-shin (a broad area)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:abd_ruq",
+   "status": "PASS",
+   "detail": "0.7 cm from the anatomical point (max 4) — upper right quadrant centre: ~6.5 cm right of the midline, ~6 cm above the navel (navel found as the deepest midline dimple)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:abd_luq",
+   "status": "PASS",
+   "detail": "0.7 cm from the anatomical point (max 4) — upper left quadrant centre: ~6.5 cm left of the midline, ~6 cm above the navel (navel found as the deepest midline dimple)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:abd_rlq",
+   "status": "PASS",
+   "detail": "1.4 cm from the anatomical point (max 4) — lower right quadrant centre: ~6.5 cm right of the midline, ~6 cm below the navel (navel found as the deepest midline dimple)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:abd_llq",
+   "status": "PASS",
+   "detail": "1.4 cm from the anatomical point (max 4) — lower left quadrant centre: ~6.5 cm left of the midline, ~6 cm below the navel (navel found as the deepest midline dimple)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:cardiac_aortic",
+   "status": "PASS",
+   "detail": "0.6 cm from the anatomical point (max 2) — 2nd ICS, right sternal border (~27% notch→xiphoid, 2.5 cm right)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:cardiac_pulmonic",
+   "status": "PASS",
+   "detail": "0.6 cm from the anatomical point (max 2) — 2nd ICS, left sternal border"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:cardiac_erbs",
+   "status": "PASS",
+   "detail": "1.6 cm from the anatomical point (max 2) — 3rd ICS, left sternal border (~45%)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:cardiac_tricuspid",
+   "status": "PASS",
+   "detail": "0.9 cm from the anatomical point (max 2) — 4th–5th ICS, left lower sternal border (~80%)"
+  },
+  {
+   "id": "anchors:oracle:female:seated_leaning_forward:cardiac_mitral",
+   "status": "PASS",
+   "detail": "0.8 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
+  },
+  {
+   "id": "anchors:occlusion:female:seated_leaning_forward:cva_right",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+  },
+  {
+   "id": "anchors:occlusion:female:seated_leaning_forward:cva_left",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+  },
+  {
+   "id": "anchors:occlusion:female:seated_leaning_forward:lung_post_ru",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+  },
+  {
+   "id": "anchors:occlusion:female:seated_leaning_forward:lung_post_lu",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+  },
+  {
+   "id": "anchors:occlusion:female:seated_leaning_forward:lung_post_rl",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+  },
+  {
+   "id": "anchors:occlusion:female:seated_leaning_forward:lung_post_ll",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:skin:female:sitting_dangling:cardiac_aortic",
@@ -7910,7 +9250,7 @@
   {
    "id": "anchors:skin:female:sitting_dangling:spine_thoracic",
    "status": "PASS",
-   "detail": "0.02 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:sitting_dangling:spine_lumbar",
@@ -7920,7 +9260,7 @@
   {
    "id": "anchors:skin:female:sitting_dangling:sacrum",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:sitting_dangling:abd_epigastric",
@@ -7995,7 +9335,7 @@
   {
    "id": "anchors:skin:female:sitting_dangling:groin_left",
    "status": "PASS",
-   "detail": "0.02 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:sitting_dangling:shoulder_left",
@@ -8165,7 +9505,7 @@
   {
    "id": "anchors:skin:female:sitting_dangling:groin_right",
    "status": "PASS",
-   "detail": "0.02 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:sitting_dangling:shoulder_right",
@@ -8438,6 +9778,26 @@
    "detail": "1.0 cm from the anatomical point (max 2.5) — apex: 5th ICS, mid-clavicular line (~9 cm left of the midline, ~95%)"
   },
   {
+   "id": "anchors:occlusion:female:sitting_dangling:sacrum",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+  },
+  {
+   "id": "anchors:occlusion:female:sitting_dangling:spine_cervical",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+  },
+  {
+   "id": "anchors:occlusion:female:sitting_dangling:spine_thoracic",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 5)"
+  },
+  {
+   "id": "anchors:occlusion:female:sitting_dangling:spine_lumbar",
+   "status": "PASS",
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 6)"
+  },
+  {
    "id": "anchors:occlusion:female:sitting_dangling:triceps_tendon_right",
    "status": "PASS",
    "detail": "from the elbow_right shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 2)"
@@ -8515,7 +9875,7 @@
   {
    "id": "anchors:skin:female:left_lateral_decubitus:neck_jvp_right",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:left_lateral_decubitus:scalp",
@@ -8570,7 +9930,7 @@
   {
    "id": "anchors:skin:female:left_lateral_decubitus:ln_submandibular#0",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:left_lateral_decubitus:ln_submandibular#1",
@@ -8590,7 +9950,7 @@
   {
    "id": "anchors:skin:female:left_lateral_decubitus:ln_ant_cervical#1",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:left_lateral_decubitus:ln_post_cervical#0",
@@ -8620,7 +9980,7 @@
   {
    "id": "anchors:skin:female:left_lateral_decubitus:spine_thoracic",
    "status": "PASS",
-   "detail": "0.02 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:left_lateral_decubitus:spine_lumbar",
@@ -8630,7 +9990,7 @@
   {
    "id": "anchors:skin:female:left_lateral_decubitus:sacrum",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:left_lateral_decubitus:abd_epigastric",
@@ -8660,7 +10020,7 @@
   {
    "id": "anchors:skin:female:left_lateral_decubitus:lung_ant_lu",
    "status": "PASS",
-   "detail": "0.00 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:left_lateral_decubitus:lung_ant_ll",
@@ -8705,7 +10065,7 @@
   {
    "id": "anchors:skin:female:left_lateral_decubitus:groin_left",
    "status": "PASS",
-   "detail": "0.02 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:left_lateral_decubitus:shoulder_left",
@@ -8720,7 +10080,7 @@
   {
    "id": "anchors:skin:female:left_lateral_decubitus:elbow_left",
    "status": "PASS",
-   "detail": "0.01 cm from the skin (max 0.3)"
+   "detail": "0.00 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:left_lateral_decubitus:wrist_left",
@@ -8875,7 +10235,7 @@
   {
    "id": "anchors:skin:female:left_lateral_decubitus:groin_right",
    "status": "PASS",
-   "detail": "0.03 cm from the skin (max 0.3)"
+   "detail": "0.01 cm from the skin (max 0.3)"
   },
   {
    "id": "anchors:skin:female:left_lateral_decubitus:shoulder_right",
@@ -9000,12 +10360,12 @@
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:biceps_tendon_left",
    "status": "PASS",
-   "detail": "0.4 cm from the anatomical point (max 2) — biceps tendon: in the antecubital fossa, front of the elbow joint"
+   "detail": "0.5 cm from the anatomical point (max 2) — biceps tendon: in the antecubital fossa, front of the elbow joint"
   },
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:triceps_tendon_left",
    "status": "PASS",
-   "detail": "0.5 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
+   "detail": "0.9 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
   },
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:brachioradialis_left",
@@ -9065,7 +10425,7 @@
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:triceps_tendon_right",
    "status": "PASS",
-   "detail": "0.5 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
+   "detail": "0.6 cm from the anatomical point (max 2) — triceps tendon: 2–3 cm above the olecranon, back of the arm"
   },
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:brachioradialis_right",
@@ -9105,7 +10465,7 @@
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:abd_ruq",
    "status": "PASS",
-   "detail": "1.2 cm from the anatomical point (max 4) — upper right quadrant centre: ~6.5 cm right of the midline, ~6 cm above the navel (navel found as the deepest midline dimple)"
+   "detail": "1.1 cm from the anatomical point (max 4) — upper right quadrant centre: ~6.5 cm right of the midline, ~6 cm above the navel (navel found as the deepest midline dimple)"
   },
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:abd_luq",
@@ -9120,7 +10480,7 @@
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:abd_llq",
    "status": "PASS",
-   "detail": "2.1 cm from the anatomical point (max 4) — lower left quadrant centre: ~6.5 cm left of the midline, ~6 cm below the navel (navel found as the deepest midline dimple)"
+   "detail": "2.2 cm from the anatomical point (max 4) — lower left quadrant centre: ~6.5 cm left of the midline, ~6 cm below the navel (navel found as the deepest midline dimple)"
   },
   {
    "id": "anchors:oracle:female:left_lateral_decubitus:cardiac_aortic",
@@ -9150,7 +10510,7 @@
   {
    "id": "anchors:occlusion:female:left_lateral_decubitus:sacrum",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.7 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:left_lateral_decubitus:spine_cervical",
@@ -9183,7 +10543,7 @@
    "variant": "male",
    "position": "supine",
    "regionId": "cardiac_erbs",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -9906,7 +11266,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "upper_arm_left",
-   "cm": 1.32,
+   "cm": 1.35,
    "max": 3
   },
   {
@@ -9922,7 +11282,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "triceps_tendon_left",
-   "cm": 0.43,
+   "cm": 0.4,
    "max": 2
   },
   {
@@ -9930,7 +11290,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "brachioradialis_left",
-   "cm": 1.64,
+   "cm": 1.61,
    "max": 2
   },
   {
@@ -9938,7 +11298,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "wrist_left",
-   "cm": 0.43,
+   "cm": 0.42,
    "max": 2.5
   },
   {
@@ -10002,7 +11362,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "upper_arm_right",
-   "cm": 1.32,
+   "cm": 1.35,
    "max": 3
   },
   {
@@ -10018,7 +11378,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "triceps_tendon_right",
-   "cm": 0.43,
+   "cm": 0.4,
    "max": 2
   },
   {
@@ -10026,7 +11386,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "brachioradialis_right",
-   "cm": 1.64,
+   "cm": 1.61,
    "max": 2
   },
   {
@@ -10034,7 +11394,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "wrist_right",
-   "cm": 0.43,
+   "cm": 0.42,
    "max": 2.5
   },
   {
@@ -10114,7 +11474,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "cardiac_aortic",
-   "cm": 0.82,
+   "cm": 0.81,
    "max": 2
   },
   {
@@ -10122,7 +11482,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "cardiac_pulmonic",
-   "cm": 0.82,
+   "cm": 0.81,
    "max": 2
   },
   {
@@ -10130,7 +11490,7 @@
    "variant": "male",
    "position": "supine",
    "rule": "cardiac_erbs",
-   "cm": 0.51,
+   "cm": 0.5,
    "max": 2
   },
   {
@@ -10257,7 +11617,7 @@
    "shot": "chest_front",
    "first": "skin",
    "part": "torso",
-   "offCm": 0.01
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -11215,7 +12575,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "brachioradialis_left",
-   "cm": 1.64,
+   "cm": 1.62,
    "max": 2
   },
   {
@@ -11223,7 +12583,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "wrist_left",
-   "cm": 0.43,
+   "cm": 0.42,
    "max": 2.5
   },
   {
@@ -11311,7 +12671,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "brachioradialis_right",
-   "cm": 1.64,
+   "cm": 1.62,
    "max": 2
   },
   {
@@ -11319,7 +12679,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "wrist_right",
-   "cm": 0.43,
+   "cm": 0.42,
    "max": 2.5
   },
   {
@@ -11399,7 +12759,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "cardiac_aortic",
-   "cm": 0.82,
+   "cm": 0.81,
    "max": 2
   },
   {
@@ -11407,7 +12767,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "cardiac_pulmonic",
-   "cm": 0.82,
+   "cm": 0.81,
    "max": 2
   },
   {
@@ -11415,7 +12775,7 @@
    "variant": "male",
    "position": "reclined_30",
    "rule": "cardiac_erbs",
-   "cm": 0.51,
+   "cm": 0.5,
    "max": 2
   },
   {
@@ -11788,7 +13148,7 @@
    "variant": "male",
    "position": "reclined_45",
    "regionId": "groin_left",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -12026,7 +13386,7 @@
    "variant": "male",
    "position": "reclined_45",
    "regionId": "groin_right",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -12196,7 +13556,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "upper_arm_left",
-   "cm": 1.26,
+   "cm": 1.25,
    "max": 3
   },
   {
@@ -12212,7 +13572,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "triceps_tendon_left",
-   "cm": 0.51,
+   "cm": 0.53,
    "max": 2
   },
   {
@@ -12220,7 +13580,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "brachioradialis_left",
-   "cm": 1.64,
+   "cm": 1.62,
    "max": 2
   },
   {
@@ -12292,7 +13652,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "upper_arm_right",
-   "cm": 1.26,
+   "cm": 1.25,
    "max": 3
   },
   {
@@ -12308,7 +13668,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "triceps_tendon_right",
-   "cm": 0.51,
+   "cm": 0.53,
    "max": 2
   },
   {
@@ -12316,7 +13676,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "brachioradialis_right",
-   "cm": 1.64,
+   "cm": 1.62,
    "max": 2
   },
   {
@@ -12420,7 +13780,7 @@
    "variant": "male",
    "position": "reclined_45",
    "rule": "cardiac_erbs",
-   "cm": 0.51,
+   "cm": 0.5,
    "max": 2
   },
   {
@@ -12668,7 +14028,7 @@
    "variant": "male",
    "position": "seated",
    "regionId": "sacrum",
-   "cm": 0
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -12773,7 +14133,7 @@
    "variant": "male",
    "position": "seated",
    "regionId": "groin_left",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -13011,7 +14371,7 @@
    "variant": "male",
    "position": "seated",
    "regionId": "groin_right",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -13181,7 +14541,7 @@
    "variant": "male",
    "position": "seated",
    "rule": "upper_arm_left",
-   "cm": 1.2,
+   "cm": 1.19,
    "max": 3
   },
   {
@@ -13197,7 +14557,7 @@
    "variant": "male",
    "position": "seated",
    "rule": "triceps_tendon_left",
-   "cm": 0.58,
+   "cm": 0.6,
    "max": 2
   },
   {
@@ -13277,7 +14637,7 @@
    "variant": "male",
    "position": "seated",
    "rule": "upper_arm_right",
-   "cm": 1.2,
+   "cm": 1.19,
    "max": 3
   },
   {
@@ -13293,7 +14653,7 @@
    "variant": "male",
    "position": "seated",
    "rule": "triceps_tendon_right",
-   "cm": 0.58,
+   "cm": 0.6,
    "max": 2
   },
   {
@@ -13428,26 +14788,6 @@
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
-   "regionId": "cva_right",
-   "shot": "chest_back",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 8.74
-  },
-  {
-   "check": "occlusion",
-   "variant": "male",
-   "position": "seated",
-   "regionId": "cva_left",
-   "shot": "chest_back",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 9
-  },
-  {
-   "check": "occlusion",
-   "variant": "male",
-   "position": "seated",
    "regionId": "carotid_right",
    "shot": "head_neck",
    "first": "skin",
@@ -13472,7 +14812,7 @@
    "shot": "arms",
    "first": "skin",
    "part": "forearm_r",
-   "offCm": 0.64
+   "offCm": 1.43
   },
   {
    "check": "occlusion",
@@ -13482,7 +14822,7 @@
    "shot": "arms_left",
    "first": "skin",
    "part": "forearm_l",
-   "offCm": 0.64
+   "offCm": 1.43
   },
   {
    "check": "occlusion",
@@ -13492,7 +14832,7 @@
    "shot": "hands",
    "first": "skin",
    "part": "hand_r",
-   "offCm": 1.98
+   "offCm": 2.16
   },
   {
    "check": "occlusion",
@@ -13502,17 +14842,7 @@
    "shot": "hands",
    "first": "skin",
    "part": "hand_l",
-   "offCm": 1.98
-  },
-  {
-   "check": "occlusion",
-   "variant": "male",
-   "position": "seated",
-   "regionId": "sacrum",
-   "shot": "chest_back",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 52.9
+   "offCm": 2.16
   },
   {
    "check": "occlusion",
@@ -13778,36 +15108,6 @@
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
-   "regionId": "spine_cervical",
-   "shot": "chest_back",
-   "first": "skin",
-   "part": "neck",
-   "offCm": 0
-  },
-  {
-   "check": "occlusion",
-   "variant": "male",
-   "position": "seated",
-   "regionId": "spine_thoracic",
-   "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0.03
-  },
-  {
-   "check": "occlusion",
-   "variant": "male",
-   "position": "seated",
-   "regionId": "spine_lumbar",
-   "shot": "chest_back",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 47.81
-  },
-  {
-   "check": "occlusion",
-   "variant": "male",
-   "position": "seated",
    "regionId": "hip_right",
    "shot": "legs",
    "first": "skin",
@@ -13958,46 +15258,6 @@
    "check": "occlusion",
    "variant": "male",
    "position": "seated",
-   "regionId": "lung_post_ru",
-   "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0.01
-  },
-  {
-   "check": "occlusion",
-   "variant": "male",
-   "position": "seated",
-   "regionId": "lung_post_lu",
-   "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0.01
-  },
-  {
-   "check": "occlusion",
-   "variant": "male",
-   "position": "seated",
-   "regionId": "lung_post_rl",
-   "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0
-  },
-  {
-   "check": "occlusion",
-   "variant": "male",
-   "position": "seated",
-   "regionId": "lung_post_ll",
-   "shot": "chest_back",
-   "first": "skin",
-   "part": "torso",
-   "offCm": 0
-  },
-  {
-   "check": "occlusion",
-   "variant": "male",
-   "position": "seated",
    "regionId": "lung_lat_r",
    "shot": "chest_right",
    "first": "skin",
@@ -14013,6 +15273,1051 @@
    "first": "skin",
    "part": "torso",
    "offCm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "cardiac_aortic",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "cardiac_pulmonic",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "cardiac_erbs",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "cardiac_tricuspid",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "cardiac_mitral",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "precordium_lsb",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "precordium_wall",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "neck_trachea",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "neck_thyroid",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "neck_jvp_right",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "scalp",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "nose",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "mouth",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "face",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_occipital",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_occipital",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_post_auricular",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_post_auricular",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_pre_auricular",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_pre_auricular",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_submandibular",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_submandibular",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_submental",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_ant_cervical",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_ant_cervical",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_post_cervical",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_post_cervical",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_supraclavicular",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_supraclavicular",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "spine_cervical",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "spine_thoracic",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "spine_lumbar",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "sacrum",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "abd_epigastric",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "pelvic",
+   "cm": 0.02
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "carotid_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "eye_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ear_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_ant_lu",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_ant_ll",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_lat_l",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_lu",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_ll",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "cva_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "breast_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "abd_luq",
+   "cm": 0.03
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "abd_llq",
+   "cm": 0.02
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "groin_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "shoulder_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "arm_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "elbow_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "wrist_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "hand_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "hip_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "knee_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "shin_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "calf_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ankle_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "foot_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "toe_great_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "upper_arm_left",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "biceps_tendon_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "triceps_tendon_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "brachioradialis_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "patellar_tendon_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "leg_medial_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "achilles_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "sole_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "foot_lateral_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "carotid_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "eye_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ear_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_ant_ru",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_ant_rl",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_lat_r",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_ru",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_rl",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "cva_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "breast_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "abd_ruq",
+   "cm": 0.03
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "abd_rlq",
+   "cm": 0.02
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "groin_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "shoulder_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "arm_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "elbow_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "wrist_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "hand_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "hip_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "knee_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "shin_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "calf_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "ankle_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "foot_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "toe_great_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "upper_arm_right",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "biceps_tendon_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "triceps_tendon_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "brachioradialis_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "patellar_tendon_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "leg_medial_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "achilles_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "sole_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "foot_lateral_right",
+   "cm": 0
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "ear_left#mastoid",
+   "cm": 0,
+   "max": 1.2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "eye_left",
+   "cm": 0.05,
+   "max": 0.6
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "upper_arm_left",
+   "cm": 1.2,
+   "max": 3
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "biceps_tendon_left",
+   "cm": 0.82,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "triceps_tendon_left",
+   "cm": 0.58,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "brachioradialis_left",
+   "cm": 1.68,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "wrist_left",
+   "cm": 0.43,
+   "max": 2.5
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "patellar_tendon_left",
+   "cm": 0.79,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "achilles_left",
+   "cm": 0.26,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "sole_left",
+   "cm": 1.58,
+   "max": 3
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "foot_lateral_left",
+   "cm": 2.58,
+   "max": 4
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "leg_medial_left",
+   "cm": 3.66,
+   "max": 5
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "ear_right#mastoid",
+   "cm": 0,
+   "max": 1.2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "eye_right",
+   "cm": 0.05,
+   "max": 0.6
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "upper_arm_right",
+   "cm": 1.2,
+   "max": 3
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "biceps_tendon_right",
+   "cm": 0.82,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "triceps_tendon_right",
+   "cm": 0.58,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "brachioradialis_right",
+   "cm": 1.68,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "wrist_right",
+   "cm": 0.43,
+   "max": 2.5
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "patellar_tendon_right",
+   "cm": 0.79,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "achilles_right",
+   "cm": 0.26,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "sole_right",
+   "cm": 1.58,
+   "max": 3
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "foot_lateral_right",
+   "cm": 2.58,
+   "max": 4
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "leg_medial_right",
+   "cm": 3.66,
+   "max": 5
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "abd_ruq",
+   "cm": 0.66,
+   "max": 4
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "abd_luq",
+   "cm": 0.66,
+   "max": 4
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "abd_rlq",
+   "cm": 0.9,
+   "max": 4
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "abd_llq",
+   "cm": 0.9,
+   "max": 4
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "cardiac_aortic",
+   "cm": 0.83,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "cardiac_pulmonic",
+   "cm": 0.83,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "cardiac_erbs",
+   "cm": 0.51,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "cardiac_tricuspid",
+   "cm": 0.86,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "rule": "cardiac_mitral",
+   "cm": 0.1,
+   "max": 2.5
+  },
+  {
+   "check": "occlusion",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "cva_right",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
+  },
+  {
+   "check": "occlusion",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "cva_left",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
+  },
+  {
+   "check": "occlusion",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_ru",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
+  },
+  {
+   "check": "occlusion",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_lu",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
+  },
+  {
+   "check": "occlusion",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_rl",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.01
+  },
+  {
+   "check": "occlusion",
+   "variant": "male",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_ll",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.01
   },
   {
    "check": "skin",
@@ -14033,7 +16338,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "regionId": "cardiac_erbs",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -14229,7 +16534,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "regionId": "spine_thoracic",
-   "cm": 0.02
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -14243,7 +16548,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "regionId": "sacrum",
-   "cm": 0
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -14348,7 +16653,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "regionId": "groin_left",
-   "cm": 0.02
+   "cm": 0
   },
   {
    "check": "skin",
@@ -14586,7 +16891,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "regionId": "groin_right",
-   "cm": 0.02
+   "cm": 0
   },
   {
    "check": "skin",
@@ -14756,7 +17061,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "upper_arm_left",
-   "cm": 1.2,
+   "cm": 1.19,
    "max": 3
   },
   {
@@ -14772,7 +17077,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "triceps_tendon_left",
-   "cm": 0.58,
+   "cm": 0.6,
    "max": 2
   },
   {
@@ -14780,7 +17085,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "brachioradialis_left",
-   "cm": 1.64,
+   "cm": 1.66,
    "max": 2
   },
   {
@@ -14852,7 +17157,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "upper_arm_right",
-   "cm": 1.2,
+   "cm": 1.19,
    "max": 3
   },
   {
@@ -14868,7 +17173,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "triceps_tendon_right",
-   "cm": 0.58,
+   "cm": 0.6,
    "max": 2
   },
   {
@@ -14876,7 +17181,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "brachioradialis_right",
-   "cm": 1.64,
+   "cm": 1.66,
    "max": 2
   },
   {
@@ -14964,7 +17269,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "cardiac_aortic",
-   "cm": 0.83,
+   "cm": 0.82,
    "max": 2
   },
   {
@@ -14972,7 +17277,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "cardiac_pulmonic",
-   "cm": 0.83,
+   "cm": 0.82,
    "max": 2
   },
   {
@@ -14980,7 +17285,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "rule": "cardiac_erbs",
-   "cm": 0.51,
+   "cm": 0.5,
    "max": 2
   },
   {
@@ -14998,6 +17303,46 @@
    "rule": "cardiac_mitral",
    "cm": 0.1,
    "max": 2.5
+  },
+  {
+   "check": "occlusion",
+   "variant": "male",
+   "position": "sitting_dangling",
+   "regionId": "sacrum",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.78
+  },
+  {
+   "check": "occlusion",
+   "variant": "male",
+   "position": "sitting_dangling",
+   "regionId": "spine_cervical",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "neck",
+   "offCm": 0
+  },
+  {
+   "check": "occlusion",
+   "variant": "male",
+   "position": "sitting_dangling",
+   "regionId": "spine_thoracic",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.02
+  },
+  {
+   "check": "occlusion",
+   "variant": "male",
+   "position": "sitting_dangling",
+   "regionId": "spine_lumbar",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -15127,7 +17472,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "regionId": "neck_jvp_right",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -15274,7 +17619,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "regionId": "spine_thoracic",
-   "cm": 0.02
+   "cm": 0.03
   },
   {
    "check": "skin",
@@ -15393,7 +17738,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "regionId": "groin_left",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -15484,7 +17829,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "regionId": "upper_arm_left",
-   "cm": 0
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -15631,7 +17976,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "regionId": "groin_right",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -15801,7 +18146,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "upper_arm_left",
-   "cm": 1.32,
+   "cm": 1.2,
    "max": 3
   },
   {
@@ -15809,7 +18154,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "biceps_tendon_left",
-   "cm": 0.81,
+   "cm": 0.82,
    "max": 2
   },
   {
@@ -15817,7 +18162,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "triceps_tendon_left",
-   "cm": 0.43,
+   "cm": 0.59,
    "max": 2
   },
   {
@@ -15913,7 +18258,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "triceps_tendon_right",
-   "cm": 0.43,
+   "cm": 0.44,
    "max": 2
   },
   {
@@ -15921,7 +18266,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "brachioradialis_right",
-   "cm": 1.64,
+   "cm": 1.61,
    "max": 2
   },
   {
@@ -15929,7 +18274,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "wrist_right",
-   "cm": 0.43,
+   "cm": 0.42,
    "max": 2.5
   },
   {
@@ -16009,7 +18354,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "cardiac_aortic",
-   "cm": 0.83,
+   "cm": 0.84,
    "max": 2
   },
   {
@@ -16017,7 +18362,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "cardiac_pulmonic",
-   "cm": 0.83,
+   "cm": 0.82,
    "max": 2
   },
   {
@@ -16025,7 +18370,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "rule": "cardiac_erbs",
-   "cm": 0.52,
+   "cm": 0.5,
    "max": 2
   },
   {
@@ -16052,7 +18397,7 @@
    "shot": "chest_back",
    "first": "skin",
    "part": "torso",
-   "offCm": 3.13
+   "offCm": 0.02
   },
   {
    "check": "occlusion",
@@ -16303,7 +18648,7 @@
    "variant": "female",
    "position": "supine",
    "regionId": "sacrum",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -16345,7 +18690,7 @@
    "variant": "female",
    "position": "supine",
    "regionId": "lung_ant_lu",
-   "cm": 0
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -16583,7 +18928,7 @@
    "variant": "female",
    "position": "supine",
    "regionId": "lung_ant_ru",
-   "cm": 0
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -16816,7 +19161,7 @@
    "variant": "female",
    "position": "supine",
    "rule": "upper_arm_left",
-   "cm": 2.08,
+   "cm": 2.11,
    "max": 3
   },
   {
@@ -16832,7 +19177,7 @@
    "variant": "female",
    "position": "supine",
    "rule": "triceps_tendon_left",
-   "cm": 0.54,
+   "cm": 0.48,
    "max": 2
   },
   {
@@ -16848,7 +19193,7 @@
    "variant": "female",
    "position": "supine",
    "rule": "wrist_left",
-   "cm": 0.5,
+   "cm": 0.49,
    "max": 2.5
   },
   {
@@ -16912,7 +19257,7 @@
    "variant": "female",
    "position": "supine",
    "rule": "upper_arm_right",
-   "cm": 2.08,
+   "cm": 2.11,
    "max": 3
   },
   {
@@ -16928,7 +19273,7 @@
    "variant": "female",
    "position": "supine",
    "rule": "triceps_tendon_right",
-   "cm": 0.54,
+   "cm": 0.48,
    "max": 2
   },
   {
@@ -16944,7 +19289,7 @@
    "variant": "female",
    "position": "supine",
    "rule": "wrist_right",
-   "cm": 0.5,
+   "cm": 0.49,
    "max": 2.5
   },
   {
@@ -17588,7 +19933,7 @@
    "variant": "female",
    "position": "reclined_30",
    "regionId": "sacrum",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -17630,7 +19975,7 @@
    "variant": "female",
    "position": "reclined_30",
    "regionId": "lung_ant_lu",
-   "cm": 0
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -17693,7 +20038,7 @@
    "variant": "female",
    "position": "reclined_30",
    "regionId": "groin_left",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -17868,7 +20213,7 @@
    "variant": "female",
    "position": "reclined_30",
    "regionId": "lung_ant_ru",
-   "cm": 0
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -17931,7 +20276,7 @@
    "variant": "female",
    "position": "reclined_30",
    "regionId": "groin_right",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -18593,7 +20938,7 @@
    "variant": "female",
    "position": "reclined_45",
    "regionId": "sacrum",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -18698,7 +21043,7 @@
    "variant": "female",
    "position": "reclined_45",
    "regionId": "groin_left",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -18936,7 +21281,7 @@
    "variant": "female",
    "position": "reclined_45",
    "regionId": "groin_right",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -19114,7 +21459,7 @@
    "variant": "female",
    "position": "reclined_45",
    "rule": "biceps_tendon_left",
-   "cm": 0.42,
+   "cm": 0.43,
    "max": 2
   },
   {
@@ -19122,7 +21467,7 @@
    "variant": "female",
    "position": "reclined_45",
    "rule": "triceps_tendon_left",
-   "cm": 0.72,
+   "cm": 0.75,
    "max": 2
   },
   {
@@ -19210,7 +21555,7 @@
    "variant": "female",
    "position": "reclined_45",
    "rule": "biceps_tendon_right",
-   "cm": 0.42,
+   "cm": 0.43,
    "max": 2
   },
   {
@@ -19218,7 +21563,7 @@
    "variant": "female",
    "position": "reclined_45",
    "rule": "triceps_tendon_right",
-   "cm": 0.72,
+   "cm": 0.75,
    "max": 2
   },
   {
@@ -19578,7 +21923,7 @@
    "variant": "female",
    "position": "seated",
    "regionId": "sacrum",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -19683,7 +22028,7 @@
    "variant": "female",
    "position": "seated",
    "regionId": "groin_left",
-   "cm": 0.02
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -19704,7 +22049,7 @@
    "variant": "female",
    "position": "seated",
    "regionId": "elbow_left",
-   "cm": 0
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -19921,7 +22266,7 @@
    "variant": "female",
    "position": "seated",
    "regionId": "groin_right",
-   "cm": 0.02
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -19942,7 +22287,7 @@
    "variant": "female",
    "position": "seated",
    "regionId": "elbow_right",
-   "cm": 0
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -20091,7 +22436,7 @@
    "variant": "female",
    "position": "seated",
    "rule": "upper_arm_left",
-   "cm": 2.09,
+   "cm": 2.13,
    "max": 3
   },
   {
@@ -20099,7 +22444,7 @@
    "variant": "female",
    "position": "seated",
    "rule": "biceps_tendon_left",
-   "cm": 0.46,
+   "cm": 0.47,
    "max": 2
   },
   {
@@ -20107,7 +22452,7 @@
    "variant": "female",
    "position": "seated",
    "rule": "triceps_tendon_left",
-   "cm": 0.89,
+   "cm": 0.96,
    "max": 2
   },
   {
@@ -20187,7 +22532,7 @@
    "variant": "female",
    "position": "seated",
    "rule": "upper_arm_right",
-   "cm": 2.09,
+   "cm": 2.13,
    "max": 3
   },
   {
@@ -20195,7 +22540,7 @@
    "variant": "female",
    "position": "seated",
    "rule": "biceps_tendon_right",
-   "cm": 0.46,
+   "cm": 0.47,
    "max": 2
   },
   {
@@ -20203,7 +22548,7 @@
    "variant": "female",
    "position": "seated",
    "rule": "triceps_tendon_right",
-   "cm": 0.89,
+   "cm": 0.96,
    "max": 2
   },
   {
@@ -20338,26 +22683,6 @@
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
-   "regionId": "cva_right",
-   "shot": "chest_back",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 50
-  },
-  {
-   "check": "occlusion",
-   "variant": "female",
-   "position": "seated",
-   "regionId": "cva_left",
-   "shot": "chest_back",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 51.7
-  },
-  {
-   "check": "occlusion",
-   "variant": "female",
-   "position": "seated",
    "regionId": "carotid_right",
    "shot": "head_neck",
    "first": "skin",
@@ -20402,7 +22727,7 @@
    "shot": "hands",
    "first": "skin",
    "part": "hand_r",
-   "offCm": 1.75
+   "offCm": 2.03
   },
   {
    "check": "occlusion",
@@ -20412,17 +22737,7 @@
    "shot": "hands",
    "first": "skin",
    "part": "hand_l",
-   "offCm": 1.75
-  },
-  {
-   "check": "occlusion",
-   "variant": "female",
-   "position": "seated",
-   "regionId": "sacrum",
-   "shot": "chest_back",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 49.66
+   "offCm": 2.03
   },
   {
    "check": "occlusion",
@@ -20688,36 +23003,6 @@
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
-   "regionId": "spine_cervical",
-   "shot": "chest_back",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 39.91
-  },
-  {
-   "check": "occlusion",
-   "variant": "female",
-   "position": "seated",
-   "regionId": "spine_thoracic",
-   "shot": "chest_back",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 46.25
-  },
-  {
-   "check": "occlusion",
-   "variant": "female",
-   "position": "seated",
-   "regionId": "spine_lumbar",
-   "shot": "chest_back",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 47.18
-  },
-  {
-   "check": "occlusion",
-   "variant": "female",
-   "position": "seated",
    "regionId": "hip_right",
    "shot": "legs",
    "first": "skin",
@@ -20792,7 +23077,7 @@
    "shot": "arms",
    "first": "skin",
    "part": "forearm_r",
-   "offCm": 0
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -20802,7 +23087,7 @@
    "shot": "arms_left",
    "first": "skin",
    "part": "forearm_l",
-   "offCm": 0
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
@@ -20868,46 +23153,6 @@
    "check": "occlusion",
    "variant": "female",
    "position": "seated",
-   "regionId": "lung_post_ru",
-   "shot": "chest_back",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 42.65
-  },
-  {
-   "check": "occlusion",
-   "variant": "female",
-   "position": "seated",
-   "regionId": "lung_post_lu",
-   "shot": "chest_back",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 44.66
-  },
-  {
-   "check": "occlusion",
-   "variant": "female",
-   "position": "seated",
-   "regionId": "lung_post_rl",
-   "shot": "chest_back",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 49.39
-  },
-  {
-   "check": "occlusion",
-   "variant": "female",
-   "position": "seated",
-   "regionId": "lung_post_ll",
-   "shot": "chest_back",
-   "first": "table:head-mattress",
-   "part": null,
-   "offCm": 51.19
-  },
-  {
-   "check": "occlusion",
-   "variant": "female",
-   "position": "seated",
    "regionId": "lung_lat_r",
    "shot": "chest_right",
    "first": "skin",
@@ -20920,6 +23165,1051 @@
    "position": "seated",
    "regionId": "lung_lat_l",
    "shot": "chest_left",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "cardiac_aortic",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "cardiac_pulmonic",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "cardiac_erbs",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "cardiac_tricuspid",
+   "cm": 0.02
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "cardiac_mitral",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "precordium_lsb",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "precordium_wall",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "neck_trachea",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "neck_thyroid",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "neck_jvp_right",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "scalp",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "nose",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "mouth",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "face",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_occipital",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_occipital",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_post_auricular",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_post_auricular",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_pre_auricular",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_pre_auricular",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_submandibular",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_submandibular",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_submental",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_ant_cervical",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_ant_cervical",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_post_cervical",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_post_cervical",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_supraclavicular",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ln_supraclavicular",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "spine_cervical",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "spine_thoracic",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "spine_lumbar",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "sacrum",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "abd_epigastric",
+   "cm": 0.04
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "pelvic",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "carotid_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "eye_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ear_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_ant_lu",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_ant_ll",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_lat_l",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_lu",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_ll",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "cva_left",
+   "cm": 0.02
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "breast_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "abd_luq",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "abd_llq",
+   "cm": 0.02
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "groin_left",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "shoulder_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "arm_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "elbow_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "wrist_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "hand_left",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "hip_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "knee_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "shin_left",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "calf_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ankle_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "foot_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "toe_great_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "upper_arm_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "biceps_tendon_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "triceps_tendon_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "brachioradialis_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "patellar_tendon_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "leg_medial_left",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "achilles_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "sole_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "foot_lateral_left",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "carotid_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "eye_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ear_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_ant_ru",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_ant_rl",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_lat_r",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_ru",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_rl",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "cva_right",
+   "cm": 0.02
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "breast_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "abd_ruq",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "abd_rlq",
+   "cm": 0.02
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "groin_right",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "shoulder_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "arm_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "elbow_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "wrist_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "hand_right",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "hip_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "knee_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "shin_right",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "calf_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "ankle_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "foot_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "toe_great_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "upper_arm_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "biceps_tendon_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "triceps_tendon_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "brachioradialis_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "patellar_tendon_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "leg_medial_right",
+   "cm": 0.01
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "achilles_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "sole_right",
+   "cm": 0
+  },
+  {
+   "check": "skin",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "foot_lateral_right",
+   "cm": 0
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "ear_left#mastoid",
+   "cm": 0.01,
+   "max": 1.2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "eye_left",
+   "cm": 0.05,
+   "max": 0.6
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "upper_arm_left",
+   "cm": 2.09,
+   "max": 3
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "biceps_tendon_left",
+   "cm": 0.46,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "triceps_tendon_left",
+   "cm": 0.89,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "brachioradialis_left",
+   "cm": 0.81,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "wrist_left",
+   "cm": 0.5,
+   "max": 2.5
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "patellar_tendon_left",
+   "cm": 1.58,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "achilles_left",
+   "cm": 0.5,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "sole_left",
+   "cm": 1.15,
+   "max": 3
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "foot_lateral_left",
+   "cm": 2.25,
+   "max": 4
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "leg_medial_left",
+   "cm": 3.34,
+   "max": 5
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "ear_right#mastoid",
+   "cm": 0.01,
+   "max": 1.2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "eye_right",
+   "cm": 0.05,
+   "max": 0.6
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "upper_arm_right",
+   "cm": 2.09,
+   "max": 3
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "biceps_tendon_right",
+   "cm": 0.46,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "triceps_tendon_right",
+   "cm": 0.89,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "brachioradialis_right",
+   "cm": 0.81,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "wrist_right",
+   "cm": 0.5,
+   "max": 2.5
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "patellar_tendon_right",
+   "cm": 1.58,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "achilles_right",
+   "cm": 0.5,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "sole_right",
+   "cm": 1.15,
+   "max": 3
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "foot_lateral_right",
+   "cm": 2.25,
+   "max": 4
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "leg_medial_right",
+   "cm": 3.34,
+   "max": 5
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "abd_ruq",
+   "cm": 0.74,
+   "max": 4
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "abd_luq",
+   "cm": 0.74,
+   "max": 4
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "abd_rlq",
+   "cm": 1.36,
+   "max": 4
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "abd_llq",
+   "cm": 1.36,
+   "max": 4
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "cardiac_aortic",
+   "cm": 0.58,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "cardiac_pulmonic",
+   "cm": 0.58,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "cardiac_erbs",
+   "cm": 1.61,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "cardiac_tricuspid",
+   "cm": 0.95,
+   "max": 2
+  },
+  {
+   "check": "oracle",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "rule": "cardiac_mitral",
+   "cm": 0.8,
+   "max": 2.5
+  },
+  {
+   "check": "occlusion",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "cva_right",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.02
+  },
+  {
+   "check": "occlusion",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "cva_left",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.02
+  },
+  {
+   "check": "occlusion",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_ru",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
+  },
+  {
+   "check": "occlusion",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_lu",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
+  },
+  {
+   "check": "occlusion",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_rl",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
+  },
+  {
+   "check": "occlusion",
+   "variant": "female",
+   "position": "seated_leaning_forward",
+   "regionId": "lung_post_ll",
+   "shot": "chest_back",
    "first": "skin",
    "part": "torso",
    "offCm": 0
@@ -21139,7 +24429,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "regionId": "spine_thoracic",
-   "cm": 0.02
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -21153,7 +24443,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "regionId": "sacrum",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -21258,7 +24548,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "regionId": "groin_left",
-   "cm": 0.02
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -21496,7 +24786,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "regionId": "groin_right",
-   "cm": 0.02
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -21666,7 +24956,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "rule": "upper_arm_left",
-   "cm": 2.09,
+   "cm": 2.11,
    "max": 3
   },
   {
@@ -21674,7 +24964,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "rule": "biceps_tendon_left",
-   "cm": 0.46,
+   "cm": 0.47,
    "max": 2
   },
   {
@@ -21682,7 +24972,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "rule": "triceps_tendon_left",
-   "cm": 0.89,
+   "cm": 0.94,
    "max": 2
   },
   {
@@ -21762,7 +25052,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "rule": "upper_arm_right",
-   "cm": 2.09,
+   "cm": 2.11,
    "max": 3
   },
   {
@@ -21770,7 +25060,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "rule": "biceps_tendon_right",
-   "cm": 0.46,
+   "cm": 0.47,
    "max": 2
   },
   {
@@ -21778,7 +25068,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "rule": "triceps_tendon_right",
-   "cm": 0.89,
+   "cm": 0.94,
    "max": 2
   },
   {
@@ -21908,6 +25198,46 @@
    "rule": "cardiac_mitral",
    "cm": 0.97,
    "max": 2.5
+  },
+  {
+   "check": "occlusion",
+   "variant": "female",
+   "position": "sitting_dangling",
+   "regionId": "sacrum",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.01
+  },
+  {
+   "check": "occlusion",
+   "variant": "female",
+   "position": "sitting_dangling",
+   "regionId": "spine_cervical",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
+  },
+  {
+   "check": "occlusion",
+   "variant": "female",
+   "position": "sitting_dangling",
+   "regionId": "spine_thoracic",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0.01
+  },
+  {
+   "check": "occlusion",
+   "variant": "female",
+   "position": "sitting_dangling",
+   "regionId": "spine_lumbar",
+   "shot": "chest_back",
+   "first": "skin",
+   "part": "torso",
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -22037,7 +25367,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "regionId": "neck_jvp_right",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -22114,7 +25444,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "regionId": "ln_submandibular",
-   "cm": 0
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -22142,7 +25472,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "regionId": "ln_ant_cervical",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -22184,7 +25514,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "regionId": "spine_thoracic",
-   "cm": 0.02
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -22198,7 +25528,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "regionId": "sacrum",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -22240,7 +25570,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "regionId": "lung_ant_lu",
-   "cm": 0
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -22303,7 +25633,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "regionId": "groin_left",
-   "cm": 0.02
+   "cm": 0
   },
   {
    "check": "skin",
@@ -22324,7 +25654,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "regionId": "elbow_left",
-   "cm": 0.01
+   "cm": 0
   },
   {
    "check": "skin",
@@ -22541,7 +25871,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "regionId": "groin_right",
-   "cm": 0.03
+   "cm": 0.01
   },
   {
    "check": "skin",
@@ -22711,7 +26041,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "rule": "upper_arm_left",
-   "cm": 2.08,
+   "cm": 2.1,
    "max": 3
   },
   {
@@ -22719,7 +26049,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "rule": "biceps_tendon_left",
-   "cm": 0.4,
+   "cm": 0.46,
    "max": 2
   },
   {
@@ -22727,7 +26057,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "rule": "triceps_tendon_left",
-   "cm": 0.54,
+   "cm": 0.91,
    "max": 2
   },
   {
@@ -22807,7 +26137,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "rule": "upper_arm_right",
-   "cm": 2.08,
+   "cm": 2.07,
    "max": 3
   },
   {
@@ -22823,7 +26153,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "rule": "triceps_tendon_right",
-   "cm": 0.54,
+   "cm": 0.57,
    "max": 2
   },
   {
@@ -22887,7 +26217,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "rule": "abd_ruq",
-   "cm": 1.16,
+   "cm": 1.14,
    "max": 4
   },
   {
@@ -22895,7 +26225,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "rule": "abd_luq",
-   "cm": 1.16,
+   "cm": 1.18,
    "max": 4
   },
   {
@@ -22903,7 +26233,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "rule": "abd_rlq",
-   "cm": 2.12,
+   "cm": 2.09,
    "max": 4
   },
   {
@@ -22911,7 +26241,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "rule": "abd_llq",
-   "cm": 2.14,
+   "cm": 2.17,
    "max": 4
   },
   {
@@ -22962,7 +26292,7 @@
    "shot": "chest_back",
    "first": "skin",
    "part": "torso",
-   "offCm": 0.72
+   "offCm": 0.01
   },
   {
    "check": "occlusion",
