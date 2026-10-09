@@ -93,7 +93,9 @@ async function coachApi(baseURL: string): Promise<APIRequestContext> {
 }
 
 async function qaLog(api: APIRequestContext, sessionId: string): Promise<Action[]> {
-  const res = await api.get(`/api/coach/sessions/${sessionId}/log`);
+  // an idle keep-alive socket the server has just closed fails as "socket hang up": the GET is idempotent, so retry once
+  const get = () => api.get(`/api/coach/sessions/${sessionId}/log`);
+  const res = await get().catch((err: Error) => (/socket hang up|ECONNRESET/.test(err.message) ? get() : Promise.reject(err)));
   expect(res.ok(), "QA log route (QA_HOOKS=true)").toBe(true);
   return ((await res.json()) as { actions: Action[] }).actions;
 }
