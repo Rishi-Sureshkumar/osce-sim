@@ -10,7 +10,7 @@
   {
    "id": "intersections:male:supine:covered:gown",
    "status": "PASS",
-   "detail": "72 of 14517 skin vertices (0.50%, max 0.5%)"
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
   },
   {
    "id": "intersections:male:supine:covered:sheet",
@@ -25,7 +25,7 @@
   {
    "id": "intersections:male:supine:chest-left-exposed:gown",
    "status": "PASS",
-   "detail": "72 of 14517 skin vertices (0.50%, max 0.5%)"
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
   },
   {
    "id": "intersections:male:supine:chest-left-exposed:sheet",
@@ -40,7 +40,7 @@
   {
    "id": "intersections:male:supine:chest-exposed:gown",
    "status": "PASS",
-   "detail": "72 of 14517 skin vertices (0.50%, max 0.5%)"
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
   },
   {
    "id": "intersections:male:supine:chest-exposed:sheet",
@@ -55,7 +55,7 @@
   {
    "id": "intersections:male:supine:back-exposed:gown",
    "status": "PASS",
-   "detail": "72 of 14517 skin vertices (0.50%, max 0.5%)"
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
   },
   {
    "id": "intersections:male:supine:back-exposed:sheet",
@@ -85,7 +85,7 @@
   {
    "id": "intersections:male:supine:leg-left-exposed:gown",
    "status": "PASS",
-   "detail": "72 of 14517 skin vertices (0.50%, max 0.5%)"
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
   },
   {
    "id": "intersections:male:supine:leg-left-exposed:sheet",
@@ -100,7 +100,7 @@
   {
    "id": "intersections:male:supine:legs-exposed:gown",
    "status": "PASS",
-   "detail": "72 of 14517 skin vertices (0.50%, max 0.5%)"
+   "detail": "0 of 14517 skin vertices (0.00%, max 0.5%)"
   },
   {
    "id": "intersections:male:supine:legs-exposed:sheet",
@@ -1697,8 +1697,8 @@
    "position": "supine",
    "drape": "covered",
    "kind": "gown",
-   "vertices": 72,
-   "percent": 0.496
+   "vertices": 0,
+   "percent": 0
   },
   {
    "variant": "male",
@@ -1721,8 +1721,8 @@
    "position": "supine",
    "drape": "chest-left-exposed",
    "kind": "gown",
-   "vertices": 72,
-   "percent": 0.496
+   "vertices": 0,
+   "percent": 0
   },
   {
    "variant": "male",
@@ -1745,8 +1745,8 @@
    "position": "supine",
    "drape": "chest-exposed",
    "kind": "gown",
-   "vertices": 72,
-   "percent": 0.496
+   "vertices": 0,
+   "percent": 0
   },
   {
    "variant": "male",
@@ -1769,8 +1769,8 @@
    "position": "supine",
    "drape": "back-exposed",
    "kind": "gown",
-   "vertices": 72,
-   "percent": 0.496
+   "vertices": 0,
+   "percent": 0
   },
   {
    "variant": "male",
@@ -1817,8 +1817,8 @@
    "position": "supine",
    "drape": "leg-left-exposed",
    "kind": "gown",
-   "vertices": 72,
-   "percent": 0.496
+   "vertices": 0,
+   "percent": 0
   },
   {
    "variant": "male",
@@ -1841,8 +1841,8 @@
    "position": "supine",
    "drape": "legs-exposed",
    "kind": "gown",
-   "vertices": 72,
-   "percent": 0.496
+   "vertices": 0,
+   "percent": 0
   },
   {
    "variant": "male",

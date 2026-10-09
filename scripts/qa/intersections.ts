@@ -16,7 +16,7 @@ import { DoubleSide, Plane, Ray, Vector3 } from "three";
 import type { DrapeSection, Position } from "@/domain/schemas";
 import { POSITION_ANGLE } from "@/engine/patientState";
 import { poseFor } from "@/exam3d/regionAnchors";
-import { buildSheet, classifySheet, coverageAt, coverageField, nodeShown, sheetCuts, sheetPenetration, skinWorld, underOtherSkin, type SkinData } from "@/scene/sheetGeometry";
+import { armMask, buildSheet, classifySheet, coverageAt, coverageField, nodeShown, sheetCuts, sheetPenetration, skinWorld, underOtherSkin, type SkinData } from "@/scene/sheetGeometry";
 import { TABLE } from "@/scene/rig";
 import type { VariantId } from "@/scene/rig";
 import { insideBox, tableAngle, tableBoxes } from "@/scene/room/tableGeometry";
@@ -57,6 +57,7 @@ async function main() {
     const skinMesh = (await loadPatient(variant)).find((m) => m.name === "skin")!;
     const skinData: SkinData = { bind: skinMesh.positions, joints: skinMesh.joints, weights: skinMesh.weights, jointNames: skinMesh.jointNames, count: skinMesh.positions.length / 3 };
     const owner = classifySheet(skinData, sheetCuts(variant, skinData));
+    const arms = armMask(skinData);
     for (const position of POSITIONS) {
       const angle = POSITION_ANGLE[position];
       const pose = poseFor(position, angle, variant);
@@ -66,7 +67,7 @@ async function main() {
       // the table's head section as the app sets it for the position (not the trunk angle)
       const boxes = tableBoxes(tableAngle(position, angle), variant);
       const lapOnly = position === "sitting_dangling";
-      const sheet = buildSheet(skinWorld(skinData, pose, owner), owner, { lapOnly });
+      const sheet = buildSheet(skinWorld(skinData, pose, owner), owner, { lapOnly, under: skinWorld(skinData, pose, arms) });
       // the chest panel's midline (one side uncovered: PatientModel clips the panel there)
       const spine = pose.world.get("spine01")!;
       const leftDir = new Vector3(1, 0, 0).transformDirection(spine);

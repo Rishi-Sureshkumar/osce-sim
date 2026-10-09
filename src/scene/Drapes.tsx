@@ -19,7 +19,7 @@ import type { Pose } from "@/exam3d/regionAnchors";
 import { TAB_BIND, bodyAxes, gownRollLines, nearestVertex, trunkMask } from "./drapeGeometry";
 import { PATIENT_VARIANTS } from "./patientRig.generated";
 import type { VariantId } from "./rig";
-import { OWNER_SECTION, buildSheet, classifySheet, sheetCuts, sheetMesh, sheetOwnerAt, skinNormal, skinWorld, type Sheet, type SkinData } from "./sheetGeometry";
+import { OWNER_SECTION, armMask, buildSheet, classifySheet, sheetCuts, sheetMesh, sheetOwnerAt, skinNormal, skinWorld, type Sheet, type SkinData } from "./sheetGeometry";
 
 const SHEET_COLOR = "#a8cad8";
 const GOWN_EDGE = "#9ec5d4";
@@ -84,10 +84,12 @@ export function Drapes({
 }) {
   const skin = useSkinData(variant);
   const owner = useMemo(() => (skin ? classifySheet(skin, sheetCuts(variant, skin)) : null), [skin, variant]);
+  const arms = useMemo(() => (skin ? armMask(skin) : null), [skin]);
   const sheet = useMemo<Sheet | null>(() => {
-    if (!skin || !owner) return null;
-    return buildSheet(skinWorld(skin, pose, owner), owner, { lapOnly: pose.position === "sitting_dangling" });
-  }, [skin, owner, pose]);
+    if (!skin || !owner || !arms) return null;
+    // the hands rest on the sheet (it tucks under the arms), not under it
+    return buildSheet(skinWorld(skin, pose, owner), owner, { lapOnly: pose.position === "sitting_dangling", under: skinWorld(skin, pose, arms) });
+  }, [skin, owner, arms, pose]);
   const legs = { leg_left: sections.leg_left, leg_right: sections.leg_right };
   const geom = useMemo(() => {
     if (!sheet) return null;

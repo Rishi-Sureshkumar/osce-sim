@@ -60,32 +60,28 @@ reviewed again (`-- --scaffold` adds the rows). High defects must have an owner 
 
 | file | sha256 | reviewed@ | defects | notes |
 |---|---|---|---|---|
-| 1180x820/hf-male/layout/01-station-inside.png | d378c0d476f3 | 0b84dda+wt | V-WRAP, V-SHEET, V-OVERFLOW | Station at 1180: "Actions" and "Leave the room" on a second toolbar row · V-WRAP · V-SHEET · V-OVERFLOW |
-| 1180x820/hf-male/layout/02-note.png | b25bbe3a6e5c | 0b84dda+wt | — | Post-encounter note at 1180: history, exam, diagnosis with findings, door instructions; timer and autosave masked |
-| 1180x820/hf-male/layout/03-results.png | 87d0eda94f06 | 0b84dda+wt | — | Results at 1180: readable, nothing clipped |
-| 1180x820/hf-male/layout/04-coach-list.png | a7e6d00230c3 | 0b84dda+wt | V-HINTS | Coach list at 1180 · V-HINTS |
-| 1180x820/hf-male/layout/05-coach-detail.png | d0a7b01dab55 | 0b84dda+wt | — | Coach detail at 1180: two columns, readable |
-| 1280x800/hf-male/layout/01-station-inside.png | 3db5ea82c77c | 0b84dda+wt | V-WRAP, V-SHEET, V-OVERFLOW | Station at 1280: "Leave the room" wraps to a second toolbar row · V-WRAP · V-SHEET · V-OVERFLOW: chat cut off below |
-| 1280x800/hf-male/layout/02-note.png | 97a0ed9cb4b0 | 0b84dda+wt | — | Post-encounter note at 1280, readable |
-| 1280x800/hf-male/layout/03-results.png | 8a331bdfbd4b | 0b84dda+wt | — | Results at 1280: feedback and debrief readable, nothing clipped |
-| 1280x800/hf-male/layout/04-coach-list.png | 3bbe2f0323ed | 0b84dda+wt | V-HINTS | Coach list at 1280 · V-HINTS |
-| 1280x800/hf-male/layout/05-coach-detail.png | 1bf95b5eb84d | 0b84dda+wt | — | Coach detail at 1280: two columns, readable |
-| 1440x900/hf-male/drapes/01-chest_front__supine__chest-exposed.png | 671f457ee746 | 0b84dda+wt | V-CHESTINV, V-ROD, V-ARMS | Chest uncovered supine, viewed from the head end (face upside down) · V-CHESTINV · V-ROD: the rolled gown lies across the upper chest · V-ARMS |
-| 1440x900/hf-male/drapes/01-chest_front__supine__chest-left-exposed.png | a6b54a1df3d2 | UNREVIEWED | — | new |
-| 1440x900/hf-male/drapes/02-abdomen__supine__abdomen-exposed.png | b73b7d39a212 | 0b84dda+wt | V-ROD, V-ARMS | Abdomen uncovered, navel visible; rolls above and below · V-ROD · V-ARMS: hands raised |
-| 1440x900/hf-male/drapes/02-chest_front__supine__chest-exposed.png | 34690f084459 | UNREVIEWED | — | new |
-| 1440x900/hf-male/drapes/03-abdomen__supine__abdomen-exposed.png | aa2cc413b825 | UNREVIEWED | — | new |
-| 1440x900/hf-male/drapes/03-legs__supine__legs-exposed.png | dbd352c78bef | 0b84dda+wt | — | Legs uncovered supine: both legs flat on the table, nothing clipping |
-| 1440x900/hf-male/drapes/04-legs__supine__legs-left-exposed.png | 9175d384fe06 | UNREVIEWED | — | new |
-| 1440x900/hf-male/drapes/04-overview__supine__all-exposed.png | a618b3896338 | 0b84dda+wt | V-PELVIS, V-ROD | All exposed: the patient is naked (pelvis exposed) · V-PELVIS · V-ROD: rolls across chest and abdomen |
-| 1440x900/hf-male/drapes/05-legs__supine__legs-exposed.png | 87bd5304c190 | UNREVIEWED | — | new |
-| 1440x900/hf-male/drapes/06-overview__supine__all-exposed.png | ef77c432af33 | UNREVIEWED | — | new |
-| 1440x900/hf-male/layout/01-station-inside.png | 048c870ee188 | 0b84dda+wt | V-SHEET, V-OVERFLOW | Station inside at 1440: door instructions with vitals, room view · V-SHEET: feet through the sheet · V-OVERFLOW: chat options cut at the bottom |
-| 1440x900/hf-male/layout/02-note.png | 1a0acf2433c6 | 0b84dda+wt | — | Post-encounter note at 1440, readable |
-| 1440x900/hf-male/layout/03-results.png | 3f85442b5f78 | 0b84dda+wt | — | Results: feedback with verbatim quotes, strengths, improvements (note claim of an unperformed JVP exam flagged), case debrief list |
-| 1440x900/hf-male/layout/04-coach-list.png | d1109db6e8a5 | 0b84dda+wt | V-HINTS | Coach session list · V-HINTS: "1 hints" plural |
-| 1440x900/hf-male/layout/05-coach-detail.png | c73c89f9a751 | 0b84dda+wt | — | Coach detail: feedback, pass banner, domain card with items and overrides, note with the unperformed-exam flag, transcript with match details |
-| 1440x900/hf-male/room/00-exam-corridor-placard.png | fec6cf3400e2 | 0b84dda+wt | V-PLACARD, V-PLACEHOLDER | Exam-mode corridor: "You may begin" button, disabled "Knock and enter" with the wait message · V-PLACARD: blank 3D placard · V-PLACEHOLDER: chat says "Station finished" |
+| 1180x820/hf-male/layout/01-station-inside.png | 80e150123f38 | UNREVIEWED | V-WRAP, V-SHEET, V-OVERFLOW | changed (was d378c0d476f3) |
+| 1180x820/hf-male/layout/02-note.png | acb82688ca23 | UNREVIEWED | — | changed (was b25bbe3a6e5c) |
+| 1180x820/hf-male/layout/03-results.png | 62b8011b0a53 | UNREVIEWED | — | changed (was 87d0eda94f06) |
+| 1180x820/hf-male/layout/04-coach-list.png | f379495dee95 | UNREVIEWED | V-HINTS | changed (was a7e6d00230c3) |
+| 1180x820/hf-male/layout/05-coach-detail.png | 9cdd1a3d5585 | UNREVIEWED | — | changed (was d0a7b01dab55) |
+| 1280x800/hf-male/layout/01-station-inside.png | a24baa249236 | UNREVIEWED | V-WRAP, V-SHEET, V-OVERFLOW | changed (was 3db5ea82c77c) |
+| 1280x800/hf-male/layout/02-note.png | 289bb4f9a82c | UNREVIEWED | — | changed (was 97a0ed9cb4b0) |
+| 1280x800/hf-male/layout/03-results.png | 03f0709560a9 | UNREVIEWED | — | changed (was 8a331bdfbd4b) |
+| 1280x800/hf-male/layout/04-coach-list.png | ed6433764bc7 | UNREVIEWED | V-HINTS | changed (was 3bbe2f0323ed) |
+| 1280x800/hf-male/layout/05-coach-detail.png | a94cbe01e164 | UNREVIEWED | — | changed (was 1bf95b5eb84d) |
+| 1440x900/hf-male/drapes/01-chest_front__supine__chest-left-exposed.png | 369dd8270be5 | UNREVIEWED | — | changed (was a6b54a1df3d2) |
+| 1440x900/hf-male/drapes/02-chest_front__supine__chest-exposed.png | 76416ae47bc9 | UNREVIEWED | — | changed (was 34690f084459) |
+| 1440x900/hf-male/drapes/03-abdomen__supine__abdomen-exposed.png | e572ac8d5acd | UNREVIEWED | — | changed (was aa2cc413b825) |
+| 1440x900/hf-male/drapes/04-legs__supine__legs-left-exposed.png | a71b524bb743 | UNREVIEWED | — | changed (was 9175d384fe06) |
+| 1440x900/hf-male/drapes/05-legs__supine__legs-exposed.png | 76414b62edbe | UNREVIEWED | — | changed (was 87bd5304c190) |
+| 1440x900/hf-male/drapes/06-overview__supine__all-exposed.png | fc4898378ea2 | UNREVIEWED | — | changed (was ef77c432af33) |
+| 1440x900/hf-male/layout/01-station-inside.png | c0e6e07c7c11 | UNREVIEWED | V-SHEET, V-OVERFLOW | changed (was 048c870ee188) |
+| 1440x900/hf-male/layout/02-note.png | 4ccf8a401588 | UNREVIEWED | — | changed (was 1a0acf2433c6) |
+| 1440x900/hf-male/layout/03-results.png | 4fb07c6bc55f | UNREVIEWED | — | changed (was 3f85442b5f78) |
+| 1440x900/hf-male/layout/04-coach-list.png | be2ed7ffc30d | UNREVIEWED | V-HINTS | changed (was d1109db6e8a5) |
+| 1440x900/hf-male/layout/05-coach-detail.png | 91e892cca698 | UNREVIEWED | — | changed (was c73c89f9a751) |
+| 1440x900/hf-male/room/00-exam-corridor-placard.png | c9c51c64b1d0 | UNREVIEWED | V-PLACARD, V-PLACEHOLDER | changed (was fec6cf3400e2) |
 | 1440x900/hf-male/room/01-corridor.png | 28eb37d0ba1e | UNREVIEWED | V-PLACARD, V-PLACEHOLDER | changed (was 3de7ebe2286f) |
 | 1440x900/hf-male/room/02-overview.png | c0e6e07c7c11 | UNREVIEWED | V-SHEET | changed (was 048c870ee188) |
 | 1440x900/hf-male/room/03-sink.png | fedfcbc6fcf6 | UNREVIEWED | — | changed (was b05bce06c815) |
@@ -172,26 +168,24 @@ reviewed again (`-- --scaffold` adds the rows). High defects must have an owner 
 | 1440x900/hf-male/views/08-chest_left__seated__covered.png | 0a289be1cf20 | UNREVIEWED | V-ROD | changed (was 14bbfb21d009) |
 | 1440x900/hf-male/views/09-ankle_right__sitting_dangling__covered.png | fd699e8eebdf | UNREVIEWED | V-SHEET | changed (was 2c00233af9e5) |
 | 1440x900/hf-male/views/10-ankle_left__sitting_dangling__covered.png | d23e629d8bfd | UNREVIEWED | V-SHEET | changed (was c8672706e9e9) |
-| 1440x900/screening-female/dialogs/01-examine-menu.png | d82857a319d0 | 0b84dda+wt | V-MENUSCROLL | Examine menu (✕, search field, grouped regions) · V-MENUSCROLL: more groups below with no scroll cue |
-| 1440x900/screening-female/dialogs/02-maneuver-menu.png | 48ce18eb9eea | 0b84dda+wt | V-SHEET | Maneuver menu for the thyroid (title, technique group, ✕, Show me) over the room view · V-SHEET: feet through the sheet |
-| 1440x900/screening-female/dialogs/03-tool-chooser.png | 8b0f92266d16 | 0b84dda+wt | V-ROD | "Which exam?" chooser with ✕ and three palpation options over the abdomen (hands tool cursor and contact patch visible) · V-ROD |
-| 1440x900/screening-female/dialogs/04-perform.png | 7114353f0d41 | 0b84dda+wt | V-PERFORMCLIP, V-ROD | Perform card with steps and the finding; the finding text is clipped at the canvas bottom · V-PERFORMCLIP · V-ROD |
-| 1440x900/screening-female/dialogs/05-describe.png | 81f1a185b5c4 | 0b84dda+wt | V-TOASTSTACK | Mouth & throat verbal exam dialog (✕, text box, Cancel/Done) opened from the face view · V-TOASTSTACK: hygiene toast stays over the canvas under the modal |
-| 1440x900/screening-female/dialogs/06-leave-confirm.png | 5ec291c780bc | 0b84dda+wt | V-TOASTSTACK | Leave-the-room confirmation (✕, Stay/Leave) · V-TOASTSTACK |
-| 1440x900/screening-female/dialogs/07-actions-menu.png | 03272d35a6ef | 0b84dda+wt | V-MENUOVER, V-TOASTSTACK | Actions menu with ✕ and all positions incl. Sitting, legs dangling · V-MENUOVER: covers the Findings panel · V-TOASTSTACK |
-| 1440x900/screening-female/dialogs/08-tools-menu.png | 5d18700ece66 | 0b84dda+wt | — | Tools menu (✕, every tool incl. BP cuff and hands) over the face view; one finding listed |
-| 1440x900/screening-female/dialogs/09-bed-hud.png | 47dd82a5a362 | 0b84dda+wt | — | Head-of-table controls (✕, Raise/Lower/Done), opened from the seated view next to the lever |
-| 1440x900/screening-female/dialogs/10-practice-help.png | 6b341977dd60 | 0b84dda+wt | V-HINTOVER | Hint popover (✕) · V-HINTOVER: covers the drape chips and Actions/Leave |
-| 1440x900/screening-female/dialogs/11-finish.png | 905bac38a92b | 0b84dda+wt | — | Finish confirmation (✕, Keep going/Submit), backdrop dims the page |
-| 1440x900/screening-female/drapes/01-chest_front__supine__chest-exposed.png | ef50ea291f6b | 0b84dda+wt | V-FCHEST, V-CHESTINV, V-ROD | Female chest uncovered: both breasts at once, viewed from the head end · V-FCHEST · V-CHESTINV · V-ROD |
-| 1440x900/screening-female/drapes/01-chest_front__supine__chest-left-exposed.png | f62a471b81bd | UNREVIEWED | — | new |
-| 1440x900/screening-female/drapes/02-abdomen__supine__abdomen-exposed.png | 2d0f630891bc | 0b84dda+wt | V-ROD, V-PUBIS | Abdomen uncovered, navel visible; the lower roll sits low over the pubic area · V-ROD · V-PUBIS |
-| 1440x900/screening-female/drapes/02-chest_front__supine__chest-exposed.png | 2d12acf9cc15 | UNREVIEWED | — | new |
-| 1440x900/screening-female/drapes/03-abdomen__supine__abdomen-exposed.png | 58ac6fe1068d | UNREVIEWED | — | new |
-| 1440x900/screening-female/drapes/03-legs__supine__legs-exposed.png | 2b26dc0cb495 | 0b84dda+wt | — | Legs uncovered supine: legs flat on the table, nothing clipping |
-| 1440x900/screening-female/drapes/04-legs__supine__legs-left-exposed.png | 13709be4794c | UNREVIEWED | — | new |
-| 1440x900/screening-female/drapes/04-overview__supine__all-exposed.png | 5da339ff862f | 0b84dda+wt | V-PELVIS, V-ROD | All exposed: patient naked (pelvis exposed) · V-PELVIS · V-ROD |
-| 1440x900/screening-female/drapes/05-legs__supine__legs-exposed.png | 38e87e1cb6f2 | UNREVIEWED | — | new |
+| 1440x900/screening-female/dialogs/01-examine-menu.png | e3279940e232 | UNREVIEWED | V-MENUSCROLL | changed (was d82857a319d0) |
+| 1440x900/screening-female/dialogs/02-maneuver-menu.png | bd605454e36f | UNREVIEWED | V-SHEET | changed (was 48ce18eb9eea) |
+| 1440x900/screening-female/dialogs/03-tool-chooser.png | 2c3d50123c32 | UNREVIEWED | V-ROD | changed (was 8b0f92266d16) |
+| 1440x900/screening-female/dialogs/04-perform.png | 3cd267917551 | UNREVIEWED | V-PERFORMCLIP, V-ROD | changed (was 7114353f0d41) |
+| 1440x900/screening-female/dialogs/05-describe.png | ec820cf04ca3 | UNREVIEWED | V-TOASTSTACK | changed (was 81f1a185b5c4) |
+| 1440x900/screening-female/dialogs/06-leave-confirm.png | 960cc69991f2 | UNREVIEWED | V-TOASTSTACK | changed (was 5ec291c780bc) |
+| 1440x900/screening-female/dialogs/07-actions-menu.png | 25570092643d | UNREVIEWED | V-MENUOVER, V-TOASTSTACK | changed (was 03272d35a6ef) |
+| 1440x900/screening-female/dialogs/08-tools-menu.png | b4eb05729f55 | UNREVIEWED | — | changed (was 5d18700ece66) |
+| 1440x900/screening-female/dialogs/09-bed-hud.png | 1adffcb82750 | UNREVIEWED | — | changed (was 47dd82a5a362) |
+| 1440x900/screening-female/dialogs/10-practice-help.png | c54dfbde8b45 | UNREVIEWED | V-HINTOVER | changed (was 6b341977dd60) |
+| 1440x900/screening-female/dialogs/11-finish.png | 26777708908b | UNREVIEWED | — | changed (was 905bac38a92b) |
+| 1440x900/screening-female/dialogs/12-settings.png | bf2ec9a9cbbf | UNREVIEWED | — | new |
+| 1440x900/screening-female/drapes/01-chest_front__supine__chest-left-exposed.png | 492bf0fa8840 | UNREVIEWED | — | changed (was f62a471b81bd) |
+| 1440x900/screening-female/drapes/02-chest_front__supine__chest-exposed.png | e6846fed5e6b | UNREVIEWED | — | changed (was 2d12acf9cc15) |
+| 1440x900/screening-female/drapes/03-abdomen__supine__abdomen-exposed.png | d4b8f9500ce5 | UNREVIEWED | — | changed (was 58ac6fe1068d) |
+| 1440x900/screening-female/drapes/04-legs__supine__legs-left-exposed.png | 74ec1524f390 | UNREVIEWED | — | changed (was 13709be4794c) |
+| 1440x900/screening-female/drapes/05-legs__supine__legs-exposed.png | 4af862bee537 | UNREVIEWED | — | changed (was 38e87e1cb6f2) |
+| 1440x900/screening-female/drapes/06-overview__supine__all-exposed.png | 949e98fdaaf1 | UNREVIEWED | — | new |
 | 1440x900/screening-female/room/01-corridor.png | 8313214ef2c3 | UNREVIEWED | V-PLACARD, V-PLACEHOLDER | changed (was c83d433ff505) |
 | 1440x900/screening-female/room/02-overview.png | 4faa4bba4d37 | UNREVIEWED | V-SHEET | changed (was 53d00c88f692) |
 | 1440x900/screening-female/room/03-sink.png | fd1bb67a81e7 | UNREVIEWED | — | changed (was 83c86f2a0294) |

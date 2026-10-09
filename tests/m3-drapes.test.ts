@@ -8,7 +8,7 @@ import { anchorWorldPoints, anchorsFor, poseFor } from "@/exam3d/regionAnchors";
 import { zoneState } from "@/components/station/EncounterBar";
 import { chestChanges } from "@/scene/Drapes";
 import { gownRollLines, trunkMask } from "@/scene/drapeGeometry";
-import { buildSheet, classifySheet, coverageAt, coverageField, sheetCuts, sheetPenetration, skinNormal, skinWorld, underOtherSkin, type SkinData } from "@/scene/sheetGeometry";
+import { armMask, buildSheet, classifySheet, coverageAt, coverageField, sheetCuts, sheetPenetration, skinNormal, skinWorld, underOtherSkin, type SkinData } from "@/scene/sheetGeometry";
 import { TABLE } from "@/scene/rig";
 import { loadPatient } from "../scripts/qa/lib/patientMesh";
 import { makeLog } from "./helpers";
@@ -30,7 +30,7 @@ describe("M3 sheet (bug 6): built from the posed skin", () => {
         const pose = poseFor(position, POSITION_ANGLE[position], variant);
         const world = skinWorld(skin, pose, owner);
         const lapOnly = position === "sitting_dangling";
-        const sheet = buildSheet(world, owner, { lapOnly });
+        const sheet = buildSheet(world, owner, { lapOnly, under: skinWorld(skin, pose, armMask(skin)) });
         for (const legs of [
           { leg_left: true, leg_right: true },
           { leg_left: false, leg_right: true },
@@ -76,6 +76,32 @@ describe("M3 sheet (bug 6): built from the posed skin", () => {
   });
 });
 
+describe("M3 the hands rest on the sheet, not under it (visual review: supine hands hidden by the sheet's fall-off)", () => {
+  for (const variant of ["male", "female"] as const) {
+    it(`${variant}: in every position at most 2% of the arm lies more than 3 cm under the drawn sheet`, async () => {
+      const skin = await skinOf(variant);
+      const owner = classifySheet(skin, sheetCuts(variant, skin));
+      const arms = armMask(skin);
+      let total = 0;
+      for (let i = 0; i < skin.count; i++) total += arms[i]!;
+      for (const position of POSITIONS) {
+        const pose = poseFor(position, POSITION_ANGLE[position], variant);
+        const armWorld = skinWorld(skin, pose, arms);
+        const sheet = buildSheet(skinWorld(skin, pose, owner), owner, { lapOnly: position === "sitting_dangling", under: armWorld });
+        const field = coverageField(sheet, { leg_left: true, leg_right: true });
+        let buried = 0;
+        for (let i = 0; i < skin.count; i++) {
+          if (!arms[i]) continue;
+          const p = [armWorld[i * 3]!, armWorld[i * 3 + 1]!, armWorld[i * 3 + 2]!];
+          const pen = sheetPenetration(sheet, p);
+          if (pen !== null && pen < -0.03 && coverageAt(sheet, field, p[0]!, p[2]!) >= 0.5) buried++;
+        }
+        expect(buried / total, `${position}: ${buried} of ${total} arm vertices buried`).toBeLessThanOrEqual(0.02);
+      }
+    });
+  }
+});
+
 describe("M3 the ankles stay bare under a covered sheet", () => {
   for (const variant of ["male", "female"] as const) {
     it(`${variant}: the ankle targets are outside the drawn sheet in every position with the legs covered`, async () => {
@@ -83,7 +109,7 @@ describe("M3 the ankles stay bare under a covered sheet", () => {
       const owner = classifySheet(skin, sheetCuts(variant, skin));
       for (const position of POSITIONS) {
         const pose = poseFor(position, POSITION_ANGLE[position], variant);
-        const sheet = buildSheet(skinWorld(skin, pose, owner), owner, { lapOnly: position === "sitting_dangling" });
+        const sheet = buildSheet(skinWorld(skin, pose, owner), owner, { lapOnly: position === "sitting_dangling", under: skinWorld(skin, pose, armMask(skin)) });
         const field = coverageField(sheet, { leg_left: true, leg_right: true });
         for (const id of ["ankle_left", "ankle_right"]) {
           const p = anchorWorldPoints(id, pose)[0]!;

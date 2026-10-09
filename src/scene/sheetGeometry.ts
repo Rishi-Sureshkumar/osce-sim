@@ -168,7 +168,7 @@ export interface Sheet {
 }
 
 /** Build the heightfield sheet from skinned, classified vertices. `lapOnly`: sitting with the legs hanging. */
-export function buildSheet(world: Float32Array, owner: Uint8Array, opts: { lapOnly?: boolean; seed?: number } = {}): Sheet {
+export function buildSheet(world: Float32Array, owner: Uint8Array, opts: { lapOnly?: boolean; seed?: number; under?: Float32Array } = {}): Sheet {
   const tableTop = TABLE.topY;
   const covers = (i: number) => owner[i] && !Number.isNaN(world[i * 3]!) && (!opts.lapOnly || world[i * 3 + 1]! >= tableTop - 0.03);
   let zmin = Infinity;
@@ -190,6 +190,10 @@ export function buildSheet(world: Float32Array, owner: Uint8Array, opts: { lapOn
   const nz = Math.max(2, Math.ceil((zmax + 0.008 - z0) / cell) + 1);
   const N = nx * nz;
   const h0 = new Float32Array(N).fill(-Infinity);
+  // the same, within one cell diagonal only: the lowest a node may go and still keep every covered vertex
+  // of its cells under the (bilinear) sheet — the floor for tucking under the arms
+  const h1 = new Float32Array(N).fill(-Infinity);
+  const r1 = cell * Math.SQRT2 + 0.001;
   const near = new Float32Array(N).fill(Infinity);
   const own0 = new Uint8Array(N);
   const mask0 = new Uint8Array(N);
@@ -212,6 +216,7 @@ export function buildSheet(world: Float32Array, owner: Uint8Array, opts: { lapOn
         if (d > r) continue;
         const n = j * nx + k;
         if (py + SHEET.lift > h0[n]!) h0[n] = py + SHEET.lift;
+        if (d <= r1 && py + SHEET.lift > h1[n]!) h1[n] = py + SHEET.lift;
       }
     }
   }
@@ -297,7 +302,97 @@ export function buildSheet(world: Float32Array, owner: Uint8Array, opts: { lapOn
       mask[n] = bestMask || 1 << (own[n]! - 1);
     }
   }
+  if (opts.under) tuckUnder(height, h1, h0, opts.under, { x0, z0, cell, nx, nz, lapOnly: !!opts.lapOnly, floorAt: (x) => (Math.abs(x - TABLE.x) <= TABLE.width / 2 ? tableTop + 0.004 : tableTop - SHEET.hang) });
   return { x0, z0, cell, nx, nz, height, owner: own, mask, onBody, top: h0 };
+}
+
+/**
+ * How the sheet passes under the arms: a few millimetres below them, rising away at `slope` (m per m) to the
+ * drape, under arm vertices within `rest` of what they lie on (the mattress or covered skin).
+ */
+export const TUCK = { gap: 0.004, reach: 0.1, slope: 1.2, relax: 12, rest: 0.1 } as const;
+
+/**
+ * Hands lying beside the hips rest on the sheet rather than under it: the cloth's fall-off would
+ * otherwise drape it over them. A node's height is capped just below the nearest arm vertices (`under`:
+ * skinned arm positions, NaN elsewhere), rising away from the arm — so the sheet tucks down between the
+ * arm and the body — but never below the covered skin within one cell diagonal (`floor`), so every
+ * covered vertex stays under the sheet.
+ */
+function tuckUnder(height: Float32Array, floor: Float32Array, skinTop: Float32Array, under: Float32Array, g: { x0: number; z0: number; cell: number; nx: number; nz: number; lapOnly: boolean; floorAt: (x: number) => number }) {
+  const { x0, z0, cell, nx, nz } = g;
+  const cap = new Float32Array(nx * nz).fill(Infinity);
+  const rc = Math.ceil(TUCK.reach / cell);
+  for (let i = 0; i * 3 < under.length; i++) {
+    const px = under[i * 3]!;
+    if (Number.isNaN(px)) continue;
+    const py = under[i * 3 + 1]!;
+    const pz = under[i * 3 + 2]!;
+    const ci = Math.round((px - x0) / cell);
+    const cj = Math.round((pz - z0) / cell);
+    if (ci < -rc || cj < -rc || ci > nx + rc || cj > nz + rc) continue;
+    // only an arm lying on something (the mattress, or covered skin such as the lap) has the sheet under
+    // it; an elbow held clear beside the body leaves the cloth hanging as it was
+    const cn = Math.min(nz - 1, Math.max(0, cj)) * nx + Math.min(nx - 1, Math.max(0, ci));
+    // sitting on the end of the table only the forearms on the lap count (the elbows hang clear beside it)
+    const rests = g.lapOnly
+      ? floor[cn]! > -Infinity && py - (skinTop[cn]! - SHEET.lift) <= TUCK.rest
+      : py - Math.max(g.floorAt(px), skinTop[cn]! - SHEET.lift) <= TUCK.rest;
+    if (!rests) continue;
+    for (let dj = -rc; dj <= rc; dj++) {
+      const j = cj + dj;
+      if (j < 0 || j >= nz) continue;
+      for (let di = -rc; di <= rc; di++) {
+        const k = ci + di;
+        if (k < 0 || k >= nx) continue;
+        const d = Math.hypot(x0 + k * cell - px, z0 + j * cell - pz);
+        if (d > TUCK.reach) continue;
+        const n = j * nx + k;
+        const c = py - TUCK.gap + TUCK.slope * d;
+        if (c < cap[n]!) cap[n] = c;
+      }
+    }
+  }
+  // each node's band: never below the covered skin (or the mattress), never above the arm cap or where
+  // the cloth hung before; relaxing inside the band turns the tuck's steps into smooth slopes
+  const lo = new Float32Array(nx * nz);
+  const hi = new Float32Array(nx * nz);
+  const free: number[] = [];
+  for (let j = 0; j < nz; j++)
+    for (let k = 0; k < nx; k++) {
+      const n = j * nx + k;
+      lo[n] = Math.max(g.floorAt(x0 + k * cell), floor[n]!);
+      hi[n] = Math.max(lo[n]!, Math.min(height[n]!, cap[n]!));
+      height[n] = hi[n]!;
+      if (cap[n] !== Infinity) free.push(n);
+    }
+  const next = new Float32Array(height);
+  for (let it = 0; it < TUCK.relax; it++) {
+    for (const n of free) {
+      const k = n % nx;
+      const j = (n - k) / nx;
+      let acc = 0;
+      let w = 0;
+      for (let dj = -1; dj <= 1; dj++)
+        for (let dk = -1; dk <= 1; dk++) {
+          const jj = j + dj;
+          const kk = k + dk;
+          if (jj < 0 || jj >= nz || kk < 0 || kk >= nx) continue;
+          const wt = dj === 0 && dk === 0 ? 4 : dj === 0 || dk === 0 ? 2 : 1;
+          acc += height[jj * nx + kk]! * wt;
+          w += wt;
+        }
+      next[n] = Math.min(hi[n]!, Math.max(lo[n]!, acc / w));
+    }
+    for (const n of free) height[n] = next[n]!;
+  }
+}
+
+/** Bind-pose arm vertices (the A-pose holds them out to the sides): what the sheet tucks under. */
+export function armMask(skin: SkinData): Uint8Array {
+  const out = new Uint8Array(skin.count);
+  for (let i = 0; i < skin.count; i++) if (Math.abs(skin.bind[i * 3]!) > 0.24) out[i] = 1;
+  return out;
 }
 
 /** Bilinear sheet height at a world (x, z), or null outside the sheet. */

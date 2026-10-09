@@ -38,7 +38,7 @@ export default async function CoachHome() {
             )}
             {rows.map((r) => (
               <tr key={r.session.id} className="hover:bg-subtle">
-                <td className="px-3 py-2">
+                <td className="px-3 py-2 whitespace-nowrap">
                   <Link href={`/coach/${r.session.id}`} className="font-medium text-brand hover:underline">
                     {r.session.studentLabel}
                   </Link>
@@ -50,9 +50,12 @@ export default async function CoachHome() {
                 <td className="px-3 py-2">{r.session.status}</td>
                 <td className="px-3 py-2 font-mono">{r.points === null ? "—" : `${r.points}/${r.maxPoints}`}</td>
                 <td className="px-3 py-2">
-                  {r.needsReview > 0 && <span className="rounded bg-amber-100 px-1.5 text-xs text-amber-900">{r.needsReview} needs review</span>}
-                  {r.overrides > 0 && <span className="ml-1 rounded bg-indigo-100 px-1.5 text-xs text-indigo-800">{r.overrides} overrides</span>}
-                  {r.hints > 0 && <span className="ml-1 rounded bg-emerald-100 px-1.5 text-xs text-emerald-900">{r.hints} {r.hints === 1 ? "hint" : "hints"}</span>}
+                  {/* badges wrap as whole badges, never mid-badge */}
+                  <div className="flex flex-wrap gap-1 text-xs whitespace-nowrap">
+                    {r.needsReview > 0 && <span className="rounded bg-amber-100 px-1.5 text-amber-900">{r.needsReview} needs review</span>}
+                    {r.overrides > 0 && <span className="rounded bg-indigo-100 px-1.5 text-indigo-800">{r.overrides} {r.overrides === 1 ? "override" : "overrides"}</span>}
+                    {r.hints > 0 && <span className="rounded bg-emerald-100 px-1.5 text-emerald-900">{r.hints} {r.hints === 1 ? "hint" : "hints"}</span>}
+                  </div>
                 </td>
               </tr>
             ))}

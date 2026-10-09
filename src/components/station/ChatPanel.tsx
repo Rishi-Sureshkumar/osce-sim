@@ -217,9 +217,17 @@ export function ChatPanel({
           onKeyUp={(e) => {
             if (e.key === "Enter" || e.key === " ") ptt.current?.release();
           }}
-          className={`rounded-md px-3 py-2 text-sm font-medium ${voice.listening ? "bg-red-600 text-white" : "border border-line-strong bg-white text-ink-2"} disabled:opacity-50`}
+          className={`shrink-0 rounded-md px-2.5 py-2 text-sm font-medium ${voice.listening ? "bg-red-600 text-white" : "border border-line-strong bg-white text-ink-2"} disabled:opacity-50`}
         >
-          {voice.listening ? "● Rec" : "Hold to talk"}
+          {/* a microphone (named "Hold to talk"): the text label left the message box too narrow for its placeholder */}
+          {voice.listening ? (
+            "● Rec"
+          ) : (
+            <svg aria-hidden viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="9" y="3" width="6" height="11" rx="3" />
+              <path d="M5 11a7 7 0 0 0 14 0M12 18v3" />
+            </svg>
+          )}
         </button>
         <label htmlFor="chat-input" className="sr-only">
           Message to patient
@@ -239,7 +247,7 @@ export function ChatPanel({
           placeholder={disabled ? (disabledReason ?? "Station finished") : "Ask the patient…"}
           className="min-w-0 flex-1 rounded-md border border-line-strong px-3 py-2 text-sm"
         />
-        <button type="submit" disabled={disabled || streaming !== null || !text.trim()} className="rounded-md bg-brand px-4 py-2 text-sm font-medium text-white disabled:opacity-50">
+        <button type="submit" disabled={disabled || streaming !== null || !text.trim()} className="shrink-0 rounded-md bg-brand px-4 py-2 text-sm font-medium text-white disabled:opacity-50">
           Send
         </button>
       </form>

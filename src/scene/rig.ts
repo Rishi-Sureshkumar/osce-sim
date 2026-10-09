@@ -66,9 +66,11 @@ function elbowForLap(lap: number, variant: VariantId): number {
  * when flat, the hands beside the gown (lab-fitted); sitting up the arms come in to 38° and turn inward
  * so the forearms lie on the thighs (clear of the lateral hip).
  */
-const ARM_REST: Record<VariantId, { shoulder: number; wrist: number; abduct: number; inward: number }> = {
-  male: { shoulder: 19, wrist: -10, abduct: 30, inward: 46 },
-  female: { shoulder: 16, wrist: -14, abduct: 24, inward: 40 },
+const ARM_REST: Record<VariantId, { shoulder: number; wrist: number; abduct: number; inward: number; flatOut: number }> = {
+  // flatOut: lying flat, the arm turns this much further out so the hand lies clear of the hip — the
+  // sheet then passes under it instead of over it (fades out by 20°, leaving the reclined lap fit alone)
+  male: { shoulder: 19, wrist: -10, abduct: 30, inward: 46, flatOut: 4 },
+  female: { shoulder: 16, wrist: -14, abduct: 24, inward: 40, flatOut: 0 },
 };
 
 /** Arms resting on the lap, per sitting position and body: shoulder [flex, inward turn, adduction], elbow, wrist (degrees). */
@@ -100,6 +102,7 @@ export function poseRotations(position: Position, bedAngleDeg: number, variant: 
   // (hanging by the sides of a reclined trunk, the hands slid under the thighs out of sight — V-HANDS)
   const t = Math.min(1, Math.max(0, (bedAngleDeg - 10) / 70));
   const lap = t * t * (3 - 2 * t);
+  const out = arm.flatOut * Math.max(0, 1 - bedAngleDeg / 20);
   const r: BoneRotations = {
     // trunk flexion relative to the lying body (raises the torso off the table)
     spine05: [a * 0.55, 0, 0],
@@ -113,8 +116,8 @@ export function poseRotations(position: Position, bedAngleDeg: number, variant: 
     // Lying flat the arms rest on the mattress (V-ARMS): the bind pose has the elbows and wrists bent,
     // so the shoulder extends and the elbow and wrist straighten until the arm lies on the table, a
     // little away from the body so the hands lie beside the gown, not under its side panel.
-    "upperarm01_L": [arm.shoulder * (1 - lap) * DEG, -arm.inward * lap * DEG, -(arm.abduct + (38 - arm.abduct) * lap) * DEG],
-    "upperarm01_R": [arm.shoulder * (1 - lap) * DEG, arm.inward * lap * DEG, (arm.abduct + (38 - arm.abduct) * lap) * DEG],
+    "upperarm01_L": [arm.shoulder * (1 - lap) * DEG, -arm.inward * lap * DEG, -(arm.abduct - out + (38 - arm.abduct) * lap) * DEG],
+    "upperarm01_R": [arm.shoulder * (1 - lap) * DEG, arm.inward * lap * DEG, (arm.abduct - out + (38 - arm.abduct) * lap) * DEG],
     "lowerarm01_L": [elbowForLap(lap, variant) * DEG, 0, 0],
     "lowerarm01_R": [elbowForLap(lap, variant) * DEG, 0, 0],
     wrist_L: [arm.wrist * (1 - lap) * DEG, 0, 0],
