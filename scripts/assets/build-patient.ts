@@ -345,15 +345,42 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
   const shoulderL = headOf("upperarm01.L");
   const shoulderR = headOf("upperarm01.R");
   const ARM = (b: string) => /^(upperarm|lowerarm|wrist|hand|finger|metacarpal|thumb)/.test(b);
-  const sideZ = -0.01; // front / back seam: the mid-axillary plane
+  // front / back seam: the mid-axillary plane, per body and height — halfway between the torso's front and
+  // back at each level (a fixed plane missed the woman's torso, which sits forward of the pelvis centre: her
+  // chest and abdomen panels wrapped round the whole back, and "Back" covered only the buttocks)
+  const BAND = 0.02;
+  const zFront = new Map<number, number>();
+  const zBack = new Map<number, number>();
+  skin.pos.forEach((p, i) => {
+    const b = dominant(skin.src[i]!);
+    if (Math.abs(p[0]) > 0.12 || ARM(b) || /^(head|jaw|eye|neck|upperleg|lowerleg|foot|toe)/.test(b)) return;
+    const k = Math.round(p[1] / BAND);
+    zFront.set(k, Math.max(zFront.get(k) ?? -Infinity, p[2]));
+    zBack.set(k, Math.min(zBack.get(k) ?? Infinity, p[2]));
+  });
+  const bands = [...zFront.keys()].sort((a, b) => a - b);
+  const midAt = (k: number) => (zFront.get(k)! + zBack.get(k)!) / 2;
+  const sideZ = (y: number) => {
+    // linear between the nearest measured bands (clamped at the ends)
+    const f = y / BAND;
+    const lo = bands.filter((k) => k <= f).at(-1) ?? bands[0]!;
+    const hi = bands.find((k) => k >= f) ?? bands.at(-1)!;
+    if (lo === hi) return midAt(lo);
+    const t = (f - lo) / (hi - lo);
+    return midAt(lo) * (1 - t) + midAt(hi) * t;
+  };
   const neckField = (p: V3) => {
     const dx = p[0] - neckBase[0];
     const dz = p[2] - neckBase[2];
     const r = Math.hypot(dx, dz);
     const front = r > 1e-6 ? Math.max(0, dz / r) : 0;
-    // a round neckline, 7 cm from the neck's axis at the sides and back, scooped to ~10 cm in front
+    // a round neckline, 7 cm from the neck's axis at the sides and back, scooped to ~10 cm in front. The
+    // cut reaches only 3 cm below the neck's base at the back, 8 cm below the sternal notch in front (an
+    // unbounded cylinder also cut a strip down the back wherever the spine came within 7 cm of the neck's
+    // axis, baring it to the buttocks)
     const R = 0.07 + 0.03 * front * front;
-    return Math.min(r - R, neckTop - p[1], notch[1] + 0.09 - p[1]);
+    const bottom = (neckBase[1] - 0.03) * (1 - front) + (notch[1] - 0.08) * front;
+    return Math.min(Math.max(r - R, bottom - p[1]), neckTop - p[1], notch[1] + 0.09 - p[1]);
   };
   const coverField = (i: number) => {
     const p = skin.pos[i]!;
@@ -368,7 +395,7 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
   };
   const cover = skin.pos.map((_, i) => coverField(i));
   const chestField = skin.pos.map((p) => p[1] - xiphoidY); // > 0 chest, < 0 abdomen
-  const frontField = skin.pos.map((p) => p[2] - sideZ); // > 0 front, < 0 back
+  const frontField = skin.pos.map((p) => p[2] - sideZ(p[1])); // > 0 front, < 0 back
   type GV = { p: V3; n: V3; uv: [number, number]; w: Map<string, number> };
   const weightMap = (vi: number) => new Map(top4(skin.src[vi]!, "head"));
   const lerpV = (a: GV, b: GV, t: number): GV => {
