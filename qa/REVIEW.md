@@ -16,45 +16,45 @@ reviewed again (`-- --scaffold` adds the rows). High defects must have an owner 
 | V-HANDS | high | shot | M2 | fixed | Hands shot frames the thighs/table; the hands are hidden (bug 4) — fixed at the M2 gate: reclined, the forearms rest on the thighs, so the hands are in view supine, reclined 30/45, seated and dangling (the female 30° hands are still partly tucked: V-ARMS; left lateral: V-LLD) |
 | V-NECK | high | shot | M2 | fixed | head_neck shot looks down on the scalp or from the head end: neck hidden by the chin, no front view of the face (bug 4) — fixed in M2 bug 4 (head_neck framed from the front along the head's forward axis; new frontal face shot 40 cm, fov 35; head steady for the eye exam) (8 shots) |
 | V-SINK | high | room | M2 | fixed | Sink has no basin, soap or towel (bug 3) — fixed in M2 bug 3 (basin ≥ 10 cm, faucet, soap, towels; washing over the basin) (4 shots) |
-| V-ARMS | high | pose | M3 | open | Supine arms hover above the table instead of resting (2 shots) |
-| V-BACKREST | high | room | M3 | open | Seated: patient sits 11-15 cm inside the backrest; the back shot shows only the backrest (M3 intersections xfail) (2 shots) |
+| V-ARMS | high | pose | M3 | fixed | Supine arms hover above the table instead of resting (2 shots) — fixed in M3.2: lying flat the arms lie on the mattress, the hands beside the hips (resting on the sheet, not under it); sitting up the forearms rest ~2 cm over the thighs |
+| V-BACKREST | high | room | M3 | fixed | Seated: patient sits 11-15 cm inside the backrest; the back shot shows only the backrest (M3 intersections xfail) (2 shots) — fixed in M3.1: the raised head section pivots at a per-body point fitted to the back (test:intersections clean) |
 | V-EARBACK | high | shot | M3 | fixed | Ear shots in reclined positions were blocked by the raised backrest — fixed at the M2 gate (ear views rise until clear of the table; mastoid and canal in view lying back) |
-| V-FCHEST | high | drape | M3 | open | Female chest uncovers both breasts at once; must be per side and covered by default (1 shots) |
+| V-FCHEST | high | drape | M3 | fixed | Female chest uncovers both breasts at once; must be per side and covered by default (1 shots) — fixed in M3.1: the female chest gown is per side and covered by default |
 | V-LLD | high | pose | M3 | open | Left lateral decubitus pose contorted (arm flung up, hangs off the table edge) and the leg sheet disappears (6 shots) |
 | V-LLDPRIV | high | drape | M3 | open | LLD: gown rides up, buttocks exposed, no sheet (2 shots) |
-| V-PELVIS | high | drape | M3 | open | "All exposed" leaves the patient naked: the pelvis section must never be exposed (2 shots) |
+| V-PELVIS | high | drape | M3 | fixed | "All exposed" leaves the patient naked: the pelvis section must never be exposed (2 shots) — fixed in M3.1: the pelvis towel is never uncovered (all exposed leaves the towel) |
 | V-PUBIS | high | drape | M3 | open | Female abdomen exposure reaches the pubic area (pelvis section must stay covered) (1 shots) |
-| V-SHEET | high | drape | M3 | open | Legs/feet poke through the leg sheet while "Legs: covered" (bug 6) (18 shots) |
+| V-SHEET | high | drape | M3 | fixed | Legs/feet poke through the leg sheet while "Legs: covered" (bug 6) (18 shots) — fixed in M3.1 (bug 6): the leg sheet is built per pose from the skinned body; zero-tolerance coverage test for every position, model and leg state |
 | V-ARMSLLD | medium | shot | M3 | open | LLD arms shot frames the raised arm against the wall from behind — the arm is flung up by the left-lateral pose (V-LLD); re-owned to M3 at the M2 gate |
 | V-ARMSSEAT | medium | shot | M2 | fixed | Seated arms shot frames the torso; the arm is hidden behind the body — fixed at the M2 gate (arm and hand on the thigh in view; plus close left-arm and back-of-elbow views) |
 | V-BACKHINT | medium | ux | M2 | fixed | Reclined 45°: back against the backrest but no "ask the patient to sit up" hint — fixed at the M2 gate (shotHint: lying back up to 45°, and seated against the backrest: "lean forward") |
 | V-BACKHINT2 | medium | ux | M2 | fixed | LLD: hint wrongly said the back is against the table — fixed at the M2 gate (shotHint is per position) |
 | V-NECKLLD | medium | shot | M3 | open | LLD head_neck: neck partly behind the shoulder — follows the left-lateral pose (V-LLD); re-owned to M3 at the M2 gate |
 | V-BODY | medium | asset | M3 | open | Female body barely differs from the male (proportions, hair) (2 shots) |
-| V-ROD | medium | drape | M3 | open | Rolled/folded gown edges render as floating light-blue rods across the body (the roll-chest rod lies over the apex) (59 shots) |
+| V-ROD | medium | drape | M3 | fixed | Rolled/folded gown edges render as floating light-blue rods across the body (the roll-chest rod lies over the apex) (59 shots) — fixed in M3.3: folded gown edges are tubes laid along the skin, drawn only where a fold exists, clear of exam targets |
 | V-CHESTINV | medium | shot | M6 | open | Supine chest shot from the head end: the face is upside down at the bottom of the frame (3 shots) |
-| V-PERFORMCLIP | medium | ui | M6 | open | Perform card clips the finding text at the canvas bottom (1 shots) |
-| V-PLACARD | medium | ui | M6 | open | 3D door placard is a blank rectangle (text only in the side panel) (3 shots) |
-| V-WRAP | medium | ui | M6 | open | Toolbar wraps at 1280/1180 wide ("Actions"/"Leave the room" on a second row) (2 shots) |
+| V-PERFORMCLIP | medium | ui | M6 | fixed | Perform card clips the finding text at the canvas bottom (1 shots) — fixed in M6: the exam card grows upward inside the view with a height cap and scrolls |
+| V-PLACARD | medium | ui | M6 | fixed | 3D door placard is a blank rectangle (text only in the side panel) (3 shots) — fixed in M6: the door instructions are printed on the 3D door (canvas texture) |
+| V-WRAP | medium | ui | M6 | fixed | Toolbar wraps at 1280/1180 wide ("Actions"/"Leave the room" on a second row) (2 shots) — fixed in M6: top bar + one-row encounter bar at 1440/1280/1180 (fixed height; steady-layout regression) |
 | V-EARDOWN | low | ux | M2 | fixed | LLD: the left ear faces the table — fixed at the M2 gate: a hint says the left ear is against the table |
 | V-GOWNEDGE | low | asset | M3 | open | Gown neckline has a sawtooth edge (1 shots) |
 | V-GOWNFIT | low | asset | M3 | open | Gown is skin-tight (body outline shows through) (5 shots) |
 | V-HAIR | low | asset | M3 | open | Procedural hair shell has jagged edges over the ears (10 shots) |
 | V-SEAM | low | asset | M3 | open | Visible skin seam line above the knee (1 shots) |
-| V-TOOLS | low | asset | M3 | open | Instruments are crude primitives (2 shots) |
+| V-TOOLS | low | asset | M3 | fixed | Instruments are crude primitives (2 shots) — fixed in M3.3: stethoscope with tubing, Taylor hammer, U-shaped forks, penlight, otoscope, cuff with gauge |
 | V-ZFIGHT | low | room | M3 | open | Backrest corner geometry flickers (1 shots) |
 | V-CHESTROT | low | shot | M6 | open | Reclined chest shot rotated 90° (1 shots) |
 | V-FRAME | low | shot | M6 | open | Conversation (seated) shot crops the head (2 shots) |
-| V-HINTOVER | low | ui | M6 | open | Hint popover covers the drape chips and Actions/Leave (1 shots) |
-| V-HINTS | low | ui | M6 | open | "1 hints" plural in the coach list (3 shots) |
-| V-MENUOVER | low | ui | M6 | open | Actions menu covers the Findings panel (1 shots) |
-| V-MENUSCROLL | low | ui | M6 | open | Examine menu needs scrolling with no visible cue (1 shots) |
-| V-OVERFLOW | low | ui | M6 | open | Left column overflows: chat options cut off below the fold (3 shots) |
-| V-PLACEHOLDER | low | ui | M6 | open | Chat input says "Station finished" before the encounter starts (2 shots) |
-| V-TOASTSTACK | low | ui | M6 | open | Hygiene nudge toast stays over the canvas while a modal is open (1 shots) |
+| V-HINTOVER | low | ui | M6 | fixed | Hint popover covers the drape chips and Actions/Leave (1 shots) — fixed in M6: the hint popover opens below the encounter bar, clear of the drape chips and Actions |
+| V-HINTS | low | ui | M6 | fixed | "1 hints" plural in the coach list (3 shots) — fixed in M6: plurals ("1 hint"); badges wrap whole |
+| V-MENUOVER | low | ui | M6 | wontfix | Actions menu covers the Findings panel (1 shots) — accepted at the M6 gate: a dropdown menu overlays content below it and closes on Esc or an outside click |
+| V-MENUSCROLL | low | ui | M6 | fixed | Examine menu needs scrolling with no visible cue (1 shots) — fixed in M6: the Examine menu shows a scroll cue when it overflows |
+| V-OVERFLOW | low | ui | M6 | fixed | Left column overflows: chat options cut off below the fold (3 shots) — fixed in M6: collapsible side panels; the door placard folds once inside |
+| V-PLACEHOLDER | low | ui | M6 | fixed | Chat input says "Station finished" before the encounter starts (2 shots) — fixed in M6: the chat placeholder says why it is closed (e.g. waiting for "You may begin") |
+| V-TOASTSTACK | low | ui | M6 | fixed | Hygiene nudge toast stays over the canvas while a modal is open (1 shots) — fixed in M6: toasts step aside while a modal is open |
 | V-JUSTIFY | high | grading | M4 | fixed | Fixed in M4: the justification counts only history points raised in the conversation and exam points whose maneuvers were performed; the label no longer says "the student" (tests/m4-hide-mistakes.test.ts). Was: results credit "Diagnoses are justified by findings the student elicited — orthopnea, raised JVP" when neither was elicited (JVP not examined; the note's claim is flagged as unperformed in the same feedback); "the student" in third person on a student page (found at the M2 gate) |
-| V-HINTTEXT | low | ui | M6 | open | The canvas hint line ("Click the patient to move closer…") has no backdrop: unreadable over dark table rails; also shown in the tool-table view with no patient (found at the M2 gate) |
-| V-BADGES | low | ui | M6 | open | Coach transcript: "typed" badge runs into the text; "Matched" badge on 0-point items that say no words matched (found at the M2 gate) |
+| V-HINTTEXT | low | ui | M6 | fixed | The canvas hint line ("Click the patient to move closer…") has no backdrop: unreadable over dark table rails; also shown in the tool-table view with no patient (found at the M2 gate) — fixed in M6: the canvas hint is a pill on a backdrop and is hidden in views without the patient |
+| V-BADGES | low | ui | M6 | fixed | Coach transcript: "typed" badge runs into the text; "Matched" badge on 0-point items that say no words matched (found at the M2 gate) — fixed in M6: transcript badges sit on their own line; "No match" replaces "Matched" on 0-point items |
 
 ## Screenshots
 
