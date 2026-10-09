@@ -18,7 +18,12 @@ export interface RawHit {
   kind: string | undefined;
   point: Vec3;
   normal: Vec3;
+  /** body part under the hit (the asset build's `_PART` label), when known */
+  part?: string | null;
 }
+
+/** Parts that are themselves a region: a click landing on one is that region (never a target beside it). */
+const PART_REGION: Record<string, string> = { ear_l: "ear_left", ear_r: "ear_right" };
 
 /** A body hit is only resolved to a region when it lands this close to the region's tolerance boundary. */
 export const REACH_CM = 9;
@@ -36,7 +41,10 @@ export function resolveHit(hits: readonly RawHit[], pickableRegionIds: readonly 
   // on the gown, measure from the skin under it; on an eye, at the eye (behind it is the socket)
   const skin = hits.find((h) => h.kind === "body");
   const measure: Vec3 = first.kind === "eye" ? first.point : skin ? skin.point : first.point;
-  let snap = snapToAnchor(measure, pickableRegionIds, pose);
+  // a click on the ear is the ear, even where a neighbour's broader zone reaches (the pre-auricular nodes
+  // lie 2 cm in front of the canal with a wider tolerance, and took clicks on the tragus)
+  const own = first.kind === "body" && first.part ? PART_REGION[first.part] : undefined;
+  let snap = own && pickableRegionIds.includes(own) ? snapToAnchor(measure, [own], pose) : snapToAnchor(measure, pickableRegionIds, pose);
   if (snap && examinableRegionIds && !examinableRegionIds.includes(snap.regionId)) {
     const alt = snapToAnchor(measure, examinableRegionIds, pose);
     if (alt && alt.error <= 1 && alt.distanceCm < snap.distanceCm) snap = alt;

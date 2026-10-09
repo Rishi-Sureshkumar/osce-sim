@@ -47,7 +47,7 @@ export interface Patient3DProps {
  */
 export function Patient3D(p: Patient3DProps) {
   const toHit = (e: ThreeEvent<MouseEvent | PointerEvent>, record = false): BodyHit | null => {
-    const raw: RawHit[] = e.intersections.map((x) => ({ kind: x.object.userData.kind as string | undefined, point: [x.point.x, x.point.y, x.point.z] as Vec3, normal: worldNormal(x) }));
+    const raw: RawHit[] = e.intersections.map((x) => ({ kind: x.object.userData.kind as string | undefined, point: [x.point.x, x.point.y, x.point.z] as Vec3, normal: worldNormal(x), part: probeHitOf(x).part }));
     const h = resolveHit(raw, p.pickableRegionIds, p.pose, undefined, p.examinableRegionIds);
     if (record && QA.enabled) recordPointer({ hits: e.intersections.map(probeHitOf), bodyHit: h ? { point: h.point, kind: h.kind, regionId: h.regionId } : null });
     return h;
