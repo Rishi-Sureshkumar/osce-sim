@@ -120,7 +120,13 @@ async function setPosition(page: Page, p: Position): Promise<boolean> {
 async function setDrape(page: Page, zone: string, covered: boolean) {
   const btn = page.getByRole("button", { name: new RegExp(`^${zone}: (covered|uncovered|left uncovered|right uncovered)$`) });
   // a partly uncovered zone covers itself first, so click until it reaches the wanted state
-  for (let k = 0; k < 2 && (await btn.getAttribute("aria-pressed")) !== String(covered); k++) await btn.click();
+  // (each click waits for its own change to land before the state is read again)
+  for (let k = 0; k < 2; k++) {
+    const now = await btn.getAttribute("aria-pressed");
+    if (now === String(covered)) break;
+    await btn.click();
+    await expect(btn).not.toHaveAttribute("aria-pressed", now ?? "");
+  }
   await expect(btn).toHaveAttribute("aria-pressed", String(covered));
   await waitSettled(page);
 }

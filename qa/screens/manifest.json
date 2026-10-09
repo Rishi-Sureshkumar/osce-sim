@@ -80,8 +80,38 @@
   "drape": "chest-exposed"
  },
  {
+  "file": "1440x900/hf-male/drapes/01-chest_front__supine__chest-left-exposed.png",
+  "sha256": "a6b54a1df3d2cfdc8b52fcf9169c55000ef8b0948383122b36026fda965f32fa",
+  "viewport": "1440x900",
+  "area": "drapes",
+  "case": "hf-decompensated-01",
+  "shot": "chest_front",
+  "position": "supine",
+  "drape": "chest-left-exposed"
+ },
+ {
   "file": "1440x900/hf-male/drapes/02-abdomen__supine__abdomen-exposed.png",
   "sha256": "b73b7d39a212112e0bbee142adad26362a4637987e89486e49d4c2d7fc21e052",
+  "viewport": "1440x900",
+  "area": "drapes",
+  "case": "hf-decompensated-01",
+  "shot": "abdomen",
+  "position": "supine",
+  "drape": "abdomen-exposed"
+ },
+ {
+  "file": "1440x900/hf-male/drapes/02-chest_front__supine__chest-exposed.png",
+  "sha256": "34690f08445958e55d0de037e5daecdd5995f4a7923036ee263e739c81c138b8",
+  "viewport": "1440x900",
+  "area": "drapes",
+  "case": "hf-decompensated-01",
+  "shot": "chest_front",
+  "position": "supine",
+  "drape": "chest-exposed"
+ },
+ {
+  "file": "1440x900/hf-male/drapes/03-abdomen__supine__abdomen-exposed.png",
+  "sha256": "aa2cc413b82555ec5c6c43babdaaec05290c11a90beb5eb7f9435ba1aedabfae",
   "viewport": "1440x900",
   "area": "drapes",
   "case": "hf-decompensated-01",
@@ -100,8 +130,38 @@
   "drape": "legs-exposed"
  },
  {
+  "file": "1440x900/hf-male/drapes/04-legs__supine__legs-left-exposed.png",
+  "sha256": "9175d384fe0644343ec0a7f5974ec44b6a518adabe79df71d6bdd28a4c6143df",
+  "viewport": "1440x900",
+  "area": "drapes",
+  "case": "hf-decompensated-01",
+  "shot": "legs",
+  "position": "supine",
+  "drape": "legs-left-exposed"
+ },
+ {
   "file": "1440x900/hf-male/drapes/04-overview__supine__all-exposed.png",
   "sha256": "a618b3896338523715d7fec8beeaf07699e83446b0ff3893ce8b58d12a68915b",
+  "viewport": "1440x900",
+  "area": "drapes",
+  "case": "hf-decompensated-01",
+  "shot": "overview",
+  "position": "supine",
+  "drape": "all-exposed"
+ },
+ {
+  "file": "1440x900/hf-male/drapes/05-legs__supine__legs-exposed.png",
+  "sha256": "87bd5304c190ec14ade0bef9eb8f77267103ec90e871cae72411ba591abb177d",
+  "viewport": "1440x900",
+  "area": "drapes",
+  "case": "hf-decompensated-01",
+  "shot": "legs",
+  "position": "supine",
+  "drape": "legs-exposed"
+ },
+ {
+  "file": "1440x900/hf-male/drapes/06-overview__supine__all-exposed.png",
+  "sha256": "ef77c432af3340a652002493e2bf785b922d53c8d816024018e7d31af034ea91",
   "viewport": "1440x900",
   "area": "drapes",
   "case": "hf-decompensated-01",
@@ -154,7 +214,7 @@
  },
  {
   "file": "1440x900/hf-male/room/01-corridor.png",
-  "sha256": "3de7ebe2286fc329f7edff7f8f71c48654b132194274f68fae87e1c48145ea62",
+  "sha256": "28eb37d0ba1e84f1c6c6a5d4368d5ee24d0e6d86f7542dee8e264c71afac4859",
   "viewport": "1440x900",
   "area": "room",
   "case": "hf-decompensated-01",
@@ -162,7 +222,7 @@
  },
  {
   "file": "1440x900/hf-male/room/02-overview.png",
-  "sha256": "048c870ee188863694ef95d0864164cae0e190359362f9583ec16759aab76866",
+  "sha256": "c0e6e07c7c119debcfb48ded1c317cf64851b9ebfacf377dbfb6623848aa9fab",
   "viewport": "1440x900",
   "area": "room",
   "case": "hf-decompensated-01",
@@ -170,7 +230,7 @@
  },
  {
   "file": "1440x900/hf-male/room/03-sink.png",
-  "sha256": "b05bce06c8158e2bfc94f3f08040eeea3fe45c26197bac7d60c3a71541bea744",
+  "sha256": "fedfcbc6fcf61a386bc9ee68814bceb2ecdf1833d237dd12aa15d514801f6b70",
   "viewport": "1440x900",
   "area": "room",
   "case": "hf-decompensated-01",
@@ -178,7 +238,7 @@
  },
  {
   "file": "1440x900/hf-male/room/04-tool_table.png",
-  "sha256": "34dfbe6e2449aa681d88d3166e28a96de945f434ca924ce40b63ca785b885ad5",
+  "sha256": "d542c32635b3aadc6cb73086550a1e5e2c7b5cc30e11501550b2ecbb3912445e",
   "viewport": "1440x900",
   "area": "room",
   "case": "hf-decompensated-01",
@@ -186,7 +246,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/001-overview__supine__covered.png",
-  "sha256": "83d0309bbb0d5a24bb373e4d353d0c771056d185d454ba8ac88c85280e3434cf",
+  "sha256": "ef77c432af3340a652002493e2bf785b922d53c8d816024018e7d31af034ea91",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -196,7 +256,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/002-seated__supine__covered.png",
-  "sha256": "87f1655b70ad59891246a00201c286bf174b88d7b0f5ff6bd8ab396e5cc1fe3b",
+  "sha256": "e724f36ba2e535355fc620640907f39e0fa37bfa303428890706d25008088ab5",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -206,7 +266,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/003-head_neck__supine__covered.png",
-  "sha256": "903c7ce8477fe1b8ff6028458e8659e599084813be4b42c05f5875eced4f3c57",
+  "sha256": "389b88cce5ea6c1c2b72da12989ffe2ef92d385eabca0019df3d096a395fb7fc",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -216,7 +276,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/004-ear_left__supine__covered.png",
-  "sha256": "4ee593e8cabd66070de3885d486425c4e7e4cb61cd03538a35f9b1c7eb55c9f1",
+  "sha256": "6b54ff8f8570faf22796814a20e5d294866bc58a1a498f24afe6e1da40c6d4b5",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -226,7 +286,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/005-ear_right__supine__covered.png",
-  "sha256": "a68f82d6964977bab9676c24134ff27cf1094195fdcc9acdaf5e135ed8d0cc0b",
+  "sha256": "41938d2f6bbe8af8ce03c165549ddd2d504bf27e879f281cf3fb84539825ad95",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -236,7 +296,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/006-chest_front__supine__covered.png",
-  "sha256": "e800ce6847224762d55d58d204d38333bbb915d9f8f41d7051b6e27f7ec395b7",
+  "sha256": "a6b54a1df3d2cfdc8b52fcf9169c55000ef8b0948383122b36026fda965f32fa",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -246,7 +306,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/007-chest_back__supine__covered.png",
-  "sha256": "719d72d3b89d26f4c54985f2068ed57fab7cdd7e19dadbcb16a8d578831fc383",
+  "sha256": "0c4b687278550415a94a0d9eb1f81e5090017572b32f5194aa425e98f1441b07",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -256,7 +316,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/008-abdomen__supine__covered.png",
-  "sha256": "74c249dbb742559df6af0474f62aadd292bd966eafd27ec51c496e930f52a2d9",
+  "sha256": "126809759ef79a663d3f3854534a2a97451b4a6a1e92882fa13c6fc03c5e27f3",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -266,7 +326,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/009-arms__supine__covered.png",
-  "sha256": "fcb4663891809e3dd1fd015daca9c7ab2fa6b7bb84f324b4fa935c0c6cfca6da",
+  "sha256": "b387a463894e665973ea4fd6d786311b414c8358b93547060f0380d13dfa6c04",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -276,7 +336,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/010-hands__supine__covered.png",
-  "sha256": "8c1f0b5be348af7435fad6c37094ea1189784de96d54efa03127780b6d1c723a",
+  "sha256": "9936dd81ae8244a7caa790000bf96dec6afef53d9111f8f46aa76a146793c670",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -286,7 +346,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/011-legs__supine__covered.png",
-  "sha256": "7b58cad605cdd691fd3492fc69a25807c9bc7d98288b34587bc3e6636a5dde28",
+  "sha256": "87bd5304c190ec14ade0bef9eb8f77267103ec90e871cae72411ba591abb177d",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -296,7 +356,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/012-feet__supine__covered.png",
-  "sha256": "75aa4b303f9d44c96b973cedeb93c96cd631ec60c3280556cd6a47fa324f1efa",
+  "sha256": "5724656982ac9cb75f4db7732ea6971183faa7f6d2af085c5b9dcce6843ac591",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -306,7 +366,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/013-overview__reclined_30__covered.png",
-  "sha256": "d3a1000fc1a69d5e12bef199153134c0611e10227029e2efb221cf4c30055677",
+  "sha256": "4bec810011c2fd8e4b73ba33fd53faa375661e8d08443de4ede9e9ac60e94678",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -316,7 +376,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/014-seated__reclined_30__covered.png",
-  "sha256": "193e0ad15c4b6df6575c71b8126252c72d150a147dcf866543166acc00a17e9f",
+  "sha256": "38484dfc18e1eb32bb03ddde6d676aa3988dd49a3c5c7ee6ab0f5616b55fc970",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -326,7 +386,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/015-head_neck__reclined_30__covered.png",
-  "sha256": "b4037fdb7d335f9b00fb4377f7b44389b8df9990a203eacf602ef9405048e0fa",
+  "sha256": "e599aa65c8359484335b007df9ceb52fa4e3a2f916f2349c27e5255c77896bb3",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -336,7 +396,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/016-ear_left__reclined_30__covered.png",
-  "sha256": "636e9b227ffd3434d1464bd04ba3b1113917c2cd4daacbfd2755a70eded314ee",
+  "sha256": "859dc095ecd435711820b41c82583fb59fdbe5f3f24301233e398b1d383229a2",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -346,7 +406,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/017-ear_right__reclined_30__covered.png",
-  "sha256": "243ec251f34da51c31f901af6727450f1fc64e02016b625c7062be441597d7d7",
+  "sha256": "218b296afeab9eeda38f61795853d054aa028d715377d1eb1507b49ddff7539d",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -356,7 +416,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/018-chest_front__reclined_30__covered.png",
-  "sha256": "369835aebcc923b85691009c1e90eec85521fdfe2a63ea2ca23cd8f972abccfa",
+  "sha256": "2e029cf585dbf18ed580f030cf0897ae6091ea1d8032f39d075decad7ebf8166",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -366,7 +426,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/019-chest_back__reclined_30__covered.png",
-  "sha256": "dde5a94ff1f62e0251fd4041470e7ca858b5768c24f0907d8c9d5bc4d8467234",
+  "sha256": "00d8e33cc231689f8742e47625794f83fe9d069b24a9998bc6e4d238dc827917",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -376,7 +436,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/020-abdomen__reclined_30__covered.png",
-  "sha256": "db5dc7047fe25b368effe2fd049d0e5162c96d8b6e1cff63c6fbb0931bcddae5",
+  "sha256": "d8e5c8c774b875f82c4d607f124a7bb5400f911c6ba3d89482cadac7109373b2",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -386,7 +446,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/021-arms__reclined_30__covered.png",
-  "sha256": "ec27ce06a730cdc5a19a81e88cf0b661256299e40fc88786dadf8aa333d066e4",
+  "sha256": "37cdb7260e1bf7c79a69dfad233d3a527041e172e35bc0ff3193e89cc9c8a28a",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -396,7 +456,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/022-hands__reclined_30__covered.png",
-  "sha256": "a10a58a8fdcffdce5a0db76220cc23bda1f2a38d2f80831aa1f521f0eba3dc29",
+  "sha256": "f425aef29d578ce530f8482156a456e4338504b4c582089e9d95835f4998b0d1",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -406,7 +466,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/023-legs__reclined_30__covered.png",
-  "sha256": "eb04af4b6b724f08724f8d335a0efe62dcb3e79482c92ef15bf1ba17dc074bdf",
+  "sha256": "6d19974d6383da619459088ae96ea91fd0e90a752f57167995d1d1ae6448c90f",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -416,7 +476,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/024-feet__reclined_30__covered.png",
-  "sha256": "f8240b428b6e171053589e062e82413d2c5ac56dd85a5bea1e471c3d778d1e32",
+  "sha256": "0eb42cf006c1e186201b63e2230f7bb2595ff11738c65f6652c12890fa6e084c",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -426,7 +486,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/025-overview__reclined_45__covered.png",
-  "sha256": "db2194364687350d591c1c2d1a817f201b95df9cac8bdd5f8066975659dcabad",
+  "sha256": "5ec5add849b02a75754783e6254e9094fb5ad3726daa3d05786f62acd5c4018a",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -436,7 +496,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/026-seated__reclined_45__covered.png",
-  "sha256": "331e38487f2e7d1416f0777b5b5c3e5dc0e45a762de954523cc36959e079cecc",
+  "sha256": "dd4b583e6df4ac71c141bf5d268a2c3684eeb7fbb70638573da0dfcc5d3bc8cc",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -446,7 +506,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/027-head_neck__reclined_45__covered.png",
-  "sha256": "3eed08705371e3145a5e60a9e74acdb18dbec48b1159db723da4494b125531dd",
+  "sha256": "ca3b5aa6937edbbb0e6d7d154daa62bd589a3591256241571d7c6be2b33e92c7",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -456,7 +516,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/028-ear_left__reclined_45__covered.png",
-  "sha256": "6bf1d20783a220799e47a691845068c86d3349ec49f349d3689d159bc8d54274",
+  "sha256": "a080edf9b11258c86f440c446370eb9da662e2f6c8da5a11dd90a182be48db11",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -466,7 +526,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/029-ear_right__reclined_45__covered.png",
-  "sha256": "173431c98e6dea8274758bd6d4a84930d8bb8a6e8ff1ca1f1b94f7caa23704a2",
+  "sha256": "c9eb63ba022e6491272c906b2589e790d112eba051b9e5f6ba526a3093c55227",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -476,7 +536,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/030-chest_front__reclined_45__covered.png",
-  "sha256": "24d123881286be97b915848e23e5f2ab0b8ce8a9273e8c382df431274d558480",
+  "sha256": "413e30fc7d1f01a273bf016d93dc19975739ff01336fd4a76b81e37be5e08394",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -486,7 +546,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/031-chest_back__reclined_45__covered.png",
-  "sha256": "3208460671a77079418d5886a9e87271b06970b9e75a47a45f501819a795c680",
+  "sha256": "d6f7ba25387e0e3deddee0c2b5e99f1f0d13ccbcf4ccb3c69b80d11f3bc2023a",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -496,7 +556,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/032-abdomen__reclined_45__covered.png",
-  "sha256": "ec12066e97ac9f49f4f9d1084b3a5302d8f41332b79a3ee89006e6db9b060d00",
+  "sha256": "854c0ac0e7cbf5e8742490045f0d3331d14a51d2fbf4adfacda08d77c0ac6f2f",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -506,7 +566,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/033-arms__reclined_45__covered.png",
-  "sha256": "818fae068e9cc8f1dc6c992595333caf8546c9b3d35753f303f789e34b626f96",
+  "sha256": "f2292dec811a2c2af994b1f570a20c8f4ffb85f16359916582360a44c142cd01",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -516,7 +576,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/034-hands__reclined_45__covered.png",
-  "sha256": "354f925e75a08ca226e6c8d2c8ac060e4394a5f112aa1738446dcd5bdbf27a79",
+  "sha256": "975d5a3b89847df8aafa8ae5d3d1efe1bf58a78b4008000e5fe8296e5c0876c8",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -526,7 +586,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/035-legs__reclined_45__covered.png",
-  "sha256": "57b5a5c6a5948206f0c85486531ae65c5b0041b5ea085ed5a72889567cba19a5",
+  "sha256": "321cd635225d613622243fd7ec81fd34954744537aac1bc5308fe199d137a3a4",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -536,7 +596,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/036-feet__reclined_45__covered.png",
-  "sha256": "95141e47e19e72110015e2cba494a89c45407c9fce00365d75c862250ec3de1e",
+  "sha256": "2840369a5813a86d371886bc8e8d34b10c07b15068aa83012f4a719d7e9c8f87",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -546,7 +606,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/037-overview__seated__covered.png",
-  "sha256": "048c870ee188863694ef95d0864164cae0e190359362f9583ec16759aab76866",
+  "sha256": "c0e6e07c7c119debcfb48ded1c317cf64851b9ebfacf377dbfb6623848aa9fab",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -556,7 +616,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/038-seated__seated__covered.png",
-  "sha256": "121339c5a8561dd83493757c6175eccc5debd74e4f32775f7dd699e164bd1ccd",
+  "sha256": "5e0fef252b506ab137b3efaf64f7b9e12d35457e9ac2024c56ad44eb99213803",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -566,7 +626,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/039-head_neck__seated__covered.png",
-  "sha256": "7cabbd0237cb18148a0e869e9700a9a598105f5a8405b3f30c6ac1d15d966b58",
+  "sha256": "b7d27b3a9b0e8f9653849ffb668d327eb54aa28747648f1a0174875c8419f48b",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -576,7 +636,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/040-ear_left__seated__covered.png",
-  "sha256": "06343e68862f92f7c7bddcdc99b2095e6e10445493448bc73bc54678bb40e6e4",
+  "sha256": "a0bb7ff33735e06b6c8d6b03dcea6faf3b73ada4b1a9c18f58416ca3598021e2",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -586,7 +646,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/041-ear_right__seated__covered.png",
-  "sha256": "7265f1054088a431b920262f79c5d8def579cd9972d13928b8960ecae140ade9",
+  "sha256": "f2fd207b5832b03bb74d880c65a8b5e527b7598fc3988b3bd3e33e74a3233f91",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -596,7 +656,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/042-chest_front__seated__covered.png",
-  "sha256": "086bf157f97a84b70773586165208888ce46e6f5e6a75afb81aeaac1ad46b0e1",
+  "sha256": "599d88a7d0c23b9b70ea986662d0da9d11aa53206d58b3b758fbd3b4b2b33d47",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -606,7 +666,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/043-chest_back__seated__covered.png",
-  "sha256": "0f3d82213011d643e4761676363881cd20952a26325d031e6d686e197951812b",
+  "sha256": "f13642a67affa3faf0d7cedd0b5a5b18f25bbbcf20235f3a1945a9b51ee81115",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -616,7 +676,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/044-abdomen__seated__covered.png",
-  "sha256": "bf56f717c39a294b59c2955e7a4ca0193eaa9438c2983a59d4c4dd1564d30c9b",
+  "sha256": "412fd726cc466f197443012089fba4ff341dffdd057209614738b473dcb6a814",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -626,7 +686,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/045-arms__seated__covered.png",
-  "sha256": "884b269c874f225e72dd3f4b2933054bfc667463fd6287542b61e7c42bd0b500",
+  "sha256": "bd27ea4b617e4c0efddb1037cc9efccf23f4277ad3ea7e3c82a96cfc469d2794",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -636,7 +696,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/046-hands__seated__covered.png",
-  "sha256": "ab6a127d729bbebef7a2ef9ded6d8b168ddcdc8d91c112500eb085e0926935d3",
+  "sha256": "aaea15f9f02f393cd6b13e676293755786ee69f519845e6dd605890e003c5f77",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -646,7 +706,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/047-legs__seated__covered.png",
-  "sha256": "8525cc6a2a3c5892fb7efc1516e6ee3307bbd5ca17d426efac0ced24635f3bc2",
+  "sha256": "861e485342d28478a9623d437dfbe1af770e116b7a8c30f541654e02186d708c",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -656,7 +716,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/048-feet__seated__covered.png",
-  "sha256": "d9f527f952624bdbcd98235031243e0fb594f669c78bd5a23aa1b57d1d1fe46a",
+  "sha256": "719ed7c02ad9339bd4d7c33deeb3a5f478625ed6206491178a09f483c187fd03",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -666,7 +726,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/049-overview__sitting_dangling__covered.png",
-  "sha256": "212cdf88813def9bb179d176c1e49a7f8bec089b44e81232d342cffb3d34c0d0",
+  "sha256": "a52dd51fd2034468ff46bfce6e48246163b98dd3fa5eb0f5191f289f53005383",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -676,7 +736,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/050-seated__sitting_dangling__covered.png",
-  "sha256": "df5749651942f9a1b0e4c1ca28378232720e72626bcb89f922fce05876bde898",
+  "sha256": "590d8ca6300f988a288654feb0e115de5858b0fcd8134f795323f1a7f758fc63",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -686,7 +746,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/051-head_neck__sitting_dangling__covered.png",
-  "sha256": "f0ccca73ea56e1bec5889aaac9ab9bee1ae1f2e698762c10dc0125ee5eb58b69",
+  "sha256": "69f02946890657ae07751a1d28d55a77300d23ab92fdb7319c5a96034f1555ed",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -696,7 +756,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/052-ear_left__sitting_dangling__covered.png",
-  "sha256": "09ad34af3d06c294b83d4eee665ffebf65c4361eda7ed1588fb4bd40e5453232",
+  "sha256": "260577e2f116bbf7d5c0837adb541735871cb5f8bf5f75bce469d84d6043a7c4",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -706,7 +766,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/053-ear_right__sitting_dangling__covered.png",
-  "sha256": "9fe2b819f4b5d16106b1da209f023d378e01a118803ec14e4b5f01ed10611a53",
+  "sha256": "c422608438d27ef589fd009ae9c94341a832be4c3f2f71cb45230b0f56004bb0",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -716,7 +776,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/054-chest_front__sitting_dangling__covered.png",
-  "sha256": "b729f9a5e8e2bd54263fe5b757c548b9584f242fa6b087f8682e95982585b9e0",
+  "sha256": "67f4c228b4f0349a1bb611643404d9e5f37770c932f72f4ce7d70a2e2dd6515c",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -726,7 +786,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/055-chest_back__sitting_dangling__covered.png",
-  "sha256": "3c4e8a7ae276311fa79dc26b9ce0ba63819371644bf022259394a05143495737",
+  "sha256": "e377be31ae13fad7ac29ec2ef6c1345744687c9c102f888569932d89c8ec7993",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -736,7 +796,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/056-abdomen__sitting_dangling__covered.png",
-  "sha256": "4301f4dc924ae91d9d7d628c29fb6653a40631bef34888e2323d3e78c5cf6fe7",
+  "sha256": "c2ce1f14a4b2dd62fa4b424695e02b924d8030b327af235a582c51386e006409",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -746,7 +806,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/057-arms__sitting_dangling__covered.png",
-  "sha256": "3371a36faba3463d931075952679e62eceee48c776b0f4e448db5e5a8357d00e",
+  "sha256": "f4e95dec0e61d82c3106aab50dda5449a00e8edb3477857e1ebf1a06553c07f3",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -756,7 +816,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/058-hands__sitting_dangling__covered.png",
-  "sha256": "5c948f8a0d496f1d40241b315df19adabe4dfd0e3427718c74347131f9d96a91",
+  "sha256": "562447686c57fb32145436d5cb4fdf6e6585f3816e0e8393d0363f054a475164",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -766,7 +826,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/059-legs__sitting_dangling__covered.png",
-  "sha256": "1c7a6be1be1b9358596309f85f98ebe3e30c1a4c0922edf8a54e673ce443086b",
+  "sha256": "9cf7678bda6ae88cb32e4f56ddb5364da0135ac2988fc64dd6954a1dc9bdc538",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -776,7 +836,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/060-feet__sitting_dangling__covered.png",
-  "sha256": "c30dd305c4a46af4c58f7ebb6a17302b7b16c7b02ea1d1dc89f828334f5747b3",
+  "sha256": "7cfd5985fbd4012761a88dab1607a6dbd1ded5946a12c71ecc28614d752b4c0c",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -786,7 +846,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/061-overview__left_lateral_decubitus__covered.png",
-  "sha256": "f1aa724c43d1a16b047da0ecc9496cf1daeeedd18240fd5fe2f9e11761fb0bb3",
+  "sha256": "c8a6a483b8e91613ece303f295637d2f084e2518a87ed78dd9868814c02ce112",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -796,7 +856,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/062-seated__left_lateral_decubitus__covered.png",
-  "sha256": "669c78910e75e933025c531cfc14bc79f3a3b57bc6ffbc48b8d3ad50ea6c360e",
+  "sha256": "ef8a2a22f98a37ad5f7b7c99816a7793eca939307b989f00dbe9bb44dc6a6ffb",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -806,7 +866,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/063-head_neck__left_lateral_decubitus__covered.png",
-  "sha256": "ea216fd238f7ec2c23c9add67939ca183ae57aa395ffd7fa99e8d746bff0b907",
+  "sha256": "61a8a5523b5c9bba55e1dcd84d8ac6f571e0293159df63edf56e46e68e6cbdcd",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -816,7 +876,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/064-ear_left__left_lateral_decubitus__covered.png",
-  "sha256": "cbc3b451f7958f4242c461f9a403e656672f1fca513598b5b7f469c1cd136a7e",
+  "sha256": "faaa59a4ef2e81337c026e59359a802b3703bac63e15edc526e7e08532d99586",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -826,7 +886,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/065-ear_right__left_lateral_decubitus__covered.png",
-  "sha256": "96279379a99acea54d7b307d9e34778c5faafddc45935d75affeaf9fbd2c5019",
+  "sha256": "9effa599cdc65b48c3f4246cbaca7f8f02a0182a9d754b668611c2d7d257cbc6",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -836,7 +896,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/066-chest_front__left_lateral_decubitus__covered.png",
-  "sha256": "3fa92bd37bfa6e28173c03a54e7d74911cf459fb3aa1ecd46ae94e928a493aa9",
+  "sha256": "356c8f6822d038f5288b9068162dd63b45b6b139d74595ebfb653eb3afbd0697",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -846,7 +906,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/067-chest_back__left_lateral_decubitus__covered.png",
-  "sha256": "eb04921d105ce0896530ff8a7543b324ac9249743303329ba408f3dc9e6844f9",
+  "sha256": "83e214f7a6aa11069245721ef6c3537bcf930eb7719a657f9092e90d179e6613",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -856,7 +916,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/068-abdomen__left_lateral_decubitus__covered.png",
-  "sha256": "3b3577f368baf928664bced1323447133e1352a3fa0761217cbad33675bac9d4",
+  "sha256": "44dfc0b26d3e45616a6edfd2dc50a4ac707da03acb7c420a500755c08b0f2974",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -866,7 +926,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/069-arms__left_lateral_decubitus__covered.png",
-  "sha256": "8b9e8c31643638d671ae26dacc06a6885d7de3de3ef773b7ddf51eaaab64e294",
+  "sha256": "c45c60551059e6e8829e8da7e5efd74195cd144fbe697a074fc25479c325bb28",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -876,7 +936,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/070-hands__left_lateral_decubitus__covered.png",
-  "sha256": "2178464ca72e2840543823ac7e044e3ead53cf42a50bfb75102f6573591d6e1b",
+  "sha256": "ca74ee8ff9927fa2d1e171dadab82ea55898e23fb61bbc0e70aa69e6a4c609d8",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -886,7 +946,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/071-legs__left_lateral_decubitus__covered.png",
-  "sha256": "85eeef86d3879fe6f1b8c942ae946f3c3e186f21ded4be984c3d15bace64f021",
+  "sha256": "01d337b6300347b0865d65a10c381bd1477f181bfbc09bc6032c8b8d275c7e59",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -896,7 +956,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/072-feet__left_lateral_decubitus__covered.png",
-  "sha256": "f54645fbaf4b18018305c4d61cac1d4cb186828721f06682ee35a3a055dfdcb0",
+  "sha256": "17243512c08f6cdc06f8f67cafa6bb6f37869efb0e17539ae5f6b66f60f7d6e0",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -906,7 +966,7 @@
  },
  {
   "file": "1440x900/hf-male/views/01-face__seated__covered.png",
-  "sha256": "43b6ba923a6402db40667fc482db22b69783a34c32ec8be49cee3abf5260af99",
+  "sha256": "fb3ca265d764f736b1e349d23dac5c4b0f7e0525d336672e271b79cbd140bebf",
   "viewport": "1440x900",
   "area": "views",
   "case": "hf-decompensated-01",
@@ -916,7 +976,7 @@
  },
  {
   "file": "1440x900/hf-male/views/02-neck_back__seated__covered.png",
-  "sha256": "aca5f5d27bf809803a88b94dc8a3fe8a3792562d64c67ae6a997b144943c972e",
+  "sha256": "7251186bbdcad72ea7c2d7f484c3eb4486c14eeff41340223c0a086e732a5029",
   "viewport": "1440x900",
   "area": "views",
   "case": "hf-decompensated-01",
@@ -926,7 +986,7 @@
  },
  {
   "file": "1440x900/hf-male/views/03-head_top__seated__covered.png",
-  "sha256": "f26ebfd2a7d673a3419900fde671ecae3e747cddced1afc3ca28abe86a961d92",
+  "sha256": "cceddca14bdccb0c14ac2563c152bb7963a9d38cc59af0f0ffb44b8d98cb4a67",
   "viewport": "1440x900",
   "area": "views",
   "case": "hf-decompensated-01",
@@ -936,7 +996,7 @@
  },
  {
   "file": "1440x900/hf-male/views/04-arms_left__seated__covered.png",
-  "sha256": "b7aa6b428c3d3bee1b3650a51acc2d6ca465b37f9ade7f8c6a170f1b8240ec8a",
+  "sha256": "34313e053bbefd7e2e8c0604ad4962ff1723187993fdf46bf3c1bdcdcca9c80b",
   "viewport": "1440x900",
   "area": "views",
   "case": "hf-decompensated-01",
@@ -946,7 +1006,7 @@
  },
  {
   "file": "1440x900/hf-male/views/05-elbow_right__seated__covered.png",
-  "sha256": "f2b01b7343e739bbb05f9bf42622b722019f9d650c4812ba4227c4149260fee1",
+  "sha256": "a949d111c17786a2043c15f936af8696680df88c2783b8be03601c894162302a",
   "viewport": "1440x900",
   "area": "views",
   "case": "hf-decompensated-01",
@@ -956,7 +1016,7 @@
  },
  {
   "file": "1440x900/hf-male/views/06-elbow_left__seated__covered.png",
-  "sha256": "6e298ccd298f2423642da876f8a1fe728c38c1475ee818bbca2ec2e6b6a08cc6",
+  "sha256": "b88c8be4cd1c37590627f59b00bd3ef9012c199893649a59f6bec1c86a65c40b",
   "viewport": "1440x900",
   "area": "views",
   "case": "hf-decompensated-01",
@@ -966,7 +1026,7 @@
  },
  {
   "file": "1440x900/hf-male/views/07-chest_right__seated__covered.png",
-  "sha256": "e66b5168478745ebc816fe422b62fd202569a880a7e443ef80491735788dc717",
+  "sha256": "6152d8826077d4197dc713569d838d8ac448630b11d73fb56ad29ce4f34afbf6",
   "viewport": "1440x900",
   "area": "views",
   "case": "hf-decompensated-01",
@@ -976,7 +1036,7 @@
  },
  {
   "file": "1440x900/hf-male/views/08-chest_left__seated__covered.png",
-  "sha256": "14bbfb21d009d293db9250ab8a1f1edfe8e0a555906bf5f221694b4d8ef437de",
+  "sha256": "0a289be1cf20747f0add8617bf3f47b776587d8826ea176ce836662532126e58",
   "viewport": "1440x900",
   "area": "views",
   "case": "hf-decompensated-01",
@@ -986,7 +1046,7 @@
  },
  {
   "file": "1440x900/hf-male/views/09-ankle_right__sitting_dangling__covered.png",
-  "sha256": "2c00233af9e5f9d3c8ad3a86e8750829b25b8a9ae74afe4e93df5f32e0543a02",
+  "sha256": "fd699e8eebdf2c7ae184b1cb43cef365cab55f27f77d37bfafd8201750490beb",
   "viewport": "1440x900",
   "area": "views",
   "case": "hf-decompensated-01",
@@ -996,7 +1056,7 @@
  },
  {
   "file": "1440x900/hf-male/views/10-ankle_left__sitting_dangling__covered.png",
-  "sha256": "c8672706e9e982763b24448d0834d601788be23d7413eae3742db8613e9ffaeb",
+  "sha256": "d23e629d8bfd837a5686016b9f759c163102cd5be6d89ff851016a76635b9ddf",
   "viewport": "1440x900",
   "area": "views",
   "case": "hf-decompensated-01",
@@ -1103,8 +1163,38 @@
   "drape": "chest-exposed"
  },
  {
+  "file": "1440x900/screening-female/drapes/01-chest_front__supine__chest-left-exposed.png",
+  "sha256": "f62a471b81bd47610adfa070ba7f36e127b37132b5990440f365aacf52ff6af2",
+  "viewport": "1440x900",
+  "area": "drapes",
+  "case": "screening-normal",
+  "shot": "chest_front",
+  "position": "supine",
+  "drape": "chest-left-exposed"
+ },
+ {
   "file": "1440x900/screening-female/drapes/02-abdomen__supine__abdomen-exposed.png",
   "sha256": "2d0f630891bc24b78925fa50930d9be6fc8b0c06ab17d988602623322ffd149b",
+  "viewport": "1440x900",
+  "area": "drapes",
+  "case": "screening-normal",
+  "shot": "abdomen",
+  "position": "supine",
+  "drape": "abdomen-exposed"
+ },
+ {
+  "file": "1440x900/screening-female/drapes/02-chest_front__supine__chest-exposed.png",
+  "sha256": "2d12acf9cc15b5f4180b222f8de7e56e31e691e233e08490be14010bcb28a51a",
+  "viewport": "1440x900",
+  "area": "drapes",
+  "case": "screening-normal",
+  "shot": "chest_front",
+  "position": "supine",
+  "drape": "chest-exposed"
+ },
+ {
+  "file": "1440x900/screening-female/drapes/03-abdomen__supine__abdomen-exposed.png",
+  "sha256": "58ac6fe1068d31f332036468e862c4b7debc7eb89b5a1a0bf50894b176f0ed28",
   "viewport": "1440x900",
   "area": "drapes",
   "case": "screening-normal",
@@ -1123,6 +1213,16 @@
   "drape": "legs-exposed"
  },
  {
+  "file": "1440x900/screening-female/drapes/04-legs__supine__legs-left-exposed.png",
+  "sha256": "13709be4794c1eb33ec7a57b58a42c88b43f47aee9f5a43f2e9dac1287b8f710",
+  "viewport": "1440x900",
+  "area": "drapes",
+  "case": "screening-normal",
+  "shot": "legs",
+  "position": "supine",
+  "drape": "legs-left-exposed"
+ },
+ {
   "file": "1440x900/screening-female/drapes/04-overview__supine__all-exposed.png",
   "sha256": "5da339ff862f2aec40254de0cabb1127858838f08ddbe1ac2d439249f5ebb8f8",
   "viewport": "1440x900",
@@ -1133,8 +1233,18 @@
   "drape": "all-exposed"
  },
  {
+  "file": "1440x900/screening-female/drapes/05-legs__supine__legs-exposed.png",
+  "sha256": "38e87e1cb6f2627380caac8ae8aed8ff2db81587191986c5243cf1f04f9a92e8",
+  "viewport": "1440x900",
+  "area": "drapes",
+  "case": "screening-normal",
+  "shot": "legs",
+  "position": "supine",
+  "drape": "legs-exposed"
+ },
+ {
   "file": "1440x900/screening-female/room/01-corridor.png",
-  "sha256": "c83d433ff50575fc9e8395e566f5deb1d731ab58f252a321a5f87fa191d2d19f",
+  "sha256": "8313214ef2c3b23d6bc2f8e0d2618f2f5adc38ebe19137aa0f88825aae470284",
   "viewport": "1440x900",
   "area": "room",
   "case": "screening-normal",
@@ -1142,7 +1252,7 @@
  },
  {
   "file": "1440x900/screening-female/room/02-overview.png",
-  "sha256": "53d00c88f6924c66d95cfa4a925ddcbe42f46a63a000a471cd60e51751bdf8ff",
+  "sha256": "4faa4bba4d37780a4111ee5a39c101cfdfc07b33e52ed6176d9db8a06553d01f",
   "viewport": "1440x900",
   "area": "room",
   "case": "screening-normal",
@@ -1150,7 +1260,7 @@
  },
  {
   "file": "1440x900/screening-female/room/03-sink.png",
-  "sha256": "83c86f2a02948b67a5ed4eb00e0681ee0e2948d5d3a249faad6238e15df13001",
+  "sha256": "fd1bb67a81e746b95dcb7fa11ee153212dab461d5f2bef3b41f69ee5ac44fdcf",
   "viewport": "1440x900",
   "area": "room",
   "case": "screening-normal",
@@ -1158,7 +1268,7 @@
  },
  {
   "file": "1440x900/screening-female/room/04-tool_table.png",
-  "sha256": "ff84e049e75d26eb87974c85ae0a7d0083949649f01b80f5242a45d12aed4e5f",
+  "sha256": "c38724a2aa95aadc9ad9b2d1df0bcd83c2bbc1d63ebca2c8570bbbc8fc33b28a",
   "viewport": "1440x900",
   "area": "room",
   "case": "screening-normal",
@@ -1166,7 +1276,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/001-overview__supine__covered.png",
-  "sha256": "74d42dffb797637184ecac1a0fd3670c63c783060bc5fb6278070db4b3a3305c",
+  "sha256": "a0677062c159c4feee63b8910a62fc843d4d850f5611a767ab19563560ed6a14",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1176,7 +1286,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/002-seated__supine__covered.png",
-  "sha256": "3ab4950d775f2f798d9fbf2c7a785ad2aade3fbafb7c7b2a58b2024065d277c4",
+  "sha256": "428d235f15eeb9a6d5e015fa03107b149fd999b6707dec45be9184a00652f8db",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1186,7 +1296,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/003-head_neck__supine__covered.png",
-  "sha256": "c09055b2cb0eb22b89c7c08bb03b6a2a87dbbe905b3626c753a26f1a1de03d03",
+  "sha256": "f313ba49ab3f4fc888e1f81720dd158c1d67de5a01bed0f10d644ecb27339149",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1196,7 +1306,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/004-ear_left__supine__covered.png",
-  "sha256": "6b3fffc070a7dfaa8ef1773f6951c7baef7c3e9c7bd8afe91cd11922a2a343ca",
+  "sha256": "a4b30dd1388f83c86b1b67da35841fe80ce8003f751f35f0b960d022d4d37ece",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1206,7 +1316,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/005-ear_right__supine__covered.png",
-  "sha256": "bcb26472879d3b615c01027b3211d6326533e407759dedfe7b10b32d327cdace",
+  "sha256": "37595fb27f36ae49f9cea7361f3a7917d2db511eb6ad78a80dcc4d948819b44a",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1216,7 +1326,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/006-chest_front__supine__covered.png",
-  "sha256": "d728bf790f2a88f7cfcfd576f953cdfde089729c5765d6f3266037bcf8878f7a",
+  "sha256": "f62a471b81bd47610adfa070ba7f36e127b37132b5990440f365aacf52ff6af2",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1226,7 +1336,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/007-chest_back__supine__covered.png",
-  "sha256": "ec1bfaccdcc973521062b405538f0e5221613f8a9767b5dc9584a5c17f67f728",
+  "sha256": "41802a7ccd3840f5b76fe3c5018a7b2047f1f688fdfd5f6199c32c8ee38501fd",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1236,7 +1346,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/008-abdomen__supine__covered.png",
-  "sha256": "927d050616f6ec4ec9acc6f2bb2c98408c06421cb171d59e3f3331d096b83ed2",
+  "sha256": "58ac6fe1068d31f332036468e862c4b7debc7eb89b5a1a0bf50894b176f0ed28",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1246,7 +1356,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/009-arms__supine__covered.png",
-  "sha256": "e75964b59e34d0268be9bafdc77d2aa1e183e5b419aa6b772a0047edee6e2fe9",
+  "sha256": "e0d822fb15010493477a43e8008d75abc0d32002c8b59ebc8d490fcb45ac8bbe",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1256,7 +1366,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/010-hands__supine__covered.png",
-  "sha256": "ad9294aba1af63e82e1cda2302a658f666660113cc3184e4022470587ae494b5",
+  "sha256": "251be4768295f888d27f1fb18bde957d1cb3213b65da71d578c9cfbf603fce00",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1266,7 +1376,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/011-legs__supine__covered.png",
-  "sha256": "77444d560822deed51b64204257260a7096bbb5cdb1f58e57a30f38b48398cca",
+  "sha256": "38e87e1cb6f2627380caac8ae8aed8ff2db81587191986c5243cf1f04f9a92e8",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1276,7 +1386,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/012-feet__supine__covered.png",
-  "sha256": "07759c81b9d4c9b17b68d6977573aded88d27c939d1266ae6dcfcd5f538a2db8",
+  "sha256": "eb3c58ace893c7a633a7b0135b82f6950f48af1d1f48e5ec4ddb8e7485c6fb53",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1286,7 +1396,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/013-overview__reclined_30__covered.png",
-  "sha256": "c963a241af6e6f234c8281af2f433ed7af1f3400ae40034d18a9e88153da3677",
+  "sha256": "cd12e9ddb10bdb82ea29da8e049f76a42dec2dbd71e707bd058777b39dec67ee",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1296,7 +1406,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/014-seated__reclined_30__covered.png",
-  "sha256": "e37425b990edf11bee25510c51f1ac6f87aa3c76ec0d7c5770295caf74fa9bb1",
+  "sha256": "0f6a87a6cca1e3694c7f6d45e5b915ca63b54a0390c6b459d6f8b42e4aea7402",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1306,7 +1416,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/015-head_neck__reclined_30__covered.png",
-  "sha256": "6d92aa12c902eee5bf6260c8872ffe82ca3312475d92e196bfe0e5eb814b8569",
+  "sha256": "25a0812f76c9ba4df0b1ff6da1e582de0feb06ba152dc1e759518de58cafb743",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1316,7 +1426,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/016-ear_left__reclined_30__covered.png",
-  "sha256": "d1105deef1f055e3362aaec9e5cd07de674f66f1f35ad195e66668b10f3eee4f",
+  "sha256": "f14151da169e7989584fba7814d69decfa0aa7716fce6d1199a0d960fb4a2d68",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1326,7 +1436,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/017-ear_right__reclined_30__covered.png",
-  "sha256": "c9ed11e027c1493565a6ca98ed010d1cb3dc95a7a42b8998712334955521a985",
+  "sha256": "0cc9760e60ca2fdf6a126a51890ac89381e200b9cda4bd7c1b75753fed5a6b55",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1336,7 +1446,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/018-chest_front__reclined_30__covered.png",
-  "sha256": "7e373170c1120c80707c56ea805e2851f708e9a62f662c312e6a0310b4567193",
+  "sha256": "867b157105c7845be23d2d9ecd6867cadc4aca0dd6710303c910c3d290bbb35e",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1346,7 +1456,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/019-chest_back__reclined_30__covered.png",
-  "sha256": "98a5e495f2e8a120a7fa78a5d4689efffcd35eaca53dd58aff4a5bdf61f5e539",
+  "sha256": "a0b7587e21236618857d5ff6b2f18e6ca1eada7944ade08cb53425d7edf8f381",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1356,7 +1466,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/020-abdomen__reclined_30__covered.png",
-  "sha256": "45bc935da137a6542fc19edc58908dcfc3c4d70b9d98625e79a8476a2bc61f8b",
+  "sha256": "4d924e5bcd39916e5da686f846c6865a30e2a8633dea672e5bf1603bbf589d29",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1366,7 +1476,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/021-arms__reclined_30__covered.png",
-  "sha256": "cd155920fe31ac9d7fb24b774a4c3627a5539ae539fedd3c75c17eb21eac9182",
+  "sha256": "5ec33ecbcad0bd07878f6b89de02c56c94a4952ded13f5a7ae4ee479f727b433",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1376,7 +1486,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/022-hands__reclined_30__covered.png",
-  "sha256": "edbdb36e2fdc179c4b339b6379e4e8c375d791b2bac02c3a3769107f1af30e48",
+  "sha256": "fe95760a9556196b15aa7a732764162eb6c29479a94738f10143988259f10c52",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1386,7 +1496,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/023-legs__reclined_30__covered.png",
-  "sha256": "0dc36f5c9d4823c0908150a0d37b46ea024c6a80c806cea5f9a6546a61ee3813",
+  "sha256": "3bf31f48058a96d2ea48d33d9caa8e24f8bf5a35a8e6ebb2bf9294594c841349",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1396,7 +1506,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/024-feet__reclined_30__covered.png",
-  "sha256": "ab7caaddf29b0e4a76483499f4793030411dadef904045c757cc16f8b451eb36",
+  "sha256": "a44c7d7bb45dd459b912cd87ffba06e1569c4f3263516e8b9223aaf49faf9984",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1406,7 +1516,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/025-overview__reclined_45__covered.png",
-  "sha256": "8cd800bc97a782626b9065a75d80b430512a18def132841a4eee101916a2214b",
+  "sha256": "245c5f50ca404184410495e620791dd92966a5f2bd3d62dff1ec1da04c2bb6cc",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1416,7 +1526,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/026-seated__reclined_45__covered.png",
-  "sha256": "42a7c99de4fedf26ba7220b923bae0047c3214672f46cf027581406115c29b09",
+  "sha256": "26d8ab79df43e7caa6f424fa16ee7c3ec4cb4be4cf02fd7a497698b77d249f97",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1426,7 +1536,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/027-head_neck__reclined_45__covered.png",
-  "sha256": "a0e53af81c5de13bcd9c7b4f181a4498bd7988145a9713ad2db799ba58226b99",
+  "sha256": "c68791864bb2f387b41313622f7b443ca92324397921ffd40b0036921036c39c",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1436,7 +1546,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/028-ear_left__reclined_45__covered.png",
-  "sha256": "3ab81c1907cca8153ae8959b5e11bd6eea01159ef504b8a42bf59d525e408ae2",
+  "sha256": "e0cabc29a25ddc5bc11c7ff99f60e8a6b871ab96fd2ac83155eb622ce55a51a3",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1446,7 +1556,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/029-ear_right__reclined_45__covered.png",
-  "sha256": "5ee882c97aa34e2ce10d8e3c646340f095aa3549ef893f1977e12b848f26c5bb",
+  "sha256": "179182e6869bbe90edd6aa32461ef1438a2444c4a73078e6bc514ccfc929f136",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1456,7 +1566,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/030-chest_front__reclined_45__covered.png",
-  "sha256": "19c54df3cf6742e82d0d879cd66f8d9c2d8c268579e76c00d8ca546b46c02785",
+  "sha256": "690259eb1fedd246fa4809f1e1642ffaa3468e87b7e98be14f6caac9a003ec4f",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1466,7 +1576,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/031-chest_back__reclined_45__covered.png",
-  "sha256": "ba05a825024e71ba2b5bcc2eaadd92fc408c4a6deca4aaffc23c570ce7d5475e",
+  "sha256": "d2df56a2daa246c88d213ad1bf42d0538814c4948c80d8a28eabf17cc9dd53c4",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1476,7 +1586,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/032-abdomen__reclined_45__covered.png",
-  "sha256": "9a5f5162518369a7c1be52f50ea928e156b2a8e5a266bb5ac34edd0029c0526d",
+  "sha256": "4b9e2d55b42528c3aa0f6f987d6b0eff711b85536502d9e5f444147243206b33",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1486,7 +1596,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/033-arms__reclined_45__covered.png",
-  "sha256": "353303923c5a4005e4ba79e017cc4f8d19c8e96e0950f725fd6ca3e78d423def",
+  "sha256": "9c49001ff412fb8c572ee1058e6c49d4747943e263bc826855c66d3915b6fdc8",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1496,7 +1606,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/034-hands__reclined_45__covered.png",
-  "sha256": "25609d82f3b773be517d29f4ba430dcd6a285b45492e12e4b180830f8076ba1f",
+  "sha256": "8dccab2b14de3cbc63788bf731bb04a97f3d8cb1af2b2dc156dc9bbc9fb4b001",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1506,7 +1616,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/035-legs__reclined_45__covered.png",
-  "sha256": "384d5da02c6725578172287bb06926d81eba63b616ca8abaa385695c1d873a83",
+  "sha256": "79d90336105b5b0b84f96742c10c10858b298747c33594d0743ef992beed9e50",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1516,7 +1626,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/036-feet__reclined_45__covered.png",
-  "sha256": "4bf506e87b204a24759b627f1267c2ec0e2911fda05314749ecb7f95434f1d70",
+  "sha256": "060adada554170e28a4d7c96758534dd417b3694b55d10d9c463f1f87205594b",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1526,7 +1636,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/037-overview__seated__covered.png",
-  "sha256": "431d6a4199538f515a1bf74a2e2041f996de7de6bc7b59f09851ed4b62bf731d",
+  "sha256": "4faa4bba4d37780a4111ee5a39c101cfdfc07b33e52ed6176d9db8a06553d01f",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1536,7 +1646,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/038-seated__seated__covered.png",
-  "sha256": "11907a0e3599cb5d1404be198bdd234dab563a2bfecd7bbbd081f6a3bb1e2324",
+  "sha256": "5bd5e16bde13149b6d20d4cdfb631c80b78db65316a563fb3cdd83441515d674",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1546,7 +1656,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/039-head_neck__seated__covered.png",
-  "sha256": "b7b18addcfc9a0961a4416ff5bcacb8bbe77456b1c2821c6d0b2f72cf93fa753",
+  "sha256": "55fc3fb0a0c370e2c819e0bc0028b3fc32f024fdb8edd92dc4cfe9bfd78109b2",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1556,7 +1666,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/040-ear_left__seated__covered.png",
-  "sha256": "eaf43e0621c10cf29819a9861e93f470c662329e477585e44561422a44fd4621",
+  "sha256": "968ce46321da45d528addc72906d8b73870ea388fe5a415ac73bcd4980b66ffe",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1566,7 +1676,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/041-ear_right__seated__covered.png",
-  "sha256": "fb0a1280a8a8f559f1c5735d7f1ea1b397f1a2ab1ff8e7a43b3be6bb75298b9d",
+  "sha256": "55e6f8e3a4eea422aa3be58211f05173eeb76853a496266e2a46d93c6ec3ba2f",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1576,7 +1686,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/042-chest_front__seated__covered.png",
-  "sha256": "952a4df8060b3a3f1f04ed9577f6b2b3288aa861cbe37f5b2c49e9be1ebb64ce",
+  "sha256": "1f822f519992309cd59b49b6dafe7897273d55c082c96c166dff8ef3b4bf5d82",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1586,7 +1696,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/043-chest_back__seated__covered.png",
-  "sha256": "08e06b0c1d6a337466b330a859d85eb686eb18a1e2bca042f0e18b6567abd12b",
+  "sha256": "2f94dc17e9d15a2e08cdae7c5370a04060efa47133f77d31e5d2e628987c8bbb",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1596,7 +1706,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/044-abdomen__seated__covered.png",
-  "sha256": "7884a986c449b6e3b46e6509812ad1f0945160546e2b9002479966ad75ce41e8",
+  "sha256": "d167138aee1fd169598922ab1178117414f9fde24b2c1f038ef19392a9a85e63",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1606,7 +1716,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/045-arms__seated__covered.png",
-  "sha256": "f968f49e67564313a141eba42fa9318685e26d3ad24cb31700d56acd5a9d76fb",
+  "sha256": "bac4f0f8b29322d0b2abc390a71cb24a088283fa4cceeec2f9487250320ce6e1",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1616,7 +1726,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/046-hands__seated__covered.png",
-  "sha256": "022a72c18486fa9cd939a8b172fad2c9e4349033302c84a83fa1471a00ffc660",
+  "sha256": "1f405bc731e3cc795aec49228ff47406da5dd387b692ace7815990217ba15232",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1626,7 +1736,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/047-legs__seated__covered.png",
-  "sha256": "10be6511c5c33cb0889347820f5bcb6cd2a100f847013eeae37085450366c86e",
+  "sha256": "aa58ac678703b6b540a630c43f4c682cdafcd5bfd19a849362dbfac9403de805",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1636,7 +1746,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/048-feet__seated__covered.png",
-  "sha256": "3fa6c346b15b4bb352294b23749ac1902ca8db061c9b111f746170ab803fdc2d",
+  "sha256": "a439bc9c6d59461998de69ba33d6da3763f8bfcbb529b5c8ebed52c5b933228b",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1646,7 +1756,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/049-overview__sitting_dangling__covered.png",
-  "sha256": "4de6494ae56884a6d9d5a97bd6c5b943a65a24e6c8d2cf7088a083a31b151255",
+  "sha256": "376b8ae05cc8c04df79b4503e4d56f28fe3d9db9afd863cecadb670370ad011b",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1656,7 +1766,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/050-seated__sitting_dangling__covered.png",
-  "sha256": "9c160e1ef3f77734f2cb1a44ab95a6554284e62a30ae444c6ddd5ddc26ce3fc1",
+  "sha256": "00e75650e9b203c584711318cf3d39692fb5ba8481fa22df531653d01fcf50ae",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1666,7 +1776,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/051-head_neck__sitting_dangling__covered.png",
-  "sha256": "01f9a9955815681df0fec55dca637f85e8edf2c49f493338e30459a781f26907",
+  "sha256": "a107480914e6b80db6ab82a73a328b1d855bab25a63f96310e981c4eb6fcbddd",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1676,7 +1786,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/052-ear_left__sitting_dangling__covered.png",
-  "sha256": "bc3913539f3351f87dd526cd20bf13300b1f531feed6facb35e8af880aed5416",
+  "sha256": "e583269614f7f0eff398d93b74db9c460ffb2cd6f6eba92f0ece2f51b5b8bbcc",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1686,7 +1796,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/053-ear_right__sitting_dangling__covered.png",
-  "sha256": "040b6ce336c392b2e5f0f065038e8207fcf6b1c720810946a265185454cccc4b",
+  "sha256": "60442b50f779c4ce69efebb649177d152ecfee59feca96f0a5fd0e30b7dc5b0e",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1696,7 +1806,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/054-chest_front__sitting_dangling__covered.png",
-  "sha256": "fa3ecd3c7e363e64f41e11963fd498d71ce4a2c2e40d025bc7e884fef2fae5d0",
+  "sha256": "57b0661a8c3eb54b71155058d197b358f07ba1b72333559b7fc045c964b9c3cf",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1706,7 +1816,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/055-chest_back__sitting_dangling__covered.png",
-  "sha256": "a45e1978384bb1c3d9d5f41522e2049a967f4c1a378850ae45edab5cbddaece9",
+  "sha256": "67507dd53f33d6bb630e6d2162dc8fc10d878ed91258bb05ee5c5ae8f389088b",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1716,7 +1826,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/056-abdomen__sitting_dangling__covered.png",
-  "sha256": "b89101eada183b069a384088f408ee4dbc04df827034d55b24d3575eb56e3574",
+  "sha256": "850d75dd022aa522702286e105bceca2570778cfe3dbceed17c64ecdac470cbb",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1726,7 +1836,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/057-arms__sitting_dangling__covered.png",
-  "sha256": "0aed3aa19eb2e6987e2702f52a59e7e74c70665afcf5ccad5d5004ef73e1b407",
+  "sha256": "4a95862b81c73dff4fb3d9f0fa7e5056071f25249419ff2e086813f86299bc14",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1736,7 +1846,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/058-hands__sitting_dangling__covered.png",
-  "sha256": "47ec26a7fd64512e5acd6b544521949da6aa8038664ecc205393f3dfeb65fa6d",
+  "sha256": "c600a8bb70a32f72afdd9948d623ebc08d9a30f3378f4e885cd4dcc66c3b5422",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1746,7 +1856,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/059-legs__sitting_dangling__covered.png",
-  "sha256": "a8d04eebcbf2c31584e5c4e200c4e8fbf81d0799b97aaa20a5c37ff87150b5a0",
+  "sha256": "76547cc048e67a5ec06204390696c1ab50263d7595ee48b9f2cad30b57da3474",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1756,7 +1866,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/060-feet__sitting_dangling__covered.png",
-  "sha256": "3aa63d1823697c094f9e2c43d5b84e02e80108d77f673705506340ad8d702e44",
+  "sha256": "be72e9412ea3dd1fad0cfe014389242fca05ad1a3f08d3e91f0a3875a73425c6",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1766,7 +1876,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/061-overview__left_lateral_decubitus__covered.png",
-  "sha256": "e60a26a048e61ac38d99411e9f80665d9e5dc4fe487bf9ff84cc557994c630ca",
+  "sha256": "abe96c9e3e7968b38ca46937bd441abe2f5c42fef17d71299b62f741095ba6a3",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1776,7 +1886,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/062-seated__left_lateral_decubitus__covered.png",
-  "sha256": "57f0d9d286adc3d5b5d30a36c5e99c270a6d2cec8e16429c9fa66c7719fcb1e2",
+  "sha256": "f193c978ef7f2e18e9ce0df596739d40f6daa2a25df5a940c2529f0ca01f0abe",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1786,7 +1896,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/063-head_neck__left_lateral_decubitus__covered.png",
-  "sha256": "494d283052f6850000f89eebc4523dabce4d7a7154a45e4a15103bea63a40ea2",
+  "sha256": "2f167ad9f603fcb8804f7284783b0b2f87782ccac3369f39774c27c2ba5c7163",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1796,7 +1906,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/064-ear_left__left_lateral_decubitus__covered.png",
-  "sha256": "c327f4072f7a235fff855decb5f6f29ae182346672bc02a2e51460becf95cdf9",
+  "sha256": "0f2ce5b7def05a59814779a3d076778512186591b621cf6d810ce6cded0eb75b",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1806,7 +1916,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/065-ear_right__left_lateral_decubitus__covered.png",
-  "sha256": "973efd6a0236c8d036cd9934f5a94cadd763a754d9049b5b06eb3280877b4a0f",
+  "sha256": "67c794dda42a136c2aced93030311e288bcd1c2d153941497b489332c35a5976",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1816,7 +1926,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/066-chest_front__left_lateral_decubitus__covered.png",
-  "sha256": "be73cddd17463066711f19d765358297a2c0515a88787bb1fb145e7f67e95f65",
+  "sha256": "13113f7526593090277b06740bc35141da6b38285994467514606fae6ed40e9a",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1826,7 +1936,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/067-chest_back__left_lateral_decubitus__covered.png",
-  "sha256": "a21204e6c9af5bbc98d276581370e0e5f3431919dfb3ea1972c9dd6440c55e7d",
+  "sha256": "e86e5a6b889c71c3fa099fc02e0f232ef3a7aa4d0f2e857bff886c63b3912f94",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1836,7 +1946,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/068-abdomen__left_lateral_decubitus__covered.png",
-  "sha256": "b0c8ddc7361be311cea67fb90910a092fd784b1c361fc7488e1ce220b999dda4",
+  "sha256": "a4ee715b1f5e6ed1b3f760f855b347d250b97c8e5f3ec5c3cc0423017488ce15",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1846,7 +1956,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/069-arms__left_lateral_decubitus__covered.png",
-  "sha256": "9b31ab869e7f1585acafa295069808e5602265dd23ce9620c8166e64fb4393bd",
+  "sha256": "99e99191f55e46998eaefb25afed28e934af52109ba0e1d014aa0b0de79b36ce",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1856,7 +1966,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/070-hands__left_lateral_decubitus__covered.png",
-  "sha256": "8b1362a7852689a125d89fedebb4fa9bcc5d95ae3d565c25f46fd5eef0894ad4",
+  "sha256": "bc70d529c64e3031f804331ed142e4250a9062e1317cfbfbe40cdeed82ef3cdf",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1866,7 +1976,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/071-legs__left_lateral_decubitus__covered.png",
-  "sha256": "af4e7c62da9cf71be8dc0016bf8f0e708f20068263e632d0a9b119f8bf54589f",
+  "sha256": "8541ef7154d9380f6bf9b0bebcf32da77d8a37c515fad79093728333ec654e52",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1876,7 +1986,7 @@
  },
  {
   "file": "1440x900/screening-female/shots/072-feet__left_lateral_decubitus__covered.png",
-  "sha256": "ebacbca5bbeb440ee6b7be7a4337517eba9b78093b63dc13429b307d1abc55e1",
+  "sha256": "9634f0974c3bd4c46121456052733f8859ca468e896f4ee1c44de3274e0d5e5a",
   "viewport": "1440x900",
   "area": "shots",
   "case": "screening-normal",
@@ -1886,7 +1996,7 @@
  },
  {
   "file": "1440x900/screening-female/views/01-face__seated__covered.png",
-  "sha256": "ab58dbdace7cc341b884cf8c401afea915dea7260e77789175124d90c056d857",
+  "sha256": "688206d08fa4e59cc152960531d357b3d9b007214121ac5956ae980c9dc2311a",
   "viewport": "1440x900",
   "area": "views",
   "case": "screening-normal",
@@ -1896,7 +2006,7 @@
  },
  {
   "file": "1440x900/screening-female/views/02-neck_back__seated__covered.png",
-  "sha256": "a837dff933f4b26411e59bb6a15d3f763c93d05864868ad1804f29767f6937e7",
+  "sha256": "faf097ff67a60a9e1508f37ac53023fa29392627faa494006b2a6b5d6d05dec6",
   "viewport": "1440x900",
   "area": "views",
   "case": "screening-normal",
@@ -1906,7 +2016,7 @@
  },
  {
   "file": "1440x900/screening-female/views/03-head_top__seated__covered.png",
-  "sha256": "981f8903726fc8d32f1966d82e178b69c24adc16c3a392d4558a04b7649c83da",
+  "sha256": "afb38f744e22fa9745b5e6b195d6d7d2a6d23e91b4d06f3d71ed92239801b282",
   "viewport": "1440x900",
   "area": "views",
   "case": "screening-normal",
@@ -1916,7 +2026,7 @@
  },
  {
   "file": "1440x900/screening-female/views/04-arms_left__seated__covered.png",
-  "sha256": "1bbc598f23bb59bcfd5038a4414d68be0172e0e76ee6b0c2f3c19b1edad9e7c9",
+  "sha256": "786dcbc451a58d47c9b2d901f1546f31a062ed9a73cef7348a8c86b2e9e6c4f1",
   "viewport": "1440x900",
   "area": "views",
   "case": "screening-normal",
@@ -1926,7 +2036,7 @@
  },
  {
   "file": "1440x900/screening-female/views/05-elbow_right__seated__covered.png",
-  "sha256": "c18897b56806b970b16eb19a5b5e9bde2f312a9404e7f04b5ca87f64f03aed0f",
+  "sha256": "ce873690595921603a265dcf57419af10f1a26ccf204a259ca33c587a66ed1fb",
   "viewport": "1440x900",
   "area": "views",
   "case": "screening-normal",
@@ -1936,7 +2046,7 @@
  },
  {
   "file": "1440x900/screening-female/views/06-elbow_left__seated__covered.png",
-  "sha256": "fe47263130bbfad968fe942f9b30cc68547efddb8dae2a62c895381262d81a16",
+  "sha256": "b497a734e94fa2d606c2ef99c3da136b3ded18a8469c610cc30eba62795e8810",
   "viewport": "1440x900",
   "area": "views",
   "case": "screening-normal",
@@ -1946,7 +2056,7 @@
  },
  {
   "file": "1440x900/screening-female/views/07-chest_right__seated__covered.png",
-  "sha256": "624bf11763d658bb4dede8a0242753c7a5bc66f1181fb7dddca3f30ff2714805",
+  "sha256": "7f4ee4fcd8a8188572a26f4119fcb63b213d33575a872c73a3fce3920c07162f",
   "viewport": "1440x900",
   "area": "views",
   "case": "screening-normal",
@@ -1956,7 +2066,7 @@
  },
  {
   "file": "1440x900/screening-female/views/08-chest_left__seated__covered.png",
-  "sha256": "e2eb944cee7ab66e5ea8deb3f1e28bb6f53b2cc033e031f0393de852b7d4cfb6",
+  "sha256": "6778e5e9c28626be1b14fbb03a72280dfb391aa0f264d97021cff9d683f4c2d1",
   "viewport": "1440x900",
   "area": "views",
   "case": "screening-normal",
@@ -1966,7 +2076,7 @@
  },
  {
   "file": "1440x900/screening-female/views/09-ankle_right__sitting_dangling__covered.png",
-  "sha256": "4784dfd2d05c65596127c92a17ca2fbdfb5f843d8cae74f54fcf1bd9a5045dbe",
+  "sha256": "9d840d537aea3c19f60082e7cf498fb6fb389f8d232b3b3e610db87ad7724a2b",
   "viewport": "1440x900",
   "area": "views",
   "case": "screening-normal",
@@ -1976,7 +2086,7 @@
  },
  {
   "file": "1440x900/screening-female/views/10-ankle_left__sitting_dangling__covered.png",
-  "sha256": "5d6a0a448d8d817d6473c8c3481989678eb21e462169f894db51d064edfff9d2",
+  "sha256": "6d8a0b0be989ed4bab26a1af70c0360916ef119ec573590e58fa5d6dd6ce9b72",
   "viewport": "1440x900",
   "area": "views",
   "case": "screening-normal",
