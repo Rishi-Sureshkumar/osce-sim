@@ -38,6 +38,8 @@ export const QA = {
   wantKey: "",
   bakedKey: "",
   gownSettled: true,
+  /** the patient's head has finished turning (toward the student while speaking, back when held still) */
+  headSettled: true,
   busy: false,
   lastPointer: null as PointerRecord | null,
 };
@@ -58,7 +60,7 @@ export function configureQa(enabled: boolean) {
 export const qaDelay = (ms: number) => (QA.enabled && QA.fast ? 0 : ms);
 
 export function qaSettled(): boolean {
-  return QA.cameraSettled && QA.directorSettled && QA.gownSettled && QA.bakedKey === QA.wantKey && !QA.busy;
+  return QA.cameraSettled && QA.directorSettled && QA.gownSettled && QA.headSettled && QA.bakedKey === QA.wantKey && !QA.busy;
 }
 
 export function recordPointer(r: Omit<PointerRecord, "at">) {

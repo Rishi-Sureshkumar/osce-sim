@@ -241,6 +241,8 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
 
   // where the student clicks: the anchor (or each sequence landmark)
   const targets: { x: number; y: number }[] = [];
+  // re-aims each target from its world point (the camera can move between clicks)
+  const aims: (() => Promise<{ x: number; y: number } | null>)[] = [];
   if (e.route !== "panel" && e.route !== "panel-tool") {
     const steps = e.sweep ? e.sweep.map((r) => ({ id: "", landmark: undefined as string | undefined, regionId: r })) : e.steps?.length ? e.steps.map((st) => ({ ...st, regionId: e.regionId })) : [{ id: "", landmark: undefined as string | undefined, regionId: e.regionId }];
     for (const st of steps) {
@@ -248,16 +250,19 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
       const useOracle = at && (!at.step || at.step === st.id);
       // an anchor is aimed 3 mm under the skin (as the Node occlusion check does): one on the body's
       // outline from its shot is still clicked on the body, not on the edge
-      const p = useOracle
-        ? await page.evaluate((w) => window.__osce3d!.projectPoint(w), at!.world)
-        : lm
-          ? await page.evaluate(([r, l]) => window.__osce3d!.project(r!, l!), [st.regionId, lm] as const)
-          : await page.evaluate((r) => {
-              const h = window.__osce3d!;
-              const w = h.anchor(r);
-              const n = h.anchorNormal(r) ?? [0, 0, 0];
-              return w ? h.projectPoint([w[0] - n[0] * 0.003, w[1] - n[1] * 0.003, w[2] - n[2] * 0.003]) : null;
-            }, st.regionId);
+      const aim = () =>
+        useOracle
+          ? page.evaluate((w) => window.__osce3d!.projectPoint(w), at!.world)
+          : lm
+            ? page.evaluate(([r, l]) => window.__osce3d!.project(r!, l!), [st.regionId, lm] as const)
+            : page.evaluate((r) => {
+                const h = window.__osce3d!;
+                const w = h.anchor(r);
+                const n = h.anchorNormal(r) ?? [0, 0, 0];
+                return w ? h.projectPoint([w[0] - n[0] * 0.003, w[1] - n[1] * 0.003, w[2] - n[2] * 0.003]) : null;
+              }, st.regionId);
+      aims.push(aim);
+      const p = await aim();
       if (!p) {
         fails.push(`no anchor${lm ? ` for landmark ${lm}` : ""} to click`);
         return fails;
@@ -321,7 +326,10 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
       await page.mouse.up();
       await page.waitForTimeout(300);
     }
-    for (const t of e.sweep ? [] : targets) {
+    for (const [i, t0] of (e.sweep ? [] : targets).entries()) {
+      // aimed again just before pressing: the view may still have been easing when the targets were taken
+      await waitSettled(page);
+      const t = (await aims[i]?.()) ?? t0;
       await page.mouse.move(t.x, t.y);
       await page.mouse.down();
       if (e.hold) await page.waitForTimeout(HOLD_MS);
@@ -329,9 +337,12 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
       const chooser = page.locator('[data-dialog="tool-chooser"]');
       if (await chooser.isVisible({ timeout: 600 }).catch(() => false)) {
         await chooser.locator(`[data-maneuver="${e.maneuverId}"]`).click();
-        // a stethoscope hold asks first (several exams fit); then hold again to listen
+        // a stethoscope hold asks first (several exams fit); then hold again to listen — aimed afresh,
+        // since the view may have moved closer meanwhile
         if (e.hold) {
-          await page.mouse.move(t.x, t.y);
+          await waitSettled(page);
+          const t2 = (await aims[i]?.()) ?? t;
+          await page.mouse.move(t2.x, t2.y);
           await page.mouse.down();
           await page.waitForTimeout(HOLD_MS);
           await page.mouse.up();
@@ -348,9 +359,15 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
     }
   }
 
-  // (c) + (d)
-  const { fresh } = await newestExamine(api, sessionId, before);
-  const ex = fresh.filter((a) => a.payload.maneuverId === e.maneuverId && a.payload.regionId === e.regionId).at(-1);
+  // (c) + (d) — a held tool records when its listening time is up, and the post can land after the
+  // release under load: give the log a few seconds before calling the exam missing
+  const wanted = (list: Extract<Action, { type: "examine" }>[]) => list.filter((a) => a.payload.maneuverId === e.maneuverId && a.payload.regionId === e.regionId).at(-1);
+  let { fresh } = await newestExamine(api, sessionId, before);
+  for (let k = 0; k < 15 && !wanted(fresh); k++) {
+    await page.waitForTimeout(200);
+    ({ fresh } = await newestExamine(api, sessionId, before));
+  }
+  const ex = wanted(fresh);
   if (!ex) {
     fails.push(`(c) no examine for ${e.maneuverId}@${e.regionId} (got ${fresh.map((a) => `${a.payload.maneuverId}@${a.payload.regionId}`).join(", ") || "none"})`);
   } else {

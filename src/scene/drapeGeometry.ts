@@ -1,13 +1,14 @@
 /**
  * Gown handles shared by the renderer (Drapes.tsx) and QA: where the gown's pull tabs and folded
- * edges sit for a pose. The leg sheet itself is built from the posed skin in sheetGeometry.ts.
+ * edges (tubes along the skin, gownRollLines) sit for a pose. The leg sheet itself is built from the
+ * posed skin in sheetGeometry.ts.
  *
  * Phase 4 M3: the pull tabs used to sit on the xiphoid and the umbilicus, over the exam targets, and
  * took clicks meant for them; they now sit on the patient's right flank (anterior axillary line), and
  * the folded edges are drawn but never take a click (cover again with the tab or the encounter bar).
  */
-import { Quaternion, Vector3 } from "three";
-import { anchorWorldNormals, anchorWorldPoints, skinLandmark, type Pose, type Vec3 } from "@/exam3d/regionAnchors";
+import { Vector3 } from "three";
+import { skinLandmark, type Pose, type Vec3 } from "@/exam3d/regionAnchors";
 import type { SkinData } from "./sheetGeometry";
 
 /** Bind-space points (model space, metres) on the right flank for the gown's pull tabs. */
@@ -39,12 +40,6 @@ export function bodyAxes(pose: Pose, bone = "spine03"): { left: Vector3; up: Vec
     front: new Vector3(0, 0, 1).transformDirection(m),
   };
 }
-
-const groinMid = (pose: Pose): Vec3 => {
-  const r = anchorWorldPoints("groin_right", pose)[0]!;
-  const l = anchorWorldPoints("groin_left", pose)[0]!;
-  return [(r[0] + l[0]) / 2, (r[1] + l[1]) / 2, (r[2] + l[2]) / 2];
-};
 
 /**
  * A folded gown edge lying on the body (V-ROD: straight capsules floated over the curved trunk): the
@@ -138,7 +133,6 @@ export function gownRollLines(
   normalOf?: (i: number) => Vector3 | null,
   clear?: Float32Array,
 ): Record<"chest" | "abdomen" | "sternum", Vec3[]> {
-  const f = gownRollFrames(pose);
   const { up, left, front } = bodyAxes(pose);
   const notch = skinLandmark("sternal_notch", pose).point;
   const xiph = skinLandmark("xiphoid", pose).point;
@@ -146,44 +140,15 @@ export function gownRollLines(
   const len = along.length();
   along.normalize();
   const mid: Vec3 = [(notch[0] + xiph[0]) / 2, (notch[1] + xiph[1]) / 2, (notch[2] + xiph[2]) / 2];
-  // the frames' points are lifted off the skin: step back onto the plane through the skin point
-  const base = (p: Vec3, lift: number): Vec3 => [p[0] - front.x * lift, p[1] - front.y * lift, p[2] - front.z * lift];
   const LIFT = 0.02; // gown offset + the roll's radius
   return {
-    chest: surfaceLine(world, base(f.chest.pos, 0.02), up, left, front, 0.13, LIFT, normalOf, clear),
+    // the chest gown rolled down onto the abdomen panel, 10 cm below the xiphoid: at the epigastrium it lay
+    // level with the lower anterior lung zones (lung_ant_rl/ll, 4–6 cm below the xiphoid) and hid them
+    chest: surfaceLine(world, [xiph[0] - up.x * 0.1, xiph[1] - up.y * 0.1, xiph[2] - up.z * 0.1], up, left, front, 0.13, LIFT, normalOf, clear),
     // the abdomen gown pulled up to the chest panel's edge, just below the xiphoid line: at the groin it lay
     // over the femoral pulse points (4 cm below the lower quadrants: nothing fits between them); here it
     // keeps 2.5 cm from the breasts above and 3.5 cm from the epigastrium below
     abdomen: surfaceLine(world, [xiph[0] - up.x * 0.012, xiph[1] - up.y * 0.012, xiph[2] - up.z * 0.012], up, left, front, 0.13, LIFT, normalOf, clear),
     sternum: surfaceLine(world, mid, left, along, front, len * 0.45, LIFT * 0.85, normalOf, clear),
-  };
-}
-
-/** Where the folded gown edges sit when a section is uncovered (drawn only; they never take a click). */
-export function gownRollFrames(pose: Pose): Record<"chest" | "abdomen" | "sternum", { pos: Vec3; q: Quaternion; len: number }> {
-  const nr = skinLandmark("nipple_r", pose).point;
-  const nl = skinLandmark("nipple_l", pose).point;
-  const xiph = skinLandmark("xiphoid", pose);
-  const notch = skinLandmark("sternal_notch", pose);
-  const umb = skinLandmark("umbilicus", pose);
-  const { up } = bodyAxes(pose);
-  const across = new Vector3(nl[0] - nr[0], nl[1] - nr[1], nl[2] - nr[2]).normalize();
-  const q = new Quaternion().setFromUnitVectors(new Vector3(0, 1, 0), across);
-  const at = (p: Vec3, n: Vec3, out: number): Vec3 => [p[0] + n[0] * out, p[1] + n[1] * out, p[2] + n[2] * out];
-  const g = groinMid(pose);
-  const sternumDir = new Vector3(notch.point[0] - xiph.point[0], notch.point[1] - xiph.point[1], notch.point[2] - xiph.point[2]);
-  const sternumLen = sternumDir.length();
-  const mid: Vec3 = [(notch.point[0] + xiph.point[0]) / 2, (notch.point[1] + xiph.point[1]) / 2, (notch.point[2] + xiph.point[2]) / 2];
-  // below the costal margin, on the abdomen panel: at the xiphoid line it lay across the lower anterior
-  // lung zones (lung_ant_rl/ll) and took clicks meant for them
-  // (the epigastric target is on the skin; it is under the abdomen panel whenever this roll is drawn)
-  const low = anchorWorldPoints("abd_epigastric", pose)[0]!;
-  const lowN = anchorWorldNormals("abd_epigastric", pose)[0]!;
-  return {
-    chest: { pos: at(low, lowN, 0.02), q, len: 0.24 },
-    // rolled down onto the top edge of the sheet (clear of the lower quadrants above it)
-    abdomen: { pos: at([g[0] - up.x * 0.005, g[1] - up.y * 0.005, g[2] - up.z * 0.005], umb.normal, 0.02), q, len: 0.26 },
-    // one side of the chest uncovered: the gown is gathered along the sternum
-    sternum: { pos: at(mid, notch.normal, 0.014), q: new Quaternion().setFromUnitVectors(new Vector3(0, 1, 0), sternumDir.normalize()), len: sternumLen * 0.9 },
   };
 }

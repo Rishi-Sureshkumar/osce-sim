@@ -572,8 +572,9 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
                   onRegionClick={onRegionClick}
                 />
               </ErrorBoundary>
-              {/* cards sit at the top right of the view, sized to fit it (V-PERFORMCLIP: the finding was cut off at the bottom) */}
-              <div className={`absolute top-2 right-2 z-10 max-h-[calc(100%-3.5rem)] w-80 max-w-[90%] overflow-y-auto ${performing?.kind === "tool" && !choice ? "pointer-events-none [&_button]:pointer-events-auto" : ""}`}>
+              {/* cards sit at the bottom right of the view and grow upward, never taller than it (V-PERFORMCLIP:
+                  the finding was cut off at the bottom); kept clear of the abdomen and chest targets above */}
+              <div className={`absolute right-2 bottom-10 z-10 max-h-[calc(100%-6rem)] w-80 max-w-[90%] overflow-y-auto ${performing?.kind === "tool" && !choice ? "pointer-events-none [&_button]:pointer-events-auto" : ""}`}>
                 {toast && !selected && !choice && performing?.kind !== "menu" && <Toast message={toast} onDismiss={() => setToast(null)} className="mb-2" />}
                 {choice ? (
                   <ManeuverMenu

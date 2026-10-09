@@ -845,7 +845,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
           </div>
         )}
         {tool === "tuning_fork" && props.tool.struckAt && (
-          <p className="pointer-events-none absolute right-2 bottom-8 rounded bg-amber-50 px-2 py-0.5 text-xs text-amber-900">Fork struck {forkElapsed.toFixed(0)} s ago</p>
+          <p className="pointer-events-none absolute top-12 right-2 rounded bg-amber-50 px-2 py-0.5 text-xs text-amber-900">Fork struck {forkElapsed.toFixed(0)} s ago</p>
         )}
         {hint && (
           <p className="pointer-events-none absolute bottom-8 left-2 max-w-xs rounded-md bg-amber-50 px-2 py-1 text-xs text-amber-900" data-testid="shot-hint">

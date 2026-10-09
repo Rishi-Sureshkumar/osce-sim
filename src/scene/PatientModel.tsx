@@ -185,6 +185,8 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
       lk.yaw = 0;
       lk.pitch = 0;
     }
+    // QA: picking waits until the head stops turning (the eye targets move with it)
+    QA.headSettled = Math.abs(target.yaw - lk.yaw) < 0.002 && Math.abs(target.pitch - lk.pitch) < 0.002;
     const rot = liveRotations({
       position: p.position,
       variant: p.variant,
