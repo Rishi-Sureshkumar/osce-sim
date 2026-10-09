@@ -21,6 +21,9 @@ import { tableAngle, tableBoxes, type OrientedBox } from "@/scene/room/tableGeom
 import { oracleFor, sampleWorld } from "../../qa/anatomy/oracle";
 import { examinedAnchors } from "../../e2e/qa/catalogPlan";
 import { skinnedPatient, type SkinnedPatient } from "./lib/patientMesh";
+
+/** the first skin a click meets from a target's shot must lie within this share of its tolerance */
+const OUTLINE_MARGIN = 0.6;
 import { classify, report, type CheckResult } from "./lib/xfail";
 
 /** Anchors are skinned like skin vertices (M2 bug 5), so they must sit within 3 mm of the deformed skin. */
@@ -179,11 +182,13 @@ async function main() {
             const offCm = h ? dist(h.point, w) * 100 : Infinity;
             const isEye = /^eye_/.test(e.regionId);
             const surfaceOk = !!h && (h.what === "skin" || (isEye && (h.what === "eyes" || h.what === "pupils")) || (e.regionId === "mouth" && h.what === "mouth"));
-            return { h, offCm, pass: surfaceOk && offCm <= tol && partsOk(e.regionId, h?.part ?? null) };
+            // well inside the tolerance: a target on the body's outline from its shot (first skin right at the
+            // tolerance) resolved to a neighbouring region whenever the head moved a few millimetres
+            return { h, offCm, pass: surfaceOk && offCm <= tol * OUTLINE_MARGIN && partsOk(e.regionId, h?.part ?? null) };
           });
           const { h, offCm, pass } = tries.find((t) => t.pass) ?? tries[0]!;
           const id = `anchors:occlusion:${variant}:${position}:${e.regionId}${i ? `#${i}` : ""}`;
-          results.push({ id, pass, detail: h ? `from the ${e.shot} shot the ray first meets ${h.what}${h.part ? ` (${h.part})` : ""} ${offCm.toFixed(1)} cm from the anchor (tolerance ${tol})` : "the ray meets nothing" });
+          results.push({ id, pass, detail: h ? `from the ${e.shot} shot the ray first meets ${h.what}${h.part ? ` (${h.part})` : ""} ${offCm.toFixed(1)} cm from the anchor (max ${(tol * OUTLINE_MARGIN).toFixed(1)}: ${OUTLINE_MARGIN} × tolerance ${tol})` : "the ray meets nothing" });
           rows.push({ check: "occlusion", variant, position, regionId: e.regionId, shot: e.shot, first: h?.what ?? null, part: h?.part ?? null, offCm: +offCm.toFixed(2) });
         }
       }

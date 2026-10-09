@@ -685,152 +685,152 @@
   {
    "id": "anchors:occlusion:male:supine:abd_ruq",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:supine:abd_luq",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:supine:abd_rlq",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:supine:abd_llq",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:supine:abd_epigastric",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3.5)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.1: 0.6 × tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:male:supine:precordium_wall",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 6)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:male:supine:precordium_lsb",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:supine:cardiac_aortic",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:supine:cardiac_pulmonic",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:supine:cardiac_mitral",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:supine:cardiac_erbs",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:supine:cardiac_tricuspid",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:supine:groin_right",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:supine:groin_left",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:supine:knee_right",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (thigh_r) 0.0 cm from the anchor (tolerance 4.5)"
+   "detail": "from the legs shot the ray first meets skin (thigh_r) 0.0 cm from the anchor (max 2.7: 0.6 × tolerance 4.5)"
   },
   {
    "id": "anchors:occlusion:male:supine:knee_left",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (thigh_l) 0.0 cm from the anchor (tolerance 4.5)"
+   "detail": "from the legs shot the ray first meets skin (thigh_l) 0.0 cm from the anchor (max 2.7: 0.6 × tolerance 4.5)"
   },
   {
    "id": "anchors:occlusion:male:supine:foot_right",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:supine:foot_left",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:supine:ankle_right",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_r) 1.7 cm from the anchor (tolerance 3.5)"
+   "detail": "from the feet shot the ray first meets skin (foot_r) 1.7 cm from the anchor (max 2.1: 0.6 × tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:male:supine:ankle_left",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (tolerance 3.5)"
+   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (max 2.1: 0.6 × tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:male:supine:shin_right",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (leg_r) 0.0 cm from the anchor (tolerance 6)"
+   "detail": "from the legs shot the ray first meets skin (leg_r) 0.0 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:male:supine:shin_left",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (leg_l) 0.0 cm from the anchor (tolerance 6)"
+   "detail": "from the legs shot the ray first meets skin (leg_l) 0.0 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:male:supine:hip_right",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (thigh_r) 0.1 cm from the anchor (tolerance 6)"
+   "detail": "from the legs shot the ray first meets skin (thigh_r) 0.1 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:male:supine:hip_left",
    "status": "PASS",
-   "detail": "from the legs_left shot the ray first meets skin (thigh_l) 0.1 cm from the anchor (tolerance 6)"
+   "detail": "from the legs_left shot the ray first meets skin (thigh_l) 0.1 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:male:supine:leg_medial_right",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (leg_r) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the legs shot the ray first meets skin (leg_r) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:supine:leg_medial_left",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (leg_l) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the legs shot the ray first meets skin (leg_l) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:supine:foot_lateral_right",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:supine:foot_lateral_left",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:supine:toe_great_right",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:supine:toe_great_left",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:skin:male:reclined_30:cardiac_aortic",
@@ -1515,12 +1515,12 @@
   {
    "id": "anchors:occlusion:male:reclined_30:abd_ruq",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:reclined_30:neck_jvp_right",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:skin:male:reclined_45:cardiac_aortic",
@@ -2885,247 +2885,247 @@
   {
    "id": "anchors:occlusion:male:seated:carotid_right",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the head_neck shot the ray first meets skin (neck) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:carotid_left",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:arm_right",
    "status": "PASS",
-   "detail": "from the arms shot the ray first meets skin (forearm_r) 1.4 cm from the anchor (tolerance 3.5)"
+   "detail": "from the arms shot the ray first meets skin (forearm_r) 1.4 cm from the anchor (max 2.1: 0.6 × tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:arm_left",
    "status": "PASS",
-   "detail": "from the arms_left shot the ray first meets skin (forearm_l) 1.4 cm from the anchor (tolerance 3.5)"
+   "detail": "from the arms_left shot the ray first meets skin (forearm_l) 1.4 cm from the anchor (max 2.1: 0.6 × tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:hand_right",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (hand_r) 2.2 cm from the anchor (tolerance 4)"
+   "detail": "from the hands shot the ray first meets skin (hand_r) 2.2 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:hand_left",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (hand_l) 2.2 cm from the anchor (tolerance 4)"
+   "detail": "from the hands shot the ray first meets skin (hand_l) 2.2 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:wrist_right",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the hands shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:wrist_left",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the hands shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:upper_arm_right",
    "status": "PASS",
-   "detail": "from the arms shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the arms shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated:upper_arm_left",
    "status": "PASS",
-   "detail": "from the arms_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the arms_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_occipital",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the neck_back shot the ray first meets skin (scalp) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_occipital#1",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the neck_back shot the ray first meets skin (scalp) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_post_auricular",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (face) 2.0 cm from the anchor (tolerance 2)"
+   "detail": "from the neck_back shot the ray first meets skin (face) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_post_auricular#1",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (face) 2.0 cm from the anchor (tolerance 2)"
+   "detail": "from the neck_back shot the ray first meets skin (face) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_pre_auricular",
    "status": "PASS",
-   "detail": "from the face shot the ray first meets skin (face) 0.4 cm from the anchor (tolerance 2)"
+   "detail": "from the face shot the ray first meets skin (face) 0.4 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_pre_auricular#1",
    "status": "PASS",
-   "detail": "from the face shot the ray first meets skin (face) 0.4 cm from the anchor (tolerance 2)"
+   "detail": "from the face shot the ray first meets skin (face) 0.4 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_submandibular",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_submandibular#1",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_post_cervical",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_post_cervical#1",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_ant_cervical",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_ant_cervical#1",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_submental",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_supraclavicular",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ln_supraclavicular#1",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:neck_trachea",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:neck_thyroid",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the head_neck shot the ray first meets skin (neck) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:eye_right",
    "status": "PASS",
-   "detail": "from the face shot the ray first meets pupils (eye_r) 0.0 cm from the anchor (tolerance 1.5)"
+   "detail": "from the face shot the ray first meets pupils (eye_r) 0.0 cm from the anchor (max 0.9: 0.6 × tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:eye_left",
    "status": "PASS",
-   "detail": "from the face shot the ray first meets pupils (eye_l) 0.0 cm from the anchor (tolerance 1.5)"
+   "detail": "from the face shot the ray first meets pupils (eye_l) 0.0 cm from the anchor (max 0.9: 0.6 × tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ear_right",
    "status": "PASS",
-   "detail": "from the ear_right shot the ray first meets skin (ear_r) 0.0 cm from the anchor (tolerance 1.5)"
+   "detail": "from the ear_right shot the ray first meets skin (ear_r) 0.0 cm from the anchor (max 0.9: 0.6 × tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:ear_left",
    "status": "PASS",
-   "detail": "from the ear_left shot the ray first meets skin (ear_l) 0.0 cm from the anchor (tolerance 1.5)"
+   "detail": "from the ear_left shot the ray first meets skin (ear_l) 0.0 cm from the anchor (max 0.9: 0.6 × tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:scalp",
    "status": "PASS",
-   "detail": "from the head_top shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the head_top shot the ray first meets skin (scalp) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:hip_right",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (thigh_r) 0.1 cm from the anchor (tolerance 6)"
+   "detail": "from the legs shot the ray first meets skin (thigh_r) 0.1 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:male:seated:hip_left",
    "status": "PASS",
-   "detail": "from the legs_left shot the ray first meets skin (thigh_l) 0.1 cm from the anchor (tolerance 6)"
+   "detail": "from the legs_left shot the ray first meets skin (thigh_l) 0.1 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:male:seated:shoulder_right",
    "status": "PASS",
-   "detail": "from the arms shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 5)"
+   "detail": "from the arms shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (max 3.0: 0.6 × tolerance 5)"
   },
   {
    "id": "anchors:occlusion:male:seated:shoulder_left",
    "status": "PASS",
-   "detail": "from the arms_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 5)"
+   "detail": "from the arms_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (max 3.0: 0.6 × tolerance 5)"
   },
   {
    "id": "anchors:occlusion:male:seated:elbow_right",
    "status": "PASS",
-   "detail": "from the elbow_right shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 3.5)"
+   "detail": "from the elbow_right shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (max 2.1: 0.6 × tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:elbow_left",
    "status": "PASS",
-   "detail": "from the elbow_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 3.5)"
+   "detail": "from the elbow_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (max 2.1: 0.6 × tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:male:seated:face",
    "status": "PASS",
-   "detail": "from the face shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the face shot the ray first meets skin (face) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:biceps_tendon_right",
    "status": "PASS",
-   "detail": "from the arms shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the arms shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:biceps_tendon_left",
    "status": "PASS",
-   "detail": "from the arms_left shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the arms_left shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:brachioradialis_right",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the hands shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:brachioradialis_left",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the hands shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:seated:lung_ant_ru",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:lung_ant_lu",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:lung_ant_rl",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:lung_ant_ll",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:lung_lat_r",
    "status": "PASS",
-   "detail": "from the chest_right shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_right shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated:lung_lat_l",
    "status": "PASS",
-   "detail": "from the chest_left shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_left shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:skin:male:seated_leaning_forward:cardiac_aortic",
@@ -3810,32 +3810,32 @@
   {
    "id": "anchors:occlusion:male:seated_leaning_forward:cva_right",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated_leaning_forward:cva_left",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:seated_leaning_forward:lung_post_ru",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated_leaning_forward:lung_post_lu",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated_leaning_forward:lung_post_rl",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:seated_leaning_forward:lung_post_ll",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:skin:male:sitting_dangling:cardiac_aortic",
@@ -4520,52 +4520,52 @@
   {
    "id": "anchors:occlusion:male:sitting_dangling:sacrum",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.8 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.8 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:sitting_dangling:spine_cervical",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:sitting_dangling:spine_thoracic",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 5)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 3.0: 0.6 × tolerance 5)"
   },
   {
    "id": "anchors:occlusion:male:sitting_dangling:spine_lumbar",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 6)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:male:sitting_dangling:triceps_tendon_right",
    "status": "PASS",
-   "detail": "from the elbow_right shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the elbow_right shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:sitting_dangling:triceps_tendon_left",
    "status": "PASS",
-   "detail": "from the elbow_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the elbow_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:sitting_dangling:patellar_tendon_right",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (leg_r) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the legs shot the ray first meets skin (leg_r) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:sitting_dangling:patellar_tendon_left",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (thigh_l) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the legs shot the ray first meets skin (thigh_l) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:sitting_dangling:achilles_right",
    "status": "PASS",
-   "detail": "from the ankle_right shot the ray first meets skin (leg_r) 0.2 cm from the anchor (tolerance 2)"
+   "detail": "from the ankle_right shot the ray first meets skin (leg_r) 0.2 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:male:sitting_dangling:achilles_left",
    "status": "PASS",
-   "detail": "from the ankle_left shot the ray first meets skin (leg_l) 0.2 cm from the anchor (tolerance 2)"
+   "detail": "from the ankle_left shot the ray first meets skin (leg_l) 0.2 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:skin:male:left_lateral_decubitus:cardiac_aortic",
@@ -5250,17 +5250,17 @@
   {
    "id": "anchors:occlusion:male:left_lateral_decubitus:sacrum",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:male:left_lateral_decubitus:spine_cervical",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:left_lateral_decubitus:spine_lumbar",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 6)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:skin:female:supine:cardiac_aortic",
@@ -5945,152 +5945,152 @@
   {
    "id": "anchors:occlusion:female:supine:abd_ruq",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:supine:abd_luq",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:supine:abd_rlq",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:supine:abd_llq",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:supine:abd_epigastric",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3.5)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.1: 0.6 × tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:female:supine:precordium_wall",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 6)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:female:supine:precordium_lsb",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:supine:cardiac_aortic",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:supine:cardiac_pulmonic",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:supine:cardiac_mitral",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:supine:cardiac_erbs",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:supine:cardiac_tricuspid",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:supine:groin_right",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:supine:groin_left",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:supine:knee_right",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (thigh_r) 0.0 cm from the anchor (tolerance 4.5)"
+   "detail": "from the legs shot the ray first meets skin (thigh_r) 0.0 cm from the anchor (max 2.7: 0.6 × tolerance 4.5)"
   },
   {
    "id": "anchors:occlusion:female:supine:knee_left",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (thigh_l) 0.0 cm from the anchor (tolerance 4.5)"
+   "detail": "from the legs shot the ray first meets skin (thigh_l) 0.0 cm from the anchor (max 2.7: 0.6 × tolerance 4.5)"
   },
   {
    "id": "anchors:occlusion:female:supine:foot_right",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:supine:foot_left",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:supine:ankle_right",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (tolerance 3.5)"
+   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (max 2.1: 0.6 × tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:female:supine:ankle_left",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (tolerance 3.5)"
+   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (max 2.1: 0.6 × tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:female:supine:shin_right",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (leg_r) 0.0 cm from the anchor (tolerance 6)"
+   "detail": "from the legs shot the ray first meets skin (leg_r) 0.0 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:female:supine:shin_left",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (leg_l) 0.0 cm from the anchor (tolerance 6)"
+   "detail": "from the legs shot the ray first meets skin (leg_l) 0.0 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:female:supine:hip_right",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (thigh_r) 0.0 cm from the anchor (tolerance 6)"
+   "detail": "from the legs shot the ray first meets skin (thigh_r) 0.0 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:female:supine:hip_left",
    "status": "PASS",
-   "detail": "from the legs_left shot the ray first meets skin (thigh_l) 0.0 cm from the anchor (tolerance 6)"
+   "detail": "from the legs_left shot the ray first meets skin (thigh_l) 0.0 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:female:supine:leg_medial_right",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (leg_r) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the legs shot the ray first meets skin (leg_r) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:supine:leg_medial_left",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (leg_l) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the legs shot the ray first meets skin (leg_l) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:supine:foot_lateral_right",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:supine:foot_lateral_left",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:supine:toe_great_right",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the feet shot the ray first meets skin (foot_r) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:supine:toe_great_left",
    "status": "PASS",
-   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the feet shot the ray first meets skin (foot_l) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:skin:female:reclined_30:cardiac_aortic",
@@ -6775,12 +6775,12 @@
   {
    "id": "anchors:occlusion:female:reclined_30:abd_ruq",
    "status": "PASS",
-   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the abdomen shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:reclined_30:neck_jvp_right",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:skin:female:reclined_45:cardiac_aortic",
@@ -8145,247 +8145,247 @@
   {
    "id": "anchors:occlusion:female:seated:carotid_right",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:carotid_left",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:arm_right",
    "status": "PASS",
-   "detail": "from the arms shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (tolerance 3.5)"
+   "detail": "from the arms shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (max 2.1: 0.6 × tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:arm_left",
    "status": "PASS",
-   "detail": "from the arms_left shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (tolerance 3.5)"
+   "detail": "from the arms_left shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (max 2.1: 0.6 × tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:hand_right",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (hand_r) 2.0 cm from the anchor (tolerance 4)"
+   "detail": "from the hands shot the ray first meets skin (hand_r) 2.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:hand_left",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (hand_l) 2.0 cm from the anchor (tolerance 4)"
+   "detail": "from the hands shot the ray first meets skin (hand_l) 2.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:wrist_right",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the hands shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:wrist_left",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the hands shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:upper_arm_right",
    "status": "PASS",
-   "detail": "from the arms shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the arms shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:upper_arm_left",
    "status": "PASS",
-   "detail": "from the arms_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the arms_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_occipital",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the neck_back shot the ray first meets skin (scalp) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_occipital#1",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the neck_back shot the ray first meets skin (scalp) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_post_auricular",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the neck_back shot the ray first meets skin (face) 0.1 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_post_auricular#1",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the neck_back shot the ray first meets skin (face) 0.1 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_pre_auricular",
    "status": "PASS",
-   "detail": "from the face shot the ray first meets skin (face) 0.1 cm from the anchor (tolerance 2)"
+   "detail": "from the face shot the ray first meets skin (face) 0.1 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_pre_auricular#1",
    "status": "PASS",
-   "detail": "from the face shot the ray first meets skin (face) 0.1 cm from the anchor (tolerance 2)"
+   "detail": "from the face shot the ray first meets skin (face) 0.1 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_submandibular",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_submandibular#1",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_post_cervical",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_post_cervical#1",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the neck_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_ant_cervical",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_ant_cervical#1",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_submental",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the head_neck shot the ray first meets skin (face) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_supraclavicular",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ln_supraclavicular#1",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:neck_trachea",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:neck_thyroid",
    "status": "PASS",
-   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 2.5)"
+   "detail": "from the head_neck shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.5: 0.6 × tolerance 2.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:eye_right",
    "status": "PASS",
-   "detail": "from the face shot the ray first meets pupils (eye_r) 0.0 cm from the anchor (tolerance 1.5)"
+   "detail": "from the face shot the ray first meets pupils (eye_r) 0.0 cm from the anchor (max 0.9: 0.6 × tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:eye_left",
    "status": "PASS",
-   "detail": "from the face shot the ray first meets pupils (eye_l) 0.0 cm from the anchor (tolerance 1.5)"
+   "detail": "from the face shot the ray first meets pupils (eye_l) 0.0 cm from the anchor (max 0.9: 0.6 × tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ear_right",
    "status": "PASS",
-   "detail": "from the ear_right shot the ray first meets skin (ear_r) 0.0 cm from the anchor (tolerance 1.5)"
+   "detail": "from the ear_right shot the ray first meets skin (ear_r) 0.0 cm from the anchor (max 0.9: 0.6 × tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:ear_left",
    "status": "PASS",
-   "detail": "from the ear_left shot the ray first meets skin (ear_l) 0.0 cm from the anchor (tolerance 1.5)"
+   "detail": "from the ear_left shot the ray first meets skin (ear_l) 0.0 cm from the anchor (max 0.9: 0.6 × tolerance 1.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:scalp",
    "status": "PASS",
-   "detail": "from the head_top shot the ray first meets skin (scalp) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the head_top shot the ray first meets skin (scalp) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:hip_right",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (thigh_r) 0.0 cm from the anchor (tolerance 6)"
+   "detail": "from the legs shot the ray first meets skin (thigh_r) 0.0 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:female:seated:hip_left",
    "status": "PASS",
-   "detail": "from the legs_left shot the ray first meets skin (thigh_l) 0.0 cm from the anchor (tolerance 6)"
+   "detail": "from the legs_left shot the ray first meets skin (thigh_l) 0.0 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:female:seated:shoulder_right",
    "status": "PASS",
-   "detail": "from the arms shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 5)"
+   "detail": "from the arms shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (max 3.0: 0.6 × tolerance 5)"
   },
   {
    "id": "anchors:occlusion:female:seated:shoulder_left",
    "status": "PASS",
-   "detail": "from the arms_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 5)"
+   "detail": "from the arms_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (max 3.0: 0.6 × tolerance 5)"
   },
   {
    "id": "anchors:occlusion:female:seated:elbow_right",
    "status": "PASS",
-   "detail": "from the elbow_right shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 3.5)"
+   "detail": "from the elbow_right shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (max 2.1: 0.6 × tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:elbow_left",
    "status": "PASS",
-   "detail": "from the elbow_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 3.5)"
+   "detail": "from the elbow_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (max 2.1: 0.6 × tolerance 3.5)"
   },
   {
    "id": "anchors:occlusion:female:seated:face",
    "status": "PASS",
-   "detail": "from the face shot the ray first meets skin (face) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the face shot the ray first meets skin (face) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:biceps_tendon_right",
    "status": "PASS",
-   "detail": "from the arms shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the arms shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:biceps_tendon_left",
    "status": "PASS",
-   "detail": "from the arms_left shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the arms_left shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:brachioradialis_right",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the hands shot the ray first meets skin (forearm_r) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:brachioradialis_left",
    "status": "PASS",
-   "detail": "from the hands shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the hands shot the ray first meets skin (forearm_l) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:seated:lung_ant_ru",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:lung_ant_lu",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:lung_ant_rl",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:lung_ant_ll",
    "status": "PASS",
-   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_front shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:lung_lat_r",
    "status": "PASS",
-   "detail": "from the chest_right shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_right shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated:lung_lat_l",
    "status": "PASS",
-   "detail": "from the chest_left shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_left shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:skin:female:seated_leaning_forward:cardiac_aortic",
@@ -9070,32 +9070,32 @@
   {
    "id": "anchors:occlusion:female:seated_leaning_forward:cva_right",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated_leaning_forward:cva_left",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:seated_leaning_forward:lung_post_ru",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated_leaning_forward:lung_post_lu",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated_leaning_forward:lung_post_rl",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:seated_leaning_forward:lung_post_ll",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:skin:female:sitting_dangling:cardiac_aortic",
@@ -9780,52 +9780,52 @@
   {
    "id": "anchors:occlusion:female:sitting_dangling:sacrum",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:sitting_dangling:spine_cervical",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the neck_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:sitting_dangling:spine_thoracic",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 5)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 3.0: 0.6 × tolerance 5)"
   },
   {
    "id": "anchors:occlusion:female:sitting_dangling:spine_lumbar",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 6)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   },
   {
    "id": "anchors:occlusion:female:sitting_dangling:triceps_tendon_right",
    "status": "PASS",
-   "detail": "from the elbow_right shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the elbow_right shot the ray first meets skin (upper_arm_r) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:sitting_dangling:triceps_tendon_left",
    "status": "PASS",
-   "detail": "from the elbow_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the elbow_left shot the ray first meets skin (upper_arm_l) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:sitting_dangling:patellar_tendon_right",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (leg_r) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the legs shot the ray first meets skin (leg_r) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:sitting_dangling:patellar_tendon_left",
    "status": "PASS",
-   "detail": "from the legs shot the ray first meets skin (leg_l) 0.0 cm from the anchor (tolerance 2)"
+   "detail": "from the legs shot the ray first meets skin (leg_l) 0.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:sitting_dangling:achilles_right",
    "status": "PASS",
-   "detail": "from the ankle_right shot the ray first meets skin (leg_r) 1.0 cm from the anchor (tolerance 2)"
+   "detail": "from the ankle_right shot the ray first meets skin (leg_r) 1.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:occlusion:female:sitting_dangling:achilles_left",
    "status": "PASS",
-   "detail": "from the ankle_left shot the ray first meets skin (leg_l) 1.0 cm from the anchor (tolerance 2)"
+   "detail": "from the ankle_left shot the ray first meets skin (leg_l) 1.0 cm from the anchor (max 1.2: 0.6 × tolerance 2)"
   },
   {
    "id": "anchors:skin:female:left_lateral_decubitus:cardiac_aortic",
@@ -10510,17 +10510,17 @@
   {
    "id": "anchors:occlusion:female:left_lateral_decubitus:sacrum",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 4)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 2.4: 0.6 × tolerance 4)"
   },
   {
    "id": "anchors:occlusion:female:left_lateral_decubitus:spine_cervical",
    "status": "PASS",
-   "detail": "from the neck_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the neck_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 1.8: 0.6 × tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:left_lateral_decubitus:spine_lumbar",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 6)"
+   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (max 3.6: 0.6 × tolerance 6)"
   }
  ],
  "rows": [
@@ -14912,7 +14912,7 @@
    "shot": "neck_back",
    "first": "skin",
    "part": "face",
-   "offCm": 1.97
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -14922,7 +14922,7 @@
    "shot": "neck_back",
    "first": "skin",
    "part": "face",
-   "offCm": 1.97
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -22807,7 +22807,7 @@
    "shot": "neck_back",
    "first": "skin",
    "part": "face",
-   "offCm": 0
+   "offCm": 0.05
   },
   {
    "check": "occlusion",
@@ -22817,7 +22817,7 @@
    "shot": "neck_back",
    "first": "skin",
    "part": "face",
-   "offCm": 0
+   "offCm": 0.05
   },
   {
    "check": "occlusion",

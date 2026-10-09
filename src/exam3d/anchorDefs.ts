@@ -189,7 +189,8 @@ const SINGLE: Def[] = [
   { regionId: "face", landmark: "nose_tip", offsetCm: [-4, -1, -1.5], facing: "front", toleranceCm: 4 },
   // lymph node groups (both sides)
   { regionId: "ln_occipital", landmark: "occiput", offsetCm: [3, -2, 0], facing: "back", bilateral: true, toleranceCm: 2.5 },
-  { regionId: "ln_post_auricular", landmark: "mastoid_l", offsetCm: [0, 0, 0], facing: "any", bilateral: true, toleranceCm: 2 },
+  // over the back of the mastoid: on the mastoid itself the target sat on the head's outline from behind the neck
+  { regionId: "ln_post_auricular", landmark: "mastoid_l", offsetCm: [-0.4, 0, -1.2], facing: "any", bilateral: true, toleranceCm: 2 },
   { regionId: "ln_pre_auricular", landmark: "ear_canal_l", offsetCm: [-0.5, 0, 2], facing: "left", bilateral: true, toleranceCm: 2 },
   // under the body of the mandible; on the male model the jaw overhangs the angle, so the target sits
   // further forward along it (still the submandibular triangle)

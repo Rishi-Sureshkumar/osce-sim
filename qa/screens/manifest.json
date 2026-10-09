@@ -174,7 +174,7 @@
  },
  {
   "file": "1440x900/hf-male/room/01-corridor.png",
-  "sha256": "28eb37d0ba1e84f1c6c6a5d4368d5ee24d0e6d86f7542dee8e264c71afac4859",
+  "sha256": "59d7b97b2d32364ec705aec05bdad2c1c69431c1767095e721c48ed690d3408e",
   "viewport": "1440x900",
   "area": "room",
   "case": "hf-decompensated-01",
@@ -182,7 +182,7 @@
  },
  {
   "file": "1440x900/hf-male/room/02-overview.png",
-  "sha256": "c0e6e07c7c119debcfb48ded1c317cf64851b9ebfacf377dbfb6623848aa9fab",
+  "sha256": "a10f634755d51bdac301e82280c9a9b9fc98f3ad7e7f670c34f71861163e4397",
   "viewport": "1440x900",
   "area": "room",
   "case": "hf-decompensated-01",
@@ -190,7 +190,7 @@
  },
  {
   "file": "1440x900/hf-male/room/03-sink.png",
-  "sha256": "fedfcbc6fcf61a386bc9ee68814bceb2ecdf1833d237dd12aa15d514801f6b70",
+  "sha256": "81cc97c85f7e8b185288b2109fc93ce78c03f8686a08721fbf782578c06a55b6",
   "viewport": "1440x900",
   "area": "room",
   "case": "hf-decompensated-01",
@@ -198,7 +198,7 @@
  },
  {
   "file": "1440x900/hf-male/room/04-tool_table.png",
-  "sha256": "d542c32635b3aadc6cb73086550a1e5e2c7b5cc30e11501550b2ecbb3912445e",
+  "sha256": "7d12eeaee7916af7a97aec14f9eda03ff0e49654b2f9e6f8b3bec76f0fe3d75d",
   "viewport": "1440x900",
   "area": "room",
   "case": "hf-decompensated-01",
@@ -206,7 +206,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/001-overview__supine__covered.png",
-  "sha256": "ef77c432af3340a652002493e2bf785b922d53c8d816024018e7d31af034ea91",
+  "sha256": "ed90baebf6ff809aecae8c9cd911feefbbc88c60a11c661e5fff5b0d006546c9",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -216,7 +216,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/002-seated__supine__covered.png",
-  "sha256": "e724f36ba2e535355fc620640907f39e0fa37bfa303428890706d25008088ab5",
+  "sha256": "d89908a028616d55a175dbc5b535ded263b65b855e0a7f6c008f478353b9127a",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -226,7 +226,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/003-head_neck__supine__covered.png",
-  "sha256": "389b88cce5ea6c1c2b72da12989ffe2ef92d385eabca0019df3d096a395fb7fc",
+  "sha256": "16bea6eb04d8241c7e2c9588482fbac4f37569b1144b76e2aef6069669eef277",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -236,7 +236,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/004-ear_left__supine__covered.png",
-  "sha256": "6b54ff8f8570faf22796814a20e5d294866bc58a1a498f24afe6e1da40c6d4b5",
+  "sha256": "65288e748a9f83ec460ba8c342601dbf80b6694c1442905d8acbc1c3a01125f9",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -246,7 +246,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/005-ear_right__supine__covered.png",
-  "sha256": "41938d2f6bbe8af8ce03c165549ddd2d504bf27e879f281cf3fb84539825ad95",
+  "sha256": "ba12d842f3335f4365e9e5412bd729959daec53774d61bf3d32d11de58150ff0",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -256,7 +256,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/006-chest_front__supine__covered.png",
-  "sha256": "a6b54a1df3d2cfdc8b52fcf9169c55000ef8b0948383122b36026fda965f32fa",
+  "sha256": "a4ebe977405717b1adc7619079886bacd9828b89c02aa3ecaae6a1df01375967",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -266,7 +266,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/007-chest_back__supine__covered.png",
-  "sha256": "0c4b687278550415a94a0d9eb1f81e5090017572b32f5194aa425e98f1441b07",
+  "sha256": "e8f887a9f204bcd9de4fd56690b79d8be1ef29fc8bf3551ed43d332be046479e",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -276,7 +276,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/008-abdomen__supine__covered.png",
-  "sha256": "126809759ef79a663d3f3854534a2a97451b4a6a1e92882fa13c6fc03c5e27f3",
+  "sha256": "bd509be9c255251597a325d522f4d688996575fd162139720bdc94b0d91dd3c5",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -286,7 +286,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/009-arms__supine__covered.png",
-  "sha256": "b387a463894e665973ea4fd6d786311b414c8358b93547060f0380d13dfa6c04",
+  "sha256": "11bfec0cedb2206befe3e146cdba8a85ba64d53d96261160062e56c1510f9d72",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -296,7 +296,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/010-hands__supine__covered.png",
-  "sha256": "9936dd81ae8244a7caa790000bf96dec6afef53d9111f8f46aa76a146793c670",
+  "sha256": "d3c2fd8c78fd5e13bb21367a41685037ad48e624a1fbe2508333fb0f42c65262",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -306,7 +306,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/011-legs__supine__covered.png",
-  "sha256": "87bd5304c190ec14ade0bef9eb8f77267103ec90e871cae72411ba591abb177d",
+  "sha256": "13cff2456de5af91260727cc8b753dbda5fce730da2f57940094e77398d6f1f9",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",
@@ -316,7 +316,7 @@
  },
  {
   "file": "1440x900/hf-male/shots/012-feet__supine__covered.png",
-  "sha256": "5724656982ac9cb75f4db7732ea6971183faa7f6d2af085c5b9dcce6843ac591",
+  "sha256": "c277225746d94ed9284e79f62b94116bd99fa4b19c0c31c4385cb80ebb721fe5",
   "viewport": "1440x900",
   "area": "shots",
   "case": "hf-decompensated-01",

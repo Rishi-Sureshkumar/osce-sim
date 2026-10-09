@@ -243,7 +243,7 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
       drapeAlpha.current[g] = next;
       const mat = mesh.material as MeshStandardMaterial;
       mat.opacity = next;
-      mesh.visible = next > 0.02;
+      mesh.visible = gownShown(next);
       mat.depthWrite = next > 0.98;
     }
     QA.gownSettled = drapeSettled();
@@ -265,7 +265,9 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
       QA.bakedKey = key;
     }
   });
-  const drapeSettled = () => Object.values(drapeAlpha.current).every((a) => a < 0.03 || a > 0.97);
+  // "faded out" must mean hidden: with 0.03 here and 0.02 for visibility, a bake landing in between baked an
+  // all-but-invisible chest panel into the click proxies (the bare chest then took clicks as the gown)
+  const drapeSettled = () => gownFadeSettled(Object.values(drapeAlpha.current));
   const bakedKey = useRef<string>("");
   const stableFrames = useRef(0);
   const proxyRoot = useRef<Object3D>(null);
@@ -307,6 +309,12 @@ export function preloadPatients() {
 export function isBody(o: Object3D): boolean {
   return (o as Mesh).userData?.kind === "body";
 }
+
+/** A fading gown panel is drawn (and baked into the click proxies) only above this opacity. */
+const GOWN_SHOWN = 0.02;
+export const gownShown = (alpha: number) => alpha > GOWN_SHOWN;
+/** Every panel has finished fading: fully shown, or hidden (never "settled" while still drawn faintly). */
+export const gownFadeSettled = (alphas: number[]) => alphas.every((a) => !gownShown(a) || a > 0.97);
 
 const PROXY_MATERIAL = new MeshBasicMaterial({ colorWrite: false, depthWrite: false, transparent: true, opacity: 0 });
 
