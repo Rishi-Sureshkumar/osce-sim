@@ -404,7 +404,22 @@ async function runNegative(page: Page, api: APIRequestContext, sessionId: string
       }) ?? null
     );
   }, [e.regionId, e.toleranceCm * 2] as const);
-  if (!p) return ["(neg) no visible skin 2× the tolerance away to test"];
+  if (!p) {
+    // what the candidate points hit instead (gown, sheet, a nearer limb, or skin too close to the anchor)
+    const seen = await page.evaluate(([r, cm]) => {
+      const h = window.__osce3d!;
+      const a = h.anchor(r!)!;
+      return h
+        .skinPointNear(r!, cm!, 8)
+        .map((q) => {
+          const f = h.probe(q.page.x, q.page.y).find((x) => x.kind !== "hair");
+          return f ? `${f.kind}${f.part ? `/${f.part}` : ""}@${(Math.hypot(f.point[0] - a[0], f.point[1] - a[1], f.point[2] - a[2]) * 100).toFixed(1)}cm` : "none";
+        })
+        .join(", ");
+    }, [e.regionId, e.toleranceCm * 2] as const);
+    const cover = await page.getByRole("group", { name: "Encounter" }).getByRole("button", { pressed: true }).allTextContents();
+    return [`(neg) no visible skin 2× the tolerance away to test (hits: ${seen}; covered: ${cover.join("/") || "none"})`];
+  }
   const before = (await newestExamine(api, sessionId, 0)).count;
   await page.mouse.move(p.page.x, p.page.y);
   await page.mouse.down();
