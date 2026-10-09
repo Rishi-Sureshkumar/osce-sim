@@ -1,7 +1,7 @@
 "use client";
 import type { ThreeEvent } from "@react-three/fiber";
 import type { BufferGeometry, Intersection, Mesh } from "three";
-import type { DrapeZone } from "@/domain/schemas";
+import type { DrapeSection } from "@/domain/schemas";
 import { PatientModel } from "@/scene/PatientModel";
 import { PART_NAMES } from "@/scene/patientRig.generated";
 import type { VariantId } from "@/scene/rig";
@@ -16,7 +16,7 @@ export type { BodyHit };
 export interface Patient3DProps {
   pose: Pose;
   variant: VariantId;
-  drape: Record<DrapeZone, boolean>;
+  sections: Record<DrapeSection, boolean>;
   rr: number;
   hr: number;
   laboured: boolean;
@@ -89,7 +89,7 @@ export function Patient3D(p: Patient3DProps) {
         bedAngle={p.pose.bedAngle}
         angle={p.angle}
         jerk={p.jerk}
-        drape={p.drape}
+        sections={p.sections}
         hr={p.hr}
         rr={p.rr}
         laboured={p.laboured}

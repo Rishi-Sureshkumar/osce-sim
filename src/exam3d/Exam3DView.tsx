@@ -1,13 +1,13 @@
 "use client";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { Action, AudioSpec, ContactOutcome, DrapeZone, Position, PublicCase, Region } from "@/domain/schemas";
+import type { Action, AudioSpec, ContactOutcome, Position, PublicCase, Region } from "@/domain/schemas";
 import type { PublicCatalog } from "@/content/types";
 import { patientState } from "@/engine/patientState";
 import { audioEngine, type Playing } from "@/audio/engine";
 import { captionFor, toneEnvelope } from "@/audio/schedule";
 import type { ToolContact, ToolUse } from "@/input/adapters/tool";
-import { Drapes } from "@/scene/Drapes";
+import { Drapes, type DrapeHandler } from "@/scene/Drapes";
 import { HandWash } from "@/scene/HandWash";
 import { washHandsPosition } from "@/scene/room/sinkGeometry";
 import { tableAngle } from "@/scene/room/tableGeometry";
@@ -65,7 +65,7 @@ export interface Exam3DViewProps {
   onWash: () => Promise<void>;
   onSit: () => void;
   onBed: (p: Position) => void;
-  onDrape: (zone: DrapeZone, covered: boolean) => void;
+  onDrape: DrapeHandler;
   /** the door from inside: the parent asks for confirmation, then ends the encounter */
   onLeaveRequest: () => void;
   /** a region was chosen in its focus shot: open the maneuver menu */
@@ -665,6 +665,8 @@ export default function Exam3DView(props: Exam3DViewProps) {
           camera={{ fov: 45, near: 0.02, far: 30, position: goal.position as Vec3 }}
           gl={{ antialias: quality === "high" }}
           onCreated={({ gl }) => {
+            // one side of the chest gown can be folded back: drawn with a clipping plane (PatientModel)
+            gl.localClippingEnabled = true;
             // a lost GPU context (driver reset, memory pressure) would otherwise leave a blank canvas
             gl.domElement.addEventListener("webglcontextlost", (e) => {
               e.preventDefault();
@@ -690,6 +692,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
           <Director table={angle.current} tableTarget={tableAngle(state.position, state.bedAngle)} trunk={trunk.current} trunkTarget={state.bedAngle} door={door.current} doorTarget={doorTarget} />
           <ExamRoom
             angle={angle.current}
+            variant={props.variant}
             door={door.current}
             onDoor={onDoor}
             onSink={inside ? () => wash("sink") : undefined}
@@ -714,7 +717,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
               speaking={!!props.speaking}
               steadyHead={shot.current === "face" || props.tool.tool === "penlight"}
               quality={quality}
-              drape={state.drape}
+              sections={state.sections}
               rr={rr}
               hr={hr}
               laboured={props.presentation.visibleSigns.breathing === "laboured"}
@@ -732,7 +735,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
               onToolUp={onToolUp}
               onHover={setHover}
             />
-            <Drapes pose={pose} drape={state.drape} onDrape={inside && !props.disabled ? props.onDrape : undefined} />
+            <Drapes pose={pose} variant={props.variant} sections={state.sections} onDrape={inside && !props.disabled ? props.onDrape : undefined} />
           </Suspense>
           {tool && <ToolCursor tool={tool} at={cursor} toolMode={mode} swingAt={swingAt} vibrating={!!props.tool.struckAt && forkElapsed < 12} />}
           {washing !== null && <HandWash startedAt={washing} durationMs={washMs} at={washKind === "sink" ? washHandsPosition() : undefined} />}

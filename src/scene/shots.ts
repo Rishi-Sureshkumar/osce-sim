@@ -345,7 +345,7 @@ export function shotCamera(id: ShotId, pose: Pose): { position: Vec3; target: Ve
   if (n[1] < -0.3 && !f.forwardBone) n = norm([n[0], 0.6, n[2] - 0.4]);
   let position = add(target, n, f.distance);
   if (f.clearTable) {
-    const boxes = tableBoxes(tableAngle(pose.position, pose.bedAngle));
+    const boxes = tableBoxes(tableAngle(pose.position, pose.bedAngle), pose.variant);
     for (let k = 0; k < 8 && blockedByTable(position, target, boxes); k++) {
       n = norm(add(n, [0, 0.3, 0]));
       position = add(target, n, f.distance);

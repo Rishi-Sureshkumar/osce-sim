@@ -13,10 +13,9 @@ import { anchorWorldNormals, anchorWorldPoints, poseFor, type Vec3 } from "@/exa
 import { decidePlacement, holdCandidate } from "@/exam3d/tools/decide";
 import { regionsForTool } from "@/exam3d/tools/toolLogic";
 import { JERK_SECONDS, REFLEX_JERK, jerkDelta } from "@/scene/animation/reflex";
-import { LEG_SHEET, legSheetFrame, legSheetPenetration } from "@/scene/drapeGeometry";
 import { liveRotations } from "@/scene/livePose";
 import { poseRotations, TABLE } from "@/scene/rig";
-import { TABLE_PARTS, insideBox, tableBoxes } from "@/scene/room/tableGeometry";
+import { HEAD_PIVOT, TABLE_PARTS, insideBox, tableBoxes } from "@/scene/room/tableGeometry";
 import { FileRepo } from "@/server/db/fileRepo";
 import type { Position, Session } from "@/domain/schemas";
 
@@ -130,29 +129,22 @@ describe("table geometry (src/scene/room/tableGeometry.ts)", () => {
     const flat = tableBoxes(0);
     const head0 = flat.find((b) => b.name === "head-mattress")!;
     expect(head0.center[1]).toBeCloseTo(TABLE.topY - TABLE_PARTS.mattress / 2, 6);
-    const up = tableBoxes(90).find((b) => b.name === "head-mattress")!;
-    expect(up.center[1]).toBeCloseTo(TABLE.topY - 0.06 + TABLE_PARTS.headLen / 2, 6);
-    expect(up.center[2]).toBeCloseTo(TABLE.hingeZ, 6);
+    // raised to 90° about its pivot (HEAD_PIVOT): the box stands upright behind the pivot
+    for (const v of ["male", "female"] as const) {
+      const up = tableBoxes(90, v).find((b) => b.name === "head-mattress")!;
+      const { dy, dz } = HEAD_PIVOT[v];
+      expect(up.center[1]).toBeCloseTo(TABLE.topY - 0.06 + dy + TABLE_PARTS.headLen / 2 + dz, 6);
+      expect(up.center[2]).toBeCloseTo(TABLE.hingeZ + dz - dy, 6);
+    }
   });
   it("insideBox respects rotation and slack", () => {
     const up = tableBoxes(90).find((b) => b.name === "head-mattress")!;
     expect(insideBox(up.center, up)).toBe(true);
-    // 30 cm above the hinge is inside the raised back rest, not 30 cm toward the head
-    expect(insideBox([TABLE.x, TABLE.topY - 0.06 + 0.3, TABLE.hingeZ], up)).toBe(true);
-    expect(insideBox([TABLE.x, TABLE.topY - 0.06, TABLE.hingeZ - 0.3], up)).toBe(false);
+    // 30 cm above the box's foot end is inside the raised back rest, not 30 cm toward the head
+    const foot = up.center[1] - TABLE_PARTS.headLen / 2;
+    expect(insideBox([TABLE.x, foot + 0.3, up.center[2]], up)).toBe(true);
+    expect(insideBox([TABLE.x, foot + 0.3, up.center[2] - 0.3], up)).toBe(false);
     expect(insideBox(up.center, up, 1)).toBe(false);
-  });
-});
-
-describe("drape geometry (src/scene/drapeGeometry.ts)", () => {
-  it("the leg sheet axis is inside; a point 1 cm outside the arc pokes through", () => {
-    const f = legSheetFrame(poseFor("supine", 0));
-    expect(legSheetPenetration([f.mid.x, f.mid.y, f.mid.z], f)).toBeCloseTo(-LEG_SHEET.radius, 6);
-    const top = f.mid.clone().addScaledVector(f.up, LEG_SHEET.radius + 0.01);
-    expect(legSheetPenetration([top.x, top.y, top.z], f)).toBeCloseTo(0.01, 6);
-    // underneath the legs is outside the sheet's arc (not covered)
-    const below = f.mid.clone().addScaledVector(f.up, -0.1);
-    expect(legSheetPenetration([below.x, below.y, below.z], f)).toBeNull();
   });
 });
 

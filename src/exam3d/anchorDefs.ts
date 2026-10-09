@@ -135,7 +135,9 @@ const LEFT: Def[] = [
   // abdomen
   { regionId: "abd_luq", landmark: "umbilicus", offsetCm: [7, 6, 0], facing: "front", toleranceCm: 4 },
   { regionId: "abd_llq", landmark: "umbilicus", offsetCm: [7, -6, 0], facing: "front", toleranceCm: 4 },
-  { regionId: "groin_left", landmark: "asis_l", offsetCm: [-5, -7, 0], facing: "front", toleranceCm: 3, label: "Femoral pulse" },
+  // the femoral pulse: just below the mid-inguinal point (halfway from the ASIS to the pubic
+  // tubercle), clear of the towel the sheet keeps over the genitals (Phase 4 M3)
+  { regionId: "groin_left", landmark: "asis_l", offsetCm: [-2, -6.5, 0], facing: "front", toleranceCm: 3, label: "Femoral pulse" },
   // limbs
   // the front of the shoulder: the top-lateral point is on the body's outline from most cameras
   { regionId: "shoulder_left", landmark: "shoulder_l", offsetCm: [0, -1, 3], facing: "front", toleranceCm: 5 },

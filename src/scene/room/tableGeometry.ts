@@ -3,7 +3,7 @@
  * (scripts/qa/intersections.ts). World frame: the table's long axis is Z (head toward −Z), the
  * head section hinges at z = TABLE.hingeZ at the patient's hips.
  */
-import { TABLE } from "../rig";
+import { TABLE, type VariantId } from "../rig";
 
 export const TABLE_PARTS = {
   headLen: 0.85,
@@ -34,14 +34,30 @@ export function tableAngle(position: string, bedAngle: number): number {
   return bedAngle;
 }
 
+/**
+ * Where the head section pivots, relative to its hinge line (y = top − 6 cm, z = hingeZ). The patient's
+ * trunk bends about the lumbar spine, well above and behind the table's hinge, so a backrest raised
+ * about the hinge swings 7–11 cm into the patient's back (V-BACKREST). Pivoting it here keeps the
+ * backrest under the back as it rises; fitted per body model (.cache/lab/pivot.ts, Phase 4 M3).
+ */
+export const HEAD_PIVOT: Record<VariantId, { dy: number; dz: number }> = {
+  male: { dy: 0.02, dz: -0.14 },
+  female: { dy: 0, dz: -0.095 },
+};
+
 /** Solid boxes of the table at a head-section angle (degrees from flat). */
-export function tableBoxes(headAngleDeg: number): OrientedBox[] {
+export function tableBoxes(headAngleDeg: number, variant: VariantId = "male"): OrientedBox[] {
   const top = TABLE.topY;
   const { headLen, footLen, mattress, cabinet, step } = TABLE_PARTS;
   const a = (headAngleDeg * Math.PI) / 180;
   const hingeY = top - 0.06;
-  // the head mattress box centre sits headLen/2 toward −Z from the hinge, rotated up by `a`
-  const headCenter: [number, number, number] = [TABLE.x, hingeY + Math.sin(a) * (headLen / 2), TABLE.hingeZ - Math.cos(a) * (headLen / 2)];
+  // the head mattress box centre sits headLen/2 toward −Z from the hinge at rest, rotated up by `a` about the pivot
+  const { dy, dz } = HEAD_PIVOT[variant];
+  const py = hingeY + dy;
+  const pz = TABLE.hingeZ + dz;
+  const ry = hingeY - py;
+  const rz = TABLE.hingeZ - headLen / 2 - pz;
+  const headCenter: [number, number, number] = [TABLE.x, py + ry * Math.cos(a) - rz * Math.sin(a), pz + ry * Math.sin(a) + rz * Math.cos(a)];
   return [
     { name: "cabinet", center: [TABLE.x, (top - 0.12) / 2, TABLE.hingeZ + cabinet.z], size: [cabinet.width, top - 0.12, cabinet.depth], rotX: 0 },
     { name: "foot-mattress", center: [TABLE.x, hingeY, TABLE.hingeZ + footLen / 2], size: [TABLE.width, mattress, footLen], rotX: 0 },

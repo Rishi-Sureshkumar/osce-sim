@@ -23,12 +23,14 @@ export const ZONE_SECTIONS: Record<DrapeZone, DrapeSection[]> = {
   legs: ["leg_left", "leg_right"],
 };
 
-/** Which drape zone covers each region (regions not listed are never draped). */
+/** Which drape zone covers each region (regions not listed are never draped; the sections are in `sectionsForRegion`). */
 export const DRAPE_ZONE_OF: Record<string, DrapeZone> = Object.fromEntries([
   ...["precordium", "precordium_wall", "precordium_lsb", "cardiac_aortic", "cardiac_pulmonic", "cardiac_erbs", "cardiac_tricuspid", "cardiac_mitral"].map((r) => [r, "chest" as const]),
   ...["lung_ant_ru", "lung_ant_lu", "lung_ant_rl", "lung_ant_ll", "lung_lat_r", "lung_lat_l", "lung_post_ru", "lung_post_lu", "lung_post_rl", "lung_post_ll"].map((r) => [r, "chest" as const]),
-  ...["abd_ruq", "abd_luq", "abd_rlq", "abd_llq", "abd_epigastric", "groin_right", "groin_left"].map((r) => [r, "abdomen" as const]),
-  ...["hip_right", "hip_left", "knee_right", "knee_left", "shin_right", "shin_left", "calf_right", "calf_left"].map((r) => [r, "legs" as const]),
+  ...["abd_ruq", "abd_luq", "abd_rlq", "abd_llq", "abd_epigastric"].map((r) => [r, "abdomen" as const]),
+  // the leg sheet runs from just above the pubis to the ankles (src/scene/sheetGeometry.ts): each leg
+  // section includes its groin crease (femoral pulse); the feet stay bare
+  ...["groin_right", "groin_left", "hip_right", "hip_left", "knee_right", "knee_left", "shin_right", "shin_left", "calf_right", "calf_left", "patellar_tendon_right", "patellar_tendon_left", "leg_medial_right", "leg_medial_left"].map((r) => [r, "legs" as const]),
 ]);
 
 /**

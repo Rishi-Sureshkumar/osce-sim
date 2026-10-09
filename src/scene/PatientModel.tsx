@@ -2,10 +2,10 @@
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
-import { Bone, BufferGeometry, Float32BufferAttribute, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial, Object3D, Quaternion, SkinnedMesh, Vector3, type Material } from "three";
+import { Bone, BufferGeometry, Float32BufferAttribute, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial, Object3D, Plane, Quaternion, SkinnedMesh, Vector3, type Material } from "three";
 import { MeshBVH, acceleratedRaycast } from "three-mesh-bvh";
 import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
-import type { DrapeZone, Position } from "@/domain/schemas";
+import type { DrapeSection, Position } from "@/domain/schemas";
 import { QA } from "@/exam3d/qa";
 import { liveRotations } from "./livePose";
 import type { Jerk } from "./animation/reflex";
@@ -16,7 +16,8 @@ export interface PatientModelProps {
   variant: VariantId;
   position: Position;
   bedAngle: number;
-  drape: Record<DrapeZone, boolean>;
+  /** drape sections (true = covered): the gown's chest panel shows per side, its back panel with `back` */
+  sections: Record<DrapeSection, boolean>;
   hr: number;
   rr: number;
   laboured: boolean;
@@ -147,6 +148,9 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
   const look = useRef({ yaw: 0, pitch: 0 });
   const pupils = useRef({ left: 1, right: 1 });
   const drapeAlpha = useRef<Record<string, number>>({ gown_chest: 1, gown_abdomen: 1, gown_back: 1 });
+  // one side of the chest uncovered: the chest panel is clipped along the body's midline
+  const chestClip = useMemo(() => new Plane(), []);
+  const chestSide = p.sections.chest_left === p.sections.chest_right ? null : p.sections.chest_left ? "left" : "right";
   const root = useRef<Object3D>(null);
 
   useFrame(({ clock, camera, scene: world }, dt) => {
@@ -208,7 +212,26 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
       bone.quaternion.copy(rot[name] ? rotationOf(rot[name]) : tmpQ.identity());
     }
     // drape: gown panels fade out when uncovered (and back in when covered)
-    const want: Record<string, number> = { gown_chest: p.drape.chest ? 1 : 0, gown_back: p.drape.chest ? 1 : 0, gown_abdomen: p.drape.abdomen ? 1 : 0 };
+    const want: Record<string, number> = {
+      gown_chest: p.sections.chest_left || p.sections.chest_right ? 1 : 0,
+      gown_back: p.sections.back ? 1 : 0,
+      gown_abdomen: p.sections.abdomen ? 1 : 0,
+    };
+    const chestMesh = meshes.get("gown_chest");
+    const sternum = bones.get("spine01");
+    if (chestMesh && sternum) {
+      const mat = chestMesh.material as MeshStandardMaterial;
+      if (chestSide) {
+        updateChestClip(chestClip, sternum, chestSide);
+        if (mat.clippingPlanes?.[0] !== chestClip) {
+          mat.clippingPlanes = [chestClip];
+          mat.needsUpdate = true;
+        }
+      } else if (mat.clippingPlanes?.length) {
+        mat.clippingPlanes = [];
+        mat.needsUpdate = true;
+      }
+    }
     for (const [g, target] of Object.entries(want)) {
       const mesh = meshes.get(g);
       if (!mesh) continue;
@@ -226,7 +249,7 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
     }
     // re-bake the raycast proxies once the posture has settled after a change (and when the gown changes)
     const settled = Math.abs((p.angle?.current ?? p.bedAngle) - p.bedAngle) < 0.3;
-    const key = `${p.position}|${p.bedAngle}|${p.drape.chest}|${p.drape.abdomen}`;
+    const key = `${p.position}|${p.bedAngle}|${p.sections.chest_left}|${p.sections.chest_right}|${p.sections.back}|${p.sections.abdomen}`;
     QA.wantKey = key;
     if (!settled || !drapeSettled()) stableFrames.current = 0;
     else stableFrames.current++;
@@ -234,7 +257,8 @@ uniform float uTime; uniform float uHr; uniform vec3 uJvp; uniform float uJvpAmp
     if (stableFrames.current >= 3 && bakedKey.current !== key && proxyRoot.current) {
       bakedKey.current = key;
       world.updateMatrixWorld(true);
-      bakeProxies(meshes, proxyRoot.current);
+      if (chestSide && sternum) updateChestClip(chestClip, sternum, chestSide);
+      bakeProxies(meshes, proxyRoot.current, chestSide ? { gown_chest: chestClip } : {});
       QA.bakedKey = key;
     }
   });
@@ -283,8 +307,20 @@ export function isBody(o: Object3D): boolean {
 
 const PROXY_MATERIAL = new MeshBasicMaterial({ colorWrite: false, depthWrite: false, transparent: true, opacity: 0 });
 
-/** Bakes the posed skin (and visible gown panels) into static, BVH-indexed meshes for raycasting. */
-function bakeProxies(meshes: Map<string, SkinnedMesh>, root: Object3D) {
+/** Keep the covered half of the chest panel: the plane through the sternum, facing the covered side. */
+function updateChestClip(plane: Plane, sternum: Bone, covered: "left" | "right") {
+  sternum.updateWorldMatrix(true, false);
+  const left = new Vector3(1, 0, 0).transformDirection(sternum.matrixWorld);
+  const at = new Vector3().setFromMatrixPosition(sternum.matrixWorld);
+  plane.setFromNormalAndCoplanarPoint(covered === "left" ? left : left.negate(), at);
+}
+
+/**
+ * Bakes the posed skin (and visible gown panels) into static, BVH-indexed meshes for raycasting.
+ * `clip`: a panel drawn clipped (one side of the chest uncovered) keeps only the triangles on the
+ * plane's positive side, so the uncovered half takes no click.
+ */
+function bakeProxies(meshes: Map<string, SkinnedMesh>, root: Object3D, clip: Record<string, Plane> = {}) {
   for (const old of [...root.children]) {
     root.remove(old);
     (old as Mesh).geometry?.dispose();
@@ -309,7 +345,19 @@ function bakeProxies(meshes: Map<string, SkinnedMesh>, root: Object3D) {
     // QA body-part labels (asset build `_PART`) travel with the proxy
     const part = src.geometry.getAttribute("_part");
     if (part) geom.setAttribute("_part", part.clone());
-    if (src.geometry.index) geom.setIndex(src.geometry.index.clone());
+    if (src.geometry.index) {
+      const plane = clip[name];
+      if (plane) {
+        const idx = src.geometry.index;
+        const kept: number[] = [];
+        const at = (i: number) => v.set(out[i * 3]!, out[i * 3 + 1]!, out[i * 3 + 2]!);
+        for (let t = 0; t < idx.count; t += 3) {
+          const tri = [idx.getX(t), idx.getX(t + 1), idx.getX(t + 2)];
+          if (tri.some((i) => plane.distanceToPoint(at(i)) >= 0)) kept.push(...tri);
+        }
+        geom.setIndex(kept);
+      } else geom.setIndex(src.geometry.index.clone());
+    }
     geom.boundsTree = new MeshBVH(geom);
     const proxy = new Mesh(geom, PROXY_MATERIAL);
     proxy.raycast = acceleratedRaycast;

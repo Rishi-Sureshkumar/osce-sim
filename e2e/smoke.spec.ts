@@ -231,8 +231,9 @@ test("student completes the HF case end to end; coach reviews and overrides", as
   await page.mouse.up();
   await expect(page.locator('[data-testid="findings"]')).toContainText("Loud low-pitched S3 gallop");
   await expect(page.locator('[data-testid="action-log"]')).toContainText(/stethoscope \(bell\)/);
-  // the chest was uncovered automatically for the exam; cover it again (direct manipulation)
-  await page.getByRole("button", { name: "Chest: uncovered" }).click();
+  // the left chest was uncovered automatically for the exam; cover it again (direct manipulation)
+  // (only the left side: the apex is under the left chest section)
+  await page.getByRole("button", { name: "Chest: left uncovered" }).click();
   await expect(page.getByRole("button", { name: "Chest: covered" })).toHaveAttribute("aria-pressed", "true");
   // crackles at both posterior bases, sitting up (bed raised with the slider), diaphragm
   await page.getByLabel("Bed angle").fill("3");

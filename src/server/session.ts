@@ -6,7 +6,7 @@ import { DEADLINE_GRACE_MS, allowedInPhase, dueTimerEvents, encounterState, type
 import { timeIsUp } from "@/engine/practice";
 import { ActionInput as ActionInputSchema } from "@/domain/schemas";
 import { InvalidExamError, isTouch, resolveFinding } from "@/engine/resolveFinding";
-import { DRAPE_ZONE_OF, patientState } from "@/engine/patientState";
+import { patientState, sectionsForRegion } from "@/engine/patientState";
 import { alertsOn, detectMistakes } from "@/engine/mistakes";
 import { getRepo } from "./db";
 import { HttpError } from "./errors";
@@ -153,9 +153,8 @@ async function appendOne(sessionId: string, raw: unknown, implied: Action[], aft
     if (p.tool === "stethoscope" && p.durationMs !== undefined && p.durationMs < MIN_LISTEN_MS) throw new HttpError(400, "Listen for longer to record a finding");
     const repo = await getRepo();
     const state = patientState(await repo.listActions(sessionId));
-    // Examining a region that is still draped exposes it first (logged, so coaches see it).
-    const zone = DRAPE_ZONE_OF[input.payload.regionId];
-    if (zone && state.drape[zone]) {
+    // Examining a region that is still (partly) draped exposes its sections first (logged, so coaches see it).
+    if (sectionsForRegion(input.payload.regionId).some((sec) => sec !== "pelvis" && state.sections[sec])) {
       const expose: Action = { ...(await stamp()), type: "courtesy", source: input.source, payload: { kind: "expose", regionId: input.payload.regionId } };
       await repo.appendAction(expose);
       implied.push(expose);

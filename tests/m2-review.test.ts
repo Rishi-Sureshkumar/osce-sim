@@ -29,7 +29,7 @@ describe("the Achilles (and back-of-neck, top-of-head, ear) close-ups stay out o
     it(`${variant}: in every position the camera is outside the table, and its line of sight clears it (bar a part lying on it)`, () => {
       for (const position of POSITIONS) {
         const pose = poseFor(position, POSITION_ANGLE[position], variant);
-        const boxes = tableBoxes(tableAngle(position, POSITION_ANGLE[position]));
+        const boxes = tableBoxes(tableAngle(position, POSITION_ANGLE[position]), variant);
         for (const shot of ["ankle_left", "ankle_right", "neck_back", "head_top", "ear_left", "ear_right"] as const) {
           const { position: cam, target } = shotCamera(shot, pose);
           expect(boxes.some((b) => insideBox(cam, b)), `${shot} ${position}: camera inside the table`).toBe(false);

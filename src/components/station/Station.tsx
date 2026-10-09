@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import type { Action, CourtesyKind, DrapeZone, Position, PublicCase, Region, Session } from "@/domain/schemas";
+import type { Action, CourtesyKind, Position, PublicCase, Region, Session } from "@/domain/schemas";
+import type { DrapeChange } from "@/scene/Drapes";
 import type { PublicCatalog } from "@/content/types";
 import { findingDisplay, labelsFrom } from "@/components/common/format";
 import { examineFromClick } from "@/input/adapters/click";
@@ -258,7 +259,10 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
     }),
   );
   const onBed = (position: Position) => run(() => post({ type: "state_change", source: "click", payload: { position, via: "direct" } }));
-  const onDrape = (zone: DrapeZone, covered: boolean) => run(() => post({ type: "state_change", source: "click", payload: { drape: { zone, covered }, via: "direct" } }));
+  const onDrape = (changes: DrapeChange[]) =>
+    run(async () => {
+      for (const { section, covered } of changes) await post({ type: "state_change", source: "click", payload: { drape: { section, covered }, via: "direct" } });
+    });
   const leave = () =>
     run(async () => {
       setLeaveNudge(null);

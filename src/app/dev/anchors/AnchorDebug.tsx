@@ -17,7 +17,7 @@ import { PatientModel } from "@/scene/PatientModel";
 import { ExamTable } from "@/scene/room/ExamRoom";
 import { TABLE, type VariantId } from "@/scene/rig";
 
-const NO_DRAPE = { chest: false, abdomen: false, legs: false } as const;
+const NO_DRAPE = { chest_left: false, chest_right: false, back: false, abdomen: false, pelvis: true, leg_left: false, leg_right: false } as const;
 
 export function AnchorDebug() {
   const [variant, setVariant] = useState<VariantId>("male");
@@ -65,9 +65,9 @@ export function AnchorDebug() {
           <color attach="background" args={["#eef2f4"]} />
           <hemisphereLight args={["#ffffff", "#9aa7b0", 1.2]} />
           <directionalLight position={[-1, 3, 1]} intensity={1.2} />
-          <ExamTable angle={angle} />
+          <ExamTable angle={angle} variant={variant} />
           <Suspense fallback={null}>
-            <PatientModel variant={variant} position={position} bedAngle={bedAngle} angle={angle} drape={NO_DRAPE} hr={70} rr={0.001} laboured={false} jvpCm={0} edema={{}} pupilScale={1} speaking={false} quality="low" />
+            <PatientModel variant={variant} position={position} bedAngle={bedAngle} angle={angle} sections={NO_DRAPE} hr={70} rr={0.001} laboured={false} jvpCm={0} edema={{}} pupilScale={1} speaking={false} quality="low" />
           </Suspense>
           {anchors.map((a) =>
             anchorWorldPoints(a.regionId, pose).map((p, i) => (

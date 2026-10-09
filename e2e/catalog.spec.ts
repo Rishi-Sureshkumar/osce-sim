@@ -14,8 +14,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { request as pwRequest, type APIRequestContext, type Page } from "@playwright/test";
-import type { Action, DrapeZone, Tool } from "@/domain/schemas";
-import { DRAPE_ZONE_OF } from "@/engine/patientState";
+import type { Action, DrapeSection, Tool } from "@/domain/schemas";
+import { sectionsForRegion } from "@/engine/patientState";
 import { POSITION_LABELS } from "@/components/common/format";
 import { classify, type CheckResult } from "../scripts/qa/lib/xfail";
 import { poseFor, type Vec3 } from "@/exam3d/regionAnchors";
@@ -133,19 +133,28 @@ async function setPosition(page: Page, label: string) {
 }
 
 /**
- * A student uncovers the region before examining it (a covered sheet or gown tab takes the click).
- * The leg sheet also lies over the ankles and feet, which the drape-zone table doesn't list.
+ * A student uncovers the region before examining it (a covered sheet takes the click): each drape
+ * section over the region, with the encounter bar's side buttons (Phase 4 M3 sectioned drapes).
  */
 async function expose(page: Page, e: CatalogEntry) {
-  const zone: DrapeZone | undefined = DRAPE_ZONE_OF[e.regionId] ?? (e.group === "feet" || e.group === "legs" ? "legs" : undefined);
-  if (!zone) return;
-  const label = { chest: "Chest", abdomen: "Abdomen", legs: "Legs" }[zone];
-  const btn = page.getByRole("button", { name: new RegExp(`^${label}: (covered|uncovered)$`) });
-  if ((await btn.getAttribute("aria-pressed")) === "true") {
-    await btn.click();
-    await expect(btn).toHaveAttribute("aria-pressed", "false");
+  for (const sec of sectionsForRegion(e.regionId)) {
+    const name = SECTION_BUTTON[sec];
+    if (!name) continue;
+    const btn = page.getByRole("button", { name: new RegExp(`^${name}: (covered|uncovered)$`) });
+    if ((await btn.getAttribute("aria-pressed")) === "true") {
+      await btn.click();
+      await expect(btn).toHaveAttribute("aria-pressed", "false");
+    }
   }
 }
+const SECTION_BUTTON: Partial<Record<DrapeSection, string>> = {
+  chest_left: "Chest left",
+  chest_right: "Chest right",
+  back: "Back",
+  abdomen: "Abdomen",
+  leg_left: "Legs left",
+  leg_right: "Legs right",
+};
 
 async function camera(page: Page, shot: string) {
   const cur = await page.locator('[data-testid="exam3d"]').getAttribute("data-camera");

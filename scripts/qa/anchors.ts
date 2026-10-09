@@ -96,7 +96,7 @@ function rayBox(ray: Ray, b: OrientedBox): number | null {
 }
 
 /** first surface a ray from the camera meets on its way to `target`, among the patient's visible meshes and the table */
-function firstHit(p: SkinnedPatient, from: Vec3, target: Vec3, angle: number) {
+function firstHit(p: SkinnedPatient, from: Vec3, target: Vec3, angle: number, variant: VariantId = "male") {
   const o = new Vector3(...from);
   const dir = new Vector3(...target).sub(o).normalize();
   const ray = new Ray(o, dir);
@@ -111,7 +111,7 @@ function firstHit(p: SkinnedPatient, from: Vec3, target: Vec3, angle: number) {
     if (m.mesh.parts && h.face) part = PART_NAMES[m.mesh.parts[h.face.a]!] ?? null;
     best = { what: m.mesh.name, part, t: h.distance, point: [h.point.x, h.point.y, h.point.z] };
   }
-  for (const b of tableBoxes(angle)) {
+  for (const b of tableBoxes(angle, variant)) {
     const t = rayBox(ray, b);
     if (t !== null && (!best || t < best.t)) {
       const q = o.clone().addScaledVector(dir, t);
@@ -175,7 +175,7 @@ async function main() {
           // (the lateral hip seen from above) is clickable if either reaches the right skin
           const n = normals[i] ?? [0, 0, 0];
           const tries = [w, [w[0] - n[0] * 0.003, w[1] - n[1] * 0.003, w[2] - n[2] * 0.003] as Vec3].map((aim) => {
-            const h = firstHit(sp, cam, aim, tableAngle(position, angle));
+            const h = firstHit(sp, cam, aim, tableAngle(position, angle), variant);
             const offCm = h ? dist(h.point, w) * 100 : Infinity;
             const isEye = /^eye_/.test(e.regionId);
             const surfaceOk = !!h && (h.what === "skin" || (isEye && (h.what === "eyes" || h.what === "pupils")) || (e.regionId === "mouth" && h.what === "mouth"));

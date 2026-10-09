@@ -11,8 +11,8 @@
 import { useFrame, type ThreeEvent } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import { DoubleSide, ExtrudeGeometry, LatheGeometry, Path, Shape, Vector2, type Group } from "three";
-import { TABLE } from "../rig";
-import { TABLE_PARTS } from "./tableGeometry";
+import { TABLE, type VariantId } from "../rig";
+import { HEAD_PIVOT, TABLE_PARTS } from "./tableGeometry";
 import { Dispenser } from "./Dispenser";
 import { FAUCET, SINK, basinCenter, basinProfile } from "./sinkGeometry";
 import { ToolTable, type ToolTableProps } from "./ToolTable";
@@ -49,6 +49,8 @@ export interface RoomHandlers {
 export interface ExamRoomProps extends RoomHandlers {
   /** animated head-section angle in degrees (0 = flat); read every frame */
   angle: { current: number };
+  /** the patient's body model (the head section pivots where its trunk bends) */
+  variant?: VariantId;
   /** animated door swing 0 (closed) … 1 (open); read every frame */
   door: { current: number };
   sanitiser?: { progress: number; clean: boolean; start: () => void; cancel: () => void; disabled?: boolean };
@@ -77,7 +79,7 @@ export function clickable(handler?: () => void) {
   };
 }
 
-export function ExamRoom({ angle, door, sanitiser, placard, toolTable, sinkRunning, onDoor, onSink, onToolTable, onStool, onHeadControl }: ExamRoomProps) {
+export function ExamRoom({ angle, variant, door, sanitiser, placard, toolTable, sinkRunning, onDoor, onSink, onToolTable, onStool, onHeadControl }: ExamRoomProps) {
   const { halfX, backZ, doorZ, height } = ROOM;
   const wall = "#eef2f4";
   return (
@@ -119,7 +121,7 @@ export function ExamRoom({ angle, door, sanitiser, placard, toolTable, sinkRunni
       {sanitiser && (
         <Dispenser progress={sanitiser.progress} clean={sanitiser.clean} onStart={() => !sanitiser.disabled && sanitiser.start()} onCancel={sanitiser.cancel} />
       )}
-      <ExamTable angle={angle} onHeadControl={onHeadControl} />
+      <ExamTable angle={angle} variant={variant} onHeadControl={onHeadControl} />
       <group {...clickable(onToolTable)}>
         <ToolTable {...toolTable} />
       </group>
@@ -256,9 +258,11 @@ function Sink({ running }: { running?: boolean }) {
   );
 }
 
-export function ExamTable({ angle, onHeadControl }: { angle: { current: number }; onHeadControl?: () => void }) {
+export function ExamTable({ angle, variant = "male", onHeadControl }: { angle: { current: number }; variant?: VariantId; onHeadControl?: () => void }) {
   const top = TABLE.topY;
   const { headLen, footLen, mattress, cabinet, step } = TABLE_PARTS;
+  // the head section pivots where the patient's trunk bends (tableGeometry.ts HEAD_PIVOT)
+  const { dy, dz } = HEAD_PIVOT[variant];
   const head = useRef<Group>(null);
   const pillow = useRef<Group>(null);
   useFrame(() => {
@@ -275,12 +279,12 @@ export function ExamTable({ angle, onHeadControl }: { angle: { current: number }
       <Box p={[0, top - mattress / 2, footLen / 2]} s={[TABLE.width, mattress, footLen]} c={vinyl} r={0.55} />
       <Box p={[0, top + 0.002, footLen / 2]} s={[TABLE.width * 0.82, 0.002, footLen]} c="#f8fafc" r={0.9} shadow={false} />
       {/* head section hinges at the patient's hips */}
-      <group ref={head} position={[0, top - mattress / 2, 0]}>
-        <Box p={[0, 0, -headLen / 2]} s={[TABLE.width, mattress, headLen]} c={vinyl} r={0.55} />
-        <Box p={[0, 0.062, -headLen / 2]} s={[TABLE.width * 0.82, 0.002, headLen]} c="#f8fafc" r={0.9} shadow={false} />
+      <group ref={head} position={[0, top - mattress / 2 + dy, dz]}>
+        <Box p={[0, -dy, -headLen / 2 - dz]} s={[TABLE.width, mattress, headLen]} c={vinyl} r={0.55} />
+        <Box p={[0, 0.062 - dy, -headLen / 2 - dz]} s={[TABLE.width * 0.82, 0.002, headLen]} c="#f8fafc" r={0.9} shadow={false} />
         {/* pillow (only when lying back) */}
         <group ref={pillow}>
-        <mesh position={[0, 0.095, -headLen + 0.16]} rotation={[0, 0, Math.PI / 2]} scale={[0.7, 1, 1]} raycast={noRay} castShadow>
+        <mesh position={[0, 0.095 - dy, -headLen + 0.16 - dz]} rotation={[0, 0, Math.PI / 2]} scale={[0.7, 1, 1]} raycast={noRay} castShadow>
           <capsuleGeometry args={[0.05, 0.36, 6, 12]} />
           <meshStandardMaterial color="#f1f5f9" roughness={0.95} />
         </mesh>

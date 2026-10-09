@@ -116,9 +116,11 @@ async function setPosition(page: Page, p: Position): Promise<boolean> {
   return true;
 }
 
-async function setDrape(page: Page, zone: "Chest" | "Abdomen" | "Legs", covered: boolean) {
-  const btn = page.getByRole("button", { name: new RegExp(`^${zone}: (covered|uncovered)$`) });
-  if ((await btn.getAttribute("aria-pressed")) !== String(covered)) await btn.click();
+/** a zone ("Chest") or one side of it ("Legs left") */
+async function setDrape(page: Page, zone: string, covered: boolean) {
+  const btn = page.getByRole("button", { name: new RegExp(`^${zone}: (covered|uncovered|left uncovered|right uncovered)$`) });
+  // a partly uncovered zone covers itself first, so click until it reaches the wanted state
+  for (let k = 0; k < 2 && (await btn.getAttribute("aria-pressed")) !== String(covered); k++) await btn.click();
   await expect(btn).toHaveAttribute("aria-pressed", String(covered));
   await waitSettled(page);
 }
@@ -154,13 +156,13 @@ for (const v of VARIANTS) {
       await camera(page, shot);
       await shoot(page, `${v.slug}/views/${String(r++).padStart(2, "0")}-${shot}__${position}__covered`, { area: "views", case: v.caseId, shot, position, drape: "covered" });
     }
-    // drape states (supine): each zone uncovered on its own, then everything uncovered
+    // drape states (supine): each section uncovered on its own, then everything uncovered (the pelvis stays covered)
     await setPosition(page, "supine");
     let d = 1;
-    for (const [zone, shot] of [["Chest", "chest_front"], ["Abdomen", "abdomen"], ["Legs", "legs"]] as const) {
+    for (const [zone, shot] of [["Chest left", "chest_front"], ["Chest", "chest_front"], ["Abdomen", "abdomen"], ["Legs left", "legs"], ["Legs", "legs"]] as const) {
       await setDrape(page, zone, false);
       await camera(page, shot);
-      await shoot(page, `${v.slug}/drapes/${String(d++).padStart(2, "0")}-${shot}__supine__${zone.toLowerCase()}-exposed`, { area: "drapes", case: v.caseId, shot, position: "supine", drape: `${zone.toLowerCase()}-exposed` });
+      await shoot(page, `${v.slug}/drapes/${String(d++).padStart(2, "0")}-${shot}__supine__${zone.toLowerCase().replace(" ", "-")}-exposed`, { area: "drapes", case: v.caseId, shot, position: "supine", drape: `${zone.toLowerCase().replace(" ", "-")}-exposed` });
       await setDrape(page, zone, true);
     }
     for (const zone of ["Chest", "Abdomen", "Legs"] as const) await setDrape(page, zone, false);
