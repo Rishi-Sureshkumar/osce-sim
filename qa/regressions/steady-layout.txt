@@ -1,0 +1,34 @@
+# Regression proof: steady-layout
+
+found by the M3/M6 catalog runs: bars around the 3D view changed height when a tool was picked up
+(the tool HUD wrapped when its help text appeared; the encounter bar wrapped at 1280), so the canvas
+resized mid-exam and the patient moved under the pointer; the first one-row HUD then ran under the
+right panel and hid "Put down" (40 catalog entries per model timed out behind the action log)
+
+test:      e2e/regressions/steady-layout.spec.ts
+command:   PW_REUSE=1 npx playwright test e2e/regressions/steady-layout.spec.ts
+old code:  7426f18 build (QA server)      → 3 failed (FAILS, as it must)
+new code:  fixed build                     → 3 passed; full e2e 19/19
+result:    PROVEN (old-code output below)
+
+## Old code: why it fails
+[1/3] e2e/regressions/steady-layout.spec.ts:18:3 › the 3D view keeps its size with any tool in hand at 1440
+  1) e2e/regressions/steady-layout.spec.ts:18:3 › the 3D view keeps its size with any tool in hand at 1440 
+    Error: HUD controls covered while listening for an exam
+    +   "Tools… (under ol)",
+[2/3] e2e/regressions/steady-layout.spec.ts:18:3 › the 3D view keeps its size with any tool in hand at 1280
+  2) e2e/regressions/steady-layout.spec.ts:18:3 › the 3D view keeps its size with any tool in hand at 1280 
+    Error: HUD controls covered while listening for an exam
+    +   "Put down (under ol)",
+    +   "Go to tool table (under span)",
+    +   "Tools… (under li)",
+[3/3] e2e/regressions/steady-layout.spec.ts:18:3 › the 3D view keeps its size with any tool in hand at 1180
+  3) e2e/regressions/steady-layout.spec.ts:18:3 › the 3D view keeps its size with any tool in hand at 1180 
+    Error: HUD controls covered while listening for an exam
+    +   "Change exam (under span)",
+    +   "Put down (under span)",
+    +   "Go to tool table (under li)",
+    +   "Tools… (under ol)",
+    e2e/regressions/steady-layout.spec.ts:18:3 › the 3D view keeps its size with any tool in hand at 1440 
+    e2e/regressions/steady-layout.spec.ts:18:3 › the 3D view keeps its size with any tool in hand at 1280 
+    e2e/regressions/steady-layout.spec.ts:18:3 › the 3D view keeps its size with any tool in hand at 1180 

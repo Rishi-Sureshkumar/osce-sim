@@ -111,8 +111,9 @@ export function ToolHud({
   const opener = useRef<HTMLButtonElement>(null);
   return (
     // one fixed-height row: a bar that wrapped when the help text appeared resized the 3D view above it
-    // mid-exam (the patient jumped under the pointer); the help text gives way first
-    <div className="flex h-8 flex-nowrap items-center gap-1.5 whitespace-nowrap text-xs [&>*]:shrink-0" role="toolbar" aria-label="Exam tools" data-testid="tool-hud">
+    // mid-exam (the patient jumped under the pointer). The buttons come first; the "listening for" label
+    // and the help text truncate so the row never runs under the side panel
+    <div className="flex h-8 min-w-0 flex-nowrap items-center gap-1 whitespace-nowrap text-xs [&>*]:shrink-0" role="toolbar" aria-label="Exam tools" data-testid="tool-hud">
       <span className="whitespace-nowrap rounded bg-subtle px-2 py-1 text-ink-2" data-testid="tool-in-hand">
         In hand: <b>{state.tool ? TOOL_LABELS[state.tool] + (state.tool === "tuning_fork" ? ` ${state.forkFreq} Hz` : "") : "nothing"}</b>
       </span>
@@ -125,14 +126,6 @@ export function ToolHud({
           ))}
         </span>
       )}
-      {state.tool === "stethoscope" && listeningFor && (
-        <span className="flex min-w-0 items-center gap-1 whitespace-nowrap rounded bg-brand-soft px-2 py-1 text-cyan-900" data-testid="listening-for">
-          Listening for: <b className="max-w-[12rem] truncate" title={listeningFor.label}>{listeningFor.label}</b>
-          <button type="button" onClick={listeningFor.onChange} className="ml-1 underline">
-            Change exam
-          </button>
-        </span>
-      )}
       {state.tool === "tuning_fork" && (
         <button type="button" disabled={disabled} onClick={() => onChange({ ...state, struckAt: performance.now() })} className="rounded-md border border-amber-500 bg-amber-500 px-2.5 py-1 text-white">
           Strike fork
@@ -143,17 +136,26 @@ export function ToolHud({
           Put down
         </button>
       )}
-      {onOpenTable && (
-        <button type="button" disabled={disabled} onClick={onOpenTable} className="rounded-md border border-line-strong bg-white px-2.5 py-1">
-          Go to tool table
-        </button>
-      )}
       <div className="relative">
         <button ref={opener} type="button" disabled={disabled} aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)} className="rounded-md border border-line-strong bg-white px-2.5 py-1">
           Tools…
         </button>
         {open && (
           <Dialog id="tools-menu" kind="menu" title="Tools" hideTitle onClose={() => setOpen(false)} ignoreOutside={opener} className="absolute bottom-full left-0 z-30 mb-1 w-56 rounded-md border border-line bg-surface py-1 pt-7 shadow-lg">
+            {onOpenTable && (
+              <button
+                type="button"
+                role="menuitem"
+                data-tool="table"
+                onClick={() => {
+                  setOpen(false);
+                  onOpenTable();
+                }}
+                className="block w-full border-b border-line px-3 py-1.5 text-left hover:bg-subtle focus:bg-subtle focus:outline-none"
+              >
+                Go to the tool table
+              </button>
+            )}
             {MENU.map((m) => (
               <button
                 key={m.label}
@@ -172,6 +174,16 @@ export function ToolHud({
           </Dialog>
         )}
       </div>
+      {state.tool === "stethoscope" && listeningFor && (
+        <span className="flex min-w-[5rem] shrink! items-center gap-1 overflow-hidden rounded bg-brand-soft px-2 py-1 text-cyan-900" data-testid="listening-for">
+          <span className="min-w-0 truncate" title={`Listening for: ${listeningFor.label}`}>
+            Listening for: <b>{listeningFor.label}</b>
+          </span>
+          <button type="button" onClick={listeningFor.onChange} aria-label="Change exam" title="Change exam" className="ml-1 shrink-0 underline">
+            Change
+          </button>
+        </span>
+      )}
       {state.tool && (
         <span className="min-w-0 shrink! truncate text-ink-3" title={TOOL_HELP[state.tool]}>
           {TOOL_HELP[state.tool]}
