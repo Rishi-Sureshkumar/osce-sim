@@ -20,31 +20,31 @@ reviewed again (`-- --scaffold` adds the rows). High defects must have an owner 
 | V-BACKREST | high | room | M3 | fixed | Seated: patient sits 11-15 cm inside the backrest; the back shot shows only the backrest (M3 intersections xfail) (2 shots) — fixed in M3.1: the raised head section pivots at a per-body point fitted to the back (test:intersections clean) |
 | V-EARBACK | high | shot | M3 | fixed | Ear shots in reclined positions were blocked by the raised backrest — fixed at the M2 gate (ear views rise until clear of the table; mastoid and canal in view lying back) |
 | V-FCHEST | high | drape | M3 | fixed | Female chest uncovers both breasts at once; must be per side and covered by default (1 shots) — fixed in M3.1: the female chest gown is per side and covered by default |
-| V-LLD | high | pose | M3 | open | Left lateral decubitus pose contorted (arm flung up, hangs off the table edge) and the leg sheet disappears (6 shots) |
-| V-LLDPRIV | high | drape | M3 | open | LLD: gown rides up, buttocks exposed, no sheet (2 shots) |
+| V-LLD | high | pose | M3 | fixed | Left lateral decubitus pose contorted (arm flung up, hangs off the table edge) and the leg sheet disappears (6 shots) — fixed in M3.2: two-bone-IK left lateral pose (lower arm forward on the mattress, upper arm along the flank, side pillow); the leg sheet stays (confirmed at the M3/M6 review, both bodies) |
+| V-LLDPRIV | high | drape | M3 | fixed | LLD: gown rides up, buttocks exposed, no sheet (2 shots) — fixed in M3.1/M3.2: the sheet covers the legs and buttocks in left lateral; the gown stays on (confirmed at the M3/M6 review) |
 | V-PELVIS | high | drape | M3 | fixed | "All exposed" leaves the patient naked: the pelvis section must never be exposed (2 shots) — fixed in M3.1: the pelvis towel is never uncovered (all exposed leaves the towel) |
 | V-PUBIS | high | drape | M3 | open | Female abdomen exposure reaches the pubic area (pelvis section must stay covered) (1 shots) |
 | V-SHEET | high | drape | M3 | fixed | Legs/feet poke through the leg sheet while "Legs: covered" (bug 6) (18 shots) — fixed in M3.1 (bug 6): the leg sheet is built per pose from the skinned body; zero-tolerance coverage test for every position, model and leg state |
-| V-ARMSLLD | medium | shot | M3 | open | LLD arms shot frames the raised arm against the wall from behind — the arm is flung up by the left-lateral pose (V-LLD); re-owned to M3 at the M2 gate |
+| V-ARMSLLD | medium | shot | M3 | fixed | LLD arms shot frames the raised arm against the wall from behind — the arm is flung up by the left-lateral pose (V-LLD); re-owned to M3 at the M2 gate — fixed in M3.2: the upper arm lies along the flank, so the arms view shows the arm on the body |
 | V-ARMSSEAT | medium | shot | M2 | fixed | Seated arms shot frames the torso; the arm is hidden behind the body — fixed at the M2 gate (arm and hand on the thigh in view; plus close left-arm and back-of-elbow views) |
 | V-BACKHINT | medium | ux | M2 | fixed | Reclined 45°: back against the backrest but no "ask the patient to sit up" hint — fixed at the M2 gate (shotHint: lying back up to 45°, and seated against the backrest: "lean forward") |
 | V-BACKHINT2 | medium | ux | M2 | fixed | LLD: hint wrongly said the back is against the table — fixed at the M2 gate (shotHint is per position) |
-| V-NECKLLD | medium | shot | M3 | open | LLD head_neck: neck partly behind the shoulder — follows the left-lateral pose (V-LLD); re-owned to M3 at the M2 gate |
-| V-BODY | medium | asset | M3 | open | Female body barely differs from the male (proportions, hair) (2 shots) |
+| V-NECKLLD | medium | shot | M3 | fixed | LLD head_neck: neck partly behind the shoulder — follows the left-lateral pose (V-LLD); re-owned to M3 at the M2 gate — fixed in M3.2: with the IK pose and side pillow the neck is in view from the front |
+| V-BODY | medium | asset | M3 | fixed | Female body barely differs from the male (proportions, hair) (2 shots) — fixed: distinct bodies (older heavier man, grey short hair; woman in her 30s with breast and hip targets, brown hair) (confirmed at the M3/M6 review) |
 | V-ROD | medium | drape | M3 | fixed | Rolled/folded gown edges render as floating light-blue rods across the body (the roll-chest rod lies over the apex) (59 shots) — fixed in M3.3: folded gown edges are tubes laid along the skin, drawn only where a fold exists, clear of exam targets |
-| V-CHESTINV | medium | shot | M6 | open | Supine chest shot from the head end: the face is upside down at the bottom of the frame (3 shots) |
+| V-CHESTINV | medium | shot | M6 | fixed | Supine chest shot from the head end: the face is upside down at the bottom of the frame (3 shots) — fixed in M6: the chest view is no longer upside down (the face sits to the side, as from beside the bed) |
 | V-PERFORMCLIP | medium | ui | M6 | fixed | Perform card clips the finding text at the canvas bottom (1 shots) — fixed in M6: the exam card grows upward inside the view with a height cap and scrolls |
 | V-PLACARD | medium | ui | M6 | fixed | 3D door placard is a blank rectangle (text only in the side panel) (3 shots) — fixed in M6: the door instructions are printed on the 3D door (canvas texture) |
 | V-WRAP | medium | ui | M6 | fixed | Toolbar wraps at 1280/1180 wide ("Actions"/"Leave the room" on a second row) (2 shots) — fixed in M6: top bar + one-row encounter bar at 1440/1280/1180 (fixed height; steady-layout regression) |
 | V-EARDOWN | low | ux | M2 | fixed | LLD: the left ear faces the table — fixed at the M2 gate: a hint says the left ear is against the table |
-| V-GOWNEDGE | low | asset | M3 | open | Gown neckline has a sawtooth edge (1 shots) |
-| V-GOWNFIT | low | asset | M3 | open | Gown is skin-tight (body outline shows through) (5 shots) |
-| V-HAIR | low | asset | M3 | open | Procedural hair shell has jagged edges over the ears (10 shots) |
-| V-SEAM | low | asset | M3 | open | Visible skin seam line above the knee (1 shots) |
+| V-GOWNEDGE | low | asset | M3 | fixed | Gown neckline has a sawtooth edge (1 shots) — fixed in M3.3: iso-clipped smooth neckline, sleeves and hem |
+| V-GOWNFIT | low | asset | M3 | open | Gown is skin-tight (body outline shows through) (5 shots) — improved in M3.3 (inflate-only smoothing bridges hollows); the woman's gown still follows the breast contour |
+| V-HAIR | low | asset | M3 | fixed | Procedural hair shell has jagged edges over the ears (10 shots) — fixed in M3.3: the hair cap is clipped at a smooth hairline |
+| V-SEAM | low | asset | M3 | fixed | Visible skin seam line above the knee (1 shots) — not reproduced at the M3/M6 review (legs exposed, both bodies) |
 | V-TOOLS | low | asset | M3 | fixed | Instruments are crude primitives (2 shots) — fixed in M3.3: stethoscope with tubing, Taylor hammer, U-shaped forks, penlight, otoscope, cuff with gauge |
-| V-ZFIGHT | low | room | M3 | open | Backrest corner geometry flickers (1 shots) |
-| V-CHESTROT | low | shot | M6 | open | Reclined chest shot rotated 90° (1 shots) |
-| V-FRAME | low | shot | M6 | open | Conversation (seated) shot crops the head (2 shots) |
+| V-ZFIGHT | low | room | M3 | fixed | Backrest corner geometry flickers (1 shots) — fixed in M3.3: a gap at the table hinge removes the coplanar mattress faces |
+| V-CHESTROT | low | shot | M6 | fixed | Reclined chest shot rotated 90° (1 shots) — fixed in M6: the reclined chest view is upright |
+| V-FRAME | low | shot | M6 | fixed | Conversation (seated) shot crops the head (2 shots) — fixed in M6: the conversation view keeps the whole head in frame (52° field of view) |
 | V-HINTOVER | low | ui | M6 | fixed | Hint popover covers the drape chips and Actions/Leave (1 shots) — fixed in M6: the hint popover opens below the encounter bar, clear of the drape chips and Actions |
 | V-HINTS | low | ui | M6 | fixed | "1 hints" plural in the coach list (3 shots) — fixed in M6: plurals ("1 hint"); badges wrap whole |
 | V-MENUOVER | low | ui | M6 | wontfix | Actions menu covers the Findings panel (1 shots) — accepted at the M6 gate: a dropdown menu overlays content below it and closes on Esc or an outside click |
@@ -55,6 +55,11 @@ reviewed again (`-- --scaffold` adds the rows). High defects must have an owner 
 | V-JUSTIFY | high | grading | M4 | fixed | Fixed in M4: the justification counts only history points raised in the conversation and exam points whose maneuvers were performed; the label no longer says "the student" (tests/m4-hide-mistakes.test.ts). Was: results credit "Diagnoses are justified by findings the student elicited — orthopnea, raised JVP" when neither was elicited (JVP not examined; the note's claim is flagged as unperformed in the same feedback); "the student" in third person on a student page (found at the M2 gate) |
 | V-HINTTEXT | low | ui | M6 | fixed | The canvas hint line ("Click the patient to move closer…") has no backdrop: unreadable over dark table rails; also shown in the tool-table view with no patient (found at the M2 gate) — fixed in M6: the canvas hint is a pill on a backdrop and is hidden in views without the patient |
 | V-BADGES | low | ui | M6 | fixed | Coach transcript: "typed" badge runs into the text; "Matched" badge on 0-point items that say no words matched (found at the M2 gate) — fixed in M6: transcript badges sit on their own line; "No match" replaces "Matched" on 0-point items |
+| V-HANDSHEET | high | drape | M3 | fixed | Found at the M3/M6 review: lying flat or reclined, the sheet's fall-off draped it over the hands beside the hips (hands hidden, 85% of the arm under the sheet supine) — fixed: the sheet tucks under arms that rest on something (tests/m3-drapes.test.ts) |
+| V-GOWNBACK | high | drape | M3 | fixed | Found at the M3/M6 review: with the back covered, the spine was bare from the neck to the buttocks (woman sitting up; a notch on the man) — fixed: per-body front/back seam and a bounded neckline (tests/m3-gown-back.test.ts) |
+| V-HUDOVER | medium | ui | M6 | fixed | Found by the catalog: a one-row tool HUD ran under the right panel once "Listening for" showed, hiding Put down / Tools… — fixed: buttons first, labels truncate (e2e/regressions/steady-layout.spec.ts) |
+| V-COACHBADGE | low | ui | M6 | fixed | Found at the M3/M6 review: coach list "1 hint" badge split across two lines; "1 overrides" — fixed: badges wrap whole, singular |
+| V-CHATNARROW | low | ui | M6 | fixed | Found at the M3/M6 review: the chat box too narrow for its placeholder ("Ask the pat…") — fixed: push-to-talk is a microphone icon |
 
 ## Screenshots
 
