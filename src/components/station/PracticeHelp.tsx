@@ -42,7 +42,9 @@ export function PracticeHelp({ sessionId, append, disabled }: { sessionId: strin
             setHint(null);
             setSections(null);
           }}
-          className="absolute top-full right-0 z-40 mt-1 max-h-72 w-[min(28rem,92vw)] overflow-y-auto rounded-lg border border-ok/30 bg-surface p-3 text-sm text-ink shadow-2"
+          // below the encounter bar, over the top of the side panel (V-HINTOVER: hanging from the top bar it
+          // covered the drape chips and the Actions menu)
+          className="fixed top-[9.25rem] right-4 z-40 max-h-[min(24rem,60vh)] w-[min(24rem,92vw)] overflow-y-auto rounded-lg border border-ok/30 bg-surface p-3 text-sm text-ink shadow-2"
           panelProps={{ "aria-live": "polite" }}
         >
           {hint && <p data-testid="practice-hint">{hint}</p>}
