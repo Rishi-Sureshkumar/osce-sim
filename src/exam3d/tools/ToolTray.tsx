@@ -111,20 +111,20 @@ export function ToolHud({
   const opener = useRef<HTMLButtonElement>(null);
   return (
     <div className="flex flex-wrap items-center gap-1.5 text-xs" role="toolbar" aria-label="Exam tools" data-testid="tool-hud">
-      <span className="rounded bg-slate-100 px-2 py-1 text-slate-700" data-testid="tool-in-hand">
+      <span className="rounded bg-subtle px-2 py-1 text-ink-2" data-testid="tool-in-hand">
         In hand: <b>{state.tool ? TOOL_LABELS[state.tool] + (state.tool === "tuning_fork" ? ` ${state.forkFreq} Hz` : "") : "nothing"}</b>
       </span>
       {state.tool === "stethoscope" && (
-        <span role="radiogroup" aria-label="Stethoscope head" className="flex overflow-hidden rounded-md border border-slate-300">
+        <span role="radiogroup" aria-label="Stethoscope head" className="flex overflow-hidden rounded-md border border-line-strong">
           {(["diaphragm", "bell"] as const).map((m) => (
-            <button key={m} type="button" role="radio" aria-checked={state.stethMode === m} onClick={() => onChange({ ...state, stethMode: m })} className={`px-2 py-1 ${state.stethMode === m ? "bg-slate-800 text-white" : "bg-white"}`}>
+            <button key={m} type="button" role="radio" aria-checked={state.stethMode === m} onClick={() => onChange({ ...state, stethMode: m })} className={`px-2 py-1 ${state.stethMode === m ? "bg-ink text-white" : "bg-white"}`}>
               {m === "diaphragm" ? "Diaphragm" : "Bell"}
             </button>
           ))}
         </span>
       )}
       {state.tool === "stethoscope" && listeningFor && (
-        <span className="flex items-center gap-1 rounded bg-cyan-50 px-2 py-1 text-cyan-900" data-testid="listening-for">
+        <span className="flex items-center gap-1 rounded bg-brand-soft px-2 py-1 text-cyan-900" data-testid="listening-for">
           Listening for: <b>{listeningFor.label}</b>
           <button type="button" onClick={listeningFor.onChange} className="ml-1 underline">
             Change exam
@@ -137,21 +137,21 @@ export function ToolHud({
         </button>
       )}
       {state.tool && (
-        <button type="button" onClick={() => onChange({ ...state, tool: null, struckAt: null })} className="rounded-md border border-slate-300 bg-white px-2.5 py-1">
+        <button type="button" onClick={() => onChange({ ...state, tool: null, struckAt: null })} className="rounded-md border border-line-strong bg-white px-2.5 py-1">
           Put down
         </button>
       )}
       {onOpenTable && (
-        <button type="button" disabled={disabled} onClick={onOpenTable} className="rounded-md border border-slate-300 bg-white px-2.5 py-1">
+        <button type="button" disabled={disabled} onClick={onOpenTable} className="rounded-md border border-line-strong bg-white px-2.5 py-1">
           Go to tool table
         </button>
       )}
       <div className="relative">
-        <button ref={opener} type="button" disabled={disabled} aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)} className="rounded-md border border-slate-300 bg-white px-2.5 py-1">
+        <button ref={opener} type="button" disabled={disabled} aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)} className="rounded-md border border-line-strong bg-white px-2.5 py-1">
           Tools…
         </button>
         {open && (
-          <Dialog id="tools-menu" kind="menu" title="Tools" hideTitle onClose={() => setOpen(false)} ignoreOutside={opener} className="absolute bottom-full left-0 z-30 mb-1 w-56 rounded-md border border-slate-200 bg-white py-1 pt-7 shadow-lg">
+          <Dialog id="tools-menu" kind="menu" title="Tools" hideTitle onClose={() => setOpen(false)} ignoreOutside={opener} className="absolute bottom-full left-0 z-30 mb-1 w-56 rounded-md border border-line bg-surface py-1 pt-7 shadow-lg">
             {MENU.map((m) => (
               <button
                 key={m.label}
@@ -162,7 +162,7 @@ export function ToolHud({
                   setOpen(false);
                   onChange(m.item ? pickFromTable(state, m.item) : { ...state, tool: m.tool, struckAt: null });
                 }}
-                className="block w-full px-3 py-1.5 text-left hover:bg-slate-100 focus:bg-slate-100 focus:outline-none"
+                className="block w-full px-3 py-1.5 text-left hover:bg-subtle focus:bg-subtle focus:outline-none"
               >
                 {m.label}
               </button>
@@ -170,7 +170,7 @@ export function ToolHud({
           </Dialog>
         )}
       </div>
-      {state.tool && <span className="text-slate-500">{TOOL_HELP[state.tool]}</span>}
+      {state.tool && <span className="text-ink-3">{TOOL_HELP[state.tool]}</span>}
     </div>
   );
 }

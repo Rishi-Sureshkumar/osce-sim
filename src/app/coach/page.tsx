@@ -10,13 +10,13 @@ export default async function CoachHome() {
     <main className="mx-auto max-w-6xl p-6">
       <div className="flex items-baseline justify-between">
         <h1 className="text-xl font-semibold">Coach view — sessions</h1>
-        <Link href="/coach/feedback" className="text-sm text-cyan-700 underline">
+        <Link href="/coach/feedback" className="text-sm text-brand underline">
           In-app feedback
         </Link>
       </div>
-      <div className="mt-4 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+      <div className="mt-4 overflow-x-auto rounded-lg border border-line bg-surface">
         <table className="w-full text-left text-sm">
-          <thead className="bg-slate-50 text-xs text-slate-500 uppercase">
+          <thead className="bg-subtle text-xs text-ink-3 uppercase">
             <tr>
               <th className="px-3 py-2">Student</th>
               <th className="px-3 py-2">Case</th>
@@ -31,15 +31,15 @@ export default async function CoachHome() {
           <tbody className="divide-y divide-slate-100">
             {rows.length === 0 && (
               <tr>
-                <td colSpan={9} className="px-3 py-6 text-center text-slate-500">
+                <td colSpan={9} className="px-3 py-6 text-center text-ink-3">
                   No sessions yet.
                 </td>
               </tr>
             )}
             {rows.map((r) => (
-              <tr key={r.session.id} className="hover:bg-slate-50">
+              <tr key={r.session.id} className="hover:bg-subtle">
                 <td className="px-3 py-2">
-                  <Link href={`/coach/${r.session.id}`} className="font-medium text-cyan-700 hover:underline">
+                  <Link href={`/coach/${r.session.id}`} className="font-medium text-brand hover:underline">
                     {r.session.studentLabel}
                   </Link>
                 </td>
@@ -52,7 +52,7 @@ export default async function CoachHome() {
                 <td className="px-3 py-2">
                   {r.needsReview > 0 && <span className="rounded bg-amber-100 px-1.5 text-xs text-amber-900">{r.needsReview} needs review</span>}
                   {r.overrides > 0 && <span className="ml-1 rounded bg-indigo-100 px-1.5 text-xs text-indigo-800">{r.overrides} overrides</span>}
-                  {r.hints > 0 && <span className="ml-1 rounded bg-emerald-100 px-1.5 text-xs text-emerald-900">{r.hints} hints</span>}
+                  {r.hints > 0 && <span className="ml-1 rounded bg-emerald-100 px-1.5 text-xs text-emerald-900">{r.hints} {r.hints === 1 ? "hint" : "hints"}</span>}
                 </td>
               </tr>
             ))}

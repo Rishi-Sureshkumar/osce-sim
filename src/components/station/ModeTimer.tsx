@@ -48,17 +48,17 @@ export function ModeTimer({
     }
   }, [mode, now, remaining, stopped, up, onTimerEvent]);
 
-  if (now === null) return <div className="rounded-md bg-slate-100 px-3 py-1 font-mono text-lg">--:--</div>;
+  if (now === null) return <div className="rounded-md bg-subtle px-3 py-1 font-mono text-lg">--:--</div>;
 
   if (mode === "practice") {
     const paused = isPaused(actions);
     return (
       <div className="flex items-center gap-1">
-        <div className={`rounded-md px-3 py-1 font-mono text-lg tabular-nums ${paused ? "bg-amber-100 text-amber-900" : "bg-slate-100"}`} aria-label="Time elapsed">
+        <div className={`rounded-md px-3 py-1 font-mono text-lg tabular-nums ${paused ? "bg-amber-100 text-amber-900" : "bg-subtle"}`} aria-label="Time elapsed">
           {mmss(elapsed)}
         </div>
         {!stopped && (
-          <button type="button" onClick={() => onTimerEvent(paused ? "resume" : "pause")} className="rounded border border-slate-300 bg-white px-2 py-1 text-xs">
+          <button type="button" onClick={() => onTimerEvent(paused ? "resume" : "pause")} className="rounded border border-line-strong bg-white px-2 py-1 text-xs">
             {paused ? "Resume" : "Pause"}
           </button>
         )}
@@ -68,7 +68,7 @@ export function ModeTimer({
   const warn = remaining <= 120_000;
   return (
     <div
-      className={`rounded-md px-3 py-1 font-mono text-lg tabular-nums ${remaining <= 0 ? "bg-red-600 text-white" : warn ? "bg-amber-100 text-amber-900" : "bg-slate-100"}`}
+      className={`rounded-md px-3 py-1 font-mono text-lg tabular-nums ${remaining <= 0 ? "bg-red-600 text-white" : warn ? "bg-amber-100 text-amber-900" : "bg-subtle"}`}
       aria-label="Time remaining"
       data-testid="exam-timer"
     >

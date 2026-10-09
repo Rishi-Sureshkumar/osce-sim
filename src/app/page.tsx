@@ -9,12 +9,12 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-4xl p-6">
       <h1 className="text-2xl font-semibold">OSCE Simulator</h1>
-      <p className="mt-1 text-slate-600">
+      <p className="mt-1 text-ink-3">
         Practise a station: take a history, examine the patient, present your differential, and get feedback against the mark sheet.
       </p>
       <CasePicker cases={cases} />
-      <p className="mt-8 text-sm text-slate-500">
-        Coach? Open the <Link href="/coach" className="text-cyan-700 underline">coach view</Link> (needs the coach code).
+      <p className="mt-8 text-sm text-ink-3">
+        Coach? Open the <Link href="/coach" className="text-brand underline">coach view</Link> (needs the coach code).
       </p>
     </main>
   );

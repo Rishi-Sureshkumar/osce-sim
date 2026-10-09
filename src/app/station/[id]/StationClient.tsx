@@ -7,8 +7,8 @@ export function StationClient(props: Omit<StationProps, "chat" | "finish">) {
   return (
     <Station
       {...props}
-      chat={({ actions, append, disabled, onSpeaking }) => (
-        <ChatPanel sessionId={props.session.id} patientName={props.kase.patient.name} actions={actions} append={append} disabled={disabled} onSpeaking={onSpeaking} />
+      chat={({ actions, append, disabled, disabledReason, onSpeaking }) => (
+        <ChatPanel sessionId={props.session.id} patientName={props.kase.patient.name} actions={actions} append={append} disabled={disabled} disabledReason={disabledReason} onSpeaking={onSpeaking} />
       )}
       finish={({ append, disabled, forceOpen }) => <FinishDialog sessionId={props.session.id} mode={props.kase.mode} append={append} disabled={disabled} forceOpen={forceOpen} />}
     />

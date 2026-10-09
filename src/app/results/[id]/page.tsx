@@ -29,45 +29,46 @@ export default async function ResultsPage({ params }: { params: Promise<{ id: st
   const href = (actionId: string) => `#a-${actionId}`;
 
   return (
-    <main className="mx-auto max-w-5xl space-y-4 p-6">
+    <main className="mx-auto max-w-5xl space-y-4 p-4 sm:p-6">
       <header className="flex flex-wrap items-end justify-between gap-2">
         <div>
-          <p className="text-xs font-semibold tracking-wide text-cyan-700 uppercase">Results</p>
+          <p className="text-xs font-semibold tracking-wide text-brand uppercase">Results</p>
           <h1 className="text-xl font-semibold">{kase.title}</h1>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-ink-3">
             {session.studentLabel} · started <span data-volatile>{new Date(session.startedAt).toLocaleString()}</span> ·{" "}
-            <span className={`rounded px-1.5 py-0.5 text-xs font-semibold ${session.mode === "practice" ? "bg-emerald-100 text-emerald-900" : "bg-slate-800 text-white"}`} data-testid="mode-badge">
+            <span className={`rounded-md px-1.5 py-0.5 text-xs font-semibold ${session.mode === "practice" ? "bg-ok-soft text-ok" : "bg-ink text-white"}`} data-testid="mode-badge">
               {modeLabel(session.mode)}
             </span>
           </p>
         </div>
-        <Link href="/" className="text-sm text-cyan-700 underline">
+        <Link href="/" className="text-sm text-brand underline">
           Try another station
         </Link>
       </header>
 
       {session.status === "active" ? (
-        <p className="rounded-md bg-slate-100 p-3 text-sm">
-          This station is still in progress. <Link href={`/station/${id}`} className="text-cyan-700 underline">Return to the station</Link>.
+        <p className="rounded-md bg-subtle p-3 text-sm">
+          This station is still in progress. <Link href={`/station/${id}`} className="text-brand underline">Return to the station</Link>.
         </p>
       ) : !run ? (
         <GradeTrigger sessionId={id} />
       ) : (
         <>
           {session.mode === "practice" && (
-            <p className="rounded-md bg-emerald-50 px-3 py-2 text-xs text-emerald-900">
+            <p className="rounded-md bg-ok-soft px-3 py-2 text-xs text-ok">
               Practice attempt: scored for feedback. Time-dependent items only count in exam mode.
             </p>
           )}
+          {/* verdict first, then the feedback, the two domains item by item, then recognition, mistakes and the note (Phase 4 M6) */}
+          <StationVerdict pass={view.pass} domains={view.domains} />
           <FeedbackSummary run={run} />
           {debrief && <Debrief debrief={debrief} />}
-          <StationVerdict pass={view.pass} domains={view.domains} />
           {view.domains.map((d) => (
             <DomainCard key={d.domain} domain={d} sheets={sheets} actionsById={actionsById} labels={labels} timelineHref={href} />
           ))}
-          {view.penReview && <PenReview pen={view.penReview.pen} check={view.penReview.check} actionsById={actionsById} timelineHref={href} />}
           {session.settings?.findingsDisplay === "hide" && <RecognitionSection actions={actions} labels={labels} timelineHref={href} />}
           <MistakesSection actions={actions} timelineHref={href} />
+          {view.penReview && <PenReview pen={view.penReview.pen} check={view.penReview.check} actionsById={actionsById} timelineHref={href} />}
           <FeedbackForm sessionId={id} page="results" />
         </>
       )}

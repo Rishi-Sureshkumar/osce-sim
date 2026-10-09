@@ -2,7 +2,7 @@ import type { ResultsView } from "@/server/results";
 
 export function Debrief({ debrief }: { debrief: NonNullable<ResultsView["debrief"]> }) {
   return (
-    <section className="rounded-lg border border-slate-200 bg-white p-4" aria-labelledby="debrief-h">
+    <section className="rounded-lg border border-line bg-surface p-4" aria-labelledby="debrief-h">
       <h2 id="debrief-h" className="font-semibold">
         Case debrief
       </h2>
@@ -25,7 +25,7 @@ export function Debrief({ debrief }: { debrief: NonNullable<ResultsView["debrief
           <ol className="mt-1 list-decimal space-y-1 pl-5 text-sm">
             {debrief.expectedDifferential.map((d) => (
               <li key={d.rank}>
-                <span className="font-medium">{d.diagnosis}</span> — <span className="text-slate-600">{d.rationale}</span>
+                <span className="font-medium">{d.diagnosis}</span> — <span className="text-ink-3">{d.rationale}</span>
               </li>
             ))}
           </ol>

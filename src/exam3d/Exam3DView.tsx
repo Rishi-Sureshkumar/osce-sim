@@ -51,6 +51,8 @@ export interface Exam3DViewProps {
   examinableRegionIds: Set<string>;
   actions: Action[];
   presentation: PublicCase["presentation"];
+  /** the door instructions printed on the 3D door placard */
+  placard?: string[];
   selectedRegionId?: string | null;
   performingRegionId?: string | null;
   examinedRegionIds: Set<string>;
@@ -658,7 +660,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-2">
-      <div className="relative min-h-[380px] flex-1 overflow-hidden rounded-md bg-slate-100" data-testid="exam3d" data-camera={shot.current}>
+      <div className="relative min-h-[380px] flex-1 overflow-hidden rounded-md bg-subtle" data-testid="exam3d" data-camera={shot.current}>
         <Canvas
           dpr={quality === "high" ? [1, 1.5] : 1}
           shadows={quality === "high" ? "percentage" : false}
@@ -676,10 +678,12 @@ export default function Exam3DView(props: Exam3DViewProps) {
           }}
         >
           <color attach="background" args={["#e9eff2"]} />
-          <hemisphereLight args={["#ffffff", "#b8c4cc", 1.05]} />
+          {/* warm-white ceiling light (~4000 K) with a cooler bounce from the floor and walls; ACES tone mapping (r3f default) */}
+          <hemisphereLight args={["#fff6ec", "#b8c4cc", 1.05]} />
           <directionalLight
             position={[-1.6, 2.6, 1.4]}
-            intensity={1.5}
+            color="#ffefdc"
+            intensity={1.55}
             castShadow={quality === "high"}
             shadow-mapSize={quality === "high" ? [2048, 2048] : [512, 512]}
             shadow-camera-left={-2.5}
@@ -688,13 +692,14 @@ export default function Exam3DView(props: Exam3DViewProps) {
             shadow-camera-bottom={-2.5}
             shadow-bias={-0.0004}
           />
-          <directionalLight position={[2, 2, -1]} intensity={0.35} />
+          <directionalLight position={[2, 2, -1]} color="#e9f0ff" intensity={0.35} />
           <Director table={angle.current} tableTarget={tableAngle(state.position, state.bedAngle)} trunk={trunk.current} trunkTarget={state.bedAngle} door={door.current} doorTarget={doorTarget} />
           <ExamRoom
             angle={angle.current}
             variant={props.variant}
             sideLying={state.position === "left_lateral_decubitus"}
             door={door.current}
+            placard={props.placard}
             onDoor={onDoor}
             onSink={inside ? () => wash("sink") : undefined}
             sinkRunning={washing !== null && washKind === "sink"}
@@ -748,9 +753,9 @@ export default function Exam3DView(props: Exam3DViewProps) {
 
         <LoadingOverlay />
         {contextLost && (
-          <div role="alert" className="absolute inset-0 z-30 flex flex-col items-center justify-center gap-2 bg-slate-100/95 p-4 text-center text-sm">
+          <div role="alert" className="absolute inset-0 z-30 flex flex-col items-center justify-center gap-2 bg-subtle/95 p-4 text-center text-sm">
             <p className="font-medium">The 3D view lost its graphics context.</p>
-            <p className="text-xs text-slate-600">Try the Low graphics setting, or reload the page. Your session is saved.</p>
+            <p className="text-xs text-ink-3">Try the Low graphics setting, or reload the page. Your session is saved.</p>
           </div>
         )}
         {/* breadcrumb, Back, and a keyboard route to every shot */}
@@ -760,7 +765,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
               ← Back
             </button>
           )}
-          <span className="rounded-md bg-white/90 px-2 py-1 text-slate-700 shadow">{crumbs.join(" › ")}</span>
+          <span className="rounded-md bg-white/90 px-2 py-1 text-ink-2 shadow">{crumbs.join(" › ")}</span>
           {inside && (
             <label className="rounded-md bg-white/90 px-1.5 py-0.5 shadow">
               <span className="sr-only">Camera shot</span>
@@ -784,8 +789,8 @@ export default function Exam3DView(props: Exam3DViewProps) {
         {!inside && (
           <div className="absolute inset-x-0 bottom-3 z-10 flex justify-center">
             <div className="rounded-lg bg-white/95 px-4 py-2 text-center text-sm shadow" data-testid="corridor">
-              <p className="text-slate-700">{props.canEnter ? "Read the door instructions, then knock on the door to enter." : "Wait for the announcement before you begin."}</p>
-              <button type="button" disabled={!props.canEnter || opening} onClick={() => void enter()} className="mt-1.5 rounded-md bg-cyan-700 px-4 py-1.5 font-medium text-white disabled:opacity-50">
+              <p className="text-ink-2">{props.canEnter ? "Read the door instructions, then knock on the door to enter." : "Wait for the announcement before you begin."}</p>
+              <button type="button" disabled={!props.canEnter || opening} onClick={() => void enter()} className="mt-1.5 rounded-md bg-brand px-4 py-1.5 font-medium text-white disabled:opacity-50">
                 Knock and enter
               </button>
             </div>
@@ -796,7 +801,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
             <div className="flex items-center gap-3 rounded-lg bg-white/95 px-4 py-2 text-sm shadow">
               <span>Cleaning hands… {Math.max(0, Math.ceil((washMs - (now - washing)) / 1000))} s</span>
               {props.mode === "practice" && (
-                <button type="button" onClick={() => void finishWash()} className="text-xs text-cyan-700 underline">
+                <button type="button" onClick={() => void finishWash()} className="text-xs text-brand underline">
                   Skip
                 </button>
               )}
@@ -806,26 +811,31 @@ export default function Exam3DView(props: Exam3DViewProps) {
         {bedHud && (
           <Dialog id="bed-hud" kind="popover" title="Head of the table" onClose={() => setBedHud(false)} className="absolute top-12 left-2 z-10 rounded-lg bg-white/95 p-2 text-xs shadow" panelProps={{ "data-testid": "bed-hud" }}>
             <div className="flex gap-1">
-              <button type="button" onClick={() => stepBed(1)} className="rounded border border-slate-300 px-2 py-1">
+              <button type="button" onClick={() => stepBed(1)} className="rounded border border-line-strong px-2 py-1">
                 ▲ Raise
               </button>
-              <button type="button" onClick={() => stepBed(-1)} className="rounded border border-slate-300 px-2 py-1">
+              <button type="button" onClick={() => stepBed(-1)} className="rounded border border-line-strong px-2 py-1">
                 ▼ Lower
               </button>
-              <button type="button" onClick={() => setBedHud(false)} className="px-2 py-1 text-slate-500">
+              <button type="button" onClick={() => setBedHud(false)} className="px-2 py-1 text-ink-3">
                 Done
               </button>
             </div>
           </Dialog>
         )}
-        <div className="pointer-events-none absolute inset-x-0 bottom-1 text-center text-sm text-slate-700" aria-live="polite">
-          {inside && !washing && (hover?.regionId && !tool ? byId.get(hover.regionId)?.label : !tool ? "Click the patient to move closer · click again to examine · drag to look around" : "")}
+        {/* the hint line sits on a soft backdrop so it stays readable over dark rails and the floor (V-HINTTEXT) */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-1.5 flex justify-center" aria-live="polite">
+          {inside && !washing && !tool && shot.current !== "tool_table" && (
+            <span className="rounded-full bg-white/85 px-3 py-0.5 text-sm text-ink-2 shadow-sm backdrop-blur-sm">
+              {hover?.regionId ? byId.get(hover.regionId)?.label : "Click the patient to move closer · click again to examine · drag to look around"}
+            </span>
+          )}
         </div>
         {(hold || caption) && (
           <div className="pointer-events-none absolute top-12 left-1/2 w-[min(92%,26rem)] -translate-x-1/2 rounded-md bg-white/95 px-3 py-2 text-sm shadow" data-testid="sound-caption" aria-live="polite">
             {hold && (
               <>
-                <p className="text-xs text-slate-500">Listening · {(holdMs / 1000).toFixed(1)} s</p>
+                <p className="text-xs text-ink-3">Listening · {(holdMs / 1000).toFixed(1)} s</p>
                 <div className="mt-1 h-1.5 overflow-hidden rounded bg-slate-200" role="progressbar" aria-valuemin={0} aria-valuemax={MIN_LISTEN_MS} aria-valuenow={Math.min(holdMs, MIN_LISTEN_MS)} aria-label="Listening time">
                   <div className={`h-full ${holdMs >= MIN_LISTEN_MS ? "bg-emerald-500" : "bg-cyan-600"}`} style={{ width: `${Math.min(100, (holdMs / MIN_LISTEN_MS) * 100)}%` }} />
                 </div>
@@ -835,7 +845,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
           </div>
         )}
         {tool === "tuning_fork" && props.tool.struckAt && (
-          <p className="pointer-events-none absolute top-2 right-2 rounded bg-amber-50 px-2 py-0.5 text-xs text-amber-900">Fork struck {forkElapsed.toFixed(0)} s ago</p>
+          <p className="pointer-events-none absolute right-2 bottom-8 rounded bg-amber-50 px-2 py-0.5 text-xs text-amber-900">Fork struck {forkElapsed.toFixed(0)} s ago</p>
         )}
         {hint && (
           <p className="pointer-events-none absolute bottom-8 left-2 max-w-xs rounded-md bg-amber-50 px-2 py-1 text-xs text-amber-900" data-testid="shot-hint">
@@ -873,7 +883,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
           </p>
           <ol className="mt-1 list-decimal pl-5">
             {rinne.steps!.map((st) => (
-              <li key={st.id} className={sequence.done.includes(st.id) ? "text-emerald-800 line-through" : progress.next?.id === st.id ? "font-medium" : "text-slate-500"}>
+              <li key={st.id} className={sequence.done.includes(st.id) ? "text-emerald-800 line-through" : progress.next?.id === st.id ? "font-medium" : "text-ink-3"}>
                 {st.label}
               </li>
             ))}
@@ -905,7 +915,7 @@ export default function Exam3DView(props: Exam3DViewProps) {
           </p>
           <ol className="mt-1 list-decimal pl-5">
             {bpSteps.map((st) => (
-              <li key={st.id} className={bp.done.includes(st.id) ? "text-emerald-800 line-through" : bpNext(bpSteps, bp)?.id === st.id ? "font-medium" : "text-slate-500"}>
+              <li key={st.id} className={bp.done.includes(st.id) ? "text-emerald-800 line-through" : bpNext(bpSteps, bp)?.id === st.id ? "font-medium" : "text-ink-3"}>
                 {st.label}
               </li>
             ))}
@@ -934,13 +944,13 @@ export default function Exam3DView(props: Exam3DViewProps) {
 
       {inside && (
         <div className="flex flex-wrap items-center gap-1 text-xs">
-          <span className="text-slate-500">Neuro:</span>
+          <span className="text-ink-3">Neuro:</span>
           {panelRegions.map((r) => (
             <button
               key={r.id}
               disabled={props.disabled}
               onClick={() => props.onRegionClick(r)}
-              className={`rounded border px-2 py-0.5 ${props.selectedRegionId === r.id ? "border-cyan-700 bg-cyan-50" : "border-slate-300"}`}
+              className={`rounded border px-2 py-0.5 ${props.selectedRegionId === r.id ? "border-brand bg-brand-soft" : "border-line-strong"}`}
             >
               {r.label}
             </button>

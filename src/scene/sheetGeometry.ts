@@ -33,6 +33,22 @@ export interface SkinData {
   /** joint index → bone name */
   jointNames: readonly string[];
   count: number;
+  /** bind-pose normals (optional: the folded gown edges lift off the skin along them) */
+  normals?: ArrayLike<number>;
+}
+
+/** World-space normal of one skin vertex in a pose (bind normal turned by its bones' rotations). */
+export function skinNormal(skin: SkinData, pose: Pose, i: number): Vector3 | null {
+  if (!skin.normals) return null;
+  const n = new Vector3();
+  const b = new Vector3(skin.normals[i * 3]!, skin.normals[i * 3 + 1]!, skin.normals[i * 3 + 2]!);
+  for (let k = 0; k < 4; k++) {
+    const w = skin.weights[i * 4 + k]!;
+    if (w <= 0) continue;
+    const m = pose.world.get(skin.jointNames[skin.joints[i * 4 + k]!]!);
+    if (m) n.addScaledVector(b.clone().transformDirection(m), w);
+  }
+  return n.lengthSq() > 0 ? n.normalize() : null;
 }
 
 export interface SheetCuts {

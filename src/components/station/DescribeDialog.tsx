@@ -32,7 +32,7 @@ export function DescribeDialog({ region, onSubmit, onClose }: { region: Region; 
   };
   return (
     <Dialog id="describe" kind="modal" title={`${region.label}: verbal exam`} onClose={onClose} initialFocus={area} className="w-full max-w-lg space-y-3 rounded-lg bg-white p-5 shadow-xl">
-        <p className="text-sm text-slate-600">The patient stays masked. Describe the maneuver and what you are looking for. Be specific.</p>
+        <p className="text-sm text-ink-3">The patient stays masked. Describe the maneuver and what you are looking for. Be specific.</p>
         <label className="block text-sm">
           <span className="sr-only">Your description</span>
           <textarea
@@ -41,7 +41,7 @@ export function DescribeDialog({ region, onSubmit, onClose }: { region: Region; 
             onChange={(e) => setText(e.target.value)}
             rows={4}
             maxLength={2000}
-            className="w-full rounded-md border border-slate-300 p-2"
+            className="w-full rounded-md border border-line-strong p-2"
             aria-label="Describe the exam"
           />
         </label>
@@ -53,7 +53,7 @@ export function DescribeDialog({ region, onSubmit, onClose }: { region: Region; 
             onPointerDown={() => ptt.current?.press()}
             onPointerUp={() => ptt.current?.release()}
             onPointerLeave={() => ptt.current?.release()}
-            className="rounded-md border border-slate-300 px-3 py-1.5 text-sm disabled:opacity-50"
+            className="rounded-md border border-line-strong px-3 py-1.5 text-sm disabled:opacity-50"
           >
             {voice.listening ? "Listening… release to stop" : "Hold to talk"}
           </button>
@@ -61,7 +61,7 @@ export function DescribeDialog({ region, onSubmit, onClose }: { region: Region; 
             <button type="button" onClick={onClose} className="rounded-md px-3 py-1.5 text-sm">
               Cancel
             </button>
-            <button type="button" disabled={busy || !text.trim()} onClick={() => void submit()} className="rounded-md bg-cyan-700 px-4 py-1.5 text-sm font-medium text-white disabled:opacity-50">
+            <button type="button" disabled={busy || !text.trim()} onClick={() => void submit()} className="rounded-md bg-brand px-4 py-1.5 text-sm font-medium text-white disabled:opacity-50">
               Done
             </button>
           </div>

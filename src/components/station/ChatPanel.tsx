@@ -15,6 +15,7 @@ export function ChatPanel({
   actions,
   append,
   disabled,
+  disabledReason,
   onSpeaking,
 }: {
   sessionId: string;
@@ -22,6 +23,8 @@ export function ChatPanel({
   actions: Action[];
   append: (a: Action) => void;
   disabled: boolean;
+  /** shown in the input while the conversation is closed */
+  disabledReason?: string;
   /** the patient's reply is streaming (the 3D patient turns toward the student) */
   onSpeaking?: (speaking: boolean) => void;
 }) {
@@ -160,13 +163,13 @@ export function ChatPanel({
   };
 
   return (
-    <section aria-labelledby="chat-h" className="flex min-h-[320px] flex-1 flex-col rounded-lg border border-slate-200 bg-white" data-embedder={embedder}>
-      <h2 id="chat-h" className="border-b border-slate-200 px-3 py-2 text-sm font-semibold">
+    <section aria-labelledby="chat-h" className="flex min-h-[320px] flex-1 flex-col rounded-lg border border-line bg-surface" data-embedder={embedder}>
+      <h2 id="chat-h" className="border-b border-line px-3 py-2 text-sm font-semibold">
         Conversation with {patientName}
       </h2>
       <div className="min-h-0 flex-1 space-y-2 overflow-y-auto p-3" data-testid="chat-log">
         {turns.length === 0 && streaming === null && (
-          <p className="text-sm text-slate-500">Greet the patient and introduce yourself to begin. Everything you type is part of the transcript that is graded.</p>
+          <p className="text-sm text-ink-3">Greet the patient and introduce yourself to begin. Everything you type is part of the transcript that is graded.</p>
         )}
         {turns.map((a) =>
           a.type === "say" ? (
@@ -184,7 +187,7 @@ export function ChatPanel({
         </p>
       )}
       {(voice.listening || voice.error || !supported) && (
-        <p className={`px-3 pt-1 text-xs ${voice.error || !supported ? "text-amber-800" : "text-cyan-800"}`} aria-live="polite" data-testid="voice-status">
+        <p className={`px-3 pt-1 text-xs ${voice.error || !supported ? "text-amber-800" : "text-brand-strong"}`} aria-live="polite" data-testid="voice-status">
           {!supported
             ? "Voice input isn't available in this browser (try Chrome, Edge or Safari). Type instead."
             : voice.error
@@ -192,7 +195,7 @@ export function ChatPanel({
               : `Listening… ${voice.interim}`}
         </p>
       )}
-      <form onSubmit={submit} className="flex gap-2 border-t border-slate-200 p-2">
+      <form onSubmit={submit} className="flex gap-2 border-t border-line p-2">
         <button
           type="button"
           disabled={disabled || !supported || streaming !== null}
@@ -214,7 +217,7 @@ export function ChatPanel({
           onKeyUp={(e) => {
             if (e.key === "Enter" || e.key === " ") ptt.current?.release();
           }}
-          className={`rounded-md px-3 py-2 text-sm font-medium ${voice.listening ? "bg-red-600 text-white" : "border border-slate-300 bg-white text-slate-700"} disabled:opacity-50`}
+          className={`rounded-md px-3 py-2 text-sm font-medium ${voice.listening ? "bg-red-600 text-white" : "border border-line-strong bg-white text-ink-2"} disabled:opacity-50`}
         >
           {voice.listening ? "● Rec" : "Hold to talk"}
         </button>
@@ -233,14 +236,14 @@ export function ChatPanel({
           disabled={disabled}
           maxLength={2000}
           autoComplete="off"
-          placeholder={disabled ? "Station finished" : "Ask the patient…"}
-          className="min-w-0 flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm"
+          placeholder={disabled ? (disabledReason ?? "Station finished") : "Ask the patient…"}
+          className="min-w-0 flex-1 rounded-md border border-line-strong px-3 py-2 text-sm"
         />
-        <button type="submit" disabled={disabled || streaming !== null || !text.trim()} className="rounded-md bg-cyan-700 px-4 py-2 text-sm font-medium text-white disabled:opacity-50">
+        <button type="submit" disabled={disabled || streaming !== null || !text.trim()} className="rounded-md bg-brand px-4 py-2 text-sm font-medium text-white disabled:opacity-50">
           Send
         </button>
       </form>
-      <div className="flex flex-wrap gap-4 px-3 pb-2 text-xs text-slate-600">
+      <div className="flex flex-wrap gap-4 px-3 pb-2 text-xs text-ink-3">
         <label className="flex items-center gap-1.5">
           <input type="checkbox" checked={autoSend} onChange={(e) => setAutoSend(e.target.checked)} disabled={!supported} />
           Send speech automatically
@@ -257,18 +260,18 @@ export function ChatPanel({
         )}
       </div>
       {enhanced.state.status === "confirm" && (
-        <div className="mx-3 mb-2 flex flex-wrap items-center gap-2 rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5 text-xs text-slate-700" data-testid="enhanced-confirm">
+        <div className="mx-3 mb-2 flex flex-wrap items-center gap-2 rounded-md border border-line bg-subtle px-2 py-1.5 text-xs text-ink-2" data-testid="enhanced-confirm">
           <span>Downloads a {enhanced.sizeMB} MB language model once, into this browser. Continue?</span>
-          <button type="button" className="rounded bg-cyan-700 px-2 py-0.5 font-medium text-white" onClick={() => void enhanced.load()}>
+          <button type="button" className="rounded bg-brand px-2 py-0.5 font-medium text-white" onClick={() => void enhanced.load()}>
             Download
           </button>
-          <button type="button" className="rounded border border-slate-300 px-2 py-0.5" onClick={enhanced.turnOff}>
+          <button type="button" className="rounded border border-line-strong px-2 py-0.5" onClick={enhanced.turnOff}>
             Not now
           </button>
         </div>
       )}
       {enhanced.state.status === "loading" && (
-        <p className="px-3 pb-2 text-xs text-slate-600" aria-live="polite">
+        <p className="px-3 pb-2 text-xs text-ink-3" aria-live="polite">
           Loading the enhanced patient… {Math.round(enhanced.state.progress * 100)}%
         </p>
       )}
@@ -284,11 +287,11 @@ export function ChatPanel({
 function Bubble({ who, text, mine, streaming, original }: { who: string; text: string; mine?: boolean; streaming?: boolean; original?: string }) {
   return (
     <div className={`flex ${mine ? "justify-end" : "justify-start"}`} data-streaming={streaming || undefined} aria-busy={streaming || undefined}>
-      <div className={`max-w-[85%] rounded-lg px-3 py-2 text-sm ${mine ? "bg-cyan-700 text-white" : "bg-slate-100"}`}>
-        <span className={`block text-[10px] font-semibold uppercase ${mine ? "text-cyan-100" : "text-slate-500"}`}>
+      <div className={`max-w-[85%] rounded-lg px-3 py-2 text-sm ${mine ? "bg-brand text-white" : "bg-subtle"}`}>
+        <span className={`block text-[10px] font-semibold uppercase ${mine ? "text-cyan-100" : "text-ink-3"}`}>
           {who}
           {original && (
-            <span className="ml-1 font-normal normal-case text-slate-400" title={`Reworded in your browser. Original: ${original}`} data-testid="reworded">
+            <span className="ml-1 font-normal normal-case text-muted" title={`Reworded in your browser. Original: ${original}`} data-testid="reworded">
               · reworded
             </span>
           )}

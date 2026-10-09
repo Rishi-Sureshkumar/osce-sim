@@ -22,7 +22,7 @@ export function GradeTrigger({ sessionId }: { sessionId: string }) {
       {error}
     </p>
   ) : (
-    <p className="animate-pulse rounded-md bg-cyan-50 p-3 text-sm text-cyan-900" data-testid="grading">
+    <p className="animate-pulse rounded-md bg-brand-soft p-3 text-sm text-cyan-900" data-testid="grading">
       Grading your station… this can take up to a minute.
     </p>
   );

@@ -24,17 +24,17 @@ export function ChatTester({ cases }: { cases: { id: string; title: string }[] }
   return (
     <main className="mx-auto max-w-4xl space-y-4 p-6 text-sm">
       <h1 className="text-xl font-semibold">Chat tester</h1>
-      <p className="text-slate-600">How the deterministic patient understands a line. Replies are fixed case text; nothing is generated.</p>
+      <p className="text-ink-3">How the deterministic patient understands a line. Replies are fixed case text; nothing is generated.</p>
       <div className="flex flex-wrap gap-2">
-        <select aria-label="Case" value={caseId} onChange={(e) => setCaseId(e.target.value)} className="rounded border border-slate-300 px-2 py-1">
+        <select aria-label="Case" value={caseId} onChange={(e) => setCaseId(e.target.value)} className="rounded border border-line-strong px-2 py-1">
           {cases.map((c) => (
             <option key={c.id} value={c.id}>
               {c.title}
             </option>
           ))}
         </select>
-        <input aria-label="Student line" value={text} onChange={(e) => setText(e.target.value)} onKeyDown={(e) => e.key === "Enter" && void run()} placeholder="Do you get short of breath lying flat?" className="min-w-80 flex-1 rounded border border-slate-300 px-2 py-1" />
-        <button type="button" onClick={() => void run()} className="rounded bg-slate-800 px-3 py-1 text-white">
+        <input aria-label="Student line" value={text} onChange={(e) => setText(e.target.value)} onKeyDown={(e) => e.key === "Enter" && void run()} placeholder="Do you get short of breath lying flat?" className="min-w-80 flex-1 rounded border border-line-strong px-2 py-1" />
+        <button type="button" onClick={() => void run()} className="rounded bg-ink px-3 py-1 text-white">
           Match
         </button>
       </div>
@@ -45,13 +45,13 @@ export function ChatTester({ cases }: { cases: { id: string; title: string }[] }
             <b>Normalised:</b> <code>{res.normalized}</code> · embeddings: {res.embedding} · accept ≥ {res.thresholds.accept} with margin ≥ {res.thresholds.margin}
           </p>
           {res.clauses.map((c, i) => (
-            <div key={i} className="rounded border border-slate-200 p-3">
+            <div key={i} className="rounded border border-line p-3">
               <p>
                 <b>Clause {i + 1}:</b> <code>{c.text}</code> → <b>{c.target ?? "no match"}</b> ({c.via}, {c.score.toFixed(3)})
               </p>
               <table className="mt-2 w-full text-xs">
                 <thead>
-                  <tr className="text-left text-slate-500">
+                  <tr className="text-left text-ink-3">
                     <th>target</th>
                     <th>score</th>
                     <th>cosine</th>
@@ -69,7 +69,7 @@ export function ChatTester({ cases }: { cases: { id: string; title: string }[] }
               </table>
             </div>
           ))}
-          <p className="rounded bg-slate-50 p-3">
+          <p className="rounded bg-subtle p-3">
             <b>Patient:</b> {res.reply}
           </p>
         </div>

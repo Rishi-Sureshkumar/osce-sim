@@ -12,14 +12,14 @@
 import { useGLTF } from "@react-three/drei";
 import type { ThreeEvent } from "@react-three/fiber";
 import { useEffect, useMemo } from "react";
-import { BufferAttribute, BufferGeometry, DoubleSide, Quaternion, SkinnedMesh, Vector3 } from "three";
+import { BufferAttribute, BufferGeometry, CatmullRomCurve3, DoubleSide, Quaternion, SkinnedMesh, TubeGeometry, Vector3 } from "three";
 import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
 import type { DrapeSection } from "@/domain/schemas";
 import type { Pose } from "@/exam3d/regionAnchors";
-import { TAB_BIND, bodyAxes, gownRollFrames, nearestVertex } from "./drapeGeometry";
+import { TAB_BIND, bodyAxes, gownRollLines, nearestVertex, trunkMask } from "./drapeGeometry";
 import { PATIENT_VARIANTS } from "./patientRig.generated";
 import type { VariantId } from "./rig";
-import { OWNER_SECTION, buildSheet, classifySheet, sheetCuts, sheetMesh, sheetOwnerAt, skinWorld, type Sheet, type SkinData } from "./sheetGeometry";
+import { OWNER_SECTION, buildSheet, classifySheet, sheetCuts, sheetMesh, sheetOwnerAt, skinNormal, skinWorld, type Sheet, type SkinData } from "./sheetGeometry";
 
 const SHEET_COLOR = "#a8cad8";
 const GOWN_EDGE = "#9ec5d4";
@@ -44,16 +44,21 @@ export function useSkinData(variant: VariantId): SkinData | null {
     const sm = skin as SkinnedMesh;
     const g = sm.geometry;
     const pos = g.getAttribute("position");
+    const nrm = g.getAttribute("normal");
     const idx = g.getAttribute("skinIndex");
     const wts = g.getAttribute("skinWeight");
     const count = pos.count;
     const bind = new Float32Array(count * 3);
+    const normals = new Float32Array(count * 3);
     const joints = new Uint16Array(count * 4);
     const weights = new Float32Array(count * 4);
     for (let i = 0; i < count; i++) {
       bind[i * 3] = pos.getX(i);
       bind[i * 3 + 1] = pos.getY(i);
       bind[i * 3 + 2] = pos.getZ(i);
+      normals[i * 3] = nrm.getX(i);
+      normals[i * 3 + 1] = nrm.getY(i);
+      normals[i * 3 + 2] = nrm.getZ(i);
       const w = [wts.getX(i), wts.getY(i), wts.getZ(i), wts.getW(i)];
       const sum = w[0]! + w[1]! + w[2]! + w[3]! || 1;
       for (let k = 0; k < 4; k++) weights[i * 4 + k] = w[k]! / sum;
@@ -62,7 +67,7 @@ export function useSkinData(variant: VariantId): SkinData | null {
       joints[i * 4 + 2] = idx.getZ(i);
       joints[i * 4 + 3] = idx.getW(i);
     }
-    return { bind, joints, weights, jointNames: sm.skeleton.bones.map((b) => b.name), count };
+    return { bind, joints, weights, jointNames: sm.skeleton.bones.map((b) => b.name), count, normals };
   }, [gltf]);
 }
 
@@ -96,7 +101,12 @@ export function Drapes({
   }, [sheet, legs.leg_left, legs.leg_right]);
   useEffect(() => () => geom?.dispose(), [geom]);
 
-  const rolls = useMemo(() => gownRollFrames(pose), [pose]);
+  const trunk = useMemo(() => (skin ? trunkMask(skin) : null), [skin]);
+  const rolls = useMemo(() => {
+    if (!skin || !trunk) return null;
+    const arms = trunk.map((t) => 1 - t);
+    return gownRollLines(pose, skinWorld(skin, pose, trunk), (i) => skinNormal(skin, pose, i), skinWorld(skin, pose, arms));
+  }, [skin, trunk, pose]);
   const tabs = useMemo(() => (skin ? gownTabs(skin, pose) : null), [skin, pose]);
 
   const onSheet = onDrape
@@ -131,9 +141,11 @@ export function Drapes({
         </>
       )}
       {/* folded gown edges (drawn only) */}
-      {chestBare && <Roll name="roll-chest" frame={rolls.chest} />}
-      {!chestCovered && !chestBare && <Roll name="roll-chest" frame={rolls.sternum} />}
-      {!sections.abdomen && <Roll name="roll-abdomen" frame={rolls.abdomen} />}
+      {/* the chest gown rolled down onto the abdomen panel, the abdomen gown pulled up onto the chest panel,
+          one side of the chest gathered along the sternum; with the whole front uncovered it is folded away */}
+      {rolls && chestBare && sections.abdomen && <Roll name="roll-chest" points={rolls.chest} />}
+      {rolls && !chestCovered && !chestBare && <Roll name="roll-chest" points={rolls.sternum} />}
+      {rolls && !sections.abdomen && chestCovered && <Roll name="roll-abdomen" points={rolls.abdomen} />}
     </group>
   );
 }
@@ -146,12 +158,29 @@ export function chestChanges(sections: Record<DrapeSection, boolean>): DrapeChan
 
 const noRay = () => null;
 
-function Roll({ name, frame }: { name: string; frame: { pos: [number, number, number]; q: Quaternion; len: number } }) {
+const ROLL_RADIUS = 0.011;
+
+/** A folded gown edge: a tube along a line on the skin, with rounded ends. */
+function Roll({ name, points }: { name: string; points: [number, number, number][] }) {
+  const geom = useMemo(
+    () => (points.length >= 2 ? new TubeGeometry(new CatmullRomCurve3(points.map((p) => new Vector3(...p))), points.length * 4, ROLL_RADIUS, 8, false) : null),
+    [points],
+  );
+  useEffect(() => () => geom?.dispose(), [geom]);
+  if (!geom) return null;
+  const ends = [points[0]!, points[points.length - 1]!];
   return (
-    <mesh position={frame.pos} quaternion={frame.q} name={name} castShadow raycast={noRay}>
-      <capsuleGeometry args={[0.012, frame.len, 4, 10]} />
-      <meshStandardMaterial color={GOWN_EDGE} roughness={0.92} />
-    </mesh>
+    <group name={name}>
+      <mesh geometry={geom} name={name} castShadow raycast={noRay}>
+        <meshStandardMaterial color={GOWN_EDGE} roughness={0.92} />
+      </mesh>
+      {ends.map((p, i) => (
+        <mesh key={i} position={p} raycast={noRay}>
+          <sphereGeometry args={[ROLL_RADIUS, 10, 8]} />
+          <meshStandardMaterial color={GOWN_EDGE} roughness={0.92} />
+        </mesh>
+      ))}
+    </group>
   );
 }
 

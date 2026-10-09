@@ -41,7 +41,7 @@ export function MistakeAlerts({ actions }: { actions: Action[] }) {
             !
           </span>
           <span className="min-w-0 flex-1">{m.payload.message}</span>
-          <button type="button" aria-label="Dismiss" onClick={() => setDismissed((d) => new Set(d).add(m.id))} className="shrink-0 rounded px-1 text-slate-500 hover:text-slate-900">
+          <button type="button" aria-label="Dismiss" onClick={() => setDismissed((d) => new Set(d).add(m.id))} className="shrink-0 rounded px-1 text-ink-3 hover:text-ink">
             ✕
           </button>
         </li>

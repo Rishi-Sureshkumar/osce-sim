@@ -54,15 +54,15 @@ export function EncounterClock({
     }
   });
 
-  if (now === null) return <div className="rounded-md bg-slate-100 px-3 py-1 font-mono text-lg">--:--</div>;
+  if (now === null) return <div className="rounded-md bg-subtle px-3 py-1 font-mono text-lg">--:--</div>;
   const label = st.phase === "corridor" ? "Waiting to begin" : st.phase === "encounter" ? "Encounter" : st.phase === "pen" ? "Post-encounter note" : "Finished";
   const shown = left ?? (st.phase === "pen" && st.endedAt !== null ? t - st.endedAt : st.beganAt !== null && st.phase === "encounter" ? t - st.beganAt : null);
   const warn = left !== null && ((st.phase === "encounter" && left <= 5 * 60_000) || (st.phase === "pen" && left <= 2 * 60_000));
   return (
     <div className="flex items-center gap-2" data-testid="encounter-clock" data-phase={st.phase}>
-      <span className="text-xs text-slate-600">{label}</span>
+      <span className="text-xs text-ink-3">{label}</span>
       <span
-        className={`rounded-md px-3 py-1 font-mono text-lg tabular-nums ${left === 0 ? "bg-red-600 text-white" : warn ? "bg-amber-100 text-amber-900" : "bg-slate-100"}`}
+        className={`rounded-md px-3 py-1 font-mono text-lg tabular-nums ${left === 0 ? "bg-red-600 text-white" : warn ? "bg-amber-100 text-amber-900" : "bg-subtle"}`}
         aria-label={left !== null ? "Time remaining" : "Time elapsed"}
         data-testid="exam-timer"
       >

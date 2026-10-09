@@ -63,11 +63,11 @@ export function PenForm({ sessionId, initial, lockNow, endReason }: { sessionId:
   const filled = pen.diagnoses.some((d) => d.diagnosis.trim());
   const ro = lockNow || busy;
   return (
-    <section className="mx-auto w-full max-w-3xl rounded-lg border border-slate-200 bg-white p-5 shadow-sm" aria-labelledby="pen-h" data-testid="pen-form">
+    <section className="mx-auto w-full max-w-3xl rounded-lg border border-line bg-surface p-5 shadow-sm" aria-labelledby="pen-h" data-testid="pen-form">
       <h2 id="pen-h" className="text-lg font-semibold">
         Post-encounter note
       </h2>
-      <p className="text-sm text-slate-600">
+      <p className="text-sm text-ink-3">
         {endReason === "time_up" ? "Encounter time is up. " : "You have left the room. "}Write your note. It locks when the note time runs out.
       </p>
       <form
@@ -79,20 +79,20 @@ export function PenForm({ sessionId, initial, lockNow, endReason }: { sessionId:
       >
         <label className="block text-sm">
           <span className="font-medium">History</span>
-          <span className="ml-2 text-xs text-slate-500">pertinent positives and negatives</span>
-          <textarea value={pen.history} onChange={(e) => update({ history: e.target.value })} readOnly={ro} rows={6} maxLength={6000} className="mt-1 w-full rounded-md border border-slate-300 p-2" />
+          <span className="ml-2 text-xs text-ink-3">pertinent positives and negatives</span>
+          <textarea value={pen.history} onChange={(e) => update({ history: e.target.value })} readOnly={ro} rows={6} maxLength={6000} className="mt-1 w-full rounded-md border border-line-strong p-2" />
         </label>
         <label className="block text-sm">
           <span className="font-medium">Physical examination</span>
-          <span className="ml-2 text-xs text-slate-500">include only maneuvers you performed</span>
-          <textarea value={pen.exam} onChange={(e) => update({ exam: e.target.value })} readOnly={ro} rows={6} maxLength={6000} className="mt-1 w-full rounded-md border border-slate-300 p-2" />
+          <span className="ml-2 text-xs text-ink-3">include only maneuvers you performed</span>
+          <textarea value={pen.exam} onChange={(e) => update({ exam: e.target.value })} readOnly={ro} rows={6} maxLength={6000} className="mt-1 w-full rounded-md border border-line-strong p-2" />
         </label>
         <fieldset className="space-y-2 text-sm">
           <legend className="font-medium">Diagnoses (up to 3, most likely first)</legend>
           {pen.diagnoses.map((d, i) => (
             <div key={i} className="grid gap-1 sm:grid-cols-[1fr_1.4fr]">
-              <input value={d.diagnosis} onChange={(e) => setDx(i, { diagnosis: e.target.value })} readOnly={ro} aria-label={`Diagnosis ${i + 1}`} placeholder={`${i + 1}.`} maxLength={300} className="rounded-md border border-slate-300 px-2 py-1.5" />
-              <input value={d.support ?? ""} onChange={(e) => setDx(i, { support: e.target.value })} readOnly={ro} aria-label={`Supporting findings ${i + 1}`} placeholder="Supporting findings (optional)" maxLength={2000} className="rounded-md border border-slate-300 px-2 py-1.5" />
+              <input value={d.diagnosis} onChange={(e) => setDx(i, { diagnosis: e.target.value })} readOnly={ro} aria-label={`Diagnosis ${i + 1}`} placeholder={`${i + 1}.`} maxLength={300} className="rounded-md border border-line-strong px-2 py-1.5" />
+              <input value={d.support ?? ""} onChange={(e) => setDx(i, { support: e.target.value })} readOnly={ro} aria-label={`Supporting findings ${i + 1}`} placeholder="Supporting findings (optional)" maxLength={2000} className="rounded-md border border-line-strong px-2 py-1.5" />
             </div>
           ))}
         </fieldset>
@@ -102,10 +102,10 @@ export function PenForm({ sessionId, initial, lockNow, endReason }: { sessionId:
           </p>
         )}
         <div className="flex items-center justify-between">
-          <span className="text-xs text-slate-500" data-testid="pen-saved">
+          <span className="text-xs text-ink-3" data-testid="pen-saved">
             {lockNow ? "Time is up — submitting your note…" : savedAt ? `Draft saved ${new Date(savedAt).toLocaleTimeString()}` : "Autosaves every 5 seconds"}
           </span>
-          <button type="submit" disabled={ro || !filled} className="rounded-md bg-cyan-700 px-4 py-2 text-sm font-medium text-white disabled:opacity-50">
+          <button type="submit" disabled={ro || !filled} className="rounded-md bg-brand px-4 py-2 text-sm font-medium text-white disabled:opacity-50">
             {busy ? "Submitting…" : "Submit note"}
           </button>
         </div>

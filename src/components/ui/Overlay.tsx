@@ -89,10 +89,18 @@ function push(entry: Entry) {
     document.addEventListener("mousedown", onMouseDown, true);
   }
   stack.push(entry);
+  syncModalFlag();
+}
+/** <html data-modal> while a modal or confirm dialog is open (toasts step aside: V-TOASTSTACK) */
+function syncModalFlag() {
+  const modal = stack.some((e) => e.kind === "modal" || e.kind === "confirm");
+  if (modal) document.documentElement.dataset.modal = "";
+  else delete document.documentElement.dataset.modal;
 }
 function pop(entry: Entry) {
   const i = stack.indexOf(entry);
   if (i >= 0) stack.splice(i, 1);
+  syncModalFlag();
   if (!stack.length) {
     document.removeEventListener("keydown", onKeyDown, true);
     document.removeEventListener("pointerdown", onPointerDown, true);
@@ -169,7 +177,7 @@ export function Dialog({ id, kind, title, onClose, children, className, backdrop
           onClick={() => closeRef.current()}
           aria-label="Close"
           data-dialog-close=""
-          className="-mt-1 -mr-1 shrink-0 rounded px-2 py-0.5 text-lg leading-none text-slate-500 hover:bg-slate-100 hover:text-slate-800 focus-visible:ring-2 focus-visible:ring-cyan-600"
+          className="-mt-1 -mr-1 shrink-0 rounded px-2 py-0.5 text-lg leading-none text-ink-3 hover:bg-subtle hover:text-ink-2 focus-visible:ring-2 focus-visible:ring-cyan-600"
         >
           ✕
         </button>

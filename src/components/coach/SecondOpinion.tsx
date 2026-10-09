@@ -29,29 +29,29 @@ export function SecondOpinion({ label, guidance, lines }: { label: string; guida
   };
   if (state === "idle")
     return (
-      <button type="button" className="mt-1 text-xs text-cyan-700 hover:underline" onClick={() => (shared ? void ask() : setState("confirm"))}>
+      <button type="button" className="mt-1 text-xs text-brand hover:underline" onClick={() => (shared ? void ask() : setState("confirm"))}>
         Second opinion (in-browser model, advisory)
       </button>
     );
   if (state === "confirm")
     return (
-      <p className="mt-1 text-xs text-slate-600">
+      <p className="mt-1 text-xs text-ink-3">
         Downloads a {WEBLLM_MODEL.downloadMB} MB model once.{" "}
-        <button type="button" className="text-cyan-700 hover:underline" onClick={() => void ask()}>
+        <button type="button" className="text-brand hover:underline" onClick={() => void ask()}>
           Continue
         </button>{" "}
         ·{" "}
-        <button type="button" className="text-slate-500 hover:underline" onClick={() => setState("idle")}>
+        <button type="button" className="text-ink-3 hover:underline" onClick={() => setState("idle")}>
           Cancel
         </button>
       </p>
     );
-  if (state === "working") return <p className="mt-1 text-xs text-slate-500">Asking the in-browser model…</p>;
+  if (state === "working") return <p className="mt-1 text-xs text-ink-3">Asking the in-browser model…</p>;
   return (
-    <p className="mt-1 text-xs text-slate-600" data-testid="second-opinion">
+    <p className="mt-1 text-xs text-ink-3" data-testid="second-opinion">
       Advisory: <span className="font-medium">{state.verdict === "likely_credit" ? "likely credit" : state.verdict === "likely_no_credit" ? "likely no credit" : "unsure"}</span>
       {state.quote ? <> — “{state.quote}”</> : null}
-      {state.note ? <span className="text-slate-500"> · {state.note}</span> : null}
+      {state.note ? <span className="text-ink-3"> · {state.note}</span> : null}
     </p>
   );
 }

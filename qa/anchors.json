@@ -4525,7 +4525,7 @@
   {
    "id": "anchors:occlusion:male:sitting_dangling:spine_cervical",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:sitting_dangling:spine_thoracic",
@@ -5255,7 +5255,7 @@
   {
    "id": "anchors:occlusion:male:left_lateral_decubitus:spine_cervical",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the neck_back shot the ray first meets skin (neck) 0.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:male:left_lateral_decubitus:spine_lumbar",
@@ -9785,7 +9785,7 @@
   {
    "id": "anchors:occlusion:female:sitting_dangling:spine_cervical",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the neck_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:sitting_dangling:spine_thoracic",
@@ -10515,7 +10515,7 @@
   {
    "id": "anchors:occlusion:female:left_lateral_decubitus:spine_cervical",
    "status": "PASS",
-   "detail": "from the chest_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
+   "detail": "from the neck_back shot the ray first meets skin (torso) 0.0 cm from the anchor (tolerance 3)"
   },
   {
    "id": "anchors:occlusion:female:left_lateral_decubitus:spine_lumbar",
@@ -17319,7 +17319,7 @@
    "variant": "male",
    "position": "sitting_dangling",
    "regionId": "spine_cervical",
-   "shot": "chest_back",
+   "shot": "neck_back",
    "first": "skin",
    "part": "neck",
    "offCm": 0
@@ -18404,7 +18404,7 @@
    "variant": "male",
    "position": "left_lateral_decubitus",
    "regionId": "spine_cervical",
-   "shot": "chest_back",
+   "shot": "neck_back",
    "first": "skin",
    "part": "neck",
    "offCm": 0
@@ -19502,7 +19502,7 @@
    "shot": "chest_front",
    "first": "skin",
    "part": "torso",
-   "offCm": 0.01
+   "offCm": 0
   },
   {
    "check": "occlusion",
@@ -25214,7 +25214,7 @@
    "variant": "female",
    "position": "sitting_dangling",
    "regionId": "spine_cervical",
-   "shot": "chest_back",
+   "shot": "neck_back",
    "first": "skin",
    "part": "torso",
    "offCm": 0
@@ -26299,7 +26299,7 @@
    "variant": "female",
    "position": "left_lateral_decubitus",
    "regionId": "spine_cervical",
-   "shot": "chest_back",
+   "shot": "neck_back",
    "first": "skin",
    "part": "torso",
    "offCm": 0

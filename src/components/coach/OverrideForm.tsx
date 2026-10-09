@@ -50,15 +50,15 @@ export function OverrideForm({ sessionId, markSheetId, itemId, maxPoints, curren
     <form onSubmit={submit} className="mt-2 flex flex-wrap items-end gap-2 rounded-md bg-indigo-50 p-2 text-xs">
       <label className="flex flex-col">
         <span>Points (max {maxPoints})</span>
-        <input type="number" step="0.25" min={0} max={maxPoints} value={points} onChange={(e) => setPoints(e.target.value)} className="w-20 rounded border border-slate-300 px-1 py-1" required />
+        <input type="number" step="0.25" min={0} max={maxPoints} value={points} onChange={(e) => setPoints(e.target.value)} className="w-20 rounded border border-line-strong px-1 py-1" required />
       </label>
       <label className="flex min-w-48 flex-1 flex-col">
         <span>Reason</span>
-        <input value={reason} onChange={(e) => setReason(e.target.value)} className="rounded border border-slate-300 px-1 py-1" required minLength={3} maxLength={1000} />
+        <input value={reason} onChange={(e) => setReason(e.target.value)} className="rounded border border-line-strong px-1 py-1" required minLength={3} maxLength={1000} />
       </label>
       <label className="flex flex-col">
         <span>Your name</span>
-        <input value={coach} onChange={(e) => setCoach(e.target.value)} className="w-32 rounded border border-slate-300 px-1 py-1" required maxLength={80} />
+        <input value={coach} onChange={(e) => setCoach(e.target.value)} className="w-32 rounded border border-line-strong px-1 py-1" required maxLength={80} />
       </label>
       <button disabled={busy} className="rounded bg-indigo-700 px-3 py-1.5 text-white disabled:opacity-50">
         Save

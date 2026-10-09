@@ -10,8 +10,8 @@
  */
 import { RoundedBox } from "@react-three/drei";
 import { useFrame, type ThreeEvent } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
-import { DoubleSide, ExtrudeGeometry, LatheGeometry, Path, Shape, Vector2, type Group } from "three";
+import { useEffect, useMemo, useRef } from "react";
+import { CanvasTexture, DoubleSide, ExtrudeGeometry, LatheGeometry, Path, SRGBColorSpace, Shape, Vector2, type Group } from "three";
 import { TABLE, type VariantId } from "../rig";
 import { HEAD_PIVOT, SIDE_PILLOW, TABLE_PARTS } from "./tableGeometry";
 import { Dispenser } from "./Dispenser";
@@ -167,19 +167,65 @@ function DoorWall({ door: doorRef, placard, onDoor }: { door: { current: number 
         </mesh>
         <Cyl p={[w - 0.1, 1.0, 0.05]} r={0.012} h={0.14} c="#cbd5e1" rot={[0, 0, Math.PI / 2]} metal={0.8} rough={0.3} />
         <Cyl p={[w - 0.1, 1.0, -0.05]} r={0.012} h={0.14} c="#cbd5e1" rot={[0, 0, Math.PI / 2]} metal={0.8} rough={0.3} />
-        {/* placard on the corridor side */}
-        <mesh position={[w / 2, 1.45, 0.03]} raycast={noRay}>
-          <planeGeometry args={[0.36, 0.26]} />
-          <meshStandardMaterial color="#f8fafc" roughness={0.6} />
-        </mesh>
-        {placard?.length ? (
-          <mesh position={[w / 2, 1.45, 0.031]} raycast={noRay}>
-            <planeGeometry args={[0.3, 0.02]} />
-            <meshStandardMaterial color="#1e293b" />
-          </mesh>
-        ) : null}
+        {/* placard on the corridor side, with the door instructions printed on it (V-PLACARD) */}
+        <Placard lines={placard} position={[w / 2, 1.45, 0.03]} />
       </group>
     </group>
+  );
+}
+
+/** The door placard: the door instructions drawn onto a canvas texture (no web fonts, nothing fetched). */
+function Placard({ lines, position }: { lines?: string[]; position: [number, number, number] }) {
+  const texture = useMemo(() => {
+    if (typeof document === "undefined") return null;
+    const W = 720;
+    const H = 520;
+    const c = document.createElement("canvas");
+    c.width = W;
+    c.height = H;
+    const g = c.getContext("2d");
+    if (!g) return null;
+    g.fillStyle = "#f8fafc";
+    g.fillRect(0, 0, W, H);
+    g.strokeStyle = "#94a3b8";
+    g.lineWidth = 6;
+    g.strokeRect(3, 3, W - 6, H - 6);
+    g.fillStyle = "#0e7490";
+    g.fillRect(0, 0, W, 64);
+    g.fillStyle = "#ffffff";
+    g.font = "600 30px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif";
+    g.textBaseline = "middle";
+    g.fillText("DOOR INSTRUCTIONS", 28, 33);
+    g.fillStyle = "#0f172a";
+    g.textBaseline = "top";
+    let y = 86;
+    const wrap = (text: string, font: string, lineH: number) => {
+      g.font = font;
+      const words = text.split(/\s+/);
+      let line = "";
+      for (const word of words) {
+        const next = line ? `${line} ${word}` : word;
+        if (g.measureText(next).width > W - 56 && line) {
+          if (y + lineH <= H - 16) g.fillText(line, 28, y);
+          y += lineH;
+          line = word;
+        } else line = next;
+      }
+      if (line && y + lineH <= H - 16) g.fillText(line, 28, y);
+      y += lineH + 8;
+    };
+    (lines ?? []).forEach((text, i) => wrap(text, i === 0 ? "700 38px system-ui, Helvetica, Arial, sans-serif" : "400 29px system-ui, Helvetica, Arial, sans-serif", i === 0 ? 46 : 36));
+    const t = new CanvasTexture(c);
+    t.colorSpace = SRGBColorSpace;
+    t.anisotropy = 4;
+    return t;
+  }, [lines]);
+  useEffect(() => () => texture?.dispose(), [texture]);
+  return (
+    <mesh position={position} raycast={noRay} name="door-placard">
+      <planeGeometry args={[0.36, 0.26]} />
+      <meshStandardMaterial color="#ffffff" map={texture ?? undefined} roughness={0.6} />
+    </mesh>
   );
 }
 
@@ -273,7 +319,8 @@ export function ExamTable({
   onHeadControl?: () => void;
 }) {
   const top = TABLE.topY;
-  const { headLen, footLen, mattress, cabinet, step } = TABLE_PARTS;
+  const { headLen: fullHead, hingeGap, footLen, mattress, cabinet, step } = TABLE_PARTS;
+  const headLen = fullHead - hingeGap;
   // the head section pivots where the patient's trunk bends (tableGeometry.ts HEAD_PIVOT)
   const { dy, dz } = HEAD_PIVOT[variant];
   const head = useRef<Group>(null);
@@ -293,8 +340,8 @@ export function ExamTable({
       <Box p={[0, top + 0.002, footLen / 2]} s={[TABLE.width * 0.82, 0.002, footLen]} c="#f8fafc" r={0.9} shadow={false} />
       {/* head section hinges at the patient's hips */}
       <group ref={head} position={[0, top - mattress / 2 + dy, dz]}>
-        <Box p={[0, -dy, -headLen / 2 - dz]} s={[TABLE.width, mattress, headLen]} c={vinyl} r={0.55} />
-        <Box p={[0, 0.062 - dy, -headLen / 2 - dz]} s={[TABLE.width * 0.82, 0.002, headLen]} c="#f8fafc" r={0.9} shadow={false} />
+        <Box p={[0, -dy, -hingeGap - headLen / 2 - dz]} s={[TABLE.width, mattress, headLen]} c={vinyl} r={0.55} />
+        <Box p={[0, 0.062 - dy, -hingeGap - headLen / 2 - dz]} s={[TABLE.width * 0.82, 0.002, headLen]} c="#f8fafc" r={0.9} shadow={false} />
         {/* pillow (only when lying back) */}
         <group ref={pillow}>
         <mesh position={[0, 0.095 - dy, -headLen + 0.16 - dz]} rotation={[0, 0, Math.PI / 2]} scale={[0.7, 1, 1]} raycast={noRay} castShadow>

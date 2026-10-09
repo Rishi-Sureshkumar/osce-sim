@@ -7,6 +7,8 @@ import { TABLE, type VariantId } from "../rig";
 
 export const TABLE_PARTS = {
   headLen: 0.85,
+  /** gap between the head and foot mattresses at the hinge (their end faces z-fought: V-SEAM / V-ZFIGHT) */
+  hingeGap: 0.006,
   footLen: TABLE.footLen,
   mattress: 0.12,
   cabinet: { width: 0.56, depth: 1.4, z: 0.15 },
@@ -55,7 +57,8 @@ export const SIDE_PILLOW = { center: [TABLE.x - 0.06, TABLE.topY + 0.065, TABLE.
 /** Solid boxes of the table at a head-section angle (degrees from flat). */
 export function tableBoxes(headAngleDeg: number, variant: VariantId = "male"): OrientedBox[] {
   const top = TABLE.topY;
-  const { headLen, footLen, mattress, cabinet, step } = TABLE_PARTS;
+  const { headLen: fullHead, hingeGap, footLen, mattress, cabinet, step } = TABLE_PARTS;
+  const headLen = fullHead - hingeGap;
   const a = (headAngleDeg * Math.PI) / 180;
   const hingeY = top - 0.06;
   // the head mattress box centre sits headLen/2 toward −Z from the hinge at rest, rotated up by `a` about the pivot
@@ -63,7 +66,7 @@ export function tableBoxes(headAngleDeg: number, variant: VariantId = "male"): O
   const py = hingeY + dy;
   const pz = TABLE.hingeZ + dz;
   const ry = hingeY - py;
-  const rz = TABLE.hingeZ - headLen / 2 - pz;
+  const rz = TABLE.hingeZ - hingeGap - headLen / 2 - pz;
   const headCenter: [number, number, number] = [TABLE.x, py + ry * Math.cos(a) - rz * Math.sin(a), pz + ry * Math.sin(a) + rz * Math.cos(a)];
   return [
     { name: "cabinet", center: [TABLE.x, (top - 0.12) / 2, TABLE.hingeZ + cabinet.z], size: [cabinet.width, top - 0.12, cabinet.depth], rotX: 0 },

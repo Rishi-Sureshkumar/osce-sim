@@ -98,8 +98,10 @@ export const SHOTS: Record<ShotId, Shot> = {
     id: "seated",
     label: "Seated",
     parent: "overview",
-    framing: { kind: "fixed", position: [-1.05, 1.12, 0.65], target: [0, 1.0, -0.35], follow: true },
-    fov: 45,
+    // the conversation view from the stool: aimed a little higher so a sitting patient's head stays in frame (V-FRAME),
+    framing: { kind: "fixed", position: [-1.05, 1.2, 0.65], target: [0, 1.08, -0.35], follow: true },
+    // wide enough for the head of a sitting patient and the table's head lever below
+    fov: 52,
     freeLook: look(30, 0.85, 1.2),
     transitions: ROOM_SHOTS,
   },
@@ -169,7 +171,9 @@ export const SHOTS: Record<ShotId, Shot> = {
     id: "chest_front",
     label: "Chest (front)",
     parent: "overview",
-    framing: { kind: "patient", on: [{ anchor: "cardiac_erbs" }], normalFrom: { landmark: "sternal_notch" }, distance: 0.75, side: 0.18 },
+    // from over the lower chest toward the head (V-CHESTINV: lying flat, the notch's normal put the camera
+    // over the head end and the face showed upside down at the bottom of the frame)
+    framing: { kind: "patient", on: [{ anchor: "cardiac_erbs" }], normalFrom: { landmark: "sternal_notch" }, distance: 0.75, side: 0.18, down: 0.28 },
     fov: 40,
     freeLook: look(35, 0.7, 1.3),
     transitions: ROOM_SHOTS,
@@ -381,6 +385,8 @@ const REGION_SHOT: Record<string, ShotId> = {
   ln_post_auricular: "neck_back",
   ln_occipital: "neck_back",
   ln_post_cervical: "neck_back",
+  // the cervical spine: at the top edge of the back view, under the toolbar (Phase 4 M3)
+  spine_cervical: "neck_back",
   ln_pre_auricular: "face",
   // the back of the limb: the Achilles from beside the ankle; the triceps tendon from behind the elbow
   // (from the back view it is on the arm's outline, and seated the backrest is in the way)

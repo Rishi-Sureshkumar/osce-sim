@@ -11,5 +11,6 @@ export const DIALOG_IDS = [
   "bed-hud",
   "practice-help",
   "finish",
+  "settings",
 ] as const;
 export type DialogId = (typeof DIALOG_IDS)[number];

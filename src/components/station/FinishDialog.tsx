@@ -62,35 +62,35 @@ export function FinishDialog({
         <>
           <label className="block text-sm">
             <span className="font-medium">Summary statement</span>
-            <textarea required value={summary} onChange={(e) => setSummary(e.target.value)} rows={3} maxLength={4000} className="mt-1 w-full rounded-md border border-slate-300 p-2" />
+            <textarea required value={summary} onChange={(e) => setSummary(e.target.value)} rows={3} maxLength={4000} className="mt-1 w-full rounded-md border border-line-strong p-2" />
           </label>
           <fieldset className="text-sm">
             <legend className="font-medium">Differential diagnosis (most likely first)</legend>
             {ddx.map((d, i) => (
               <label key={i} className="mt-1 flex items-center gap-2">
-                <span className="w-5 text-right text-slate-500">{i + 1}.</span>
+                <span className="w-5 text-right text-ink-3">{i + 1}.</span>
                 <input
                   value={d}
                   aria-label={`Differential ${i + 1}`}
                   onChange={(e) => setDdx((xs) => xs.map((x, j) => (j === i ? e.target.value : x)))}
                   maxLength={300}
-                  className="flex-1 rounded-md border border-slate-300 px-2 py-1.5"
+                  className="flex-1 rounded-md border border-line-strong px-2 py-1.5"
                 />
               </label>
             ))}
             {ddx.length < 8 && (
-              <button type="button" onClick={() => setDdx((xs) => [...xs, ""])} className="mt-1 ml-7 text-xs text-cyan-700 underline">
+              <button type="button" onClick={() => setDdx((xs) => [...xs, ""])} className="mt-1 ml-7 text-xs text-brand underline">
                 Add another
               </button>
             )}
           </fieldset>
           <label className="block text-sm">
             <span className="font-medium">Initial plan</span>
-            <textarea required value={plan} onChange={(e) => setPlan(e.target.value)} rows={3} maxLength={4000} className="mt-1 w-full rounded-md border border-slate-300 p-2" />
+            <textarea required value={plan} onChange={(e) => setPlan(e.target.value)} rows={3} maxLength={4000} className="mt-1 w-full rounded-md border border-line-strong p-2" />
           </label>
         </>
       ) : (
-        <p className="text-sm text-slate-600">You won&apos;t be able to examine further after finishing. Your exam will be scored against the FCM-1 mark sheet.</p>
+        <p className="text-sm text-ink-3">You won&apos;t be able to examine further after finishing. Your exam will be scored against the FCM-1 mark sheet.</p>
       )}
       {error && (
         <p role="alert" className="text-sm text-red-700">
@@ -103,7 +103,7 @@ export function FinishDialog({
             Keep going
           </button>
         )}
-        <button type="submit" disabled={busy || (encounter && filled.length === 0)} className="rounded-md bg-cyan-700 px-4 py-2 text-sm font-medium text-white disabled:opacity-50">
+        <button type="submit" disabled={busy || (encounter && filled.length === 0)} className="rounded-md bg-brand px-4 py-2 text-sm font-medium text-white disabled:opacity-50">
           {busy ? "Submitting…" : "Submit"}
         </button>
       </div>
@@ -112,7 +112,7 @@ export function FinishDialog({
 
   if (forceOpen) {
     return (
-      <section className="w-full max-w-xl space-y-3 rounded-lg border border-slate-200 bg-white p-5 shadow" aria-labelledby="finish-step-h" data-testid="finish-step">
+      <section className="w-full max-w-xl space-y-3 rounded-lg border border-line bg-surface p-5 shadow" aria-labelledby="finish-step-h" data-testid="finish-step">
         <h2 id="finish-step-h" className="text-lg font-semibold">
           {title}
         </h2>
@@ -123,7 +123,7 @@ export function FinishDialog({
 
   if (disabled) {
     return (
-      <a href={`/results/${sessionId}`} className="rounded-md bg-slate-800 px-4 py-2 text-sm font-medium text-white">
+      <a href={`/results/${sessionId}`} className="rounded-md bg-ink px-4 py-2 text-sm font-medium text-white">
         View results
       </a>
     );
@@ -131,7 +131,7 @@ export function FinishDialog({
 
   return (
     <>
-      <button onClick={() => setOpen(true)} className="rounded-md bg-slate-800 px-4 py-2 text-sm font-medium text-white hover:bg-slate-900">
+      <button onClick={() => setOpen(true)} className="rounded-md bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-slate-900">
         {encounter ? "Finish & present" : "Finish exam"}
       </button>
       {open && (

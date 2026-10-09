@@ -31,7 +31,7 @@ export function AnchorDebug() {
 
   return (
     <main className="flex h-screen flex-col">
-      <div className="flex flex-wrap items-center gap-3 border-b border-slate-200 p-2 text-sm">
+      <div className="flex flex-wrap items-center gap-3 border-b border-line p-2 text-sm">
         <strong>Anchor calibration (dev only)</strong>
         <select value={variant} onChange={(e) => setVariant(e.target.value as VariantId)} aria-label="Variant">
           <option value="male">male</option>
@@ -58,7 +58,7 @@ export function AnchorDebug() {
         <label>
           <input type="checkbox" checked={labels} onChange={(e) => setLabels(e.target.checked)} /> labels
         </label>
-        <span className="text-slate-500">green = tolerance (finding), amber = up to {NEAR_FACTOR}× (near)</span>
+        <span className="text-ink-3">green = tolerance (finding), amber = up to {NEAR_FACTOR}× (near)</span>
       </div>
       <div className="flex-1" data-testid="anchor-debug">
         <Canvas camera={{ fov: 40, position: [-1.4, 1.8, 0.4] }}>

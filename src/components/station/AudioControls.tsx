@@ -30,7 +30,7 @@ export function AudioControls() {
   }, [muted, volume]);
   return (
     <div className="flex items-center gap-1.5 text-xs" role="group" aria-label="Exam sound">
-      <button type="button" onClick={() => setMuted((m) => !m)} aria-pressed={muted} className="rounded border border-slate-300 bg-white px-2 py-1">
+      <button type="button" onClick={() => setMuted((m) => !m)} aria-pressed={muted} className="rounded border border-line-strong bg-white px-2 py-1">
         {muted ? "Sound off" : "Sound on"}
       </button>
       <label className="flex items-center gap-1">

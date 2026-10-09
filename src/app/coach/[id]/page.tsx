@@ -31,7 +31,7 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
 
   return (
     <main className="mx-auto max-w-[1400px] p-6">
-      <Link href="/coach" className="text-sm text-cyan-700 underline">
+      <Link href="/coach" className="text-sm text-brand underline">
         ← All sessions
       </Link>
       <header className="mt-2 flex flex-wrap items-end justify-between gap-3">
@@ -39,9 +39,9 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
           <h1 className="text-xl font-semibold">
             {session.studentLabel} — {kase.title}
           </h1>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-ink-3">
             <span data-testid="coach-mode">{modeLabel(session.mode)}</span> · {session.status} · started <span data-volatile>{new Date(session.startedAt).toLocaleString()}</span> · {session.patientTurns} patient turns ·{" "}
-            {actions.filter((a) => a.type === "hint").length} hints used · {runs.length} grading run(s)
+            {plural(actions.filter((a) => a.type === "hint").length, "hint")} used · {plural(runs.length, "grading run")}
             {run?.embeddings === false && (
               <span className="ml-1 text-amber-700" title="The server's sentence-embedding model was unavailable: language items were matched by keywords and patterns only">
                 · graded without embeddings
@@ -81,26 +81,26 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
               ))}
             </>
           ) : (
-            <p className="rounded-md bg-slate-100 p-3 text-sm">Not graded yet.</p>
+            <p className="rounded-md bg-subtle p-3 text-sm">Not graded yet.</p>
           )}
 
           <FeedbackForm sessionId={id} page="coach-session" prompt="Coach feedback on this simulator / grading" />
 
-          <section className="rounded-lg border border-slate-200 bg-white p-4" aria-labelledby="ovr-h">
+          <section className="rounded-lg border border-line bg-surface p-4" aria-labelledby="ovr-h">
             <h2 id="ovr-h" className="font-semibold">
               Override history
             </h2>
             {overrides.length === 0 ? (
-              <p className="mt-1 text-sm text-slate-500">No overrides yet.</p>
+              <p className="mt-1 text-sm text-ink-3">No overrides yet.</p>
             ) : (
               <ul className="mt-2 divide-y divide-slate-100 text-sm" data-testid="override-history">
                 {overrides.map((o) => (
                   <li key={o.id} className="py-1.5">
-                    <span className="text-slate-500" data-volatile>{new Date(o.createdAt).toLocaleString()}</span> — <span className="font-medium">{o.coach}</span> changed{" "}
+                    <span className="text-ink-3" data-volatile>{new Date(o.createdAt).toLocaleString()}</span> — <span className="font-medium">{o.coach}</span> changed{" "}
                     <code className="text-xs">
                       {o.markSheetId}/{o.itemId}
                     </code>{" "}
-                    from {o.originalPoints} to {o.newPoints}: “{o.reason}”{o.gradingRunId !== run?.id && <span className="ml-1 text-xs text-slate-400">(earlier grading run)</span>}
+                    from {o.originalPoints} to {o.newPoints}: “{o.reason}”{o.gradingRunId !== run?.id && <span className="ml-1 text-xs text-muted">(earlier grading run)</span>}
                   </li>
                 ))}
               </ul>
@@ -120,4 +120,8 @@ export default async function CoachSession({ params }: { params: Promise<{ id: s
       </div>
     </main>
   );
+}
+
+function plural(n: number, word: string): string {
+  return `${n} ${word}${n === 1 ? "" : "s"}`;
 }

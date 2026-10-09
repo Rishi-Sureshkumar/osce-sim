@@ -7,7 +7,8 @@ import { POSITION_ANGLE, patientState, sectionsForRegion } from "@/engine/patien
 import { anchorsFor, poseFor } from "@/exam3d/regionAnchors";
 import { zoneState } from "@/components/station/EncounterBar";
 import { chestChanges } from "@/scene/Drapes";
-import { buildSheet, classifySheet, coverageAt, coverageField, sheetCuts, sheetPenetration, skinWorld, underOtherSkin, type SkinData } from "@/scene/sheetGeometry";
+import { gownRollLines, trunkMask } from "@/scene/drapeGeometry";
+import { buildSheet, classifySheet, coverageAt, coverageField, sheetCuts, sheetPenetration, skinNormal, skinWorld, underOtherSkin, type SkinData } from "@/scene/sheetGeometry";
 import { TABLE } from "@/scene/rig";
 import { loadPatient } from "../scripts/qa/lib/patientMesh";
 import { makeLog } from "./helpers";
@@ -17,7 +18,7 @@ const ALL: Record<DrapeSection, boolean> = { chest_left: true, chest_right: true
 
 async function skinOf(variant: "male" | "female"): Promise<SkinData> {
   const m = (await loadPatient(variant)).find((x) => x.name === "skin")!;
-  return { bind: m.positions, joints: m.joints, weights: m.weights, jointNames: m.jointNames, count: m.positions.length / 3 };
+  return { bind: m.positions, joints: m.joints, weights: m.weights, jointNames: m.jointNames, count: m.positions.length / 3, normals: m.normals };
 }
 
 describe("M3 sheet (bug 6): built from the posed skin", () => {
@@ -73,6 +74,31 @@ describe("M3 sheet (bug 6): built from the posed skin", () => {
       }
     }
   });
+});
+
+describe("M3 folded gown edges lie on the body (V-ROD)", () => {
+  for (const variant of ["male", "female"] as const) {
+    it(`${variant}: every roll follows the skin 0.8–3 cm off it, across the trunk, in every lying and sitting position`, async () => {
+      const skin = await skinOf(variant);
+      const all = new Uint8Array(skin.count).fill(1);
+      const trunk = trunkMask(skin);
+      for (const position of POSITIONS) {
+        const pose = poseFor(position, POSITION_ANGLE[position], variant);
+        const world = skinWorld(skin, pose, all);
+        const lines = gownRollLines(pose, skinWorld(skin, pose, trunk), (i) => skinNormal(skin, pose, i), skinWorld(skin, pose, trunk.map((t) => 1 - t)));
+        for (const [name, pts] of Object.entries(lines)) {
+          expect(pts.length, `${position} ${name}`).toBeGreaterThanOrEqual(6);
+          for (const p of pts) {
+            let best = Infinity;
+            for (let i = 0; i < skin.count; i++) best = Math.min(best, (world[i * 3]! - p[0]) ** 2 + (world[i * 3 + 1]! - p[1]) ** 2 + (world[i * 3 + 2]! - p[2]) ** 2);
+            const cm = Math.sqrt(best) * 100;
+            expect(cm, `${position} ${name}`).toBeGreaterThan(0.8);
+            expect(cm, `${position} ${name}`).toBeLessThan(3);
+          }
+        }
+      }
+    });
+  }
 });
 
 describe("M3 drape sections", () => {

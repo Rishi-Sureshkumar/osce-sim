@@ -75,6 +75,9 @@ export const OPENERS = {
   "practice-help": async (page) => {
     await page.getByRole("button", { name: "Hint" }).click();
   },
+  settings: async (page) => {
+    await page.getByRole("button", { name: "Settings" }).click();
+  },
   finish: async (page) => {
     await page.getByRole("button", { name: "Finish exam" }).click();
   },

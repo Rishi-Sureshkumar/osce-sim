@@ -111,7 +111,9 @@ async function startStation(page: Page, caseId: string): Promise<string> {
   await page.goto(`${page.url()}?qa=fast`);
   await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
   // the harness checks picking, not looks: low graphics renders faster under software WebGL
+  await page.getByRole("button", { name: "Settings" }).click();
   await page.getByLabel("Graphics quality").selectOption("low");
+  await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Knock and enter" }).click();
   await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "overview", { timeout: 10_000 });
   await waitSettled(page);
@@ -366,14 +368,19 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
 async function runNegative(page: Page, api: APIRequestContext, sessionId: string, e: CatalogEntry): Promise<string[]> {
   if (e.route !== "tool" || e.steps?.length || e.sweep || !e.toleranceCm) return [];
   await closeAll(page);
-  // a skin point the click actually reaches: one hidden behind another limb would land nearer the anchor
+  // the camera may still be easing after the positive placement: project and probe a still scene
+  await waitSettled(page);
+  // a skin point the click actually reaches well outside the tolerance (≥ 1.5×): what the ray meets
+  // first there is the patient's skin, not a nearer limb, the sheet or a prop
   const p = await page.evaluate(([r, cm]) => {
     const h = window.__osce3d!;
+    const a = h.anchor(r!);
+    if (!a) return null;
     return (
       h.skinPointNear(r!, cm!, 8).find((q) => {
         if (q.page.x <= 0 || q.page.y <= 0) return false;
         const first = h.probe(q.page.x, q.page.y).find((x) => x.kind !== "hair");
-        return !!first && Math.hypot(first.point[0] - q.world[0], first.point[1] - q.world[1], first.point[2] - q.world[2]) < 0.01;
+        return !!first && first.kind === "body" && Math.hypot(first.point[0] - a[0], first.point[1] - a[1], first.point[2] - a[2]) >= (cm! / 100) * 0.75;
       }) ?? null
     );
   }, [e.regionId, e.toleranceCm * 2] as const);

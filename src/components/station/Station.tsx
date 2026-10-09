@@ -10,7 +10,10 @@ import { contactFromTool, examineFromTool, type ToolContact, type ToolUse } from
 import { patientState } from "@/engine/patientState";
 import { toolFor } from "@/exam3d/tools/toolLogic";
 import { TOOL_LABELS, type ToolState } from "@/exam3d/tools/ToolTray";
-import { AudioControls } from "./AudioControls";
+import { SettingsMenu } from "./SettingsMenu";
+import { TopBar } from "./TopBar";
+import { SidePanel, usePanelOpen } from "./SidePanel";
+import { alertsOn } from "@/engine/mistakes";
 import { ModeTimer } from "./ModeTimer";
 import { PracticeHelp } from "./PracticeHelp";
 import { timeIsUp } from "@/engine/practice";
@@ -41,7 +44,7 @@ import { useQuality } from "@/scene/quality";
 const Exam3DView = dynamic(() => import("@/exam3d/Exam3DView"), {
   ssr: false,
   loading: () => (
-    <div className="flex min-h-[360px] flex-1 items-center justify-center rounded-md bg-slate-100 text-sm text-slate-600" role="status">
+    <div className="flex min-h-[360px] flex-1 items-center justify-center rounded-md bg-subtle text-sm text-ink-3" role="status">
       Loading 3D patient…
     </div>
   ),
@@ -60,7 +63,7 @@ export interface StationProps {
   catalog: PublicCatalog;
   initialActions: Action[];
   /** Slot for the chat panel. */
-  chat?: (ctx: { actions: Action[]; append: (a: Action) => void; disabled: boolean; onSpeaking: (speaking: boolean) => void }) => React.ReactNode;
+  chat?: (ctx: { actions: Action[]; append: (a: Action) => void; disabled: boolean; disabledReason?: string; onSpeaking: (speaking: boolean) => void }) => React.ReactNode;
   /** Slot for the finish/submit control. */
   finish?: (ctx: { append: (a: Action) => void; disabled: boolean; forceOpen: ForceOpen }) => React.ReactNode;
   /** QA hooks (server env QA_HOOKS=true): test hook in the 3D view, ?qa=fast|freeze */
@@ -90,13 +93,29 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
   const outside = !state.inRoom;
   /** exam actions and chat stop outside the room, when the station ended or exam time ran out */
   const locked = ended || timeUp || outside || (!!flow && phase !== "encounter");
+  // why the conversation is closed (V-PLACEHOLDER: it said "Station finished" before the encounter began)
+  const chatClosed = ended || timeUp ? "Station finished" : left ? "You have left the room" : outside || (!!flow && phase !== "encounter") ? "Enter the room to talk to the patient" : undefined;
   const [entering, setEntering] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const [quality, setQuality] = useQuality();
+  const [leftOpen, setLeftOpen] = usePanelOpen("left");
+  const [rightOpen, setRightOpen] = usePanelOpen("right");
   const [leaveNudge, setLeaveNudge] = useState<string | null>(null);
   const [confirmLeave, setConfirmLeave] = useState(false);
   const [describe, setDescribe] = useState<Region | null>(null);
   const prohibited = useMemo(() => new Set((kase.doorInstructions?.prohibitedExams ?? []).flatMap((p) => p.regionIds)), [kase]);
+  // the door instructions, printed on the placard in the 3D corridor too
+  const placard = useMemo(() => {
+    const p = kase.patient;
+    const v = kase.vitals;
+    const d = kase.doorInstructions;
+    return [
+      `${p.name}, ${p.age}`,
+      `Reason for visit: ${d?.reasonForVisit ?? p.chiefComplaint}`,
+      `BP ${v.bpSystolic}/${v.bpDiastolic} · HR ${v.hr} · RR ${v.rr} · T ${v.tempC.toFixed(1)} °C · SpO₂ ${v.spo2}%`,
+      `Task: ${d?.task ?? kase.doorSign.task}`,
+    ];
+  }, [kase]);
 
   const append = (a: Action) => setActions((xs) => [...xs, a]);
   const appendAll = (list: Action[]) => {
@@ -342,22 +361,28 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
 
   if (flow && (phase === "pen" || (phase === "submitted" && !ended))) {
     return (
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-3 p-3">
-        <header className="flex flex-wrap items-center justify-between gap-2">
-          <h1 className="text-lg font-semibold">{kase.title}</h1>
-          <EncounterClock mode={mode} startedAt={session.startedAt} limits={flow} actions={actions} onWarning={onFlowWarning} onDeadline={onDeadline} />
-        </header>
-        {error && (
-          <p role="alert" className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-800">
-            {error}
-          </p>
-        )}
-        {toast && <Toast message={toast} onDismiss={() => setToast(null)} tone="warn" />}
-        <div className="grid gap-3 lg:grid-cols-[1fr_300px]">
-          <PenForm sessionId={session.id} initial={session.penDraft} lockNow={penLock || !!flowState?.locked} endReason={flowState?.endReason ?? null} />
-          <div className="space-y-3">
-            <Notepad sessionId={session.id} />
-            <DoorPlacard kase={kase} />
+      <div className="flex flex-col">
+        <TopBar
+          title={kase.title}
+          subtitle={`${session.studentLabel} · Post-encounter note`}
+          mode={mode}
+          hideFindings={hideFindings}
+          clock={<EncounterClock mode={mode} startedAt={session.startedAt} limits={flow} actions={actions} onWarning={onFlowWarning} onDeadline={onDeadline} />}
+          settings={<SettingsMenu quality={quality} onQuality={setQuality} hideFindings={hideFindings} alerts={alertsOn(session.settings, mode)} />}
+        />
+        <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-3 p-3">
+          {error && (
+            <p role="alert" className="rounded-md bg-bad-soft px-3 py-2 text-sm text-bad">
+              {error}
+            </p>
+          )}
+          {toast && <Toast message={toast} onDismiss={() => setToast(null)} tone="warn" />}
+          <div className="grid gap-3 lg:grid-cols-[1fr_300px]">
+            <PenForm sessionId={session.id} initial={session.penDraft} lockNow={penLock || !!flowState?.locked} endReason={flowState?.endReason ?? null} />
+            <div className="space-y-3">
+              <Notepad sessionId={session.id} />
+              <DoorPlacard kase={kase} />
+            </div>
           </div>
         </div>
       </div>
@@ -368,225 +393,235 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
   const forcedFinish: ForceOpen = !flow && !ended ? (timeUp ? "time_up" : left ? "left_room" : null) : null;
   if (forcedFinish) {
     return (
-      <div className="mx-auto flex max-w-[900px] flex-col items-center gap-3 p-3">
-        <header className="flex w-full flex-wrap items-center justify-between gap-2">
-          <h1 className="text-lg font-semibold">{kase.title}</h1>
-          <ModeTimer mode={mode} startedAt={session.startedAt} limitSeconds={kase.timeLimitSeconds} actions={actions} stopped={ended || timeUp} onTimerEvent={onTimerEvent} />
-        </header>
-        {error && (
-          <p role="alert" className="w-full rounded-md bg-red-50 px-3 py-2 text-sm text-red-800">
-            {error}
+      <div className="flex flex-col">
+        <TopBar
+          title={kase.title}
+          subtitle={`${session.studentLabel} · Presentation`}
+          mode={mode}
+          hideFindings={hideFindings}
+          clock={<ModeTimer mode={mode} startedAt={session.startedAt} limitSeconds={kase.timeLimitSeconds} actions={actions} stopped={ended || timeUp} onTimerEvent={onTimerEvent} />}
+          settings={<SettingsMenu quality={quality} onQuality={setQuality} hideFindings={hideFindings} alerts={alertsOn(session.settings, mode)} />}
+        />
+        <div className="mx-auto flex w-full max-w-[900px] flex-col items-center gap-3 p-3">
+          {error && (
+            <p role="alert" className="w-full rounded-md bg-bad-soft px-3 py-2 text-sm text-bad">
+              {error}
+            </p>
+          )}
+          <p role="status" className="w-full rounded-md bg-subtle px-3 py-2 text-sm text-ink-2">
+            {forcedFinish === "time_up" ? "Time is up. The examination is closed." : "You have left the room."} Present your summary, differential and plan.
           </p>
-        )}
-        <p role="status" className="w-full rounded-md bg-slate-100 px-3 py-2 text-sm text-slate-800">
-          {forcedFinish === "time_up" ? "Time is up. The examination is closed." : "You have left the room."} Present your summary, differential and plan.
-        </p>
-        {finish?.({ append, disabled: false, forceOpen: forcedFinish })}
+          {finish?.({ append, disabled: false, forceOpen: forcedFinish })}
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto flex max-w-[1500px] flex-col gap-3 p-3 lg:h-[calc(100vh-30px)]">
-      <header className="flex flex-wrap items-center justify-between gap-2">
-        <div>
-          <h1 className="text-lg font-semibold">{kase.title}</h1>
-          <p className="text-xs text-slate-500">
-            {session.studentLabel} · {kase.mode === "screening" ? "Screening exam" : "Case encounter"} ·{" "}
-            <span className={`rounded px-1.5 py-0.5 font-semibold ${mode === "practice" ? "bg-emerald-100 text-emerald-900" : "bg-slate-800 text-white"}`} data-testid="mode-badge">
-              {mode === "practice" ? "Practice" : "Exam"}
-            </span>
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          <AudioControls />
-          <label className="flex items-center gap-1 text-xs text-slate-600">
-            Graphics
-            <select aria-label="Graphics quality" value={quality} onChange={(e) => setQuality(e.target.value as "high" | "low")} className="rounded border border-slate-300 bg-white px-1 py-0.5">
-              <option value="high">High</option>
-              <option value="low">Low</option>
-            </select>
-          </label>
-          {flow ? (
+    <div className="flex flex-col lg:h-[calc(100vh-30px)]">
+      <TopBar
+        title={kase.title}
+        subtitle={`${session.studentLabel} · ${kase.mode === "screening" ? "Screening exam" : "Case encounter"}`}
+        mode={mode}
+        hideFindings={hideFindings}
+        clock={
+          flow ? (
             <EncounterClock mode={mode} startedAt={session.startedAt} limits={flow} actions={actions} onWarning={onFlowWarning} onDeadline={onDeadline} />
           ) : (
             <ModeTimer mode={mode} startedAt={session.startedAt} limitSeconds={kase.timeLimitSeconds} actions={actions} stopped={ended || timeUp} onTimerEvent={onTimerEvent} />
-          )}
-          {flow && ended ? (
-            <a href={`/results/${session.id}`} className="rounded-md bg-slate-800 px-4 py-2 text-sm font-medium text-white">
+          )
+        }
+        settings={<SettingsMenu quality={quality} onQuality={setQuality} hideFindings={hideFindings} alerts={alertsOn(session.settings, mode)} />}
+        onLeave={!left && !outside ? () => setConfirmLeave(true) : undefined}
+        leaveDisabled={locked}
+        end={
+          flow && ended ? (
+            <a href={`/results/${session.id}`} className="flex h-8 items-center rounded-md bg-ink px-4 text-sm font-medium text-white">
               View results
             </a>
           ) : (
             !flow && finish?.({ append, disabled: ended, forceOpen: null })
-          )}
-        </div>
-      </header>
+          )
+        }
+      />
+      <div className="mx-auto flex min-h-0 w-full max-w-[1680px] flex-1 flex-col gap-2 p-3">
+        {error && (
+          <p role="alert" className="rounded-md bg-bad-soft px-3 py-2 text-sm text-bad">
+            {error}
+          </p>
+        )}
 
-      {error && (
-        <p role="alert" className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-800">
-          {error}
-        </p>
-      )}
-
-      {begunBanner && (
-        <p role="status" className="rounded-md bg-emerald-600 px-3 py-2 text-center text-sm font-semibold text-white" data-testid="begin-banner">
-          You may begin.
-        </p>
-      )}
-      {confirmLeave && (
-        <Dialog id="leave-confirm" kind="confirm" title="Leave the room?" onClose={() => setConfirmLeave(false)} className="w-full max-w-sm space-y-3 rounded-lg bg-white p-5 shadow-xl">
-          <p className="text-sm text-slate-600">Leaving ends the encounter. No re-entry.</p>
-          <div className="flex justify-end gap-2">
-            <button type="button" onClick={() => setConfirmLeave(false)} className="rounded-md px-3 py-1.5 text-sm">
-              Stay
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setConfirmLeave(false);
-                void onLeave();
-              }}
-              className="rounded-md bg-slate-800 px-4 py-1.5 text-sm font-medium text-white"
-            >
-              Leave
-            </button>
-          </div>
-        </Dialog>
-      )}
-      {describe && <DescribeDialog region={describe} onSubmit={onDescribeSubmit} onClose={() => setDescribe(null)} />}
-      {mode === "practice" && !locked && <PracticeHelp sessionId={session.id} append={append} disabled={locked} />}
-      {!left && !outside && <EncounterBar state={state} disabled={locked} sanitise={sanitise} onBed={onBed} onDrape={onDrape} onMenu={onCourtesy} onLeave={() => setConfirmLeave(true)} />}
-      {leaveNudge && !left && (
-        <p className="rounded-md bg-cyan-50 px-3 py-2 text-sm text-cyan-900" role="status" data-testid="leave-nudge">
-          {leaveNudge}
-          <button type="button" className="ml-2 underline" onClick={() => void leave()}>
-            Leave anyway
-          </button>
-        </p>
-      )}
-
-      <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 lg:grid-cols-[minmax(250px,0.8fr)_minmax(460px,2fr)_minmax(250px,0.8fr)]">
-        <div className="flex min-h-0 flex-col gap-3">
-          {flow ? (
-            <DoorPlacard kase={kase}>
-              {phase === "corridor" && mode === "exam" && (
-                <button type="button" onClick={() => void begin()} className="mt-3 w-full rounded-md bg-emerald-700 px-3 py-2 text-sm font-semibold text-white" data-testid="begin">
-                  You may begin
-                </button>
-              )}
-              {phase === "corridor" && mode === "exam" && <p className="mt-1 text-xs text-slate-500">Stands in for the proctor&apos;s announcement. The door opens once the encounter begins.</p>}
-            </DoorPlacard>
-          ) : (
-            <DoorSign kase={kase} />
-          )}
-          <Notepad sessionId={session.id} />
-          <ErrorBoundary label="conversation panel">{chat?.({ actions, append, disabled: locked, onSpeaking: setSpeaking })}</ErrorBoundary>
-        </div>
-
-        <div className="flex min-h-0 flex-col gap-2 rounded-lg border border-slate-200 bg-white p-3">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <ExamineMenu regions={catalog.regions} onPick={onRegionClick} disabled={locked || blocking} />
-            <div className="flex gap-1">
-              {whole.map((r) => (
-                <button
-                  key={r.id}
-                  onClick={() => onRegionClick(r)}
-                  disabled={locked}
-                  className={`rounded-md border px-2 py-1 text-xs ${selected?.id === r.id ? "border-cyan-700 bg-cyan-50" : "border-slate-300"}`}
-                >
-                  {r.label}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="relative flex min-h-0 flex-1 flex-col">
-            <ErrorBoundary label="3D exam view">
-            <Exam3DView
-                sessionId={session.id}
-                bp={{ systolic: kase.vitals.bpSystolic, diastolic: kase.vitals.bpDiastolic }}
-                qa={qa}
-                maneuvers={catalog.maneuvers}
-                tool={tool}
-                onToolChange={(t) => {
-                  setTool(t);
-                  setToast(null);
+        {begunBanner && (
+          <p role="status" className="rounded-md bg-ok px-3 py-2 text-center text-sm font-semibold text-white" data-testid="begin-banner">
+            You may begin.
+          </p>
+        )}
+        {confirmLeave && (
+          <Dialog id="leave-confirm" kind="confirm" title="Leave the room?" onClose={() => setConfirmLeave(false)} className="w-full max-w-sm space-y-3 rounded-lg bg-surface p-5 shadow-2">
+            <p className="text-sm text-ink-3">Leaving ends the encounter. No re-entry.</p>
+            <div className="flex justify-end gap-2">
+              <button type="button" onClick={() => setConfirmLeave(false)} className="rounded-md px-3 py-1.5 text-sm">
+                Stay
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setConfirmLeave(false);
+                  void onLeave();
                 }}
-                onToolExamine={onToolExamine}
-                onToolAmbiguous={onToolAmbiguous}
-                onToolContact={onToolContact}
-                onLandmarksHint={mode === "practice" ? (where) => void run(async () => appendAll((await postAction(session.id, { type: "hint", source: "click", payload: { kind: "hint", text: `Showed landmarks: ${where}` } })).appended)) : undefined}
-                mode={mode}
-                revealCaptions={!hideFindings}
-                canEnter={!ended && !timeUp && !left && !entering && (!flow || phase === "encounter")}
-                onEnter={onEnter}
-                onWash={onWash}
-                onSit={onSit}
-                onBed={onBed}
-                onDrape={onDrape}
-                onLeaveRequest={() => setConfirmLeave(true)}
-                onDescribe={(r) => setDescribe(r)}
-                onProhibited={onProhibited}
-                prohibitedRegionIds={prohibited}
-                variant={variantFor(kase.patient.sex)}
-                speaking={speaking}
-                quality={quality}
-                regions={catalog.regions}
-                examinableRegionIds={examinable}
-                actions={actions}
-                presentation={kase.presentation}
-                selectedRegionId={selected?.id}
-                performingRegionId={blocking ? performing?.regionId : null}
-                examinedRegionIds={examined}
-                disabled={locked || blocking}
-                onRegionClick={onRegionClick}
-              />
-            </ErrorBoundary>
-            <div className={`absolute right-2 z-10 w-72 max-w-[90%] bottom-28 max-h-[45%] overflow-y-auto ${performing?.kind === "tool" && !choice ? "pointer-events-none [&_button]:pointer-events-auto" : ""}`}>
-              {toast && !selected && !choice && performing?.kind !== "menu" && <Toast message={toast} onDismiss={() => setToast(null)} className="mb-2" />}
-              {choice ? (
-                <ManeuverMenu
-                  dialogId="tool-chooser"
-                  region={choice.region}
-                  maneuvers={catalog.maneuvers.filter((m) => choice.ids.includes(m.id))}
-                  busy={false}
-                  onChoose={(m) => {
-                    choice.resolve(m.id);
-                    setChoice(null);
+                className="rounded-md bg-ink px-4 py-1.5 text-sm font-medium text-white"
+              >
+                Leave
+              </button>
+            </div>
+          </Dialog>
+        )}
+        {describe && <DescribeDialog region={describe} onSubmit={onDescribeSubmit} onClose={() => setDescribe(null)} />}
+        {!left && !outside && (
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="min-w-0 flex-1">
+              <EncounterBar state={state} disabled={locked} sanitise={sanitise} onBed={onBed} onDrape={onDrape} onMenu={onCourtesy} />
+            </div>
+            {mode === "practice" && !locked && <PracticeHelp sessionId={session.id} append={append} disabled={locked} />}
+          </div>
+        )}
+        {(left || outside) && mode === "practice" && !locked && <PracticeHelp sessionId={session.id} append={append} disabled={locked} />}
+        {leaveNudge && !left && (
+          <p className="rounded-md bg-brand-soft px-3 py-2 text-sm text-brand-strong" role="status" data-testid="leave-nudge">
+            {leaveNudge}
+            <button type="button" className="ml-2 underline" onClick={() => void leave()}>
+              Leave anyway
+            </button>
+          </p>
+        )}
+
+        <div className={`grid min-h-0 flex-1 grid-cols-1 gap-3 ${leftOpen ? "lg:[--left:minmax(264px,300px)]" : "lg:[--left:2.5rem]"} ${rightOpen ? "lg:[--right:minmax(264px,300px)]" : "lg:[--right:2.5rem]"} lg:grid-cols-[var(--left)_minmax(0,1fr)_var(--right)]`}>
+          <SidePanel side="left" label="conversation and door notes" open={leftOpen} onToggle={setLeftOpen}>
+            {flow ? (
+              <DoorPlacard kase={kase} collapsible={state.inRoom}>
+                {phase === "corridor" && mode === "exam" && (
+                  <button type="button" onClick={() => void begin()} className="mt-3 w-full rounded-md bg-ok px-3 py-2 text-sm font-semibold text-white" data-testid="begin">
+                    You may begin
+                  </button>
+                )}
+                {phase === "corridor" && mode === "exam" && <p className="mt-1 text-xs text-ink-3">Stands in for the proctor&apos;s announcement. The door opens once the encounter begins.</p>}
+              </DoorPlacard>
+            ) : (
+              <DoorSign kase={kase} />
+            )}
+            <Notepad sessionId={session.id} />
+            <ErrorBoundary label="conversation panel">{chat?.({ actions, append, disabled: locked, disabledReason: chatClosed, onSpeaking: setSpeaking })}</ErrorBoundary>
+          </SidePanel>
+
+          <div className="flex min-h-0 flex-col gap-2 rounded-lg border border-line bg-surface p-2 shadow-1">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <ExamineMenu regions={catalog.regions} onPick={onRegionClick} disabled={locked || blocking} />
+              <div className="flex gap-1">
+                {whole.map((r) => (
+                  <button
+                    key={r.id}
+                    onClick={() => onRegionClick(r)}
+                    disabled={locked}
+                    className={`h-7 rounded-md border px-2 text-xs ${selected?.id === r.id ? "border-brand bg-brand-soft text-brand-strong" : "border-line-strong text-ink-2 hover:bg-subtle"}`}
+                  >
+                    {r.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="relative flex min-h-0 flex-1 flex-col">
+              <ErrorBoundary label="3D exam view">
+              <Exam3DView
+                  sessionId={session.id}
+                  bp={{ systolic: kase.vitals.bpSystolic, diastolic: kase.vitals.bpDiastolic }}
+                  qa={qa}
+                  maneuvers={catalog.maneuvers}
+                  tool={tool}
+                  onToolChange={(t) => {
+                    setTool(t);
+                    setToast(null);
                   }}
-                  onClose={() => {
-                    choice.resolve(null);
-                    setChoice(null);
-                  }}
+                  onToolExamine={onToolExamine}
+                  onToolAmbiguous={onToolAmbiguous}
+                  onToolContact={onToolContact}
+                  onLandmarksHint={mode === "practice" ? (where) => void run(async () => appendAll((await postAction(session.id, { type: "hint", source: "click", payload: { kind: "hint", text: `Showed landmarks: ${where}` } })).appended)) : undefined}
+                  mode={mode}
+                  revealCaptions={!hideFindings}
+                  canEnter={!ended && !timeUp && !left && !entering && (!flow || phase === "encounter")}
+                  onEnter={onEnter}
+                  onWash={onWash}
+                  onSit={onSit}
+                  onBed={onBed}
+                  onDrape={onDrape}
+                  onLeaveRequest={() => setConfirmLeave(true)}
+                  onDescribe={(r) => setDescribe(r)}
+                  onProhibited={onProhibited}
+                  prohibitedRegionIds={prohibited}
+                  variant={variantFor(kase.patient.sex)}
+                  speaking={speaking}
+                  quality={quality}
+                  regions={catalog.regions}
+                  examinableRegionIds={examinable}
+                  actions={actions}
+                  presentation={kase.presentation}
+                placard={placard}
+                  selectedRegionId={selected?.id}
+                  performingRegionId={blocking ? performing?.regionId : null}
+                  examinedRegionIds={examined}
+                  disabled={locked || blocking}
+                  onRegionClick={onRegionClick}
                 />
-              ) : performing ? (
-                <PerformOverlay
-                  title={performing.title}
-                  steps={performing.steps}
-                  finding={performing.finding}
-                  onDone={() => setPerforming(null)}
-                />
-              ) : selected ? (
-                <ManeuverMenu region={selected} maneuvers={catalog.maneuvers} busy={!!performing} onChoose={onChoose} onShowMe={mode === "practice" ? onShowMe : undefined} onClose={() => setSelected(null)} />
-              ) : null}
+              </ErrorBoundary>
+              {/* cards sit at the top right of the view, sized to fit it (V-PERFORMCLIP: the finding was cut off at the bottom) */}
+              <div className={`absolute top-2 right-2 z-10 max-h-[calc(100%-3.5rem)] w-80 max-w-[90%] overflow-y-auto ${performing?.kind === "tool" && !choice ? "pointer-events-none [&_button]:pointer-events-auto" : ""}`}>
+                {toast && !selected && !choice && performing?.kind !== "menu" && <Toast message={toast} onDismiss={() => setToast(null)} className="mb-2" />}
+                {choice ? (
+                  <ManeuverMenu
+                    dialogId="tool-chooser"
+                    region={choice.region}
+                    maneuvers={catalog.maneuvers.filter((m) => choice.ids.includes(m.id))}
+                    busy={false}
+                    onChoose={(m) => {
+                      choice.resolve(m.id);
+                      setChoice(null);
+                    }}
+                    onClose={() => {
+                      choice.resolve(null);
+                      setChoice(null);
+                    }}
+                  />
+                ) : performing ? (
+                  <PerformOverlay
+                    title={performing.title}
+                    steps={performing.steps}
+                    finding={performing.finding}
+                    onDone={() => setPerforming(null)}
+                  />
+                ) : selected ? (
+                  <ManeuverMenu region={selected} maneuvers={catalog.maneuvers} busy={!!performing} onChoose={onChoose} onShowMe={mode === "practice" ? onShowMe : undefined} onClose={() => setSelected(null)} />
+                ) : null}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="grid min-h-0 grid-rows-[1.4fr_1fr] gap-3">
-          <div className="flex min-h-0 flex-col gap-2">
-            <MistakeAlerts actions={actions} />
-            <FindingsPanel
-              actions={actions}
-              labels={labels}
-              hide={hideFindings}
-              onInterpret={
-                locked
-                  ? undefined
-                  : (exam, text) => run(async () => post({ type: "interpretation", source: "text", payload: { examActionId: exam.id, regionId: exam.payload.regionId, maneuverId: exam.payload.maneuverId, text } }))
-              }
-            />
-          </div>
-          <ActionLog actions={actions} labels={labels} />
+          <SidePanel side="right" label="findings and log" open={rightOpen} onToggle={setRightOpen}>
+            <div className="grid min-h-0 flex-1 grid-rows-[1.5fr_1fr] gap-2">
+              <div className="flex min-h-0 flex-col gap-2">
+                <MistakeAlerts actions={actions} />
+                <FindingsPanel
+                  actions={actions}
+                  labels={labels}
+                  hide={hideFindings}
+                  onInterpret={
+                    locked
+                      ? undefined
+                      : (exam, text) => run(async () => post({ type: "interpretation", source: "text", payload: { examActionId: exam.id, regionId: exam.payload.regionId, maneuverId: exam.payload.maneuverId, text } }))
+                  }
+                />
+              </div>
+              <ActionLog actions={actions} labels={labels} />
+            </div>
+          </SidePanel>
         </div>
       </div>
     </div>

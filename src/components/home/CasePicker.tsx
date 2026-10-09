@@ -38,7 +38,7 @@ export function CasePicker({ cases }: { cases: PublicCase[] }) {
           onChange={(e) => setName(e.target.value)}
           maxLength={80}
           placeholder="e.g. Sam P."
-          className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
+          className="mt-1 w-full rounded-md border border-line-strong px-3 py-2"
         />
       </label>
       <fieldset className="text-sm">
@@ -50,11 +50,11 @@ export function CasePicker({ cases }: { cases: PublicCase[] }) {
               ["exam", "Exam (timed)", "Countdown from the station's time limit with a 2-minute warning; ends automatically. No help. Feedback only at the end."],
             ] as const
           ).map(([value, label, help]) => (
-            <label key={value} className={`flex cursor-pointer gap-2 rounded-lg border p-3 ${mode === value ? "border-cyan-700 bg-cyan-50" : "border-slate-200 bg-white"}`}>
+            <label key={value} className={`flex cursor-pointer gap-2 rounded-lg border p-3 ${mode === value ? "border-brand bg-brand-soft" : "border-line bg-surface"}`}>
               <input type="radio" name="mode" value={value} checked={mode === value} onChange={() => setMode(value)} className="mt-1" />
               <span>
                 <span className="font-medium">{label}</span>
-                <span className="block text-xs text-slate-600">{help}</span>
+                <span className="block text-xs text-ink-3">{help}</span>
               </span>
             </label>
           ))}
@@ -69,11 +69,11 @@ export function CasePicker({ cases }: { cases: PublicCase[] }) {
               ["hide", "Hide findings (interpret)", "You hear and see what the exam produces (sounds, movements, pupils) and write what you notice. Text-only findings are still shown."],
             ] as const
           ).map(([value, label, help]) => (
-            <label key={value} className={`flex cursor-pointer gap-2 rounded-lg border p-3 ${findings === value ? "border-cyan-700 bg-cyan-50" : "border-slate-200 bg-white"}`}>
+            <label key={value} className={`flex cursor-pointer gap-2 rounded-lg border p-3 ${findings === value ? "border-brand bg-brand-soft" : "border-line bg-surface"}`}>
               <input type="radio" name="findings" value={value} checked={findings === value} onChange={() => setFindings(value)} className="mt-1" />
               <span>
                 <span className="font-medium">{label}</span>
-                <span className="block text-xs text-slate-600">{help}</span>
+                <span className="block text-xs text-ink-3">{help}</span>
               </span>
             </label>
           ))}
@@ -86,16 +86,16 @@ export function CasePicker({ cases }: { cases: PublicCase[] }) {
       )}
       <ul className="grid gap-3 sm:grid-cols-2">
         {cases.map((c) => (
-          <li key={c.id} className="flex flex-col rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-            <span className="text-xs font-semibold tracking-wide text-cyan-700 uppercase">{c.mode === "screening" ? "Screening exam" : "Case encounter"}</span>
+          <li key={c.id} className="flex flex-col rounded-lg border border-line bg-surface p-4 shadow-sm">
+            <span className="text-xs font-semibold tracking-wide text-brand uppercase">{c.mode === "screening" ? "Screening exam" : "Case encounter"}</span>
             <h2 className="mt-1 font-semibold">{c.title}</h2>
-            <p className="mt-1 flex-1 text-sm text-slate-600">{c.patient.chiefComplaint}</p>
-            <p className="mt-2 text-xs text-slate-500">{c.doorSign.timeLimitMinutes} minutes</p>
+            <p className="mt-1 flex-1 text-sm text-ink-3">{c.patient.chiefComplaint}</p>
+            <p className="mt-2 text-xs text-ink-3">{c.doorSign.timeLimitMinutes} minutes</p>
             <button
               onClick={() => start(c.id)}
               disabled={!!busy}
               data-case={c.id}
-              className="mt-3 rounded-md bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-800 disabled:opacity-60"
+              className="mt-3 rounded-md bg-brand px-3 py-2 text-sm font-medium text-white hover:bg-brand-strong disabled:opacity-60"
             >
               {busy === c.id ? "Starting…" : "Start station"}
             </button>

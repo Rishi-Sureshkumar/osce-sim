@@ -18,7 +18,7 @@ export function RegradeButton({ sessionId, label = "Re-run grading" }: { session
           setBusy(false);
           router.refresh();
         }}
-        className="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm disabled:opacity-50"
+        className="rounded-md border border-line-strong bg-white px-3 py-1.5 text-sm disabled:opacity-50"
       >
         {busy ? "Grading…" : label}
       </button>

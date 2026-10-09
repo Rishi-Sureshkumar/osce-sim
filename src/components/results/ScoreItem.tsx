@@ -7,7 +7,9 @@ const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(2).repla
 export function StatusBadge({ s }: { s: EffectiveScore }) {
   if (s.override) return <span className="rounded bg-indigo-100 px-1.5 py-0.5 text-xs text-indigo-800">Coach override</span>;
   if (s.status === "needs_review") return <span className="rounded bg-amber-100 px-1.5 py-0.5 text-xs text-amber-900">Needs review</span>;
-  if (s.status === "not_assessable") return <span className="rounded bg-slate-100 px-1.5 py-0.5 text-xs text-slate-500">Not assessable</span>;
+  if (s.status === "not_assessable") return <span className="rounded bg-subtle px-1.5 py-0.5 text-xs text-ink-3">Not assessable</span>;
+  // a matched item that earned nothing found no matching words: say so (V-BADGES)
+  if (s.scoring === "match" && s.points <= 0) return <span className="rounded bg-subtle px-1.5 py-0.5 text-xs text-ink-3">No match</span>;
   return <span className={`rounded px-1.5 py-0.5 text-xs ${s.scoring === "auto" ? "bg-emerald-50 text-emerald-800" : "bg-violet-50 text-violet-800"}`}>{s.scoring === "match" ? "Matched" : s.scoring === "ai" ? "AI (legacy)" : "Auto"}</span>;
 }
 
@@ -33,16 +35,16 @@ export function ScoreItem({
     <li className={`px-3 py-2 ${na ? "opacity-60" : ""}`} data-item={item.id}>
       <div className="flex items-start gap-3">
         <span
-          className={`mt-0.5 w-14 shrink-0 rounded text-center font-mono text-sm ${na ? "bg-slate-100 text-slate-400" : full ? "bg-emerald-100 text-emerald-900" : score.points > 0 ? "bg-amber-100 text-amber-900" : "bg-red-50 text-red-800"}`}
+          className={`mt-0.5 w-14 shrink-0 rounded text-center font-mono text-sm ${na ? "bg-subtle text-muted" : full ? "bg-emerald-100 text-emerald-900" : score.points > 0 ? "bg-amber-100 text-amber-900" : "bg-red-50 text-red-800"}`}
         >
           {na ? "—" : `${fmt(score.points)}/${fmt(score.maxPoints)}`}
         </span>
         <div className="min-w-0 flex-1">
           <p className="text-sm font-medium">
-            {item.fcmId && <span className="mr-1 text-xs text-slate-400">#{item.fcmId}</span>}
+            {item.fcmId && <span className="mr-1 text-xs text-muted">#{item.fcmId}</span>}
             {item.label} <StatusBadge s={score} />
           </p>
-          <p className="text-xs text-slate-600">{score.rationale}</p>
+          <p className="text-xs text-ink-3">{score.rationale}</p>
           {score.override && (
             <p className="mt-0.5 text-xs text-indigo-800">
               Coach {score.override.coach}: {fmt(score.override.originalPoints)} → {fmt(score.override.newPoints)} — “{score.override.reason}”
@@ -54,15 +56,15 @@ export function ScoreItem({
                 const a = actionsById.get(e.actionId);
                 return (
                   <li key={i} className="text-xs">
-                    <a href={timelineHref(e.actionId)} className="text-cyan-700 hover:underline">
+                    <a href={timelineHref(e.actionId)} className="text-brand hover:underline">
                       {a ? mmss(a.t) : "?"}
                     </a>{" "}
                     {e.quote ? (
-                      <span className={e.verified ? "text-slate-700" : "text-red-700 line-through"} title={e.verified ? "Quote verified in transcript" : "Quote NOT found verbatim"}>
+                      <span className={e.verified ? "text-ink-2" : "text-red-700 line-through"} title={e.verified ? "Quote verified in transcript" : "Quote NOT found verbatim"}>
                         “{e.quote}”
                       </span>
                     ) : (
-                      a && <span className="text-slate-600">{describeAction(a, labels).text}</span>
+                      a && <span className="text-ink-3">{describeAction(a, labels).text}</span>
                     )}
                   </li>
                 );

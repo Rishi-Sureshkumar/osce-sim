@@ -26,10 +26,10 @@ export function PracticeHelp({ sessionId, append, disabled }: { sessionId: strin
   return (
     <div className="relative flex flex-wrap items-start gap-2 text-xs" data-testid="practice-help">
       <span className="rounded bg-emerald-100 px-1.5 py-0.5 font-semibold text-emerald-900">Practice help</span>
-      <button type="button" disabled={disabled} onClick={() => call("hint")} className="rounded border border-slate-300 bg-white px-2 py-0.5">
+      <button type="button" disabled={disabled} onClick={() => call("hint")} className="rounded border border-line-strong bg-white px-2 py-0.5">
         Hint
       </button>
-      <button type="button" disabled={disabled} onClick={() => call("progress")} className="rounded border border-slate-300 bg-white px-2 py-0.5">
+      <button type="button" disabled={disabled} onClick={() => call("progress")} className="rounded border border-line-strong bg-white px-2 py-0.5">
         Check my progress
       </button>
       {error && <span className="text-red-700">{error}</span>}
@@ -54,7 +54,7 @@ export function PracticeHelp({ sessionId, append, disabled }: { sessionId: strin
                     {s.done}/{s.total}
                   </span>{" "}
                   {s.section}
-                  {s.missing.length > 0 && <span className="text-slate-600"> — still to do: {s.missing.slice(0, 3).join("; ")}{s.missing.length > 3 ? "…" : ""}</span>}
+                  {s.missing.length > 0 && <span className="text-ink-3"> — still to do: {s.missing.slice(0, 3).join("; ")}{s.missing.length > 3 ? "…" : ""}</span>}
                 </li>
               ))}
             </ul>

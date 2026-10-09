@@ -174,14 +174,14 @@ export function BpGauge({ onPressure, onRecord, onClose, frozen = false, referen
   };
 
   return (
-    <section aria-label="Blood pressure cuff" data-testid="bp-gauge" className="w-72 rounded-lg border border-slate-300 bg-white/95 p-3 text-sm text-slate-800 shadow-lg">
+    <section aria-label="Blood pressure cuff" data-testid="bp-gauge" className="w-72 rounded-lg border border-line-strong bg-white/95 p-3 text-sm text-ink-2 shadow-lg">
       <div className="mb-1 flex items-center justify-between">
         <h2 className="font-semibold">BP cuff</h2>
-        <button type="button" aria-label="Close" onClick={onClose} className="rounded px-2 py-0.5 text-slate-600 hover:bg-slate-100">
+        <button type="button" aria-label="Close" onClick={onClose} className="rounded px-2 py-0.5 text-ink-3 hover:bg-subtle">
           ✕
         </button>
       </div>
-      <p className="mb-2 text-xs text-slate-600">
+      <p className="mb-2 text-xs text-ink-3">
         Pump until the pulse can no longer be felt, then about 30 mmHg more. Open the valve a little and let the needle drop 2–3 mmHg each second while you listen.
       </p>
       <div className="flex flex-col items-center">
@@ -195,17 +195,17 @@ export function BpGauge({ onPressure, onRecord, onClose, frozen = false, referen
       </div>
 
       <div className="mt-2 flex items-center gap-2">
-        <button type="button" data-testid="bp-squeeze" onClick={doSqueeze} className="rounded-md border border-slate-400 bg-slate-50 px-3 py-1.5 hover:bg-slate-100 active:bg-slate-200">
+        <button type="button" data-testid="bp-squeeze" onClick={doSqueeze} className="rounded-md border border-slate-400 bg-subtle px-3 py-1.5 hover:bg-subtle active:bg-slate-200">
           Squeeze bulb
         </button>
-        <button type="button" data-testid="bp-read" onClick={() => announce(`${gaugeReading(cuff.current.pressure)} mmHg`, cuff.current)} className="rounded-md border border-slate-300 bg-white px-2 py-1.5 text-xs text-slate-700 hover:bg-slate-100">
+        <button type="button" data-testid="bp-read" onClick={() => announce(`${gaugeReading(cuff.current.pressure)} mmHg`, cuff.current)} className="rounded-md border border-line-strong bg-white px-2 py-1.5 text-xs text-ink-2 hover:bg-subtle">
           Read gauge
         </button>
       </div>
-      <p className="mt-1 text-xs text-slate-500">Each squeeze pumps once.</p>
+      <p className="mt-1 text-xs text-ink-3">Each squeeze pumps once.</p>
 
       <div className="mt-2 flex items-center gap-1" role="group" aria-label="Release valve">
-        <span className="mr-1 text-xs text-slate-600">Valve</span>
+        <span className="mr-1 text-xs text-ink-3">Valve</span>
         {VALVE_BUTTONS.map((b) => (
           <button
             key={b.key}
@@ -213,15 +213,15 @@ export function BpGauge({ onPressure, onRecord, onClose, frozen = false, referen
             data-testid={b.testId}
             aria-pressed={valveKey === b.key}
             onClick={() => doValve(b)}
-            className={`rounded border px-2 py-0.5 text-xs ${valveKey === b.key ? "border-sky-400 bg-sky-100 text-sky-900" : "border-slate-300 bg-white text-slate-600"}`}
+            className={`rounded border px-2 py-0.5 text-xs ${valveKey === b.key ? "border-sky-400 bg-sky-100 text-sky-900" : "border-line-strong bg-white text-ink-3"}`}
           >
             {b.label}
           </button>
         ))}
       </div>
 
-      <form onSubmit={submit} noValidate className="mt-3 border-t border-slate-200 pt-2" aria-label="Record reading">
-        <h3 className="mb-1 text-xs font-semibold text-slate-700">Record reading</h3>
+      <form onSubmit={submit} noValidate className="mt-3 border-t border-line pt-2" aria-label="Record reading">
+        <h3 className="mb-1 text-xs font-semibold text-ink-2">Record reading</h3>
         <div className="flex items-end gap-2">
           <label htmlFor={`${ids}-sys`} className="flex flex-col text-xs">
             Systolic (mmHg)
@@ -236,7 +236,7 @@ export function BpGauge({ onPressure, onRecord, onClose, frozen = false, referen
               onChange={(e) => setSystolic(e.target.value)}
               aria-invalid={error?.sys ? true : undefined}
               aria-describedby={error?.sys ? errorId : undefined}
-              className="mt-0.5 w-20 rounded border border-slate-300 px-1 py-0.5 text-sm"
+              className="mt-0.5 w-20 rounded border border-line-strong px-1 py-0.5 text-sm"
             />
           </label>
           <label htmlFor={`${ids}-dia`} className="flex flex-col text-xs">
@@ -252,10 +252,10 @@ export function BpGauge({ onPressure, onRecord, onClose, frozen = false, referen
               onChange={(e) => setDiastolic(e.target.value)}
               aria-invalid={error?.dia ? true : undefined}
               aria-describedby={error?.dia ? errorId : undefined}
-              className="mt-0.5 w-20 rounded border border-slate-300 px-1 py-0.5 text-sm"
+              className="mt-0.5 w-20 rounded border border-line-strong px-1 py-0.5 text-sm"
             />
           </label>
-          <button type="submit" data-testid="bp-record" className="rounded-md bg-cyan-700 px-3 py-1 text-white hover:bg-cyan-800">
+          <button type="submit" data-testid="bp-record" className="rounded-md bg-brand px-3 py-1 text-white hover:bg-brand-strong">
             Record
           </button>
         </div>

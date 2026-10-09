@@ -40,7 +40,6 @@ export function EncounterBar({
   onBed,
   onDrape,
   onMenu,
-  onLeave,
 }: {
   state: PatientState;
   disabled: boolean;
@@ -50,7 +49,6 @@ export function EncounterBar({
   onDrape: (changes: DrapeChange[]) => void;
   /** keyboard-accessible fallback actions */
   onMenu: (kind: CourtesyKind, position?: Position) => void;
-  onLeave: () => void;
 }) {
   // off-scale positions (e.g. left lateral) show the stop nearest the current bed angle
   const stop = BED_STOPS.includes(state.position)
@@ -67,8 +65,9 @@ export function EncounterBar({
     commit.current = setTimeout(() => BED_STOPS[i] !== state.position && onBed(BED_STOPS[i]!), 350);
   };
 
+  // one row at 1180 px and up (V-WRAP): short visible labels; the accessible names carry the full state
   return (
-    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm" role="group" aria-label="Encounter">
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-2 rounded-lg border border-line bg-surface px-2.5 py-1.5 text-sm shadow-1" role="group" aria-label="Encounter">
       <button
         type="button"
         disabled={disabled}
@@ -77,18 +76,21 @@ export function EncounterBar({
         onPointerLeave={sanitise.cancel}
         onKeyDown={(e) => (e.key === " " || e.key === "Enter") && !e.repeat && (e.preventDefault(), sanitise.start())}
         onKeyUp={(e) => (e.key === " " || e.key === "Enter") && sanitise.cancel()}
-        className="flex items-center gap-2 rounded-md border border-sky-300 bg-sky-50 px-3 py-1.5 text-sky-900 select-none hover:bg-sky-100 disabled:opacity-50"
+        className="flex h-8 items-center gap-1.5 rounded-md border border-brand/40 bg-brand-soft px-2.5 text-brand-strong select-none hover:bg-brand-soft/70 disabled:opacity-50"
+        aria-label="Hold to sanitise hands"
+        title="Hold to sanitise hands"
         aria-describedby="hands-status"
       >
         <HoldRing progress={sanitise.progress} />
-        Hold to sanitise hands
+        Sanitise
       </button>
-      <span id="hands-status" data-testid="hands-status" className={`rounded px-1.5 py-0.5 text-xs ${state.handsClean ? "bg-emerald-100 text-emerald-900" : "bg-amber-100 text-amber-900"}`}>
+      <span id="hands-status" data-testid="hands-status" className={`rounded-md px-1.5 py-0.5 text-xs ${state.handsClean ? "bg-ok-soft text-ok" : "bg-warn-soft text-warn"}`}>
         Hands: {state.handsClean ? "clean" : "not cleaned"}
       </span>
 
+      <span className="h-5 w-px bg-line" aria-hidden />
       <label className="flex items-center gap-2">
-        <span className="text-slate-600">Bed</span>
+        <span className="text-ink-3">Bed</span>
         <input
           type="range"
           min={0}
@@ -99,15 +101,16 @@ export function EncounterBar({
           onChange={(e) => moveBed(Number(e.target.value))}
           aria-label="Bed angle"
           aria-valuetext={POSITION_LABELS[BED_STOPS[bed]!]}
-          className="w-28 accent-cyan-700"
+          className="w-24 accent-brand"
         />
-        <span className="w-36 text-xs text-slate-700" data-testid="position-label">
+        <span className="max-w-[10.5rem] truncate text-xs text-ink-2" data-testid="position-label" title={POSITION_LABELS[state.position]}>
           {POSITION_LABELS[state.position]}
         </span>
       </label>
 
-      <div className="flex flex-wrap items-center gap-1" role="group" aria-label="Drape">
-        <span className="text-slate-600">Drape</span>
+      <span className="h-5 w-px bg-line" aria-hidden />
+      <div className="flex items-center gap-1" role="group" aria-label="Drape">
+        <span className="text-ink-3">Drape</span>
         {ZONES.map(({ label, sections, sides }) => {
           const st = zoneState(state.sections, sections);
           const all = st === "covered";
@@ -117,12 +120,14 @@ export function EncounterBar({
                 type="button"
                 disabled={disabled}
                 aria-pressed={all ? true : st === "uncovered" ? false : "mixed"}
+                aria-label={`${label}: ${st}`}
                 // fully covered → uncover all; otherwise → cover what is uncovered
                 onClick={() => onDrape(sections.filter((sec) => (all ? true : !state.sections[sec])).map((section) => ({ section, covered: !all })))}
-                className={`rounded border px-2 py-0.5 text-xs ${sides ? "rounded-r-none" : ""} ${all ? "border-sky-400 bg-sky-100 text-sky-900" : st === "uncovered" ? "border-slate-300 bg-white text-slate-600" : "border-sky-300 bg-sky-50 text-sky-900"}`}
+                className={`flex h-7 items-center gap-1 rounded-md border px-2 text-xs ${sides ? "rounded-r-none" : ""} ${all ? "border-brand/50 bg-brand-soft text-brand-strong" : st === "uncovered" ? "border-line-strong bg-surface text-ink-3" : "border-brand/40 bg-brand-soft/60 text-brand-strong"}`}
                 title={all ? `${label} covered — click to uncover` : `${label} ${st} — click to cover`}
               >
-                {label}: {st}
+                <span aria-hidden className={`inline-block h-2 w-2 rounded-full border border-current ${all ? "bg-current" : st === "uncovered" ? "" : "bg-gradient-to-r from-current from-50% to-transparent to-50%"}`} />
+                {label}
               </button>
               {sides?.map((sec) => (
                 <button
@@ -132,7 +137,7 @@ export function EncounterBar({
                   aria-pressed={state.sections[sec]}
                   aria-label={`${label} ${sec.endsWith("_left") ? "left" : "right"}: ${state.sections[sec] ? "covered" : "uncovered"}`}
                   onClick={() => onDrape([{ section: sec, covered: !state.sections[sec] }])}
-                  className={`-ml-px border px-1.5 py-0.5 text-[11px] last:rounded-r ${state.sections[sec] ? "border-sky-400 bg-sky-100 text-sky-900" : "border-slate-300 bg-white text-slate-500"}`}
+                  className={`-ml-px h-7 border px-1.5 text-[11px] last:rounded-r-md ${state.sections[sec] ? "border-brand/50 bg-brand-soft text-brand-strong" : "border-line-strong bg-surface text-ink-3"}`}
                   title={`${label}, patient's ${sec.endsWith("_left") ? "left" : "right"} side`}
                 >
                   {sec.endsWith("_left") ? "L" : "R"}
@@ -143,10 +148,8 @@ export function EncounterBar({
         })}
       </div>
 
+      <span className="h-5 w-px bg-line" aria-hidden />
       <ActionsMenu disabled={disabled} onMenu={onMenu} />
-      <button type="button" disabled={disabled} onClick={onLeave} className="ml-auto rounded-md border border-slate-400 px-3 py-1.5 hover:bg-slate-50 disabled:opacity-50">
-        Leave the room
-      </button>
     </div>
   );
 }
@@ -171,11 +174,11 @@ function ActionsMenu({ disabled, onMenu }: { disabled: boolean; onMenu: (kind: C
   };
   return (
     <div className="relative" ref={ref} onKeyDown={onKey}>
-      <button ref={opener} type="button" disabled={disabled} aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)} className="rounded-md border border-slate-300 px-2.5 py-1 text-xs hover:bg-slate-50">
+      <button ref={opener} type="button" disabled={disabled} aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)} className="h-7 rounded-md border border-line-strong bg-surface px-2.5 text-xs text-ink-2 hover:bg-subtle">
         Actions ▾
       </button>
       {open && (
-        <Dialog id="actions-menu" kind="menu" title="Actions" hideTitle onClose={() => setOpen(false)} ignoreOutside={opener} className="absolute left-0 z-30 mt-1 w-60 rounded-md border border-slate-200 bg-white py-1 pt-7 shadow-lg">
+        <Dialog id="actions-menu" kind="menu" title="Actions" hideTitle onClose={() => setOpen(false)} ignoreOutside={opener} className="absolute left-0 z-30 mt-1 max-h-[60vh] w-60 overflow-y-auto rounded-lg border border-line bg-surface py-1 pt-7 shadow-2">
           {items.map((it) => (
             <button
               key={it.label}
@@ -185,7 +188,7 @@ function ActionsMenu({ disabled, onMenu }: { disabled: boolean; onMenu: (kind: C
                 setOpen(false);
                 it.run();
               }}
-              className="block w-full px-3 py-1.5 text-left text-xs hover:bg-slate-100 focus:bg-slate-100 focus:outline-none"
+              className="block w-full px-3 py-1.5 text-left text-xs hover:bg-subtle focus:bg-subtle focus:outline-none"
             >
               {it.label}
             </button>

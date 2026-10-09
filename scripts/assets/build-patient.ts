@@ -330,69 +330,213 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
     anchors.push({ regionId: def.regionId, points: pts, normals: nrm, bones, weights });
   }
 
-  // ---- gown panels (offset shell over the torso)
-  const TORSO = (b: string) => /^(root|spine0\d|clavicle|shoulder01|pelvis)/.test(b);
+  // ---- gown panels (Phase 4 M3): an offset shell over the torso with smooth edges and seams
+  // Each skin vertex gets scalar fields that are positive where the gown is: a round neckline (scooped
+  // in front), short sleeves, a hem across the upper thighs, and the seams between the panels (chest /
+  // abdomen at the xiphoid line, front / back at the mid-axillary plane). Triangles are clipped at each
+  // field's zero crossing (interpolating position, normal and skin weights), so every edge is a smooth
+  // curve instead of the stair-steps of whole-triangle selection (V-GOWNEDGE). The shell is then
+  // inflated (never deflated) by smoothing along the normals, so the cloth bridges hollows — between the
+  // breasts, the navel, the spine groove — instead of following every contour (V-GOWNFIT).
   const xiphoidY = landmarks.xiphoid!.point[1];
-  const gown: Record<string, Built> = { gown_chest: { pos: [], uv: [], src: [], idx: [] }, gown_abdomen: { pos: [], uv: [], src: [], idx: [] }, gown_back: { pos: [], uv: [], src: [], idx: [] } };
-  const gownMaps: Record<string, Map<number, number>> = { gown_chest: new Map(), gown_abdomen: new Map(), gown_back: new Map() };
-  const inGown = (i: number) => {
-    const b = dominant(skin.src[i]!);
-    const p = skin.pos[i]!;
-    if (TORSO(b)) return true;
-    if (b.startsWith("upperarm01")) return len(sub(p, headOf(b))) < 0.12; // short sleeve
-    if (b.startsWith("upperleg01")) return p[1] > -0.16; // to upper thigh
-    return false;
+  const notch = landmarks.sternal_notch!.point;
+  const neckBase = headOf("neck01");
+  const neckTop = headOf("neck02")[1] + 0.01;
+  const shoulderL = headOf("upperarm01.L");
+  const shoulderR = headOf("upperarm01.R");
+  const ARM = (b: string) => /^(upperarm|lowerarm|wrist|hand|finger|metacarpal|thumb)/.test(b);
+  const sideZ = -0.01; // front / back seam: the mid-axillary plane
+  const neckField = (p: V3) => {
+    const dx = p[0] - neckBase[0];
+    const dz = p[2] - neckBase[2];
+    const r = Math.hypot(dx, dz);
+    const front = r > 1e-6 ? Math.max(0, dz / r) : 0;
+    // a round neckline, 7 cm from the neck's axis at the sides and back, scooped to ~10 cm in front
+    const R = 0.07 + 0.03 * front * front;
+    return Math.min(r - R, neckTop - p[1], notch[1] + 0.09 - p[1]);
   };
+  const coverField = (i: number) => {
+    const p = skin.pos[i]!;
+    const b = dominant(skin.src[i]!);
+    if (/^(head|jaw|eye|orbicularis|levator|oris|tongue|temporalis|risorius)/.test(b)) return -0.05;
+    const neck = neckField(p);
+    if (ARM(b)) {
+      const sh = p[0] >= 0 ? shoulderL : shoulderR;
+      return Math.min(neck, 0.12 - len(sub(p, sh))); // short sleeve
+    }
+    return Math.min(neck, p[1] + 0.16); // hem across the upper thighs
+  };
+  const cover = skin.pos.map((_, i) => coverField(i));
+  const chestField = skin.pos.map((p) => p[1] - xiphoidY); // > 0 chest, < 0 abdomen
+  const frontField = skin.pos.map((p) => p[2] - sideZ); // > 0 front, < 0 back
+  type GV = { p: V3; n: V3; uv: [number, number]; w: Map<string, number> };
+  const weightMap = (vi: number) => new Map(top4(skin.src[vi]!, "head"));
+  const lerpV = (a: GV, b: GV, t: number): GV => {
+    const w = new Map<string, number>();
+    for (const [k, x] of a.w) w.set(k, (w.get(k) ?? 0) + x * (1 - t));
+    for (const [k, x] of b.w) w.set(k, (w.get(k) ?? 0) + x * t);
+    return { p: add(a.p, scale(sub(b.p, a.p), t)), n: norm(add(scale(a.n, 1 - t), scale(b.n, t))), uv: [a.uv[0] + (b.uv[0] - a.uv[0]) * t, a.uv[1] + (b.uv[1] - a.uv[1]) * t], w };
+  };
+  // clip a polygon (vertex + field values) to field >= 0 (Sutherland–Hodgman)
+  const clip = (poly: { v: GV; f: number[] }[], k: number) => {
+    const out: { v: GV; f: number[] }[] = [];
+    for (let j = 0; j < poly.length; j++) {
+      const a = poly[j]!;
+      const b = poly[(j + 1) % poly.length]!;
+      const fa = a.f[k]!;
+      const fb = b.f[k]!;
+      if (fa >= 0) out.push(a);
+      if (fa >= 0 !== fb >= 0) {
+        const t = fa / (fa - fb);
+        out.push({ v: lerpV(a.v, b.v, t), f: a.f.map((x, m) => x + (b.f[m]! - x) * t) });
+      }
+    }
+    return out;
+  };
+  const PANELS: Record<string, [number, number]> = { gown_chest: [1, 1], gown_abdomen: [-1, 1], gown_back: [0, -1] }; // [chest sign (0 any), front sign]
+  type Panel = { verts: GV[]; idx: number[]; keys: Map<string, number> };
+  const panels: Record<string, Panel> = {};
+  for (const name of Object.keys(PANELS)) panels[name] = { verts: [], idx: [], keys: new Map() };
   for (let t = 0; t < skin.idx.length; t += 3) {
     const tri = [skin.idx[t]!, skin.idx[t + 1]!, skin.idx[t + 2]!];
-    if (!tri.every(inGown)) continue;
-    const c = scale(add(add(skin.pos[tri[0]!]!, skin.pos[tri[1]!]!), skin.pos[tri[2]!]!), 1 / 3);
-    const n = norm(add(add(normals[tri[0]!]!, normals[tri[1]!]!), normals[tri[2]!]!));
-    const panel = n[2] < -0.2 ? "gown_back" : c[1] > xiphoidY ? "gown_chest" : "gown_abdomen";
-    const g = gown[panel]!;
-    const map = gownMaps[panel]!;
-    for (const v of tri) {
-      let id = map.get(v);
-      if (id === undefined) {
-        id = g.pos.length;
-        map.set(v, id);
-        const off = normals[v]![2] < 0 ? 0.014 : 0.01;
-        g.pos.push(add(skin.pos[v]!, scale(normals[v]!, off)));
-        g.uv.push(skin.uv[v]!);
-        g.src.push(skin.src[v]!);
-      }
-      g.idx.push(id);
+    if (tri.every((v) => cover[v]! < 0)) continue;
+    for (const [name, [cs, fs]] of Object.entries(PANELS)) {
+      let poly = tri.map((v) => ({ v: { p: skin.pos[v]!, n: normals[v]!, uv: skin.uv[v]!, w: weightMap(v) }, f: [cover[v]!, cs * chestField[v]!, fs * frontField[v]!] }));
+      poly = clip(poly, 0);
+      if (cs) poly = clip(poly, 1);
+      poly = clip(poly, 2);
+      if (poly.length < 3) continue;
+      const P = panels[name]!;
+      const ids = poly.map(({ v }) => {
+        // shared vertices (and the same cut point on a shared edge) are welded by position
+        const key = v.p.map((x) => Math.round(x * 1e6)).join(",");
+        let id = P.keys.get(key);
+        if (id === undefined) {
+          id = P.verts.length;
+          P.keys.set(key, id);
+          P.verts.push(v);
+        }
+        return id;
+      });
+      for (let k = 1; k + 1 < ids.length; k++) if (ids[0] !== ids[k] && ids[k] !== ids[k + 1] && ids[0] !== ids[k + 1]) P.idx.push(ids[0]!, ids[k]!, ids[k + 1]!);
     }
   }
+  // inflate the panels as one welded shell, so the seams between them stay closed
+  const gKey = (v: GV) => v.p.map((x) => Math.round(x * 1e6)).join(",");
+  const gIndex = new Map<string, number>();
+  const gVerts: GV[] = [];
+  const toGlobal: Record<string, number[]> = {};
+  for (const [name, P] of Object.entries(panels))
+    toGlobal[name] = P.verts.map((v) => {
+      const k = gKey(v);
+      let id = gIndex.get(k);
+      if (id === undefined) {
+        id = gVerts.length;
+        gIndex.set(k, id);
+        gVerts.push(v);
+      }
+      return id;
+    });
+  const gn = gVerts.length;
+  const nb: Set<number>[] = Array.from({ length: gn }, () => new Set());
+  for (const [name, P] of Object.entries(panels)) {
+    const g = toGlobal[name]!;
+    for (let t = 0; t < P.idx.length; t += 3)
+      for (let k = 0; k < 3; k++) {
+        nb[g[P.idx[t + k]!]!]!.add(g[P.idx[t + ((k + 1) % 3)]!]!);
+        nb[g[P.idx[t + k]!]!]!.add(g[P.idx[t + ((k + 2) % 3)]!]!);
+      }
+  }
+  const minOff: number[] = gVerts.map((v) => (v.n[2] < 0 ? 0.012 : 0.009));
+  let h = minOff.slice();
+  let gpos = gVerts.map((v, i) => add(v.p, scale(v.n, h[i]!)));
+  for (let it = 0; it < 24; it++) {
+    const next = h.slice();
+    for (let i = 0; i < gn; i++) {
+      if (!nb[i]!.size) continue;
+      let q: V3 = [0, 0, 0];
+      for (const j of nb[i]!) q = add(q, gpos[j]!);
+      q = scale(q, 1 / nb[i]!.size);
+      // only ever lift the cloth off the skin (fills hollows), capped so it never balloons
+      next[i] = Math.min(0.035, Math.max(minOff[i]!, dot(sub(q, gVerts[i]!.p), gVerts[i]!.n)));
+    }
+    h = next;
+    gpos = gVerts.map((v, i) => add(v.p, scale(v.n, h[i]!)));
+  }
+  const gown: Record<string, Built & { w: [string, number][][] }> = {};
+  for (const [name, P] of Object.entries(panels)) {
+    const g = toGlobal[name]!;
+    gown[name] = {
+      pos: g.map((i) => gpos[i]!),
+      uv: P.verts.map((v) => v.uv),
+      src: P.verts.map(() => 0),
+      idx: P.idx,
+      w: P.verts.map((v) => {
+        const arr = [...v.w.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4);
+        const sum = arr.reduce((m, [, x]) => m + x, 0) || 1;
+        return arr.map(([b, x]) => [b, x / sum] as [string, number]);
+      }),
+    };
+  }
 
-  // ---- hair: a close cap over the scalp (offset shell of head-dominated faces above the brow)
-  const hair: Built = { pos: [], uv: [], src: [], idx: [] };
-  const hairMap = new Map<number, number>();
+  // ---- hair: a close cap over the scalp, clipped at a smooth hairline (Phase 4 M3, V-HAIR: whole
+  // triangles gave a jagged edge over the ears). The field is positive on the scalp: above a hairline that
+  // runs low at the nape, at ear height over the sides and back up to the brow in front; minus the ears
+  // and a bare patch over each mastoid (the Rinne / mastoid target).
+  const hair: Built & { w: [string, number][][] } = { pos: [], uv: [], src: [], idx: [], w: [] };
+  const variantId = id;
   const browY = headOf("orbicularis03.L")[1] + 0.03;
   const earY = landmarks.ear_canal_l!.point[1];
   const headC = headOf("head");
-  const inHair = (i: number) => {
-    const p = skin.pos[i]!;
-    if (dominant(skin.src[i]!) !== "head") return false;
-    const n = normals[i]!;
-    if (n[2] > 0.35 && p[1] < browY + 0.02) return false; // forehead and face stay bare
-    if (Math.abs(p[0]) > Math.abs(landmarks.ear_canal_l!.point[0]) - 0.012 && p[1] < earY + 0.035 && p[2] > headC[2] - 0.03) return false; // ears
-    if (len(sub(p, landmarks.mastoid_l!.point)) < 0.022 || len(sub(p, landmarks.mastoid_r!.point)) < 0.022) return false; // bare skin over the mastoid
-    return p[1] > (p[2] < headC[2] - 0.02 ? earY - 0.035 : earY + 0.01);
+  const earXc = Math.abs(landmarks.ear_canal_l!.point[0]);
+  const earZc = landmarks.ear_canal_l!.point[2];
+  const smooth = (a: number, b: number, x: number) => {
+    const t = Math.min(1, Math.max(0, (x - a) / (b - a)));
+    return t * t * (3 - 2 * t);
   };
-  for (let t = 0; t < skin.idx.length; t += 3) {
-    const tri = [skin.idx[t]!, skin.idx[t + 1]!, skin.idx[t + 2]!];
-    if (!tri.every(inHair)) continue;
-    for (const v of tri) {
-      let hid = hairMap.get(v);
-      if (hid === undefined) {
-        hid = hair.pos.length;
-        hairMap.set(v, hid);
-        hair.pos.push(add(skin.pos[v]!, scale(normals[v]!, 0.004)));
-        hair.uv.push(skin.uv[v]!);
-        hair.src.push(skin.src[v]!);
-      }
-      hair.idx.push(hid);
+  const hairField = (i: number) => {
+    const p = skin.pos[i]!;
+    if (dominant(skin.src[i]!) !== "head") return -0.05;
+    const side = smooth(headC[2] - 0.05, headC[2], p[2]);
+    const front = smooth(headC[2] + 0.03, headC[2] + 0.075, p[2]);
+    const line = earY - 0.035 + 0.045 * side + (browY + 0.02 - (earY + 0.01)) * front;
+    // the pinna: an ellipsoid over each ear, from just behind the head joint to in front of the canal
+    const ear = (sx: number) => {
+      const cx = sx * (earXc + 0.01);
+      const cz = (headC[2] - 0.03 + earZc + 0.02) / 2;
+      const rz = (earZc + 0.02 - (headC[2] - 0.03)) / 2;
+      return (Math.hypot((p[0] - cx) / 0.022, (p[1] - earY) / 0.035, (p[2] - cz) / rz) - 1) * 0.025;
+    };
+    const mastoid = Math.min(len(sub(p, landmarks.mastoid_l!.point)), len(sub(p, landmarks.mastoid_r!.point))) - 0.022;
+    return Math.min(p[1] - line, ear(1), ear(-1), mastoid);
+  };
+  const hairS = skin.pos.map((_, i) => hairField(i));
+  const inHair = (i: number) => hairS[i]! >= 0;
+  {
+    const keys = new Map<string, number>();
+    for (let t = 0; t < skin.idx.length; t += 3) {
+      const tri = [skin.idx[t]!, skin.idx[t + 1]!, skin.idx[t + 2]!];
+      if (tri.every((v) => hairS[v]! < 0)) continue;
+      const poly = clip(tri.map((v) => ({ v: { p: skin.pos[v]!, n: normals[v]!, uv: skin.uv[v]!, w: weightMap(v) }, f: [hairS[v]!] })), 0);
+      if (poly.length < 3) continue;
+      const ids = poly.map(({ v, f }) => {
+        const key = v.p.map((x) => Math.round(x * 1e6)).join(",");
+        let id = keys.get(key);
+        if (id === undefined) {
+          id = hair.pos.length;
+          keys.set(key, id);
+          // fuller hair on the woman (V-BODY), thinning to the scalp at the hairline so the edge has no step
+          const full = variantId === "female" ? 0.01 : 0.004;
+          hair.pos.push(add(v.p, scale(v.n, 0.003 + (full - 0.003) * smooth(0, 0.025, f[0]!))));
+          hair.uv.push(v.uv);
+          hair.src.push(0);
+          const arr = [...v.w.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4);
+          const sum = arr.reduce((m, [, x]) => m + x, 0) || 1;
+          hair.w.push(arr.map(([b, x]) => [b, x / sum] as [string, number]));
+        }
+        return id;
+      });
+      for (let k = 1; k + 1 < ids.length; k++) if (ids[0] !== ids[k] && ids[k] !== ids[k + 1] && ids[0] !== ids[k + 1]) hair.idx.push(ids[0]!, ids[k]!, ids[k + 1]!);
     }
   }
 
@@ -533,8 +677,8 @@ async function buildVariant(id: string, OUT_GLB: string, targets: { name: string
   addMesh("skin", skin, "skin", undefined, (i) => skinParts[i]!);
   addMesh("eyes", eyes, "eyes", undefined, (i) => (eyes.pos[i]![0] >= 0 ? PART.eye_l : PART.eye_r));
   addMesh("mouth", built.mouth!, "mouth", undefined, () => PART.mouth);
-  for (const g of Object.keys(gown)) addMesh(g, gown[g]!, "gown", undefined, () => PART.gown);
-  addMesh("hair", hair, "hair", undefined, () => PART.hair);
+  for (const g of Object.keys(gown)) addMesh(g, gown[g]!, "gown", (i) => gown[g]!.w[i]!, () => PART.gown);
+  addMesh("hair", hair, "hair", (i) => hair.w[i]!, () => PART.hair);
   addMesh("pupils", pupilMesh, "pupils", (i) => [[pupilBone[i]!, 1]], (i) => (pupilMesh.pos[i]![0] >= 0 ? PART.eye_l : PART.eye_r));
 
   doc.createExtension(EXTTextureWebP).setRequired(true);

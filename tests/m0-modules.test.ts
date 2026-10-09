@@ -133,7 +133,7 @@ describe("table geometry (src/scene/room/tableGeometry.ts)", () => {
     for (const v of ["male", "female"] as const) {
       const up = tableBoxes(90, v).find((b) => b.name === "head-mattress")!;
       const { dy, dz } = HEAD_PIVOT[v];
-      expect(up.center[1]).toBeCloseTo(TABLE.topY - 0.06 + dy + TABLE_PARTS.headLen / 2 + dz, 6);
+      expect(up.center[1]).toBeCloseTo(TABLE.topY - 0.06 + dy + TABLE_PARTS.headLen / 2 + TABLE_PARTS.hingeGap / 2 + dz, 6);
       expect(up.center[2]).toBeCloseTo(TABLE.hingeZ + dz - dy, 6);
     }
   });
