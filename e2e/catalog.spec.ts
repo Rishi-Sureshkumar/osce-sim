@@ -431,6 +431,13 @@ async function runNegative(page: Page, api: APIRequestContext, sessionId: string
   return fresh.some((a) => a.payload.maneuverId === e.maneuverId && a.payload.regionId === e.regionId) ? ["(neg) 2× the tolerance away still recorded the exam"] : [];
 }
 
+/** the error's first line plus what it was waiting for / what intercepted the pointer */
+function errText(err: unknown): string {
+  const lines = String((err as Error)?.message ?? err).split("\n");
+  const why = lines.filter((l) => /waiting for|intercepts pointer|not (visible|enabled|stable)/.test(l)).slice(-2).map((l) => l.trim());
+  return `error: ${[lines[0], ...why].join(" | ")}`;
+}
+
 for (const [group, entries] of GROUPS) {
   test(`catalog ${group} (${entries.length})`, async ({ page, baseURL }) => {
     // a stethoscope hold may need a pick and a second hold (bug 10): budget more for those
@@ -453,7 +460,7 @@ for (const [group, entries] of GROUPS) {
       try {
         fails = await runEntry(page, api, sessionId, e);
       } catch (err) {
-        fails = [`error: ${(err as Error).message.split("\n")[0]}`];
+        fails = [errText(err)];
         await closeAll(page).catch(() => undefined);
       }
       results.push({ id: e.id, pass: fails.length === 0, detail: fails.join("; ") });
@@ -466,7 +473,7 @@ for (const [group, entries] of GROUPS) {
           const world = (await oraclePoints(e)).get(o.rule)!;
           ofails = await runEntry(page, api, sessionId, e, { world, ...(o.step ? { step: o.step } : {}) });
         } catch (err) {
-          ofails = [`error: ${(err as Error).message.split("\n")[0]}`];
+          ofails = [errText(err)];
           await closeAll(page).catch(() => undefined);
         }
         results.push({ id: e.id.replace(/^catalog:/, "catalog-oracle:"), pass: ofails.length === 0, detail: `at the anatomical point (${o.rule}${o.step ? `, ${o.step} step` : ""}): ${ofails.join("; ")}` });
@@ -477,7 +484,7 @@ for (const [group, entries] of GROUPS) {
         try {
           neg = await runNegative(page, api, sessionId, e);
         } catch (err) {
-          neg = [`error: ${(err as Error).message.split("\n")[0]}`];
+          neg = [errText(err)];
         }
         results.push({ id: e.id.replace(/^catalog:/, "catalog-neg:"), pass: neg.length === 0, detail: neg.join("; ") });
       }
