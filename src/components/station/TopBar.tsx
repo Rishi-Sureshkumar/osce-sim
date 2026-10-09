@@ -12,6 +12,7 @@ export function TopBar({
   hideFindings,
   clock,
   settings,
+  help,
   onLeave,
   leaveDisabled,
   end,
@@ -22,6 +23,8 @@ export function TopBar({
   hideFindings: boolean;
   clock: ReactNode;
   settings: ReactNode;
+  /** practice help (hint, progress) */
+  help?: ReactNode;
   /** present while the student is in the room */
   onLeave?: () => void;
   leaveDisabled?: boolean;
@@ -48,6 +51,7 @@ export function TopBar({
       </div>
       <div className="shrink-0">{clock}</div>
       <div className="flex flex-1 items-center justify-end gap-2">
+        {help}
         {settings}
         {onLeave && (
           <button type="button" disabled={leaveDisabled} onClick={onLeave} className="h-8 rounded-md border border-line-strong bg-surface px-3 text-sm text-ink-2 hover:bg-subtle disabled:opacity-50">

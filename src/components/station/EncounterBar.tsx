@@ -103,7 +103,7 @@ export function EncounterBar({
           aria-valuetext={POSITION_LABELS[BED_STOPS[bed]!]}
           className="w-24 accent-brand"
         />
-        <span className="max-w-[10.5rem] truncate text-xs text-ink-2" data-testid="position-label" title={POSITION_LABELS[state.position]}>
+        <span className="w-[10.5rem] truncate text-xs text-ink-2" data-testid="position-label" title={POSITION_LABELS[state.position]}>
           {POSITION_LABELS[state.position]}
         </span>
       </label>

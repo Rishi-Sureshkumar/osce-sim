@@ -38,6 +38,8 @@ export function liveRotations(i: LiveInput): BoneRotations {
   const amp = (i.laboured ? 2.2 : 1) * DEG;
   add("spine02", -breath * amp * 0.6);
   add("spine01", breath * amp);
+  // the head stays still while the chest moves (it rocked with the spine: the eye targets drifted by several mm)
+  add("neck01", -breath * amp * 0.4);
   if (i.laboured) {
     add("clavicle_L", 0, 0, breath * 1.5 * DEG);
     add("clavicle_R", 0, 0, -breath * 1.5 * DEG);

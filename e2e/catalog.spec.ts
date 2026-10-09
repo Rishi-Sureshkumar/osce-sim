@@ -373,9 +373,10 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
   } else {
     if (e.expectedFinding !== null && norm(ex.result?.findingText ?? "") !== norm(e.expectedFinding)) fails.push(`(d) server finding "${ex.result?.findingText}" ≠ expected "${e.expectedFinding}"`);
     // the Findings panel lists the newest first
-    const shown = norm((await page.locator('[data-testid="findings"] > li').first().locator("p").last().textContent()) ?? "");
+    // (the panel renders after the action's response, which can trail the log read)
     const want = norm(ex.result?.wording || ex.result?.findingText || "");
-    if (!e.steps?.length && want && shown !== want) fails.push(`(d) Findings shows "${shown}" ≠ "${want}"`);
+    const newest = async () => norm((await page.locator('[data-testid="findings"] > li').first().locator("p").last().textContent()) ?? "");
+    if (!e.steps?.length && want && !(await expect.poll(newest, { timeout: 3_000 }).toBe(want).then(() => true, () => false))) fails.push(`(d) Findings shows "${await newest()}" ≠ "${want}"`);
   }
   await closeAll(page);
   return fails;

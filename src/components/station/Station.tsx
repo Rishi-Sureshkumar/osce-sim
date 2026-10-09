@@ -432,6 +432,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
           )
         }
         settings={<SettingsMenu quality={quality} onQuality={setQuality} hideFindings={hideFindings} alerts={alertsOn(session.settings, mode)} />}
+        help={mode === "practice" && !locked ? <PracticeHelp sessionId={session.id} append={append} disabled={locked} /> : undefined}
         onLeave={!left && !outside ? () => setConfirmLeave(true) : undefined}
         leaveDisabled={locked}
         end={
@@ -477,15 +478,7 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
           </Dialog>
         )}
         {describe && <DescribeDialog region={describe} onSubmit={onDescribeSubmit} onClose={() => setDescribe(null)} />}
-        {!left && !outside && (
-          <div className="flex flex-wrap items-center gap-2">
-            <div className="min-w-0 flex-1">
-              <EncounterBar state={state} disabled={locked} sanitise={sanitise} onBed={onBed} onDrape={onDrape} onMenu={onCourtesy} />
-            </div>
-            {mode === "practice" && !locked && <PracticeHelp sessionId={session.id} append={append} disabled={locked} />}
-          </div>
-        )}
-        {(left || outside) && mode === "practice" && !locked && <PracticeHelp sessionId={session.id} append={append} disabled={locked} />}
+        {!left && !outside && <EncounterBar state={state} disabled={locked} sanitise={sanitise} onBed={onBed} onDrape={onDrape} onMenu={onCourtesy} />}
         {leaveNudge && !left && (
           <p className="rounded-md bg-brand-soft px-3 py-2 text-sm text-brand-strong" role="status" data-testid="leave-nudge">
             {leaveNudge}
@@ -572,9 +565,10 @@ export function Station({ session, kase, catalog, initialActions, chat, finish, 
                   onRegionClick={onRegionClick}
                 />
               </ErrorBoundary>
-              {/* cards sit at the bottom right of the view and grow upward, never taller than it (V-PERFORMCLIP:
-                  the finding was cut off at the bottom); kept clear of the abdomen and chest targets above */}
-              <div className={`absolute right-2 bottom-10 z-10 max-h-[calc(100%-6rem)] w-80 max-w-[90%] overflow-y-auto ${performing?.kind === "tool" && !choice ? "pointer-events-none [&_button]:pointer-events-auto" : ""}`}>
+              {/* cards sit at the bottom right of the view (where they have always been: the catalog keeps the
+                  targets clear of them) and grow upward, never taller than the view (V-PERFORMCLIP: the finding
+                  was cut off) */}
+              <div className={`absolute right-2 bottom-28 z-10 max-h-[calc(100%-9rem)] w-80 max-w-[90%] overflow-y-auto ${performing?.kind === "tool" && !choice ? "pointer-events-none [&_button]:pointer-events-auto" : ""}`}>
                 {toast && !selected && !choice && performing?.kind !== "menu" && <Toast message={toast} onDismiss={() => setToast(null)} className="mb-2" />}
                 {choice ? (
                   <ManeuverMenu

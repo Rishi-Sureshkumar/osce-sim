@@ -92,7 +92,12 @@ export function TestHook({ pose, shot }: { pose: Pose; shot: string }) {
           }
           const drape = named(o, (n) => /^(sheet-|roll-|fold-|drape)/.test(n));
           const bed = named(o, (n) => n === "exam-table");
-          out.push({ name: named(o, () => true) ?? "", kind: drape ? "drape" : bed ? "bed" : "prop", part: null, point: [h.point.x, h.point.y, h.point.z], distance: h.distance });
+          // an unnamed object is reported by its geometry and position, so a failure says what was in the way
+          const anon = () => {
+            const c = new Vector3().setFromMatrixPosition(m.matrixWorld);
+            return `${m.geometry?.type ?? "mesh"}@${c.x.toFixed(2)},${c.y.toFixed(2)},${c.z.toFixed(2)}`;
+          };
+          out.push({ name: named(o, () => true) ?? anon(), kind: drape ? "drape" : bed ? "bed" : "prop", part: null, point: [h.point.x, h.point.y, h.point.z], distance: h.distance });
         }
       });
       return out.sort((a, b) => a.distance - b.distance);

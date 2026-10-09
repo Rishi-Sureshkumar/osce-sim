@@ -4,7 +4,7 @@ import path from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
 import type { DrapeSection, Position } from "@/domain/schemas";
 import { POSITION_ANGLE, patientState, sectionsForRegion } from "@/engine/patientState";
-import { anchorsFor, poseFor } from "@/exam3d/regionAnchors";
+import { anchorWorldPoints, anchorsFor, poseFor } from "@/exam3d/regionAnchors";
 import { zoneState } from "@/components/station/EncounterBar";
 import { chestChanges } from "@/scene/Drapes";
 import { gownRollLines, trunkMask } from "@/scene/drapeGeometry";
@@ -74,6 +74,28 @@ describe("M3 sheet (bug 6): built from the posed skin", () => {
       }
     }
   });
+});
+
+describe("M3 the ankles stay bare under a covered sheet", () => {
+  for (const variant of ["male", "female"] as const) {
+    it(`${variant}: the ankle targets are outside the drawn sheet in every position with the legs covered`, async () => {
+      const skin = await skinOf(variant);
+      const owner = classifySheet(skin, sheetCuts(variant, skin));
+      for (const position of POSITIONS) {
+        const pose = poseFor(position, POSITION_ANGLE[position], variant);
+        const sheet = buildSheet(skinWorld(skin, pose, owner), owner, { lapOnly: position === "sitting_dangling" });
+        const field = coverageField(sheet, { leg_left: true, leg_right: true });
+        for (const id of ["ankle_left", "ankle_right"]) {
+          const p = anchorWorldPoints(id, pose)[0]!;
+          // covered: inside the drawn sheet with the cloth lying just over it (the lap sheet far above a
+          // hanging ankle doesn't hide it)
+          const gap = -(sheetPenetration(sheet, p) ?? 1);
+          const covered = coverageAt(sheet, field, p[0], p[2]) >= 0.5 && gap > 0 && gap < 0.08;
+          expect(covered, `${position} ${id}`).toBe(false);
+        }
+      }
+    });
+  }
 });
 
 describe("M3 folded gown edges lie on the body (V-ROD)", () => {

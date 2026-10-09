@@ -92,7 +92,9 @@ export function sheetCuts(variant: VariantId, skin: SkinData): SheetCuts {
   }
   if (!Number.isFinite(crotchY)) crotchY = -0.1;
   const ankle = PATIENT_VARIANTS[variant].anchors.find((a) => a.regionId === "ankle_right")?.points[0];
-  const cuts = { crotchY, topY: crotchY + 0.12, ankleY: (ankle?.[1] ?? -0.8) + 0.05 };
+  // the sheet's drawn edge runs ~5 cm past its last covered vertex (splat + edge blur): cut 10 cm above the
+  // ankle target so the ankles stay bare for the edema and pulse exams
+  const cuts = { crotchY, topY: crotchY + 0.12, ankleY: (ankle?.[1] ?? -0.8) + 0.1 };
   cutsCache.set(key, cuts);
   return cuts;
 }

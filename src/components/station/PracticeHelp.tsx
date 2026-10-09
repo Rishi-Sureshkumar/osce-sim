@@ -24,15 +24,15 @@ export function PracticeHelp({ sessionId, append, disabled }: { sessionId: strin
     }
   };
   return (
-    <div className="relative flex flex-wrap items-start gap-2 text-xs" data-testid="practice-help">
-      <span className="rounded bg-emerald-100 px-1.5 py-0.5 font-semibold text-emerald-900">Practice help</span>
-      <button type="button" disabled={disabled} onClick={() => call("hint")} className="rounded border border-line-strong bg-white px-2 py-0.5">
+    // in the top bar (Phase 4 M6): beside the encounter bar it made that bar wrap to a second row
+    <div className="relative flex items-center gap-1.5 text-sm" data-testid="practice-help" role="group" aria-label="Practice help">
+      <button type="button" disabled={disabled} onClick={() => call("hint")} className="h-8 rounded-md border border-ok/40 bg-ok-soft px-2.5 text-ok hover:bg-ok-soft/70 disabled:opacity-50">
         Hint
       </button>
-      <button type="button" disabled={disabled} onClick={() => call("progress")} className="rounded border border-line-strong bg-white px-2 py-0.5">
+      <button type="button" disabled={disabled} onClick={() => call("progress")} className="h-8 rounded-md border border-ok/40 bg-ok-soft px-2.5 text-ok hover:bg-ok-soft/70 disabled:opacity-50">
         Check my progress
       </button>
-      {error && <span className="text-red-700">{error}</span>}
+      {error && <span className="text-xs text-bad">{error}</span>}
       {(hint || sections) && (
         <Dialog
           id="practice-help"
@@ -42,7 +42,7 @@ export function PracticeHelp({ sessionId, append, disabled }: { sessionId: strin
             setHint(null);
             setSections(null);
           }}
-          className="absolute top-full right-0 z-30 mt-1 max-h-64 w-[min(28rem,92vw)] overflow-y-auto rounded-md border border-emerald-200 bg-emerald-50 p-2 text-emerald-950 shadow-lg"
+          className="absolute top-full right-0 z-40 mt-1 max-h-72 w-[min(28rem,92vw)] overflow-y-auto rounded-lg border border-ok/30 bg-surface p-3 text-sm text-ink shadow-2"
           panelProps={{ "aria-live": "polite" }}
         >
           {hint && <p data-testid="practice-hint">{hint}</p>}

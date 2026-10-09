@@ -110,8 +110,10 @@ export function ToolHud({
   const [open, setOpen] = useState(false);
   const opener = useRef<HTMLButtonElement>(null);
   return (
-    <div className="flex flex-wrap items-center gap-1.5 text-xs" role="toolbar" aria-label="Exam tools" data-testid="tool-hud">
-      <span className="rounded bg-subtle px-2 py-1 text-ink-2" data-testid="tool-in-hand">
+    // one fixed-height row: a bar that wrapped when the help text appeared resized the 3D view above it
+    // mid-exam (the patient jumped under the pointer); the help text gives way first
+    <div className="flex h-8 flex-nowrap items-center gap-1.5 whitespace-nowrap text-xs [&>*]:shrink-0" role="toolbar" aria-label="Exam tools" data-testid="tool-hud">
+      <span className="whitespace-nowrap rounded bg-subtle px-2 py-1 text-ink-2" data-testid="tool-in-hand">
         In hand: <b>{state.tool ? TOOL_LABELS[state.tool] + (state.tool === "tuning_fork" ? ` ${state.forkFreq} Hz` : "") : "nothing"}</b>
       </span>
       {state.tool === "stethoscope" && (
@@ -124,8 +126,8 @@ export function ToolHud({
         </span>
       )}
       {state.tool === "stethoscope" && listeningFor && (
-        <span className="flex items-center gap-1 rounded bg-brand-soft px-2 py-1 text-cyan-900" data-testid="listening-for">
-          Listening for: <b>{listeningFor.label}</b>
+        <span className="flex min-w-0 items-center gap-1 whitespace-nowrap rounded bg-brand-soft px-2 py-1 text-cyan-900" data-testid="listening-for">
+          Listening for: <b className="max-w-[12rem] truncate" title={listeningFor.label}>{listeningFor.label}</b>
           <button type="button" onClick={listeningFor.onChange} className="ml-1 underline">
             Change exam
           </button>
@@ -170,7 +172,11 @@ export function ToolHud({
           </Dialog>
         )}
       </div>
-      {state.tool && <span className="text-ink-3">{TOOL_HELP[state.tool]}</span>}
+      {state.tool && (
+        <span className="min-w-0 shrink! truncate text-ink-3" title={TOOL_HELP[state.tool]}>
+          {TOOL_HELP[state.tool]}
+        </span>
+      )}
     </div>
   );
 }
