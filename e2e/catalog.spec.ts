@@ -274,7 +274,15 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
     for (const t of await page.getByTestId("toast").all()) await t.getByRole("button", { name: "Dismiss" }).click().catch(() => undefined);
     const pr = await probeAt(page, targets[0]!.x, targets[0]!.y);
     const bad = probeOk(e, pr);
-    if (bad) fails.push(`(a) ${bad}`);
+    if (bad) {
+      fails.push(`(a) ${bad}`);
+      // what the scene looked like at the group's first miss (a whole group missing hints at the scene, not the target)
+      const shot = path.join(OUT, `${e.variant}-${e.position}-first-miss.png`);
+      if (!fs.existsSync(shot)) {
+        fs.mkdirSync(OUT, { recursive: true });
+        await page.screenshot({ path: shot }).catch(() => undefined);
+      }
+    }
   }
 
   if (e.route === "menu" || e.route === "verbal" || e.route === "prohibited") {
