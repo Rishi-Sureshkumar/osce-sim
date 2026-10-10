@@ -60,6 +60,7 @@ reviewed again (`-- --scaffold` adds the rows). High defects must have an owner 
 | V-HUDOVER | medium | ui | M6 | fixed | Found by the catalog: a one-row tool HUD ran under the right panel once "Listening for" showed, hiding Put down / Tools… — fixed: buttons first, labels truncate (e2e/regressions/steady-layout.spec.ts) |
 | V-COACHBADGE | low | ui | M6 | fixed | Found at the M3/M6 review: coach list "1 hint" badge split across two lines; "1 overrides" — fixed: badges wrap whole, singular |
 | V-CHATNARROW | low | ui | M6 | fixed | Found at the M3/M6 review: the chat box too narrow for its placeholder ("Ask the pat…") — fixed: push-to-talk is a microphone icon |
+| V-PERFORMFOCUS | medium | a11y | M6 | fixed | Found in the final e2e run: the perform card focused Skip, which goes when the steps finish, so focus fell to the page outside the open card — fixed in Dialog (focus moves back in); proof in qa/regressions/perform-focus.txt |
 
 ## Screenshots
 
