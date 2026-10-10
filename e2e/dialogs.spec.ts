@@ -91,6 +91,16 @@ test("dialog contract: ✕, Esc, outside click, focus trap — for every dialog"
       }
       await page.keyboard.press("Escape");
       await expect(panel(page, id)).toHaveCount(0);
+
+      if (id === "perform") {
+        // found in the final QA run: focus starts on Skip, and Skip goes when the steps finish — focus
+        // fell to <body>, outside the open card
+        await open();
+        await expect(panel(page, id).getByRole("button", { name: "Continue" })).toBeVisible();
+        expect(await focusInside(page, id), "perform: focus stays inside once Skip is gone").toBe(true);
+        await page.keyboard.press("Escape");
+        await expect(panel(page, id)).toHaveCount(0);
+      }
     });
   }
 });

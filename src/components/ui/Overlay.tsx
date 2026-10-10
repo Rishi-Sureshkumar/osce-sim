@@ -142,11 +142,21 @@ export function Dialog({ id, kind, title, onClose, children, className, backdrop
     const entry: Entry = { id, kind, panel, ignore: ignoreOutside, close: () => closeRef.current() };
     push(entry);
     const p = panel.current;
-    if (p && !p.contains(document.activeElement)) {
-      const target = initialFocus?.current ?? focusables(p).find((el) => el.dataset.dialogClose === undefined) ?? focusables(p)[0] ?? p;
+    const focusIn = (panelEl: HTMLElement) => {
+      const wanted = initialFocus?.current;
+      const target = (wanted?.isConnected ? wanted : null) ?? focusables(panelEl).find((el) => el.dataset.dialogClose === undefined) ?? focusables(panelEl)[0] ?? panelEl;
       target.focus({ preventScroll: true });
-    }
+    };
+    if (p && !p.contains(document.activeElement)) focusIn(p);
+    // the focused control can disappear while the dialog stays open (the perform card's Skip goes when
+    // its steps finish): focus would fall to <body>, outside the dialog — bring it back in
+    const refocus = new MutationObserver(() => {
+      const active = document.activeElement;
+      if (p && stack.at(-1) === entry && (!active || active === document.body)) focusIn(p);
+    });
+    if (p) refocus.observe(p, { childList: true, subtree: true });
     return () => {
+      refocus.disconnect();
       pop(entry);
       // give focus back to whatever opened the dialog (if it is still there and nothing else took it)
       const active = document.activeElement;

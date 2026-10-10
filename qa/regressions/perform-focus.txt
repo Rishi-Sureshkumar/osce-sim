@@ -1,0 +1,7 @@
+perform card focus (found in the final M6 QA run)
+new check in e2e/dialogs.spec.ts, run against the build of 89559cd (before the Overlay fix):
+  1) e2e/dialogs.spec.ts:45:1 › dialog contract: ✕, Esc, outside click, focus trap — for every dialog › perform 
+    Error: perform: focus stays inside once Skip is gone
+    Expected: true
+    Received: false
+  1 failed
