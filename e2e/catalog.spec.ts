@@ -110,6 +110,9 @@ async function startStation(page: Page, caseId: string): Promise<string> {
   await page.locator(`[data-case="${caseId}"]`).click();
   await expect(page).toHaveURL(/\/station\//);
   const sessionId = new URL(page.url()).pathname.split("/").pop()!;
+  // let the first load finish its models before reloading in fast mode: leaving the page mid-decode
+  // logged "GLTFLoader: Couldn't load texture blob" from the abandoned page (the console guard caught it)
+  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
   await page.goto(`${page.url()}?qa=fast`);
   await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
   // the harness checks picking, not looks: low graphics renders faster under software WebGL
