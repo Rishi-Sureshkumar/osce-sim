@@ -60,11 +60,12 @@ export async function waitSettled(page: Page, timeout = 15_000) {
 
 /**
  * Reload the station in a QA mode (`?qa=fast`, `?qa=fast,freeze`) and wait for the 3D view. The
- * first load finishes its models before the reload: leaving the page mid-decode logs
- * "GLTFLoader: Couldn't load texture blob" from the abandoned page, which the console guard fails on.
+ * first load finishes every model and texture before the reload (the station preloads both patients,
+ * so "ready" alone isn't enough): leaving the page mid-decode logs "GLTFLoader: Couldn't load texture
+ * blob" from the abandoned page, which the console guard fails on.
  */
 export async function reloadInQaMode(page: Page, qa = "fast") {
-  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await page.waitForFunction(() => window.__osce3d?.ready && !window.__osce3d.loading(), null, { timeout: 60_000, polling: 100 });
   await page.goto(`${page.url()}?qa=${qa}`);
   await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
 }

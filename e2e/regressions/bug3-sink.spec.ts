@@ -4,7 +4,7 @@
  * least 8 cm deep and washing at the sink happens over it (with the water running).
  */
 import type { Page } from "@playwright/test";
-import { expect, test, waitSettled } from "../qa/fixtures";
+import { expect, reloadInQaMode, test, waitSettled } from "../qa/fixtures";
 import { enterCode } from "../qa/openers";
 
 type Box = { min: [number, number, number]; max: [number, number, number]; center: [number, number, number] } | null;
@@ -17,8 +17,7 @@ test("bug 3: the sink has a real basin, and washing at the sink happens over it"
   await page.getByLabel(/Practice \(untimed\)/).check();
   await page.locator('[data-case="screening-normal"]').click();
   await expect(page).toHaveURL(/\/station\//);
-  await page.goto(`${page.url()}?qa=freeze`);
-  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await reloadInQaMode(page, "freeze");
   await page.getByRole("button", { name: "Knock and enter" }).click();
   await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "overview", { timeout: 15_000 });
   await waitSettled(page);
@@ -33,10 +32,9 @@ test("bug 3: the sink has a real basin, and washing at the sink happens over it"
   expect(p).not.toBeNull();
   await page.mouse.click(p!.x, p!.y);
   await expect(page.locator('[data-testid="washing"]')).toContainText("Cleaning hands");
-  await page.waitForTimeout(500);
-  const hands = await box(page, "hand-wash");
-  expect(hands, "washing hands are drawn").not.toBeNull();
-  const [hx, hy, hz] = hands!.center;
+  // the rig is drawn once the washing starts; wait for it rather than a fixed delay
+  await expect.poll(() => box(page, "hand-wash"), { message: "washing hands are drawn", timeout: 5_000 }).not.toBeNull();
+  const [hx, hy, hz] = (await box(page, "hand-wash"))!.center;
   expect(hx, "hands over the basin (x)").toBeGreaterThan(basin!.min[0]);
   expect(hx).toBeLessThan(basin!.max[0]);
   expect(hz, "hands over the basin (z)").toBeGreaterThan(basin!.min[2]);

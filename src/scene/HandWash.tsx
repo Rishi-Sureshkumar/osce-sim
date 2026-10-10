@@ -103,7 +103,8 @@ export function HandWash({ startedAt, durationMs, at }: { startedAt: number; dur
   });
 
   return (
-    <group ref={rig} name="hand-wash">
+    // placed at the basin from the first render (useFrame only runs on the next frame)
+    <group ref={rig} name="hand-wash" position={at}>
       <pointLight position={[0, 0.2, 0.2]} intensity={0.6} distance={1.2} />
       <group ref={left}>
         <Hand side={-1} />

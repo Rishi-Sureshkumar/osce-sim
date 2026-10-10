@@ -1,4 +1,5 @@
 "use client";
+import { useProgress } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useEffect } from "react";
 import { Box3, Mesh, Object3D, Quaternion, Raycaster, SkinnedMesh, Vector2, Vector3 } from "three";
@@ -27,6 +28,8 @@ declare global {
       landmark: (name: string) => Vec3 | null;
       shot: string;
       ready: boolean;
+      /** a model or texture is still loading (e.g. the other patient's preload): leaving now aborts its decode */
+      loading: () => boolean;
       /** camera tween done, table/trunk/door at target, raycast proxies baked for this pose, gown faded, not busy */
       settled: () => boolean;
       pose: () => { position: string; bedAngle: number; variant: string };
@@ -123,6 +126,7 @@ export function TestHook({ pose, shot }: { pose: Pose; shot: string }) {
     };
     window.__osce3d = {
       ready: true,
+      loading: () => useProgress.getState().active,
       shot,
       qa: { fast: QA.fast, freeze: QA.freeze },
       projectPoint: toPage,
