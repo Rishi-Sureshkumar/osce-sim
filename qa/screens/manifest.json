@@ -16,20 +16,20 @@
  },
  {
   "file": "1180x820/hf-male/layout/03-results.png",
-  "sha256": "16a03139ced4b1c81d13d2b03b1654a4baad1764e50d61d013a2ec2474e7198d",
+  "sha256": "9839d8f6ea128c0ab619b679122a6dbbd6f2da8f757ed8c1fd2431251858a280",
   "viewport": "1180x820",
   "area": "layout",
   "case": "hf-decompensated-01"
  },
  {
   "file": "1180x820/hf-male/layout/04-coach-list.png",
-  "sha256": "353349367a69be8032ddf28416a945c5fe55404d733baf3b92a3fa439f69b849",
+  "sha256": "6f465eff6be83e5e32eb828a6be8dbe805ffd06e867f2b23c948f95a79d5e691",
   "viewport": "1180x820",
   "area": "layout"
  },
  {
   "file": "1180x820/hf-male/layout/05-coach-detail.png",
-  "sha256": "c3a9740cf049f981e24a5617d611743ee513762e269259cada331b699a986e8f",
+  "sha256": "d7f3ba13742351b3cb120d6d118c593f45eb4a6c5b1cf989954b23a5f4f83aea",
   "viewport": "1180x820",
   "area": "layout",
   "case": "hf-decompensated-01"
@@ -51,20 +51,20 @@
  },
  {
   "file": "1280x800/hf-male/layout/03-results.png",
-  "sha256": "26490415872a3e88192698c3cbc614798a436d3da1a568dab91d0a13aedc4977",
+  "sha256": "c89f0c8bb8a86dd449d54688eaaee80eccef363e46af71b0e18e8d6c9b54c70e",
   "viewport": "1280x800",
   "area": "layout",
   "case": "hf-decompensated-01"
  },
  {
   "file": "1280x800/hf-male/layout/04-coach-list.png",
-  "sha256": "393acf82163eff6187827411bc6914bd8784386bfdb9e0f8f758ed642fd8560e",
+  "sha256": "95e1ed67f335b7c966b813b7113a1fedb63dfa0ff318c4bf98f63fa15e805ef0",
   "viewport": "1280x800",
   "area": "layout"
  },
  {
   "file": "1280x800/hf-male/layout/05-coach-detail.png",
-  "sha256": "bb721c2f4f4bfae49fcff78d3784ce6ba8603d209a19309f46d296ca1704d826",
+  "sha256": "749e17fd18ae6e3aa6e06506c4464342b69752d93d33de06cf77c38b261ccb36",
   "viewport": "1280x800",
   "area": "layout",
   "case": "hf-decompensated-01"
@@ -101,7 +101,7 @@
  },
  {
   "file": "1440x900/hf-male/drapes/04-legs__supine__legs-left-exposed.png",
-  "sha256": "fe1ab0f46b5418c6b6d84d8930827db3d39814e639c6e807e1901398dde436dc",
+  "sha256": "5192a378d03a5097d3e8744bf84951574732aa5fd1d9f95980598faf572737f0",
   "viewport": "1440x900",
   "area": "drapes",
   "case": "hf-decompensated-01",
@@ -146,20 +146,20 @@
  },
  {
   "file": "1440x900/hf-male/layout/03-results.png",
-  "sha256": "9d20e362ee65873a441ccd38b506b9212aa286677f53ffd592581b6d0f9b7b5d",
+  "sha256": "b0cd6a13608e4c1f06b44e6818959a9ebe7cb8e6a4d3e67fb329ff5fff600cbc",
   "viewport": "1440x900",
   "area": "layout",
   "case": "hf-decompensated-01"
  },
  {
   "file": "1440x900/hf-male/layout/04-coach-list.png",
-  "sha256": "669c665f5e67a6b54757340fa4453298def0e0ed72b3086b8969d8e6c2e6d166",
+  "sha256": "8dd298eaed80a36afb3e35d4153db5f1f0f7c4c67ee2559d71c607a9b97bd44d",
   "viewport": "1440x900",
   "area": "layout"
  },
  {
   "file": "1440x900/hf-male/layout/05-coach-detail.png",
-  "sha256": "d44fb185d871ca02119b815b3eeceaf5538453eece57a26f0e3b6e2753d91efe",
+  "sha256": "4262fd6b7642645a78b983fc7301919c00d70388cd0c6f4c8b7527025d8b42fe",
   "viewport": "1440x900",
   "area": "layout",
   "case": "hf-decompensated-01"
@@ -1050,7 +1050,7 @@
  },
  {
   "file": "1440x900/screening-female/dialogs/04-perform.png",
-  "sha256": "98cfd7ae6a1d36e4d96894ea9c5ac58b2c91ca702feb020e6355a445e4735b77",
+  "sha256": "7acf1199ae91a491f9932b2e28466fa3ff479380089d40cfb4f5eb81467a469e",
   "viewport": "1440x900",
   "area": "dialogs",
   "case": "screening-normal",
@@ -1058,7 +1058,7 @@
  },
  {
   "file": "1440x900/screening-female/dialogs/05-describe.png",
-  "sha256": "6e826be915c5b125d69ac3ec7d5368d19756c44bebf5e3166f80c619427f3644",
+  "sha256": "76dc536bd92e3b7f12bd26a77f4ae6939eddd798230f9c59007b587a83574ab3",
   "viewport": "1440x900",
   "area": "dialogs",
   "case": "screening-normal",
@@ -1066,7 +1066,7 @@
  },
  {
   "file": "1440x900/screening-female/dialogs/06-leave-confirm.png",
-  "sha256": "e38efb5343c16724df829b19638d0b7166234dc68ce439ef287f7c3b99676856",
+  "sha256": "03b49943485c30975e891d245faeba1cc562ea0e1d8418ff9aa2dafe83599f19",
   "viewport": "1440x900",
   "area": "dialogs",
   "case": "screening-normal",
@@ -1074,7 +1074,7 @@
  },
  {
   "file": "1440x900/screening-female/dialogs/07-actions-menu.png",
-  "sha256": "d07f846f8f29adfcd483ea9a064d71599ab4200c90f00b0b9d62adcebf13f566",
+  "sha256": "2f765e14ce09b42dd792457279d2d2e711c2ae898c4a745d5fa243eca8248996",
   "viewport": "1440x900",
   "area": "dialogs",
   "case": "screening-normal",
@@ -1082,7 +1082,7 @@
  },
  {
   "file": "1440x900/screening-female/dialogs/08-tools-menu.png",
-  "sha256": "4f4e99c1d75b918efe4057830a62f7061d7acc96ce31c3d9608873d17ae49d6f",
+  "sha256": "b0880a37ded0fa8d0282505e0645a1e6bcdd62896cb77d60a5a80f4b9b00b2aa",
   "viewport": "1440x900",
   "area": "dialogs",
   "case": "screening-normal",
@@ -1090,7 +1090,7 @@
  },
  {
   "file": "1440x900/screening-female/dialogs/09-bed-hud.png",
-  "sha256": "d05e06287971fadfae8f92229e82b85c08dfd2b22647202e8218e190399c8eac",
+  "sha256": "6c258803d0250d4851fe7cdca07f514b64ca1f4d2a00564de063319d3eb5572b",
   "viewport": "1440x900",
   "area": "dialogs",
   "case": "screening-normal",
@@ -1098,7 +1098,7 @@
  },
  {
   "file": "1440x900/screening-female/dialogs/10-practice-help.png",
-  "sha256": "741a0b1ba0f8bc0f84f18e0f8f320cd86670d7768f17612572004baeef169d91",
+  "sha256": "39a4b266dd5444a7f6a89bb6aa68650234e41f61ff54d332b7ddc4ba01fd1060",
   "viewport": "1440x900",
   "area": "dialogs",
   "case": "screening-normal",
@@ -1106,7 +1106,7 @@
  },
  {
   "file": "1440x900/screening-female/dialogs/11-finish.png",
-  "sha256": "c1be5357e74088d2231988222545f0b5eef16dbb45c9aa84e1fc5019cb89dd0e",
+  "sha256": "728661c1dfcff0355e84a75dba4d48d87fdcdbc0d092d2569aa59263217a7275",
   "viewport": "1440x900",
   "area": "dialogs",
   "case": "screening-normal",
@@ -1114,7 +1114,7 @@
  },
  {
   "file": "1440x900/screening-female/dialogs/12-settings.png",
-  "sha256": "d41d6cc12cf68dbc537c029b2c131349c55532ed8d27ceaf862162f89914e85b",
+  "sha256": "360cfe2ad3636ec6f26e8bf5c5e6c3b7de922e2441e2c3536689834b6598f73f",
   "viewport": "1440x900",
   "area": "dialogs",
   "case": "screening-normal",
@@ -1152,7 +1152,7 @@
  },
  {
   "file": "1440x900/screening-female/drapes/04-legs__supine__legs-left-exposed.png",
-  "sha256": "0b59ee2e1584dff9de935a13a8c27fcf5095e4d8f9a1256d7cd47ad75fbd5fad",
+  "sha256": "6170dce9b93d3908402d2a927b7bbc30cb5e80f394be0f41aef2c6e36020e2da",
   "viewport": "1440x900",
   "area": "drapes",
   "case": "screening-normal",
