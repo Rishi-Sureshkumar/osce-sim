@@ -6,7 +6,7 @@
  */
 import { request as pwRequest, type APIRequestContext, type Page } from "@playwright/test";
 import type { Action } from "@/domain/schemas";
-import { expect, test, waitSettled } from "../qa/fixtures";
+import { expect, reloadInQaMode, test, waitSettled } from "../qa/fixtures";
 import { enterCode } from "../qa/openers";
 
 async function coachApi(baseURL: string): Promise<APIRequestContext> {
@@ -55,8 +55,7 @@ test("bug 9: a blood pressure is taken on the upper arm and the case's BP is rec
   await page.locator('[data-case="hf-decompensated-01"]').click();
   await expect(page).toHaveURL(/\/station\//);
   const sessionId = new URL(page.url()).pathname.split("/").pop()!;
-  await page.goto(`${page.url()}?qa=fast`);
-  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await reloadInQaMode(page);
   await page.getByRole("button", { name: "Knock and enter" }).click();
   await waitSettled(page);
   await page.getByRole("button", { name: "Actions ▾" }).click();

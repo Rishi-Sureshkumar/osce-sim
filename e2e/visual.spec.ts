@@ -13,7 +13,7 @@ import type { Page } from "@playwright/test";
 import { DIALOG_IDS } from "../src/components/ui/dialogIds";
 import { POSITION_LABELS } from "@/components/common/format";
 import type { Position } from "@/domain/schemas";
-import { expect, test, waitSettled } from "./qa/fixtures";
+import { expect, reloadInQaMode, test, waitSettled } from "./qa/fixtures";
 import { OPENERS, enterCode } from "./qa/openers";
 
 const ROOT = path.join(process.cwd(), "qa/screens");
@@ -81,8 +81,7 @@ async function startStation(page: Page, caseId: string, opts: { mode?: "practice
   else await page.getByLabel(/Exam \(timed\)/).check();
   await page.locator(`[data-case="${caseId}"]`).click();
   await expect(page).toHaveURL(/\/station\//);
-  await page.goto(`${page.url()}?qa=${opts.qa ?? "fast,freeze"}`);
-  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await reloadInQaMode(page, opts.qa ?? "fast,freeze");
   await waitSettled(page);
 }
 

@@ -5,7 +5,7 @@
  */
 import type { Page } from "@playwright/test";
 import { DIALOG_IDS, type DialogId } from "../src/components/ui/dialogIds";
-import { expect, test, waitSettled } from "./qa/fixtures";
+import { expect, reloadInQaMode, test, waitSettled } from "./qa/fixtures";
 import { OPENERS, enterCode } from "./qa/openers";
 
 /** Screening patient, practice mode, fast QA timings, inside the room. */
@@ -17,8 +17,7 @@ async function startStation(page: Page) {
   await page.getByLabel(/Practice \(untimed\)/).check();
   await page.locator('[data-case="screening-normal"]').click();
   await expect(page).toHaveURL(/\/station\//);
-  await page.goto(`${page.url()}?qa=fast`);
-  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await reloadInQaMode(page);
   await page.getByRole("button", { name: "Knock and enter" }).click();
   await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "overview", { timeout: 10_000 });
   await waitSettled(page);

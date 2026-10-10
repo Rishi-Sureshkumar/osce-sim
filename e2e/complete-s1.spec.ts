@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { expect, test, waitSettled } from "./qa/fixtures";
+import { expect, reloadInQaMode, test, waitSettled } from "./qa/fixtures";
 import { enterCode } from "./qa/openers";
 
 /**
@@ -69,8 +69,7 @@ test("S1 radiculopathy: ankle jerk with the legs hanging, swab on the lateral fo
   await page.locator('[data-case="s1-radiculopathy-01"]').click();
   await expect(page).toHaveURL(/\/station\//);
   await expect(page.getByTestId("door-placard")).toContainText("Low back pain going down the leg");
-  await page.goto(`${page.url()}?qa=fast`);
-  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await reloadInQaMode(page);
   await page.getByRole("button", { name: "Knock and enter" }).click();
   await waitSettled(page);
 

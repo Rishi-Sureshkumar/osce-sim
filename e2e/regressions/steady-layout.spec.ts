@@ -5,7 +5,7 @@
  * the right panel and hid "Put down". At every supported width, with any tool in hand, the 3D view
  * keeps its size and every HUD control is the topmost element under its own centre.
  */
-import { expect, test } from "../qa/fixtures";
+import { expect, reloadInQaMode, test } from "../qa/fixtures";
 import { enterCode } from "../qa/openers";
 
 const TOOLS = ["stethoscope", "tuning_fork", "penlight", "cotton_swab", "pointer"] as const;
@@ -23,8 +23,7 @@ for (const [width, height] of [
     await page.getByLabel(/Practice \(untimed\)/).check();
     await page.locator('[data-case="hf-decompensated-01"]').click();
     await expect(page).toHaveURL(/\/station\//);
-    await page.goto(`${page.url()}?qa=fast`);
-    await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+    await reloadInQaMode(page);
     await page.getByRole("button", { name: "Knock and enter" }).click();
     await expect(page.locator('[data-testid="exam3d"]')).toHaveAttribute("data-camera", "overview", { timeout: 10_000 });
 

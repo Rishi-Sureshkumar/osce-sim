@@ -23,7 +23,7 @@ import { POSITION_ANGLE } from "@/engine/patientState";
 import { oracleFor, sampleWorld } from "../qa/anatomy/oracle";
 import { skinnedPatient } from "../scripts/qa/lib/patientMesh";
 import { buildCatalogPlan, type CatalogEntry } from "./qa/catalogPlan";
-import { expect, test, waitSettled } from "./qa/fixtures";
+import { expect, reloadInQaMode, test, waitSettled } from "./qa/fixtures";
 
 const PLAN = buildCatalogPlan({ filter: process.env.CATALOG_FILTER });
 // each (model, position) group starts its own station, so groups can run side by side (CATALOG_WORKERS)
@@ -110,11 +110,7 @@ async function startStation(page: Page, caseId: string): Promise<string> {
   await page.locator(`[data-case="${caseId}"]`).click();
   await expect(page).toHaveURL(/\/station\//);
   const sessionId = new URL(page.url()).pathname.split("/").pop()!;
-  // let the first load finish its models before reloading in fast mode: leaving the page mid-decode
-  // logged "GLTFLoader: Couldn't load texture blob" from the abandoned page (the console guard caught it)
-  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
-  await page.goto(`${page.url()}?qa=fast`);
-  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await reloadInQaMode(page);
   // the harness checks picking, not looks: low graphics renders faster under software WebGL
   await page.getByRole("button", { name: "Settings" }).click();
   await page.getByLabel("Graphics quality").selectOption("low");

@@ -5,7 +5,7 @@
  */
 import { request as pwRequest, type Page } from "@playwright/test";
 import type { Action } from "../src/domain/schemas";
-import { expect, test, waitSettled } from "./qa/fixtures";
+import { expect, reloadInQaMode, test, waitSettled } from "./qa/fixtures";
 import { enterCode } from "./qa/openers";
 
 test("embeddings load lazily in the browser and are used for chat; no off-host requests", async ({ page, baseURL }) => {
@@ -30,8 +30,7 @@ test("embeddings load lazily in the browser and are used for chat; no off-host r
   await page.locator('[data-case="screening-normal"]').click();
   await expect(page).toHaveURL(/\/station\//);
   const sessionId = page.url().match(/\/station\/([^/?#]+)/)![1]!;
-  await page.goto(`${page.url()}?qa=fast`);
-  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await reloadInQaMode(page);
   await page.getByRole("button", { name: "Knock and enter" }).click();
   await waitSettled(page);
 

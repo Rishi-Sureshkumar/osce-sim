@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { expect, test, waitSettled } from "./qa/fixtures";
+import { expect, reloadInQaMode, test, waitSettled } from "./qa/fixtures";
 import { enterCode } from "./qa/openers";
 
 /**
@@ -59,8 +59,7 @@ test("aortic stenosis: ejection murmur at the RUSB and the carotid, slow upstrok
   await page.locator('[data-case="aortic-stenosis-01"]').click();
   await expect(page).toHaveURL(/\/station\//);
   await expect(page.getByTestId("door-placard")).toContainText("Breathlessness on exertion and a near-faint");
-  await page.goto(`${page.url()}?qa=fast`);
-  await page.waitForFunction(() => window.__osce3d?.ready, null, { timeout: 60_000 });
+  await reloadInQaMode(page);
   await page.getByRole("button", { name: "Knock and enter" }).click();
   await waitSettled(page);
 
