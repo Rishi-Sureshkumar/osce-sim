@@ -287,10 +287,16 @@ async function runEntry(page: Page, api: APIRequestContext, sessionId: string, e
 
   if (e.route === "menu" || e.route === "verbal" || e.route === "prohibited") {
     const before = await page.evaluate(() => window.__osce3d!.lastPointer()?.at ?? 0);
-    await page.mouse.click(targets[0]!.x, targets[0]!.y);
+    // aimed again just before clicking (as the tool route does): the head turns while the patient speaks
+    await waitSettled(page);
+    const t = (await aims[0]?.()) ?? targets[0]!;
+    await page.mouse.click(t.x, t.y);
     const lp = await page.evaluate(() => window.__osce3d!.lastPointer());
     if (!lp || lp.at === before) fails.push("(b) the click never reached the patient");
-    else if (lp.bodyHit?.regionId !== e.regionId) fails.push(`(b) the click resolved to ${lp.bodyHit?.regionId ?? "no region"}`);
+    else if (lp.bodyHit?.regionId !== e.regionId) {
+      const h = (lp.hits as { kind: string; part: string | null }[] | undefined)?.find((x) => x.kind !== "hair");
+      fails.push(`(b) the click resolved to ${lp.bodyHit?.regionId ?? "no region"} (first hit ${h ? `${h.kind}/${h.part ?? "?"}` : "none"})`);
+    }
   }
   if (e.route === "verbal") {
     const dlg = page.locator('[data-dialog="describe"]');
